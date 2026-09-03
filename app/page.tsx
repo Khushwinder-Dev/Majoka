@@ -12,6 +12,7 @@ import Services from "@/components/Services";
 import ClientTestimonials from "@/components/ClientTestimonials";
 import GetStarted from "@/components/GetStarted";
 import MeetOurTeam from "@/components/Common/MeetOurTeam";
+import BlogSection from "@/components/BlogSection";
 
 export default function Home() {
   useEffect(() => {
@@ -53,6 +54,10 @@ export default function Home() {
 
         <div data-aos="fade-up" data-aos-delay="200">
           <GetStarted />
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="200">
+          <BlogSection />
         </div>
       </main>
     </div>
