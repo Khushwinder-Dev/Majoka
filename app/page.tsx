@@ -13,6 +13,7 @@ import ClientTestimonials from "@/components/ClientTestimonials";
 import GetStarted from "@/components/GetStarted";
 import MeetOurTeam from "@/components/Common/MeetOurTeam";
 import BlogSection from "@/components/BlogSection";
+import VideoBanner from "@/components/VideoBanner";
 
 export default function Home() {
   useEffect(() => {
@@ -27,9 +28,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <main>
-        <div>
+        <VideoBanner />
+        {/* <div>
           <HeroSection />
-        </div>
+        </div> */}
         <div data-aos="fade-up" data-aos-delay="100">
           <StatsSection />
         </div>
