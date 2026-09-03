@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100..800&display=swap");
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /* --primary: #510424; */
+  --primary: #01a9a0;
+  --secondary: #ffbf00;
+  --white: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* background: var(--background); */
+  color: var(--foreground);
+  font-family: "Anek Malayalam", sans-serif !important;
+}
+.theme-bg-main {
+  background: var(--primary);
+}
+.theme-text-main {
+  color: var(--primary);
+}
+.theme-text-main-hover-white {
+  color: var(--primary);
+}.theme-text-main-hover-white:hover {
+  color: var(--white);
+}
