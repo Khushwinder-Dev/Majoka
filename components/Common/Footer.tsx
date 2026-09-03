@@ -15,6 +15,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
+import { getAssetPath } from "@/lib/basePath";
+
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,7 +27,7 @@ export default function Footer() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-        style={{ backgroundImage: "url('/footer/footer-bg.png')" }}
+        style={{ backgroundImage: `url('${getAssetPath("/footer/footer-bg.png")}')` }}
       />
 
       <div className="relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-16 py-6">

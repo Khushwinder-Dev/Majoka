@@ -3,6 +3,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { getAssetPath } from "@/lib/basePath";
+
 const ConstructionMaterialsSection = () => {
   return (
     <div className="w-full bg-white py-16 px-4 sm:px-6 lg:px-8">
@@ -52,7 +54,7 @@ const ConstructionMaterialsSection = () => {
             <div
               className="absolute inset-0 bg-cover bg-center opacity-60"
               style={{
-                backgroundImage: `url('/landing/assist/lol.jpg')`,
+                backgroundImage: `url('${getAssetPath("/landing/assist/lol.jpg")}')`,
               }}
             ></div>
 

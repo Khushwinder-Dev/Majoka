@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import Image from "next/image";
 
+import { getAssetPath } from "@/lib/basePath";
+
 interface ProjectData {
   id: number;
   name: string;
@@ -166,7 +168,7 @@ const FeaturedProjects = () => {
     <div
       className="relative flex flex-col items-center w-full py-20 gap-16 px-4 md:px-8 lg:px-16"
       style={{
-        backgroundImage: "url(/featured-bg.webp)",
+        backgroundImage: `url('${getAssetPath("/featured-bg.webp")}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

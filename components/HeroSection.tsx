@@ -6,6 +6,8 @@ import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+import { getAssetPath } from "@/lib/basePath";
+
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -128,7 +130,7 @@ const HeroSection = () => {
               : "opacity-0 scale-95 translate-y-[50px]"
           }`}
           style={{
-            backgroundImage: `url('${image}')`,
+            backgroundImage: `url('${getAssetPath(image)}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             filter:

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
+import { getAssetPath } from "@/lib/basePath";
+
 interface FormData {
   fullName: string;
   phone: string;
@@ -182,7 +184,7 @@ const GetStarted = () => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/getStart.png')",
+            backgroundImage: `url('${getAssetPath("/getStart.png")}')`,
           }}
         >
           {/* Dark overlay for better text readability */}

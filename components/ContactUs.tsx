@@ -2,6 +2,8 @@
 import React from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+import { getAssetPath } from "@/lib/basePath";
+
 const WorkSteps = () => {
   return (
     <div className="relative w-full h-[676px] bg-[#0d4159] bg-opacity-70 bg-cover bg-center overflow-hidden p-16">
@@ -139,7 +141,7 @@ const WorkSteps = () => {
       {/* CSS for background image */}
       <style jsx>{`
         .bg-cover {
-          background-image: url("/images/construction-background-1.png");
+          background-image: url("${getAssetPath("/images/construction-background-1.png")}");
           background-size: cover;
           background-position: center;
         }

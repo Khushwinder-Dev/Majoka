@@ -6,6 +6,8 @@ import Footer from "@/components/Common/Footer";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 
+import { getAssetPath } from "@/lib/basePath";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,9 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/TajAlrahmanlogo.png" sizes="any" />
-        <link rel="icon" href="/TajAlrahmanlogo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/TajAlrahmanlogo.png" />
+        <link rel="icon" href={getAssetPath("/TajAlrahmanlogo.png")} sizes="any" />
+        <link rel="icon" href={getAssetPath("/TajAlrahmanlogo.png")} type="image/png" />
+        <link rel="apple-touch-icon" href={getAssetPath("/TajAlrahmanlogo.png")} />
       </head>
       <body
         className={`${anekMalayalam.variable} ${anekMalayalam.variable} antialiased bg-white overflow-x-hidden!`}
