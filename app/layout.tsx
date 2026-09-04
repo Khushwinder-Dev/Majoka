@@ -40,7 +40,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/TajAlrahmanlogo.png" />
       </head>
       <body
-        className={`${anekMalayalam.variable} ${anekMalayalam.variable} antialiased bg-white overflow-x-hidden!`}
+        className={`${anekMalayalam.variable} antialiased bg-white overflow-x-hidden!`}
       >
         {/* Global Toast Notifications */}
         <Toaster

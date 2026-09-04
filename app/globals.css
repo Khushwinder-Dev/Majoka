@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100..800&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -15,8 +14,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-anek: var(--font-anek-malayalam), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,7 +27,7 @@
 body {
   /* background: var(--background); */
   color: var(--foreground);
-  font-family: "Anek Malayalam", sans-serif !important;
+  font-family: var(--font-anek-malayalam), "Anek Malayalam", sans-serif;
 }
 .theme-bg-main {
   background: var(--primary);
