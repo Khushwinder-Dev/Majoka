@@ -15,8 +15,7 @@ export default function MapSection() {
         );
         const L = await import("leaflet");
 
-        // Import CSS (ignore TypeScript error for CSS import)
-        // @ts-expect-error CSS import not recognized by TypeScript
+        // Import CSS
         await import("leaflet/dist/leaflet.css");
 
         // Fix for default markers in React Leaflet
