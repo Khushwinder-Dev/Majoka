@@ -336,6 +336,32 @@ export default function MediaPage() {
     setActivePhoto(photoItems[prevIdx]);
   };
 
+  // Lock body scroll when modal is open and support keyboard navigation
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveVideo(null);
+        setActivePhoto(null);
+      } else if (e.key === "ArrowRight" && activePhoto) {
+        handleNextPhoto();
+      } else if (e.key === "ArrowLeft" && activePhoto) {
+        handlePrevPhoto();
+      }
+    };
+
+    if (activeVideo || activePhoto) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeVideo, activePhoto, currentPhotoIndex]);
+
   return (
     <div className="min-h-screen bg-white text-gray-900 overflow-x-hidden">
       {/* ===================== HERO SECTION ===================== */}
@@ -471,49 +497,54 @@ export default function MediaPage() {
       {/* ===================== VIDEO PLAYER MODAL ===================== */}
       {activeVideo && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          style={{ zIndex: 99999 }}
           onClick={() => setActiveVideo(null)}
         >
           <div
-            className="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+            className="relative w-full max-w-2xl bg-gray-950 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col my-auto max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setActiveVideo(null)}
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-xs transition-transform hover:scale-110 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            {/* Header / Top Bar with Category, Title and Accessible Close Button */}
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-gray-900/95 border-b border-white/10 z-20">
+              <div className="flex items-center gap-2 overflow-hidden mr-3">
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#01a9a0] uppercase tracking-wider bg-[#01a9a0]/15 px-2 py-0.5 rounded flex-shrink-0">
+                  {activeVideo.category}
+                </span>
+                <h3 className="text-xs sm:text-sm font-bold text-white truncate">
+                  {activeVideo.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setActiveVideo(null)}
+                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer flex-shrink-0"
+                title="Close (Esc)"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
 
             {/* Video Player */}
-            <div className="relative aspect-video w-full bg-black flex items-center justify-center">
+            <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
               <video
                 src={activeVideo.videoSrc || "/Hero.mp4"}
                 controls
                 autoPlay
+                playsInline
                 className="w-full h-full object-contain"
               >
                 Your browser does not support HTML5 video.
               </video>
             </div>
 
-            {/* Video Info Footer */}
-            <div className="p-5 sm:p-6 bg-gray-950 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div>
-                <span className="text-xs font-semibold text-[#01a9a0] uppercase tracking-wider block mb-1">
-                  {activeVideo.category}
-                </span>
-                <h3 className="text-base sm:text-lg font-bold font-anek">
-                  {activeVideo.title}
-                </h3>
-                {activeVideo.description && (
-                  <p className="text-xs text-gray-400 mt-1 max-w-2xl">
-                    {activeVideo.description}
-                  </p>
-                )}
+            {/* Video Description */}
+            {activeVideo.description && (
+              <div className="px-4 sm:px-5 py-3 bg-gray-900/80 border-t border-white/5">
+                <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
+                  {activeVideo.description}
+                </p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
@@ -521,31 +552,35 @@ export default function MediaPage() {
       {/* ===================== PHOTO LIGHTBOX MODAL ===================== */}
       {activePhoto && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          style={{ zIndex: 99999 }}
           onClick={() => setActivePhoto(null)}
         >
           <div
-            className="relative w-full max-w-5xl max-h-[90vh] flex flex-col items-center"
+            className="relative w-full max-w-2xl bg-gray-950 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col my-auto max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setActivePhoto(null)}
-              className="absolute -top-12 right-0 sm:right-2 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-xs transition-transform hover:scale-110 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            {/* Header / Top Bar with Category, Title and Accessible Close Button */}
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-gray-900/95 border-b border-white/10 z-20">
+              <div className="flex items-center gap-2 overflow-hidden mr-3">
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#01a9a0] uppercase tracking-wider bg-[#01a9a0]/15 px-2 py-0.5 rounded flex-shrink-0">
+                  {activePhoto.category}
+                </span>
+                <h3 className="text-xs sm:text-sm font-bold text-white truncate">
+                  {activePhoto.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setActivePhoto(null)}
+                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer flex-shrink-0"
+                title="Close (Esc)"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
 
-            {/* Previous Photo Button */}
-            <button
-              onClick={handlePrevPhoto}
-              className="absolute left-2 sm:-left-14 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs z-20"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            {/* Main Photo Display */}
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[75vh] rounded-2xl overflow-hidden bg-black shadow-2xl">
+            {/* Main Photo Display with Arrows */}
+            <div className="relative w-full aspect-[4/3] bg-black flex items-center justify-center overflow-hidden group">
               <Image
                 src={activePhoto.thumbnail}
                 alt={activePhoto.title}
@@ -553,26 +588,39 @@ export default function MediaPage() {
                 className="object-contain"
                 priority
               />
+
+              {/* Prev Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrevPhoto();
+                }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md"
+                title="Previous photo (←)"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNextPhoto();
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md"
+                title="Next photo (→)"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Next Photo Button */}
-            <button
-              onClick={handleNextPhoto}
-              className="absolute right-2 sm:-right-14 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs z-20"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-
-            {/* Photo Caption */}
-            <div className="w-full mt-4 text-center text-white">
-              <h3 className="text-base sm:text-lg font-bold font-anek">
-                {activePhoto.title}
-              </h3>
-              <p className="text-xs text-gray-400 mt-0.5">
+            {/* Caption & Counter */}
+            <div className="px-4 sm:px-5 py-3 bg-gray-900/80 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 gap-3">
+              <p className="truncate">
                 {activePhoto.description}
               </p>
-              <span className="text-[11px] text-gray-500 mt-1 inline-block">
-                {currentPhotoIndex + 1} of {photoItems.length}
+              <span className="text-[11px] font-medium text-gray-500 flex-shrink-0">
+                {currentPhotoIndex + 1} / {photoItems.length}
               </span>
             </div>
           </div>
