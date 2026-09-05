@@ -44,8 +44,8 @@ export default function Footer() {
             </div>
 
             <p className="text-white text-base leading-relaxed">
-              Delivering innovative and sustainable engineering solutions with
-              integrity and excellence.
+              Taj Al Rahmah Technical Services, we deliver expert electrical, plumbing, painting, cleaning, repairs, and heating &
+              cooling solutions with quality workmanship and dependable service.
             </p>
 
             {/* Social Media Icons */}
@@ -165,15 +165,15 @@ export default function Footer() {
               Resources
             </h3>
             <ul className="space-y-3 flex-grow">
-              {/* <li>
+              <li>
                 <Link
                   href="/media"
-                  className="flex items-center gap-2 text-white text-base transition-colors"
+                  className="flex items-center gap-2 text-white text-base transition-colors hover:text-white/80"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
                   Media
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link
                   href="/blogs"
@@ -283,10 +283,10 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-white flex-shrink-0" />
                 <Link
-                  href="mailto:info@majokaengineering.com"
+                  href="mailto:info@tajengineering.com"
                   className="text-white text-base transition-colors break-all"
                 >
-                  info@majokaengineering.com
+                  info@tajengineering.com
                 </Link>
               </div>
             </div>
@@ -309,7 +309,7 @@ export default function Footer() {
 
             {/* Copyright Text */}
             <p className="text-center text-white text-base">
-              © 2025 MAJOKA ENGINEERING. All rights reserved. Developed by{" "}
+              © 2025 TAJ ENGINEERING. All rights reserved. Developed by{" "}
               <Link
                 href="https://rapidsmarterp.com/"
                 target="_blank"

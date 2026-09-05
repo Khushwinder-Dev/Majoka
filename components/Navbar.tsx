@@ -48,7 +48,7 @@ const Navbar = () => {
     if (href === "/career") return pathname === "/career" || pathname.startsWith("/career");
     if (href === "/services") return pathname === "/services" || pathname.startsWith("/services");
     if (href === "/about-us") return pathname === "/about-us" || pathname === "/about";
-    if (href === "/resources") return pathname === "/resources" || pathname === "/blogs" || pathname.startsWith("/blogs");
+    if (href === "/resources") return pathname === "/resources" || pathname === "/blogs" || pathname.startsWith("/blogs") || pathname === "/media" || pathname.startsWith("/media");
     return pathname === href || pathname.startsWith(href);
   };
 
