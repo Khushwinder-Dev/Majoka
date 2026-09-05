@@ -15,197 +15,35 @@ interface MediaItem {
   description?: string;
 }
 
-const mediaItems: MediaItem[] = [
-  // ROW 1
-  {
-    id: 1,
-    type: "video",
-    title: "Epoxy Floor Coating Application",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Our specialized crew applying high-durability epoxy resin to a commercial warehouse floor.",
-  },
-  {
-    id: 2,
-    type: "video",
-    title: "Commercial Swimming Pool Waterproofing",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Substrate preparation, waterproof membrane installation, and precision tile grouting.",
-  },
-  {
-    id: 3,
-    type: "video",
-    title: "Precision Door & Hardware Maintenance",
-    category: "Facility Maintenance",
-    thumbnail: "/media/door-maintenance.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Expert adjustments and security hardware alignment for commercial and residential doors.",
-  },
-  {
-    id: 4,
-    type: "video",
-    title: "Industrial Electrical Panel Wiring",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Circuit breaker installation, load balancing, and diagnostic electrical verification.",
-  },
-
-  // ROW 2
-  {
-    id: 5,
-    type: "video",
-    title: "Pool Basin Sealant & Grout Inspection",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Hydrostatic testing and specialized coating to prevent moisture leakage in commercial pools.",
-  },
-  {
-    id: 6,
-    type: "video",
-    title: "Control System Voltage Calibration",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Precision calibration of high-amperage breakers and automated safety cut-offs.",
-  },
-  {
-    id: 7,
-    type: "video",
-    title: "Industrial Floor Scrubbing & Prep",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Heavy equipment surface profiling before the final epoxy topcoat layer.",
-  },
-  {
-    id: 8,
-    type: "video",
-    title: "Polyurethane Spray Insulation Service",
-    category: "Insulation & Coating",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Full-coverage seamless insulation application preventing moisture infiltration.",
-  },
-
-  // ROW 3
-  {
-    id: 9,
-    type: "video",
-    title: "High-Gloss Factory Epoxy Finishing",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Application of abrasion-resistant glossy finish for maximum chemical protection.",
-  },
-  {
-    id: 10,
-    type: "video",
-    title: "Outdoor Resort Pool Edge Sealing",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Perimeter expansion joint sealing and water-impermeable tile adhesion.",
-  },
-  {
-    id: 11,
-    type: "video",
-    title: "Architectural Woodwork Fitting",
-    category: "Facility Maintenance",
-    thumbnail: "/media/door-maintenance.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Fine architectural carpentry, hinge stabilization, and weatherproofing.",
-  },
-  {
-    id: 12,
-    type: "video",
-    title: "Main Switchgear Load Testing",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Thermal imaging and electrical conductivity assessment for commercial facilities.",
-  },
-
-  // ROW 4
-  {
-    id: 13,
-    type: "video",
-    title: "Tile Joint Waterproofing Treatment",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Anti-fungal, chlorine-resistant waterproof membrane sealing for swimming pools.",
-  },
-  {
-    id: 14,
-    type: "video",
-    title: "Multi-Circuit Distribution Overhaul",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Organizing and shielding heavy wiring looms in commercial power cabinets.",
-  },
-  {
-    id: 15,
-    type: "video",
-    title: "Dust-Free Concrete Surface Grinding",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Industrial diamond grinding for superior resin bonding and durability.",
-  },
-  {
-    id: 16,
-    type: "video",
-    title: "Protective Thermal Barrier Spraying",
-    category: "Insulation & Coating",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Continuous protective envelope application for roof decks and storage zones.",
-  },
-
-  // ROW 5
-  {
-    id: 17,
-    type: "video",
-    title: "Industrial Safety Line Marking",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Applying OSHA-compliant safety borders and non-slip walkways over fresh epoxy.",
-  },
-  {
-    id: 18,
-    type: "video",
-    title: "Swimming Pool Coping & Grouting",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Detailed hand finishing of perimeter stone and underwater waterproofing.",
-  },
-  {
-    id: 19,
-    type: "video",
-    title: "Security Lock Assembly & Alignment",
-    category: "Facility Maintenance",
-    thumbnail: "/media/door-maintenance.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Precision installation of high-security mortise locks and draft-proofing strips.",
-  },
-  {
-    id: 20,
-    type: "video",
-    title: "Emergency Power Transfer Calibration",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    videoSrc: "/Hero.mp4",
-    description: "Automatic generator switchover testing for critical infrastructure systems.",
-  },
+// Media Videos from public/media/videos
+const videoFilenames = [
+  "WhatsApp Video 2026-09-05 at 11.26.37 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.26.37 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.18 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.19 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.37 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.42 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.43 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.44 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.44 PM (2).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.44 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.45 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.45 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.46 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.47 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.47 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.48 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.48 PM.mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.49 PM (1).mp4",
+  "WhatsApp Video 2026-09-05 at 11.58.49 PM.mp4",
 ];
+
+const mediaItems: MediaItem[] = videoFilenames.map((filename, index) => ({
+  id: index + 1,
+  type: "video",
+  thumbnail: `/media/videos/${filename}`,
+  videoSrc: `/media/videos/${filename}`,
+}));
 
 // Media Images from public/media/Images
 const photoFilenames = [
@@ -386,22 +224,31 @@ export default function MediaPage() {
                 }}
                 className="group relative rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] bg-gray-100 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-200/60"
               >
-                {/* Thumbnail Image */}
-                <Image
-                  src={item.thumbnail}
-                  alt="Media item"
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-
-                {/* Centered Play Button (for Video items matching reference screenshot) */}
-                {isVideo && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#00968e] transition-all duration-300">
-                      <Play className="w-4 h-4 fill-white ml-0.5" />
+                {/* Media Content */}
+                {isVideo ? (
+                  <div className="relative w-full h-full bg-black">
+                    <video
+                      src={`${item.videoSrc}#t=0.001`}
+                      preload="metadata"
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Centered Play Button (for Video items matching reference screenshot) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#00968e] transition-all duration-300">
+                        <Play className="w-4 h-4 fill-white ml-0.5" />
+                      </div>
                     </div>
                   </div>
+                ) : (
+                  <Image
+                    src={item.thumbnail}
+                    alt="Media item"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 )}
               </div>
             );
