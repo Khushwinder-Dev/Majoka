@@ -8,8 +8,8 @@ import { Play, X, ChevronLeft, ChevronRight, Eye, Film, Camera } from "lucide-re
 interface MediaItem {
   id: number;
   type: "video" | "photo";
-  title: string;
-  category: string;
+  title?: string;
+  category?: string;
   thumbnail: string;
   videoSrc?: string;
   description?: string;
@@ -207,105 +207,37 @@ const mediaItems: MediaItem[] = [
   },
 ];
 
-// High-resolution photography dataset for Photo mode
-const photoItems: MediaItem[] = [
-  {
-    id: 101,
-    type: "photo",
-    title: "Seamless Epoxy Flooring Finish",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    description: "High gloss, heavy-duty epoxy flooring installation in a pharmaceutical logistics facility.",
-  },
-  {
-    id: 102,
-    type: "photo",
-    title: "Luxury Infinity Pool Tiling",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    description: "Crystal blue glass mosaic tile installation with multi-layer waterproof membrane.",
-  },
-  {
-    id: 103,
-    type: "photo",
-    title: "Interior Carpentry & Door Fitting",
-    category: "Facility Maintenance",
-    thumbnail: "/media/door-maintenance.jpg",
-    description: "Handcrafted solid oak door installation and custom brass hardware alignment.",
-  },
-  {
-    id: 104,
-    type: "photo",
-    title: "Industrial Control Switchboard",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    description: "Certified clean wiring and circuit breaker arrangement for commercial industrial plant.",
-  },
-  {
-    id: 105,
-    type: "photo",
-    title: "Resort Pool Basin Waterproofing",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    description: "Anti-slip mosaic perimeter and waterproof expansion joints under Mediterranean sun.",
-  },
-  {
-    id: 106,
-    type: "photo",
-    title: "Master Substation Distribution Board",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    description: "High-amperage terminal blocks and phase balancing system inspection.",
-  },
-  {
-    id: 107,
-    type: "photo",
-    title: "High-Visibility Safety Floor Coating",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    description: "Chemical and oil-resistant yellow safety zone floor marking in manufacturing plant.",
-  },
-  {
-    id: 108,
-    type: "photo",
-    title: "Precision Door Hardware Calibration",
-    category: "Facility Maintenance",
-    thumbnail: "/media/door-maintenance.jpg",
-    description: "Close-up view of precision acoustic seal and lock installation on hardwood door.",
-  },
-  {
-    id: 109,
-    type: "photo",
-    title: "Industrial Workshop Craftsmanship",
-    category: "Facility Maintenance",
-    thumbnail: "/media/media-hero.jpg",
-    description: "Modern workshop tools, cutting saws, and high precision woodwork fabrication.",
-  },
-  {
-    id: 110,
-    type: "photo",
-    title: "Olympic Standard Pool Maintenance",
-    category: "Pool Construction",
-    thumbnail: "/media/pool-tiling.jpg",
-    description: "Full underwater tile inspection and sealant verification before public opening.",
-  },
-  {
-    id: 111,
-    type: "photo",
-    title: "Clean Room Power Cabinet",
-    category: "Electrical Solutions",
-    thumbnail: "/media/electrical-panel.jpg",
-    description: "Precision engineered electronic control modules with surge suppression.",
-  },
-  {
-    id: 112,
-    type: "photo",
-    title: "Mirror-Finish Industrial Flooring",
-    category: "Waterproofing & Flooring",
-    thumbnail: "/media/floor-epoxy.jpg",
-    description: "Flawless mirror reflection on freshly cured 3-coat heavy traffic resin floor.",
-  },
+// Media Images from public/media/Images
+const photoFilenames = [
+  "WhatsApp Image 2026-09-05 at 11.30.18 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.30.28 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.30.36 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.30.50 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.31.07 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.31.24 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.31.46 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.32.06 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.32.26 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.33.18 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.33.33 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.33.53 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.34.45 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.35.11 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.36.49 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.37.02 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.37.14 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.37.31 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.37.48 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.38.27 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.38.41 PM.jpeg",
+  "WhatsApp Image 2026-09-05 at 11.38.54 PM.jpeg",
 ];
+
+const photoItems: MediaItem[] = photoFilenames.map((filename, index) => ({
+  id: 101 + index,
+  type: "photo",
+  thumbnail: `/media/Images/${filename}`,
+}));
 
 export default function MediaPage() {
   // Toggle State: "video" (default as in screenshot) or "photo"
