@@ -457,21 +457,11 @@ export default function MediaPage() {
                 {/* Thumbnail Image */}
                 <Image
                   src={item.thumbnail}
-                  alt={item.title}
+                  alt="Media item"
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-
-                {/* Dark Hover Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                  <span className="text-[10px] font-bold text-[#01a9a0] uppercase tracking-wider bg-white/90 backdrop-blur-xs px-2 py-0.5 rounded w-fit mb-1">
-                    {item.category}
-                  </span>
-                  <h3 className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-1">
-                    {item.title}
-                  </h3>
-                </div>
 
                 {/* Centered Play Button (for Video items matching reference screenshot) */}
                 {isVideo && (
@@ -479,13 +469,6 @@ export default function MediaPage() {
                     <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#00968e] transition-all duration-300">
                       <Play className="w-4 h-4 fill-white ml-0.5" />
                     </div>
-                  </div>
-                )}
-
-                {/* Eye Icon badge on hover (for Photo items) */}
-                {!isVideo && (
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs text-[#01a9a0] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-xs">
-                    <Eye className="w-4 h-4" />
                   </div>
                 )}
               </div>
@@ -497,32 +480,22 @@ export default function MediaPage() {
       {/* ===================== VIDEO PLAYER MODAL ===================== */}
       {activeVideo && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
           style={{ zIndex: 99999 }}
           onClick={() => setActiveVideo(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-gray-950 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col my-auto max-h-[90vh]"
+            className="relative w-full max-w-2xl bg-black rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header / Top Bar with Category, Title and Accessible Close Button */}
-            <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-gray-900/95 border-b border-white/10 z-20">
-              <div className="flex items-center gap-2 overflow-hidden mr-3">
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#01a9a0] uppercase tracking-wider bg-[#01a9a0]/15 px-2 py-0.5 rounded flex-shrink-0">
-                  {activeVideo.category}
-                </span>
-                <h3 className="text-xs sm:text-sm font-bold text-white truncate">
-                  {activeVideo.title}
-                </h3>
-              </div>
-              <button
-                onClick={() => setActiveVideo(null)}
-                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer flex-shrink-0"
-                title="Close (Esc)"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
+            {/* Close Button */}
+            <button
+              onClick={() => setActiveVideo(null)}
+              className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20"
+              title="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
 
             {/* Video Player */}
             <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
@@ -536,15 +509,6 @@ export default function MediaPage() {
                 Your browser does not support HTML5 video.
               </video>
             </div>
-
-            {/* Video Description */}
-            {activeVideo.description && (
-              <div className="px-4 sm:px-5 py-3 bg-gray-900/80 border-t border-white/5">
-                <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">
-                  {activeVideo.description}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       )}
@@ -552,38 +516,28 @@ export default function MediaPage() {
       {/* ===================== PHOTO LIGHTBOX MODAL ===================== */}
       {activePhoto && (
         <div
-          className="fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
           style={{ zIndex: 99999 }}
           onClick={() => setActivePhoto(null)}
         >
           <div
-            className="relative w-full max-w-2xl bg-gray-950 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 flex flex-col my-auto max-h-[90vh]"
+            className="relative w-full max-w-2xl bg-black rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header / Top Bar with Category, Title and Accessible Close Button */}
-            <div className="flex items-center justify-between px-4 sm:px-5 py-3 bg-gray-900/95 border-b border-white/10 z-20">
-              <div className="flex items-center gap-2 overflow-hidden mr-3">
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#01a9a0] uppercase tracking-wider bg-[#01a9a0]/15 px-2 py-0.5 rounded flex-shrink-0">
-                  {activePhoto.category}
-                </span>
-                <h3 className="text-xs sm:text-sm font-bold text-white truncate">
-                  {activePhoto.title}
-                </h3>
-              </div>
-              <button
-                onClick={() => setActivePhoto(null)}
-                className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer flex-shrink-0"
-                title="Close (Esc)"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
+            {/* Close Button */}
+            <button
+              onClick={() => setActivePhoto(null)}
+              className="absolute top-3 right-3 z-30 w-8 h-8 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20"
+              title="Close"
+            >
+              <X className="w-4 h-4" />
+            </button>
 
-            {/* Main Photo Display with Arrows */}
-            <div className="relative w-full aspect-[4/3] bg-black flex items-center justify-center overflow-hidden group">
+            {/* Main Photo Display with Navigation Arrows */}
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] bg-black flex items-center justify-center overflow-hidden">
               <Image
                 src={activePhoto.thumbnail}
-                alt={activePhoto.title}
+                alt="Media photo"
                 fill
                 className="object-contain"
                 priority
@@ -595,8 +549,8 @@ export default function MediaPage() {
                   e.stopPropagation();
                   handlePrevPhoto();
                 }}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md"
-                title="Previous photo (←)"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md z-20"
+                title="Previous"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -607,21 +561,11 @@ export default function MediaPage() {
                   e.stopPropagation();
                   handleNextPhoto();
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md"
-                title="Next photo (→)"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs border border-white/15 hover:scale-105 shadow-md z-20"
+                title="Next"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
-            </div>
-
-            {/* Caption & Counter */}
-            <div className="px-4 sm:px-5 py-3 bg-gray-900/80 border-t border-white/5 flex items-center justify-between text-xs text-gray-400 gap-3">
-              <p className="truncate">
-                {activePhoto.description}
-              </p>
-              <span className="text-[11px] font-medium text-gray-500 flex-shrink-0">
-                {currentPhotoIndex + 1} / {photoItems.length}
-              </span>
             </div>
           </div>
         </div>
