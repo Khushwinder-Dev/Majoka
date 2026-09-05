@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   LayoutGrid,
   List as ListIcon,
@@ -34,14 +35,14 @@ interface ProductItem {
 const allProductsData: ProductItem[] = [
   {
     id: 1,
-    name: "Sigma Quattro Camera best",
+    name: "Nomad MagSafe Charger",
     category: "Technology",
-    image: "/products/minimal-watch.jpg",
+    image: "/products/nomad-magsafe-charger.jpg",
     description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 128,
-    price: "$199.00",
+      "The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch leather pad, so it sits flush and stays put.",
+    rating: 4.9,
+    reviewsCount: 214,
+    price: "$149.00",
   },
   {
     id: 2,
@@ -178,6 +179,7 @@ const categoryList = [
 ];
 
 export default function ProductsPage() {
+  const router = useRouter();
   // Filter States
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedRating, setSelectedRating] = useState<number | "any">("any");
@@ -697,7 +699,10 @@ export default function ProductsPage() {
                   return (
                     <div
                       key={product.id}
-                      onClick={() => setSelectedCardId(product.id)}
+                      onClick={() => {
+                        setSelectedCardId(product.id);
+                        router.push(`/products/${product.id}`);
+                      }}
                       className={`relative rounded-2xl transition-all duration-200 cursor-pointer p-3 sm:p-3.5 flex flex-col group ${
                         isShareOpen ? "z-30" : isSelected ? "z-20" : "z-10 hover:z-20"
                       } ${
