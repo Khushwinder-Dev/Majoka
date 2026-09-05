@@ -140,7 +140,7 @@ export default function ProductDetailsPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900 pt-28 pb-24 selection:bg-[#01a9a0]/15 selection:text-[#01a9a0]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* ===================== BREADCRUMBS ===================== */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 mb-8 sm:mb-12">
           <Link href="/" className="hover:text-gray-900 transition-colors">
@@ -180,9 +180,8 @@ export default function ProductDetailsPage() {
                 title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
               >
                 <Heart
-                  className={`w-4 h-4 ${
-                    isWishlisted ? "fill-rose-500 text-rose-500" : ""
-                  }`}
+                  className={`w-4 h-4 ${isWishlisted ? "fill-rose-500 text-rose-500" : ""
+                    }`}
                 />
               </button>
             </div>
@@ -317,7 +316,7 @@ export default function ProductDetailsPage() {
             </div>
 
             {/* Price & Interactive Actions */}
-            <div className="pt-2 border-t border-gray-100 flex flex-col gap-4">
+            {/* <div className="pt-2 border-t border-gray-100 flex flex-col gap-4">
               <div className="flex items-baseline gap-3">
                 <span className="text-2xl sm:text-3xl font-bold text-gray-900 font-anek">
                   {product.price}
@@ -327,9 +326,8 @@ export default function ProductDetailsPage() {
                 </span>
               </div>
 
-              {/* Quantity and CTA Buttons */}
+              
               <div className="flex flex-wrap items-center gap-3">
-                {/* Quantity Control */}
                 <div className="flex items-center border border-gray-200 rounded-xl bg-white p-1 shadow-2xs">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -348,7 +346,7 @@ export default function ProductDetailsPage() {
                   </button>
                 </div>
 
-                {/* Add to Cart */}
+
                 <button
                   onClick={handleAddToCart}
                   className="flex-1 min-w-[160px] py-3 px-6 bg-[#01a9a0] hover:bg-[#00968e] text-white font-semibold text-xs rounded-xl shadow-xs hover:shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
@@ -358,7 +356,7 @@ export default function ProductDetailsPage() {
                 </button>
               </div>
 
-              {/* Assurance Badges */}
+             
               <div className="grid grid-cols-3 gap-2 pt-2 text-[11px] text-gray-500 border-t border-gray-100/60">
                 <div className="flex items-center gap-1.5">
                   <Truck className="w-3.5 h-3.5 text-[#01a9a0]" />
@@ -373,7 +371,7 @@ export default function ProductDetailsPage() {
                   <span>30-Day Returns</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -382,31 +380,28 @@ export default function ProductDetailsPage() {
           <div className="flex items-center gap-8">
             <button
               onClick={() => scrollToSection("overview")}
-              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${
-                activeTab === "overview"
-                  ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
-                  : "text-gray-500 hover:text-gray-800"
-              }`}
+              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${activeTab === "overview"
+                ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
+                : "text-gray-500 hover:text-gray-800"
+                }`}
             >
               Overview
             </button>
             <button
               onClick={() => scrollToSection("specifications")}
-              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${
-                activeTab === "specifications"
-                  ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
-                  : "text-gray-500 hover:text-gray-800"
-              }`}
+              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${activeTab === "specifications"
+                ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
+                : "text-gray-500 hover:text-gray-800"
+                }`}
             >
               Specifications
             </button>
             <button
               onClick={() => scrollToSection("reviews")}
-              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${
-                activeTab === "reviews"
-                  ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
-                  : "text-gray-500 hover:text-gray-800"
-              }`}
+              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${activeTab === "reviews"
+                ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
+                : "text-gray-500 hover:text-gray-800"
+                }`}
             >
               Reviews
             </button>
@@ -627,11 +622,10 @@ export default function ProductDetailsPage() {
                       className="p-0.5 hover:scale-110 transition-transform"
                     >
                       <Star
-                        className={`w-5 h-5 ${
-                          star <= newReview.rating
-                            ? "fill-amber-500 text-amber-500"
-                            : "text-gray-300"
-                        }`}
+                        className={`w-5 h-5 ${star <= newReview.rating
+                          ? "fill-amber-500 text-amber-500"
+                          : "text-gray-300"
+                          }`}
                       />
                     </button>
                   ))}
