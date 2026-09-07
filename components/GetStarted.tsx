@@ -212,10 +212,16 @@ const GetStarted = () => {
                 <div className="flex flex-col">
                   <h4 className="text-xl font-medium text-white">Email</h4>
                   <a
-                    href="mailto:info@majokaengineering.com"
+                    href="mailto:info@tajalrahmah.com"
                     className="text-base font-medium text-white hover:underline"
                   >
-                    info@majokaengineering.com
+                    info@tajalrahmah.com
+                  </a>
+                  <a
+                    href="mailto:tajalrahmah@gmail.com"
+                    className="text-base font-medium text-white hover:underline"
+                  >
+                    tajalrahmah@gmail.com
                   </a>
                 </div>
               </div>
@@ -231,7 +237,13 @@ const GetStarted = () => {
                     href="tel:+971556173300"
                     className="text-base font-medium text-white hover:underline"
                   >
-                    +971-556173300
+                    +971 55 617 3300
+                  </a>
+                  <a
+                    href="tel:+971527492002"
+                    className="text-base font-medium text-white hover:underline"
+                  >
+                    +971 52 749 2002
                   </a>
                 </div>
               </div>
@@ -244,7 +256,7 @@ const GetStarted = () => {
                 <div className="flex flex-col">
                   <h4 className="text-xl font-medium text-white">Office</h4>
                   <p className="text-base font-medium text-white">
-                    Mecca, Saudi Arabia
+                    Office G-01-691, Al Khabaisi, Dubai, 00000 Dubai
                   </p>
                 </div>
               </div>

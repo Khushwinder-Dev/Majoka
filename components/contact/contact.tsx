@@ -5,6 +5,7 @@ import {
   Phone,
   Mail,
   MapPin,
+  Clock,
   Send,
   CheckCircle,
   AlertCircle,
@@ -23,7 +24,8 @@ interface ContactCard {
   id: number;
   icon: React.ElementType;
   title: string;
-  content: string;
+  items?: { text: string; link?: string; isAlert?: boolean }[];
+  content?: string;
   link?: string;
 }
 
@@ -47,22 +49,39 @@ export default function ContactPage() {
       id: 1,
       icon: Phone,
       title: "Phone",
-      content: "+971-556173300",
-      link: "tel:+971556173300",
+      items: [
+        { text: "+971 55 617 3300", link: "tel:+971556173300" },
+        { text: "+971 52 749 2002", link: "tel:+971527492002" },
+      ],
     },
     {
       id: 2,
       icon: Mail,
       title: "Email",
-      content: "info@majokaengineering.com",
-      link: "mailto:info@majokaengineering.com",
+      items: [
+        { text: "info@tajalrahmah.com", link: "mailto:info@tajalrahmah.com" },
+        { text: "tajalrahmah@gmail.com", link: "mailto:tajalrahmah@gmail.com" },
+      ],
     },
     {
       id: 3,
       icon: MapPin,
       title: "Location",
-      content: "Mecca, Saudi Arabia",
-      link: "https://www.google.com/maps/place/TAJ+AL+RAHMAH/@25.3223595,55.3930895,17z/data=!4m6!3m5!1s0x3e5f5bfe0755486f:0xb4a012d339c9440!8m2!3d25.3223595!4d55.3930895!16s%2Fg%2F11ywc1qtc4?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D",
+      items: [
+        {
+          text: "Office G-01-691, Al Khabaisi, Dubai, 00000 Dubai",
+          link: "https://www.google.com/maps/place/TAJ+AL+RAHMAH/@25.3223595,55.3930895,17z/data=!4m6!3m5!1s0x3e5f5bfe0755486f:0xb4a012d339c9440!8m2!3d25.3223595!4d55.3930895!16s%2Fg%2F11ywc1qtc4?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D",
+        },
+      ],
+    },
+    {
+      id: 4,
+      icon: Clock,
+      title: "Office Hours",
+      items: [
+        { text: "Sat - Thu: 8:00 AM - 9:00 PM" },
+        { text: "Friday - Closed", isAlert: true },
+      ],
     },
   ];
 
@@ -242,8 +261,37 @@ export default function ContactPage() {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 flex items-center">
-                      {info.link ? (
+                    <div className="flex-1 flex flex-col justify-center gap-1">
+                      {info.items ? (
+                        info.items.map((item, idx) =>
+                          item.link ? (
+                            <a
+                              key={idx}
+                              href={item.link}
+                              target={
+                                info.title === "Location" ? "_blank" : undefined
+                              }
+                              rel={
+                                info.title === "Location"
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                              className="text-lg sm:text-xl font-bold text-gray-700 hover:text-[#01a9a0] transition-colors duration-300 block"
+                            >
+                              {item.text}
+                            </a>
+                          ) : (
+                            <p
+                              key={idx}
+                              className={`text-lg sm:text-xl font-bold leading-relaxed ${
+                                item.isAlert ? "text-red-600" : "text-gray-700"
+                              }`}
+                            >
+                              {item.text}
+                            </p>
+                          )
+                        )
+                      ) : info.link ? (
                         <a
                           href={info.link}
                           target={
