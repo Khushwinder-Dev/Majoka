@@ -24,8 +24,8 @@ const anekMalayalam = Anek_Malayalam({
 });
 
 export const metadata: Metadata = {
-  title: "Majoka Engineering",
-  description: "Professional services and solutions",
+  title: "Taj Al Rahmah",
+  description: "Professional contracting and technical services in Dubai, UAE",
 };
 
 export default function RootLayout({

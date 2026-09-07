@@ -1041,7 +1041,7 @@ export default function ProductsPage() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="+966 50 123 4567"
+                  placeholder="+971 55 617 3300"
                   value={expertForm.phone}
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, phone: e.target.value })

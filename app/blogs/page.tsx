@@ -235,10 +235,10 @@ const News = () => {
                     We are always available to discuss with you
                   </p>
                   <a
-                    href="mailto:info@majokaengineering.com"
-                    className="text-black text-lg font-medium hover:text-sky-500 transition-colors duration-300 break-all text-center"
+                    href="mailto:info@tajalrahmah.com"
+                    className="text-black text-lg font-medium hover:text-[#01a9a0] transition-colors duration-300 break-all text-center"
                   >
-                    info@majokaengineering.com
+                    info@tajalrahmah.com
                   </a>
                   <button
                     className="px-4 py-2 theme-bg-main rounded-[50px] hover:bg-pink-900 transition-all duration-300 flex items-center gap-2 shadow-lg cursor-pointer"

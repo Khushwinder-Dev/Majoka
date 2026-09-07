@@ -107,23 +107,23 @@ export default function MapSection() {
                 <Marker position={position} icon={redIcon}>
                   <Popup className="custom-popup">
                     <div className="p-2">
-                      <h3 className="font-bold text-lg mb-2">
+                      <h3 className="font-bold text-lg mb-2 text-[#01a9a0]">
                         TAJ AL RAHMAH
                       </h3>
 
                       <p className="text-sm text-gray-600 mb-2">
-                        Dubai
+                        Office G-01-691, Al Khabaisi
                         <br />
-                        United Arab Emirates
+                        Dubai, 00000 Dubai
                       </p>
 
-                      <div className="text-sm">
-                        <p className="font-semibold">
-                          Phone: +971-556173300
+                      <div className="text-sm space-y-1">
+                        <p className="font-semibold text-gray-700">
+                          Phone: +971 55 617 3300 / +971 52 749 2002
                         </p>
 
-                        <p className="font-semibold">
-                          Email: info@majokaengineering.com
+                        <p className="font-semibold text-gray-700">
+                          Email: info@tajalrahmah.com
                         </p>
                       </div>
                     </div>
@@ -168,9 +168,10 @@ export default function MapSection() {
                 </div>
 
                 <div className="text-sm text-gray-700 mb-3 leading-relaxed">
-                  <p className="font-semibold">TAJ AL RAHMAH</p>
-                  <p>Dubai</p>
-                  <p>United Arab Emirates</p>
+                  <p className="font-semibold text-[#01a9a0]">TAJ AL RAHMAH</p>
+                  <p>Office G-01-691, Al Khabaisi</p>
+                  <p>Dubai, 00000 Dubai</p>
+                  <p className="mt-2 text-xs font-semibold text-gray-600">+971 55 617 3300</p>
                 </div>
 
                 <button
