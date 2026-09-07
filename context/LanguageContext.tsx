@@ -93,28 +93,35 @@ export interface Translations {
     readFull: string;
   };
   footer: {
+    tagline1: string;
+    tagline2: string;
     companyDescription: string;
-    quickLinks: string;
-    home: string;
-    aboutUs: string;
-    services: string;
-    inspection: string;
-    resources: string;
-    media: string;
-    blog: string;
-    career: string;
-    gallery: string;
-    project: string;
+    newsletter: {
+      title: string;
+      description: string;
+      placeholder: string;
+      subscribe: string;
+      successMsg: string;
+      errorMsg: string;
+      invalidMsg: string;
+    };
     servicesTitle: string;
-    weights: string;
-    pressureSystems: string;
-    gauge: string;
-    laboratories: string;
-    contactUs: string;
+    servicesLinks: string[];
+    resourcesTitle: string;
+    resourcesLinks: string[];
+    companyTitle: string;
+    companyLinks: string[];
+    contactTitle: string;
+    phone1: string;
+    phone2: string;
+    email1: string;
+    email2: string;
     location: string;
+    workingHours: string;
+    closedDay: string;
     copyright: string;
-    developedBy: string;
     scrollToTop: string;
+    exploreMore: string;
   };
 }
 
@@ -320,29 +327,57 @@ const translations: Record<Language, Translations> = {
       readFull: "READ FULL ARTICLE",
     },
     footer: {
+      tagline1: "Building Better",
+      tagline2: "Spaces For Tomorrow",
       companyDescription:
-        "Taj Al Rahmah Technical Services, we deliver expert electrical, plumbing, painting, cleaning, repairs, and heating & cooling solutions with quality workmanship and dependable service.",
-      quickLinks: "Quick Links",
-      home: "Home",
-      aboutUs: "About Us",
-      services: "Services",
-      inspection: "Inspection",
-      resources: "Resources",
-      media: "Media",
-      blog: "Blog",
-      career: "Career",
-      gallery: "Gallery",
-      project: "Project",
+        "Taj Al Rahmah Contracting Company Delivers Reliable Contracting Solutions With A Focus On Quality, Safety, And Customer Satisfaction.",
+      newsletter: {
+        title: "SUBSCRIBE & GET 15% DISCOUNT",
+        description:
+          "Enjoy 15% off your first service and stay updated with exclusive offers, project insights, expert tips, and the latest waterproofing and contracting solutions.",
+        placeholder: "Enter Your Email",
+        subscribe: "Subscribe",
+        successMsg: "🎉 Subscribed successfully! Check your email for your 15% discount code.",
+        errorMsg: "Something went wrong. Please try again.",
+        invalidMsg: "Please enter a valid email address.",
+      },
       servicesTitle: "Services",
-      weights: "Weights",
-      pressureSystems: "Pressure Systems",
-      gauge: "Gauge",
-      laboratories: "Laboratories",
-      contactUs: "Contact Us",
-      location: "Mecca, Saudi Arabia",
-      copyright: "© 2025 TAJ ENGINEERING. All rights reserved. Developed by",
-      developedBy: "RAPID",
+      servicesLinks: [
+        "Waterproofing",
+        "Swimming Pool Installation",
+        "Electrical Fit-Out",
+        "Plumbing & Sanitary",
+        "Floor & Wall Tiling",
+      ],
+      resourcesTitle: "Resources",
+      resourcesLinks: [
+        "Media",
+        "Blog",
+        "Downloads",
+        "FAQs",
+        "Privacy",
+        "Terms",
+      ],
+      companyTitle: "Company",
+      companyLinks: [
+        "About Us",
+        "Clients",
+        "Expertise",
+        "Certifications",
+        "Careers",
+        "Contact",
+      ],
+      contactTitle: "Contact",
+      phone1: "+971 56 440 6456",
+      phone2: "+971 55 763 6994",
+      email1: "info@tajalrahmah.com",
+      email2: "tajalrahmah@gmail.com",
+      location: "Industrial Area No 5,\nSharjah, UAE",
+      workingHours: "Sat - Thu, 9:00 am - 6:00 pm",
+      closedDay: "Friday closed",
+      copyright: "© 2026 Taj Al Rahmah. All Rights Reserved.",
       scrollToTop: "Scroll to top",
+      exploreMore: "Explore More",
     },
   },
   ar: {
@@ -546,29 +581,57 @@ const translations: Record<Language, Translations> = {
       readFull: "اقرأ المقال كاملاً",
     },
     footer: {
+      tagline1: "بناء مساحات",
+      tagline2: "أفضل للغد",
       companyDescription:
-        "شركة تاج الرحمة للخدمات الفنية، نقدم حلولاً متخصصة في الكهرباء والسباكة والدهان والتنظيف والإصلاحات وتدفئة والتبريد بجودة حرفية وخدمة موثوقة.",
-      quickLinks: "روابط سريعة",
-      home: "الرئيسية",
-      aboutUs: "عن الشركة",
-      services: "الخدمات",
-      inspection: "التفتيش",
-      resources: "الموارد",
-      media: "الوسائط",
-      blog: "المدونة",
-      career: "الوظائف",
-      gallery: "المعرض",
-      project: "المشاريع",
+        "شركة تاج الرحمة للمقاولات تقدم حلول مقاولات موثوقة مع تركيز على الجودة والسلامة ورضا العملاء.",
+      newsletter: {
+        title: "اشترك واحصل على خصم 15%",
+        description:
+          "استمتع بخصم 15% على أول خدمة لك وابق على اطلاع بالعروض الحصرية ورؤى المشاريع ونصائح الخبراء وأحدث حلول العزل المائي والمقاولات.",
+        placeholder: "أدخل بريدك الإلكتروني",
+        subscribe: "اشترك",
+        successMsg: "🎉 تم الاشتراك بنجاح! تحقق من بريدك الإلكتروني للحصول على رمز خصم 15%.",
+        errorMsg: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+        invalidMsg: "يرجى إدخال عنوان بريد إلكتروني صالح.",
+      },
       servicesTitle: "الخدمات",
-      weights: "الموازين",
-      pressureSystems: "أنظمة الضغط",
-      gauge: "المقاييس",
-      laboratories: "المختبرات",
-      contactUs: "اتصل بنا",
-      location: "مكة المكرمة، المملكة العربية السعودية",
-      copyright: "© 2025 تاج للهندسة. جميع الحقوق محفوظة. تم التطوير بواسطة",
-      developedBy: "RAPID",
+      servicesLinks: [
+        "العزل المائي",
+        "تركيب حمامات السباحة",
+        "تجهيزات الكهربائية",
+        "السباكة والصرف الصحي",
+        "تركيب الأرضيات والجدران",
+      ],
+      resourcesTitle: "الموارد",
+      resourcesLinks: [
+        "الوسائط",
+        "المدونة",
+        "التحميلات",
+        "الأسئلة الشائعة",
+        "الخصوصية",
+        "الشروط",
+      ],
+      companyTitle: "الشركة",
+      companyLinks: [
+        "عن الشركة",
+        "العملاء",
+        "الخبرة",
+        "الشهادات",
+        "الوظائف",
+        "اتصل بنا",
+      ],
+      contactTitle: "تواصل معنا",
+      phone1: "+971 56 440 6456",
+      phone2: "+971 55 763 6994",
+      email1: "info@tajalrahmah.com",
+      email2: "tajalrahmah@gmail.com",
+      location: "المنطقة الصناعية رقم 5،\nالشارقة، الإمارات",
+      workingHours: "السبت - الخميس، 9:00 صباحاً - 6:00 مساءً",
+      closedDay: "مغلق يوم الجمعة",
+      copyright: "© 2026 تاج الرحمة. جميع الحقوق محفوظة.",
       scrollToTop: "العودة للأعلى",
+      exploreMore: "استكشف المزيد",
     },
   },
 };
