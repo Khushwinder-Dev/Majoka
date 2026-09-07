@@ -133,7 +133,7 @@ const ServicesContent = () => {
       name: "Calibration",
       title: "Calibration",
       description:
-        "Majoka specializes in calibration services, ensuring equipment accuracy and reliability. Our skilled technicians provide precise calibration for various instruments, maintaining high standards.",
+        "Taj Al Rahmah specializes in calibration services, ensuring equipment accuracy and reliability. Our skilled technicians provide precise calibration for various instruments, maintaining high standards.",
       highlights: [
         "Precision Calibration: Ensuring accuracy in equipment and instruments",
         "Skilled Technicians: Experienced professionals for reliable calibration.",
@@ -262,7 +262,7 @@ const ServicesContent = () => {
       name: "Soil Testing Laboratories",
       title: "Soil Testing Laboratories",
       description:
-        "Majoka provides a wide range of testing services, including soil, concrete, and chemical analysis. Our advanced methods ensure accurate results, supporting construction and engineering projects.",
+        "Taj Al Rahmah provides a wide range of testing services, including soil, concrete, and chemical analysis. Our advanced methods ensure accurate results, supporting construction and engineering projects.",
       highlights: [
         "Accurate Results: Using advanced technology for precise testing.",
         "Support for Projects: Ensuring quality and safety in construction.",
@@ -312,7 +312,7 @@ const ServicesContent = () => {
       name: "General Trading",
       title: "General Trading",
       description:
-        "Majoka engages in trading, offering a wide range of materials and equipment. Our extensive network ensures the availability of high-quality products, supporting various projects.",
+        "Taj Al Rahmah engages in trading, offering a wide range of materials and equipment. Our extensive network ensures the availability of high-quality products, supporting various projects.",
       highlights: [
         "Wide Range of Products: Offering materials and equipment for diverse needs.",
         "Quality Assurance: Ensuring high-quality products for all projects.",

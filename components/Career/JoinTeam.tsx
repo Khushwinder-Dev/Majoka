@@ -10,14 +10,14 @@ const JoinTeam = () => {
           <div className="order-2 lg:order-1">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold theme-text-main mb-6 leading-tight">
               {/* Build Your Future with Us: Careers in Construction */}
-              Careers at Majoka
+              Careers at Taj Al Rahmah
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
               {/* Join our dynamic construction team and help us build a brighter
               future! At BuildRight, we strive to be the leading construction
               company, delivering exceptional projects and fostering talent.
               Become part of our mission today! */}
-              At Majoka, we are committed to building not just structures, but
+              At Taj Al Rahmah, we are committed to building not just structures, but
               also careers. We are always on the lookout for talented and
               passionate individuals who share our dedication to excellence,
               innovation, and safety in civil construction. Join our team and

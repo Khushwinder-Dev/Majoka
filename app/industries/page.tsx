@@ -43,7 +43,7 @@ const industriesData: Industry[] = [
     shortDesc:
       "Comprehensive plant turnaround, non-destructive testing, calibration, and heavy equipment support for upstream & downstream facilities.",
     fullDesc:
-      "Majoka Engineering provides end-to-end mission-critical services for major refineries, gas processing plants, and petrochemical complexes across Saudi Arabia. We ensure zero unscheduled downtime through high-precision calibration of pressure systems, certified NDT inspections, and rapid deployment of qualified manpower.",
+      "Taj Al Rahmah provides end-to-end mission-critical services for major refineries, gas processing plants, and industrial complexes. We ensure zero unscheduled downtime through high-precision technical services, certified inspections, and rapid deployment of qualified manpower.",
     icon: Flame,
     image: "/project.jpg",
     keyServices: [
@@ -187,7 +187,7 @@ const industriesData: Industry[] = [
     shortDesc:
       "Geotechnical soil sampling, heavy plant machinery maintenance, aggregate testing, and ruggedized sensors.",
     fullDesc:
-      "From phosphate and bauxite extraction to gold and industrial mineral operations, Majoka provides durable field testing gear, certified geotechnical survey teams, and robust machinery maintenance to thrive in remote desert conditions.",
+      "From phosphate and bauxite extraction to gold and industrial mineral operations, Taj Al Rahmah provides durable field testing gear, certified geotechnical survey teams, and robust machinery maintenance to thrive in demanding conditions.",
     icon: Pickaxe,
     image: "/about-us/about-us-1.png",
     keyServices: [
@@ -397,11 +397,11 @@ export default function IndustriesPage() {
           </div>
         </div>
 
-        {/* Why Leading Industrial Clients Trust Majoka */}
+        {/* Why Leading Industrial Clients Trust Taj Al Rahmah */}
         <div className="my-20">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h3 className="text-2xl sm:text-3xl font-bold font-anek text-stone-900">
-              Why Key Industrial Entities Choose Majoka
+              Why Key Industrial Entities Choose Taj Al Rahmah
             </h3>
             <p className="text-sm sm:text-base text-gray-600 mt-2">
               Uncompromising dedication to safety, precision calibration, and

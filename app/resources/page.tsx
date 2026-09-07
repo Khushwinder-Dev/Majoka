@@ -68,7 +68,7 @@ const resourcesData: ResourceItem[] = [
     category: "Case Studies",
     format: "Interactive Article",
     description:
-      "How Majoka deployed 180+ certified technicians and 24/7 mobile calibration rigs to complete turnaround testing 4 days ahead of schedule.",
+      "How Taj Al Rahmah deployed 180+ certified technicians and 24/7 mobile calibration rigs to complete turnaround testing 4 days ahead of schedule.",
     date: "Nov 2025",
     readTime: "8 min read",
     linkHref: "/blogs",
@@ -76,12 +76,12 @@ const resourcesData: ResourceItem[] = [
   },
   {
     id: 4,
-    title: "Majoka Engineering Corporate Capability Profile & Catalog",
+    title: "Taj Al Rahmah Corporate Capability Profile & Catalog",
     category: "Company Brochures",
     format: "Company Brochure",
     fileSize: "6.5 MB",
     description:
-      "Official overview of Majoka's multi-disciplinary engineering divisions: Inspection, Calibration, Equipment Rental, Manpower, and Trading.",
+      "Official overview of Taj Al Rahmah's multi-disciplinary contracting and engineering divisions: Inspection, Calibration, Equipment Rental, Manpower, and Trading.",
     date: "2026 Edition",
     readTime: "Full Brochure",
     tags: ["Corporate", "Services", "Portfolio"],
@@ -190,7 +190,7 @@ export default function ResourcesPage() {
           <p className="mt-3 text-base sm:text-lg text-gray-600 leading-relaxed">
             Access our technical publications, industry standards matrices,
             downloadable corporate brochures, and real-world project case
-            studies curated by senior Majoka engineers.
+            studies curated by senior Taj Al Rahmah engineers.
           </p>
         </div>
 
@@ -381,7 +381,7 @@ export default function ResourcesPage() {
                 Latest Articles
               </span>
               <h3 className="text-2xl sm:text-3xl font-bold font-anek text-stone-900">
-                Explore Majoka Technical Articles & Blogs
+                Explore Taj Al Rahmah Technical Articles & Blogs
               </h3>
               <p className="text-sm text-gray-600 mt-2 max-w-xl">
                 Read our team&apos;s latest field reports, safety updates, and

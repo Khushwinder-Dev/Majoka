@@ -20,9 +20,9 @@ const Question = () => {
     },
     {
       id: 2,
-      question: "What sets Majoka Construction apart in design?",
+      question: "What sets Taj Al Rahmah apart in design?",
       answer:
-        "Majoka Construction stands out through our innovative approach, experienced team, and commitment to quality. We combine traditional construction expertise with modern design principles to deliver exceptional results.",
+        "Taj Al Rahmah stands out through our innovative approach, experienced team, and commitment to quality. We combine traditional construction expertise with modern design principles to deliver exceptional results.",
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const Question = () => {
     },
     {
       id: 4,
-      question: "Does Majoka prioritize sustainability?",
+      question: "Does Taj Al Rahmah prioritize sustainability?",
       answer:
         "Yes, sustainability is at the core of our operations. We use eco-friendly materials, implement energy-efficient solutions, and follow green building practices to minimize environmental impact.",
     },

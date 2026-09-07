@@ -305,7 +305,7 @@ const translations: Record<Language, Translations> = {
         {
           name: "Stella Smith, New York",
           title:
-            "Majoka Engineering delivered exactly what we expected — professional work, timely completion, and great communication from start to finish.",
+            "Taj Al Rahmah delivered exactly what we expected — professional work, timely completion, and great communication from start to finish.",
         },
         {
           name: "Abdur Gaffar, Dubai",
@@ -320,7 +320,7 @@ const translations: Record<Language, Translations> = {
         {
           name: "Ahmed Hassan, Dubai",
           title:
-            "Reliable and efficient service delivery. Majoka Engineering consistently provides high-quality work with excellent project management and communication.",
+            "Reliable and efficient service delivery. Taj Al Rahmah consistently provides high-quality work with excellent project management and communication.",
         },
         {
           name: "Milon Islam, Dubai",
@@ -351,7 +351,8 @@ const translations: Record<Language, Translations> = {
             "Polyurea Coating Waterproofing Fast, Flexible & Durable Protection",
           excerpt:
             "Polyurea coating provides fast-curing, chemicals, abrasion, and harsh conditions.",
-          image: "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.png",
+          image:
+            "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.jpg",
         },
         {
           date: "FEB 25, 2026",
@@ -359,7 +360,8 @@ const translations: Record<Language, Translations> = {
           title: "Industrial Coatings Durable Protection For Demanding Environments",
           excerpt:
             "Industrial coatings protect against corrosion, chemicals, and heavy wear,",
-          image: "/news/Industrial Coatings Durable Protection For Demanding Environments.png",
+          image:
+            "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
         },
         {
           date: "FEB 25, 2026",
@@ -368,7 +370,8 @@ const translations: Record<Language, Translations> = {
             "Injection Waterproofing Targeted Leak Sealing For Lasting Protection",
           excerpt:
             "Polyurea coating provides fast-curing, abrasion, and harsh conditions.",
-          image: "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.png",
+          image:
+            "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.jpg",
         },
       ],
     },
@@ -593,7 +596,7 @@ const translations: Record<Language, Translations> = {
         {
           name: "ستيلا سميث، نيويورك",
           title:
-            "سلمت شركة Majoka للهندسة بالضبط ما توقعناه - عمل احترافي، إكمال في الوقت المحدد، وتواصل رائع من البداية إلى النهاية.",
+            "سلمت شركة تاج الرحمة بالضبط ما توقعناه - عمل احترافي، إكمال في الوقت المحدد، وتواصل رائع من البداية إلى النهاية.",
         },
         {
           name: "عبد الغفار، دبي",
@@ -608,7 +611,7 @@ const translations: Record<Language, Translations> = {
         {
           name: "أحمد حسن، دبي",
           title:
-            "تسليم خدمة موثوق وفعال. تقدم شركة Majoka للهندسة باستمرار عملاً عالي الجودة مع إدارة مشاريع وتواصل ممتازين.",
+            "تسليم خدمة موثوق وفعال. تقدم شركة تاج الرحمة باستمرار عملاً عالي الجودة مع إدارة مشاريع وتواصل ممتازين.",
         },
         {
           name: "ميلون إسلام، دبي",
@@ -639,7 +642,8 @@ const translations: Record<Language, Translations> = {
             "طلاء البولييوريا للعزل المائي حماية سريعة ومرنة ومتانة",
           excerpt:
             "يوفر طلاء البولييوريا معالجة سريعة التصلب ومقاومة للمواد الكيميائية والتآكل والظروف القاسية.",
-          image: "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.png",
+          image:
+            "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.jpg",
         },
         {
           date: "٢٥ فبراير ٢٠٢٦",
@@ -648,7 +652,8 @@ const translations: Record<Language, Translations> = {
             "الطلاءات الصناعية حماية متينة للبيئات المتطلبة",
           excerpt:
             "تحمي الطلاءات الصناعية من التآكل والمواد الكيميائية والتلف الثقيل.",
-          image: "/news/Industrial Coatings Durable Protection For Demanding Environments.png",
+          image:
+            "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
         },
         {
           date: "٢٥ فبراير ٢٠٢٦",
@@ -657,7 +662,8 @@ const translations: Record<Language, Translations> = {
             "العزل المائي بالحقن إغلاق مستهدف للتسريبات لحماية دائمة",
           excerpt:
             "يوفر طلاء البولييوريا معالجة سريعة ومقاومة للتآكل والظروف القاسية.",
-          image: "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.png",
+          image:
+            "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.jpg",
         },
       ],
     },

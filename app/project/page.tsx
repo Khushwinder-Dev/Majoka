@@ -7,7 +7,7 @@ export default function ProjectPage() {
   return (
     <div>
       <CommonHeader
-        title="Build Your Project With Majoka"
+        title="Build Your Project With Taj Al Rahmah"
         breadcrumb="Projects"
         imagePath="/project.jpg"
       />

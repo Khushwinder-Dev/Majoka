@@ -100,7 +100,7 @@ const Portfolio = () => {
         {/* Header Section */}
         <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold theme-text-main mb-6">
-            Majoka Project Portfolio
+            Taj Al Rahmah Project Portfolio
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             Completed 6 major construction and infrastructure projects for Saudi

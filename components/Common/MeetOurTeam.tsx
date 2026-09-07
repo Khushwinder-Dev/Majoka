@@ -18,7 +18,7 @@ const WorkSteps = () => {
 
   const teamMembers = [
     {
-      name: "Nauman Safdar Majoka",
+      name: "Nauman Safdar",
       position: "Director",
       image: "/team-members/NAUMAN.jpg",
     },
@@ -33,19 +33,19 @@ const WorkSteps = () => {
       image: "/team-members/Anait.jpg",
     },
     {
-      name: "Luqman Safdar Majoka",
+      name: "Luqman Safdar",
       position: "Sales Manager",
       image: "/team-members/Luqman.jpg",
     },
 
     {
-      name: "Rizwan Safdar Majoka",
+      name: "Rizwan Safdar",
       position: "Operation Manager",
       image: "/team-members/Rizwan.jpg",
     },
 
     {
-      name: "Tasawar Hussain Majoka ",
+      name: "Tasawar Hussain",
       position: "Research and Development  Manager",
       image: "/team-members/Tasawar.jpg",
     },

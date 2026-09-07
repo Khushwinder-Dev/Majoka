@@ -35,10 +35,10 @@ const OurMission = () => {
 
                 <div className="theme-text-main text-sm sm:text-base space-y-4 leading-snug tracking-tight text-shadow-2xs">
                   <p>
-                    At Majoka Engineering, our mission is to deliver innovative,
-                    reliable, and sustainable engineering solutions that empower
-                    industries and enhance communities. We strive to exceed
-                    client expectations through technical excellence, quality
+                    At Taj Al Rahmah, our mission is to deliver innovative,
+                    reliable, and sustainable solutions that empower industries
+                    and enhance communities. We strive to exceed client
+                    expectations through technical excellence, quality
                     workmanship, and a strong commitment to safety, integrity,
                     and customer satisfaction.
                   </p>

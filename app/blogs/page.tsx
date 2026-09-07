@@ -72,7 +72,7 @@ const News = () => {
       excerpt:
         "Force and torque measurement is vital for industrial efficiency and safety. Our services include calibration of torque wrenches, gauges, load cells, and testing machines. Accurate testing ensures equipment reliability and product quality. Expert evaluation and precise calibration support optimal performance in all applications.",
       image:
-        "/news/Laboratories Material Testing Ensuring Structural Integrity.png",
+        "/news/Precision Matters Force & Torque Testing Solutions.png",
       date: generateDynamicDate(10), // 10 days ago
     },
     {
@@ -141,9 +141,9 @@ const News = () => {
               Explore Our Blogs
             </h2>
             <p className="text-lg text-gray-900/80 max-w-4xl mx-auto">
-              Insights, tips, and stories from the world of engineering — stay
+              Insights, tips, and stories from the world of contracting and engineering — stay
               updated with the latest trends, innovative solutions, and expert
-              advice from Majoka Engineering.
+              advice from Taj Al Rahmah.
             </p>
           </div>
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
