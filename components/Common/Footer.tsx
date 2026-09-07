@@ -14,8 +14,10 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLanguage();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -44,8 +46,7 @@ export default function Footer() {
             </div>
 
             <p className="text-white text-base leading-relaxed">
-              Taj Al Rahmah Technical Services, we deliver expert electrical, plumbing, painting, cleaning, repairs, and heating &
-              cooling solutions with quality workmanship and dependable service.
+              {t.footer.companyDescription}
             </p>
 
             {/* Social Media Icons */}
@@ -117,7 +118,7 @@ export default function Footer() {
           {/* Quick Links - Column 2 */}
           <div className="space-y-4 h-full flex flex-col md:ml-8 mt-12">
             <h3 className="text-white text-2xl font-semibold mb-2">
-              Quick Links
+              {t.footer.quickLinks}
             </h3>
             <ul className="space-y-3 flex-grow">
               <li>
@@ -126,7 +127,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Home
+                  {t.footer.home}
                 </Link>
               </li>
               <li>
@@ -135,7 +136,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  About Us
+                  {t.footer.aboutUs}
                 </Link>
               </li>
               <li>
@@ -144,7 +145,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Services
+                  {t.footer.services}
                 </Link>
               </li>
               <li>
@@ -153,7 +154,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Inspection
+                  {t.footer.inspection}
                 </Link>
               </li>
             </ul>
@@ -162,7 +163,7 @@ export default function Footer() {
           {/* Resources - Column 3 */}
           <div className="space-y-4 h-full flex flex-col md:ml-6 mt-12">
             <h3 className="text-white text-2xl font-semibold mb-2">
-              Resources
+              {t.footer.resources}
             </h3>
             <ul className="space-y-3 flex-grow">
               <li>
@@ -171,7 +172,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors hover:text-white/80"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Media
+                  {t.footer.media}
                 </Link>
               </li>
               <li>
@@ -180,7 +181,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Blog
+                  {t.footer.blog}
                 </Link>
               </li>
               <li>
@@ -189,7 +190,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Career
+                  {t.footer.career}
                 </Link>
               </li>
 
@@ -199,7 +200,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Gallery
+                  {t.footer.gallery}
                 </Link>
               </li>
               <li>
@@ -208,7 +209,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Project
+                  {t.footer.project}
                 </Link>
               </li>
             </ul>
@@ -216,7 +217,7 @@ export default function Footer() {
 
           {/* Services - Column 4 */}
           <div className="space-y-4 h-full flex flex-col md:ml-2 mt-12">
-            <h3 className="text-white text-2xl font-semibold mb-2">Services</h3>
+            <h3 className="text-white text-2xl font-semibold mb-2">{t.footer.servicesTitle}</h3>
             <ul className="space-y-3 flex-grow">
               <li>
                 <Link
@@ -224,7 +225,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Weights
+                  {t.footer.weights}
                 </Link>
               </li>
               <li>
@@ -233,7 +234,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Pressure Systems
+                  {t.footer.pressureSystems}
                 </Link>
               </li>
               <li>
@@ -242,7 +243,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Gauge
+                  {t.footer.gauge}
                 </Link>
               </li>
               <li>
@@ -251,7 +252,7 @@ export default function Footer() {
                   className="flex items-center gap-2 text-white text-base transition-colors"
                 >
                   <ChevronRight className="w-4 h-4 flex-shrink-0" />
-                  Laboratories
+                  {t.footer.laboratories}
                 </Link>
               </li>
             </ul>
@@ -260,7 +261,7 @@ export default function Footer() {
           {/* Contact Us - Column 5 */}
           <div className="space-y-4 h-full flex flex-col md:ml-2 mt-12">
             <h3 className="text-white text-2xl font-semibold mb-2">
-              Contact Us
+              {t.footer.contactUs}
             </h3>
             <div className="space-y-4 flex-grow">
               <div className="flex items-start gap-3">
@@ -268,7 +269,7 @@ export default function Footer() {
                 <div className="text-white text-base leading-relaxed">
                   {/* <p>Fish Round About Deira,</p>
                   <p>Dubai, UAE</p> */}
-                  <p>Mecca, Saudi Arabia</p>
+                  <p>{t.footer.location}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -302,21 +303,21 @@ export default function Footer() {
             <button
               onClick={scrollToTop}
               className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Scroll to top"
+              aria-label={t.footer.scrollToTop}
             >
               <ChevronRight className="w-5 h-5 text-white rotate-[-90deg]" />
             </button>
 
             {/* Copyright Text */}
             <p className="text-center text-white text-base">
-              © 2025 TAJ ENGINEERING. All rights reserved. Developed by{" "}
+              {t.footer.copyright}{" "}
               <Link
                 href="https://rapidsmarterp.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold transition-colors underline"
               >
-                RAPID
+                {t.footer.developedBy}
               </Link>
             </p>
 

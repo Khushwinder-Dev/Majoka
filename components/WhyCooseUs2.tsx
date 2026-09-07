@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,27 +14,13 @@ interface Feature {
 }
 
 const WhyChooseUsSection = () => {
+  const { t } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const features: Feature[] = [
-    {
-      id: 1,
-      title: "Unmatched Expertise",
-      description:
-        "With years of experience across residential, commercial, and industrial projects, we bring proven knowledge and innovative techniques to every build.",
-    },
-    {
-      id: 2,
-      title: "Commitment to Quality",
-      description:
-        "From materials to craftsmanship, we follow international standards to ensure long-lasting durability and top-tier finishing.",
-    },
-    {
-      id: 3,
-      title: "On-Time Delivery",
-      description:
-        "We value your time. Our structured planning and efficient project management guarantee deadlines are met without compromise.",
-    },
+    { id: 1, title: t.whyChooseUs.feature1Title, description: t.whyChooseUs.feature1Desc },
+    { id: 2, title: t.whyChooseUs.feature2Title, description: t.whyChooseUs.feature2Desc },
+    { id: 3, title: t.whyChooseUs.feature3Title, description: t.whyChooseUs.feature3Desc },
   ];
 
   // Animation variants
@@ -143,7 +130,7 @@ const WhyChooseUsSection = () => {
             className="text-3xl sm:text-4xl font-black theme-text-main"
             variants={featureVariants}
           >
-            Why Choose Us?
+            {t.whyChooseUs.title}
           </motion.h2>
 
           {/* Features List */}
@@ -185,7 +172,7 @@ const WhyChooseUsSection = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Explore More
+                {t.whyChooseUs.exploreMore}
               </motion.button>
             </Link>
           </motion.div>

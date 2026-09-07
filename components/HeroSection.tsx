@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, Pause, Volume2, VolumeX, Image as ImageIcon } from "lucide-react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Animated counter for stats
 const AnimatedCounter = ({
@@ -44,18 +45,19 @@ const AnimatedCounter = ({
   );
 };
 
-const statsData = [
-  { value: 17, suffix: "+", label: "Year Of Experience" },
-  { value: 820, suffix: "+", label: "Project Completed" },
-  { value: 500, suffix: "+", label: "Satisfied Clients" },
-  { value: 120, suffix: "+", label: "Skilled Professionals" },
-];
-
 const HeroSection = () => {
+  const { t } = useLanguage();
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [isVideoPaused, setIsVideoPaused] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const statsData = [
+    { value: 17, suffix: "+", label: t.hero.stat1 },
+    { value: 820, suffix: "+", label: t.hero.stat2 },
+    { value: 500, suffix: "+", label: t.hero.stat3 },
+    { value: 120, suffix: "+", label: t.hero.stat4 },
+  ];
 
   // Toggle video playing state
   const handleToggleVideo = () => {
@@ -192,13 +194,13 @@ const HeroSection = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00c2b2]"></span>
           </span>
           <span className="hidden sm:inline text-white/90">
-            {isVideoPaused ? "Video Paused" : "Video Mode"}
+            {isVideoPaused ? t.hero.videoPaused : t.hero.videoMode}
           </span>
           <button
             onClick={handleToggleMute}
-            aria-label={isMuted ? "Unmute video" : "Mute video"}
+            aria-label={isMuted ? t.hero.unmuteAudio : t.hero.muteAudio}
             className="p-1 hover:text-[#00c2b2] transition-colors cursor-pointer"
-            title={isMuted ? "Unmute audio" : "Mute audio"}
+            title={isMuted ? t.hero.unmuteAudio : t.hero.muteAudio}
           >
             {isMuted ? (
               <VolumeX className="w-4 h-4 text-white/80 hover:text-white" />
@@ -209,10 +211,10 @@ const HeroSection = () => {
           <button
             onClick={handleSwitchToImage}
             className="pl-2 border-l border-white/20 hover:text-[#00c2b2] transition-colors flex items-center gap-1.5 cursor-pointer text-white/80 hover:text-white"
-            title="Return to photo banner"
+            title={t.hero.returnToPhoto}
           >
             <ImageIcon className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-medium">Photo</span>
+            <span className="text-[11px] font-medium">{t.hero.photo}</span>
           </button>
         </div>
       )}
@@ -226,22 +228,21 @@ const HeroSection = () => {
             <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
               <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
               <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
-                TRUSTED WATERPROOFING EXPERT
+                {t.hero.eyebrow}
               </span>
             </div>
 
             {/* Headline */}
             <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px] font-bold leading-[1.08] tracking-tight font-anek">
-              Contracting & <br />
+              {t.hero.titlePart1} <br />
               <span className="text-[#00c2b2] drop-shadow-[0_2px_20px_rgba(0,194,178,0.4)]">
-                Waterproofing Excellence
+                {t.hero.titlePart2}
               </span>
             </h1>
 
             {/* Description */}
             <p className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mt-4 sm:mt-5 mb-7 sm:mb-9 font-anek">
-              Proven Expertise And Superior Craftsmanship, Delivering Durable
-              Solutions That Protect And Last.
+              {t.hero.description}
             </p>
 
             {/* Dual CTA Buttons */}
@@ -251,7 +252,7 @@ const HeroSection = () => {
                 href="/services"
                 className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00c2b2] hover:bg-[#00d6c4] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-[0_4px_22px_rgba(0,194,178,0.45)] hover:shadow-[0_6px_28px_rgba(0,194,178,0.65)] hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span>EXPLORE SERVICES</span>
+                <span>{t.hero.exploreServices}</span>
                 <span className="w-8 h-8 rounded-full bg-white text-[#00c2b2] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
                   <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                 </span>
@@ -262,7 +263,7 @@ const HeroSection = () => {
                 href="/project"
                 className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <span>EXPLORE PROJECT</span>
+                <span>{t.hero.exploreProject}</span>
                 <span className="w-8 h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
                   <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                 </span>
@@ -284,9 +285,9 @@ const HeroSection = () => {
                 aria-label={
                   isPlayingVideo
                     ? isVideoPaused
-                      ? "Resume Video"
-                      : "Pause Video"
-                    : "Play Hero Video"
+                      ? t.hero.resumeVideoHint
+                      : t.hero.pauseVideoHint
+                    : t.hero.playVideoHint
                 }
                 className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white/12 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 shadow-[0_0_35px_rgba(0,194,178,0.35)] hover:shadow-[0_0_55px_rgba(0,194,178,0.65)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00c2b2]"
               >
@@ -305,9 +306,9 @@ const HeroSection = () => {
                 <span className="text-[11px] font-semibold text-white/90 bg-black/50 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/20">
                   {isPlayingVideo
                     ? isVideoPaused
-                      ? "Click to play"
-                      : "Click to pause"
-                    : "Click to play video"}
+                      ? t.hero.resumeVideoHint
+                      : t.hero.pauseVideoHint
+                    : t.hero.playVideoHint}
                 </span>
               </div>
             </div>

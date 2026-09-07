@@ -5,8 +5,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import ExpandableSearchBar from "./Common/ExpandableSearchBar";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Navbar = () => {
+  const { language, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
@@ -15,30 +17,28 @@ const Navbar = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
-  // Search suggestions
   const searchSuggestions = [
-    "Products",
-    "Services",
-    "Projects",
-    "Industries",
-    "Resources",
-    "Careers",
-    "About Us",
-    "Contact",
+    t.nav.products,
+    t.nav.services,
+    t.nav.projects,
+    t.nav.industries,
+    t.nav.resources,
+    t.nav.careers,
+    t.nav.company,
+    t.nav.contact,
     "Waterproofing",
     "Contracting",
   ];
 
-  // Updated navigation items matching the reference header image
   const navItems = [
-    { name: "Services", href: "/services" },
-    { name: "Projects", href: "/project" },
-    { name: "Products", href: "/products" },
-    { name: "Industries", href: "/industries" },
-    { name: "Resources", href: "/resources" },
-    { name: "Company", href: "/about-us" },
-    { name: "Careers", href: "/career" },
-    { name: "Contact", href: "/contact" },
+    { name: t.nav.services, href: "/services" },
+    { name: t.nav.projects, href: "/project" },
+    { name: t.nav.products, href: "/products" },
+    { name: t.nav.industries, href: "/industries" },
+    { name: t.nav.resources, href: "/resources" },
+    { name: t.nav.company, href: "/about-us" },
+    { name: t.nav.careers, href: "/career" },
+    { name: t.nav.contact, href: "/contact" },
   ];
 
   const isLinkActive = (href: string) => {
@@ -189,16 +189,17 @@ const Navbar = () => {
             {/* Arabic Link / Toggle */}
             <button
               type="button"
+              onClick={toggleLanguage}
               className="text-white hover:text-[#00c2b2] text-sm xl:text-base font-semibold transition-colors cursor-pointer px-1 py-1 font-sans"
-              title="العربية"
+              title={t.nav.langToggle}
             >
-              العربية
+              {t.nav.langToggle}
             </button>
 
             {/* Circular Search Button with Dashed Ring */}
             <ExpandableSearchBar
               onSearch={handleSearch}
-              placeholder="Search..."
+              placeholder={t.nav.searchPlaceholder}
               suggestions={searchSuggestions}
               dashedButton={true}
               iconColor={styles.textColor}
@@ -210,7 +211,7 @@ const Navbar = () => {
               href="/contact"
               className="pl-5 pr-2 py-2 sm:pl-6 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-3 transition-all duration-300 shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)] hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group"
             >
-              <span className="whitespace-nowrap font-anek">GET A QUOTE</span>
+              <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
               <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
                 <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
               </span>
@@ -326,9 +327,9 @@ const Navbar = () => {
             <ExpandableSearchBar
               onSearch={(query) => {
                 handleSearch(query);
-                setIsMobileMenuOpen(false); // Close mobile menu after search
+                setIsMobileMenuOpen(false);
               }}
-              placeholder="Search..."
+              placeholder={t.nav.searchPlaceholder}
               suggestions={searchSuggestions}
               iconColor="text-white/80"
               hoverIconColor="hover:text-white"
@@ -340,9 +341,13 @@ const Navbar = () => {
           <div className="mb-4">
             <button
               type="button"
+              onClick={() => {
+                toggleLanguage();
+                setIsMobileMenuOpen(false);
+              }}
               className="text-white hover:text-[#00c2b2] text-base font-semibold transition-colors cursor-pointer flex items-center gap-2"
             >
-              <span>العربية</span>
+              <span>{t.nav.langToggle}</span>
             </button>
           </div>
 
@@ -353,7 +358,7 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="pl-6 pr-2 py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-sm tracking-wider uppercase inline-flex items-center gap-3 shadow-lg group"
             >
-              <span className="whitespace-nowrap font-anek">GET A QUOTE</span>
+              <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
               <span className="w-8 h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center">
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </span>

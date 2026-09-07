@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Wrench, Cpu, Zap } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface BlogArticle {
   id: number;
@@ -76,6 +77,7 @@ const getCategoryIcon = (category: string) => {
 export default function BlogSection() {
   const featuredArticle = blogArticles[0];
   const sideArticles = blogArticles.slice(1, 4);
+  const { t } = useLanguage();
 
   return (
     <section className="w-full py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#fafbfc]">
@@ -84,20 +86,20 @@ export default function BlogSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#01a9a0]/10 text-[#01a9a0] text-xs font-bold uppercase tracking-widest mb-3">
-              <span>Articles & Insights</span>
+              <span>{t.blog.badge}</span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight">
-              Latest from Our <span className="theme-text-main">Blog</span>
+              {t.blog.title} <span className="theme-text-main">{t.blog.titleAccent}</span>
             </h2>
             <p className="text-stone-600 text-base md:text-lg mt-2 max-w-2xl">
-              Stay updated with expert engineering insights, industry standards, and innovative solutions from Majoka.
+              {t.blog.subtitle}
             </p>
           </div>
           <Link
             href="/blogs"
             className="inline-flex items-center gap-2 text-sm md:text-base font-bold text-[#01a9a0] hover:text-[#01a9a0] transition-colors group self-start md:self-end"
           >
-            <span>View All Articles</span>
+            <span>{t.blog.viewAll}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
           </Link>
         </div>
@@ -148,7 +150,7 @@ export default function BlogSection() {
                 href="/blogs"
                 className="w-full py-4 bg-[#01a9a0] hover:bg-[#01a9a0] text-white font-bold text-xs sm:text-sm tracking-widest uppercase text-center block transition-colors shadow-inner"
               >
-                READ FULL ARTICLE
+                {t.blog.readFull}
               </Link>
             </div>
           </div>

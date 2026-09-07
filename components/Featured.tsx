@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ProjectData {
   id: number;
@@ -45,6 +46,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 };
 
 const FeaturedProjects = () => {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [cardsPerView, setCardsPerView] = useState(3);
@@ -66,74 +68,17 @@ const FeaturedProjects = () => {
     return () => window.removeEventListener("resize", updateCardsPerView);
   }, []);
 
-  const projectsData: ProjectData[] = [
-    {
-      id: 1,
-      name: "Axel Towers",
-      image: "/Featured/1.png",
-      category: "Building & Interior",
-      location: "Dubai, UAE",
-      year: "2024",
-      type: "Commercial",
-      area: "50,000 sq ft",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      name: "Glass Hotel",
-      image: "/Featured/2.png",
-      category: "Architecture",
-      location: "Abu Dhabi, UAE",
-      year: "2023",
-      type: "Hospitality",
-      area: "75,000 sq ft",
-      status: "Completed",
-    },
-    {
-      id: 3,
-      name: "Concord Tower",
-      image: "/Featured/3.png",
-      category: "Mega Architecture",
-      location: "Sharjah, UAE",
-      year: "2024",
-      type: "Residential",
-      area: "120,000 sq ft",
-      status: "In Progress",
-    },
-    {
-      id: 4,
-      name: "Marina Heights",
-      image: "/Featured/4.png",
-      category: "Mega Architecture",
-      location: "Dubai Marina, UAE",
-      year: "2025",
-      type: "Mixed Use",
-      area: "200,000 sq ft",
-      status: "Planning",
-    },
-    {
-      id: 5,
-      name: "Sky Gardens",
-      image: "/Featured/5.png",
-      category: "Green Architecture",
-      location: "Al Ain, UAE",
-      year: "2023",
-      type: "Residential",
-      area: "85,000 sq ft",
-      status: "Completed",
-    },
-    {
-      id: 6,
-      name: "Business Hub",
-      image: "/Featured/6.png",
-      category: "Commercial Design",
-      location: "Fujairah, UAE",
-      year: "2024",
-      type: "Office",
-      area: "95,000 sq ft",
-      status: "In Progress",
-    },
-  ];
+  const projectsData: ProjectData[] = t.featured.projects.map((p: any, idx: number) => {
+    const originals = [
+      { id: 1, image: "/Featured/1.png", year: "2024", area: "50,000 sq ft" },
+      { id: 2, image: "/Featured/2.png", year: "2023", area: "75,000 sq ft" },
+      { id: 3, image: "/Featured/3.png", year: "2024", area: "120,000 sq ft" },
+      { id: 4, image: "/Featured/4.png", year: "2025", area: "200,000 sq ft" },
+      { id: 5, image: "/Featured/5.png", year: "2023", area: "85,000 sq ft" },
+      { id: 6, image: "/Featured/6.png", year: "2024", area: "95,000 sq ft" },
+    ];
+    return { ...originals[idx], name: p.name, category: p.category, location: p.location, type: p.type, status: p.status };
+  });
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -177,10 +122,10 @@ const FeaturedProjects = () => {
         <div className=" px-4 py-8 rounded-lg ">
           <div className="flex flex-col items-center gap-4 max-w-4xl mx-auto text-center ">
             <h2 className="text-4xl font-bold tracking-[-0.4px] text-gray-100">
-              Our Featured Projects
+              {t.featured.title}
             </h2>
             <p className="text-xl text-gray-300 mb-8">
-              Explore Our Highlighted Projects That Reflect Our Identity
+              {t.featured.subtitle}
             </p>
           </div>
 

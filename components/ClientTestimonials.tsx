@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Quote } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface TestimonialData {
   id: number;
@@ -66,6 +67,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
 };
 
 const ClientTestimonials = () => {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [cardsPerView, setCardsPerView] = useState(3);
@@ -87,56 +89,17 @@ const ClientTestimonials = () => {
     return () => window.removeEventListener("resize", updateCardsPerView);
   }, []);
 
-  const testimonialsData: TestimonialData[] = [
-    {
-      id: 1,
-      name: "Yousuf Noor",
-      title:
-        "We are impressed by their ability to meet our specific needs and their strong customer service. We appreciated the high level of customer services.",
-      image: "/clientt/1.jpeg",
-      testimonial: "",
-    },
-    {
-      id: 2,
-      name: "Stella Smith, New York",
-      title:
-        "Majoka Engineering delivered exactly what we expected — professional work, timely completion, and great communication from start to finish.",
-      image: "/clientt/2.jpeg",
-      testimonial: "",
-    },
-    {
-      id: 3,
-      name: "Abdur Gaffar, Dubai",
-      title:
-        "Their technical expertise and dedication to quality truly set them apart. Every step of our project was handled with professionalism and care.",
-      image: "/clientt/3.jpeg",
-      testimonial: "",
-    },
-    {
-      id: 4,
-      name: "Muhammad Salim, Dubai",
-      title:
-        "Outstanding engineering solutions with exceptional attention to detail. Their team delivered beyond our expectations with professional service throughout.",
-      image: "/clientt/5.jpeg",
-      testimonial: "",
-    },
-    {
-      id: 5,
-      name: "Ahmed Hassan, Dubai",
-      title:
-        "Reliable and efficient service delivery. Majoka Engineering consistently provides high-quality work with excellent project management and communication.",
-      image: "/clientt/4.jpeg",
-      testimonial: "",
-    },
-    {
-      id: 6,
-      name: "Milon Islam, Dubai",
-      title:
-        "Their technical expertise and commitment to excellence made our project a complete success. Highly recommend their engineering services.",
-      image: "/clientt/3.jpeg",
-      testimonial: "",
-    },
-  ];
+  const testimonialsData: TestimonialData[] = t.testimonials.items.map((item, idx) => {
+    const originals = [
+      { id:1, image:"/clientt/1.jpeg", testimonial:"" },
+      { id:2, image:"/clientt/2.jpeg", testimonial:"" },
+      { id:3, image:"/clientt/3.jpeg", testimonial:"" },
+      { id:4, image:"/clientt/5.jpeg", testimonial:"" },
+      { id:5, image:"/clientt/4.jpeg", testimonial:"" },
+      { id:6, image:"/clientt/3.jpeg", testimonial:"" },
+    ];
+    return { ...originals[idx], name:item.name, title:item.title };
+  });
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -168,11 +131,11 @@ const ClientTestimonials = () => {
     <div className="bg-white flex flex-col items-center w-full py-20 gap-16 px-4 md:px-8 lg:px-8">
       <div className="flex flex-col items-center gap-4 max-w-xl mx-auto text-center">
         <span className="text-4xl theme-text-main font-semibold">
-          Client Testimonials
+          {t.testimonials.title}
         </span>
 
         <p className="text-stone-900 text-xl!">
-          Discover how we can elevate your experience
+          {t.testimonials.subtitle}
         </p>
       </div>
 
@@ -213,7 +176,7 @@ const ClientTestimonials = () => {
           >
             <Image
               src="/arrowL.svg"
-              alt="Previous"
+              alt={t.featured.previous}
               width={24}
               height={24}
               className="w-6 h-6 sm:w-8 sm:h-8 text-white"
@@ -226,7 +189,7 @@ const ClientTestimonials = () => {
           >
             <Image
               src="/arrowR.svg"
-              alt="Previous"
+              alt={t.featured.next}
               width={24}
               height={24}
               className="w-6 h-6 sm:w-8 sm:h-8 text-white"
