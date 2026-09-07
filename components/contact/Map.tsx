@@ -1,18 +1,17 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 
 export default function MapSection() {
-  const [MapComponent, setMapComponent] = useState<React.ComponentType | null>(
-    null
-  );
+  const [MapComponent, setMapComponent] =
+    useState<React.ComponentType | null>(null);
 
   useEffect(() => {
     // Dynamically import the map component only on client side
     const loadMap = async () => {
       try {
-        const { MapContainer, TileLayer, Marker, Popup, useMap } = await import(
-          "react-leaflet"
-        );
+        const { MapContainer, TileLayer, Marker, Popup, useMap } =
+          await import("react-leaflet");
         const L = await import("leaflet");
 
         // Import CSS
@@ -24,6 +23,7 @@ export default function MapSection() {
             _getIconUrl?: () => void;
           }
         )._getIconUrl;
+
         L.Icon.Default.mergeOptions({
           iconRetinaUrl:
             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
@@ -45,8 +45,8 @@ export default function MapSection() {
           shadowSize: [41, 41],
         });
 
-        // Mecca, Saudi Arabia coordinates
-        const position: [number, number] = [21.3783941, 39.7881373];
+        // TAJ AL RAHMAH, Dubai, United Arab Emirates coordinates
+        const position: [number, number] = [25.3223595, 55.3930895];
 
         // Map control component to handle centering
         const MapController = ({
@@ -74,14 +74,17 @@ export default function MapSection() {
 
           const handleViewLargerMap = () => {
             if (typeof window !== "undefined") {
-              const [lat, lng] = position;
-              const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lng}&z=15`;
+              // Open exact TAJ AL RAHMAH Google Maps location
+              const googleMapsUrl =
+                "https://www.google.com/maps/place/TAJ+AL+RAHMAH/@25.3223595,55.3930895,17z";
+
               window.open(googleMapsUrl, "_blank");
             }
           };
 
           const handleCenterToMarker = () => {
             setCenterTarget(position);
+
             // Reset the target after a short delay to allow for future clicks
             setTimeout(() => setCenterTarget(null), 2000);
           };
@@ -95,23 +98,30 @@ export default function MapSection() {
                 className="z-0"
               >
                 <MapController targetPosition={centerTarget} />
+
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+
                 <Marker position={position} icon={redIcon}>
                   <Popup className="custom-popup">
                     <div className="p-2">
                       <h3 className="font-bold text-lg mb-2">
-                        Majoka Engineering
+                        TAJ AL RAHMAH
                       </h3>
+
                       <p className="text-sm text-gray-600 mb-2">
-                        Mecca
+                        Dubai
                         <br />
-                        Saudi Arabia
+                        United Arab Emirates
                       </p>
+
                       <div className="text-sm">
-                        <p className="font-semibold">Phone: +966-0503010184</p>
+                        <p className="font-semibold">
+                          Phone: +971-556173300
+                        </p>
+
                         <p className="font-semibold">
                           Email: info@majokaengineering.com
                         </p>
@@ -146,6 +156,7 @@ export default function MapSection() {
                         strokeWidth={2}
                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                       />
+
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -157,9 +168,9 @@ export default function MapSection() {
                 </div>
 
                 <div className="text-sm text-gray-700 mb-3 leading-relaxed">
-                  <p className="font-semibold">Majoka Engineering</p>
-                  <p>Mecca</p>
-                  <p>Saudi Arabia</p>
+                  <p className="font-semibold">TAJ AL RAHMAH</p>
+                  <p>Dubai</p>
+                  <p>United Arab Emirates</p>
                 </div>
 
                 <button
@@ -190,9 +201,10 @@ export default function MapSection() {
           <h2 className="text-3xl md:text-4xl font-bold theme-text-main mb-4">
             Find Us On Map
           </h2>
+
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Visit our office location in Mecca, Saudi Arabia. We&apos;re here to
-            serve you with excellence.
+            Visit our office location in Dubai, United Arab Emirates. We&apos;re
+            here to serve you with excellence.
           </p>
         </div>
 

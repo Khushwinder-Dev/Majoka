@@ -62,7 +62,7 @@ export default function ContactPage() {
       icon: MapPin,
       title: "Location",
       content: "Mecca, Saudi Arabia",
-      link: "https://maps.google.com/?q=Mecca+Saudi+Arabia",
+      link: "https://www.google.com/maps/place/TAJ+AL+RAHMAH/@25.3223595,55.3930895,17z/data=!4m6!3m5!1s0x3e5f5bfe0755486f:0xb4a012d339c9440!8m2!3d25.3223595!4d55.3930895!16s%2Fg%2F11ywc1qtc4?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D",
     },
   ];
 
