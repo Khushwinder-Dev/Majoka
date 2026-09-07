@@ -45,7 +45,7 @@ const AboutUsSection = () => {
             {/* CEO Name */}
             <div className="mt-4">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-stone-900">
-                Yousuf Noor Hossain
+                MD Nijam Uddin Abdul Kalam
               </h3>
               <p className="text-stone-600 text-base sm:text-lg lg:text-xl">
                 Chief Executive Officer
@@ -57,7 +57,7 @@ const AboutUsSection = () => {
           <div className="w-full flex justify-center" data-aos="fade-left">
             <div className="w-full max-w-[500px] aspect-square rounded-[20px] overflow-hidden relative">
               <Image
-                src="/ceo.jpeg"
+                src="/ceo1.jpeg"
                 alt="CEO Message"
                 fill
                 className="object-cover"

@@ -15,7 +15,7 @@ export default function ContactPage() {
       />
       <Contact />
       <Map />
-      <Stats />
+      {/* <Stats /> */}
       {/* <MeetOurTeam /> */}
     </div>
   );

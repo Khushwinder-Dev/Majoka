@@ -47,8 +47,8 @@ export default function ContactPage() {
       id: 1,
       icon: Phone,
       title: "Phone",
-      content: "+966-0503010184",
-      link: "tel:+9660503010184",
+      content: "+971-556173300",
+      link: "tel:+971556173300",
     },
     {
       id: 2,
@@ -291,11 +291,10 @@ export default function ContactPage() {
                     initial={{ opacity: 0, y: -10, height: 0 }}
                     animate={{ opacity: 1, y: 0, height: "auto" }}
                     exit={{ opacity: 0, y: -10, height: 0 }}
-                    className={`mb-5 p-4 rounded-lg flex items-start gap-3 ${
-                      submitStatus.type === "success"
-                        ? "bg-green-50 text-green-800 border border-green-200"
-                        : "bg-red-50 text-red-800 border border-red-200"
-                    }`}
+                    className={`mb-5 p-4 rounded-lg flex items-start gap-3 ${submitStatus.type === "success"
+                      ? "bg-green-50 text-green-800 border border-green-200"
+                      : "bg-red-50 text-red-800 border border-red-200"
+                      }`}
                   >
                     {submitStatus.type === "success" ? (
                       <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -326,11 +325,10 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.fullName || focusedField === "fullName"
-                        ? "-translate-y-1/2 text-xs text-pink-950"
-                        : "translate-y-3 text-base text-gray-500"
-                    }`}
+                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.fullName || focusedField === "fullName"
+                      ? "-translate-y-1/2 text-xs text-pink-950"
+                      : "translate-y-3 text-base text-gray-500"
+                      }`}
                   >
                     Name
                   </label>
@@ -351,11 +349,10 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.phone || focusedField === "phone"
-                        ? "-translate-y-1/2 text-xs text-pink-950"
-                        : "translate-y-3 text-base text-gray-500"
-                    }`}
+                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.phone || focusedField === "phone"
+                      ? "-translate-y-1/2 text-xs text-pink-950"
+                      : "translate-y-3 text-base text-gray-500"
+                      }`}
                   >
                     Phone Number
                   </label>
@@ -376,11 +373,10 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.email || focusedField === "email"
-                        ? "-translate-y-1/2 text-xs text-pink-950"
-                        : "translate-y-3 text-base text-gray-500"
-                    }`}
+                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.email || focusedField === "email"
+                      ? "-translate-y-1/2 text-xs text-pink-950"
+                      : "translate-y-3 text-base text-gray-500"
+                      }`}
                   >
                     Email Address
                   </label>
@@ -400,11 +396,10 @@ export default function ContactPage() {
                     className="w-full h-full min-h-[120px] px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.message || focusedField === "message"
-                        ? "-translate-y-1/2 text-xs text-pink-950"
-                        : "translate-y-3 text-base text-gray-500"
-                    }`}
+                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.message || focusedField === "message"
+                      ? "-translate-y-1/2 text-xs text-pink-950"
+                      : "translate-y-3 text-base text-gray-500"
+                      }`}
                   >
                     Message
                   </label>
@@ -416,11 +411,10 @@ export default function ContactPage() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full px-8 py-4 theme-bg-main rounded-full text-white text-xl font-bold uppercase tracking-wide transition-all duration-300 flex items-center justify-center gap-2 shadow-lg ${
-                    isSubmitting
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:shadow-xl"
-                  }`}
+                  className={`w-full px-8 py-4 theme-bg-main rounded-full text-white text-xl font-bold uppercase tracking-wide transition-all duration-300 flex items-center justify-center gap-2 shadow-lg ${isSubmitting
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:shadow-xl"
+                    }`}
                   whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                 >

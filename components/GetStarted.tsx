@@ -228,10 +228,10 @@ const GetStarted = () => {
                 <div className="flex flex-col">
                   <h4 className="text-xl font-medium text-white">Phone</h4>
                   <a
-                    href="tel:+9660503010184"
+                    href="tel:+971556173300"
                     className="text-base font-medium text-white hover:underline"
                   >
-                    +966-0503010184
+                    +971-556173300
                   </a>
                 </div>
               </div>
@@ -270,11 +270,10 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-[#e9f5fb] text-lg font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-gray-200 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.fullName || focusedField === "fullName"
-                        ? "-translate-y-1/2 text-xs text-white bg-white/10 rounded backdrop-blur-sm"
-                        : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
-                    }`}
+                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.fullName || focusedField === "fullName"
+                      ? "-translate-y-1/2 text-xs text-white bg-white/10 rounded backdrop-blur-sm"
+                      : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
+                      }`}
                   >
                     Name
                   </label>
@@ -295,11 +294,10 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-[#e9f5fb] text-lg font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-gray-200 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.phone || focusedField === "phone"
-                        ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
-                        : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
-                    }`}
+                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.phone || focusedField === "phone"
+                      ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
+                      : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
+                      }`}
                   >
                     Phone Number
                   </label>
@@ -320,11 +318,10 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-[#e9f5fb] text-lg font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-gray-200 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.email || focusedField === "email"
-                        ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
-                        : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
-                    }`}
+                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.email || focusedField === "email"
+                      ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
+                      : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
+                      }`}
                   >
                     Email Address
                   </label>
@@ -333,11 +330,10 @@ const GetStarted = () => {
                 {/* Services Dropdown */}
                 <div className="relative">
                   <div
-                    className={`w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center justify-between ${
-                      isSubmitting
-                        ? "opacity-50 cursor-not-allowed"
-                        : "cursor-pointer"
-                    }`}
+                    className={`w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center justify-between ${isSubmitting
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                      }`}
                     onClick={() =>
                       !isSubmitting && setIsDropdownOpen(!isDropdownOpen)
                     }
@@ -346,9 +342,8 @@ const GetStarted = () => {
                       {formData.service || "Select Service"}
                     </span>
                     <ChevronDown
-                      className={`w-4 h-4 text-[#e9f5fb] transition-transform duration-200 ${
-                        isDropdownOpen ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 text-[#e9f5fb] transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
+                        }`}
                     />
                   </div>
 
@@ -383,11 +378,10 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-[#e9f5fb] text-lg font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-gray-200 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
-                      formData.message || focusedField === "message"
-                        ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
-                        : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
-                    }`}
+                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.message || focusedField === "message"
+                      ? "-translate-y-1/2 text-xs text-white bg-white/10 backdrop-blur-sm rounded"
+                      : "translate-y-3 text-lg text-[#e9f5fb] bg-transparent"
+                      }`}
                   >
                     Message
                   </label>
@@ -398,11 +392,10 @@ const GetStarted = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full h-[50px] bg-primary hover:bg-primary/70 text-white font-bold text-xl rounded-full flex items-center justify-center shadow transition-all duration-300 ${
-                  isSubmitting
-                    ? "opacity-50 cursor-not-allowed"
-                    : "cursor-pointer"
-                }`}
+                className={`w-full h-[50px] bg-primary hover:bg-primary/70 text-white font-bold text-xl rounded-full flex items-center justify-center shadow transition-all duration-300 ${isSubmitting
+                  ? "opacity-50 cursor-not-allowed"
+                  : "cursor-pointer"
+                  }`}
               >
                 {isSubmitting ? (
                   <>
