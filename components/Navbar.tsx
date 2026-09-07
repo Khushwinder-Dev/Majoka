@@ -190,7 +190,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="text-white hover:text-[#00c2b2] text-sm xl:text-base font-semibold transition-colors cursor-pointer px-1 py-1 font-sans"
+              className="text-white hover:text-[#00c2b2] text-sm xl:text-base font-semibold transition-colors cursor-pointer px-1 py-1 font-sans pointer-events-none"                          
               title={t.nav.langToggle}
             >
               {t.nav.langToggle}

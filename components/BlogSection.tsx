@@ -3,196 +3,148 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Wrench, Cpu, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-interface BlogArticle {
-  id: number;
-  title: string;
-  category: string;
-  department?: string;
-  excerpt: string;
-  image: string;
-  date: string;
-}
-
-const blogArticles: BlogArticle[] = [
-  {
-    id: 1,
-    title: "Ensuring Quality with Comprehensive Inspection Services",
-    category: "Inspection",
-    department: "Quality Assurance",
-    excerpt:
-      "Inspection services are crucial for maintaining safety, quality, and compliance across industries. From vendor checks to factory audits, thorough inspections help identify risks early and ensure operations run smoothly.",
-    image: "/news/Ensuring Quality with Comprehensive Inspection Services.png",
-    date: "Mar 12, 2026",
-  },
-  {
-    id: 2,
-    title: "Precision Matters: Force & Torque Testing Solutions",
-    category: "Force & Torque",
-    department: "Testing Lab",
-    excerpt:
-      "Force and torque measurement is vital for industrial efficiency and safety. Our services include calibration of torque wrenches, gauges, load cells, and testing machines.",
-    image: "/news/Precision Matters Force & Torque Testing Solutions.png",
-    date: "Feb 25, 2026",
-  },
-  {
-    id: 3,
-    title: "Advanced Process Control Instrumentation for Industrial Efficiency",
-    category: "Process Control",
-    department: "Automation Dept",
-    excerpt:
-      "Process control instrumentation monitors and regulates critical processes accurately. Pressure, temperature, flow, and level transmitters help maintain operational stability.",
-    image: "/news/Advanced Process Control Instrumentation for Industrial Efficiency.png",
-    date: "Feb 15, 2026",
-  },
-  {
-    id: 4,
-    title: "Electrical & Electronics Testing for Reliable Operations",
-    category: "Electrical",
-    department: "Technical Services",
-    excerpt:
-      "Accurate testing of electrical and electronic systems prevents failures and ensures safety. High-voltage testers and power supplies are calibrated to meet industry standards.",
-    image: "/news/Electrical Electronics Testing for Reliable Operations.png",
-    date: "Jan 30, 2026",
-  },
-];
-
-const getCategoryIcon = (category: string) => {
-  switch (category.toLowerCase()) {
-    case "force & torque":
-    case "force torque":
-      return <Wrench className="w-3 h-3 text-white" />;
-    case "process control":
-      return <Cpu className="w-3 h-3 text-white" />;
-    case "electrical":
-    case "electrical & electronics":
-      return <Zap className="w-3 h-3 text-white" />;
-    default:
-      return <ShieldCheck className="w-3 h-3 text-white" />;
-  }
-};
-
 export default function BlogSection() {
-  const featuredArticle = blogArticles[0];
-  const sideArticles = blogArticles.slice(1, 4);
-  const { t } = useLanguage();
+  const { t, isArabic } = useLanguage();
+
+  const featuredArticle = t.blog.featured;
+  const sideArticles = t.blog.side;
 
   return (
-    <section className="w-full py-16 lg:py-24 px-4 md:px-8 lg:px-16 bg-[#fafbfc]">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#01a9a0]/10 text-[#01a9a0] text-xs font-bold uppercase tracking-widest mb-3">
-              <span>{t.blog.badge}</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-900 tracking-tight">
-              {t.blog.title} <span className="theme-text-main">{t.blog.titleAccent}</span>
-            </h2>
-            <p className="text-stone-600 text-base md:text-lg mt-2 max-w-2xl">
-              {t.blog.subtitle}
-            </p>
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 xl:py-28 px-4 sm:px-6 lg:px-8 xl:px-12 overflow-hidden bg-stone-950">
+      {/* Optional subtle grain/gradient for depth */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(1,169,160,0.08),transparent_60%)]" />
+      </div>
+
+      <div className="relative max-w-[1600px] mx-auto w-full">
+        {/* ============== */}
+        {/* SECTION HEADER */}
+        {/* ============== */}
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-14 lg:mb-16">
+          {/* Badge with flanking lines:  —— BLOG & INSIGHTS ——  */}
+          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-5 w-full justify-center">
+            <span className="inline-block h-[2px] w-10 sm:w-14 md:w-20 lg:w-28 bg-[#01a9a0]/80 rounded-full" />
+            <span className="text-sm sm:text-base font-extrabold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[#01a9a0] whitespace-nowrap">
+              {t.blog.badge}
+            </span>
+            <span className="inline-block h-[2px] w-10 sm:w-14 md:w-20 lg:w-28 bg-[#01a9a0]/80 rounded-full" />
           </div>
-          <Link
-            href="/blogs"
-            className="inline-flex items-center gap-2 text-sm md:text-base font-bold text-[#01a9a0] hover:text-[#01a9a0] transition-colors group self-start md:self-end"
-          >
-            <span>{t.blog.viewAll}</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-          </Link>
+
+          {/* Title: Latest <teal>News & Articles</teal> */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
+            <span className="text-white">{t.blog.titlePrefix} </span>
+            <span className="text-[#01a9a0]">{t.blog.titleAccent}</span>
+          </h2>
         </div>
 
-        {/* 2-Column Blog Grid matching design reference */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-          {/* Left Column: Featured Large Card */}
+        {/* ========== */}
+        {/* BLOG GRID  */}
+        {/* ========== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-7 lg:gap-8 items-stretch">
+          {/* =================================== */}
+          {/* LEFT COLUMN — LARGE FEATURED CARD  */}
+          {/* =================================== */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="bg-white rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden group">
-              {/* Header Content */}
-              <div className="p-6 sm:p-8 flex flex-col">
-                {/* Meta: Category Badge & Date */}
-                <div className="flex items-center gap-2.5 mb-3 flex-wrap">
-                  <span className="px-3 py-1 bg-[#01a9a0]/15 text-[#01a9a0] text-xs font-bold uppercase tracking-wider rounded-md">
-                    {featuredArticle.category}
-                  </span>
-                  <span className="text-stone-300 font-bold">•</span>
-                  <time className="text-stone-500 text-xs sm:text-sm font-medium">
-                    {featuredArticle.date}
-                  </time>
+            <Link
+              href="/blogs"
+              className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden flex flex-col h-full shadow-[0_10px_40px_-15px_rgba(0,0,0,0.5)] hover:shadow-[0_14px_50px_-12px_rgba(1,169,160,0.18)] transition-all duration-500"
+            >
+              {/* TOP PORTION: meta + title + excerpt */}
+              <div className="p-6 sm:p-8 md:p-9 lg:p-10 flex flex-col gap-3 sm:gap-4">
+                {/* Meta: FEB 25, 2026 . PROJECT MANAGE */}
+                <div
+                  className={`flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-semibold tracking-wider uppercase text-stone-500 flex-wrap ${
+                    isArabic ? "flex-row-reverse" : ""
+                  }`}
+                >
+                  <span>{featuredArticle.date}</span>
+                  <span className="text-stone-300 text-base">•</span>
+                  <span className="truncate">{featuredArticle.category}</span>
                 </div>
 
                 {/* Title */}
-                <Link href="/blogs">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-[#01a9a0] group-hover:text-[#01a9a0] transition-colors leading-snug mb-3 tracking-tight">
-                    {featuredArticle.title}
-                  </h3>
-                </Link>
+                <h3 className="text-2xl sm:text-3xl md:text-[32px] lg:text-4xl font-extrabold text-stone-900 leading-[1.15] tracking-tight group-hover:text-[#01a9a0] transition-colors duration-300">
+                  {featuredArticle.title}
+                </h3>
 
                 {/* Excerpt */}
-                <p className="text-stone-600 text-sm sm:text-base leading-relaxed line-clamp-3">
+                <p className="text-[14px] sm:text-base md:text-[17px] leading-relaxed text-stone-600 font-medium">
                   {featuredArticle.excerpt}
                 </p>
               </div>
 
-              {/* Main Photo Edge-to-Edge */}
-              <Link href="/blogs" className="relative w-full h-64 sm:h-72 md:h-80 lg:h-96 mt-auto overflow-hidden bg-stone-100 block">
+              {/* MIDDLE: full-width image (edge-to-edge, no rounding) */}
+              <div className="relative w-full h-60 sm:h-72 md:h-80 lg:h-[420px] xl:h-[480px] overflow-hidden bg-stone-100 flex-shrink-0">
                 <Image
                   src={featuredArticle.image}
                   alt={featuredArticle.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  unoptimized
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 70vw"
+                  className="object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+                  priority
                 />
-              </Link>
+              </div>
 
-              {/* Bottom Teal Action Button */}
-              <Link
-                href="/blogs"
-                className="w-full py-4 bg-[#01a9a0] hover:bg-[#01a9a0] text-white font-bold text-xs sm:text-sm tracking-widest uppercase text-center block transition-colors shadow-inner"
-              >
-                {t.blog.readFull}
-              </Link>
-            </div>
+              {/* BOTTOM: teal CTA bar */}
+              <div className="w-full bg-[#01a9a0] hover:bg-[#00c2b2] transition-colors duration-300">
+                <div className="w-full py-4 sm:py-[18px] flex items-center justify-center gap-2 text-white text-xs sm:text-sm md:text-[15px] font-extrabold tracking-[0.2em] uppercase">
+                  {t.blog.readFull}
+                  <ArrowRight
+                    className={`w-4 h-4 sm:w-[18px] sm:h-[18px] stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1 ${
+                      isArabic ? "rotate-180 group-hover:-translate-x-1" : ""
+                    }`}
+                  />
+                </div>
+              </div>
+            </Link>
           </div>
 
-          {/* Right Column: 3 Horizontal Cards */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4 sm:gap-5">
-            {sideArticles.map((article) => (
+          {/* =================================== */}
+          {/* RIGHT COLUMN — 3 STACKED SMALL CARDS */}
+          {/* =================================== */}
+          <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6 lg:gap-7 justify-stretch">
+            {sideArticles.map((article, idx) => (
               <Link
-                key={article.id}
+                key={idx}
                 href="/blogs"
-                className="bg-white rounded-2xl border border-stone-200/80 shadow-sm hover:shadow-lg transition-all duration-300 p-4 sm:p-5 flex items-center gap-4 sm:gap-5 group cursor-pointer h-full"
+                className="group bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_6px_28px_-12px_rgba(0,0,0,0.45)] hover:shadow-[0_10px_34px_-10px_rgba(1,169,160,0.2)] transition-all duration-400 p-4 sm:p-5 md:p-6 lg:p-7 flex items-stretch gap-4 sm:gap-5 md:gap-6 h-full cursor-pointer"
               >
-                {/* Thumbnail with overlay badge */}
-                <div className="relative w-28 h-24 sm:w-36 sm:h-28 md:w-40 md:h-32 shrink-0 rounded-xl overflow-hidden bg-stone-100">
+                {/* LEFT: IMAGE THUMBNAIL */}
+                <div className="relative w-24 h-24 sm:w-32 sm:h-28 md:w-36 md:h-32 lg:w-40 lg:h-36 xl:w-44 xl:h-40 shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-stone-100">
                   <Image
                     src={article.image}
                     alt={article.title}
                     fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                    unoptimized
+                    sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 144px, 160px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                  {/* Category Badge overlay on image */}
-                  <div className="absolute top-2 left-2 z-10 bg-[#01a9a0]/95 backdrop-blur-xs text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded flex items-center gap-1 shadow-sm">
-                    {getCategoryIcon(article.category)}
-                    <span className="truncate max-w-[80px]">{article.category}</span>
-                  </div>
                 </div>
 
-                {/* Card Content */}
-                <div className="flex-1 min-w-0 flex flex-col justify-center">
-                  <div className="text-[11px] font-bold text-stone-400 tracking-wider uppercase mb-1 flex items-center gap-1.5 flex-wrap">
-                    <span>{article.date.toUpperCase()}</span>
-                    <span>•</span>
-                    <span className="truncate text-stone-500">
-                      {article.department?.toUpperCase() || article.category.toUpperCase()}
-                    </span>
+                {/* RIGHT: CONTENT (meta + title + excerpt) */}
+                <div className="flex-1 min-w-0 flex flex-col justify-center gap-2 sm:gap-2.5">
+                  {/* Meta: Date . Category */}
+                  <div
+                    className={`flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs md:text-[13px] font-semibold tracking-wider uppercase text-stone-500 flex-wrap ${
+                      isArabic ? "flex-row-reverse" : ""
+                    }`}
+                  >
+                    <span className="whitespace-nowrap">{article.date}</span>
+                    <span className="text-stone-300">•</span>
+                    <span className="truncate">{article.category}</span>
                   </div>
 
-                  <h4 className="text-sm sm:text-base font-bold text-stone-900 group-hover:text-[#01a9a0] transition-colors line-clamp-2 leading-snug mb-1.5">
+                  {/* Title */}
+                  <h4 className="text-sm sm:text-base md:text-lg lg:text-xl font-extrabold text-stone-900 leading-snug tracking-tight group-hover:text-[#01a9a0] transition-colors duration-300 line-clamp-2">
                     {article.title}
                   </h4>
 
-                  <p className="text-xs sm:text-sm text-stone-500 line-clamp-2 leading-relaxed font-normal">
+                  {/* Excerpt */}
+                  <p className="text-[12px] sm:text-[13px] md:text-sm lg:text-[15px] leading-relaxed text-stone-600 font-medium line-clamp-2 md:line-clamp-3">
                     {article.excerpt}
                   </p>
                 </div>

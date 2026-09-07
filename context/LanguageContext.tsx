@@ -86,11 +86,23 @@ export interface Translations {
   };
   blog: {
     badge: string;
-    title: string;
+    titlePrefix: string;
     titleAccent: string;
-    subtitle: string;
-    viewAll: string;
     readFull: string;
+    featured: {
+      date: string;
+      category: string;
+      title: string;
+      excerpt: string;
+      image: string;
+    };
+    side: {
+      date: string;
+      category: string;
+      title: string;
+      excerpt: string;
+      image: string;
+    }[];
   };
   footer: {
     tagline1: string;
@@ -318,13 +330,47 @@ const translations: Record<Language, Translations> = {
       ],
     },
     blog: {
-      badge: "Articles & Insights",
-      title: "Latest from Our",
-      titleAccent: "Blog",
-      subtitle:
-        "Stay updated with expert engineering insights, industry standards, and innovative solutions from Majoka.",
-      viewAll: "View All Articles",
+      badge: "BLOG & INSIGHTS",
+      titlePrefix: "Latest",
+      titleAccent: "News & Articles",
       readFull: "READ FULL ARTICLE",
+      featured: {
+        date: "FEB 25, 2026",
+        category: "PROJECT MANAGE",
+        title: "Epoxy Floor Coating Durable, Seamless & Long-Lasting Flooring",
+        excerpt:
+          "Epoxy floor coating creates a strong, seamless, easy-to-maintain surface that protects floors from chemicals and heavy traffic professional finish.",
+        image:
+          "/news/Epoxy Floor Coating Durable Seamless Long-Lasting Flooring.jpg",
+      },
+      side: [
+        {
+          date: "FEB 25, 2026",
+          category: "PROJECT MANAGE",
+          title:
+            "Polyurea Coating Waterproofing Fast, Flexible & Durable Protection",
+          excerpt:
+            "Polyurea coating provides fast-curing, chemicals, abrasion, and harsh conditions.",
+          image: "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.png",
+        },
+        {
+          date: "FEB 25, 2026",
+          category: "PROJECT MANAGE",
+          title: "Industrial Coatings Durable Protection For Demanding Environments",
+          excerpt:
+            "Industrial coatings protect against corrosion, chemicals, and heavy wear,",
+          image: "/news/Industrial Coatings Durable Protection For Demanding Environments.png",
+        },
+        {
+          date: "FEB 25, 2026",
+          category: "PROJECT MANAGE",
+          title:
+            "Injection Waterproofing Targeted Leak Sealing For Lasting Protection",
+          excerpt:
+            "Polyurea coating provides fast-curing, abrasion, and harsh conditions.",
+          image: "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.png",
+        },
+      ],
     },
     footer: {
       tagline1: "Building Better",
@@ -572,13 +618,48 @@ const translations: Record<Language, Translations> = {
       ],
     },
     blog: {
-      badge: "مقالات ورؤى",
-      title: "أحدث من",
-      titleAccent: "مدونتنا",
-      subtitle:
-        "ابقَ على اطلاع برؤى الخبراء الهندسيين والمعايير الصناعية والحلول المبتكرة من Majoka.",
-      viewAll: "عرض جميع المقالات",
+      badge: "المدونة والرؤى",
+      titlePrefix: "أحدث",
+      titleAccent: "الأخبار والمقالات",
       readFull: "اقرأ المقال كاملاً",
+      featured: {
+        date: "٢٥ فبراير ٢٠٢٦",
+        category: "إدارة المشاريع",
+        title: "طلاء أرضية الإيبوكسي أرضية متينة وبديلة وطويلة الأمد",
+        excerpt:
+          "يُشكل طلاء أرضية الإيبوكسي سطحًا قويًا وسلسًا وسهل الصيانة يحمي الأرضيات من المواد الكيميائية والمرور الثقيل بلمسة احترافية.",
+        image:
+          "/news/Epoxy Floor Coating Durable Seamless Long-Lasting Flooring.jpg",
+      },
+      side: [
+        {
+          date: "٢٥ فبراير ٢٠٢٦",
+          category: "إدارة المشاريع",
+          title:
+            "طلاء البولييوريا للعزل المائي حماية سريعة ومرنة ومتانة",
+          excerpt:
+            "يوفر طلاء البولييوريا معالجة سريعة التصلب ومقاومة للمواد الكيميائية والتآكل والظروف القاسية.",
+          image: "/news/Polyurea Coating Waterproofing Fast Flexible Durable Protection.png",
+        },
+        {
+          date: "٢٥ فبراير ٢٠٢٦",
+          category: "إدارة المشاريع",
+          title:
+            "الطلاءات الصناعية حماية متينة للبيئات المتطلبة",
+          excerpt:
+            "تحمي الطلاءات الصناعية من التآكل والمواد الكيميائية والتلف الثقيل.",
+          image: "/news/Industrial Coatings Durable Protection For Demanding Environments.png",
+        },
+        {
+          date: "٢٥ فبراير ٢٠٢٦",
+          category: "إدارة المشاريع",
+          title:
+            "العزل المائي بالحقن إغلاق مستهدف للتسريبات لحماية دائمة",
+          excerpt:
+            "يوفر طلاء البولييوريا معالجة سريعة ومقاومة للتآكل والظروف القاسية.",
+          image: "/news/Injection Waterproofing Targeted Leak Sealing For Lasting Protection.png",
+        },
+      ],
     },
     footer: {
       tagline1: "بناء مساحات",
