@@ -13,7 +13,7 @@ import ClientTestimonials from "@/components/ClientTestimonials";
 import GetStarted from "@/components/GetStarted";
 import MeetOurTeam from "@/components/Common/MeetOurTeam";
 import BlogSection from "@/components/BlogSection";
-import VideoBanner from "@/components/VideoBanner";
+import WhyChooseUs2 from "@/components/WhyCooseUs2";
 
 export default function Home() {
   useEffect(() => {
@@ -28,35 +28,32 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <main>
-        <VideoBanner />
-        {/* <div>
-          <HeroSection />
-        </div> */}
+        <HeroSection />
         <div data-aos="fade-up" data-aos-delay="100">
-          <StatsSection />
+          <WhyChooseUs2 />
         </div>
-        <div data-aos="fade-up" data-aos-delay="200">
+        {/* <div data-aos="fade-up" data-aos-delay="200">
           <WeAssist />
-        </div>
+        </div> */}
         <div data-aos="fade-up" data-aos-delay="200">
           <Featured />
         </div>
-        <div data-aos="fade-up" data-aos-delay="200">
+        {/* <div data-aos="fade-up" data-aos-delay="200">
           <WorkSteps />
-        </div>
+        </div> */}
         <div data-aos="fade-up" data-aos-delay="200">
           <Services />
         </div>
-        <div data-aos="fade-up" data-aos-delay="200">
+        {/* <div data-aos="fade-up" data-aos-delay="200">
           <MeetOurTeam />
-        </div>
+        </div> */}
         <div data-aos="fade-up" data-aos-delay="200">
           <ClientTestimonials />
         </div>
 
-        <div data-aos="fade-up" data-aos-delay="200">
+        {/* <div data-aos="fade-up" data-aos-delay="200">
           <GetStarted />
-        </div>
+        </div> */}
 
         <div data-aos="fade-up" data-aos-delay="200">
           <BlogSection />

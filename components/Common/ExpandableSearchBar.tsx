@@ -50,6 +50,7 @@ interface ExpandableSearchBarProps {
   className?: string;
   iconColor?: string;
   hoverIconColor?: string;
+  dashedButton?: boolean;
 }
 
 const ExpandableSearchBar: React.FC<ExpandableSearchBarProps> = ({
@@ -59,6 +60,7 @@ const ExpandableSearchBar: React.FC<ExpandableSearchBarProps> = ({
   className = "",
   iconColor = "text-white",
   hoverIconColor = "group-hover:text-[var(--primary)]",
+  dashedButton = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -228,14 +230,27 @@ const ExpandableSearchBar: React.FC<ExpandableSearchBarProps> = ({
       <div className="flex">
         {!isExpanded && (
           // Show only search icon when not expanded
-          <button
-            type="button"
-            onClick={() => handleDesktopSearchExpand()}
-            className={`${iconColor} ${hoverIconColor} p-2 transition-all cursor-pointer hover:bg-white/10 rounded-full`}
-            aria-label="Search"
-          >
-            <Search className={`h-6 w-6 stroke-2`} />
-          </button>
+          dashedButton ? (
+            <button
+              type="button"
+              onClick={() => handleDesktopSearchExpand()}
+              className="relative p-0.5 rounded-full border border-dashed border-white/60 hover:border-white transition-all cursor-pointer hover:scale-105"
+              aria-label="Search"
+            >
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] flex items-center justify-center text-white transition-colors shadow-sm">
+                <Search className="h-4 w-4 stroke-[2.5]" />
+              </div>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => handleDesktopSearchExpand()}
+              className={`${iconColor} ${hoverIconColor} p-2 transition-all cursor-pointer hover:bg-white/10 rounded-full`}
+              aria-label="Search"
+            >
+              <Search className={`h-6 w-6 stroke-2`} />
+            </button>
+          )
         )}
 
         <div

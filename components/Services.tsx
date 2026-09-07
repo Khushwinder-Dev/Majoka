@@ -59,22 +59,22 @@ export default function Services() {
       icon: "/landing/services/5.svg",
       featured: true,
     },
-    {
-      id: 7,
-      title: "Inspection Services",
-      description:
-        "Ensure quality, safety, and compliance with our expert inspection services.",
-      icon: "/landing/services/6.svg",
-      featured: true,
-    },
-    {
-      id: 8,
-      title: "Civil and MEP works",
-      description:
-        "Comprehensive Civil and MEP works delivering reliable construction, installation, and maintenance solutions for commercial, industrial, and residential projects.",
-      icon: "/landing/services/1.svg",
-      featured: true,
-    },
+    // {
+    //   id: 7,
+    //   title: "Inspection Services",
+    //   description:
+    //     "Ensure quality, safety, and compliance with our expert inspection services.",
+    //   icon: "/landing/services/6.svg",
+    //   featured: true,
+    // },
+    // {
+    //   id: 8,
+    //   title: "Civil and MEP works",
+    //   description:
+    //     "Comprehensive Civil and MEP works delivering reliable construction, installation, and maintenance solutions for commercial, industrial, and residential projects.",
+    //   icon: "/landing/services/1.svg",
+    //   featured: true,
+    // },
   ];
 
   return (

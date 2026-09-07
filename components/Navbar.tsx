@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { ArrowRight } from "lucide-react";
 import ExpandableSearchBar from "./Common/ExpandableSearchBar";
 
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
 
-  // Search suggestions - you can customize these
+  // Search suggestions
   const searchSuggestions = [
     "Products",
     "Services",
@@ -24,21 +25,19 @@ const Navbar = () => {
     "Careers",
     "About Us",
     "Contact",
-    "Web Development",
-    "Mobile Apps",
-    "UI/UX Design",
-    "Digital Marketing",
-    "E-commerce Solutions",
+    "Waterproofing",
+    "Contracting",
   ];
 
+  // Updated navigation items matching the reference header image
   const navItems = [
-    { name: "Products", href: "/products" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/project" },
+    { name: "Products", href: "/products" },
     { name: "Industries", href: "/industries" },
     { name: "Resources", href: "/resources" },
+    { name: "Company", href: "/about-us" },
     { name: "Careers", href: "/career" },
-    { name: "About", href: "/about-us" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -49,20 +48,20 @@ const Navbar = () => {
     if (href === "/services") return pathname === "/services" || pathname.startsWith("/services");
     if (href === "/about-us") return pathname === "/about-us" || pathname === "/about";
     if (href === "/resources") return pathname === "/resources" || pathname === "/blogs" || pathname.startsWith("/blogs") || pathname === "/media" || pathname.startsWith("/media");
+    if (href === "/products") return pathname === "/products" || pathname.startsWith("/products");
+    if (href === "/industries") return pathname === "/industries" || pathname.startsWith("/industries");
     return pathname === href || pathname.startsWith(href);
   };
 
   // Handle search functionality
   const handleSearch = (query: string) => {
     console.log("Searching for:", query);
-    // Add your search logic here - navigate to search results, filter content, etc.
-    // Example: router.push(`/search?q=${encodeURIComponent(query)}`);
   };
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 0);
+      setIsScrolled(scrollTop > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -129,13 +128,15 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobileMenuOpen]);
 
-  // Determine navbar background and text colors - all pages follow home page style
+  // Determine navbar background and text colors matching reference image
   const getNavbarStyles = () => {
     return {
-      navBg: isScrolled ? "bg-black/20 backdrop-blur-md" : "bg-transparent",
-      textColor: "text-white/80 group-hover:text-[#01a9a0]",
-      hoverColor: "hover:text-[#01a9a0]",
-      activeColor: "text-[#01a9a0]/90",
+      navBg: isScrolled
+        ? "bg-[#011c20]/90 backdrop-blur-md border-b border-white/10 shadow-lg"
+        : "bg-transparent",
+      textColor: "text-white/90 hover:text-[#00c2b2]",
+      hoverColor: "hover:text-[#00c2b2]",
+      activeColor: "text-[#00c2b2] font-bold",
     };
   };
 
@@ -143,12 +144,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 ${styles.navBg} hover:bg-white group`}
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 sm:py-4 ${styles.navBg}`}
       style={{ zIndex: 9998 }}
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-12 2xl:px-16">
-        <div className="flex items-center justify-between h-16 sm:h-16">
-          {/* Logo */}
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo (Kept exactly as it is) */}
           <div className="flex-shrink-0">
             <Link href="/">
               <Image
@@ -161,9 +162,9 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Navigation Links */}
+          {/* Navigation Links (Matching order: SERVICES, PROJECTS, PRODUCTS, INDUSTRIES, RESOURCES, COMPANY, CAREERS, CONTACT) */}
           <div className="hidden lg:block">
-            <div className="flex items-center gap-2.5 lg:gap-3 xl:gap-6 2xl:gap-8">
+            <div className="flex items-center gap-3 lg:gap-4 xl:gap-6 2xl:gap-7">
               {navItems.map((item) => {
                 const active = isLinkActive(item.href);
                 return (
@@ -174,7 +175,7 @@ const Navbar = () => {
                       active ? styles.activeColor : styles.textColor
                     } ${
                       styles.hoverColor
-                    } font-semibold uppercase transition-colors text-xs lg:text-[13px] xl:text-[15px] 2xl:text-lg font-anek whitespace-nowrap`}
+                    } font-semibold uppercase transition-colors text-xs lg:text-[12px] xl:text-[14px] 2xl:text-[15px] font-anek tracking-wider whitespace-nowrap`}
                   >
                     {item.name}
                   </Link>
@@ -183,24 +184,35 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right Side Controls */}
-          <div className="hidden lg:flex items-center space-x-3 xl:space-x-6 flex-shrink-0">
-            {/* Search Bar */}
+          {/* Right Side Controls (العربية, Dashed Search, GET A QUOTE ->) */}
+          <div className="hidden lg:flex items-center space-x-3 xl:space-x-5 flex-shrink-0">
+            {/* Arabic Link / Toggle */}
+            <button
+              type="button"
+              className="text-white hover:text-[#00c2b2] text-sm xl:text-base font-semibold transition-colors cursor-pointer px-1 py-1 font-sans"
+              title="العربية"
+            >
+              العربية
+            </button>
+
+            {/* Circular Search Button with Dashed Ring */}
             <ExpandableSearchBar
               onSearch={handleSearch}
               placeholder="Search..."
               suggestions={searchSuggestions}
+              dashedButton={true}
               iconColor={styles.textColor}
               hoverIconColor={styles.hoverColor}
             />
 
-            {/* CTA Button */}
+            {/* GET A QUOTE CTA Button */}
             <Link
               href="/contact"
-              className="w-36 xl:w-44 h-10 px-3 xl:px-5 py-3 theme-bg-main hover:opacity-90 rounded-[30px] inline-flex justify-center items-center gap-2.5 transition-opacity shadow flex-shrink-0"
+              className="pl-5 pr-2 py-2 sm:pl-6 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-3 transition-all duration-300 shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)] hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group"
             >
-              <span className="text-indigo-50 text-xs xl:text-base font-semibold uppercase whitespace-nowrap">
-                Book A Meeting
+              <span className="whitespace-nowrap font-anek">GET A QUOTE</span>
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
               </span>
             </Link>
           </div>
@@ -324,15 +336,26 @@ const Navbar = () => {
             />
           </div>
 
-          {/* Mobile Book Now Button */}
+          {/* Mobile Arabic Option */}
+          <div className="mb-4">
+            <button
+              type="button"
+              className="text-white hover:text-[#00c2b2] text-base font-semibold transition-colors cursor-pointer flex items-center gap-2"
+            >
+              <span>العربية</span>
+            </button>
+          </div>
+
+          {/* Mobile GET A QUOTE Button */}
           <div>
             <Link
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-44 h-10 px-5 py-3 theme-bg-main rounded-[30px] inline-flex justify-center items-center gap-2.5 hover:opacity-90 transition-opacity"
+              className="pl-6 pr-2 py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-sm tracking-wider uppercase inline-flex items-center gap-3 shadow-lg group"
             >
-              <span className="text-indigo-50 text-base font-semibold uppercase">
-                Book A Meeting
+              <span className="whitespace-nowrap font-anek">GET A QUOTE</span>
+              <span className="w-8 h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center">
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </span>
             </Link>
           </div>

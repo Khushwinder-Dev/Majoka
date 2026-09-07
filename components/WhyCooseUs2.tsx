@@ -71,7 +71,7 @@ const WhyChooseUsSection = () => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 mb-8">
         {/* Left Section - Images */}
         <motion.div
           className="flex-1 lg:max-w-[50%]"
@@ -189,7 +189,7 @@ const WhyChooseUsSection = () => {
               </motion.button>
             </Link>
           </motion.div>
-        </motion.div>
+        </motion.div  >
       </div>
 
       {/* Video Modal */}

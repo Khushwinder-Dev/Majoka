@@ -1,400 +1,339 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, ArrowUp, Phone, Search } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import Link from "next/link";
+import { ArrowRight, Play, Pause, Volume2, VolumeX, Image as ImageIcon } from "lucide-react";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
 
-const HeroSection = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const heroRef = React.useRef<HTMLDivElement>(null);
-  const totalSlides = 3;
+// Animated counter for stats
+const AnimatedCounter = ({
+  value,
+  suffix = "+",
+}: {
+  value: number;
+  suffix?: string;
+}) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 35,
+    stiffness: 90,
+  });
+  const [displayValue, setDisplayValue] = useState(0);
 
-  // Array of background images
-  const backgroundImages = [
-    "/landing/hero/hero1.jpg",
-    "/landing/hero/hero2.jpg",
-    "/landing/hero/hero3.jpg",
-  ];
-
-  // Initialize AOS
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-out",
-      once: true,
-      offset: 50,
-    });
-  }, []);
-
-  // Scroll-based visibility detection
-  useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-        setIsVisible(isInView);
-      }
-    };
-
-    // Initial check
-    handleScroll();
-
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  // Auto-slide functionality
-  useEffect(() => {
-    console.log("Auto-slide check:", { isPaused, isTransitioning, isVisible });
-
-    if (isPaused || isTransitioning || !isVisible) return;
-
-    const autoSlideInterval = setInterval(() => {
-      console.log("Auto-slide triggered");
-      setIsTransitioning(true);
-      setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-    }, 3000);
-
-    return () => clearInterval(autoSlideInterval);
-  }, [isPaused, isTransitioning, isVisible, totalSlides]);
-
-  const handlePrevSlide = () => {
-    if (isTransitioning) return;
-    setIsPaused(true);
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
-
-    // Resume auto-slide after 5 seconds of manual interaction
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  const handleNextSlide = () => {
-    if (isTransitioning) return;
-    setIsPaused(true);
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
-
-    // Resume auto-slide after 5 seconds of manual interaction
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  const goToSlide = (index: number) => {
-    if (isTransitioning || index === currentSlide) return;
-    setIsPaused(true);
-    setIsTransitioning(true);
-    setCurrentSlide(index);
-
-    // Resume auto-slide after 5 seconds of manual interaction
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  // Reset transition state after animation completes
-  useEffect(() => {
-    if (isTransitioning) {
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-      }, 800);
-      return () => clearTimeout(timer);
+    if (isInView) {
+      motionValue.set(value);
     }
-  }, [isTransitioning]);
+  }, [isInView, motionValue, value]);
+
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest: number) => {
+      setDisplayValue(Math.floor(latest));
+    });
+    return () => unsubscribe();
+  }, [springValue]);
 
   return (
-    <div
-      ref={heroRef}
-      className="relative w-full h-[663px] md:h-screen overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Background Images with Advanced Animations */}
-      {backgroundImages.map((image, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 bg-[#333] bg-cover bg-center transition-all duration-[800ms] ease-in-out transform ${
-            index === currentSlide
-              ? "opacity-100 scale-100 rotate-0"
-              : index === (currentSlide - 1 + totalSlides) % totalSlides
-              ? "opacity-0 scale-110 -rotate-1 translate-x-[-100px]"
-              : index === (currentSlide + 1) % totalSlides
-              ? "opacity-0 scale-110 rotate-1 translate-x-[100px]"
-              : "opacity-0 scale-95 translate-y-[50px]"
-          }`}
-          style={{
-            backgroundImage: `url('${image}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter:
-              index === currentSlide
-                ? "brightness(0.8) contrast(1.05)"
-                : "brightness(0.8) blur(2px)",
-            transition:
-              "all 800ms cubic-bezier(0.4, 0, 0.2, 1), filter 600ms ease-out",
-          }}
-        >
-          {/* Animated Gradient Overlay */}
-          <div
-            className={`absolute inset-0 bg-gradient-to-r from-black/30 to-[#bc2b2b] transition-all duration-700 ${
-              index === currentSlide ? "opacity-40" : "opacity-60"
-            }`}
-            style={{
-              background:
-                index === currentSlide
-                  ? "linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(188,43,43,0.4) 100%)"
-                  : "linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(188,43,43,0.6) 100%)",
-            }}
-          ></div>
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+};
 
-          {/* Animated Particles Effect */}
-          {index === currentSlide && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
-                  style={{
-                    left: `${20 + i * 15}%`,
-                    top: `${30 + (i % 3) * 20}%`,
-                    animationDelay: `${i * 0.5}s`,
-                    animationDuration: "3s",
-                  }}
-                ></div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+const statsData = [
+  { value: 17, suffix: "+", label: "Year Of Experience" },
+  { value: 820, suffix: "+", label: "Project Completed" },
+  { value: 500, suffix: "+", label: "Satisfied Clients" },
+  { value: 120, suffix: "+", label: "Skilled Professionals" },
+];
 
-      {/* Slide Transition Overlay */}
+const HeroSection = () => {
+  const [isPlayingVideo, setIsPlayingVideo] = useState(false);
+  const [isVideoPaused, setIsVideoPaused] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Toggle video playing state
+  const handleToggleVideo = () => {
+    if (!isPlayingVideo) {
+      setIsPlayingVideo(true);
+      setIsVideoPaused(false);
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current
+          .play()
+          .catch((err) => console.log("Video playback error:", err));
+      }
+    } else {
+      if (videoRef.current) {
+        if (videoRef.current.paused) {
+          videoRef.current
+            .play()
+            .then(() => setIsVideoPaused(false))
+            .catch((err) => console.log("Video resume error:", err));
+        } else {
+          videoRef.current.pause();
+          setIsVideoPaused(true);
+        }
+      }
+    }
+  };
+
+  // Switch back to photo banner
+  const handleSwitchToImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setIsPlayingVideo(false);
+    setIsVideoPaused(false);
+  };
+
+  // Toggle audio
+  const handleToggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  return (
+    <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24] select-none">
+      {/* 1. Background Image Banner */}
       <div
-        className={`absolute inset-0 bg-black/20 transition-opacity duration-300 pointer-events-none ${
-          isTransitioning ? "opacity-100" : "opacity-0"
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
-      ></div>
+      >
+        <Image
+          src="/hero-bg.jpg"
+          alt="Taj Al Rahmah City Skyline Hero"
+          fill
+          priority
+          quality={100}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
 
-      {/* Hero Content with Animations */}
-      <div className="relative z-10 flex flex-col h-full px-4">
-        {/* Top Content - Heading and Paragraph */}
-        <div
-          className="max-w-8xl mx-auto flex flex-col items-center space-y-5 pt-32 md:pt-20 lg:pt-54"
-          data-aos="fade-down"
-          data-aos-duration="1200"
-          data-aos-delay="200"
-        >
-          <h1
-            className={`text-white/90 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center leading-tight tracking-[-0.4px] transition-all duration-700 transform font-anek ${
-              isTransitioning
-                ? "opacity-70 translate-y-2 scale-98"
-                : "opacity-100 translate-y-0 scale-100"
-            }`}
-            style={{
-              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-              animation: isTransitioning ? "none" : "fadeInUp 1s ease-out",
-            }}
-          >
-            Shaping Skylines, Defining Progress
-          </h1>
+      {/* 2. Background Video Banner */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <video
+          ref={videoRef}
+          src="/Hero.mp4"
+          loop
+          playsInline
+          muted={isMuted}
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
 
-          <p
-            className="text-white/80 text-lg md:text-xl lg:text-2xl xl:text-3xl text-center font-anek"
-            style={{
-              textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
-            }}
-          >
-            Trusted Contractor partner across KSA and beyond
-          </p>
+      {/* 3. Deep Teal / Emerald Cinematic Gradient Overlays */}
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(2, 38, 42, 0.95) 0%, rgba(2, 44, 49, 0.90) 35%, rgba(2, 48, 58, 0.70) 65%, rgba(1, 26, 38, 0.42) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(1, 18, 22, 0.65) 0%, transparent 25%, transparent 70%, rgba(1, 20, 24, 0.88) 100%)",
+        }}
+      />
+
+      {/* 4. Four Corner Rivets / Cyber Accent Points (matching design mockup) */}
+      <div className="absolute top-5 left-5 sm:top-7 sm:left-7 z-30 pointer-events-none">
+        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
         </div>
-
-        {/* Spacer to push other content down */}
-        <div className="flex-1"></div>
-
-        {/* Navigation Arrows */}
-        {/* <div className="absolute left-1/2 transform -translate-x-1/2 top-1/2 -translate-y-1/2 w-full max-w-[1300px] flex justify-between px-4  z-50">
-          <button
-            onClick={handlePrevSlide}
-            disabled={isTransitioning}
-            className={`w-[50px] h-[50px] rounded-full shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer transform hover:scale-110 active:scale-95 bg-sky-400/60 hover:bg-sky-500/70 ${
-              isTransitioning ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            style={{
-              boxShadow:
-                "0 4px 15px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.1)",
-              zIndex: 50,
-            }}
-            data-aos="fade-right"
-            data-aos-delay="400"
-          >
-            <ArrowLeft
-              className={`w-8 h-8 transition-all duration-300 text-white ${
-                isTransitioning ? "animate-pulse" : ""
-              }`}
-            />
-          </button>
-          <button
-            onClick={handleNextSlide}
-            disabled={isTransitioning}
-            className={`w-[50px] h-[50px] rounded-full shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer transform hover:scale-110 active:scale-95 bg-sky-400/60 hover:bg-sky-500/70 ${
-              isTransitioning ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            style={{
-              boxShadow:
-                "0 4px 15px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.1)",
-              zIndex: 50,
-            }}
-            data-aos="fade-left"
-            data-aos-delay="400"
-          >
-            <ArrowRight
-              className={`w-8 h-8 transition-all duration-300 text-white ${
-                isTransitioning ? "animate-pulse" : ""
-              }`}
-            />
-          </button>
-        </div> */}
-
-        {/* Enhanced Slider Dots */}
-        <div
-          className="absolute bottom-[200px] md:bottom-[60px] left-1/2 transform -translate-x-1/2 flex space-x-3 z-30"
-          data-aos="fade-up"
-          data-aos-delay="500"
-        >
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              disabled={isTransitioning}
-              className={`h-3 rounded-full transition-all duration-500 cursor-pointer transform hover:scale-125 active:scale-90 ${
-                currentSlide === index
-                  ? "bg-primary w-8 shadow-lg"
-                  : "bg-indigo-50 hover:bg-indigo-100 w-3"
-              } ${isTransitioning ? "opacity-50 cursor-not-allowed" : ""}`}
-              style={{
-                boxShadow:
-                  currentSlide === index
-                    ? "0 2px 8px rgba(188,43,43,0.4), 0 0 0 2px rgba(255,255,255,0.2)"
-                    : "0 1px 3px rgba(0,0,0,0.2)",
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+      </div>
+      <div className="absolute top-5 right-5 sm:top-7 sm:right-7 z-30 pointer-events-none">
+        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
         </div>
+      </div>
+      <div className="absolute bottom-5 left-5 sm:bottom-7 sm:left-7 z-30 pointer-events-none">
+        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
+        </div>
+      </div>
+      <div className="absolute bottom-5 right-5 sm:bottom-7 sm:right-7 z-30 pointer-events-none">
+        <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
+        </div>
+      </div>
 
-        {/* Enhanced CTA Button */}
-        {/* <div
-          className="mt-8 md:mt-16 relative z-50"
-          data-aos="zoom-in"
-          data-aos-delay="600"
-          data-aos-duration="800"
-        >
+      {/* 5. Left Vertical Slider / Pill Indicators (matching design mockup) */}
+      <div className="hidden lg:flex flex-col items-center gap-2.5 absolute left-5 xl:left-7 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
+        {/* Active Pill */}
+        <div className="w-1.5 h-7 rounded-full bg-[#00c2b2] shadow-[0_0_14px_#00c2b2]" />
+        {/* Inactive Outlined Pills */}
+        <div className="w-1.5 h-7 rounded-full border border-white/40 bg-white/5" />
+        <div className="w-1.5 h-7 rounded-full border border-white/40 bg-white/5" />
+      </div>
+
+      {/* 6. Video Mode Status Badge & Sound Toggle (Visible when Video is Active) */}
+      {isPlayingVideo && (
+        <div className="absolute top-24 sm:top-28 right-5 sm:right-10 z-30 flex items-center gap-2.5 bg-black/45 backdrop-blur-lg border border-white/20 px-3.5 py-1.5 rounded-full text-white text-xs font-semibold shadow-2xl transition-all">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00c2b2] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00c2b2]"></span>
+          </span>
+          <span className="hidden sm:inline text-white/90">
+            {isVideoPaused ? "Video Paused" : "Video Mode"}
+          </span>
           <button
-            className={`bg-sky-500 text-white font-bold text-lg md:text-xl py-3 px-6 md:px-8 rounded-full w-[200px] md:w-[340px] h-[50px] md:h-[60px] hover:bg-sky-600 transition-all duration-300 cursor-pointer shadow-lg transform hover:scale-105 hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 md:gap-3 font-anek ${
-              isTransitioning
-                ? "opacity-80 translate-y-1"
-                : "opacity-100 translate-y-0"
-            }`}
-            style={{
-              boxShadow:
-                "0 6px 20px rgba(14, 165, 233, 0.3), 0 2px 4px rgba(0,0,0,0.1)",
-              background: "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
-              animation: isTransitioning
-                ? "none"
-                : "fadeInUp 1s ease-out 0.4s both",
-            }}
+            onClick={handleToggleMute}
+            aria-label={isMuted ? "Unmute video" : "Mute video"}
+            className="p-1 hover:text-[#00c2b2] transition-colors cursor-pointer"
+            title={isMuted ? "Unmute audio" : "Mute audio"}
           >
-            <Phone className="w-6 h-6 text-white" />
-            <span className="uppercase whitespace-nowrap">
-              Book A Quick Call
-            </span>
+            {isMuted ? (
+              <VolumeX className="w-4 h-4 text-white/80 hover:text-white" />
+            ) : (
+              <Volume2 className="w-4 h-4 text-[#00c2b2]" />
+            )}
           </button>
-        </div> */}
-
-        {/* Glassmorphism Job Search Section */}
-        {/* <div
-          className="mt-8 md:mt-12 w-full max-w-5xl px-4 mb-8 z-30"
-          data-aos="fade-up"
-          data-aos-delay="700"
-          data-aos-duration="1000"
-        >
-          <div
-            className={`rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 transition-all duration-700 transform ${
-              isTransitioning
-                ? "opacity-70 translate-y-3"
-                : "opacity-100 translate-y-0"
-            }`}
-            style={{
-              background: "rgba(255, 255, 255, 0.08)",
-              backdropFilter: "blur(15px)",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-              animation: isTransitioning
-                ? "none"
-                : "fadeInUp 1s ease-out 0.6s both",
-            }}
+          <button
+            onClick={handleSwitchToImage}
+            className="pl-2 border-l border-white/20 hover:text-[#00c2b2] transition-colors flex items-center gap-1.5 cursor-pointer text-white/80 hover:text-white"
+            title="Return to photo banner"
           >
-            <div className="text-sky-400 text-xs md:text-sm font-semibold mb-2 md:mb-3 uppercase tracking-wider font-anek">
-              QUICK SEARCH
+            <ImageIcon className="w-3.5 h-3.5" />
+            <span className="text-[11px] font-medium">Photo</span>
+          </button>
+        </div>
+      )}
+
+      {/* 7. Main Hero Content Container */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          {/* Left Text & CTAs (Columns 1-8) */}
+          <div className="lg:col-span-8 flex flex-col items-start text-left">
+            {/* Tagline / Eyebrow */}
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+              <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
+              <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
+                TRUSTED WATERPROOFING EXPERT
+              </span>
             </div>
 
-            <h2 className="text-white text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 lg:mb-8 font-anek">
-              Find Your Dream Job Now!
-            </h2>
-            <div className="flex flex-row gap-3 md:gap-4 items-stretch">
-              <div className="flex-1">
-                <input
-                  type="text"
-                  placeholder="Job Title"
-                  className="w-full px-4 md:px-6 py-3 md:py-4 rounded-full text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all duration-300 text-base md:text-lg font-anek"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.95)",
-                    border: "none",
-                  }}
-                />
-              </div>
+            {/* Headline */}
+            <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px] font-bold leading-[1.08] tracking-tight font-anek">
+              Contracting & <br />
+              <span className="text-[#00c2b2] drop-shadow-[0_2px_20px_rgba(0,194,178,0.4)]">
+                Waterproofing Excellence
+              </span>
+            </h1>
 
-              <button
-                className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-6 md:px-8 py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2 shadow-lg cursor-pointer whitespace-nowrap font-anek"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)",
-                  boxShadow: "0 4px 15px rgba(14, 165, 233, 0.4)",
-                }}
+            {/* Description */}
+            <p className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mt-4 sm:mt-5 mb-7 sm:mb-9 font-anek">
+              Proven Expertise And Superior Craftsmanship, Delivering Durable
+              Solutions That Protect And Last.
+            </p>
+
+            {/* Dual CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 sm:gap-5">
+              {/* Button 1: EXPLORE SERVICES */}
+              <Link
+                href="/services"
+                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00c2b2] hover:bg-[#00d6c4] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-[0_4px_22px_rgba(0,194,178,0.45)] hover:shadow-[0_6px_28px_rgba(0,194,178,0.65)] hover:scale-105 active:scale-95 cursor-pointer"
               >
-                <Search className="w-4 h-4 md:w-5 md:h-5" />
-                FIND JOB
-              </button>
+                <span>EXPLORE SERVICES</span>
+                <span className="w-8 h-8 rounded-full bg-white text-[#00c2b2] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </span>
+              </Link>
+
+              {/* Button 2: EXPLORE PROJECT */}
+              <Link
+                href="/project"
+                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>EXPLORE PROJECT</span>
+                <span className="w-8 h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </span>
+              </Link>
             </div>
           </div>
-        </div> */}
 
-        {/* <div
-          className="absolute bottom-10 right-[120px] md:right-[200px]"
-          data-aos="fade-left"
-          data-aos-delay="800"
-        >
-          <button className="relative w-[40px] h-[40px] rounded-full flex items-center justify-center hover:bg-[#f8eaea]/20 transition-colors cursor-pointer bg-gray-200/80">
-            <Image
-              src="/landing/hero/msg.svg"
-              alt="Message"
-              width={26}
-              height={26}
-              className="w-12 h-12 p-1"
-            />
-            <div className="absolute inset-0 flex items-center justify-center gap-0.5 -translate-y-[1px]">
-              <div className="w-1 h-1 bg-black rounded-full"></div>
-              <div className="w-1 h-1 bg-black rounded-full"></div>
-              <div className="w-1 h-1 bg-black rounded-full"></div>
+          {/* Right Column: Circular Play Button (Columns 9-12) */}
+          <div className="lg:col-span-4 flex items-center justify-center lg:justify-start lg:pl-6 pt-4 lg:pt-0">
+            <div className="relative group">
+              {/* Ambient Pulsing Halo when in photo mode */}
+              {!isPlayingVideo && (
+                <span className="absolute inset-0 rounded-full bg-[#00c2b2]/25 animate-ping duration-1000 pointer-events-none" />
+              )}
+
+              {/* Large Frosted Glass Outer Ring */}
+              <button
+                onClick={handleToggleVideo}
+                aria-label={
+                  isPlayingVideo
+                    ? isVideoPaused
+                      ? "Resume Video"
+                      : "Pause Video"
+                    : "Play Hero Video"
+                }
+                className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white/12 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 shadow-[0_0_35px_rgba(0,194,178,0.35)] hover:shadow-[0_0_55px_rgba(0,194,178,0.65)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00c2b2]"
+              >
+                {/* Inner Vibrant Teal Circle */}
+                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full bg-[#00c2b2] group-hover:bg-[#00d6c4] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105">
+                  {isPlayingVideo && !isVideoPaused ? (
+                    <Pause className="w-6 h-6 sm:w-7 sm:h-7 text-white fill-white" />
+                  ) : (
+                    <Play className="w-6 h-6 sm:w-7 sm:h-7 text-white fill-white ml-0.5 sm:ml-1" />
+                  )}
+                </div>
+              </button>
+
+              {/* Play / Pause Hint on Hover */}
+              <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <span className="text-[11px] font-semibold text-white/90 bg-black/50 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/20">
+                  {isPlayingVideo
+                    ? isVideoPaused
+                      ? "Click to play"
+                      : "Click to pause"
+                    : "Click to play video"}
+                </span>
+              </div>
             </div>
-          </button>
-        </div> */}
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* 8. Bottom Glassmorphic Stats Section */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
+          {statsData.map((stat, idx) => (
+            <div
+              key={idx}
+              className="rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 bg-[#02282e]/65 sm:bg-white/[0.08] backdrop-blur-md border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-[#00c2b2]/50 hover:bg-white/[0.13] hover:-translate-y-1 group"
+            >
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-anek">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </div>
+              <p className="text-xs sm:text-sm lg:text-base text-white/80 font-medium font-anek mt-1.5">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

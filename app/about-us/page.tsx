@@ -14,7 +14,7 @@ const AboutUs = () => {
       />
       <AboutUsSection />
       <OurMission />
-      <MeetOurTeam />
+      {/* <MeetOurTeam /> */}
       <ClientTestimonials />
     </div>
   );
