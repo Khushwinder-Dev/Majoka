@@ -151,11 +151,11 @@ export default function Footer() {
         {/* SECTION 2: MAIN FOOTER — 5 COLUMNS */}
         {/* ========================================== */}
         <section className="py-12 sm:py-14 lg:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 xl:gap-12">
             {/* ---------------- */}
             {/* COLUMN 1: BRAND */}
             {/* ---------------- */}
-            <div className="sm:col-span-2 lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
+            <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2 flex flex-col gap-6">
               {/* Logo + Tagline */}
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0">
@@ -252,15 +252,16 @@ export default function Footer() {
                   </li>
                 ))}
                 {/* Explore More — slightly different style */}
-                <li className="pt-1">
+                <li className="pt-2">
                   <Link
                     href="/services"
-                    className="inline-flex items-center gap-1.5 text-[#01a9a0] hover:text-[#00817a] font-semibold text-sm sm:text-[15px] transition-colors group"
+                    className="inline-flex items-center gap-1.5 text-[#01a9a0] hover:text-[#00817a] font-bold text-sm sm:text-[15px] transition-colors group"
                   >
                     <ArrowRight
-                      className={`w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : ""}`}
+                      className={`w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : ""}`}
+                      strokeWidth={2.5}
                     />
-                    <span>{t.footer.exploreMore}</span>
+                    <span className="whitespace-nowrap">{t.footer.exploreMore}</span>
                   </Link>
                 </li>
               </ul>
@@ -303,7 +304,7 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 5: CONTACT */}
             {/* ---------------- */}
-            <div className="sm:col-span-2 lg:col-span-3 flex flex-col gap-5">
+            <div className="sm:col-span-2 lg:col-span-1 flex flex-col gap-5">
               <FooterHeading title={t.footer.contactTitle} />
               <ul className="flex flex-col gap-4.5">
                 {/* Phones */}
@@ -485,13 +486,13 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-2 text-[14px] sm:text-[15px] text-stone-700 hover:text-[#01a9a0] font-medium transition-all duration-200 group"
+      className="flex items-start gap-2 text-[14px] sm:text-[15px] text-stone-700 hover:text-[#01a9a0] font-medium transition-all duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3.5 h-3.5 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}
+        className={`w-3.5 h-3.5 text-[#01a9a0] flex-shrink-0 mt-[5px] transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}
         strokeWidth={2.5}
       />
-      <span>{label}</span>
+      <span className="break-words">{label}</span>
     </Link>
   );
 }
