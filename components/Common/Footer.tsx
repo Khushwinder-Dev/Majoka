@@ -64,7 +64,6 @@ export default function Footer() {
     "/services",
     "/services",
     "/services",
-    "/services",
   ];
 
   const resourcesHrefs = [
@@ -87,12 +86,11 @@ export default function Footer() {
 
   return (
     <footer className="relative w-full overflow-hidden">
-      {/* Mint gradient background */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, #e8f1ec 0%, #d4e4dc 50%, #c8dcd4 100%)",
+            "linear-gradient(180deg, #e1ebe4 0%, #d5e6dd 30%, #c8dcd2 70%, #beddd1 100%)",
         }}
       />
 
@@ -106,7 +104,10 @@ export default function Footer() {
             <div className="flex items-start gap-4 sm:gap-5 lg:gap-6 flex-1 max-w-2xl">
               {/* Teal envelope icon */}
               <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-[#01a9a0]/15 flex items-center justify-center">
-                <Mail className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 text-[#01a9a0]" strokeWidth={1.8} />
+                <Mail
+                  className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 text-[#01a9a0]"
+                  strokeWidth={1.8}
+                />
               </div>
               <div className="flex flex-col gap-2">
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-stone-900 tracking-tight leading-tight">
@@ -121,7 +122,7 @@ export default function Footer() {
             {/* Right: Email input with pill shape + teal submit button */}
             <form
               onSubmit={handleSubscribe}
-              className="w-full lg:w-auto lg:min-w-[460px] xl:min-w-[520px]"
+              className="w-full lg:w-auto lg:min-w-[440px] xl:min-w-[500px]"
             >
               <div className="relative group">
                 <input
@@ -135,11 +136,15 @@ export default function Footer() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`absolute top-1/2 ${isArabic ? "left-1.5 sm:left-2" : "right-1.5 sm:right-2"} -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] active:scale-95 text-white flex items-center justify-center shadow-lg shadow-[#01a9a0]/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed`}
+                  className={`absolute top-1/2 ${
+                    isArabic ? "left-1.5 sm:left-2" : "right-1.5 sm:right-2"
+                  } -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] active:scale-95 text-white flex items-center justify-center shadow-lg shadow-[#01a9a0]/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed`}
                   aria-label={t.footer.newsletter.subscribe}
                 >
                   <ArrowRight
-                    className={`w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5] ${isArabic ? "rotate-180" : ""} ${isSubmitting ? "animate-pulse" : ""}`}
+                    className={`w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5] ${
+                      isArabic ? "rotate-180" : ""
+                    } ${isSubmitting ? "animate-pulse" : ""}`}
                   />
                 </button>
               </div>
@@ -151,11 +156,11 @@ export default function Footer() {
         {/* SECTION 2: MAIN FOOTER — 5 COLUMNS */}
         {/* ========================================== */}
         <section className="py-12 sm:py-14 lg:py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 xl:gap-12">
+          <div className="grid grid-cols-12 gap-8 sm:gap-10 lg:gap-8 xl:gap-12">
             {/* ---------------- */}
-            {/* COLUMN 1: BRAND */}
+            {/* COLUMN 1: BRAND  */}
             {/* ---------------- */}
-            <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2 flex flex-col gap-6">
+            <div className="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 flex flex-col gap-6">
               {/* Logo + Tagline */}
               <div className="flex items-center gap-3 sm:gap-4">
                 <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0">
@@ -182,9 +187,9 @@ export default function Footer() {
                 {t.footer.companyDescription}
               </p>
 
-              {/* Social media icons — row of teal circles */}
-              <div className="flex items-center gap-2.5 sm:gap-3 pt-2">
-                {/* Facebook */}
+              {/* Social media icons */}
+              <div className="flex items-center gap-2.5 sm:gap-3 pt-2 flex-wrap">
+                {/* Facebook — solid teal */}
                 <Link
                   href="https://www.facebook.com/"
                   target="_blank"
@@ -194,42 +199,42 @@ export default function Footer() {
                 >
                   <Facebook className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </Link>
-                {/* Instagram */}
+                {/* Instagram — white + gray border + gray icon, teal on hover */}
                 <Link
                   href="https://instagram.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-600 hover:text-[#01a9a0] border border-stone-200 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-500 hover:text-[#01a9a0] border border-stone-200 hover:border-[#01a9a0]/50 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </Link>
-                {/* Twitter/X */}
+                {/* Twitter/X — white + gray border + gray icon, teal on hover */}
                 <Link
                   href="https://x.com/home"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-600 hover:text-[#01a9a0] border border-stone-200 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-500 hover:text-[#01a9a0] border border-stone-200 hover:border-[#01a9a0]/50 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                   aria-label="Twitter"
                 >
                   <Twitter className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </Link>
-                {/* LinkedIn */}
+                {/* LinkedIn — white + gray border + gray icon, teal on hover */}
                 <Link
                   href="https://www.linkedin.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-600 hover:text-[#01a9a0] border border-stone-200 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-500 hover:text-[#01a9a0] border border-stone-200 hover:border-[#01a9a0]/50 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
                 </Link>
-                {/* YouTube */}
+                {/* YouTube — white + gray border + gray icon, teal on hover */}
                 <Link
                   href="#"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-600 hover:text-[#01a9a0] border border-stone-200 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white hover:bg-stone-50 text-stone-500 hover:text-[#01a9a0] border border-stone-200 hover:border-[#01a9a0]/50 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                   aria-label="YouTube"
                 >
                   <Youtube className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
@@ -237,10 +242,10 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* ---------------- */}
+            {/* ------------------ */}
             {/* COLUMN 2: SERVICES */}
-            {/* ---------------- */}
-            <div className="flex flex-col gap-5">
+            {/* ------------------ */}
+            <div className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-2 xl:col-span-2 flex flex-col gap-5">
               <FooterHeading title={t.footer.servicesTitle} />
               <ul className="flex flex-col gap-3.5">
                 {t.footer.servicesLinks.map((link, i) => (
@@ -251,26 +256,32 @@ export default function Footer() {
                     />
                   </li>
                 ))}
-                {/* Explore More — slightly different style */}
+                {/* Explore More */}
                 <li className="pt-2">
                   <Link
                     href="/services"
                     className="inline-flex items-center gap-1.5 text-[#01a9a0] hover:text-[#00817a] font-bold text-sm sm:text-[15px] transition-colors group"
                   >
                     <ArrowRight
-                      className={`w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : ""}`}
+                      className={`w-4 h-4 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${
+                        isArabic
+                          ? "rotate-180 group-hover:-translate-x-1"
+                          : ""
+                      }`}
                       strokeWidth={2.5}
                     />
-                    <span className="whitespace-nowrap">{t.footer.exploreMore}</span>
+                    <span className="whitespace-nowrap">
+                      {t.footer.exploreMore}
+                    </span>
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* ---------------- */}
+            {/* ------------------- */}
             {/* COLUMN 3: RESOURCES */}
-            {/* ---------------- */}
-            <div className="flex flex-col gap-5">
+            {/* ------------------- */}
+            <div className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-2 xl:col-span-2 flex flex-col gap-5">
               <FooterHeading title={t.footer.resourcesTitle} />
               <ul className="flex flex-col gap-3.5">
                 {t.footer.resourcesLinks.map((link, i) => (
@@ -287,7 +298,7 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 4: COMPANY */}
             {/* ---------------- */}
-            <div className="flex flex-col gap-5">
+            <div className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-2 xl:col-span-2 flex flex-col gap-5">
               <FooterHeading title={t.footer.companyTitle} />
               <ul className="flex flex-col gap-3.5">
                 {t.footer.companyLinks.map((link, i) => (
@@ -304,13 +315,16 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 5: CONTACT */}
             {/* ---------------- */}
-            <div className="sm:col-span-2 lg:col-span-1 flex flex-col gap-5">
+            <div className="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3 flex flex-col gap-5">
               <FooterHeading title={t.footer.contactTitle} />
               <ul className="flex flex-col gap-4.5">
                 {/* Phones */}
                 <ContactRow
                   icon={
-                    <Phone className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2} />
+                    <Phone
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      strokeWidth={2}
+                    />
                   }
                 >
                   <Link
@@ -330,7 +344,10 @@ export default function Footer() {
                 {/* Emails */}
                 <ContactRow
                   icon={
-                    <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2} />
+                    <Mail
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      strokeWidth={2}
+                    />
                   }
                 >
                   <Link
@@ -350,7 +367,10 @@ export default function Footer() {
                 {/* Location */}
                 <ContactRow
                   icon={
-                    <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2} />
+                    <MapPin
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      strokeWidth={2}
+                    />
                   }
                 >
                   <span className="whitespace-pre-line leading-relaxed">
@@ -361,10 +381,15 @@ export default function Footer() {
                 {/* Working Hours */}
                 <ContactRow
                   icon={
-                    <Clock className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2} />
+                    <Clock
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5"
+                      strokeWidth={2}
+                    />
                   }
                 >
-                  <span className="leading-relaxed">{t.footer.workingHours}</span>
+                  <span className="leading-relaxed">
+                    {t.footer.workingHours}
+                  </span>
                   <span className="text-stone-500 italic text-sm">
                     {t.footer.closedDay}
                   </span>
@@ -375,17 +400,19 @@ export default function Footer() {
         </section>
 
         {/* ========================================== */}
-        {/* SECTION 3: BOTTOM BAR — Copyright + Scroll Top + App Badges */}
+        {/* SECTION 3: BOTTOM BAR */}
         {/* ========================================== */}
         <section className="py-6 sm:py-7 border-t border-[#01a9a0]/20">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 md:gap-4">
             {/* Left: Copyright */}
-            <p className="text-sm sm:text-[15px] text-stone-600 text-center sm:text-left font-medium">
-              {t.footer.copyright}
-            </p>
+            <div className="order-2 md:order-1 flex justify-center md:justify-start">
+              <p className="text-sm sm:text-[15px] text-stone-600 text-center md:text-start font-medium">
+                {t.footer.copyright}
+              </p>
+            </div>
 
             {/* Center: Scroll to top */}
-            <div className="flex items-center justify-center order-first sm:order-none">
+            <div className="order-1 md:order-2 flex items-center justify-center">
               <button
                 onClick={scrollToTop}
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-lg shadow-[#01a9a0]/30 hover:shadow-xl hover:shadow-[#01a9a0]/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-300"
@@ -397,7 +424,7 @@ export default function Footer() {
             </div>
 
             {/* Right: App store badges */}
-            <div className="flex items-center justify-center sm:justify-end gap-2.5 sm:gap-3">
+            <div className="order-3 flex items-center justify-center md:justify-end gap-2.5 sm:gap-3">
               {/* Google Play */}
               <Link
                 href="#"
@@ -407,7 +434,10 @@ export default function Footer() {
                 aria-label="Google Play"
               >
                 <div className="flex items-center gap-2 h-9 sm:h-10 px-2.5 sm:px-3 bg-black rounded-[8px] hover:bg-stone-900 transition-all duration-300 hover:-translate-y-0.5 shadow-md">
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0"
+                  >
                     <path
                       fill="#34A853"
                       d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z"
@@ -425,9 +455,13 @@ export default function Footer() {
                       d="M3.61 22.186L16.377 17.36l-5.252-2.922L3.61 22.186z"
                     />
                   </svg>
-                  <div className="flex flex-col items-start text-white leading-tight">
+                  <div
+                    className={`flex flex-col items-start text-white leading-tight ${
+                      isArabic ? "items-end" : "items-start"
+                    }`}
+                  >
                     <span className="text-[9px] sm:text-[10px] opacity-90">
-                      GET IT ON
+                      {isArabic ? "احصل عليه على" : "GET IT ON"}
                     </span>
                     <span className="text-xs sm:text-[13px] font-bold">
                       Google Play
@@ -445,12 +479,19 @@ export default function Footer() {
                 aria-label="App Store"
               >
                 <div className="flex items-center gap-2 h-9 sm:h-10 px-2.5 sm:px-3 bg-black rounded-[8px] hover:bg-stone-900 transition-all duration-300 hover:-translate-y-0.5 shadow-md">
-                  <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-white">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-5 h-5 sm:w-6 sm:h-6 fill-white flex-shrink-0"
+                  >
                     <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
                   </svg>
-                  <div className="flex flex-col items-start text-white leading-tight">
+                  <div
+                    className={`flex flex-col text-white leading-tight ${
+                      isArabic ? "items-end" : "items-start"
+                    }`}
+                  >
                     <span className="text-[9px] sm:text-[10px] opacity-90">
-                      Download on the
+                      {isArabic ? "قم بالتحميل على" : "Download on the"}
                     </span>
                     <span className="text-xs sm:text-[13px] font-bold">
                       App Store
@@ -471,12 +512,17 @@ export default function Footer() {
    ============================================================ */
 
 function FooterHeading({ title }: { title: string }) {
+  const { isArabic } = useLanguage();
   return (
     <div className="flex flex-col gap-2">
       <h4 className="text-lg sm:text-xl font-extrabold text-stone-900 tracking-tight">
         {title}
       </h4>
-      <div className="w-14 h-[3px] bg-[#01a9a0] rounded-full" />
+      <div
+        className={`w-14 h-[3px] bg-[#01a9a0] rounded-full ${
+          isArabic ? "mr-0 ml-auto" : ""
+        }`}
+      />
     </div>
   );
 }
@@ -489,7 +535,9 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       className="flex items-start gap-2 text-[14px] sm:text-[15px] text-stone-700 hover:text-[#01a9a0] font-medium transition-all duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3.5 h-3.5 text-[#01a9a0] flex-shrink-0 mt-[5px] transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`}
+        className={`w-3.5 h-3.5 text-[#01a9a0] flex-shrink-0 mt-[5px] transition-transform duration-200 ${
+          isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+        }`}
         strokeWidth={2.5}
       />
       <span className="break-words">{label}</span>
@@ -506,11 +554,9 @@ function ContactRow({
 }) {
   return (
     <li className="flex items-start gap-3.5">
-      {/* Teal circle icon */}
-      <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 border-[#01a9a0]/30 bg-white flex items-center justify-center text-[#01a9a0]">
+      <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-stone-200 bg-white flex items-center justify-center text-stone-500 shadow-sm hover:shadow-md hover:border-[#01a9a0]/40 hover:text-[#01a9a0] transition-all duration-300">
         {icon}
       </div>
-      {/* Stacked values */}
       <div className="flex flex-col gap-1 pt-1 text-[14px] sm:text-[15px] text-stone-700 font-medium min-w-0">
         {children}
       </div>
