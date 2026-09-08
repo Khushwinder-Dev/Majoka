@@ -20,6 +20,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import OurProjectsSection from "@/components/OurProjectsSection";
 import IndustriesSection from "@/components/IndustriesSection";
 import ConsultationSection from "@/components/ConsultationSection";
+import TrustedClientsSection from "@/components/TrustedClientsSection";
 
 export default function Home() {
   useEffect(() => {
@@ -52,6 +53,9 @@ export default function Home() {
         </div>
         <div data-aos="fade-up" data-aos-delay="350">
           <ConsultationSection />
+        </div>
+        <div data-aos="fade-up" data-aos-delay="400">
+          <TrustedClientsSection />
         </div>
         {/* <div data-aos="fade-up" data-aos-delay="100">
           <WhyChooseUs2 />
