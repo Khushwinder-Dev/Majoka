@@ -108,9 +108,8 @@ const HeroSection = () => {
     <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24] select-none">
       {/* 1. Background Image Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
-          isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
       >
         <Image
           src="/hero-bg.jpg"
@@ -125,9 +124,8 @@ const HeroSection = () => {
 
       {/* 2. Background Video Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
-          isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
       >
         <video
           ref={videoRef}
@@ -156,7 +154,7 @@ const HeroSection = () => {
       />
 
       {/* 4. Four Corner Rivets / Cyber Accent Points (matching design mockup) */}
-      <div className="absolute top-5 left-5 sm:top-7 sm:left-7 z-30 pointer-events-none">
+      {/* <div className="absolute top-5 left-5 sm:top-7 sm:left-7 z-30 pointer-events-none">
         <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
           <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
         </div>
@@ -175,7 +173,7 @@ const HeroSection = () => {
         <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#00c2b2]/60 bg-[#00c2b2]/20 flex items-center justify-center backdrop-blur-sm shadow-[0_0_12px_rgba(0,194,178,0.6)]">
           <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shadow-[0_0_8px_#ffffff]" />
         </div>
-      </div>
+      </div> */}
 
       {/* 5. Left Vertical Slider / Pill Indicators (matching design mockup) */}
       <div className="hidden lg:flex flex-col items-center gap-2.5 absolute left-5 xl:left-7 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
