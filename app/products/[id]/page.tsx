@@ -60,7 +60,7 @@ export default function ProductDetailsPage() {
   // Share via social
   const handleSocialShare = (platform: string) => {
     const url = typeof window !== "undefined" ? window.location.href : "https://example.com/share-link";
-    const text = product.name || "Check out this product";
+    const text = product.longName || product.name || "Check out this product";
 
     let shareUrl = "";
     if (platform === "facebook") {
@@ -87,7 +87,7 @@ export default function ProductDetailsPage() {
   };
 
   const handleAddToCart = () => {
-    toast.success(`Added ${quantity} × ${product.name} to cart!`);
+    toast.success(`Added ${quantity} × ${product.longName || product.name} to cart!`);
   };
 
   const handleToggleWishlist = () => {
@@ -155,7 +155,7 @@ export default function ProductDetailsPage() {
           </Link>
           <span className="text-gray-300">/</span>
           <span className="text-gray-900 font-medium truncate max-w-[240px] sm:max-w-none">
-            {product.name}
+            {product.longName || product.name}
           </span>
         </nav>
 
@@ -166,7 +166,7 @@ export default function ProductDetailsPage() {
             <div className="w-full aspect-square bg-[#f8f9fa] rounded-3xl p-8 sm:p-14 flex items-center justify-center relative overflow-hidden group border border-gray-100/60 transition-shadow hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <Image
                 src={product.image}
-                alt={product.name}
+                alt={product.longName || product.name}
                 width={700}
                 height={700}
                 priority
@@ -292,7 +292,7 @@ export default function ProductDetailsPage() {
 
             {/* Product Title */}
             <h1 className="text-3xl sm:text-4xl font-bold font-anek text-gray-900 tracking-tight leading-tight mb-3">
-              {product.name}
+              {product.longName || product.name}
             </h1>
 
             {/* Rating Stars & Count */}
@@ -308,11 +308,10 @@ export default function ProductDetailsPage() {
 
             {/* Description Paragraphs (Exact matching reference design) */}
             <div className="space-y-4 text-xs sm:text-[13px] text-gray-600 leading-relaxed mb-6">
-              {product.longDescription ? (
-                product.longDescription.map((p, idx) => <p key={idx}>{p}</p>)
-              ) : (
-                <p>{product.description}</p>
-              )}
+              <p>{product.description}</p>
+              {product.longDescription && product.longDescription.slice(1).map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
             </div>
 
             {/* Price & Interactive Actions */}
@@ -411,27 +410,14 @@ export default function ProductDetailsPage() {
         {/* ===================== OVERVIEW SECTION ===================== */}
         <section id="overview" className="pt-10 pb-12 border-b border-gray-100">
           <h2 className="text-xl sm:text-2xl font-bold font-anek text-gray-900 tracking-tight mb-4">
-            {product.overviewTitle || "Designed to disappear into your desk."}
+            {product.overviewTitle || product.longName || product.name}
           </h2>
 
           <div className="space-y-4 max-w-4xl text-xs sm:text-[13px] text-gray-600 leading-relaxed">
-            {product.overviewContent ? (
-              product.overviewContent.map((p, idx) => <p key={idx}>{p}</p>)
-            ) : (
-              <>
-                <p>
-                  The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch
-                  leather pad, so it sits flush and stays put. Strong magnets align your phone
-                  every time, and a weighted body means you can lift your phone one-handed without
-                  the charger coming with it.
-                </p>
-                <p>
-                  A braided 2-metre USB-C cable keeps your setup tidy, and full 15W output means
-                  you get the fastest MagSafe speeds Apple allows — no compromise for the clean
-                  look.
-                </p>
-              </>
-            )}
+            <p>{product.description}</p>
+            {product.overviewContent && product.overviewContent.slice(1).map((p, idx) => (
+              <p key={idx}>{p}</p>
+            ))}
           </div>
         </section>
 

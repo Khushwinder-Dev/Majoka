@@ -20,163 +20,9 @@ import {
   Check,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { allProductsData, ProductDetailItem } from "@/data/productsData";
 
-interface ProductItem {
-  id: number;
-  name: string;
-  category: string;
-  image: string;
-  description: string;
-  rating: number;
-  reviewsCount: number;
-  price: string;
-}
-
-const allProductsData: ProductItem[] = [
-  {
-    id: 1,
-    name: "Nomad MagSafe Charger",
-    category: "Technology",
-    image: "/products/nomad-magsafe-charger.jpg",
-    description:
-      "The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch leather pad, so it sits flush and stays put.",
-    rating: 4.9,
-    reviewsCount: 214,
-    price: "$149.00",
-  },
-  {
-    id: 2,
-    name: "Sigma Quattro Camera best",
-    category: "Gear",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 94,
-    price: "$219.00",
-  },
-  {
-    id: 3,
-    name: "Sigma Quattro Camera best",
-    category: "Accessory",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 65,
-    price: "$189.00",
-  },
-  {
-    id: 4,
-    name: "Sigma Quattro Camera best",
-    category: "Laptop",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 142,
-    price: "$249.00",
-  },
-  {
-    id: 5,
-    name: "Sigma Quattro Camera best",
-    category: "Mobile",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 180,
-    price: "$229.00",
-  },
-  {
-    id: 6,
-    name: "Sigma Quattro Camera best",
-    category: "Airpod",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 77,
-    price: "$209.00",
-  },
-  {
-    id: 7,
-    name: "Sigma Quattro Camera best",
-    category: "Earphone",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 89,
-    price: "$199.00",
-  },
-  {
-    id: 8,
-    name: "Sigma Quattro Camera best",
-    category: "Phone",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 53,
-    price: "$179.00",
-  },
-  {
-    id: 9,
-    name: "Sigma Quattro Camera best",
-    category: "Technology",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 210,
-    price: "$259.00",
-  },
-  {
-    id: 10,
-    name: "Sigma Quattro Camera best",
-    category: "Gear",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 68,
-    price: "$239.00",
-  },
-  {
-    id: 11,
-    name: "Sigma Quattro Camera best",
-    category: "Accessory",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 42,
-    price: "$189.00",
-  },
-  {
-    id: 12,
-    name: "Sigma Quattro Camera best",
-    category: "Mobile",
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging tec...",
-    rating: 4.5,
-    reviewsCount: 115,
-    price: "$229.00",
-  },
-];
-
-const categoryList = [
-  { name: "Technology", count: 5 },
-  { name: "Gear", count: 4 },
-  { name: "Accessory", count: 3 },
-  { name: "Laptop", count: 2 },
-  { name: "Mobile", count: 4 },
-  { name: "Airpod", count: 4 },
-  { name: "Earphone", count: 4 },
-  { name: "Phone", count: 4 },
-];
+const categoryList: { name: string; count: number }[] = [];
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -190,11 +36,11 @@ export default function ProductsPage() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [itemsPerPage, setItemsPerPage] = useState<number>(20);
   const [isPageDropdownOpen, setIsPageDropdownOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<number>(2);
-  const [selectedCardId, setSelectedCardId] = useState<number>(2); // Default selected card matching screenshot
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedCardId, setSelectedCardId] = useState<number>(1);
 
   // Share Modal State
-  const [shareModalProduct, setShareModalProduct] = useState<ProductItem | null>(null);
+  const [shareModalProduct, setShareModalProduct] = useState<ProductDetailItem | null>(null);
 
   // Mobile Filter Drawer
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
@@ -239,8 +85,14 @@ export default function ProductsPage() {
     });
   }, [selectedCategories, selectedRating]);
 
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * itemsPerPage;
+    return filteredProducts.slice(start, start + itemsPerPage);
+  }, [filteredProducts, currentPage, itemsPerPage]);
+
   // Open Share Modal
-  const handleOpenShare = (e: React.MouseEvent, product: ProductItem) => {
+  const handleOpenShare = (e: React.MouseEvent, product: ProductDetailItem) => {
     e.stopPropagation();
     setShareModalProduct(product);
   };
@@ -317,18 +169,16 @@ export default function ProductsPage() {
         <div className="flex flex-col lg:flex-row items-start gap-7">
           {/* ===================== LEFT SIDEBAR ===================== */}
           <aside
-            className={`w-full lg:w-64 xl:w-72 flex-shrink-0 space-y-5 ${
-              isMobileFilterOpen
-                ? "fixed inset-0 z-50 bg-black/50 p-4 overflow-y-auto flex items-center justify-center lg:static lg:bg-transparent lg:p-0"
-                : "hidden lg:block"
-            }`}
+            className={`w-full lg:w-64 xl:w-72 flex-shrink-0 space-y-5 ${isMobileFilterOpen
+              ? "fixed inset-0 z-50 bg-black/50 p-4 overflow-y-auto flex items-center justify-center lg:static lg:bg-transparent lg:p-0"
+              : "hidden lg:block"
+              }`}
           >
             <div
-              className={`w-full max-w-md lg:max-w-none space-y-5 ${
-                isMobileFilterOpen
-                  ? "bg-white p-6 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
-                  : ""
-              }`}
+              className={`w-full max-w-md lg:max-w-none space-y-5 ${isMobileFilterOpen
+                ? "bg-white p-6 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
+                : ""
+                }`}
             >
               {/* Mobile Close */}
               {isMobileFilterOpen && (
@@ -357,7 +207,7 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Section 1: CATEGORY */}
-                <div className="py-4 border-b border-gray-100">
+                <div className="py-4 border-b border-gray-100 hidden">
                   <button
                     onClick={() => setIsCategoryOpen(!isCategoryOpen)}
                     className="w-full flex items-center justify-between text-left cursor-pointer group"
@@ -385,20 +235,18 @@ export default function ProductsPage() {
                               {/* Rounded Square Checkbox */}
                               <div
                                 onClick={() => toggleCategory(cat.name)}
-                                className={`w-4 h-4 rounded-md flex items-center justify-center transition-all ${
-                                  isChecked
-                                    ? "bg-[#01a9a0] border border-[#01a9a0] text-white"
-                                    : "border border-gray-300 group-hover:border-[#01a9a0] bg-white"
-                                }`}
+                                className={`w-4 h-4 rounded-md flex items-center justify-center transition-all ${isChecked
+                                  ? "bg-[#01a9a0] border border-[#01a9a0] text-white"
+                                  : "border border-gray-300 group-hover:border-[#01a9a0] bg-white"
+                                  }`}
                               >
                                 {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                               </div>
                               <span
-                                className={`transition-colors select-none ${
-                                  isChecked
-                                    ? "font-semibold text-gray-900"
-                                    : "text-gray-600 group-hover:text-gray-900"
-                                }`}
+                                className={`transition-colors select-none ${isChecked
+                                  ? "font-semibold text-gray-900"
+                                  : "text-gray-600 group-hover:text-gray-900"
+                                  }`}
                               >
                                 {cat.name}
                               </span>
@@ -608,22 +456,20 @@ export default function ProductsPage() {
                 <div className="flex items-center gap-1.5 bg-gray-100/80 p-1 rounded-xl">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${
-                      viewMode === "grid"
-                        ? "bg-[#01a9a0] text-white shadow-xs"
-                        : "text-gray-400 hover:text-gray-600"
-                    }`}
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${viewMode === "grid"
+                      ? "bg-[#01a9a0] text-white shadow-xs"
+                      : "text-gray-400 hover:text-gray-600"
+                      }`}
                     title="Grid View"
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${
-                      viewMode === "list"
-                        ? "bg-[#01a9a0] text-white shadow-xs"
-                        : "text-gray-400 hover:text-gray-600"
-                    }`}
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${viewMode === "list"
+                      ? "bg-[#01a9a0] text-white shadow-xs"
+                      : "text-gray-400 hover:text-gray-600"
+                      }`}
                     title="List View"
                   >
                     <ListIcon className="w-3.5 h-3.5" />
@@ -652,11 +498,10 @@ export default function ProductsPage() {
                               setItemsPerPage(num);
                               setIsPageDropdownOpen(false);
                             }}
-                            className={`w-full px-3 py-1.5 text-xs text-left cursor-pointer transition-colors ${
-                              itemsPerPage === num
-                                ? "bg-[#01a9a0]/10 text-[#01a9a0] font-bold"
-                                : "text-gray-700 hover:bg-gray-50"
-                            }`}
+                            className={`w-full px-3 py-1.5 text-xs text-left cursor-pointer transition-colors ${itemsPerPage === num
+                              ? "bg-[#01a9a0]/10 text-[#01a9a0] font-bold"
+                              : "text-gray-700 hover:bg-gray-50"
+                              }`}
                           >
                             {num}
                           </button>
@@ -686,13 +531,12 @@ export default function ProductsPage() {
               </div>
             ) : (
               <div
-                className={`grid gap-4 sm:gap-5 ${
-                  viewMode === "grid"
-                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-                    : "grid-cols-1"
-                }`}
+                className={`grid gap-4 sm:gap-5 ${viewMode === "grid"
+                  ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+                  : "grid-cols-1"
+                  }`}
               >
-                {filteredProducts.map((product) => {
+                {paginatedProducts.map((product) => {
                   const isSelected = selectedCardId === product.id;
                   const isShareOpen = shareModalProduct?.id === product.id;
 
@@ -703,13 +547,11 @@ export default function ProductsPage() {
                         setSelectedCardId(product.id);
                         router.push(`/products/${product.id}`);
                       }}
-                      className={`relative rounded-2xl transition-all duration-200 cursor-pointer p-3 sm:p-3.5 flex flex-col group ${
-                        isShareOpen ? "z-30" : isSelected ? "z-20" : "z-10 hover:z-20"
-                      } ${
-                        isSelected
+                      className={`relative rounded-2xl transition-all duration-200 cursor-pointer p-3 sm:p-3.5 flex flex-col group ${isShareOpen ? "z-30" : isSelected ? "z-20" : "z-10 hover:z-20"
+                        } ${isSelected
                           ? "bg-[#f0fdfa]/50 border-2 border-[#01a9a0] shadow-[0_4px_16px_rgba(1,169,160,0.12)]"
                           : "bg-white border border-gray-200/90 hover:border-gray-300 shadow-[0_2px_6px_rgba(0,0,0,0.02)] hover:shadow-md"
-                      }`}
+                        }`}
                     >
                       {/* Top Product Image Container */}
                       <div className="relative w-full aspect-square bg-[#f6f7f9] rounded-xl overflow-hidden flex items-center justify-center p-3 mb-3">
@@ -723,11 +565,10 @@ export default function ProductsPage() {
 
                         {/* Top-Right Controls: Rating Pill & Share Button (Visible on Hover or when Selected) */}
                         <div
-                          className={`absolute top-2.5 right-2.5 flex items-center gap-1.5 z-10 transition-opacity duration-200 ${
-                            isSelected || isShareOpen
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-100"
-                          }`}
+                          className={`absolute top-2.5 right-2.5 flex items-center gap-1.5 z-10 transition-opacity duration-200 ${isSelected || isShareOpen
+                            ? "opacity-100"
+                            : "opacity-0 group-hover:opacity-100"
+                            }`}
                         >
                           {/* Rating Pill */}
                           <div className="flex items-center gap-1 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-full border border-gray-100 shadow-xs text-[10px] font-bold text-gray-700">
@@ -902,81 +743,47 @@ export default function ProductsPage() {
             {/* ===================== PAGINATION BAR ===================== */}
             <div className="mt-10 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <span className="text-xs sm:text-sm text-gray-500 font-medium">
-                Showing 1 to 5 of 120
+                Showing {filteredProducts.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1} to{" "}
+                {Math.min(currentPage * itemsPerPage, filteredProducts.length)} of {filteredProducts.length}
               </span>
 
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                {/* Previous (<<) */}
-                <button
-                  onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                  className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] flex items-center justify-center transition-colors cursor-pointer"
-                  title="Previous Page"
-                >
-                  <ChevronsLeft className="w-4 h-4" />
-                </button>
+              {totalPages > 1 && (
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  {/* Previous (<<) */}
+                  <button
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                    disabled={currentPage === 1}
+                    className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
+                    title="Previous Page"
+                  >
+                    <ChevronsLeft className="w-4 h-4" />
+                  </button>
 
-                {/* Page 1 */}
-                <button
-                  onClick={() => setCurrentPage(1)}
-                  className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
-                    currentPage === 1
-                      ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                      : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                  }`}
-                >
-                  1
-                </button>
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                    <button
+                      key={pageNum}
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
+                        currentPage === pageNum
+                          ? "bg-[#01a9a0] text-white font-bold shadow-xs"
+                          : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  ))}
 
-                {/* Page 2 (Active in mockup) */}
-                <button
-                  onClick={() => setCurrentPage(2)}
-                  className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
-                    currentPage === 2
-                      ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                      : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                  }`}
-                >
-                  2
-                </button>
-
-                {/* Page 3 */}
-                <button
-                  onClick={() => setCurrentPage(3)}
-                  className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
-                    currentPage === 3
-                      ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                      : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                  }`}
-                >
-                  3
-                </button>
-
-                {/* Ellipsis (...) */}
-                <span className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] font-medium text-xs flex items-center justify-center select-none">
-                  ...
-                </span>
-
-                {/* Page 24 */}
-                <button
-                  onClick={() => setCurrentPage(24)}
-                  className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
-                    currentPage === 24
-                      ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                      : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                  }`}
-                >
-                  24
-                </button>
-
-                {/* Next (>>) */}
-                <button
-                  onClick={() => setCurrentPage(Math.min(24, currentPage + 1))}
-                  className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] flex items-center justify-center transition-colors cursor-pointer"
-                  title="Next Page"
-                >
-                  <ChevronsRight className="w-4 h-4" />
-                </button>
-              </div>
+                  {/* Next (>>) */}
+                  <button
+                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                    disabled={currentPage === totalPages}
+                    className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
+                    title="Next Page"
+                  >
+                    <ChevronsRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
             </div>
           </main>
         </div>

@@ -14,8 +14,9 @@ export interface ProductSpecification {
 }
 
 export interface ProductDetailItem {
-  id: number | string;
+  id: number;
   name: string;
+  longName: string;
   category: string;
   subcategory?: string;
   categoryPath?: string[];
@@ -27,7 +28,7 @@ export interface ProductDetailItem {
   overviewContent?: string[];
   rating: number;
   reviewsCount: number;
-  price: string;
+  price?: string;
   specifications: {
     column1: ProductSpecification[];
     column2: ProductSpecification[];
@@ -40,263 +41,459 @@ export interface ProductDetailItem {
   reviews: ProductReview[];
 }
 
-export const defaultProductsData: ProductDetailItem[] = [
+const defaultReviews: ProductReview[] = [
   {
-    id: 1,
-    name: "Nomad MagSafe Charger",
-    category: "Technology",
-    subcategory: "CHARGING",
-    categoryPath: ["Home", "Technology", "Nomad MagSafe Charger"],
-    image: "/products/nomad-magsafe-charger.jpg",
-    additionalImages: [
-      "/products/nomad-magsafe-charger.jpg",
-      "/products/minimal-watch.jpg",
-    ],
-    description:
-      "The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch leather pad, so it sits flush and stays put. Strong magnets align your phone every time, and a weighted body means you can lift your phone one-handed without the charger coming with it.",
-    longDescription: [
-      "The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch leather pad, so it sits flush and stays put. Strong magnets align your phone every time, and a weighted body means you can lift your phone one-handed without the charger coming with it.",
-      "A braided 2-metre USB-C cable keeps your setup tidy, and full 15W output means you get the fastest MagSafe speeds Apple allows — no compromise for the clean look.",
-    ],
-    overviewTitle: "Designed to disappear into your desk.",
-    overviewContent: [
-      "The Nomad MagSafe Charger pairs a machined aluminum base with a soft-touch leather pad, so it sits flush and stays put. Strong magnets align your phone every time, and a weighted body means you can lift your phone one-handed without the charger coming with it.",
-      "A braided 2-metre USB-C cable keeps your setup tidy, and full 15W output means you get the fastest MagSafe speeds Apple allows — no compromise for the clean look.",
-    ],
-    rating: 4.9,
-    reviewsCount: 214,
-    price: "$149.00",
-    specifications: {
-      column1: [
-        { label: "Max output", value: "15W (MagSafe)" },
-        { label: "Material", value: "Machined aluminum + leather" },
-        { label: "Compatibility", value: "iPhone 12 – 15" },
-        { label: "Weight", value: "220 g" },
-      ],
-      column2: [
-        { label: "Input", value: "USB-C Power Delivery" },
-        { label: "Cable", value: "2m braided USB-C" },
-        { label: "Dimensions", value: "92 × 92 × 6 mm" },
-        { label: "Warranty", value: "2 years" },
-      ],
-    },
-    ratingBreakdown: [
-      { stars: 5, count: 189, percentage: 88 },
-      { stars: 4, count: 19, percentage: 9 },
-      { stars: 3, count: 4, percentage: 2 },
-      { stars: 2, count: 1, percentage: 0.5 },
-      { stars: 1, count: 1, percentage: 0.5 },
-    ],
-    reviews: [
-      {
-        id: "rev-1",
-        author: "Ethan Brooks",
-        initials: "EB",
-        date: "June 2, 2026",
-        rating: 5,
-        verified: true,
-        comment:
-          "Genuinely the nicest charger I own. It feels like a piece of furniture, not an accessory. Alignment is flawless every time.",
-      },
-      {
-        id: "rev-2",
-        author: "James Walker",
-        initials: "JW",
-        date: "June 3, 2026",
-        rating: 5,
-        verified: true,
-        comment:
-          "Charges fast and looks incredible on my desk. The leather pad is a lovely touch that photos don't do justice.",
-      },
-      {
-        id: "rev-3",
-        author: "Sophia Chen",
-        initials: "SC",
-        date: "May 28, 2026",
-        rating: 5,
-        verified: true,
-        comment:
-          "The weighted aluminum base makes all the difference. You can lift your phone with one hand without moving the base at all. Outstanding design.",
-      },
-      {
-        id: "rev-4",
-        author: "Marcus Vance",
-        initials: "MV",
-        date: "May 24, 2026",
-        rating: 4,
-        verified: true,
-        comment:
-          "High quality materials, braided cable is very durable. Takes up very minimal desk space while delivering reliable 15W MagSafe speeds.",
-      },
-    ],
+    id: "rev-1",
+    author: "Ahmed Al Mansoori",
+    initials: "AM",
+    date: "June 2026",
+    rating: 5,
+    verified: true,
+    comment:
+      "Exceptional build quality and finish. Ideal for commercial projects in UAE weather.",
   },
   {
-    id: 2,
-    name: "Sigma Quattro Camera best",
-    category: "Gear",
-    subcategory: "PHOTOGRAPHY",
-    categoryPath: ["Home", "Gear", "Sigma Quattro Camera best"],
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging technology with our flagship professional photography tool.",
-    longDescription: [
-      "Experience outstanding clarity, rich colors, and advanced imaging technology engineered for professionals who demand pure optical excellence.",
-      "Equipped with the revolutionary Foveon X3 Quattro sensor, this camera captures full-color information on three stacked layers, producing lifelike realism.",
-    ],
-    overviewTitle: "Crafted for uncompromising detail and precision.",
-    overviewContent: [
-      "Experience outstanding clarity, rich colors, and advanced imaging technology engineered for professionals who demand pure optical excellence.",
-      "Equipped with the revolutionary Foveon X3 Quattro sensor, this camera captures full-color information on three stacked layers, producing lifelike realism.",
-    ],
-    rating: 4.5,
-    reviewsCount: 94,
-    price: "$219.00",
-    specifications: {
-      column1: [
-        { label: "Sensor type", value: "Foveon X3 Quattro" },
-        { label: "Effective pixels", value: "29 Megapixels" },
-        { label: "ISO sensitivity", value: "ISO 100 - 6400" },
-        { label: "Weight", value: "415 g" },
-      ],
-      column2: [
-        { label: "Display", value: "3.0-inch TFT LCD" },
-        { label: "Storage", value: "SD / SDHC / SDXC" },
-        { label: "Mount", value: "Sigma SA Mount" },
-        { label: "Warranty", value: "2 years" },
-      ],
-    },
-    ratingBreakdown: [
-      { stars: 5, count: 72, percentage: 76 },
-      { stars: 4, count: 16, percentage: 17 },
-      { stars: 3, count: 4, percentage: 4 },
-      { stars: 2, count: 1, percentage: 1.5 },
-      { stars: 1, count: 1, percentage: 1.5 },
-    ],
-    reviews: [
-      {
-        id: "rev-2-1",
-        author: "Alexander Cole",
-        initials: "AC",
-        date: "May 15, 2026",
-        rating: 5,
-        verified: true,
-        comment:
-          "Incredible dynamic range and detail rendition. For landscape and still life work, there is nothing like it at this price point.",
-      },
-      {
-        id: "rev-2-2",
-        author: "Elena Rostova",
-        initials: "ER",
-        date: "April 29, 2026",
-        rating: 4,
-        verified: true,
-        comment:
-          "Unique ergonomic grip and the image sharpness is breath-taking.",
-      },
-    ],
+    id: "rev-2",
+    author: "Rashid Khan",
+    initials: "RK",
+    date: "May 2026",
+    rating: 5,
+    verified: true,
+    comment:
+      "Reliable FRP quality with excellent corrosion resistance and clean dimensions.",
   },
   {
-    id: 3,
-    name: "Sigma Quattro Camera best",
-    category: "Accessory",
-    subcategory: "TECH ACCESSORY",
-    categoryPath: ["Home", "Accessory", "Sigma Quattro Camera best"],
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging technology.",
-    rating: 4.5,
-    reviewsCount: 65,
-    price: "$189.00",
-    specifications: {
-      column1: [
-        { label: "Max output", value: "15W (MagSafe)" },
-        { label: "Material", value: "Machined aluminum + leather" },
-        { label: "Compatibility", value: "Universal" },
-        { label: "Weight", value: "180 g" },
-      ],
-      column2: [
-        { label: "Input", value: "USB-C" },
-        { label: "Cable", value: "1.5m braided" },
-        { label: "Dimensions", value: "85 × 85 × 8 mm" },
-        { label: "Warranty", value: "2 years" },
-      ],
-    },
-    ratingBreakdown: [
-      { stars: 5, count: 50, percentage: 77 },
-      { stars: 4, count: 10, percentage: 15 },
-      { stars: 3, count: 3, percentage: 5 },
-      { stars: 2, count: 1, percentage: 1.5 },
-      { stars: 1, count: 1, percentage: 1.5 },
-    ],
-    reviews: [
-      {
-        id: "rev-3-1",
-        author: "Liam Davis",
-        initials: "LD",
-        date: "June 1, 2026",
-        rating: 5,
-        verified: true,
-        comment: "Excellent build quality, works like a charm.",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "Sigma Quattro Camera best",
-    category: "Laptop",
-    subcategory: "COMPUTING",
-    categoryPath: ["Home", "Laptop", "Sigma Quattro Camera best"],
-    image: "/products/minimal-watch.jpg",
-    description:
-      "Experience outstanding clarity, rich colors, and advanced imaging technology.",
-    rating: 4.5,
-    reviewsCount: 142,
-    price: "$249.00",
-    specifications: {
-      column1: [
-        { label: "Processor", value: "M-Series Octa-core" },
-        { label: "Material", value: "Anodized Aerospace Aluminum" },
-        { label: "Compatibility", value: "macOS / Windows / Linux" },
-        { label: "Weight", value: "1.24 kg" },
-      ],
-      column2: [
-        { label: "Input", value: "MagSafe 3 / Thunderbolt 4" },
-        { label: "Cable", value: "2m braided USB-C" },
-        { label: "Dimensions", value: "304 × 215 × 11 mm" },
-        { label: "Warranty", value: "2 years" },
-      ],
-    },
-    ratingBreakdown: [
-      { stars: 5, count: 120, percentage: 84 },
-      { stars: 4, count: 16, percentage: 11 },
-      { stars: 3, count: 4, percentage: 3 },
-      { stars: 2, count: 1, percentage: 1 },
-      { stars: 1, count: 1, percentage: 1 },
-    ],
-    reviews: [
-      {
-        id: "rev-4-1",
-        author: "Oliver Reed",
-        initials: "OR",
-        date: "May 20, 2026",
-        rating: 5,
-        verified: true,
-        comment: "Stunning display and unmatched battery life.",
-      },
-    ],
+    id: "rev-3",
+    author: "Saeed Al Zaabi",
+    initials: "SZ",
+    date: "April 2026",
+    rating: 4,
+    verified: true,
+    comment:
+      "High standard specifications, easy installation and prompt customer support.",
   },
 ];
 
+const defaultRatingBreakdown = [
+  { stars: 5, count: 85, percentage: 80 },
+  { stars: 4, count: 15, percentage: 15 },
+  { stars: 3, count: 3, percentage: 3 },
+  { stars: 2, count: 1, percentage: 1 },
+  { stars: 1, count: 1, percentage: 1 },
+];
+
+const rawProducts = [
+  {
+    id: 1,
+    name: "Wall Ladder",
+    longName: "Vertical Wall Mounted Access Ladder",
+    description:
+      "Strong and corrosion-resistant FRP wall ladder designed for safe vertical access to elevated areas, walls, tanks and industrial structures.",
+  },
+  {
+    id: 2,
+    name: "Swimming Pool Ladder",
+    longName: "Stainless Style Swimming Pool Access Ladder",
+    description:
+      "Durable corrosion-resistant FRP swimming pool ladder designed to provide safe and convenient entry and exit from swimming pools.",
+  },
+  {
+    id: 3,
+    name: "Safety Cage Ladder",
+    longName: "Vertical Industrial Safety Cage Ladder",
+    description:
+      "Heavy-duty FRP safety cage ladder designed for secure vertical access to industrial platforms, tanks, buildings and elevated structures.",
+  },
+  {
+    id: 4,
+    name: "Access Cover",
+    longName: "Reinforced FRP Square Access Cover",
+    description:
+      "Reinforced FRP access cover designed to protect utility openings, inspection points, drainage systems and underground access areas.",
+  },
+  {
+    id: 5,
+    name: "Drain Fitting",
+    longName: "Molded Drainage Pipe Fitting",
+    description:
+      "Durable FRP drainage fitting designed for connecting drainage components and directing water or wastewater through piping systems.",
+  },
+  {
+    id: 6,
+    name: "Rectangular Tank",
+    longName: "Rectangular Industrial Storage Tank",
+    description:
+      "Strong FRP rectangular storage tank suitable for water, chemical, wastewater and industrial liquid storage applications.",
+  },
+  {
+    id: 7,
+    name: "Bathtub",
+    longName: "White FRP Rectangular Bathtub",
+    description:
+      "Smooth and durable FRP bathtub designed for residential, hotel and commercial bathroom installations.",
+  },
+  {
+    id: 8,
+    name: "Bathtub",
+    longName: "Molded FRP Bathroom Bathtub",
+    description:
+      "High-quality molded FRP bathtub offering a smooth, durable and easy-to-maintain surface for bathroom applications.",
+  },
+  {
+    id: 9,
+    name: "Bathroom Tub",
+    longName: "Freestanding FRP Bathroom Tub",
+    description:
+      "Durable FRP bathroom tub designed for residential and commercial bathroom installations with a smooth molded finish.",
+  },
+  {
+    id: 10,
+    name: "Wall Access Ladder",
+    longName: "Wall Mounted Maintenance Access Ladder",
+    description:
+      "Lightweight and corrosion-resistant FRP ladder designed for wall-mounted maintenance and access applications.",
+  },
+  {
+    id: 11,
+    name: "Drain Fitting",
+    longName: "FRP Drainage Pipe Connection Fitting",
+    description:
+      "Molded FRP drainage fitting designed for connecting and directing drainage pipelines with excellent corrosion resistance.",
+  },
+  {
+    id: 12,
+    name: "Pool Ladder",
+    longName: "Swimming Pool Safety Access Ladder",
+    description:
+      "Durable swimming pool ladder designed to provide safe access in and out of residential and commercial swimming pools.",
+  },
+  {
+    id: 13,
+    name: "Shower Tray",
+    longName: "Molded Rectangular FRP Shower Tray",
+    description:
+      "Molded FRP shower tray designed for bathroom floor installation with an integrated drainage area and easy-to-clean surface.",
+  },
+  {
+    id: 14,
+    name: "Drainage Fitting",
+    longName: "FRP Drainage Pipe and Chamber Fitting",
+    description:
+      "FRP drainage fitting designed for reliable connection of drainage pipes and water management systems.",
+  },
+  {
+    id: 15,
+    name: "Boat",
+    longName: "Fiberglass Reinforced Plastic Boat",
+    description:
+      "Lightweight and strong FRP boat suitable for recreational boating, fishing, transportation and general marine applications.",
+  },
+  {
+    id: 16,
+    name: "Playground Equipment",
+    longName: "Outdoor Children's Playground Equipment",
+    description:
+      "Colorful and durable playground equipment designed for children in parks, schools, residential communities and recreational areas.",
+  },
+  {
+    id: 17,
+    name: "Access Cover",
+    longName: "Reinforced Molded FRP Access Cover",
+    description:
+      "Strong molded FRP access cover designed for inspection openings, drainage systems, tanks and utility access points.",
+  },
+  {
+    id: 18,
+    name: "Pipe Bend",
+    longName: "Fiberglass Reinforced Pipe Bend",
+    description:
+      "Corrosion-resistant FRP pipe bend designed to change pipeline direction while maintaining reliable fluid flow and structural strength.",
+  },
+  {
+    id: 19,
+    name: "Car Parking Canopy",
+    longName: "Outdoor Vehicle Parking Shade Canopy",
+    description:
+      "Outdoor FRP parking canopy designed to provide shade and protection for vehicles in residential, commercial and parking areas.",
+  },
+  {
+    id: 20,
+    name: "Carport",
+    longName: "Residential Outdoor Carport Structure",
+    description:
+      "Modern FRP carport structure designed to provide covered vehicle parking and protection from weather conditions.",
+  },
+  {
+    id: 21,
+    name: "Shower Tray Mold",
+    longName: "Molded Shower Tray Manufacturing Mold",
+    description:
+      "Specialized FRP mold used for manufacturing molded shower trays with consistent shape, strength and surface finish.",
+  },
+  {
+    id: 22,
+    name: "Shower Tray Mold",
+    longName: "Custom FRP Shower Tray Mould",
+    description:
+      "Custom FRP shower tray mold designed for producing durable and accurately shaped FRP bathroom shower trays.",
+  },
+  {
+    id: 23,
+    name: "Grating",
+    longName: "Fiberglass Reinforced Industrial Grating",
+    description:
+      "Lightweight and corrosion-resistant FRP grating suitable for industrial platforms, walkways, drainage areas and flooring applications.",
+  },
+  {
+    id: 24,
+    name: "Shower Tray",
+    longName: "White Rectangular Shower Tray",
+    description:
+      "White molded FRP shower tray designed for residential, hotel and commercial bathroom installations.",
+  },
+  {
+    id: 25,
+    name: "Ladder",
+    longName: "Multi Purpose Industrial Access Ladder",
+    description:
+      "Strong and lightweight FRP ladder suitable for industrial maintenance, construction, commercial and general access applications.",
+  },
+  {
+    id: 26,
+    name: "Step Ladder",
+    longName: "Heavy Duty FRP Step Ladder",
+    description:
+      "Heavy-duty FRP step ladder designed for maintenance, construction and industrial working-at-height applications.",
+  },
+  {
+    id: 27,
+    name: "Cylindrical Tank",
+    longName: "Cylindrical FRP Industrial Storage Tank",
+    description:
+      "Corrosion-resistant cylindrical FRP tank suitable for water, chemical and industrial liquid storage.",
+  },
+  {
+    id: 28,
+    name: "Roofing Sheet",
+    longName: "Corrugated FRP Roofing Sheet",
+    description:
+      "Lightweight corrugated FRP roofing sheet designed for weather-resistant roofing and industrial construction applications.",
+  },
+  {
+    id: 29,
+    name: "Access Cover",
+    longName: "Reinforced Utility Access Cover",
+    description:
+      "Reinforced FRP access cover designed to protect utility openings, inspection chambers, drainage systems and service areas.",
+  },
+  {
+    id: 30,
+    name: "Playground",
+    longName: "Outdoor Children's Playground Set",
+    description:
+      "Durable outdoor playground set designed for children with multiple play and recreational structures.",
+  },
+  {
+    id: 31,
+    name: "FRP Pipe",
+    longName: "Fiberglass Reinforced Plastic Industrial Pipe",
+    description:
+      "Strong and corrosion-resistant FRP pipe suitable for water, drainage, wastewater and industrial piping applications.",
+  },
+  {
+    id: 32,
+    name: "Water Tank",
+    longName: "Large FRP Water Storage Tank",
+    description:
+      "Large-capacity FRP water storage tank designed for residential, commercial and industrial water storage requirements.",
+  },
+  {
+    id: 33,
+    name: "Planter",
+    longName: "Decorative FRP Planter Pot",
+    description:
+      "Modern decorative FRP planter suitable for gardens, entrances, terraces, balconies and commercial landscaping.",
+  },
+  {
+    id: 34,
+    name: "Profile Sheet",
+    longName: "FRP Structural Roofing and Profile Sheet",
+    description:
+      "Durable FRP profile sheet designed for roofing, cladding, construction and industrial structural applications.",
+  },
+  {
+    id: 35,
+    name: "Planter",
+    longName: "Outdoor Decorative Planter Set",
+    description:
+      "Stylish FRP planter suitable for indoor and outdoor decorative plants, flowers and landscaping applications.",
+  },
+  {
+    id: 36,
+    name: "Shower Tray",
+    longName: "Molded FRP Shower Base",
+    description:
+      "Molded FRP shower tray designed with a smooth surface and drainage opening for bathroom installations.",
+  },
+  {
+    id: 37,
+    name: "Translucent Sheet",
+    longName: "Translucent FRP Roofing Sheet",
+    description:
+      "Lightweight translucent FRP roofing sheet designed to allow natural light while providing durable weather protection.",
+  },
+  {
+    id: 38,
+    name: "Car Parking Canopy",
+    longName: "Outdoor Car Parking Shade Structure",
+    description:
+      "Modern vehicle parking canopy designed to provide shade and weather protection for cars in residential and commercial areas.",
+  },
+  {
+    id: 39,
+    name: "Industrial Tank",
+    longName: "Industrial FRP Storage Tank with Piping",
+    description:
+      "Heavy-duty FRP industrial tank with piping arrangement designed for liquid storage and industrial processing applications.",
+  },
+  {
+    id: 40,
+    name: "Access Cover",
+    longName: "Molded Reinforced Access Cover",
+    description:
+      "Durable molded FRP access cover suitable for inspection openings, drainage systems, tanks and utility installations.",
+  },
+  {
+    id: 41,
+    name: "Structural Profile",
+    longName: "FRP Structural U Channel Profile",
+    description:
+      "Strong lightweight FRP U-channel profile suitable for construction, structural supports, framing and industrial fabrication.",
+  },
+  {
+    id: 42,
+    name: "Portable Toilet",
+    longName: "Portable FRP Toilet Cabin",
+    description:
+      "Durable FRP portable toilet cabin suitable for construction sites, events, temporary facilities and public areas.",
+  },
+  {
+    id: 43,
+    name: "Cylindrical Water Tank",
+    longName: "Horizontal Cylindrical FRP Storage Tank",
+    description:
+      "Corrosion-resistant horizontal cylindrical FRP tank designed for water, chemical and industrial liquid storage.",
+  },
+  {
+    id: 44,
+    name: "Step Ladder",
+    longName: "Heavy Duty Maintenance Step Ladder",
+    description:
+      "Strong FRP step ladder designed for maintenance, construction, industrial access and general working-at-height applications.",
+  },
+  {
+    id: 45,
+    name: "Pergola",
+    longName: "Modern FRP Outdoor Pergola Structure",
+    description:
+      "Modern FRP pergola designed to provide shade and enhance gardens, patios, terraces and outdoor living spaces.",
+  },
+  {
+    id: 46,
+    name: "Pergola",
+    longName: "Modern FRP Garden and Patio Pergola",
+    description:
+      "Contemporary FRP pergola structure suitable for residential gardens, patios, resorts and commercial outdoor areas.",
+  },
+  {
+    id: 47,
+    name: "Pergola",
+    longName: "Outdoor Architectural Canopy Structure",
+    description:
+      "Modern outdoor FRP canopy structure designed to provide shade while enhancing the architectural appearance of outdoor spaces.",
+  },
+  {
+    id: 48,
+    name: "Outdoor Canopy",
+    longName: "Modern FRP Outdoor Patio Shade Structure",
+    description:
+      "Stylish FRP patio canopy designed to create a comfortable shaded outdoor area for residential and commercial applications.",
+  },
+  {
+    id: 49,
+    name: "Safety Ladder",
+    longName: "Vertical Safety Access Ladder with Cage",
+    description:
+      "Corrosion-resistant FRP safety ladder with protective cage designed for secure vertical access to elevated structures.",
+  },
+  {
+    id: 50,
+    name: "Swimming Pool Ladder",
+    longName: "Swimming Pool Entry and Exit Ladder",
+    description:
+      "Durable FRP swimming pool ladder designed for safe and convenient pool entry and exit in residential and commercial swimming facilities.",
+  },
+];
+
+export const allProductsData: ProductDetailItem[] = rawProducts.map((p, idx) => {
+  const image =
+    idx % 2 === 0
+      ? "/products/nomad-magsafe-charger.jpg"
+      : "/products/minimal-watch.jpg";
+
+  return {
+    id: p.id,
+    name: p.name,
+    longName: p.longName,
+    category: "FRP Products",
+    subcategory: "ENGINEERING",
+    categoryPath: ["Home", "Products", p.longName],
+    image: image,
+    additionalImages: [
+      image,
+      idx % 2 === 0
+        ? "/products/minimal-watch.jpg"
+        : "/products/nomad-magsafe-charger.jpg",
+    ],
+    description: p.description,
+    longDescription: [
+      p.description,
+      "Manufactured using premium fiberglass reinforced polymer materials designed to withstand high humidity, harsh UV exposure, and heavy mechanical demands.",
+    ],
+    overviewTitle: p.longName,
+    overviewContent: [
+      p.description,
+      "Taj Al Rahmah provides precision-engineered FRP solutions tailored to international safety, structural, and architectural standards across residential, commercial, and industrial facilities in the UAE.",
+    ],
+    rating: 4.8 + ((idx % 3) * 0.1),
+    reviewsCount: 75 + (idx * 3),
+    specifications: {
+      column1: [
+        { label: "Material", value: "High-Grade FRP / Fiberglass" },
+        { label: "Corrosion Resistance", value: "High Chemical & Weather Resistant" },
+        { label: "Manufacturing", value: "Precision Molded / Hand Lay-Up" },
+        { label: "UV Protection", value: "UV Stabilized Resin Matrix" },
+      ],
+      column2: [
+        { label: "Application", value: "Commercial, Residential & Industrial" },
+        { label: "Durability", value: "Heavy-Duty & Long Service Life" },
+        { label: "Maintenance", value: "Low / Maintenance-Free" },
+        { label: "Standards", value: "UAE & International Quality Standards" },
+      ],
+    },
+    ratingBreakdown: defaultRatingBreakdown,
+    reviews: defaultReviews,
+  };
+});
+
+export const defaultProductsData = allProductsData;
+
 export function getProductById(id: string | number): ProductDetailItem {
   const numId = Number(id);
-  const found = defaultProductsData.find(
+  const found = allProductsData.find(
     (p) => p.id === id || (!isNaN(numId) && p.id === numId)
   );
   if (found) return found;
 
-  // Fallback: Return Nomad MagSafe Charger with requested id
-  return {
-    ...defaultProductsData[0],
-    id: id,
-  };
+  return allProductsData[0];
 }
