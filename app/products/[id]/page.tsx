@@ -306,12 +306,9 @@ export default function ProductDetailsPage() {
               <span className="text-xs text-gray-400">({product.reviewsCount} reviews)</span>
             </div>
 
-            {/* Description Paragraphs (Exact matching reference design) */}
-            <div className="space-y-4 text-xs sm:text-[13px] text-gray-600 leading-relaxed mb-6">
+            {/* Description Paragraph */}
+            <div className="text-xs sm:text-[13px] text-gray-600 leading-relaxed mb-6">
               <p>{product.description}</p>
-              {product.longDescription && product.longDescription.slice(1).map((p, idx) => (
-                <p key={idx}>{p}</p>
-              ))}
             </div>
 
             {/* Price & Interactive Actions */}
@@ -410,14 +407,11 @@ export default function ProductDetailsPage() {
         {/* ===================== OVERVIEW SECTION ===================== */}
         <section id="overview" className="pt-10 pb-12 border-b border-gray-100">
           <h2 className="text-xl sm:text-2xl font-bold font-anek text-gray-900 tracking-tight mb-4">
-            {product.overviewTitle || product.longName || product.name}
+            Overview
           </h2>
 
-          <div className="space-y-4 max-w-4xl text-xs sm:text-[13px] text-gray-600 leading-relaxed">
+          <div className="max-w-4xl text-xs sm:text-[13px] text-gray-600 leading-relaxed">
             <p>{product.description}</p>
-            {product.overviewContent && product.overviewContent.slice(1).map((p, idx) => (
-              <p key={idx}>{p}</p>
-            ))}
           </div>
         </section>
 

@@ -436,10 +436,7 @@ const rawProducts = [
 ];
 
 export const allProductsData: ProductDetailItem[] = rawProducts.map((p, idx) => {
-  const image =
-    idx % 2 === 0
-      ? "/products/nomad-magsafe-charger.jpg"
-      : "/products/minimal-watch.jpg";
+  const image = `/media/Updated_Product_Images/${String(p.id).padStart(2, "0")}_${p.name}.jpeg`;
 
   return {
     id: p.id,
@@ -451,20 +448,11 @@ export const allProductsData: ProductDetailItem[] = rawProducts.map((p, idx) => 
     image: image,
     additionalImages: [
       image,
-      idx % 2 === 0
-        ? "/products/minimal-watch.jpg"
-        : "/products/nomad-magsafe-charger.jpg",
     ],
     description: p.description,
-    longDescription: [
-      p.description,
-      "Manufactured using premium fiberglass reinforced polymer materials designed to withstand high humidity, harsh UV exposure, and heavy mechanical demands.",
-    ],
-    overviewTitle: p.longName,
-    overviewContent: [
-      p.description,
-      "Taj Al Rahmah provides precision-engineered FRP solutions tailored to international safety, structural, and architectural standards across residential, commercial, and industrial facilities in the UAE.",
-    ],
+    longDescription: [p.description],
+    overviewTitle: "Overview",
+    overviewContent: [p.description],
     rating: 4.8 + ((idx % 3) * 0.1),
     reviewsCount: 75 + (idx * 3),
     specifications: {

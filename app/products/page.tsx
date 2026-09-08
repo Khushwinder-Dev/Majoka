@@ -593,7 +593,7 @@ export default function ProductsPage() {
                           {product.name}
                         </h3>
 
-                        <p className="text-[11px] text-gray-500 leading-relaxed mt-1 line-clamp-2">
+                        <p className="text-[11px] text-gray-500 leading-relaxed mt-1 line-clamp-2 hidden">
                           {product.description}
                         </p>
                       </div>
@@ -763,11 +763,10 @@ export default function ProductsPage() {
                     <button
                       key={pageNum}
                       onClick={() => setCurrentPage(pageNum)}
-                      className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
-                        currentPage === pageNum
-                          ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                          : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                      }`}
+                      className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${currentPage === pageNum
+                        ? "bg-[#01a9a0] text-white font-bold shadow-xs"
+                        : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
+                        }`}
                     >
                       {pageNum}
                     </button>
