@@ -17,6 +17,7 @@ import WhyChooseUs2 from "@/components/WhyCooseUs2";
 import AboutCompanySection from "@/components/AboutCompanySection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
 import ExperienceSection from "@/components/ExperienceSection";
+import OurProjectsSection from "@/components/OurProjectsSection";
 
 export default function Home() {
   useEffect(() => {
@@ -40,6 +41,9 @@ export default function Home() {
         </div>
         <div data-aos="fade-up" data-aos-delay="200">
           <ExperienceSection />
+        </div>
+        <div data-aos="fade-up" data-aos-delay="250">
+          <OurProjectsSection />
         </div>
         {/* <div data-aos="fade-up" data-aos-delay="100">
           <WhyChooseUs2 />
