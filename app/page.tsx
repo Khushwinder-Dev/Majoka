@@ -21,6 +21,7 @@ import OurProjectsSection from "@/components/OurProjectsSection";
 import IndustriesSection from "@/components/IndustriesSection";
 import ConsultationSection from "@/components/ConsultationSection";
 import TrustedClientsSection from "@/components/TrustedClientsSection";
+import WelcomeOfferModal from "@/components/WelcomeOfferModal";
 
 export default function Home() {
   useEffect(() => {
@@ -86,6 +87,9 @@ export default function Home() {
         <div data-aos="fade-up" data-aos-delay="200">
           <BlogSection />
         </div>
+
+        {/* Welcome Offer Popup Modal */}
+        <WelcomeOfferModal />
       </main>
     </div>
   );

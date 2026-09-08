@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Play, X, ArrowRight, ShieldCheck, Wrench, Crosshair, Sparkles } from "lucide-react";
+import { Play, X, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutCompanySection() {
@@ -13,7 +13,7 @@ export default function AboutCompanySection() {
   const features = [
     {
       id: 1,
-      icon: <Sparkles className="w-5 h-5 text-[#01a9a0]" />,
+      icon: "/media/aboutSection/Frame.svg",
       title: isArabic ? "مواد عالية الجودة" : "Quality Materials",
       description: isArabic
         ? "مواد ممتازة مختارة لتحقيق المتانة والأداء والحماية الفائقة."
@@ -21,7 +21,7 @@ export default function AboutCompanySection() {
     },
     {
       id: 2,
-      icon: <Wrench className="w-5 h-5 text-[#01a9a0]" />,
+      icon: "/media/aboutSection/Frame (1).svg",
       title: isArabic ? "خبرة فنية متقدمة" : "Technical Expertise",
       description: isArabic
         ? "حلول هندسية متخصصة بناءً على متطلبات وظروف كل مشروع."
@@ -29,7 +29,7 @@ export default function AboutCompanySection() {
     },
     {
       id: 3,
-      icon: <Crosshair className="w-5 h-5 text-[#01a9a0]" />,
+      icon: "/media/aboutSection/Frame (2).svg",
       title: isArabic ? "تنفيذ دقيق" : "Precise Execution",
       description: isArabic
         ? "إعداد دقيق وتثبيت احترافي لضمان نتائج موثوقة وطويلة الأمد."
@@ -37,7 +37,7 @@ export default function AboutCompanySection() {
     },
     {
       id: 4,
-      icon: <ShieldCheck className="w-5 h-5 text-[#01a9a0]" />,
+      icon: "/media/aboutSection/Frame (4).svg",
       title: isArabic ? "حماية طويلة الأمد" : "Long-Term Protection",
       description: isArabic
         ? "حلول مصممة لحماية ممتلكاتك وتقليل التكاليف المستقبلية."
@@ -119,11 +119,15 @@ export default function AboutCompanySection() {
           <div className="md:col-span-1 lg:col-span-4 flex flex-col justify-between gap-6 sm:gap-7 py-1">
             {features.map((feature) => (
               <div key={feature.id} className="flex items-start gap-4 sm:gap-4.5 group">
-                {/* Icon Container */}
-                <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl bg-[#01a9a0]/10 border border-[#01a9a0]/25 flex items-center justify-center shrink-0 group-hover:bg-[#01a9a0] group-hover:text-white transition-all duration-300 shadow-xs group-hover:shadow-md group-hover:scale-105">
-                  <div className="group-hover:text-white transition-colors duration-300">
-                    {feature.icon}
-                  </div>
+                {/* Icon Container (35x35 SVG from /media/aboutSection) */}
+                <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-xl bg-[#EAF7F6] border border-teal-100/60 flex items-center justify-center shrink-0 group-hover:bg-[#d8f4f1] transition-all duration-300 shadow-xs">
+                  <Image
+                    src={feature.icon}
+                    alt={feature.title}
+                    width={35}
+                    height={35}
+                    className="w-[28px] h-[28px] sm:w-[35px] sm:h-[35px] object-contain"
+                  />
                 </div>
 
                 {/* Text Content */}
@@ -153,23 +157,34 @@ export default function AboutCompanySection() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
 
-              {/* Bottom-Left Experience Badge */}
+              {/* Vertical Experience Badge (Matching Reference Design) */}
               <div
                 className={`absolute bottom-0 ${
-                  isArabic ? "right-0 rounded-tl-2xl sm:rounded-tl-3xl" : "left-0 rounded-tr-2xl sm:rounded-tr-3xl"
-                } bg-[#01a9a0] text-white px-4 py-3.5 sm:px-5 sm:py-4 shadow-lg flex items-center gap-3 select-none`}
+                  isArabic
+                    ? "right-0 rounded-tl-2xl sm:rounded-tl-3xl rounded-br-2xl sm:rounded-br-3xl"
+                    : "left-0 rounded-tr-2xl sm:rounded-tr-3xl rounded-bl-2xl sm:rounded-bl-3xl"
+                } bg-[#01a9a0] text-white w-14 sm:w-16 md:w-[68px] h-[190px] sm:h-[215px] md:h-[235px] shadow-xl flex items-center justify-center select-none z-10 overflow-hidden`}
               >
-                {/* Vertical Text */}
-                <div className="flex flex-col justify-center text-[10px] sm:text-[11px] font-bold uppercase tracking-wider leading-tight opacity-95">
-                  <span>+ {isArabic ? "عام" : "Year"}</span>
-                  <span>{isArabic ? "من الخبرة" : "Of"}</span>
-                  {!isArabic && <span>Experience</span>}
-                </div>
+                <div
+                  className={`flex items-center gap-3 w-[200px] justify-center ${
+                    isArabic ? "rotate-90" : "-rotate-90"
+                  } transform`}
+                >
+                  {/* Big Experience Number */}
+                  <span className="text-3xl sm:text-4xl font-black tracking-tight leading-none text-white">
+                    17
+                  </span>
 
-                {/* Big Experience Number */}
-                <span className="text-3xl sm:text-4xl font-black tracking-tight leading-none">
-                  17
-                </span>
+                  {/* 2-Line Label */}
+                  <div
+                    className={`flex flex-col text-[11px] sm:text-xs font-bold leading-tight text-white whitespace-nowrap ${
+                      isArabic ? "text-right" : "text-left"
+                    }`}
+                  >
+                    <span>+ {isArabic ? "عام من" : "Year Of"}</span>
+                    <span>{isArabic ? "الخبرة" : "Experience"}</span>
+                  </div>
+                </div>
               </div>
             </div>
 

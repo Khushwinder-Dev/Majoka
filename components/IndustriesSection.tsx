@@ -4,35 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
-// Diamond Reticle icon matching the reference design in mint container
-function IndustryDiamondIcon({ className = "w-5 h-5" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      className={className}
-    >
-      <rect
-        x="5"
-        y="5"
-        width="14"
-        height="14"
-        rx="2.5"
-        transform="rotate(45 12 12)"
-        stroke="currentColor"
-        strokeWidth="1.8"
-      />
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M12 6.5V8.5M12 15.5V17.5M6.5 12H8.5M15.5 12H17.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
 
 export default function IndustriesSection() {
   const { isArabic } = useLanguage();
@@ -141,11 +112,17 @@ export default function IndustriesSection() {
               >
                 {/* Mint Icon Container */}
                 <div
-                  className={`w-12 h-12 rounded-2xl bg-[#E6F7F6] flex items-center justify-center text-[#01a9a0] mb-3 group-hover:bg-[#009e90] group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-sm ${
+                  className={`w-12 h-12 rounded-2xl bg-[#E6F7F6] flex items-center justify-center text-[#01a9a0] mb-3 group-hover:bg-[#d4f4f1] group-hover:scale-105 transition-all duration-300 shadow-sm ${
                     isArabic ? "mr-auto" : "sm:ml-auto"
                   }`}
                 >
-                  <IndustryDiamondIcon className="w-5 h-5 transition-transform duration-300 group-hover:rotate-45" />
+                  <Image
+                    src="/media/Frame.svg"
+                    alt={item.title}
+                    width={30}
+                    height={30}
+                    className="w-6 h-6 object-contain"
+                  />
                 </div>
 
                 {/* Title (Teal in Left Column as in reference) */}
@@ -203,11 +180,17 @@ export default function IndustriesSection() {
               >
                 {/* Mint Icon Container */}
                 <div
-                  className={`w-12 h-12 rounded-2xl bg-[#E6F7F6] flex items-center justify-center text-[#01a9a0] mb-3 group-hover:bg-[#009e90] group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-sm ${
+                  className={`w-12 h-12 rounded-2xl bg-[#E6F7F6] flex items-center justify-center text-[#01a9a0] mb-3 group-hover:bg-[#d4f4f1] group-hover:scale-105 transition-all duration-300 shadow-sm ${
                     isArabic ? "ml-auto" : "mr-auto"
                   }`}
                 >
-                  <IndustryDiamondIcon className="w-5 h-5 transition-transform duration-300 group-hover:rotate-45" />
+                  <Image
+                    src="/media/Frame.svg"
+                    alt={item.title}
+                    width={30}
+                    height={30}
+                    className="w-6 h-6 object-contain"
+                  />
                 </div>
 
                 {/* Title (Dark Stone in Right Column as in reference) */}
