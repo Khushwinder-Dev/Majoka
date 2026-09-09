@@ -12,7 +12,7 @@ export default function ServicesPage() {
   return (
     <div>
       <ServicesListing />
-      <ClientTestimonials />
+      {/* <ClientTestimonials /> */}
     </div>
   );
 }

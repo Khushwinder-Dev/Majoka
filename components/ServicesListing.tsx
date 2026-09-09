@@ -595,7 +595,7 @@ export default function ServicesListing() {
           </h2>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+          <form id="inquiry-form" onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             {/* Row 1: Full Name & Email Address */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
               <input
@@ -681,6 +681,47 @@ export default function ServicesListing() {
               </button>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* ══ BOOK A VISIT CTA BANNER (HIGHLIGHTED SECTION) ═════════ */}
+      <section className="w-full bg-[#f4f6f8] pb-16 sm:pb-20 lg:pb-24 pt-0">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#0b2447] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
+            <div className="max-w-xl">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight mb-2 sm:mb-2.5 leading-snug">
+                {isArabic ? "احجز زيارة هذا الأسبوع." : "Book a visit for this week."}
+              </h3>
+              <p className="text-stone-300 text-xs sm:text-sm lg:text-[15px] leading-relaxed">
+                {isArabic
+                  ? "أخبرنا بما تريده. ستحصل على عرض سعر ثابت في نفس اليوم وفترة وصول محددة بساعتين."
+                  : "Tell us what needs doing. You'll get a fixed quote the same day and a two-hour arrival window."}
+              </p>
+            </div>
+
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto">
+              <button
+                type="button"
+                onClick={() => {
+                  const el = document.getElementById("inquiry-form");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                    const input = el.querySelector<HTMLInputElement>("input[name='fullName']");
+                    if (input) input.focus();
+                  }
+                }}
+                className="flex-1 sm:flex-initial text-center bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-xs sm:text-sm px-6 sm:px-7 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 whitespace-nowrap cursor-pointer"
+              >
+                {isArabic ? "حجز فني متخصص" : "Book a Technician"}
+              </button>
+              <a
+                href="tel:+971556173300"
+                className="flex-1 sm:flex-initial text-center bg-white/5 hover:bg-white/10 active:scale-[0.98] border border-white/25 hover:border-white/40 text-white font-bold text-xs sm:text-sm px-6 sm:px-7 py-3.5 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer"
+              >
+                {isArabic ? "اتصل الآن" : "Call Now"}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </div>
