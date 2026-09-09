@@ -608,7 +608,7 @@ export default function ProjectsGallery() {
                       type="button"
                       onClick={() => setView("grid")}
                       aria-label={isArabic ? "عرض شبكي" : "Grid view"}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
                         view === "grid"
                           ? "bg-[#01a9a0] text-white"
                           : "bg-stone-100 text-stone-500 hover:bg-stone-200"
@@ -620,7 +620,7 @@ export default function ProjectsGallery() {
                       type="button"
                       onClick={() => setView("list")}
                       aria-label={isArabic ? "عرض قائمة" : "List view"}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
                         view === "list"
                           ? "bg-[#01a9a0] text-white"
                           : "bg-stone-100 text-stone-500 hover:bg-stone-200"
