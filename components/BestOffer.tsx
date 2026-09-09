@@ -4,7 +4,7 @@ import React from "react";
 const BestOfferSection = () => {
   return (
     <section className="bg-gray-50 py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         {/* Header */}
         <h2 className="text-3xl md:text-3xl lg:text-4xl font-bold text-rose-950 mb-8">
           Best Offer for Car Rental

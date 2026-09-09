@@ -14,7 +14,7 @@ export default function BlogSection() {
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#E6F7F6] transition-colors duration-300">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-8xl mx-auto w-full">
         {/* ========================================= */}
         {/* HEADER                                    */}
         {/* ========================================= */}

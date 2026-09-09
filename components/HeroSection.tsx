@@ -218,7 +218,7 @@ const HeroSection = () => {
       )}
 
       {/* 7. Main Hero Content Container */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center">
+      <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Left Text & CTAs (Columns 1-8) */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
@@ -315,7 +315,7 @@ const HeroSection = () => {
       </div>
 
       {/* 8. Bottom Glassmorphic Stats Section */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
+      <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
           {isPlayingVideo || statsData.map((stat, idx) => (
             <div

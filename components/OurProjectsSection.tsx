@@ -139,7 +139,7 @@ export default function OurProjectsSection() {
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#E6F7F6] overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         {/* ============================================================
             SECTION HEADER
             ============================================================ */}

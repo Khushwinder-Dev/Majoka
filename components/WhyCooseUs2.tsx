@@ -191,7 +191,7 @@ const WhyChooseUsSection = () => {
           >
             {/* Video Container */}
             <motion.div
-              className="relative w-full max-w-5xl aspect-video"
+              className="relative w-full max-w-7xl aspect-video"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}

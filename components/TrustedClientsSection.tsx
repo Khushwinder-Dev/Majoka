@@ -133,7 +133,7 @@ export default function TrustedClientsSection() {
             ============================================================ */}
         <div
           data-aos="fade-up"
-          className="relative max-w-5xl mx-auto bg-gradient-to-br from-[#02131F] via-[#041D2E] to-[#02101B] border border-[#009e90]/30 rounded-[32px] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.25)] overflow-hidden"
+          className="relative max-w-7xl mx-auto bg-gradient-to-br from-[#02131F] via-[#041D2E] to-[#02101B] border border-[#009e90]/30 rounded-[32px] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.25)] overflow-hidden"
         >
           {/* Background blueprint subtle texture effect */}
           <div className="absolute inset-0 bg-[radial-gradient(#009e90_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
@@ -210,7 +210,7 @@ export default function TrustedClientsSection() {
         {/* ============================================================
             CLIENT BRAND LOGOS CAROUSEL BAR
             ============================================================ */}
-        <div className="relative max-w-5xl mx-auto mt-12 sm:mt-14 flex items-center gap-3 sm:gap-4">
+        <div className="relative max-w-7xl mx-auto mt-12 sm:mt-14 flex items-center gap-3 sm:gap-4">
           {/* Left Arrow Button */}
           <button
             onClick={() => scrollLogos("left")}

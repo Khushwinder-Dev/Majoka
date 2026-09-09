@@ -4,7 +4,7 @@ import Image from "next/image";
 const DownloadApp = () => {
   return (
     <div className="w-full py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-8xl mx-auto">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-red-300/40 via-red-400/90 to-red-800/90 p-8 lg:p-12 shadow">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
