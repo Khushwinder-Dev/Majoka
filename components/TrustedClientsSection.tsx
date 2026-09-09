@@ -60,83 +60,40 @@ export default function TrustedClientsSection() {
 
   const logos = [
     {
-      name: "DELL",
-      customRender: (
-        <span className="font-extrabold text-lg sm:text-xl text-[#0076CE] tracking-wider">
-          DELL
-        </span>
-      ),
+      name: "Logo 1",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.32.06 PM.jpeg",
     },
     {
-      name: "CISCO",
-      customRender: (
-        <div className="flex flex-col items-center">
-          <div className="flex items-end gap-[2px] h-3.5 mb-1">
-            <span className="w-[2px] h-1.5 bg-[#049FD9]" />
-            <span className="w-[2px] h-2.5 bg-[#049FD9]" />
-            <span className="w-[2px] h-3.5 bg-[#049FD9]" />
-            <span className="w-[2px] h-2.5 bg-[#049FD9]" />
-            <span className="w-[2px] h-1.5 bg-[#049FD9]" />
-          </div>
-          <span className="font-black text-xs text-[#049FD9] tracking-[0.2em]">
-            CISCO
-          </span>
-        </div>
-      ),
+      name: "Logo 2",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.32.45 PM.jpeg",
     },
     {
-      name: "SAP",
-      customRender: (
-        <div className="bg-[#008FD3] text-white px-2.5 py-1 rounded font-black text-sm tracking-wide shadow-sm">
-          SAP
-        </div>
-      ),
+      name: "Logo 3",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.33.19 PM.jpeg",
     },
     {
-      name: "ORACLE",
-      customRender: (
-        <span className="font-bold text-sm sm:text-base text-[#C74634] tracking-[0.16em] uppercase">
-          ORACLE
-        </span>
-      ),
+      name: "Logo 4",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.33.57 PM.jpeg",
     },
     {
-      name: "IBM",
-      customRender: (
-        <span className="font-black text-lg sm:text-xl text-[#006699] tracking-widest font-serif">
-          IBM
-        </span>
-      ),
+      name: "Logo 5",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.35.36 PM.jpeg",
     },
     {
-      name: "NAKIVO",
-      customRender: (
-        <span className="font-extrabold text-sm sm:text-base text-[#0B3056] tracking-wider uppercase">
-          NAKIVO
-        </span>
-      ),
+      name: "Logo 6",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.36.27 PM.jpeg",
     },
     {
-      name: "Raj Group",
-      customRender: (
-        <div className="flex items-center gap-1">
-          <span className="font-bold text-sm text-[#1B8354]">Raj</span>
-          <span className="text-[10px] text-stone-500 font-semibold">Group</span>
-        </div>
-      ),
+      name: "Logo 7",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.37.09 PM.jpeg",
     },
     {
-      name: "ALFALAK",
-      customRender: (
-        <div className="flex items-center gap-1.5">
-          <div className="w-5 h-5 rounded bg-[#1B7E5A] flex items-center justify-center text-white text-[10px] font-bold">
-            ف
-          </div>
-          <span className="font-extrabold text-xs text-[#1B7E5A] tracking-wider">
-            ALFALAK
-          </span>
-        </div>
-      ),
+      name: "Logo 8",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.38.53 PM.jpeg",
+    },
+    {
+      name: "Logo 9",
+      src: "/media/testimonialsLogo/WhatsApp Image 2026-09-09 at 6.40.15 PM.jpeg",
     },
   ];
 
@@ -276,9 +233,16 @@ export default function TrustedClientsSection() {
             {logos.map((logo, idx) => (
               <div
                 key={idx}
-                className="flex-shrink-0 h-14 min-w-[120px] sm:min-w-[130px] bg-slate-50/80 hover:bg-white border border-slate-200/70 hover:border-[#009e90]/40 rounded-xl px-4 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group"
+                className="flex-shrink-0 relative h-14 min-w-[120px] sm:min-w-[130px] bg-slate-50/80 hover:bg-white border border-slate-200/70 hover:border-[#009e90]/40 rounded-xl px-3 sm:px-4 flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer group overflow-hidden"
               >
-                {logo.customRender}
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 640px) 120px, 130px"
+                  className="object-contain p-1.5 sm:p-2 group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
             ))}
           </div>

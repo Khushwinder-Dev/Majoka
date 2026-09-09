@@ -186,7 +186,7 @@ const HeroSection = () => {
 
       {/* 6. Video Mode Status Badge & Sound Toggle (Visible when Video is Active) */}
       {isPlayingVideo && (
-        <div className="absolute top-24 sm:top-28 right-5 sm:right-10 z-30 flex items-center gap-2.5 bg-black/45 backdrop-blur-lg border border-white/20 px-3.5 py-1.5 rounded-full text-white text-xs font-semibold shadow-2xl transition-all">
+        <div className="absolute top-24 sm:top-28 right-5 sm:right-10 z-30 flex items-center gap-2.5 bg-black/45 backdrop-blur-lg border border-white/20 px-3.5 py-1.5 rounded-full text-white text-xs font-semibold shadow-2xl transition-all hidden">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00c2b2] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00c2b2]"></span>
@@ -317,7 +317,7 @@ const HeroSection = () => {
       {/* 8. Bottom Glassmorphic Stats Section */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
-          {statsData.map((stat, idx) => (
+          {isPlayingVideo || statsData.map((stat, idx) => (
             <div
               key={idx}
               className="rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 bg-[#02282e]/65 sm:bg-white/[0.08] backdrop-blur-md border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-[#00c2b2]/50 hover:bg-white/[0.13] hover:-translate-y-1 group"
