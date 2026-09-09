@@ -43,7 +43,13 @@ const Navbar = () => {
 
   const isLinkActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    if (href === "/project") return pathname === "/project" || pathname.startsWith("/project");
+    if (href === "/project")
+      return (
+        pathname === "/project" ||
+        pathname.startsWith("/project") ||
+        pathname === "/projects" ||
+        pathname.startsWith("/projects")
+      );
     if (href === "/career") return pathname === "/career" || pathname.startsWith("/career");
     if (href === "/services") return pathname === "/services" || pathname.startsWith("/services");
     if (href === "/about-us") return pathname === "/about-us" || pathname === "/about";

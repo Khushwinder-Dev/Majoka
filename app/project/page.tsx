@@ -1,19 +1,12 @@
 import React from "react";
-import CommonHeader from "../../components/Common/CommonHeader";
-import Portfolio from "../../components/Project/portfolio";
-import MeetOurTeam from "@/components/Common/MeetOurTeam";
+import ProjectsHero from "../../components/Project/ProjectsHero";
+import ProjectsGallery from "../../components/Project/ProjectsGallery";
 
 export default function ProjectPage() {
   return (
     <div>
-      <CommonHeader
-        title="Build Your Project With Taj Al Rahmah"
-        breadcrumb="Projects"
-        imagePath="/project.jpg"
-      />
-
-      <Portfolio />
-      {/* <MeetOurTeam /> */}
+      <ProjectsHero />
+      <ProjectsGallery />
     </div>
   );
 }
