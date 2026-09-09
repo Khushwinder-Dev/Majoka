@@ -134,7 +134,8 @@ const Navbar = () => {
       navBg: isScrolled
         ? "bg-[#011c20]/90 backdrop-blur-md border-b border-white/10 shadow-lg"
         : "bg-transparent",
-      textColor: "text-white/90 hover:text-[#00c2b2]",
+      textColor: "text-[#01a9a0]",
+      // textColor: "text-white/90 hover:text-[#00c2b2]",
       hoverColor: "hover:text-[#00c2b2]",
       activeColor: "text-[#00c2b2] font-bold",
     };

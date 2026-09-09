@@ -150,7 +150,7 @@ export default function AboutCompanySection() {
             {/* Top Image with Attached Experience Badge */}
             <div className="relative w-full h-[240px] sm:h-[280px] lg:h-[270px] xl:h-[290px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-15px_rgba(0,0,0,0.25)] group bg-stone-100">
               <Image
-                src="/about-us/company-engineer.png"
+                src="/about-us/welcompop.png"
                 alt={isArabic ? "مهندس تقني مع لابتوب" : "Technical engineer working with laptop"}
                 fill
                 unoptimized

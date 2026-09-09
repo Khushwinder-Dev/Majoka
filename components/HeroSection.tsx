@@ -316,16 +316,16 @@ const HeroSection = () => {
 
       {/* 8. Bottom Glassmorphic Stats Section */}
       <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 lg:gap-3 w-fit">
           {isPlayingVideo || statsData.map((stat, idx) => (
             <div
               key={idx}
-              className="rounded-xl sm:rounded-2xl p-4 sm:p-5 lg:p-6 bg-[#02282e]/65 sm:bg-white/[0.08] backdrop-blur-md border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-[#00c2b2]/50 hover:bg-white/[0.13] hover:-translate-y-1 group"
+              className="rounded-lg sm:rounded-xl px-2.5 py-2 sm:px-3.5 sm:py-2.5 bg-[#02282e]/65 sm:bg-white/[0.08] backdrop-blur-md border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.35)] transition-all duration-300 hover:border-[#00c2b2]/50 hover:bg-white/[0.13] hover:-translate-y-1 group"
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight font-anek">
+              <div className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight font-anek">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-xs sm:text-sm lg:text-base text-white/80 font-medium font-anek mt-1.5">
+              <p className="text-[9px] sm:text-[10px] lg:text-xs text-white/80 font-medium font-anek mt-0.5">
                 {stat.label}
               </p>
             </div>
