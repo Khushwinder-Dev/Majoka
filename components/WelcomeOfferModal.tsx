@@ -6,6 +6,10 @@ import { X, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
+// Set to false after the client demo to restore once-per-session behavior.
+const SHOW_ON_EVERY_RELOAD = true;
+const DISMISS_KEY = "taj_welcome_modal_dismissed";
+
 export default function WelcomeOfferModal() {
   const { isArabic } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
@@ -14,8 +18,8 @@ export default function WelcomeOfferModal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Check if user already dismissed or submitted the modal in this session
-    const isDismissed = sessionStorage.getItem("taj_welcome_modal_dismissed");
+    const isDismissed =
+      !SHOW_ON_EVERY_RELOAD && sessionStorage.getItem(DISMISS_KEY);
     if (!isDismissed) {
       const timer = setTimeout(() => {
         setIsOpen(true);
@@ -26,7 +30,9 @@ export default function WelcomeOfferModal() {
 
   const handleClose = () => {
     setIsOpen(false);
-    sessionStorage.setItem("taj_welcome_modal_dismissed", "true");
+    if (!SHOW_ON_EVERY_RELOAD) {
+      sessionStorage.setItem(DISMISS_KEY, "true");
+    }
   };
 
   // Close on Escape key
@@ -61,7 +67,9 @@ export default function WelcomeOfferModal() {
           ? "شكراً لاشتراكك! تم تطبيق كود الخصم 15%."
           : "Thank you for subscribing! Your 15% discount code has been applied."
       );
-      sessionStorage.setItem("taj_welcome_modal_dismissed", "true");
+      if (!SHOW_ON_EVERY_RELOAD) {
+        sessionStorage.setItem(DISMISS_KEY, "true");
+      }
       setTimeout(() => {
         setIsOpen(false);
       }, 2500);
