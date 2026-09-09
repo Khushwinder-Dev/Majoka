@@ -1,636 +1,557 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import CommonHeader from "@/components/Common/CommonHeader";
-import MeetOurTeam from "@/components/Common/MeetOurTeam";
-import ClientTestimonials from "@/components/ClientTestimonials";
-import Question from "@/components/Question";
 
-interface Service {
-  id: number;
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
+import { ChevronRight, ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
+
+/* ─── TYPES ──────────────────────────────────────────────────── */
+interface SubService {
   name: string;
-  title: string;
-  description: string;
-  highlights: string[];
-  services: {
-    name?: string;
-    services?: string[];
-  }[];
-  image: string;
+  points: string[];
+  advantage?: string;
 }
 
-const ServicesContent = () => {
-  const [activeService, setActiveService] = useState(1);
-  const router = useRouter();
+interface ServiceData {
+  id: string;
+  categoryId: string;
+  label: string;
+  labelAr: string;
+  icon: string;
+  heroTag: string;
+  heroTagAr: string;
+  title: string;
+  titleAr: string;
+  intro: string;
+  introAr: string;
+  subServices: SubService[];
+  whyTitle: string;
+  whyTitleAr: string;
+  whyBody: string;
+  whyBodyAr: string;
+  gallery: string[];
+}
+
+/* ─── SIDEBAR CATEGORIES (mirrors ServicesListing) ───────────── */
+const SIDEBAR_CATS = [
+  { id: "waterproofing", label: "Waterproofing",    labelAr: "العزل المائي",       icon: "/landing/services/6.svg" },
+  { id: "swimming-pools",label: "Swimming Pools",   labelAr: "حمامات السباحة",     icon: "/landing/services/1.svg" },
+  { id: "electrical",    label: "Electrical",        labelAr: "الكهرباء",           icon: "/landing/services/2.svg" },
+  { id: "plumbing",      label: "Plumbing",          labelAr: "السباكة",            icon: "/landing/services/3.svg" },
+  { id: "tiling",        label: "Tiling",            labelAr: "تركيب البلاط",       icon: "/landing/services/4.svg" },
+  { id: "plastering",    label: "Plastering",        labelAr: "اللياسة",            icon: "/landing/services/5.svg" },
+  { id: "painting",      label: "Painting",          labelAr: "الدهانات",           icon: "/landing/services/6.svg" },
+];
+
+/* ─── GALLERY IMAGES ─────────────────────────────────────────── */
+const GRP_GALLERY = [
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 1.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 2.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 3.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 4.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 5.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 6.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 7.png",
+  "/media/serviceDetails/GRP & FIBERGLASS WATERPROOFING gallery 8.png",
+];
+
+/* ─── SERVICES DATA ──────────────────────────────────────────── */
+const SERVICES: ServiceData[] = [
+  {
+    id: "1",
+    categoryId: "waterproofing",
+    label: "GRP & Fiberglass Waterproofing",
+    labelAr: "العزل بالألياف الزجاجية",
+    icon: "/landing/services/6.svg",
+    heroTag: "Waterproofing",
+    heroTagAr: "العزل المائي",
+    title: "GRP & FIBERGLASS WATERPROOFING",
+    titleAr: "العزل المائي بالألياف الزجاجية",
+    intro: "Waterproofing is the cornerstone for preserving the lifespan of any building. At Taj Al Rahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent and is latest and conclusion. Below is a detailed explanation of the cutting-edge waterproofing techniques we provide.",
+    introAr: "العزل المائي هو حجر الزاوية للحفاظ على عمر أي مبنى. في شركة تاج الرحمة، لا نقدم مجرد عزل؛ بل نوفر أنظمة حماية متكاملة تضمن ديمومة مثالية. فيما يلي شرح تفصيلي لأحدث تقنيات العزل المائي التي نقدمها.",
+    subServices: [
+      {
+        name: "GRP & Fibreglass Lining",
+        points: [
+          "Primary Applications: Lining potable drinking water tanks, GRP, high-fibre resistant to acid, and construct drainage channels.",
+          "Competitive Advantage: It provides a simple, seamless, pain-free layer that forms for the project. It is completely safe for health (not water storage, physical loads).",
+        ],
+      },
+      {
+        name: "Bitumen Membrane Waterproofing",
+        points: [
+          "The most common and reliable solution for protecting foundations and roofs. It utilises on-site heat-adhesive rollers using heat (torch in upward).",
+          "Competitive Advantage: High flexibility in handling minor structural movements and excellent resistance to ground moisture and humidity.",
+        ],
+      },
+      {
+        name: "Epoxy Floor Coating",
+        points: [
+          "A perfect and liquid-based flooring system for smoother floors, transforming them into a smooth, hard, and liquid-resistant surface.",
+          "Primary Applications: For glass, electronics, factories, and laboratories.",
+          "Competitive Advantage: High resistance to physical chemicals, all types of cleaning, and a professional and protective appearance.",
+        ],
+      },
+      {
+        name: "Combo System Roof Waterproofing",
+        points: [
+          "The hardest and ideal solution for roofs, combining Waterproofing and Thermal Insulation into one Integrated system.",
+          "Primary Applications: First, light constructing to fight, steel elements by home.",
+          "Competitive Advantage: Significantly speeds up installation when done with the tools of waterproof protection, provides advance water protection, and can create models with long-life durability reaching 15-15 years.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Waterproofing?",
+    whyTitleAr: "لماذا تختار تاج الرحمة للعزل المائي؟",
+    whyBody: "We don't just sell insulation; we provide 'Thick-Deep Solutions'. Our process begins with a precise engineering gap inspection to select the most suitable system and works with high-grade quality tools. Each training to serve a detailed field prediction.",
+    whyBodyAr: "نحن لا نبيع العزل فحسب، بل نقدم 'حلولاً عميقة ومتكاملة'. تبدأ عمليتنا بفحص هندسي دقيق لاختيار النظام الأنسب، ونعمل بأدوات عالية الجودة لضمان أفضل النتائج.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "2",
+    categoryId: "swimming-pools",
+    label: "Swimming Pool Lining",
+    labelAr: "بطانة حمامات السباحة",
+    icon: "/landing/services/1.svg",
+    heroTag: "Swimming Pools",
+    heroTagAr: "حمامات السباحة",
+    title: "SWIMMING POOL CONSTRUCTION & RENOVATION",
+    titleAr: "إنشاء وتجديد حمامات السباحة",
+    intro: "We provide end-to-end swimming pool solutions — from structural excavation and concrete work through tiling, filtration systems, and final finishes — for residential villas, hotels, and commercial complexes across the UAE.",
+    introAr: "نقدم حلولاً متكاملة لحمامات السباحة من الحفر الهيكلي والأعمال الخرسانية حتى التبليط وأنظمة الترشيح والتشطيبات النهائية للفلل والفنادق والمجمعات التجارية.",
+    subServices: [
+      {
+        name: "Pool Construction",
+        points: [
+          "Primary Applications: Residential, hotel, and commercial pool builds from ground up.",
+          "Competitive Advantage: Structural engineering, premium waterproof concrete, and certified installation teams.",
+        ],
+      },
+      {
+        name: "Pool Lining & Waterproofing",
+        points: [
+          "Watertight lining systems for pools using GRP, fiberglass, and specialised pool membranes.",
+          "Competitive Advantage: Long-lasting, chemical-resistant linings that maintain pool water quality.",
+        ],
+      },
+      {
+        name: "Pool Renovation & Resurfacing",
+        points: [
+          "Full renovation including structural crack repair, tile replacement, and modern surface finishes.",
+          "Competitive Advantage: Extends pool lifespan by 15–20 years at a fraction of rebuild costs.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Pool Works?",
+    whyTitleAr: "لماذا تختار تاج الرحمة لأعمال المسابح؟",
+    whyBody: "Our certified pool specialists have delivered over 200 pool projects across the UAE, combining structural expertise with premium waterproofing to deliver leak-free, beautiful pools built to last.",
+    whyBodyAr: "نفّذ متخصصونا المعتمدون أكثر من 200 مشروع مسبح في الإمارات، يجمعون بين الخبرة الهيكلية والعزل المائي المتميز لتسليم مسابح خالية من التسربات.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "3",
+    categoryId: "electrical",
+    label: "Electrical Installation",
+    labelAr: "التركيبات الكهربائية",
+    icon: "/landing/services/2.svg",
+    heroTag: "Electrical",
+    heroTagAr: "الكهرباء",
+    title: "ELECTRICAL INSTALLATION & MAINTENANCE",
+    titleAr: "التركيب والصيانة الكهربائية",
+    intro: "Complete low and medium voltage electrical installations for residential, commercial and industrial buildings. Our licensed electricians deliver safe, code-compliant wiring, panel installations, and comprehensive maintenance programmes.",
+    introAr: "تركيبات كهربائية كاملة لمنخفض ومتوسط الجهد لجميع أنواع المباني. يقدم كهربائيونا المرخصون أعمال توصيل آمنة متوافقة مع الكود وبرامج صيانة شاملة.",
+    subServices: [
+      {
+        name: "Low Voltage Electrical Systems",
+        points: [
+          "Primary Applications: Residential villas, apartments, retail and office fit-outs.",
+          "Competitive Advantage: Clean concealed wiring, DB board installation, and full testing.",
+        ],
+      },
+      {
+        name: "Medium Voltage & Substations",
+        points: [
+          "Primary Applications: Industrial plants, large commercial buildings, and infrastructure.",
+          "Competitive Advantage: DEWA-approved designs and certified commissioning.",
+        ],
+      },
+      {
+        name: "Electrical Maintenance",
+        points: [
+          "Preventive and corrective maintenance of electrical systems, distribution boards, and lighting.",
+          "Competitive Advantage: 24/7 emergency response and annual maintenance contracts available.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Electrical Works?",
+    whyTitleAr: "لماذا تختار تاج الرحمة للأعمال الكهربائية؟",
+    whyBody: "Licensed electricians, DEWA-approved designs, and a track record of delivering safe electrical installations on time across hundreds of projects in the UAE.",
+    whyBodyAr: "كهربائيون مرخصون وتصاميم معتمدة من هيئة كهرباء دبي وسجل حافل بتسليم تركيبات كهربائية آمنة في الوقت المحدد عبر مئات المشاريع.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "4",
+    categoryId: "plumbing",
+    label: "Plumbing & MEP",
+    labelAr: "السباكة والميكانيكا",
+    icon: "/landing/services/3.svg",
+    heroTag: "Plumbing",
+    heroTagAr: "السباكة",
+    title: "PLUMBING & MEP SERVICES",
+    titleAr: "خدمات السباكة والميكانيكا",
+    intro: "Full plumbing, MEP and sanitary services for residential, commercial and industrial projects. From underground drainage to above-ceiling pipework, our teams deliver code-compliant installations with minimal disruption.",
+    introAr: "خدمات السباكة والميكانيكا والصرف الصحي الكاملة للمشاريع السكنية والتجارية والصناعية. من الصرف الجوفي إلى شبكات الأنابيب فوق الأسقف، تقدم فرقنا تركيبات متوافقة مع الكود.",
+    subServices: [
+      {
+        name: "Plumbing Installation",
+        points: [
+          "Primary Applications: Cold and hot water supply, drainage, and sanitary ware fixing.",
+          "Competitive Advantage: HDPE, PPR and copper pipe specialists with full pressure testing.",
+        ],
+      },
+      {
+        name: "Drainage & Sewerage",
+        points: [
+          "Underground and above-ground drainage systems for all building types.",
+          "Competitive Advantage: Gravity and pumped systems designed for long-term reliability.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Plumbing?",
+    whyTitleAr: "لماذا تختار تاج الرحمة للسباكة؟",
+    whyBody: "Experienced MEP engineers and plumbers delivering leak-free installations backed by full pressure testing and compliance with UAE plumbing codes.",
+    whyBodyAr: "مهندسو ميكانيكا وسباكون ذوو خبرة يقدمون تركيبات خالية من التسرب مدعومة باختبارات ضغط كاملة.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "5",
+    categoryId: "tiling",
+    label: "Tiling",
+    labelAr: "تركيب البلاط",
+    icon: "/landing/services/4.svg",
+    heroTag: "Tiling",
+    heroTagAr: "تركيب البلاط",
+    title: "PROFESSIONAL TILING SOLUTIONS",
+    titleAr: "حلول تركيب البلاط الاحترافية",
+    intro: "Expert installation of ceramic, porcelain and natural stone tiles for all indoor and outdoor areas. Our tiling teams are skilled in large-format slabs, mosaic features, and complex pattern layouts.",
+    introAr: "تركيب احترافي للبلاط السيراميكي والبورسلان والحجر الطبيعي للمناطق الداخلية والخارجية. فرقنا متخصصة في الألواح الكبيرة والفسيفساء والأنماط المعقدة.",
+    subServices: [
+      {
+        name: "Floor & Wall Tiling",
+        points: [
+          "Primary Applications: Villas, apartments, hotels, and commercial spaces.",
+          "Competitive Advantage: Precision levelling, premium adhesives, and mirror-finish grouting.",
+        ],
+      },
+      {
+        name: "Mosaic & Pool Tiling",
+        points: [
+          "Custom mosaic and decorative tile designs for pools, feature walls and high-end interiors.",
+          "Competitive Advantage: Waterproof pool-grade adhesives and grouts rated for constant water exposure.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Tiling?",
+    whyTitleAr: "لماذا تختار تاج الرحمة لتركيب البلاط؟",
+    whyBody: "Premium materials, laser-levelled surfaces, and craftsmen with 10+ years experience in high-end residential and commercial tiling across Dubai and Abu Dhabi.",
+    whyBodyAr: "مواد فاخرة وأسطح مستوية بالليزر وحرفيون بخبرة تزيد على 10 سنوات في تبليط المباني السكنية والتجارية الفاخرة.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "6",
+    categoryId: "plastering",
+    label: "Plastering",
+    labelAr: "اللياسة",
+    icon: "/landing/services/5.svg",
+    heroTag: "Plastering",
+    heroTagAr: "اللياسة",
+    title: "INTERIOR & EXTERIOR PLASTERING",
+    titleAr: "اللياسة الداخلية والخارجية",
+    intro: "High-quality plastering services for all types of interior and exterior surfaces. From smooth skim coats to textured renders, we deliver flawless, durable finishes that form the perfect base for painting or tiling.",
+    introAr: "خدمات لياسة عالية الجودة لجميع أنواع الأسطح الداخلية والخارجية. من الطبقات الناعمة إلى الرندر المنقوش، نقدم تشطيبات مثالية ودائمة.",
+    subServices: [
+      {
+        name: "Internal Plastering",
+        points: [
+          "Smooth and sand-faced internal wall plastering using premium compounds.",
+          "Competitive Advantage: Crack-free, dust-resistant finish ready for painting within 48 hours.",
+        ],
+      },
+      {
+        name: "External Rendering",
+        points: [
+          "Weather-resistant external render systems for facades and structural surfaces.",
+          "Competitive Advantage: Flexible polymer-modified renders rated for UAE heat and humidity.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Plastering?",
+    whyTitleAr: "لماذا تختار تاج الرحمة للياسة؟",
+    whyBody: "Specialist plasterers delivering smooth, crack-resistant finishes using the highest quality materials — on time and on budget.",
+    whyBodyAr: "متخصصون في اللياسة يقدمون تشطيبات ناعمة ومقاومة للتشقق بأعلى جودة من المواد في الوقت والميزانية المحددين.",
+    gallery: GRP_GALLERY,
+  },
+  {
+    id: "7",
+    categoryId: "painting",
+    label: "Painting",
+    labelAr: "الدهانات",
+    icon: "/landing/services/6.svg",
+    heroTag: "Painting",
+    heroTagAr: "الدهانات",
+    title: "PAINTING & SURFACE COATINGS",
+    titleAr: "الدهانات وطلاء الأسطح",
+    intro: "Professional interior and exterior painting services using premium paint systems. Our painters deliver flawless finishes for villas, apartments, offices, and large commercial buildings across the UAE.",
+    introAr: "خدمات دهانات داخلية وخارجية احترافية بأنظمة دهانات فاخرة لتشطيبات مثالية للفلل والشقق والمكاتب والمباني التجارية الكبيرة.",
+    subServices: [
+      {
+        name: "Interior Painting",
+        points: [
+          "Primary Applications: Residential villas, hotel rooms, retail and office interiors.",
+          "Competitive Advantage: Zero-VOC paints available; clean, drip-free application every time.",
+        ],
+      },
+      {
+        name: "Exterior & Facade Painting",
+        points: [
+          "UV-resistant exterior coatings that protect and beautify building facades in all climates.",
+          "Competitive Advantage: 10-year colour retention guarantee on selected paint systems.",
+        ],
+      },
+    ],
+    whyTitle: "Why Choose Taj Alrahmah for Painting?",
+    whyTitleAr: "لماذا تختار تاج الرحمة للدهانات؟",
+    whyBody: "Approved applicators for leading paint brands, with full surface preparation, dust-free environments, and a clean worksite guarantee on every project.",
+    whyBodyAr: "مطبّقون معتمدون لكبرى ماركات الدهانات، مع تجهيز كامل للسطح وبيئة خالية من الغبار وضمان موقع نظيف في كل مشروع.",
+    gallery: GRP_GALLERY,
+  },
+];
+
+/* ─── HELPER: SIDEBAR ICON ───────────────────────────────────── */
+function SidebarIcon({ src, active }: { src: string; active: boolean }) {
+  return (
+    <Image
+      src={src}
+      alt=""
+      width={16}
+      height={16}
+      className={`w-4 h-4 object-contain flex-shrink-0 transition-all duration-200 ${
+        active ? "brightness-0 invert" : "opacity-40"
+      }`}
+    />
+  );
+}
+
+/* ─── MAIN PAGE CONTENT ──────────────────────────────────────── */
+function ServiceDetailsContent() {
+  const { isArabic } = useLanguage();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-    });
-
-    // Get service ID from URL parameters
-    const serviceId = searchParams.get("service");
-    if (serviceId) {
-      const id = parseInt(serviceId);
-      if (id >= 1 && id <= 10) {
-        setActiveService(id);
-      }
-    }
-  }, [searchParams]);
-
-  const servicesData: Service[] = [
-    {
-      id: 1,
-      name: "Manpower Supply",
-      title: "Manpower Supply",
-      description:
-        "Our Manpower Supply service ensures you get reliable, trained, and experienced professionals for any type of project. Whether you need technical experts, site workers, operators, supervisors, or support staff, we deliver fully vetted and qualified manpower tailored to your project requirements. We focus on quality, safety, and timely deployment to ensure your operations run smoothly and efficiently.",
-      highlights: [
-        "Vetted & Certified Workforce: Properly screened, verified, and skill-tested professionals.",
-        "Flexible Deployment: Short-term, long-term, or project-based manpower as needed.",
-        "Industry Expertise: Specialists for construction, oil & gas, MEP, logistics, and industrial sectors.",
-      ],
-      services: [
-        {
-          name: "Individual/Domestic Help Services",
-          services: [
-            "Monthly Services",
-            "Hourly Domestic Worker Services",
-            "Maintenance Services",
-            "Mediation Services",
-          ],
-        },
-        {
-          name: "Corporate Sector Services",
-          services: ["Construction", "Healthcare", "Logistics", "Oil & Gas"],
-        },
-      ],
-      image: "Manpower Supply",
-    },
-    {
-      id: 2,
-      name: "Equipment Rental",
-      title: "Equipment Rental",
-      description:
-        "Our Equipment Rental service provides high-quality, fully maintained machinery and tools to support construction, industrial, and infrastructure projects of all sizes. We offer a wide range of equipment including heavy machinery, power tools, lifting devices, generators, testing machines, and more. Every equipment is regularly inspected, calibrated (where required), and delivered with complete safety assurance. Whether you need equipment for a few days or for long-term projects, we ensure fast delivery, technical support, and cost-effective rental plans to keep your operations running smoothly without interruption.",
-      highlights: [
-        "Wide Equipment Range: Machinery and tools for construction, industrial, and testing needs.",
-        "Well-Maintained & Safe: Fully inspected and ready-to-use equipment with safety assurance.",
-        "Flexible Rental Plans: Daily, weekly, monthly, and project-based rental options.",
-      ],
-      services: [],
-      image: "Equipment Rental",
-    },
-    {
-      id: 3,
-      name: "Scaffolding Rental",
-      title: "Scaffolding Rental",
-      description:
-        "Our Scaffolding Rental service provides high-quality, secure, and project-ready scaffolding systems designed to support construction, inspection, and industrial maintenance work. All scaffolding materials are safety-checked, load-tested, and installed by trained professionals to ensure stability and compliance with industry standards. Whether your project is short-term or long-term, we deliver reliable solutions tailored to height, load, and work requirements.",
-      highlights: [
-        "Certified & Safe Systems: Fully compliant with industry safety standards.",
-        "Professional Installation: Trained technicians for setup, inspection & dismantling.",
-        "Flexible Rental Plans: Short-term, long-term, and project-based rental options.",
-      ],
-      services: [],
-      image: "Scaffolding Rental",
-    },
-    {
-      id: 4,
-      name: "Inspection Services",
-      title: "Inspection Services",
-      description:
-        "Mazoka offers professional inspection services, assessing structural integrity and safety. Our detailed inspections ensure compliance with industry standards, providing peace of mind.",
-      highlights: [
-        "Detailed Assessments: Comprehensive inspections for structural integrity.",
-        "Safety Compliance: Ensuring all projects meet industry standards.",
-        "Reliable Results: Providing accurate and detailed inspection reports.",
-      ],
-      services: [
-        {
-          name: "",
-          services: [
-            "Vendor Inspection",
-            "Mechanical Inspection",
-            "Electrical Inspection",
-            "Civil Inspection",
-            "Factory Assesment",
-            "Factory Audit",
-            "Auditor Training",
-          ],
-        },
-      ],
-      image: "Inspection Services",
-    },
-    {
-      id: 5,
-      name: "Calibration",
-      title: "Calibration",
-      description:
-        "Taj Al Rahmah specializes in calibration services, ensuring equipment accuracy and reliability. Our skilled technicians provide precise calibration for various instruments, maintaining high standards.",
-      highlights: [
-        "Precision Calibration: Ensuring accuracy in equipment and instruments",
-        "Skilled Technicians: Experienced professionals for reliable calibration.",
-        "High Standards: Maintaining quality and reliability in all services.",
-      ],
-      services: [
-        {
-          name: "Force, Torque",
-          services: [
-            "Torque Calibrators",
-            "Torque Wrenches",
-            "Torque Gauges",
-            "Load Cells",
-            "Force Gauges",
-            "Universal Testing machines up to 60T on capacity",
-            "Tension Gauges",
-            "Compression Machines",
-            "Tensile Testing Machines",
-            "Hydraulic Jacks",
-          ],
-        },
-        {
-          name: "Process Control Instrumentation",
-          services: [
-            "Pressure Transmitters",
-            "Temperature Transmitters",
-            "Level Transmitters",
-            "Flow Transmitters",
-            "Volumetric Measurements",
-            "Auto Label",
-            "Safety Relief Valves",
-            "I/P Converters",
-            "Multi gas Detectors",
-            "Anemometers",
-            "Tachometers",
-            "Densitometers",
-            "Hydro testing Facilities",
-            "Tension & Accessory Calibrators",
-          ],
-        },
-        {
-          name: "Electrical & Electronics",
-          services: [
-            "Digital & Analogue multimeters",
-            "Clamp meters",
-            "Insulation testers",
-            "Earth resistance testers",
-            "Ohm meters",
-            "Ampere meters",
-            "High voltage testers",
-            "Frequency meters",
-            "Volt meters",
-            "Power supplies",
-            "Digital Earth Testers",
-            "Megger Testers",
-            "High Voltage Porosity Detectors",
-          ],
-        },
-        {
-          name: "Lifting & Non-Destructive Equipment",
-          services: [
-            "Crane Certification",
-            "JIB Cranes",
-            "Ultrasonic Flow Detectors",
-            "Hardness Testers",
-            "MPT Yokes",
-            "PMI Equipment",
-            "Lux Meters",
-            "Stop Watches",
-            "Sound Level Meters",
-          ],
-        },
-        {
-          name: "Pressure",
-          services: [
-            "Pressure Elements",
-            "Pressure Transmitters",
-            "Pressure Gauges",
-            "Pressure Safety Valves",
-            "Manometers",
-            "Pressure Recorders",
-            "Hydraulic",
-            "Pneumatic & Vacuum Pump",
-            "Air Compressors",
-          ],
-        },
-        {
-          name: "Mechanical & Inspection Equipment",
-          services: [
-            "Mechanical Testing Equipment",
-            "Mechanical Measuring Equipment",
-            "Pressure Testing Facilities",
-            "Inspection Tools",
-            "Profile Gauges",
-            "Gauge Block Sets",
-            "Slip Gauges",
-            "Others",
-          ],
-        },
-        {
-          name: "Weights",
-          services: [
-            "Weighing Scales",
-            "Balances",
-            "Top Loads",
-            "Dead Weights",
-            "Other Types of Balances",
-          ],
-        },
-        {
-          name: "Gauge (Dial & Digital)",
-          services: [
-            "Specific Gravity Gauges",
-            "Load Gauges Calibration",
-            "Pressure Calibration",
-            "Dial Gauge Indicators",
-            "Digital Gauge Indicators",
-            "Others",
-          ],
-        },
-      ],
-      image: "Calibration",
-    },
-    {
-      id: 6,
-      name: "Soil Testing Laboratories",
-      title: "Soil Testing Laboratories",
-      description:
-        "Taj Al Rahmah provides a wide range of testing services, including soil, concrete, and chemical analysis. Our advanced methods ensure accurate results, supporting construction and engineering projects.",
-      highlights: [
-        "Accurate Results: Using advanced technology for precise testing.",
-        "Support for Projects: Ensuring quality and safety in construction.",
-        "Custom Solutions: Tailored contracting services to meet specific needs.",
-      ],
-      services: [
-        {
-          name: "",
-          services: [
-            "Soil Testing",
-            "Aggregate Testing",
-            "Concrete Testing",
-            "Cement Testing",
-            "Asphalt and Binder Testing",
-            "Chemical & Water Testing",
-            "Petro graphic Analysis",
-            "Rock and Rock Foundation Testing",
-            "Mortar Testing",
-            "Bitumen Testing",
-            "Super pave Testing",
-            "Field Testing by NDG",
-            "Field Testing by Electrical Density Gauge",
-            "Pavement Investigation",
-            "Asphalt Mix Design",
-            "Other special test based on client requirements",
-            "Concrete Structure Inspection and failure assessment",
-            "Structural Integrity , defect and voids in concrete & rock",
-            "Durability Assessment of Reinforced concrete Structure",
-            "NDT Compression test by Schmidt Hammer",
-            "NDT by Pulse Velocity for concrete",
-            "Core Drilling",
-            "Steel Rebar Testing",
-            "Rebar Locator & cover distance measurement",
-            "Pull off Test",
-            "Concrete coating Thickness measurement",
-            "Concrete Mix Design",
-            "Structure and Foundation Testing",
-            "Brick & Block Testing",
-            "Site Investigation",
-          ],
-        },
-      ],
-      image: "Soil Testing Laboratories",
-    },
-    {
-      id: 7,
-      name: "General Trading",
-      title: "General Trading",
-      description:
-        "Taj Al Rahmah engages in trading, offering a wide range of materials and equipment. Our extensive network ensures the availability of high-quality products, supporting various projects.",
-      highlights: [
-        "Wide Range of Products: Offering materials and equipment for diverse needs.",
-        "Quality Assurance: Ensuring high-quality products for all projects.",
-        "Extensive Network: Reliable supply chain and logistics.",
-      ],
-      services: [
-        {
-          name: "",
-          services: [],
-        },
-      ],
-      image: "General Trading",
-    },
-  ];
-
-  const currentService = servicesData.find((s) => s.id === activeService);
+  // resolve active service from ?service= query param
+  const paramId = searchParams.get("service") ?? "1";
+  const service = SERVICES.find((s) => s.id === paramId) ?? SERVICES[0];
+  const activeCategoryId = service.categoryId;
 
   return (
-    <>
-      <CommonHeader
-        title={currentService?.title || "Services"}
-        breadcrumb={`Services / ${currentService?.name || "Service Details"}`}
-        imagePath="/about-us/about-us-1.png"
-      />
-      <div className="w-full min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-            {/* Sidebar */}
-            <div className="w-full lg:w-96 flex flex-col gap-6">
-              {/* Service Categories */}
-              <div
-                className="bg-white rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.15)] overflow-hidden"
-                data-aos="fade-right"
-              >
-                <div className="p-6 bg-stone-900 rounded-tl-3xl rounded-tr-3xl">
-                  <h2 className="text-white text-xl sm:text-2xl font-bold leading-7">
-                    Service Category
-                  </h2>
-                </div>
-                <div className="p-4 pb-2">
-                  {servicesData.map((service) => (
-                    <button
-                      key={service.id}
-                      onClick={() => setActiveService(service.id)}
-                      className={`w-full px-4 py-5 flex justify-between items-center transition-all duration-300 mb-2 rounded-2xl outline outline-1 outline-offset-[-1px] outline-pink-950 cursor-pointer ${
-                        activeService === service.id
-                          ? "bg-pink-950"
-                          : "hover:bg-pink-950/10"
-                      }`}
-                    >
-                      <span
-                        className={`text-lg leading-7 text-left ${
-                          activeService === service.id
-                            ? "text-white font-bold"
-                            : "text-stone-900 font-medium"
-                        }`}
-                      >
-                        {service.id < 10 ? `0${service.id}` : service.id}.{" "}
-                        {service.name}
-                      </span>
-                      <div
-                        className={`w-8 h-8 rounded-full flex justify-center items-center transition-all duration-300 flex-shrink-0 ${
-                          activeService === service.id
-                            ? "bg-gray-200"
-                            : "bg-pink-950"
-                        }`}
-                      >
-                        <span
-                          className={`text-lg font-medium leading-7 ${
-                            activeService === service.id
-                              ? "text-pink-950"
-                              : "text-gray-200"
-                          }`}
-                        >
-                          ➜
-                        </span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
+    <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
-              {/* Explore Documents */}
-              <div
-                className="bg-gray-200 rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.15)] p-6"
-                data-aos="fade-right"
-                data-aos-delay="200"
-              >
-                <div className="flex flex-col items-center gap-10">
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="p-3 bg-pink-950 rounded-2xl">
-                      <div className="w-9 h-9 relative">
-                        <Image
-                          src="/csv/csv.svg"
-                          alt="PDF Icon"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </div>
-                    <h3 className="text-stone-900 text-xl font-bold text-center">
-                      Explore Our Documents
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-                    <button className="px-4 py-2 bg-pink-950 rounded-[50px] shadow-[2px_3px_4px_0px_rgba(0,0,0,0.15)] outline outline-1 outline-offset-[-1px] outline-pink-950 hover:bg-pink-900 transition-colors duration-300 cursor-pointer">
-                      <span className="text-white text-base font-bold leading-normal">
-                        Download PDF
-                      </span>
-                    </button>
-                    <button className="px-4 py-2 bg-white rounded-[50px] shadow-[2px_3px_4px_0px_rgba(0,0,0,0.15)] outline outline-1 outline-offset-[-1px] outline-pink-950 hover:bg-pink-950 transition-all duration-300 group cursor-pointer">
-                      <span className="text-pink-950 text-base font-bold leading-normal group-hover:text-white">
-                        Preview PDF
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Card */}
-              <div
-                className="bg-gray-200 rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.15)] p-6"
-                data-aos="fade-right"
-                data-aos-delay="300"
-              >
-                <div className="flex flex-col items-center gap-6">
-                  <div className="p-3 bg-pink-950 rounded-2xl">
-                    <div className="w-9 h-9 relative">
-                      <Image
-                        src="/csv/SVG.svg"
-                        alt="Contact Icon"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                  <p className="text-black text-base font-bold text-center">
-                    We are always available to discuss with you
-                  </p>
-                  <a
-                    href="mailto:info@tajalrahmah.com"
-                    className="text-black text-lg font-medium hover:text-pink-950 transition-colors duration-300 break-all text-center"
-                  >
-                    info@tajalrahmah.com
-                  </a>
-                  <button
-                    className="px-6 py-3 bg-pink-950 rounded-[50px] shadow-[2px_3px_4px_0px_rgba(0,0,0,0.15)] outline outline-1 outline-offset-[-1px] outline-pink-950 hover:bg-pink-900 transition-all duration-300 flex items-center gap-3 cursor-pointer"
-                    onClick={() => router.push("/contact")}
-                  >
-                    <span className="text-white text-base font-bold leading-normal">
-                      Contact Us
-                    </span>
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col gap-8">
-              {/* Hero Image */}
-              <div
-                className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] 2xl:h-[600px] rounded-[40px] overflow-hidden relative"
-                data-aos="fade-left"
-              >
-                <Image
-                  fill
-                  className="w-full h-full object-cover"
-                  src={`/Catagory/${currentService?.image}.png`}
-                  alt={currentService?.title || "Service"}
-                />
-              </div>
-
-              {/* Service Title */}
-              <h1
-                className="text-stone-900 text-3xl sm:text-4xl font-bold"
-                data-aos="fade-up"
-              >
-                {currentService?.title}
-              </h1>
-
-              {/* Service Description */}
-              <div
-                className="bg-gray-200/50 rounded-[20px] shadow-[0px_0px_8px_0px_rgba(0,0,0,0.12)] px-6 sm:px-8 py-6"
-                data-aos="fade-up"
-                data-aos-delay="100"
-              >
-                <p className="text-stone-900/80 text-lg sm:text-xl lg:text-2xl font-normal text-justify mb-6">
-                  {currentService?.description}
-                </p>
-                <div className="flex flex-col gap-4">
-                  {currentService?.highlights.map((highlight, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3"
-                      data-aos="fade-right"
-                      data-aos-delay={index * 100}
-                    >
-                      <div className="w-6 h-6 bg-green-600 rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path d="M5 13l4 4L19 7"></path>
-                        </svg>
-                      </div>
-                      <p className="text-stone-900 text-lg sm:text-xl font-medium flex-1">
-                        {highlight}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Services List */}
-
-              {currentService?.services?.length ? (
-                <div data-aos="fade-up" data-aos-delay="200">
-                  <h2 className="text-stone-900 text-3xl sm:text-4xl font-medium mb-6">
-                    Services
-                  </h2>
-
-                  <div className="bg-gray-200/50 rounded-[20px] shadow-[0px_0px_8px_0px_rgba(0,0,0,0.12)] px-6 sm:px-8 py-6">
-                    {currentService?.services?.length ? (
-                      <div className="flex flex-col gap-6">
-                        {currentService.services.map((section, idx) => {
-                          // skip empty sections
-                          if (!section?.name && !section?.services?.length)
-                            return null;
-
-                          return (
-                            <div
-                              key={idx}
-                              data-aos="fade-left"
-                              data-aos-delay={idx * 50}
-                            >
-                              {/* Section Title */}
-                              {section.name && (
-                                <h3 className="text-lg sm:text-xl font-semibold text-stone-900 mb-3">
-                                  {section.name}
-                                </h3>
-                              )}
-
-                              {/* Service List */}
-                              {section.services?.length ? (
-                                <div className="flex flex-col gap-3">
-                                  {section.services?.map((item, index) =>
-                                    item ? (
-                                      <div
-                                        key={index}
-                                        className="flex items-start gap-3"
-                                      >
-                                        <div className="w-6 h-6 bg-green-600 rounded-full flex-shrink-0 mt-1 flex items-center justify-center">
-                                          <svg
-                                            className="w-4 h-4 text-white"
-                                            fill="none"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                          >
-                                            <path d="M5 13l4 4L19 7"></path>
-                                          </svg>
-                                        </div>
-
-                                        <p className="text-stone-900 text-lg sm:text-xl font-medium flex-1">
-                                          {item}
-                                        </p>
-                                      </div>
-                                    ) : null
-                                  )}
-                                </div>
-                              ) : null}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ) : (
-                      <p className="text-stone-700"></p>
-                    )}
-                  </div>
-                </div>
-              ) : null}
-            </div>
+      {/* ══ HERO BANNER (same as ServicesListing) ════════════════ */}
+      <div className="relative w-full h-[200px] sm:h-[240px] md:h-[280px] overflow-hidden">
+        <Image
+          src="/media/servicesListing/Rectangle 14 (1).png"
+          alt={isArabic ? service.heroTagAr : service.heroTag}
+          fill
+          unoptimized
+          priority
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/58" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
+          <h1 className="text-2xl sm:text-[32px] md:text-4xl font-extrabold text-white leading-tight drop-shadow">
+            {isArabic ? "استكشف حسب الخدمات" : "Explore by services"}
+          </h1>
+          <p className="text-sm sm:text-[15px] text-white/82 max-w-md leading-relaxed">
+            {isArabic
+              ? "تصفح مجموعتنا الكاملة من الخدمات الاحترافية بجودة يمكنك الوثوق بها."
+              : "Browse our full range of professional services designed to meet your home, business, and maintenance needs with quality you can trust."}
+          </p>
+          <div className="flex items-center gap-1.5 mt-1">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className={`inline-block rounded-full ${i === 0 ? "w-6 h-[7px] bg-[#009e90]" : "w-[7px] h-[7px] bg-white/45"}`} />
+            ))}
           </div>
         </div>
       </div>
-      <Question />
-      <MeetOurTeam />
-      <ClientTestimonials />
-    </>
-  );
-};
 
-const Services = () => {
+      {/* ══ BODY ════════════════════════════════════════════════ */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
+
+          {/* ── SIDEBAR ─────────────────────────────────────── */}
+          <aside className="w-full lg:w-[210px] xl:w-[230px] flex-shrink-0">
+            <p className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-stone-400 mb-3 px-1">
+              {isArabic ? "الخدمات" : "TRADES"}
+            </p>
+
+            <nav className="flex flex-col gap-0.5">
+              {SIDEBAR_CATS.map((cat) => {
+                const isActive = cat.id === activeCategoryId;
+                return (
+                  <Link
+                    key={cat.id}
+                    href={`/services-details?service=${
+                      SERVICES.find((s) => s.categoryId === cat.id)?.id ?? "1"
+                    }`}
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 ${
+                      isActive
+                        ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
+                        : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+                    }`}
+                  >
+                    <SidebarIcon src={cat.icon} active={isActive} />
+                    <span className={`text-[13px] font-semibold flex-grow ${isArabic ? "text-right" : "text-left"}`}>
+                      {isArabic ? cat.labelAr : cat.label}
+                    </span>
+                    {isActive && <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* CTA box */}
+            <div className="mt-5 bg-[#009e90] rounded-2xl p-4 sm:p-5 text-white">
+              <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-3">
+                <MessageCircle className="w-[18px] h-[18px] text-white" />
+              </div>
+              <h4 className="text-[13px] font-bold mb-1.5 leading-snug">
+                {isArabic ? "لست متأكداً من أين تبدأ؟" : "Not sure where to start?"}
+              </h4>
+              <p className="text-[11px] text-white/80 leading-relaxed mb-3">
+                {isArabic
+                  ? "فريقنا يساعدك في اختيار الخدمة المناسبة لمشروعك."
+                  : "Our team helps you pick the best service for every setup. Get a personalised recommendation in minutes."}
+              </p>
+              <Link href="/contact" className="text-[11px] font-bold text-white underline underline-offset-2 hover:text-white/75 transition-colors duration-200">
+                {isArabic ? "تحدث إلى خبير" : "Talk to an expert"}
+              </Link>
+            </div>
+          </aside>
+
+          {/* ── MAIN CONTENT ─────────────────────────────────── */}
+          <div className="flex-1 min-w-0 flex flex-col gap-8">
+
+            {/* Back link */}
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#009e90] hover:text-[#01887e] transition-colors duration-200 self-start"
+            >
+              <ArrowLeft className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
+              {isArabic ? "العودة إلى الخدمات" : "Back to services"}
+            </Link>
+
+            {/* Service title */}
+            <div>
+              <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90] mb-1">
+                {isArabic ? service.heroTagAr : service.heroTag}
+              </p>
+              <h2 className="text-[20px] sm:text-[24px] font-extrabold text-stone-900 leading-tight">
+                {isArabic ? service.titleAr : service.title}
+              </h2>
+            </div>
+
+            {/* Intro — teal left border card */}
+            <div className="bg-[#f0faf9] border-l-4 border-[#009e90] rounded-r-xl px-5 py-4">
+              <p className="text-[13px] text-stone-700 leading-relaxed">
+                {isArabic ? service.introAr : service.intro}
+              </p>
+            </div>
+
+            {/* Sub-services */}
+            <div className="flex flex-col gap-5">
+              {service.subServices.map((sub, idx) => (
+                <div key={idx} className="bg-white rounded-xl border border-stone-100 shadow-sm p-5">
+                  <h3 className="text-[14px] font-bold text-stone-900 mb-3 flex items-center gap-2">
+                    <span className="inline-block w-1.5 h-4 bg-[#009e90] rounded-full flex-shrink-0" />
+                    {sub.name}
+                  </h3>
+                  <ul className="flex flex-col gap-2">
+                    {sub.points.map((pt, pi) => (
+                      <li key={pi} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#009e90] flex-shrink-0 mt-0.5" />
+                        <p className="text-[12.5px] text-stone-600 leading-relaxed">{pt}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* Why Choose Us */}
+            <div className="bg-stone-50 rounded-xl border border-stone-100 p-5 sm:p-6">
+              <h3 className="text-[16px] font-extrabold text-stone-900 mb-3">
+                {isArabic ? service.whyTitleAr : service.whyTitle}
+              </h3>
+              <p className="text-[13px] text-stone-600 leading-relaxed mb-5">
+                {isArabic ? service.whyBodyAr : service.whyBody}
+              </p>
+
+              {/* Gallery grid: 4-column on desktop, 2 on mobile */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                {service.gallery.map((src, gi) => (
+                  <div
+                    key={gi}
+                    className="relative aspect-square rounded-lg overflow-hidden bg-stone-200 hover:opacity-90 transition-opacity duration-200"
+                  >
+                    <Image
+                      src={src}
+                      alt={`Gallery ${gi + 1}`}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 640px) 50vw, 25vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom CTA */}
+            <div className="flex justify-center pt-2 pb-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-[#009e90] hover:bg-[#01887e] text-white px-7 py-3 rounded-full font-bold text-[13px] tracking-wide shadow-[0_4px_16px_rgba(0,158,144,0.30)] hover:shadow-[0_6px_22px_rgba(0,158,144,0.40)] transition-all duration-300"
+              >
+                {isArabic ? "احجز استشارة الآن" : "Schedule Now!"}
+                <ChevronRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+
+            {/* Bottom back link */}
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#009e90] hover:text-[#01887e] transition-colors duration-200 self-start"
+            >
+              <ArrowLeft className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
+              {isArabic ? "العودة إلى الخدمات" : "Back to services"}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── EXPORT WITH SUSPENSE (required for useSearchParams) ────── */
+export default function ServiceDetailsPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ServicesContent />
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#009e90] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
+      <ServiceDetailsContent />
     </Suspense>
   );
-};
-
-export default Services;
+}

@@ -1,19 +1,17 @@
 import React from "react";
-import CommonHeader from "../../components/Common/CommonHeader";
-import Services from "@/components/Services";
-import MeetOurTeam from "@/components/Common/MeetOurTeam";
+import ServicesListing from "@/components/ServicesListing";
 import ClientTestimonials from "@/components/ClientTestimonials";
 
-export default function ProjectPage() {
+export const metadata = {
+  title: "Services | Taj Al Rahmah",
+  description:
+    "Browse our full range of professional contracting services — waterproofing, swimming pools, electrical, plumbing, tiling, plastering, and painting.",
+};
+
+export default function ServicesPage() {
   return (
     <div>
-      <CommonHeader
-        title="Explore Our Services"
-        breadcrumb="Services"
-        imagePath="/project.jpg"
-      />
-      <Services />
-      {/* <MeetOurTeam /> */}
+      <ServicesListing />
       <ClientTestimonials />
     </div>
   );
