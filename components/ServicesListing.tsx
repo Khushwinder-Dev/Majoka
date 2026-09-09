@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { ChevronRight, MessageCircle } from "lucide-react";
+import toast from "react-hot-toast";
 
 /* ─── TYPES ─────────────────────────────────────────────────── */
 interface ServiceItem {
@@ -355,6 +356,89 @@ export default function ServicesListing() {
   const { isArabic } = useLanguage();
   const [activeId, setActiveId] = useState<string>("waterproofing");
 
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.subject,
+          message: formData.subject
+            ? `[Subject: ${formData.subject}]\n\n${formData.message}`
+            : formData.message,
+        }),
+      });
+
+      if (res.ok) {
+        toast.success(
+          isArabic
+            ? "شكراً لك! تم إرسال رسالتك بنجاح. سنتواصل معك قريباً."
+            : "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+          {
+            duration: 5000,
+            style: {
+              background: "#009e90",
+              color: "#fff",
+              padding: "16px",
+              borderRadius: "8px",
+            },
+            iconTheme: {
+              primary: "#fff",
+              secondary: "#009e90",
+            },
+          }
+        );
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        const data = await res.json().catch(() => ({}));
+        toast.error(
+          data.error ||
+            (isArabic
+              ? "حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى."
+              : "Failed to send message. Please try again.")
+        );
+      }
+    } catch {
+      toast.error(
+        isArabic
+          ? "حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى لاحقاً."
+          : "Connection error. Please try again later."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0];
 
   return (
@@ -488,6 +572,117 @@ export default function ServicesListing() {
           </div>
         </div>
       </div>
+
+      {/* ══ CONTACT / INQUIRY SECTION (BELOW LISTING) ══════════════ */}
+      <section className="w-full bg-[#f4f6f8] py-16 sm:py-20 lg:py-24 border-t border-stone-200/60">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Eyebrow */}
+          <div className="flex items-center justify-center gap-2 mb-3">
+            <span className="flex items-center gap-1">
+              <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
+              <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
+            </span>
+            <span className="text-[12px] sm:text-[13px] font-semibold tracking-wide text-stone-600">
+              {isArabic ? "تواصل معنا الآن" : "Contact With Us Now"}
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h2 className="text-2xl sm:text-3xl md:text-[38px] font-extrabold text-stone-900 text-center leading-tight sm:leading-tight mb-8 sm:mb-12 max-w-2xl mx-auto tracking-tight">
+            {isArabic
+              ? "لا تتردد في مراسلة خبرائنا التقنيين"
+              : "Feel Free to Write Our Tecnology Experts"}
+          </h2>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            {/* Row 1: Full Name & Email Address */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <input
+                type="text"
+                name="fullName"
+                required
+                value={formData.fullName}
+                onChange={handleInputChange}
+                placeholder={isArabic ? "الاسم الكامل" : "Full Name"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all shadow-2xs ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
+              />
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder={isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all shadow-2xs ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
+              />
+            </div>
+
+            {/* Row 2: Phone Number & Subject */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <input
+                type="tel"
+                name="phone"
+                required
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all shadow-2xs ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
+              />
+              <input
+                type="text"
+                name="subject"
+                required
+                value={formData.subject}
+                onChange={handleInputChange}
+                placeholder={isArabic ? "الموضوع" : "Subject"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all shadow-2xs ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
+              />
+            </div>
+
+            {/* Row 3: Message Textarea */}
+            <div>
+              <textarea
+                name="message"
+                required
+                rows={6}
+                value={formData.message}
+                onChange={handleInputChange}
+                placeholder={isArabic ? "الرسالة" : "Message"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all resize-y shadow-2xs ${
+                  isArabic ? "text-right" : "text-left"
+                }`}
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-center pt-2 sm:pt-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-[15px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>{isArabic ? "جاري الإرسال..." : "Sending..."}</span>
+                  </>
+                ) : (
+                  <span>{isArabic ? "إرسال الرسالة" : "Send Message"}</span>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }
