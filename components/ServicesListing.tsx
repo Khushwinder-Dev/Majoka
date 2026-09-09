@@ -740,8 +740,8 @@ export default function ServicesListing() {
 
       {/* ══ BOOK A VISIT CTA BANNER (HIGHLIGHTED SECTION) ═════════ */}
       <section className="w-full bg-[#f4f6f8] pb-16 sm:pb-20 lg:pb-24 pt-0">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#0b2447] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#0b2447] text-white rounded-3xl p-6 sm:p-10 md:p-12 lg:p-16 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 sm:gap-8">
             <div className="max-w-xl">
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight mb-2 sm:mb-2.5 leading-snug">
                 {isArabic ? "احجز زيارة هذا الأسبوع." : "Book a visit for this week."}
