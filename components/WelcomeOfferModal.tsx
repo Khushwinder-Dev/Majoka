@@ -83,7 +83,7 @@ export default function WelcomeOfferModal() {
     >
       {/* Modal Card */}
       <div
-        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl border border-white/20 grid grid-cols-1 md:grid-cols-12 animate-in zoom-in-95 duration-300"
+        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 animate-in zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
         style={{ direction: isArabic ? "rtl" : "ltr" }}
       >
@@ -91,9 +91,8 @@ export default function WelcomeOfferModal() {
         <button
           onClick={handleClose}
           aria-label={isArabic ? "إغلاق" : "Close"}
-          className={`absolute top-3.5 ${
-            isArabic ? "left-3.5 sm:left-5" : "right-3.5 sm:right-5"
-          } sm:top-5 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#00A79D] hover:bg-[#008f86] text-white flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer`}
+          className={`absolute top-3.5 ${isArabic ? "left-3.5 sm:left-5" : "right-3.5 sm:right-5"
+            } sm:top-5 z-30 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#00A79D] hover:bg-[#008f86] text-white flex items-center justify-center shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer`}
         >
           <X className="w-5 h-5 stroke-[2.5]" />
         </button>
@@ -193,8 +192,8 @@ export default function WelcomeOfferModal() {
                     ? "جاري الاشتراك..."
                     : "SUBSCRIBING..."
                   : isArabic
-                  ? "اشترك الآن"
-                  : "SUBSCRIBE"}
+                    ? "اشترك الآن"
+                    : "SUBSCRIBE"}
               </button>
             </form>
           )}

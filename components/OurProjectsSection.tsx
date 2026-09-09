@@ -246,9 +246,8 @@ export default function OurProjectsSection() {
 
                     {/* Square Teal Badge with Target Reticle Icon at bottom-left */}
                     <div
-                      className={`absolute bottom-0 ${
-                        isArabic ? "right-4 sm:right-5" : "left-4 sm:left-5"
-                      } z-20 w-11 h-11 bg-[#009e90] rounded-t-xl flex items-center justify-center shadow-md group-hover:bg-[#01887e] transition-colors duration-300`}
+                      className={`absolute bottom-0 ${isArabic ? "right-4 sm:right-5" : "left-4 sm:left-5"
+                        } z-20 w-11 h-11 bg-[#009e90] rounded-t-xl flex items-center justify-center shadow-md group-hover:bg-[#01887e] transition-colors duration-300`}
                     >
                       <TargetReticleWhiteIcon className="w-5 h-5 text-white" />
                     </div>
@@ -263,18 +262,16 @@ export default function OurProjectsSection() {
 
                     {/* Project Subtitle / Category */}
                     <p
-                      className={`text-xs sm:text-[13px] text-stone-500 font-normal leading-[1.6] line-clamp-2 ${
-                        isArabic ? "pl-9" : "pr-9"
-                      }`}
+                      className={`text-xs sm:text-[13px] text-stone-500 font-normal leading-[1.6] line-clamp-2 ${isArabic ? "pl-9" : "pr-9"
+                        }`}
                     >
                       {project.category}
                     </p>
 
                     {/* Clean SVG Scooped Corner (Matches Reference Design Inverted Fillet Curve) */}
                     <svg
-                      className={`absolute -bottom-[0.5px] ${
-                        isArabic ? "-left-[0.5px] scale-x-[-1]" : "-right-[0.5px]"
-                      } w-[56px] h-[56px] pointer-events-none z-10`}
+                      className={`absolute -bottom-[0.5px] hidden ${isArabic ? "-left-[0.5px] scale-x-[-1]" : "-right-[0.5px]"
+                        } w-[56px] h-[56px] pointer-events-none z-10`}
                       viewBox="0 0 56 56"
                       fill="none"
                     >
@@ -286,16 +283,14 @@ export default function OurProjectsSection() {
 
                     {/* Circular Teal Arrow Button nestled inside the scooped corner */}
                     <div
-                      className={`absolute bottom-2.5 ${
-                        isArabic ? "left-2.5" : "right-2.5"
-                      } z-20 w-10 h-10 rounded-full bg-[#009e90] group-hover:bg-[#01887e] text-white flex items-center justify-center shadow-[0_4px_12px_rgba(0,158,144,0.35)] group-hover:scale-110 transition-all duration-300`}
+                      className={`absolute bottom-2.5 ${isArabic ? "left-2.5" : "right-2.5"
+                        } z-20 w-10 h-10 rounded-full bg-[#009e90] group-hover:bg-[#01887e] text-white flex items-center justify-center shadow-[0_4px_12px_rgba(0,158,144,0.35)] group-hover:scale-110 transition-all duration-300`}
                     >
                       <ArrowUpRight
-                        className={`w-4 h-4 text-white stroke-[2.5] transition-transform duration-300 ${
-                          isArabic
-                            ? "group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 rotate-[-90deg]"
-                            : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        }`}
+                        className={`w-4 h-4 text-white stroke-[2.5] transition-transform duration-300 ${isArabic
+                          ? "group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 rotate-[-90deg]"
+                          : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          }`}
                       />
                     </div>
                   </div>
