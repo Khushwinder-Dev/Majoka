@@ -136,6 +136,20 @@ export interface Translations {
     scrollToTop: string;
     exploreMore: string;
   };
+  faq: {
+    titlePrefix: string;
+    titleAccent: string;
+    subtitle: string;
+    items: {
+      question: string;
+      answer: string;
+    }[];
+    stillHave: {
+      title: string;
+      subtitle: string;
+      button: string;
+    };
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -426,6 +440,50 @@ const translations: Record<Language, Translations> = {
       scrollToTop: "Scroll to top",
       exploreMore: "Explore More",
     },
+    faq: {
+      titlePrefix: "Frequently Asked",
+      titleAccent: "Questions",
+      subtitle:
+        "Fermentum iaculis eu non diam phasellus vestibulum. Volutpat commodo sed egestas egestas fringilla phasellus. Donec ac odio tempor orci dapibus ultrices.",
+      items: [
+        {
+          question: "Can i try free trial?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+        {
+          question: "What's the pricing?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+        {
+          question: "Is there a refund?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+        {
+          question: "Where to chat with support?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+        {
+          question: "Can I try demo for free?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+        {
+          question: "Where can I leave feedback?",
+          answer:
+            "Sit amet. Sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu lobortis.",
+        },
+      ],
+      stillHave: {
+        title: "Still have questions?",
+        subtitle:
+          "We understand. Let's get in touch directly with our team, then.",
+        button: "Contact Us",
+      },
+    },
   },
   ar: {
     nav: {
@@ -713,6 +771,49 @@ const translations: Record<Language, Translations> = {
       copyright: "© 2026 تاج الرحمة. جميع الحقوق محفوظة.",
       scrollToTop: "العودة للأعلى",
       exploreMore: "استكشف المزيد",
+    },
+    faq: {
+      titlePrefix: "الأسئلة",
+      titleAccent: "الشائعة",
+      subtitle:
+        "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف.",
+      items: [
+        {
+          question: "هل يمكنني تجربة النسخة المجانية؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+        {
+          question: "ما هي الأسعار؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+        {
+          question: "هل يوجد استرداد للأموال؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+        {
+          question: "أين يمكنني الدردشة مع الدعم؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+        {
+          question: "هل يمكنني تجربة العرض التجريبي مجاناً؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+        {
+          question: "أين يمكنني ترك ملاحظاتي؟",
+          answer:
+            "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربي.",
+        },
+      ],
+      stillHave: {
+        title: "لا تزال لديك أسئلة؟",
+        subtitle: "نحن نفهم. دعنا نتصل مباشرة بفريقنا.",
+        button: "اتصل بنا",
+      },
     },
   },
 };

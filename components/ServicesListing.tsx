@@ -353,7 +353,7 @@ function SidebarIcon({ src, active }: { src: string; active: boolean }) {
 
 /* ─── MAIN COMPONENT ─────────────────────────────────────────── */
 export default function ServicesListing() {
-  const { isArabic } = useLanguage();
+  const { isArabic, t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("waterproofing");
 
   const [formData, setFormData] = useState({
@@ -681,6 +681,60 @@ export default function ServicesListing() {
               </button>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* ══ FAQ SECTION ═══════════════════════════════════════════ */}
+      <section className="w-full bg-[#f4f6f8] pb-16 sm:pb-20 lg:pb-24 pt-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#0b2447] text-white rounded-3xl p-6 sm:p-10 md:p-12 lg:p-16 shadow-xl">
+            {/* Title */}
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white leading-tight mb-4">
+                {t.faq.titlePrefix}{" "}
+                <span className="text-[#009e90]">{t.faq.titleAccent}</span>
+              </h2>
+              <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
+                {t.faq.subtitle}
+              </p>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-white/15 max-w-4xl mx-auto mb-10 sm:mb-14" />
+
+            {/* FAQ Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-x-12 md:gap-y-10 mb-12 sm:mb-16">
+              {t.faq.items.map((item, idx) => (
+                <div key={idx} className="flex flex-col gap-3">
+                  <h3 className="text-base sm:text-lg font-bold text-white leading-snug">
+                    {item.question}
+                  </h3>
+                  <p className="text-sm sm:text-[15px] text-white/60 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Still have questions CTA */}
+            <div className="bg-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8">
+              <div className="flex-1 max-w-xl">
+                <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-snug mb-2 sm:mb-3">
+                  {t.faq.stillHave.title}
+                </h3>
+                <p className="text-sm sm:text-base text-white/65 leading-relaxed">
+                  {t.faq.stillHave.subtitle}
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-base px-7 sm:px-9 py-3.5 sm:py-4 rounded-full shadow-md shadow-[#009e90]/30 transition-all duration-200 whitespace-nowrap flex-shrink-0"
+              >
+                {t.faq.stillHave.button}
+                <ChevronRight className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
