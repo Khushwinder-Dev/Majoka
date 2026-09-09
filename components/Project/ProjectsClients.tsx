@@ -129,7 +129,7 @@ export default function ProjectsClients() {
 
         <div
           ref={trackRef}
-          className="flex items-center gap-4 sm:gap-6 lg:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 px-1 no-scrollbar"
+          className="flex items-center gap-4 sm:gap-6 lg:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 px-1 no-scrollbar justify-center"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {CLIENT_LOGOS.map((logo, index) => {
