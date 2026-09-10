@@ -73,7 +73,7 @@ def build_data():
                 "all types of waterproofing", "waterproofing contractor uae", "roof waterproofing dubai",
                 "grp lining", "bitumen membrane", "epoxy floor coating", "polyurea spray", "crack injection"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/waterproofing/gallery/gallery-1.jpg",
@@ -117,7 +117,7 @@ def build_data():
                     "id": "grp-fiberglass",
                     "serviceTitle": "GRP & Fiberglass Waterproofing",
                     "serviceSlug": "grp-fiberglass",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/grp-fiberglass/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/grp-fiberglass/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/grp-fiberglass/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/grp-fiberglass/gallery/gallery-1.jpg",
@@ -141,7 +141,7 @@ def build_data():
                     "id": "combo-system",
                     "serviceTitle": "Combo System Roof Waterproofing",
                     "serviceSlug": "combo-system",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/combo-system/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/combo-system/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/combo-system/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/combo-system/gallery/gallery-1.jpg",
@@ -174,7 +174,7 @@ def build_data():
                     "id": "epoxy-floor-coating",
                     "serviceTitle": "Epoxy Floor Coating",
                     "serviceSlug": "epoxy-floor-coating",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/epoxy-floor-coating/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/epoxy-floor-coating/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/epoxy-floor-coating/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/epoxy-floor-coating/gallery/gallery-1.jpg",
@@ -206,7 +206,7 @@ def build_data():
                     "id": "bitumen-membrane",
                     "serviceTitle": "Bitumen Membrane Waterproofing",
                     "serviceSlug": "bitumen-membrane",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/bitumen-membrane/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/bitumen-membrane/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/bitumen-membrane/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/bitumen-membrane/gallery/gallery-1.jpg",
@@ -237,7 +237,7 @@ def build_data():
                     "id": "polyurea-coating",
                     "serviceTitle": "Polyurea Coating Waterproofing",
                     "serviceSlug": "polyurea-coating",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/polyurea-coating/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/polyurea-coating/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/polyurea-coating/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/polyurea-coating/gallery/gallery-1.jpg",
@@ -262,7 +262,7 @@ def build_data():
                     "id": "injection-waterproofing",
                     "serviceTitle": "Injection Waterproofing & Crack Repair",
                     "serviceSlug": "injection-waterproofing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/injection-waterproofing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/waterproofing/subservices/injection-waterproofing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/waterproofing/subservices/injection-waterproofing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/waterproofing/subservices/injection-waterproofing/gallery/gallery-1.jpg",
@@ -307,7 +307,7 @@ def build_data():
                 "swimming pool installation", "pool construction dubai", "swimming pool maintenance uae",
                 "pool waterproofing", "pool filtration pumps", "mosaic pool tiling"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/swimming-pools/gallery/gallery-1.jpg",
@@ -350,7 +350,7 @@ def build_data():
                     "id": "pool-structural-construction",
                     "serviceTitle": "Structural Construction",
                     "serviceSlug": "structural-construction",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/structural-construction/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/structural-construction/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/structural-construction/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/swimming-pools/subservices/structural-construction/gallery/gallery-1.jpg",
@@ -369,7 +369,7 @@ def build_data():
                     "id": "pool-filtration-pumps",
                     "serviceTitle": "Filtration & Pump Systems",
                     "serviceSlug": "filtration-pump-systems",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/filtration-pump-systems/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/filtration-pump-systems/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/filtration-pump-systems/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/swimming-pools/subservices/filtration-pump-systems/gallery/gallery-1.jpg",
@@ -388,7 +388,7 @@ def build_data():
                     "id": "pool-advanced-waterproofing",
                     "serviceTitle": "Advanced Waterproofing System",
                     "serviceSlug": "advanced-waterproofing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/advanced-waterproofing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/advanced-waterproofing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/advanced-waterproofing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/swimming-pools/subservices/advanced-waterproofing/gallery/gallery-1.jpg",
@@ -407,7 +407,7 @@ def build_data():
                     "id": "pool-tile-mosaic",
                     "serviceTitle": "Tile & Mosaic Fixing",
                     "serviceSlug": "tile-mosaic-fixing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/tile-mosaic-fixing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/tile-mosaic-fixing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/tile-mosaic-fixing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/swimming-pools/subservices/tile-mosaic-fixing/gallery/gallery-1.jpg",
@@ -426,7 +426,7 @@ def build_data():
                     "id": "pool-maintenance-repair",
                     "serviceTitle": "Maintenance & Repair Solutions",
                     "serviceSlug": "maintenance-repair",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/maintenance-repair/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/maintenance-repair/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/swimming-pools/subservices/maintenance-repair/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/swimming-pools/subservices/maintenance-repair/gallery/gallery-1.jpg",
@@ -459,7 +459,7 @@ def build_data():
                 "electrical installations", "emergency electrician dubai", "electrical maintenance uae",
                 "panel board installation", "low voltage lv systems", "db box load balancing"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/electrical-installations/gallery/gallery-1.jpg",
@@ -501,7 +501,7 @@ def build_data():
                     "id": "elec-panel-board",
                     "serviceTitle": "Panel Board Installation",
                     "serviceSlug": "panel-board-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/panel-board-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/panel-board-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/panel-board-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/electrical-installations/subservices/panel-board-installation/gallery/gallery-1.jpg",
@@ -520,7 +520,7 @@ def build_data():
                     "id": "elec-conduit-trunking",
                     "serviceTitle": "Conduit & Trunking",
                     "serviceSlug": "conduit-trunking",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/conduit-trunking/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/conduit-trunking/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/conduit-trunking/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/electrical-installations/subservices/conduit-trunking/gallery/gallery-1.jpg",
@@ -539,7 +539,7 @@ def build_data():
                     "id": "elec-db-box",
                     "serviceTitle": "DB Box Installation",
                     "serviceSlug": "db-box-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/db-box-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/db-box-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/db-box-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/electrical-installations/subservices/db-box-installation/gallery/gallery-1.jpg",
@@ -558,7 +558,7 @@ def build_data():
                     "id": "elec-low-voltage",
                     "serviceTitle": "Low Voltage (LV) Systems",
                     "serviceSlug": "low-voltage-systems",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/low-voltage-systems/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/low-voltage-systems/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/low-voltage-systems/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/electrical-installations/subservices/low-voltage-systems/gallery/gallery-1.jpg",
@@ -577,7 +577,7 @@ def build_data():
                     "id": "elec-testing-commissioning",
                     "serviceTitle": "Testing & Commissioning",
                     "serviceSlug": "testing-commissioning",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/testing-commissioning/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/testing-commissioning/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/electrical-installations/subservices/testing-commissioning/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/electrical-installations/subservices/testing-commissioning/gallery/gallery-1.jpg",
@@ -610,7 +610,7 @@ def build_data():
                 "plumbing sanitary works", "emergency plumber dubai", "24/7 plumbing repair uae",
                 "water leak detection", "pipe burst repair", "water supply ppr pex"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/plumbing-sanitary/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/plumbing-sanitary/gallery/gallery-1.jpg",
@@ -651,7 +651,7 @@ def build_data():
                     "id": "plumb-water-supply",
                     "serviceTitle": "Water Supply Networks",
                     "serviceSlug": "water-supply-networks",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/water-supply-networks/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/water-supply-networks/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/water-supply-networks/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/water-supply-networks/gallery/gallery-1.jpg",
@@ -670,7 +670,7 @@ def build_data():
                     "id": "plumb-drainage-sewage",
                     "serviceTitle": "Drainage & Sewage Systems",
                     "serviceSlug": "drainage-sewage-systems",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/drainage-sewage-systems/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/drainage-sewage-systems/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/drainage-sewage-systems/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/drainage-sewage-systems/gallery/gallery-1.jpg",
@@ -689,7 +689,7 @@ def build_data():
                     "id": "plumb-sanitary-ware",
                     "serviceTitle": "Sanitary Ware Fixing",
                     "serviceSlug": "sanitary-ware-fixing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/sanitary-ware-fixing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/sanitary-ware-fixing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/sanitary-ware-fixing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/sanitary-ware-fixing/gallery/gallery-1.jpg",
@@ -708,7 +708,7 @@ def build_data():
                     "id": "plumb-pump-tank",
                     "serviceTitle": "Pump & Tank Installation",
                     "serviceSlug": "pump-tank-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/pump-tank-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/pump-tank-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/pump-tank-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plumbing-sanitary/subservices/pump-tank-installation/gallery/gallery-1.jpg",
@@ -741,7 +741,7 @@ def build_data():
                 "floor tiling", "wall tile installation", "bathroom tiling dubai",
                 "kitchen backsplash tiling uae", "marble granite works", "porcelain large slab"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/floor-wall-tiling/gallery/gallery-1.jpg",
@@ -782,7 +782,7 @@ def build_data():
                     "id": "tile-ceramic-porcelain",
                     "serviceTitle": "Ceramic & Porcelain Installation",
                     "serviceSlug": "ceramic-porcelain-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/ceramic-porcelain-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/ceramic-porcelain-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/ceramic-porcelain-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/ceramic-porcelain-installation/gallery/gallery-1.jpg",
@@ -801,7 +801,7 @@ def build_data():
                     "id": "tile-marble-granite",
                     "serviceTitle": "Marble & Granite Works",
                     "serviceSlug": "marble-granite-works",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/marble-granite-works/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/marble-granite-works/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/marble-granite-works/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/marble-granite-works/gallery/gallery-1.jpg",
@@ -820,7 +820,7 @@ def build_data():
                     "id": "tile-kitchen-bathroom",
                     "serviceTitle": "Kitchen & Bathroom Tiling",
                     "serviceSlug": "kitchen-bathroom-tiling",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/kitchen-bathroom-tiling/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/kitchen-bathroom-tiling/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/kitchen-bathroom-tiling/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/kitchen-bathroom-tiling/gallery/gallery-1.jpg",
@@ -839,7 +839,7 @@ def build_data():
                     "id": "tile-exterior-cladding",
                     "serviceTitle": "Exterior Wall Cladding",
                     "serviceSlug": "exterior-wall-cladding",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/exterior-wall-cladding/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/exterior-wall-cladding/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/exterior-wall-cladding/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/exterior-wall-cladding/gallery/gallery-1.jpg",
@@ -858,7 +858,7 @@ def build_data():
                     "id": "tile-grouting-refinishing",
                     "serviceTitle": "Grouting & Surface Refinishing",
                     "serviceSlug": "grouting-surface-refinishing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/grouting-surface-refinishing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/grouting-surface-refinishing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/grouting-surface-refinishing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/floor-wall-tiling/subservices/grouting-surface-refinishing/gallery/gallery-1.jpg",
@@ -890,7 +890,7 @@ def build_data():
                 "plastering block works", "wall plastering services dubai", "cement rendering uae",
                 "internal plastering", "external wall rendering", "block work masonry"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/plastering-block-works/gallery/gallery-1.jpg",
@@ -932,7 +932,7 @@ def build_data():
                     "id": "plaster-block-works",
                     "serviceTitle": "Construction Block Works",
                     "serviceSlug": "construction-block-works",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/construction-block-works/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/construction-block-works/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/construction-block-works/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/construction-block-works/gallery/gallery-1.jpg",
@@ -951,7 +951,7 @@ def build_data():
                     "id": "plaster-internal",
                     "serviceTitle": "Internal Plastering",
                     "serviceSlug": "internal-plastering",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/internal-plastering/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/internal-plastering/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/internal-plastering/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/internal-plastering/gallery/gallery-1.jpg",
@@ -969,7 +969,7 @@ def build_data():
                     "id": "plaster-external-rendering",
                     "serviceTitle": "External Rendering",
                     "serviceSlug": "external-rendering",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/external-rendering/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/external-rendering/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/external-rendering/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/external-rendering/gallery/gallery-1.jpg",
@@ -988,7 +988,7 @@ def build_data():
                     "id": "plaster-decorative-finishes",
                     "serviceTitle": "Decorative Plaster & Finishes",
                     "serviceSlug": "decorative-plaster-finishes",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/decorative-plaster-finishes/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/decorative-plaster-finishes/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/decorative-plaster-finishes/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/decorative-plaster-finishes/gallery/gallery-1.jpg",
@@ -1007,7 +1007,7 @@ def build_data():
                     "id": "plaster-repair-patching",
                     "serviceTitle": "Plaster Repair & Patching",
                     "serviceSlug": "plaster-repair-patching",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/plaster-repair-patching/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/plaster-repair-patching/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/plaster-repair-patching/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/plaster-repair-patching/gallery/gallery-1.jpg",
@@ -1026,7 +1026,7 @@ def build_data():
                     "id": "plaster-leveling-surface-prep",
                     "serviceTitle": "Leveling & Surface Preparation",
                     "serviceSlug": "leveling-surface-preparation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/leveling-surface-preparation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/leveling-surface-preparation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/leveling-surface-preparation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/plastering-block-works/subservices/leveling-surface-preparation/gallery/gallery-1.jpg",
@@ -1059,7 +1059,7 @@ def build_data():
                 "painting contracting services", "professional painting services", "interior house painting dubai",
                 "exterior villa painting uae", "apartment repainting", "decorative painting finishes"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/painting-contracting/gallery/gallery-1.jpg",
@@ -1100,7 +1100,7 @@ def build_data():
                     "id": "paint-interior",
                     "serviceTitle": "Interior Painting",
                     "serviceSlug": "interior-painting",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/interior-painting/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/interior-painting/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/interior-painting/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/interior-painting/gallery/gallery-1.jpg",
@@ -1119,7 +1119,7 @@ def build_data():
                     "id": "paint-exterior",
                     "serviceTitle": "Exterior Painting",
                     "serviceSlug": "exterior-painting",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/exterior-painting/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/exterior-painting/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/exterior-painting/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/exterior-painting/gallery/gallery-1.jpg",
@@ -1138,7 +1138,7 @@ def build_data():
                     "id": "paint-decorative",
                     "serviceTitle": "Decorative Painting",
                     "serviceSlug": "decorative-painting",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/decorative-painting/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/decorative-painting/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/decorative-painting/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/decorative-painting/gallery/gallery-1.jpg",
@@ -1157,7 +1157,7 @@ def build_data():
                     "id": "paint-furniture-refinishing",
                     "serviceTitle": "Furniture Painting & Refinishing",
                     "serviceSlug": "furniture-painting-refinishing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/furniture-painting-refinishing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/furniture-painting-refinishing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/furniture-painting-refinishing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/furniture-painting-refinishing/gallery/gallery-1.jpg",
@@ -1175,7 +1175,7 @@ def build_data():
                     "id": "paint-repair-touchups",
                     "serviceTitle": "Paint Repair & Touch-ups",
                     "serviceSlug": "paint-repair-touch-ups",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/paint-repair-touch-ups/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/paint-repair-touch-ups/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/paint-repair-touch-ups/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/paint-repair-touch-ups/gallery/gallery-1.jpg",
@@ -1194,7 +1194,7 @@ def build_data():
                     "id": "paint-surface-preparation",
                     "serviceTitle": "Surface Preparation",
                     "serviceSlug": "surface-preparation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/surface-preparation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/surface-preparation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/painting-contracting/subservices/surface-preparation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/painting-contracting/subservices/surface-preparation/gallery/gallery-1.jpg",
@@ -1227,7 +1227,7 @@ def build_data():
                 "false ceiling partitions", "gypsum partition dubai", "ceiling installation uae",
                 "60x60 ceiling tiles", "pop ceiling design", "grid ceiling repair", "glass partitions drywall"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/false-ceiling-partitions/gallery/gallery-1.jpg",
@@ -1268,7 +1268,7 @@ def build_data():
                     "id": "ceiling-false-ceiling",
                     "serviceTitle": "False Ceiling Installation",
                     "serviceSlug": "false-ceiling-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/false-ceiling-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/false-ceiling-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/false-ceiling-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/false-ceiling-installation/gallery/gallery-1.jpg",
@@ -1286,7 +1286,7 @@ def build_data():
                     "id": "ceiling-light-partitions",
                     "serviceTitle": "Light Partition Installation",
                     "serviceSlug": "light-partition-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/light-partition-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/light-partition-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/light-partition-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/light-partition-installation/gallery/gallery-1.jpg",
@@ -1305,7 +1305,7 @@ def build_data():
                     "id": "ceiling-decorative-design",
                     "serviceTitle": "Decorative Ceiling Design",
                     "serviceSlug": "decorative-ceiling-design",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/decorative-ceiling-design/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/decorative-ceiling-design/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/decorative-ceiling-design/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/decorative-ceiling-design/gallery/gallery-1.jpg",
@@ -1323,7 +1323,7 @@ def build_data():
                     "id": "ceiling-partition-customization",
                     "serviceTitle": "Partition Customization & Design",
                     "serviceSlug": "partition-customization-design",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/partition-customization-design/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/partition-customization-design/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/partition-customization-design/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/partition-customization-design/gallery/gallery-1.jpg",
@@ -1341,7 +1341,7 @@ def build_data():
                     "id": "ceiling-repair-maintenance",
                     "serviceTitle": "Ceiling and Partition Repair & Maintenance",
                     "serviceSlug": "ceiling-partition-repair-maintenance",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/gallery/gallery-1.jpg",
@@ -1359,7 +1359,7 @@ def build_data():
                     "id": "ceiling-acoustic-solutions",
                     "serviceTitle": "Acoustic Solutions",
                     "serviceSlug": "acoustic-solutions",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/acoustic-solutions/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/acoustic-solutions/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/acoustic-solutions/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/false-ceiling-partitions/subservices/acoustic-solutions/gallery/gallery-1.jpg",
@@ -1392,7 +1392,7 @@ def build_data():
                 "ac repair dubai", "air conditioning not cooling", "emergency ac technician uae",
                 "24/7 ac repair", "hvac ventilation ducting", "air filtration preventive maintenance"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/hvac-air-conditioning/gallery/gallery-1.jpg",
@@ -1434,7 +1434,7 @@ def build_data():
                     "id": "hvac-ac-install-repair",
                     "serviceTitle": "AC Installation & Repair",
                     "serviceSlug": "ac-installation-repair",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ac-installation-repair/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ac-installation-repair/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ac-installation-repair/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ac-installation-repair/gallery/gallery-1.jpg",
@@ -1453,7 +1453,7 @@ def build_data():
                     "id": "hvac-ducting-ventilation",
                     "serviceTitle": "Ducting & Ventilation Works",
                     "serviceSlug": "ducting-ventilation-works",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ducting-ventilation-works/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ducting-ventilation-works/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ducting-ventilation-works/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/ducting-ventilation-works/gallery/gallery-1.jpg",
@@ -1472,7 +1472,7 @@ def build_data():
                     "id": "hvac-air-filtration",
                     "serviceTitle": "Air Filtration Systems",
                     "serviceSlug": "air-filtration-systems",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/air-filtration-systems/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/air-filtration-systems/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/air-filtration-systems/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/air-filtration-systems/gallery/gallery-1.jpg",
@@ -1491,7 +1491,7 @@ def build_data():
                     "id": "hvac-preventive-maintenance",
                     "serviceTitle": "Preventive Maintenance (AMC)",
                     "serviceSlug": "preventive-maintenance",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/preventive-maintenance/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/preventive-maintenance/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/preventive-maintenance/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/hvac-air-conditioning/subservices/preventive-maintenance/gallery/gallery-1.jpg",
@@ -1524,7 +1524,7 @@ def build_data():
                 "woodworking services in uae", "professional carpentry dubai", "wood flooring parquet installation",
                 "custom cabinetry wardrobes", "door installation repair", "wooden wall paneling"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/gallery/gallery-1.jpg",
@@ -1565,7 +1565,7 @@ def build_data():
                     "id": "carpentry-parquet-flooring",
                     "serviceTitle": "Wood Flooring & Parquet Installation",
                     "serviceSlug": "wood-flooring-parquet-installation",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/gallery/gallery-1.jpg",
@@ -1584,7 +1584,7 @@ def build_data():
                     "id": "carpentry-custom-cabinetry",
                     "serviceTitle": "Custom Cabinetry & Wardrobes",
                     "serviceSlug": "custom-cabinetry-wardrobes",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/gallery/gallery-1.jpg",
@@ -1603,7 +1603,7 @@ def build_data():
                     "id": "carpentry-door-repair",
                     "serviceTitle": "Door Installation & Repair",
                     "serviceSlug": "door-installation-repair",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/door-installation-repair/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/door-installation-repair/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/door-installation-repair/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/door-installation-repair/gallery/gallery-1.jpg",
@@ -1622,7 +1622,7 @@ def build_data():
                     "id": "carpentry-wood-paneling",
                     "serviceTitle": "Wooden Partitions & Wall Paneling",
                     "serviceSlug": "wooden-partitions-wall-paneling",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/gallery/gallery-1.jpg",
@@ -1655,7 +1655,7 @@ def build_data():
                 "top-rated building cleaning in uae", "building cleaning services dubai",
                 "post-construction cleaning", "external glass facade cleaning", "water tank cleaning disinfection"
             ],
-            "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/banner.jpg",
+            "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/banner/banner.jpg",
             "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/main.jpg",
             "servicesgalaryImages": [
                 f"{IMAGE_BASE_WEB}/building-cleaning-services/gallery/gallery-1.jpg",
@@ -1697,7 +1697,7 @@ def build_data():
                     "id": "clean-post-construction",
                     "serviceTitle": "Post-Construction Cleaning",
                     "serviceSlug": "post-construction-cleaning",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/post-construction-cleaning/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/post-construction-cleaning/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/post-construction-cleaning/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/post-construction-cleaning/gallery/gallery-1.jpg",
@@ -1716,7 +1716,7 @@ def build_data():
                     "id": "clean-facade-glass",
                     "serviceTitle": "External Glass & Facade Cleaning",
                     "serviceSlug": "external-glass-facade-cleaning",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/external-glass-facade-cleaning/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/external-glass-facade-cleaning/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/external-glass-facade-cleaning/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/external-glass-facade-cleaning/gallery/gallery-1.jpg",
@@ -1735,7 +1735,7 @@ def build_data():
                     "id": "clean-industrial-warehouse",
                     "serviceTitle": "Industrial & Warehouse Cleaning",
                     "serviceSlug": "industrial-warehouse-cleaning",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/industrial-warehouse-cleaning/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/industrial-warehouse-cleaning/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/industrial-warehouse-cleaning/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/industrial-warehouse-cleaning/gallery/gallery-1.jpg",
@@ -1754,7 +1754,7 @@ def build_data():
                     "id": "clean-floor-polishing",
                     "serviceTitle": "Floor Deep Cleaning & Polishing",
                     "serviceSlug": "floor-deep-cleaning-polishing",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/floor-deep-cleaning-polishing/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/floor-deep-cleaning-polishing/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/floor-deep-cleaning-polishing/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/floor-deep-cleaning-polishing/gallery/gallery-1.jpg",
@@ -1773,7 +1773,7 @@ def build_data():
                     "id": "clean-water-tank",
                     "serviceTitle": "Water Tank Cleaning & Disinfection",
                     "serviceSlug": "water-tank-cleaning-disinfection",
-                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/water-tank-cleaning-disinfection/banner.jpg",
+                    "serviceBanner": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/water-tank-cleaning-disinfection/banner/banner.jpg",
                     "serviceImage": f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/water-tank-cleaning-disinfection/main.jpg",
                     "servicesgalaryImages": [
                         f"{IMAGE_BASE_WEB}/building-cleaning-services/subservices/water-tank-cleaning-disinfection/gallery/gallery-1.jpg",
@@ -2023,27 +2023,57 @@ def build_arabic_data(en_services):
 
 def create_directory_tree_and_files(en_services, ar_services):
     services_base_dir = os.path.join(WORKSPACE_DIR, "public", "servicesSubServicesContent", "services")
+    banners_base_dir = os.path.join(WORKSPACE_DIR, "public", "servicesSubServicesContent", "banners")
     os.makedirs(services_base_dir, exist_ok=True)
+    os.makedirs(banners_base_dir, exist_ok=True)
 
     print(f"Creating tree directory structure in: {services_base_dir}")
+
+    # Top-level banners README
+    with open(os.path.join(banners_base_dir, "README.txt"), "w", encoding="utf-8") as f:
+        f.write(
+            "=== BANNERS DIRECTORY ===\n"
+            "This directory contains banner folders for all 11 services and their subservices.\n"
+            "Recommended Banner Dimensions: 1920x600 px (or 16:9 ratio).\n"
+        )
 
     for svc in en_services:
         slug = svc["serviceSlug"]
         svc_dir = os.path.join(services_base_dir, slug)
+        svc_banner_dir = os.path.join(svc_dir, "banner")
         svc_gallery_dir = os.path.join(svc_dir, "gallery")
         svc_sub_dir = os.path.join(svc_dir, "subservices")
 
+        os.makedirs(svc_banner_dir, exist_ok=True)
         os.makedirs(svc_gallery_dir, exist_ok=True)
         os.makedirs(svc_sub_dir, exist_ok=True)
 
-        # Write readme instructions for the service
+        # Service banner folder README
+        with open(os.path.join(svc_banner_dir, "README.txt"), "w", encoding="utf-8") as f:
+            f.write(
+                f"=== Top Hero Banner for Service: {svc['serviceTitle']} ===\n"
+                f"Filename: banner.jpg\n"
+                f"Recommended Dimensions: 1920x600 px (or 16:9 aspect ratio)\n"
+                f"This image displays at the top of the Service Details page and Services Listing hero.\n"
+            )
+
+        # Also create in central banners/ directory
+        central_svc_banner_dir = os.path.join(banners_base_dir, slug)
+        os.makedirs(central_svc_banner_dir, exist_ok=True)
+        with open(os.path.join(central_svc_banner_dir, "README.txt"), "w", encoding="utf-8") as f:
+            f.write(
+                f"=== Banner for Service: {svc['serviceTitle']} ===\n"
+                f"Filename: banner.jpg\n"
+            )
+
+        # Write readme instructions for the service root
         readme_path = os.path.join(svc_dir, "README.txt")
         with open(readme_path, "w", encoding="utf-8") as f:
             f.write(
                 f"=== Service: {svc['serviceTitle']} ===\n"
                 f"Slug: {slug}\n\n"
-                f"Images to place here:\n"
-                f"1. banner.jpg  - Page top banner (Recommended size: 1920x600 px)\n"
+                f"Folders and files here:\n"
+                f"1. banner/     - Place top hero banner here: banner.jpg (Recommended size: 1920x600 px)\n"
                 f"2. main.jpg    - Main service feature/card image (Recommended size: 1200x800 px)\n"
                 f"3. gallery/    - Put gallery images here: gallery-1.jpg, gallery-2.jpg, gallery-3.jpg, gallery-4.jpg\n"
                 f"4. subservices/ - Contains subdirectories for each subservice\n"
@@ -2053,16 +2083,38 @@ def create_directory_tree_and_files(en_services, ar_services):
         for sub in svc["subservices"]:
             sub_slug = sub["serviceSlug"]
             sub_dir = os.path.join(svc_sub_dir, sub_slug)
+            sub_banner_dir = os.path.join(sub_dir, "banner")
             sub_gallery_dir = os.path.join(sub_dir, "gallery")
+
+            os.makedirs(sub_banner_dir, exist_ok=True)
             os.makedirs(sub_gallery_dir, exist_ok=True)
+
+            # Subservice banner folder README
+            with open(os.path.join(sub_banner_dir, "README.txt"), "w", encoding="utf-8") as f:
+                f.write(
+                    f"=== Top Hero Banner for Subservice: {sub['serviceTitle']} ===\n"
+                    f"Parent Service: {svc['serviceTitle']}\n"
+                    f"Filename: banner.jpg\n"
+                    f"Recommended Dimensions: 1920x600 px (or 16:9 aspect ratio)\n"
+                    f"This banner will display at the top of the page when this subservice is selected.\n"
+                )
+
+            # Also in central banners/
+            central_sub_banner_dir = os.path.join(central_svc_banner_dir, sub_slug)
+            os.makedirs(central_sub_banner_dir, exist_ok=True)
+            with open(os.path.join(central_sub_banner_dir, "README.txt"), "w", encoding="utf-8") as f:
+                f.write(
+                    f"=== Banner for Subservice: {sub['serviceTitle']} ===\n"
+                    f"Filename: banner.jpg\n"
+                )
 
             sub_readme = os.path.join(sub_dir, "README.txt")
             with open(sub_readme, "w", encoding="utf-8") as f:
                 f.write(
                     f"=== Subservice: {sub['serviceTitle']} ===\n"
                     f"Parent: {svc['serviceTitle']}\n\n"
-                    f"Images to place here:\n"
-                    f"1. banner.jpg  - Subservice banner (Optional, falls back to parent banner)\n"
+                    f"Folders and files here:\n"
+                    f"1. banner/     - Subservice top banner: banner.jpg (Recommended size: 1920x600 px)\n"
                     f"2. main.jpg    - Subservice feature image (Recommended size: 800x600 px)\n"
                     f"3. gallery/    - Gallery images: gallery-1.jpg, gallery-2.jpg\n"
                 )

@@ -17,7 +17,7 @@
       "polyurea spray",
       "crack injection"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/waterproofing/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/waterproofing/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/waterproofing/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/waterproofing/gallery/gallery-1.jpg",
@@ -48,7 +48,7 @@
         "id": "grp-fiberglass",
         "serviceTitle": "GRP & Fiberglass Waterproofing",
         "serviceSlug": "grp-fiberglass",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/gallery-1.jpg",
@@ -68,7 +68,7 @@
         "id": "combo-system",
         "serviceTitle": "Combo System Roof Waterproofing",
         "serviceSlug": "combo-system",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/gallery-1.jpg",
@@ -96,7 +96,7 @@
         "id": "epoxy-floor-coating",
         "serviceTitle": "Epoxy Floor Coating",
         "serviceSlug": "epoxy-floor-coating",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/gallery-1.jpg",
@@ -124,7 +124,7 @@
         "id": "bitumen-membrane",
         "serviceTitle": "Bitumen Membrane Waterproofing",
         "serviceSlug": "bitumen-membrane",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/gallery-1.jpg",
@@ -152,7 +152,7 @@
         "id": "polyurea-coating",
         "serviceTitle": "Polyurea Coating Waterproofing",
         "serviceSlug": "polyurea-coating",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/gallery-1.jpg",
@@ -173,7 +173,7 @@
         "id": "injection-waterproofing",
         "serviceTitle": "Injection Waterproofing & Crack Repair",
         "serviceSlug": "injection-waterproofing",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/gallery-1.jpg",
@@ -214,7 +214,7 @@
       "pool filtration pumps",
       "mosaic pool tiling"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/swimming-pools/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/swimming-pools/gallery/gallery-1.jpg",
@@ -245,7 +245,7 @@
         "id": "pool-structural-construction",
         "serviceTitle": "Structural Construction",
         "serviceSlug": "structural-construction",
-        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/gallery/gallery-1.jpg",
@@ -260,7 +260,7 @@
         "id": "pool-filtration-pumps",
         "serviceTitle": "Filtration & Pump Systems",
         "serviceSlug": "filtration-pump-systems",
-        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/gallery/gallery-1.jpg",
@@ -275,7 +275,7 @@
         "id": "pool-advanced-waterproofing",
         "serviceTitle": "Advanced Waterproofing System",
         "serviceSlug": "advanced-waterproofing",
-        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/gallery/gallery-1.jpg",
@@ -290,7 +290,7 @@
         "id": "pool-tile-mosaic",
         "serviceTitle": "Tile & Mosaic Fixing",
         "serviceSlug": "tile-mosaic-fixing",
-        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/gallery/gallery-1.jpg",
@@ -305,7 +305,7 @@
         "id": "pool-maintenance-repair",
         "serviceTitle": "Maintenance & Repair Solutions",
         "serviceSlug": "maintenance-repair",
-        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/gallery/gallery-1.jpg",
@@ -334,7 +334,7 @@
       "low voltage lv systems",
       "db box load balancing"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/electrical-installations/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/electrical-installations/gallery/gallery-1.jpg",
@@ -365,7 +365,7 @@
         "id": "elec-panel-board",
         "serviceTitle": "Panel Board Installation",
         "serviceSlug": "panel-board-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/gallery/gallery-1.jpg",
@@ -380,7 +380,7 @@
         "id": "elec-conduit-trunking",
         "serviceTitle": "Conduit & Trunking",
         "serviceSlug": "conduit-trunking",
-        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/gallery/gallery-1.jpg",
@@ -395,7 +395,7 @@
         "id": "elec-db-box",
         "serviceTitle": "DB Box Installation",
         "serviceSlug": "db-box-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/gallery/gallery-1.jpg",
@@ -410,7 +410,7 @@
         "id": "elec-low-voltage",
         "serviceTitle": "Low Voltage (LV) Systems",
         "serviceSlug": "low-voltage-systems",
-        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/gallery/gallery-1.jpg",
@@ -425,7 +425,7 @@
         "id": "elec-testing-commissioning",
         "serviceTitle": "Testing & Commissioning",
         "serviceSlug": "testing-commissioning",
-        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/gallery/gallery-1.jpg",
@@ -454,7 +454,7 @@
       "pipe burst repair",
       "water supply ppr pex"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/plumbing-sanitary/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/plumbing-sanitary/gallery/gallery-1.jpg",
@@ -485,7 +485,7 @@
         "id": "plumb-water-supply",
         "serviceTitle": "Water Supply Networks",
         "serviceSlug": "water-supply-networks",
-        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/gallery/gallery-1.jpg",
@@ -500,7 +500,7 @@
         "id": "plumb-drainage-sewage",
         "serviceTitle": "Drainage & Sewage Systems",
         "serviceSlug": "drainage-sewage-systems",
-        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/gallery/gallery-1.jpg",
@@ -515,7 +515,7 @@
         "id": "plumb-sanitary-ware",
         "serviceTitle": "Sanitary Ware Fixing",
         "serviceSlug": "sanitary-ware-fixing",
-        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/gallery/gallery-1.jpg",
@@ -530,7 +530,7 @@
         "id": "plumb-pump-tank",
         "serviceTitle": "Pump & Tank Installation",
         "serviceSlug": "pump-tank-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/gallery/gallery-1.jpg",
@@ -559,7 +559,7 @@
       "marble granite works",
       "porcelain large slab"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/floor-wall-tiling/gallery/gallery-1.jpg",
@@ -590,7 +590,7 @@
         "id": "tile-ceramic-porcelain",
         "serviceTitle": "Ceramic & Porcelain Installation",
         "serviceSlug": "ceramic-porcelain-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/gallery/gallery-1.jpg",
@@ -605,7 +605,7 @@
         "id": "tile-marble-granite",
         "serviceTitle": "Marble & Granite Works",
         "serviceSlug": "marble-granite-works",
-        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/gallery/gallery-1.jpg",
@@ -620,7 +620,7 @@
         "id": "tile-kitchen-bathroom",
         "serviceTitle": "Kitchen & Bathroom Tiling",
         "serviceSlug": "kitchen-bathroom-tiling",
-        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/gallery/gallery-1.jpg",
@@ -635,7 +635,7 @@
         "id": "tile-exterior-cladding",
         "serviceTitle": "Exterior Wall Cladding",
         "serviceSlug": "exterior-wall-cladding",
-        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/gallery/gallery-1.jpg",
@@ -650,7 +650,7 @@
         "id": "tile-grouting-refinishing",
         "serviceTitle": "Grouting & Surface Refinishing",
         "serviceSlug": "grouting-surface-refinishing",
-        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/gallery/gallery-1.jpg",
@@ -679,7 +679,7 @@
       "external wall rendering",
       "block work masonry"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/plastering-block-works/gallery/gallery-1.jpg",
@@ -710,7 +710,7 @@
         "id": "plaster-block-works",
         "serviceTitle": "Construction Block Works",
         "serviceSlug": "construction-block-works",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/gallery/gallery-1.jpg",
@@ -725,7 +725,7 @@
         "id": "plaster-internal",
         "serviceTitle": "Internal Plastering",
         "serviceSlug": "internal-plastering",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/gallery/gallery-1.jpg",
@@ -740,7 +740,7 @@
         "id": "plaster-external-rendering",
         "serviceTitle": "External Rendering",
         "serviceSlug": "external-rendering",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/gallery/gallery-1.jpg",
@@ -755,7 +755,7 @@
         "id": "plaster-decorative-finishes",
         "serviceTitle": "Decorative Plaster & Finishes",
         "serviceSlug": "decorative-plaster-finishes",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/gallery/gallery-1.jpg",
@@ -770,7 +770,7 @@
         "id": "plaster-repair-patching",
         "serviceTitle": "Plaster Repair & Patching",
         "serviceSlug": "plaster-repair-patching",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/gallery/gallery-1.jpg",
@@ -785,7 +785,7 @@
         "id": "plaster-leveling-surface-prep",
         "serviceTitle": "Leveling & Surface Preparation",
         "serviceSlug": "leveling-surface-preparation",
-        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/gallery/gallery-1.jpg",
@@ -814,7 +814,7 @@
       "apartment repainting",
       "decorative painting finishes"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/painting-contracting/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/painting-contracting/gallery/gallery-1.jpg",
@@ -845,7 +845,7 @@
         "id": "paint-interior",
         "serviceTitle": "Interior Painting",
         "serviceSlug": "interior-painting",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/gallery/gallery-1.jpg",
@@ -860,7 +860,7 @@
         "id": "paint-exterior",
         "serviceTitle": "Exterior Painting",
         "serviceSlug": "exterior-painting",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/gallery/gallery-1.jpg",
@@ -875,7 +875,7 @@
         "id": "paint-decorative",
         "serviceTitle": "Decorative Painting",
         "serviceSlug": "decorative-painting",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/gallery/gallery-1.jpg",
@@ -890,7 +890,7 @@
         "id": "paint-furniture-refinishing",
         "serviceTitle": "Furniture Painting & Refinishing",
         "serviceSlug": "furniture-painting-refinishing",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/gallery/gallery-1.jpg",
@@ -905,7 +905,7 @@
         "id": "paint-repair-touchups",
         "serviceTitle": "Paint Repair & Touch-ups",
         "serviceSlug": "paint-repair-touch-ups",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/gallery/gallery-1.jpg",
@@ -920,7 +920,7 @@
         "id": "paint-surface-preparation",
         "serviceTitle": "Surface Preparation",
         "serviceSlug": "surface-preparation",
-        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/gallery/gallery-1.jpg",
@@ -950,7 +950,7 @@
       "grid ceiling repair",
       "glass partitions drywall"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/false-ceiling-partitions/gallery/gallery-1.jpg",
@@ -981,7 +981,7 @@
         "id": "ceiling-false-ceiling",
         "serviceTitle": "False Ceiling Installation",
         "serviceSlug": "false-ceiling-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/gallery/gallery-1.jpg",
@@ -996,7 +996,7 @@
         "id": "ceiling-light-partitions",
         "serviceTitle": "Light Partition Installation",
         "serviceSlug": "light-partition-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/gallery/gallery-1.jpg",
@@ -1011,7 +1011,7 @@
         "id": "ceiling-decorative-design",
         "serviceTitle": "Decorative Ceiling Design",
         "serviceSlug": "decorative-ceiling-design",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/gallery/gallery-1.jpg",
@@ -1026,7 +1026,7 @@
         "id": "ceiling-partition-customization",
         "serviceTitle": "Partition Customization & Design",
         "serviceSlug": "partition-customization-design",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/gallery/gallery-1.jpg",
@@ -1041,7 +1041,7 @@
         "id": "ceiling-repair-maintenance",
         "serviceTitle": "Ceiling and Partition Repair & Maintenance",
         "serviceSlug": "ceiling-partition-repair-maintenance",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/gallery/gallery-1.jpg",
@@ -1056,7 +1056,7 @@
         "id": "ceiling-acoustic-solutions",
         "serviceTitle": "Acoustic Solutions",
         "serviceSlug": "acoustic-solutions",
-        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/gallery/gallery-1.jpg",
@@ -1085,7 +1085,7 @@
       "hvac ventilation ducting",
       "air filtration preventive maintenance"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/hvac-air-conditioning/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/hvac-air-conditioning/gallery/gallery-1.jpg",
@@ -1116,7 +1116,7 @@
         "id": "hvac-ac-install-repair",
         "serviceTitle": "AC Installation & Repair",
         "serviceSlug": "ac-installation-repair",
-        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/gallery/gallery-1.jpg",
@@ -1131,7 +1131,7 @@
         "id": "hvac-ducting-ventilation",
         "serviceTitle": "Ducting & Ventilation Works",
         "serviceSlug": "ducting-ventilation-works",
-        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/gallery/gallery-1.jpg",
@@ -1146,7 +1146,7 @@
         "id": "hvac-air-filtration",
         "serviceTitle": "Air Filtration Systems",
         "serviceSlug": "air-filtration-systems",
-        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/gallery/gallery-1.jpg",
@@ -1161,7 +1161,7 @@
         "id": "hvac-preventive-maintenance",
         "serviceTitle": "Preventive Maintenance (AMC)",
         "serviceSlug": "preventive-maintenance",
-        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/gallery/gallery-1.jpg",
@@ -1190,7 +1190,7 @@
       "door installation repair",
       "wooden wall paneling"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/carpentry-wood-flooring/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/carpentry-wood-flooring/gallery/gallery-1.jpg",
@@ -1221,7 +1221,7 @@
         "id": "carpentry-parquet-flooring",
         "serviceTitle": "Wood Flooring & Parquet Installation",
         "serviceSlug": "wood-flooring-parquet-installation",
-        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/gallery/gallery-1.jpg",
@@ -1236,7 +1236,7 @@
         "id": "carpentry-custom-cabinetry",
         "serviceTitle": "Custom Cabinetry & Wardrobes",
         "serviceSlug": "custom-cabinetry-wardrobes",
-        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/gallery/gallery-1.jpg",
@@ -1251,7 +1251,7 @@
         "id": "carpentry-door-repair",
         "serviceTitle": "Door Installation & Repair",
         "serviceSlug": "door-installation-repair",
-        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/gallery/gallery-1.jpg",
@@ -1266,7 +1266,7 @@
         "id": "carpentry-wood-paneling",
         "serviceTitle": "Wooden Partitions & Wall Paneling",
         "serviceSlug": "wooden-partitions-wall-paneling",
-        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/gallery/gallery-1.jpg",
@@ -1294,7 +1294,7 @@
       "external glass facade cleaning",
       "water tank cleaning disinfection"
     ],
-    "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/banner.jpg",
+    "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/banner/banner.jpg",
     "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/main.jpg",
     "servicesgalaryImages": [
       "/servicesSubServicesContent/services/building-cleaning-services/gallery/gallery-1.jpg",
@@ -1325,7 +1325,7 @@
         "id": "clean-post-construction",
         "serviceTitle": "Post-Construction Cleaning",
         "serviceSlug": "post-construction-cleaning",
-        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/gallery/gallery-1.jpg",
@@ -1340,7 +1340,7 @@
         "id": "clean-facade-glass",
         "serviceTitle": "External Glass & Facade Cleaning",
         "serviceSlug": "external-glass-facade-cleaning",
-        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/gallery/gallery-1.jpg",
@@ -1355,7 +1355,7 @@
         "id": "clean-industrial-warehouse",
         "serviceTitle": "Industrial & Warehouse Cleaning",
         "serviceSlug": "industrial-warehouse-cleaning",
-        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/gallery/gallery-1.jpg",
@@ -1370,7 +1370,7 @@
         "id": "clean-floor-polishing",
         "serviceTitle": "Floor Deep Cleaning & Polishing",
         "serviceSlug": "floor-deep-cleaning-polishing",
-        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/gallery/gallery-1.jpg",
@@ -1385,7 +1385,7 @@
         "id": "clean-water-tank",
         "serviceTitle": "Water Tank Cleaning & Disinfection",
         "serviceSlug": "water-tank-cleaning-disinfection",
-        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/banner.jpg",
+        "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/banner/banner.jpg",
         "serviceImage": "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/main.jpg",
         "servicesgalaryImages": [
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/gallery/gallery-1.jpg",
