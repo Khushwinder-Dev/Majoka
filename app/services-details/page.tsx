@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Layers,
   Sparkles,
+  ChevronDown,
 } from "lucide-react";
 import {
   servicesDataEn,
@@ -20,6 +21,7 @@ import {
   ServiceItem,
   SubServiceItem,
 } from "@/data/servicesData";
+import { ServiceIcon, SubServiceIcon } from "@/components/ServiceIcon";
 
 /* ─── DEFAULT FALLBACK IMAGES ─────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -88,21 +90,6 @@ function SmartImage({
   );
 }
 
-/* ─── SIDEBAR ICON ───────────────────────────────────────────── */
-function SidebarIcon({ src, active }: { src: string; active: boolean }) {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={17}
-      height={17}
-      className={`w-[17px] h-[17px] object-contain flex-shrink-0 transition-all duration-200 ${
-        active ? "brightness-0 invert" : "opacity-40"
-      }`}
-    />
-  );
-}
-
 /* ─── MAIN CONTENT COMPONENT ─────────────────────────────────── */
 function ServiceDetailsContent() {
   const router = useRouter();
@@ -139,8 +126,8 @@ function ServiceDetailsContent() {
   const bannerEyebrow = activeSub
     ? `${service.serviceTitle} • ${service.category}`
     : isArabic
-    ? "خدمات شركة تاج الرحمة"
-    : "Taj Al Rahmah Services";
+      ? "خدمات شركة تاج الرحمة"
+      : "Taj Al Rahmah Services";
   const bannerTitle = activeSub ? activeSub.serviceTitle : service.serviceTitle;
   const bannerTagline = activeSub
     ? activeSub.shortDescription || activeSub.serviceContent
@@ -225,39 +212,80 @@ function ServiceDetailsContent() {
       {/* ══ MAIN BODY ════════════════════════════════════════════ */}
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
-          {/* ── SIDEBAR: ALL 11 SERVICES ───────────────────────── */}
-          <aside className="w-full lg:w-[240px] xl:w-[260px] flex-shrink-0">
+          {/* ── SIDEBAR: ALL 11 SERVICES & SUBSERVICES ──────────── */}
+          <aside className="w-full lg:w-[260px] xl:w-[280px] flex-shrink-0">
             <p className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-stone-400 mb-3 px-1">
-              {isArabic ? "جميع الخدمات (11)" : "ALL SERVICES (11)"}
+              {isArabic ? "جميع الخدمات والأنشطة (11)" : "ALL SERVICES & SUBSERVICES (11)"}
             </p>
 
-            <nav className="flex flex-col gap-1">
+            <nav className="flex flex-col gap-1.5">
               {services.map((svc) => {
-                const isActive = svc.serviceSlug === service.serviceSlug;
+                const isServiceActive = svc.serviceSlug === service.serviceSlug;
                 return (
-                  <Link
-                    key={svc.serviceSlug}
-                    href={`/services-details?service=${svc.serviceNumber}`}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 ${
-                      isActive
+                  <div key={svc.serviceSlug} className="flex flex-col">
+                    {/* Main service link */}
+                    <Link
+                      href={`/services-details?service=${svc.serviceNumber}`}
+                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 group ${isServiceActive
                         ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
-                        : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
-                    }`}
-                  >
-                    <SidebarIcon src={svc.icon || "/landing/services/6.svg"} active={isActive} />
-                    <span
-                      className={`text-[13px] font-semibold flex-grow truncate ${
-                        isArabic ? "text-right" : "text-left"
-                      }`}
+                        : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
+                        }`}
                     >
-                      {svc.serviceTitle}
-                    </span>
-                    {isActive && (
-                      <ChevronRight
-                        className={`w-3.5 h-3.5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`}
-                      />
+                      {/* Crisp visible icon badge */}
+                      <div
+                        className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 transition-colors ${isServiceActive ? "bg-white/20" : "bg-[#009e90]/10"
+                          }`}
+                      >
+                        <ServiceIcon slug={svc.serviceSlug} active={isServiceActive} size={15} />
+                      </div>
+
+                      <span
+                        className={`text-[13px] font-semibold flex-grow truncate ${isArabic ? "text-right" : "text-left"
+                          }`}
+                      >
+                        {svc.serviceTitle}
+                      </span>
+
+                      {isServiceActive ? (
+                        <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 opacity-80" />
+                      ) : (
+                        <ChevronRight
+                          className={`w-3.5 h-3.5 flex-shrink-0 opacity-40 group-hover:opacity-75 ${isArabic ? "rotate-180" : ""
+                            }`}
+                        />
+                      )}
+                    </Link>
+
+                    {/* Subservices list under active service in sidebar */}
+                    {isServiceActive && svc.subservices && svc.subservices.length > 0 && (
+                      <div
+                        className={`flex flex-col gap-1 mt-1 mb-1.5 ${isArabic ? "mr-3 pr-3 border-r-2" : "ml-3 pl-3 border-l-2"
+                          } border-[#009e90]/30`}
+                      >
+                        {svc.subservices.map((sub) => {
+                          const isSubActive = activeSub?.serviceSlug === sub.serviceSlug;
+                          return (
+                            <Link
+                              key={sub.id || sub.serviceSlug}
+                              href={`/services-details?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`}
+                              className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-medium transition-all ${isSubActive
+                                ? "bg-[#009e90]/15 text-[#009e90] font-bold"
+                                : "text-stone-600 hover:text-[#009e90] hover:bg-stone-50"
+                                }`}
+                            >
+                              <div
+                                className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 ${isSubActive ? "text-[#009e90]" : "text-[#009e90]/80"
+                                  }`}
+                              >
+                                <SubServiceIcon slug={sub.serviceSlug} active={isSubActive} size={13} />
+                              </div>
+                              <span className="truncate flex-grow">{sub.serviceTitle}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
                     )}
-                  </Link>
+                  </div>
                 );
               })}
             </nav>
@@ -295,24 +323,26 @@ function ServiceDetailsContent() {
               {isArabic ? "العودة إلى الخدمات" : "Back to services"}
             </Link>
 
-            {/* Sub-services Quick Tabs / Filter Bar */}
-            <div className="bg-stone-50 p-3 sm:p-4 rounded-2xl border border-stone-200/80">
+            {/* Sub-services Quick Tabs / Filter Bar with tailored icons */}
+            {/* <div className="bg-stone-50 p-3 sm:p-4 rounded-2xl border border-stone-200/80 hidden lg:block">
               <div className="flex items-center gap-2 mb-2.5 px-1">
                 <Layers className="w-4 h-4 text-[#009e90]" />
                 <span className="text-[11.5px] font-bold uppercase tracking-wider text-stone-700">
-                  {isArabic ? "اختر الخدمة الفرعية لعرض البانر وتفاصيلها:" : "Select Sub-Service to display its top banner:"}
+                  {isArabic
+                    ? "اختر الخدمة الفرعية لعرض البانر وتفاصيلها:"
+                    : "Select Sub-Service to display its top banner:"}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleSubSelect(null)}
-                  className={`text-[12px] px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${
-                    !activeSub
-                      ? "bg-[#009e90] text-white shadow-xs"
-                      : "bg-white text-stone-700 border border-stone-200 hover:border-[#009e90]/50"
-                  }`}
+                  className={`inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${!activeSub
+                    ? "bg-[#009e90] text-white shadow-xs"
+                    : "bg-white text-stone-700 border border-stone-200 hover:border-[#009e90]/50"
+                    }`}
                 >
-                  {isArabic ? "نظرة عامة على الخدمة" : "All Sub-Services Overview"}
+                  <ServiceIcon slug={service.serviceSlug} active={!activeSub} size={14} />
+                  <span>{isArabic ? "نظرة عامة على الخدمة" : "All Sub-Services Overview"}</span>
                 </button>
                 {service.subservices.map((sub) => {
                   const isSelected = activeSub?.serviceSlug === sub.serviceSlug;
@@ -320,18 +350,18 @@ function ServiceDetailsContent() {
                     <button
                       key={sub.id || sub.serviceSlug}
                       onClick={() => handleSubSelect(sub.serviceSlug)}
-                      className={`text-[12px] px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${
-                        isSelected
-                          ? "bg-[#009e90] text-white shadow-xs"
-                          : "bg-white text-stone-700 border border-stone-200 hover:border-[#009e90]/50"
-                      }`}
+                      className={`inline-flex items-center gap-1.5 text-[12px] px-3.5 py-1.5 rounded-full font-medium transition-all cursor-pointer ${isSelected
+                        ? "bg-[#009e90] text-white shadow-xs"
+                        : "bg-white text-stone-700 border border-stone-200 hover:border-[#009e90]/50"
+                        }`}
                     >
-                      {sub.serviceTitle}
+                      <SubServiceIcon slug={sub.serviceSlug} active={isSelected} size={13} />
+                      <span>{sub.serviceTitle}</span>
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </div> */}
 
             {/* Service title header */}
             <div>
@@ -367,11 +397,10 @@ function ServiceDetailsContent() {
                   <div
                     key={sub.id || sub.serviceSlug}
                     id={sub.serviceSlug}
-                    className={`bg-white rounded-xl border p-5 sm:p-6 transition-all duration-300 ${
-                      isSelectedSub
-                        ? "border-[#009e90] ring-2 ring-[#009e90]/25 shadow-md bg-stone-50/30"
-                        : "border-stone-100 shadow-sm hover:border-stone-200"
-                    }`}
+                    className={`bg-white rounded-xl border p-5 sm:p-6 transition-all duration-300 ${isSelectedSub
+                      ? "border-[#009e90] ring-2 ring-[#009e90]/25 shadow-md bg-stone-50/30"
+                      : "border-stone-100 shadow-sm hover:border-stone-200"
+                      }`}
                   >
                     <div className="flex flex-col md:flex-row gap-5 items-start">
                       {/* Subservice image thumbnail */}
@@ -388,24 +417,25 @@ function ServiceDetailsContent() {
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                           <h4 className="text-[16px] font-bold text-stone-900 flex items-center gap-2">
-                            <span className="inline-block w-1.5 h-4 bg-[#009e90] rounded-full flex-shrink-0" />
+                            <div className="w-5 h-5 rounded flex items-center justify-center bg-[#009e90]/10 text-[#009e90]">
+                              <SubServiceIcon slug={sub.serviceSlug} size={13} />
+                            </div>
                             {sub.serviceTitle}
                           </h4>
                           <button
                             onClick={() => handleSubSelect(sub.serviceSlug)}
-                            className={`text-[11px] font-bold px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                              isSelectedSub
-                                ? "bg-[#009e90] text-white"
-                                : "bg-stone-100 text-stone-600 hover:bg-[#009e90]/10 hover:text-[#009e90]"
-                            }`}
+                            className={`text-[11px] font-bold px-2.5 py-1 rounded-md transition-colors cursor-pointer ${isSelectedSub
+                              ? "bg-[#009e90] text-white"
+                              : "bg-stone-100 text-stone-600 hover:bg-[#009e90]/10 hover:text-[#009e90]"
+                              }`}
                           >
                             {isSelectedSub
                               ? isArabic
                                 ? "البانر الحالي بالأعلى ✓"
                                 : "Active Banner on Top ✓"
                               : isArabic
-                              ? "عرض البانر بالأعلى"
-                              : "Show Top Banner"}
+                                ? "عرض البانر بالأعلى"
+                                : "Show Top Banner"}
                           </button>
                         </div>
 

@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { ChevronRight, MessageCircle } from "lucide-react";
+import { ChevronRight, ChevronDown, MessageCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
+import { ServiceIcon, SubServiceIcon } from "@/components/ServiceIcon";
 
 /* ─── DEFAULT FALLBACK ASSETS ─────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -92,33 +93,25 @@ function ServiceCard({
 
       {/* Content */}
       <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-[14px] font-bold text-stone-900 leading-snug mb-2 group-hover:text-[#009e90] transition-colors duration-200">
-          {sub.serviceTitle}
-        </h3>
+        <div className="flex items-center gap-2 mb-2">
+          <div className="w-5 h-5 rounded flex items-center justify-center bg-[#009e90]/10 text-[#009e90] flex-shrink-0">
+            <SubServiceIcon slug={sub.serviceSlug} size={13} />
+          </div>
+          <h3 className="text-[14px] font-bold text-stone-900 leading-snug group-hover:text-[#009e90] transition-colors duration-200 truncate">
+            {sub.serviceTitle}
+          </h3>
+        </div>
+
         <p className="text-[12px] text-stone-500 leading-relaxed line-clamp-3 flex-grow mb-3">
           {sub.shortDescription || sub.serviceContent}
         </p>
+
         <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#009e90] group-hover:gap-2 transition-all duration-200 mt-auto">
-          {isArabic ? "اقرأ المزيد" : "Read more"}
+          {isArabic ? "عرض التفاصيل والبانر" : "View Details & Banner"}
           <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
         </span>
       </div>
     </Link>
-  );
-}
-
-/* ─── SIDEBAR ICON COMPONENT ─────────────────────────────────── */
-function SidebarIcon({ src, active }: { src: string; active: boolean }) {
-  return (
-    <Image
-      src={src}
-      alt=""
-      width={17}
-      height={17}
-      className={`w-[17px] h-[17px] object-contain flex-shrink-0 transition-all duration-200 ${
-        active ? "brightness-0 invert" : "opacity-40"
-      }`}
-    />
   );
 }
 
@@ -252,41 +245,77 @@ export default function ServicesListing() {
       {/* ══ BODY: SIDEBAR + GRID ═════════════════════════════════ */}
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
-          {/* ── SIDEBAR (ALL 11 SERVICES) ───────────────────────── */}
-          <aside className="w-full lg:w-[240px] xl:w-[260px] flex-shrink-0">
+          {/* ── SIDEBAR: ALL 11 SERVICES & SUBSERVICES ──────────── */}
+          <aside className="w-full lg:w-[260px] xl:w-[280px] flex-shrink-0">
             {/* "TRADES" eyebrow */}
             <p className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-stone-400 mb-3 px-1">
-              {isArabic ? "جميع الخدمات (11)" : "ALL SERVICES (11)"}
+              {isArabic ? "جميع الخدمات والأنشطة (11)" : "ALL SERVICES & SUBSERVICES (11)"}
             </p>
 
             {/* Category tabs */}
-            <nav className="flex flex-col gap-1">
+            <nav className="flex flex-col gap-1.5">
               {services.map((svc) => {
-                const isActive = svc.serviceSlug === activeService.serviceSlug;
+                const isServiceActive = svc.serviceSlug === activeService.serviceSlug;
                 return (
-                  <button
-                    key={svc.serviceSlug}
-                    onClick={() => setActiveSlug(svc.serviceSlug)}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 cursor-pointer text-left ${
-                      isActive
-                        ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
-                        : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
-                    }`}
-                  >
-                    <SidebarIcon src={svc.icon || "/landing/services/6.svg"} active={isActive} />
-                    <span
-                      className={`text-[13px] font-semibold flex-grow truncate ${
-                        isArabic ? "text-right" : "text-left"
+                  <div key={svc.serviceSlug} className="flex flex-col">
+                    <button
+                      onClick={() => setActiveSlug(svc.serviceSlug)}
+                      className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 cursor-pointer text-left group ${
+                        isServiceActive
+                          ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
+                          : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
                       }`}
                     >
-                      {svc.serviceTitle}
-                    </span>
-                    {isActive && (
-                      <ChevronRight
-                        className={`w-3.5 h-3.5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`}
-                      />
+                      {/* Visible icon badge */}
+                      <div
+                        className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 transition-colors ${
+                          isServiceActive ? "bg-white/20" : "bg-[#009e90]/10"
+                        }`}
+                      >
+                        <ServiceIcon slug={svc.serviceSlug} active={isServiceActive} size={15} />
+                      </div>
+
+                      <span
+                        className={`text-[13px] font-semibold flex-grow truncate ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
+                      >
+                        {svc.serviceTitle}
+                      </span>
+
+                      {isServiceActive ? (
+                        <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 opacity-80" />
+                      ) : (
+                        <ChevronRight
+                          className={`w-3.5 h-3.5 flex-shrink-0 opacity-40 group-hover:opacity-75 ${
+                            isArabic ? "rotate-180" : ""
+                          }`}
+                        />
+                      )}
+                    </button>
+
+                    {/* Subservices list under active service in sidebar */}
+                    {isServiceActive && svc.subservices && svc.subservices.length > 0 && (
+                      <div
+                        className={`flex flex-col gap-1 mt-1 mb-1.5 ${
+                          isArabic ? "mr-3 pr-3 border-r-2" : "ml-3 pl-3 border-l-2"
+                        } border-[#009e90]/30`}
+                      >
+                        {svc.subservices.map((sub) => (
+                          <Link
+                            key={sub.id || sub.serviceSlug}
+                            href={`/services-details?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`}
+                            className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-medium text-stone-600 hover:text-[#009e90] hover:bg-stone-50 transition-all"
+                          >
+                            <div className="w-4 h-4 rounded flex items-center justify-center flex-shrink-0 text-[#009e90]/80">
+                              <SubServiceIcon slug={sub.serviceSlug} size={13} />
+                            </div>
+                            <span className="truncate flex-grow">{sub.serviceTitle}</span>
+                          </Link>
+                        ))}
+                      </div>
                     )}
-                  </button>
+                  </div>
                 );
               })}
             </nav>
