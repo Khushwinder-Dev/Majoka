@@ -3,12 +3,32 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { Play, X, ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+
+const SLIDE_VARIANTS = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    y: direction > 0 ? 18 : -18,
+  }),
+  center: { opacity: 1, y: 0 },
+  exit: (direction: number) => ({
+    opacity: 0,
+    y: direction > 0 ? -18 : 18,
+  }),
+};
+
+const IMAGE_VARIANTS = {
+  enter: { opacity: 0, scale: 0.92 },
+  center: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 1.06 },
+};
 
 export default function TrustedClientsSection() {
   const { isArabic } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [direction, setDirection] = useState(1);
   const logosContainerRef = useRef<HTMLDivElement>(null);
 
   const testimonials = [
@@ -19,7 +39,7 @@ export default function TrustedClientsSection() {
         : "From Initial Site Planning To Final Handover, Their Construction Team Delivered Structural Integrity, Precise Craftsmanship, And A Project Completed Right On Schedule And Within Budget.",
       author: isArabic ? "ريهان ميتشل" : "Rehan Mitchel",
       role: isArabic ? "المؤسس، الرئيس التنفيذي" : "Founder, CEO",
-      image: "/media/bohemian-man-with-his-arms-crossed 3.png",
+      image: "/media/testimonials/testimonial-bd-1.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
     {
@@ -29,7 +49,7 @@ export default function TrustedClientsSection() {
         : "Working with Taj Al Rahmah on specialized waterproofing and protection exceeded our expectations at every stage, from material quality to flawless site execution.",
       author: isArabic ? "أحمد المنصوري" : "Ahmed Al Mansoori",
       role: isArabic ? "مدير العمليات الهندسية" : "VP of Operations",
-      image: "/media/bohemian-man-with-his-arms-crossed 3.png",
+      image: "/media/testimonials/testimonial-bd-2.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
     {
@@ -37,14 +57,20 @@ export default function TrustedClientsSection() {
       quote: isArabic
         ? "فريق محترف يقدم استشارات هندسية دقيقة وحلولاً تدوم طويلاً، مما وفر علينا تكاليف صيانة مستقبلية كبيرة. نوصي بهم بثقة تامة."
         : "A truly professional team that provides precise technical consultations and long-lasting solutions, saving us significant future maintenance costs.",
-      author: isArabic ? "سارة جنكينز" : "Sarah Jenkins",
-      role: isArabic ? "مديرة المشاريع الإنشائية" : "Director of Construction",
-      image: "/media/bohemian-man-with-his-arms-crossed 3.png",
+      author: isArabic ? "كريم حسن" : "Karim Hassan",
+      role: isArabic ? "مدير المشاريع الإنشائية" : "Director of Construction",
+      image: "/media/testimonials/testimonial-bd-3.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
   ];
 
   const current = testimonials[activeTestimonial];
+
+  const goToSlide = (index: number) => {
+    if (index === activeTestimonial) return;
+    setDirection(index > activeTestimonial ? 1 : -1);
+    setActiveTestimonial(index);
+  };
 
   const scrollLogos = (direction: "left" | "right") => {
     if (logosContainerRef.current) {
@@ -140,47 +166,66 @@ export default function TrustedClientsSection() {
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Column: Quote + Text + Author */}
-            <div className="lg:col-span-7 flex flex-col">
-              {/* Quote Circle Icon with Dashed Outline */}
+            <div className="lg:col-span-7 flex flex-col min-h-[220px] sm:min-h-[240px]">
               <div className="w-14 h-14 rounded-full bg-[#009e90] text-white flex items-center justify-center mb-6 shadow-md border-2 border-dashed border-teal-200/40">
                 <Quote className="w-6 h-6 fill-current" />
               </div>
 
-              {/* Testimonial Quote Text */}
-              <p className="text-sm sm:text-base lg:text-[17px] text-white/95 font-normal leading-[1.7] italic">
-                &ldquo;{current.quote}&rdquo;
-              </p>
-
-              {/* Author Info */}
-              <div className="mt-8 pt-2">
-                <p className="text-base sm:text-lg font-bold text-white tracking-wide">
-                  — {current.author}
-                </p>
-                <p className="text-xs sm:text-sm font-semibold text-[#01a9a0] mt-0.5">
-                  {current.role}
-                </p>
+              <div className="relative overflow-hidden">
+                <AnimatePresence mode="wait" custom={direction}>
+                  <motion.div
+                    key={current.id}
+                    custom={direction}
+                    variants={SLIDE_VARIANTS}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <p className="text-sm sm:text-base lg:text-[17px] text-white/95 font-normal leading-[1.7] italic">
+                      &ldquo;{current.quote}&rdquo;
+                    </p>
+                    <div className="mt-8 pt-2">
+                      <p className="text-base sm:text-lg font-bold text-white tracking-wide">
+                        — {current.author}
+                      </p>
+                      <p className="text-xs sm:text-sm font-semibold text-[#01a9a0] mt-0.5">
+                        {current.role}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
             </div>
 
             {/* Right Column: Concentric Circle Photo Frame + Video Play + Dots */}
             <div className="lg:col-span-5 flex items-center justify-center lg:justify-end gap-6 sm:gap-8">
-              {/* Concentric Circle Client Frame */}
               <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-[#003833] flex items-center justify-center p-3 sm:p-3.5 shadow-2xl flex-shrink-0">
-                {/* Inner Vibrant Teal Circle */}
                 <div className="relative w-full h-full rounded-full bg-[#009e90] overflow-hidden flex items-end justify-center">
-                  <Image
-                    src={current.image}
-                    alt={current.author}
-                    fill
-                    unoptimized
-                    className="object-cover object-top scale-105"
-                    priority
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={current.image}
+                      variants={IMAGE_VARIANTS}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={current.image}
+                        alt={current.author}
+                        fill
+                        unoptimized
+                        className="object-cover object-top scale-105"
+                        priority
+                      />
+                    </motion.div>
+                  </AnimatePresence>
 
-                  {/* Play Button */}
                   <button
                     onClick={() => setIsVideoOpen(true)}
-                    aria-label="Play Client Story"
+                    aria-label={isArabic ? "تشغيل قصة العميل" : "Play Client Story"}
                     className="absolute inset-0 m-auto z-20 w-12 h-12 rounded-full bg-white text-[#009e90] flex items-center justify-center shadow-lg hover:scale-110 hover:bg-teal-50 transition-all duration-300 cursor-pointer"
                   >
                     <Play className="w-5 h-5 fill-current ml-0.5" />
@@ -188,13 +233,14 @@ export default function TrustedClientsSection() {
                 </div>
               </div>
 
-              {/* Vertical Carousel Indicator Pills */}
               <div className="flex flex-col gap-2.5 items-center">
                 {testimonials.map((_, idx) => (
                   <button
                     key={idx}
-                    onClick={() => setActiveTestimonial(idx)}
-                    aria-label={`Go to slide ${idx + 1}`}
+                    type="button"
+                    onClick={() => goToSlide(idx)}
+                    aria-label={`${isArabic ? "الشهادة" : "Go to testimonial"} ${idx + 1}`}
+                    aria-current={activeTestimonial === idx}
                     className={`rounded-full transition-all duration-300 cursor-pointer ${
                       activeTestimonial === idx
                         ? "w-1.5 h-8 bg-[#009e90] shadow-[0_0_8px_rgba(0,158,144,0.6)]"
