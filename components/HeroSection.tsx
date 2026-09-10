@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, Pause, Volume2, VolumeX, Image as ImageIcon } from "lucide-react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
 // Animated counter for stats
@@ -45,12 +45,70 @@ const AnimatedCounter = ({
   );
 };
 
+const SLIDE_VARIANTS = {
+  enter: (direction: number) => ({
+    opacity: 0,
+    y: direction > 0 ? 28 : -28,
+  }),
+  center: {
+    opacity: 1,
+    y: 0,
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    y: direction > 0 ? -28 : 28,
+  }),
+};
+
 const HeroSection = () => {
-  const { t } = useLanguage();
+  const { t, isArabic } = useLanguage();
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [isVideoPaused, setIsVideoPaused] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  const slides = [
+    {
+      titlePart1: isArabic ? "المقاولات و" : "Contracting &",
+      titlePart2: isArabic ? "التميز في العزل المائي" : "Waterproofing Excellence",
+      description: isArabic
+        ? "خبرة مثبتة وحرفية عالية لتقديم حلول متينة توفر الحماية المستدامة وتدوم طويلاً."
+        : "Proven Expertise And Superior Craftsmanship, Delivering Durable Solutions That Protect And Last.",
+    },
+    {
+      titlePart1: isArabic ? "الإصلاح" : "Structural",
+      titlePart2: isArabic ? "الهيكلي والصيانة" : "Repair & Maintenance",
+      description: isArabic
+        ? "حلول إنشائية متخصصة تعيد القوة وتعزز الأداء وتوفر متانة تدوم طويلاً."
+        : "Expert Structural Solutions That Restore Strength, Enhance Performance, And Deliver Lasting Durability.",
+    },
+    {
+      titlePart1: isArabic ? "الطلاء" : "Industrial",
+      titlePart2: isArabic ? "الصناعي المتميز" : "Coating Excellence",
+      description: isArabic
+        ? "حلول طلاء متقدمة تقاوم التآكل وتحمي الأسطح وتطيل عمر الأصول."
+        : "Advanced Coating Solutions That Resist Corrosion, Protect Surfaces, And Extend Asset Life.",
+    },
+  ];
+
+  const activeSlide = slides[slideIndex];
+
+  const goToSlide = (index: number) => {
+    if (index === slideIndex) return;
+    setDirection(index > slideIndex ? 1 : -1);
+    setSlideIndex(index);
+  };
+
+  useEffect(() => {
+    if (isPlayingVideo) return;
+    const timer = setInterval(() => {
+      setDirection(1);
+      setSlideIndex((current) => (current + 1) % slides.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [isPlayingVideo, slides.length, slideIndex]);
 
   const statsData = [
     { value: 17, suffix: "+", label: t.hero.stat1 },
@@ -105,7 +163,10 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24] select-none">
+    <section
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24] select-none"
+      dir={isArabic ? "rtl" : "ltr"}
+    >
       {/* 1. Background Image Banner */}
       <div
         className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -175,13 +236,29 @@ const HeroSection = () => {
         </div>
       </div> */}
 
-      {/* 5. Left Vertical Slider / Pill Indicators (matching design mockup) */}
-      <div className="hidden lg:flex flex-col items-center gap-2.5 absolute left-5 xl:left-7 top-1/2 -translate-y-1/2 z-30 pointer-events-none">
-        {/* Active Pill */}
-        <div className="w-1.5 h-7 rounded-full bg-[#00c2b2] shadow-[0_0_14px_#00c2b2]" />
-        {/* Inactive Outlined Pills */}
-        <div className="w-1.5 h-7 rounded-full border border-white/40 bg-white/5" />
-        <div className="w-1.5 h-7 rounded-full border border-white/40 bg-white/5" />
+      {/* 5. Left Vertical Slider / Pill Indicators */}
+      <div
+        className={`flex flex-col items-center gap-2.5 absolute top-1/2 -translate-y-1/2 z-30 ${
+          isArabic ? "right-3 sm:right-5 xl:right-7" : "left-3 sm:left-5 xl:left-7"
+        }`}
+      >
+        {slides.map((_, index) => {
+          const active = index === slideIndex;
+          return (
+            <button
+              key={index}
+              type="button"
+              onClick={() => goToSlide(index)}
+              aria-label={`${isArabic ? "الشريحة" : "Go to slide"} ${index + 1}`}
+              aria-current={active}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${
+                active
+                  ? "w-1.5 h-7 bg-[#00c2b2] shadow-[0_0_14px_#00c2b2]"
+                  : "w-1.5 h-7 border border-white/40 bg-white/5 hover:border-[#00c2b2] hover:bg-[#00c2b2]/20"
+              }`}
+            />
+          );
+        })}
       </div>
 
       {/* 6. Video Mode Status Badge & Sound Toggle (Visible when Video is Active) */}
@@ -218,30 +295,43 @@ const HeroSection = () => {
       )}
 
       {/* 7. Main Hero Content Container */}
-      <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center">
+      <div className={`relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center ${
+        isArabic ? "pr-10 sm:pr-12" : "pl-10 sm:pl-12"
+      }`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Left Text & CTAs (Columns 1-8) */}
-          <div className="lg:col-span-8 flex flex-col items-start text-left">
-            {/* Tagline / Eyebrow */}
-            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
-              <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
-              <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
-                {t.hero.eyebrow}
-              </span>
+          <div className="lg:col-span-8 flex flex-col items-start text-start min-h-[280px] sm:min-h-[320px] lg:min-h-[340px]">
+            <div className="relative w-full overflow-hidden">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={slideIndex}
+                  custom={direction}
+                  variants={SLIDE_VARIANTS}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+                    <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
+                    <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
+                      {t.hero.eyebrow}
+                    </span>
+                  </div>
+
+                  <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px] font-bold leading-[1.08] tracking-tight font-anek">
+                    {activeSlide.titlePart1} <br />
+                    <span className="text-[#00c2b2] drop-shadow-[0_2px_20px_rgba(0,194,178,0.4)]">
+                      {activeSlide.titlePart2}
+                    </span>
+                  </h1>
+
+                  <p className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mt-4 sm:mt-5 mb-7 sm:mb-9 font-anek">
+                    {activeSlide.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
-
-            {/* Headline */}
-            <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px] font-bold leading-[1.08] tracking-tight font-anek">
-              {t.hero.titlePart1} <br />
-              <span className="text-[#00c2b2] drop-shadow-[0_2px_20px_rgba(0,194,178,0.4)]">
-                {t.hero.titlePart2}
-              </span>
-            </h1>
-
-            {/* Description */}
-            <p className="text-white/85 text-sm sm:text-base md:text-lg max-w-xl font-normal leading-relaxed mt-4 sm:mt-5 mb-7 sm:mb-9 font-anek">
-              {t.hero.description}
-            </p>
 
             {/* Dual CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-5">
