@@ -447,6 +447,12 @@
     "subservices": [
       {
         "id": "elec-panel-board",
+        "service":{"serviceTitle": "Electrical Installations & Fit-out",
+        "tagline": "Power and Precision Behind Every Wall",
+        "category": "Electrical",
+        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+      },
         "serviceTitle": "Panel Board Installation",
         "serviceSlug": "panel-board-installation",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/banner/control-panel-testing-standard.webp",
@@ -468,6 +474,12 @@
       },
       {
         "id": "elec-conduit-trunking",
+        "service":{"serviceTitle": "Electrical Installations & Fit-out",
+        "tagline": "Power and Precision Behind Every Wall",
+        "category": "Electrical",
+        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+      },
         "serviceTitle": "Conduit & Trunking",
         "serviceSlug": "conduit-trunking",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/banner/normal_66cb1c3df0780-standard.webp",
@@ -489,6 +501,12 @@
       },
       {
         "id": "elec-db-box",
+       "service":{"serviceTitle": "Electrical Installations & Fit-out",
+        "tagline": "Power and Precision Behind Every Wall",
+        "category": "Electrical",
+        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+      },
         "serviceTitle": "DB Box Installation",
         "serviceSlug": "db-box-installation",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/banner/whatsapp-image-2025-12-30-at-9-33-01-pm-1-standard.webp",
@@ -510,6 +528,12 @@
       },
       {
         "id": "elec-low-voltage",
+        "service":{"serviceTitle": "Electrical Installations & Fit-out",
+        "tagline": "Power and Precision Behind Every Wall",
+        "category": "Electrical",
+        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+      },
         "serviceTitle": "Low Voltage (LV) Systems",
         "serviceSlug": "low-voltage-systems",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/banner/8-standard.webp",
@@ -531,6 +555,12 @@
       },
       {
         "id": "elec-testing-commissioning",
+       "service":{"serviceTitle": "Electrical Installations & Fit-out",
+        "tagline": "Power and Precision Behind Every Wall",
+        "category": "Electrical",
+        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+      },
         "serviceTitle": "Testing & Commissioning",
         "serviceSlug": "testing-commissioning",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/banner/electrical-testing-commissioning-5-1024x725-standard.webp",

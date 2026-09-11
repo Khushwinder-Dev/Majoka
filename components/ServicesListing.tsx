@@ -74,6 +74,7 @@ function ServiceCard({
   isArabic: boolean;
 }) {
   const fallback = FALLBACK_IMAGES[idx % FALLBACK_IMAGES.length];
+  // Link to the service overview page — user picks the sub from there
   const targetLink = `/services-details?service=${service.serviceNumber}&sub=${sub.serviceSlug}`;
 
   return (
@@ -107,7 +108,7 @@ function ServiceCard({
         </p>
 
         <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#009e90] group-hover:gap-2 transition-all duration-200 mt-auto">
-          {isArabic ? "عرض التفاصيل والبانر" : "View Details & Banner"}
+          {isArabic ? "اقرأ المزيد" : "Read more"}
           <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
         </span>
       </div>
@@ -361,7 +362,7 @@ export default function ServicesListing() {
                 href={`/services-details?service=${activeService.serviceNumber}`}
                 className="text-[12px] font-semibold text-[#009e90] hover:text-[#01887e] flex items-center gap-1 whitespace-nowrap transition-colors duration-200 self-start sm:self-center"
               >
-                {isArabic ? "عرض التفاصيل الكاملة" : "View Full Details"}
+                {isArabic ? "عرض صفحة الخدمة" : "View Service Page"}
                 <ChevronRight className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
               </Link>
             </div>
