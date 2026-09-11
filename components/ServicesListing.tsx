@@ -169,17 +169,17 @@ function ServicesContent() {
 
   // Navigate to a service (listing view)
   const goToService = (svc: ServiceItem) => {
-    router.push(`/services?service=${svc.serviceNumber}`);
+    router.push(`/services?service=${svc.serviceNumber}`, { scroll: false });
   };
 
   // Navigate to a sub-service (detail view)
   const goToSub = (svc: ServiceItem, sub: SubServiceItem) => {
-    router.push(`/services?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`);
+    router.push(`/services?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`, { scroll: false });
   };
 
   // Back to listing view
   const goBack = () => {
-    router.push(`/services?service=${activeService.serviceNumber}`);
+    router.push(`/services?service=${activeService.serviceNumber}`, { scroll: false });
   };
 
   // Hero content
@@ -244,9 +244,9 @@ function ServicesContent() {
         <SmartImage src={heroBanner} alt={heroTitle} fallbackSrc={DEFAULT_BANNER} priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
-          <p className="text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-[#009e90]">
+          {/* <p className="text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-[#009e90]">
             {isArabic ? "شركة تاج الرحمة للمقاولات" : "Taj Al Rahmah Contracting"}
-          </p>
+          </p> */}
           <h1 className="text-2xl sm:text-[32px] md:text-4xl font-extrabold text-white leading-tight drop-shadow">
             {heroTitle}
           </h1>
@@ -367,9 +367,9 @@ function ServicesContent() {
 
                 {/* Sub-service title */}
                 <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight mb-6">
-                  {activeSub.serviceTitle}
+                  {activeSub.service.serviceTitle +" : " +activeSub.service.tagline}
                 </h2>
-
+                
                 {/* Render the correct template based on service/sub slug */}
                 {(() => {
                   const key = getTemplateKey(activeService.serviceSlug, activeSub.serviceSlug);
@@ -385,8 +385,8 @@ function ServicesContent() {
         </div>
       </div>
 
-      {/* ══ CONTACT / INQUIRY SECTION ════════════════════════════ */}
-      <section className="w-full bg-[#f4f6f8] py-16 sm:py-20 lg:py-24 border-t border-stone-200/60">
+      {/* ══ CONTACT / INQUIRY SECTION (listing view only) ════════ */}
+      {!activeSub && <section className="w-full bg-[#f4f6f8] py-16 sm:py-20 lg:py-24 border-t border-stone-200/60">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center gap-2 mb-3">
             <span className="flex items-center gap-1">
@@ -432,7 +432,7 @@ function ServicesContent() {
             </div>
           </form>
         </div>
-      </section>
+      </section>}
 
       {/* ══ FAQ SECTION ══════════════════════════════════════════ */}
       <section className="w-full bg-[#f4f6f8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
