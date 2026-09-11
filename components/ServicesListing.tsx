@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { ChevronRight, ChevronDown, MessageCircle, Plus, Minus } from "lucide-react";
+import { ChevronRight, ChevronDown, MessageCircle, Plus, Minus, Phone } from "lucide-react";
 import toast from "react-hot-toast";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
 import { ServiceIcon, SubServiceIcon } from "@/components/ServiceIcon";
@@ -598,6 +598,44 @@ export default function ServicesListing() {
               </Link>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* ══ BOOK A VISIT CTA BANNER ══════════════════════════════ */}
+      <section className="w-full bg-white py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-[#0d2137] rounded-2xl border border-[#1a3a5c] px-6 sm:px-10 py-7 sm:py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+            {/* Left: text */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-[18px] sm:text-[22px] font-extrabold text-white leading-snug mb-1.5">
+                {isArabic
+                  ? "احجز زيارة هذا الأسبوع."
+                  : "Book a visit for this week."}
+              </h3>
+              <p className="text-[13px] sm:text-[14px] text-white/60 leading-relaxed max-w-sm">
+                {isArabic
+                  ? "أخبرنا بما يحتاج إلى تنفيذ. ستحصل على عرض سعر ثابت في نفس اليوم ونافذة وصول مدتها ساعتان."
+                  : "Tell us what needs doing. You'll get a fixed quote the same day and a two-hour arrival window."}
+              </p>
+            </div>
+
+            {/* Right: buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+              >
+                {isArabic ? "احجز فنياً" : "Book a Technician"}
+              </Link>
+              <a
+                href="tel:+971556173300"
+                className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-white/30 hover:border-white/50 text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 whitespace-nowrap"
+              >
+                <Phone className="w-4 h-4 flex-shrink-0" />
+                {isArabic ? "اتصل الآن" : "Call Now"}
+              </a>
+            </div>
           </div>
         </div>
       </section>
