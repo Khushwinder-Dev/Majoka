@@ -294,7 +294,7 @@ export default function ServicesListing() {
           <aside className="w-full lg:w-[260px] xl:w-[280px] flex-shrink-0">
             {/* "TRADES" eyebrow */}
             <p className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-stone-400 mb-3 px-1">
-              {isArabic ? "جميع الخدمات والأنشطة (11)" : "ALL SERVICES & SUBSERVICES (11)"}
+              {isArabic ? "جميع الخدمات والأنشطة (11)" : "ALL SERVICES"}
             </p>
 
             {/* Category tabs */}
