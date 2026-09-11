@@ -4,10 +4,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { ChevronRight, ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronRight, ChevronDown, MessageCircle, Plus, Minus } from "lucide-react";
 import toast from "react-hot-toast";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
 import { ServiceIcon, SubServiceIcon } from "@/components/ServiceIcon";
+
 
 /* ─── DEFAULT FALLBACK ASSETS ─────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -95,9 +96,6 @@ function ServiceCard({
       {/* Content */}
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-5 h-5 rounded flex items-center justify-center bg-[#009e90]/10 text-[#009e90] flex-shrink-0">
-            <SubServiceIcon slug={sub.serviceSlug} size={13} />
-          </div>
           <h3 className="text-[14px] font-bold text-stone-900 leading-snug group-hover:text-[#009e90] transition-colors duration-200 truncate">
             {sub.serviceTitle}
           </h3>
@@ -115,6 +113,52 @@ function ServiceCard({
     </Link>
   );
 }
+
+/* ─── FAQ DATA ────────────────────────────────────────────────── */
+const SERVICES_FAQS = [
+  {
+    id: 1,
+    question: "Can I try a free consultation?",
+    questionAr: "هل يمكنني الحصول على استشارة مجانية؟",
+    answer: "Yes. We offer a free initial site visit and assessment for all new project inquiries across our service categories.",
+    answerAr: "نعم. نقدم زيارة موقعية ومعاينة أولية مجانية لجميع الاستفسارات المتعلقة بالمشاريع الجديدة عبر فئات خدماتنا.",
+  },
+  {
+    id: 2,
+    question: "What's the pricing model?",
+    questionAr: "ما هو نموذج التسعير؟",
+    answer: "Pricing is project-based. After a site survey we provide a detailed, itemised quotation with no hidden fees.",
+    answerAr: "التسعير يعتمد على المشروع. بعد معاينة الموقع نقدم عرض سعر مفصّل وشفاف بدون رسوم مخفية.",
+  },
+  {
+    id: 3,
+    question: "Is there a workmanship warranty?",
+    questionAr: "هل هناك ضمان على جودة التنفيذ؟",
+    answer: "Yes. We provide a workmanship warranty on all completed works, with the duration varying by service type and scope.",
+    answerAr: "نعم. نقدم ضمان على جودة التنفيذ لجميع الأعمال المنجزة، وتتفاوت المدة حسب نوع الخدمة ونطاقها.",
+  },
+  {
+    id: 4,
+    question: "How do I get support after completion?",
+    questionAr: "كيف أحصل على الدعم بعد الانتهاء؟",
+    answer: "Our after-sales team is reachable via phone, WhatsApp, and email. We also offer scheduled maintenance contracts for ongoing support.",
+    answerAr: "يمكن التواصل مع فريق خدمة ما بعد البيع عبر الهاتف أو واتساب أو البريد الإلكتروني. كما نوفر عقود صيانة دورية للدعم المستمر.",
+  },
+  {
+    id: 5,
+    question: "Can I request a demo or site visit?",
+    questionAr: "هل يمكنني طلب زيارة ميدانية؟",
+    answer: "Absolutely. Contact us to schedule a site visit at a time that suits you — available 7 days a week.",
+    answerAr: "بالتأكيد. تواصل معنا لتحديد موعد الزيارة الميدانية في الوقت المناسب — متاح 7 أيام في الأسبوع.",
+  },
+  {
+    id: 6,
+    question: "Where can I leave feedback?",
+    questionAr: "أين يمكنني إبداء ملاحظاتي؟",
+    answer: "We welcome feedback via our contact form, Google reviews, or directly through our project manager assigned to your job.",
+    answerAr: "نرحب بملاحظاتكم عبر نموذج الاتصال أو تقييمات Google أو مباشرةً عبر مدير المشروع المعين لعملكم.",
+  },
+];
 
 /* ─── MAIN SERVICES LISTING COMPONENT ─────────────────────────── */
 export default function ServicesListing() {
@@ -500,19 +544,60 @@ export default function ServicesListing() {
       </section>
 
       {/* ══ FAQ SECTION ═══════════════════════════════════════════ */}
-      <section className="w-full bg-[#f4f6f8] pb-16 sm:pb-20 lg:pb-24 pt-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[#0b2447] text-white rounded-3xl p-6 sm:p-10 md:p-12 lg:p-16 shadow-xl">
-            {/* Title */}
-            <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-white leading-tight mb-4">
-                {t.faq.titlePrefix}{" "}
-                <span className="text-[#009e90]">{t.faq.titleAccent}</span>
+      <section className="w-full bg-[#f4f6f8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-[#0b2447] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl">
+
+            {/* Heading */}
+            <div className="text-center mb-8 sm:mb-10">
+              <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-white leading-tight mb-3">
+                {isArabic ? "الأسئلة " : "Frequently Asked "}
+                <span className="text-[#009e90]">
+                  {isArabic ? "الشائعة" : "Questions"}
+                </span>
               </h2>
-              <p className="text-sm sm:text-base text-white/70 max-w-2xl mx-auto leading-relaxed">
-                {t.faq.subtitle}
+              <p className="text-sm sm:text-[15px] text-white/60 max-w-xl mx-auto leading-relaxed">
+                {isArabic
+                  ? "إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا. لا تجد ما تبحث عنه؟ تواصل مع فريقنا مباشرةً."
+                  : "Answers to the most common questions about our services. Can't find what you're looking for? Reach out to our team directly."}
               </p>
             </div>
+
+            {/* 3-column grid of Q&A items */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 mb-8 sm:mb-10">
+              {SERVICES_FAQS.map((item) => (
+                <div key={item.id}>
+                  <h4 className="text-[14px] sm:text-[15px] font-bold text-white mb-1.5 leading-snug">
+                    {isArabic ? item.questionAr : item.question}
+                  </h4>
+                  <p className="text-[13px] text-white/55 leading-relaxed">
+                    {isArabic ? item.answerAr : item.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* "Still have questions?" footer bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/8 border border-white/10 rounded-2xl px-5 sm:px-7 py-4 sm:py-5">
+              <div>
+                <p className="text-[15px] sm:text-[16px] font-bold text-white leading-snug">
+                  {isArabic ? "لا تزال لديك أسئلة؟" : "Still have questions?"}
+                </p>
+                <p className="text-[12px] sm:text-[13px] text-white/55 mt-0.5">
+                  {isArabic
+                    ? "نحن نفهم. دعنا نتواصل مع فريقنا مباشرةً."
+                    : "We understand. Let's get in touch directly with our team, then."}
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] px-5 py-2.5 rounded-full whitespace-nowrap transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] self-start sm:self-auto flex-shrink-0"
+              >
+                {isArabic ? "تواصل معنا" : "Contact Us"}
+                <ChevronRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+
           </div>
         </div>
       </section>
