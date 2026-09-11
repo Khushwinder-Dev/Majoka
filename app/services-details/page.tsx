@@ -160,39 +160,7 @@ function Sidebar({
                   ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 opacity-70" />
                   : <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 opacity-35 group-hover:opacity-70 ${isArabic ? "rotate-180" : ""}`} />
                 }
-              </Link>
-
-              {/* Sub-services under active parent */}
-              {isActive && svc.subservices.length > 0 && (
-                <div className={`flex flex-col gap-0.5 mt-0.5 mb-1.5 ${
-                  isArabic ? "mr-3 pr-3 border-r-2" : "ml-3 pl-3 border-l-2"
-                } border-[#009e90]/25`}>
-                  {svc.subservices.map((sub) => {
-                    const isSubActive = activeSub?.serviceSlug === sub.serviceSlug;
-                    return (
-                      <Link
-                        key={sub.id || sub.serviceSlug}
-                        href={`/services-details?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`}
-                        className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-[12px] font-medium transition-all ${
-                          isSubActive
-                            ? "bg-[#009e90]/12 text-[#009e90] font-semibold"
-                            : "text-stone-500 hover:text-[#009e90] hover:bg-stone-50"
-                        }`}
-                      >
-                        <div className={`w-4 h-4 rounded flex items-center justify-center flex-shrink-0 ${
-                          isSubActive ? "text-[#009e90]" : "text-[#009e90]/60"
-                        }`}>
-                          <SubServiceIcon slug={sub.serviceSlug} active={isSubActive} size={12} />
-                        </div>
-                        <span className="truncate flex-grow">{sub.serviceTitle}</span>
-                        {isSubActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#009e90] flex-shrink-0" />
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
+              </Link>             
             </div>
           );
         })}
@@ -429,7 +397,7 @@ function ServiceDetailsContent() {
       />
 
       {/* ── BREADCRUMB ───────────────────────────────────────── */}
-      <div className="border-b border-stone-100 bg-stone-50/70">
+      {/* <div className="border-b border-stone-100 bg-stone-50/70">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-[12px] text-stone-500 overflow-x-auto whitespace-nowrap">
           <Link href="/" className="hover:text-[#009e90] transition-colors">
             {isArabic ? "الرئيسية" : "Home"}
@@ -452,7 +420,7 @@ function ServiceDetailsContent() {
             </>
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* ── BODY ─────────────────────────────────────────────── */}
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 bg-stone-50/70">
