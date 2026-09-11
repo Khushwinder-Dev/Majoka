@@ -154,8 +154,8 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
-      <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-l-4 border-[#009e90]/40 pl-4">
-        {/* {service.} */}
+      <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
+        {service.serviceContent}
       </p>
 
 
@@ -164,18 +164,21 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
         {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
 
         {service.subservices.map((subservice) => (
-          <div
-            className="
+          <div key={subservice.id} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+            <div
+              className="
       text-[14px] text-stone-600 leading-relaxed
+      [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#009e90] [&_h3]:mb-3 [&_h3]:mt-6
       [&_p]:mb-1
       [&_ul]:list-disc
       [&_ul]:pl-6
       [&_ul]:mb-5
       [&_li]:mb-1
-      [&_strong]:font-bold
+      [&_strong]:font-bold [&_strong]:text-black
     "
-            dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
-          />
+              dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
+            />
+          </div>
         ))}
 
 
@@ -190,21 +193,6 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
           <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
             {service.whyChooseContent}
           </p>
-          {service.whyChoosePoints?.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {service.whyChoosePoints.map((pt, i) => (
-                <div key={i} className="bg-stone-50 border border-stone-100 rounded-xl p-4">
-                  <h4 className="text-[13px] font-bold text-stone-900 mb-1 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#009e90] flex-shrink-0" />
-                    {pt.title}
-                  </h4>
-                  <p className="text-[12px] text-stone-500 leading-relaxed pl-5">
-                    {pt.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )}
         </section>
       )}
 

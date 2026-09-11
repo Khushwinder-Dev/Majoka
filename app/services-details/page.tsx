@@ -455,7 +455,7 @@ function ServiceDetailsContent() {
       </div>
 
       {/* ── BODY ─────────────────────────────────────────────── */}
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 bg-stone-50/70">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
 
           {/* Left sidebar */}
@@ -470,7 +470,7 @@ function ServiceDetailsContent() {
           <main className="flex-1 min-w-0">
 
             {/* Back + heading row */}
-            <div className="flex flex-col gap-1 mb-7">
+            <div className="flex flex-col gap-1 mb-4">
               <Link
                 href={activeSub ? `/services-details?service=${service.serviceNumber}` : "/services"}
                 className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-stone-400 hover:text-[#009e90] transition-colors self-start mb-1"
@@ -481,8 +481,7 @@ function ServiceDetailsContent() {
                   : isArabic ? "العودة إلى الخدمات" : "Back to Services"
                 }
               </Link>
-              <div className="flex items-center gap-2.5 pb-4 border-b border-stone-100">
-                <span className="w-[3px] h-7 bg-[#009e90] rounded-full flex-shrink-0" />
+              <div className="flex items-center gap-2.5">
                 <div>
                   <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90] hidden">
                     {/* {activeSub ? service.serviceTitle : service.category} */}

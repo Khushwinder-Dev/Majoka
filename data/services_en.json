@@ -467,7 +467,7 @@
           "/servicesSubServicesContent/services/electrical-installations/gallery/whatsapp-image-2025-12-30-at-11-31-44-pm-high.jpg",
           "/servicesSubServicesContent/services/electrical-installations/gallery/whatsapp-image-2025-12-30-at-11-31-45-pm-1-high.jpg"
         ],
-        "serviceContent": "<p>The Distribution Board is the central command center for power control within the building.</p><ul><li><strong>The Service:</strong> We supply and install Main Distribution Boards (MDB) characterized by their high load-bearing capacity and efficient current distribution.</li><li><strong>Precision:</strong> We guarantee meticulous wire organization and protection against short circuits to ensure consistent power stability throughout the facility.</li></ul>",
+        "serviceContent": "<h3>1. Panel Board Installation</h3><p>The Distribution Board is the central command center for power control within the building.</p><ul><li><strong>The Service:</strong> We supply and install Main Distribution Boards (MDB) characterized by their high load-bearing capacity and efficient current distribution.</li><li><strong>Precision:</strong> We guarantee meticulous wire organization and protection against short circuits to ensure consistent power stability throughout the facility.</li></ul>",
         "shortDescription": "Main Distribution Board (MDB) installation engineered for continuous load stability and short-circuit protection.",
         "primaryApplications": "Commercial complexes, residential towers, industrial factories, and luxury villas.",
         "competitiveAdvantage": "Meticulous internal dressing, thermal management, and reliable surge suppression."
@@ -494,7 +494,7 @@
           "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/gallery/whatsapp-image-2025-12-30-at-11-31-44-pm-high.jpg",
           "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/gallery/whatsapp-image-2025-12-30-at-11-31-45-pm-1-high.jpg"
         ],
-        "serviceContent": "<p>Securing cables begins with the strategic pathways they traverse within walls and ceilings.</p><ul><li><strong>The Service:</strong> We execute conduit and metal trunking installations designed to facilitate easy future maintenance.</li><li><strong>The Goal:</strong> To protect wiring from external factors (moisture, heat, friction) and ensure the organized distribution of both high and low-voltage cables.</li></ul>",
+        "serviceContent": "<h3>2. Conduit & Trunking</h3><p>Securing cables begins with the strategic pathways they traverse within walls and ceilings.</p><ul><li><strong>The Service:</strong> We execute conduit and metal trunking installations designed to facilitate easy future maintenance.</li><li><strong>The Goal:</strong> To protect wiring from external factors (moisture, heat, friction) and ensure the organized distribution of both high and low-voltage cables.</li></ul>",
         "shortDescription": "Surface and concealed cable trunking, conduits, and cable trays for organized cable runs.",
         "primaryApplications": "Commercial ceilings, risers, plant rooms, and partition walls.",
         "competitiveAdvantage": "Smooth pull pathways preventing insulation friction, with easy access for maintenance."
@@ -521,7 +521,7 @@
           "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/gallery/whatsapp-image-2025-12-30-at-11-31-44-pm-high.jpg",
           "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/gallery/whatsapp-image-2025-12-30-at-11-31-45-pm-1-high.jpg"
         ],
-        "serviceContent": "<p>Precise control for every specific zone or floor begins with the Distribution Boards (DB).</p><ul><li><strong>The Service:</strong> We install sub-distribution boards with balanced Load Balancing to prevent power outages or breaker failures caused by excessive electrical pressure.</li></ul>",
+        "serviceContent": "<h3>3. DB Box Installation</h3><p>Precise control for every specific zone or floor begins with the Distribution Boards (DB).</p><ul><li><strong>The Service:</strong> We install sub-distribution boards with balanced Load Balancing to prevent power outages or breaker failures caused by excessive electrical pressure.</li></ul>",
         "shortDescription": "Sub-distribution board assembly with zone isolation and three-phase load balancing.",
         "primaryApplications": "Apartments, office floors, retail units, and residential villa zones.",
         "competitiveAdvantage": "Prevents nuisance tripping and extends electrical component lifespan."
@@ -548,7 +548,7 @@
           "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/gallery/whatsapp-image-2025-12-30-at-11-31-44-pm-high.jpg",
           "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/gallery/whatsapp-image-2025-12-30-at-11-31-45-pm-1-high.jpg"
         ],
-        "serviceContent": "<p>Our expertise is not limited to power; it encompasses the vital infrastructure for communication and security.</p><ul><li><strong>The Service:</strong> Includes wiring for fire alarm systems, CCTV, data networks, and intercoms.</li><li><strong>Excellence:</strong> We ensure the strict separation of low-voltage pathways from power cables to guarantee signal purity and prevent electromagnetic interference.</li></ul>",
+        "serviceContent": "<h3>4. Low Voltage (LV) Systems</h3><p>Our expertise is not limited to power; it encompasses the vital infrastructure for communication and security.</p><ul><li><strong>The Service:</strong> Includes wiring for fire alarm systems, CCTV, data networks, and intercoms.</li><li><strong>Excellence:</strong> We ensure the strict separation of low-voltage pathways from power cables to guarantee signal purity and prevent electromagnetic interference.</li></ul>",
         "shortDescription": "Cabling and installation for CCTV, fire alarms, access control, intercoms, and high-speed data networks.",
         "primaryApplications": "Commercial offices, residential communities, warehouses, and hospitality venues.",
         "competitiveAdvantage": "Zero electromagnetic interference thanks to isolated shielded trunking pathways."
@@ -575,7 +575,7 @@
           "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/gallery/whatsapp-image-2025-12-30-at-11-31-44-pm-high.jpg",
           "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/gallery/whatsapp-image-2025-12-30-at-11-31-45-pm-1-high.jpg"
         ],
-        "serviceContent": "<p>5. Testing & Commissioning: We do not consider a project complete upon installation; the most critical phase is verifying absolute safety.</p><ul><li><strong>The Service:</strong> We conduct insulation resistance tests (Megger Test), earthing inspections, and verify breaker responsiveness in emergency scenarios.</li><li><strong>The Guarantee:</strong> We hand over the project fully operational and at maximum safety levels, providing the client with comprehensive As-built Drawings.</li></ul>",
+        "serviceContent": "<h3>5. Testing & Commissioning</h3><p>We do not consider a project complete upon installation; the most critical phase is verifying absolute safety.</p><ul><li><strong>The Service:</strong> We conduct insulation resistance tests (Megger Test), earthing inspections, and verify breaker responsiveness in emergency scenarios.</li><li><strong>The Guarantee:</strong> We hand over the project fully operational and at maximum safety levels, providing the client with comprehensive As-built Drawings.</li></ul>",
         "shortDescription": "Comprehensive Megger insulation testing, earthing verification, and emergency load trip checks.",
         "primaryApplications": "Pre-handover statutory testing, fit-out approval, and annual safety audits.",
         "competitiveAdvantage": "Certified engineering test reports providing total operational peace of mind."
