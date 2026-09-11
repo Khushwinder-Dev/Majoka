@@ -1,10 +1,10 @@
 /**
  * TEMPLATE A — "Technical Deep-Dive"
- * Layout: hero image left + description right, key-benefits list,
- * execution process numbered steps, gallery grid at bottom.
+ * Layout: service intro → sub-service detail block (title, description,
+ * primary applications, competitive advantage, key benefits, process pills)
+ * → Why Choose section → gallery grid → CTA
  *
- * Best used for: waterproofing systems, structural / chemical services
- * (GRP, bitumen membrane, polyurea, injection grouting…)
+ * Assign via index.ts SUBSERVICE_TEMPLATE_OVERRIDE or SERVICE_TEMPLATE_MAP.
  */
 
 "use client";
@@ -12,13 +12,23 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CheckCircle2, ChevronRight, ArrowRight, Phone, Layers } from "lucide-react";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
+const FALLBACK_GALLERY = [
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8.png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (3).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (4).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (5).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (6).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (7).png",
+  "/media/servicesListing/unsplash_CPs2X8JYmS8 (8).png",
+];
 
-function Img({
+function SmartImg({
   src,
   alt,
   className,
@@ -39,12 +49,93 @@ function Img({
       priority={priority}
       sizes="(max-width:768px) 100vw, 50vw"
       className={className ?? "object-cover"}
-      onError={() => setS(FALLBACK)}
+      onError={() => { if (s !== FALLBACK) setS(FALLBACK); }}
     />
   );
 }
 
-/* ─── component ──────────────────────────────────────────────── */
+/* ─── sub-service detail block ────────────────────────────────── */
+function SubBlock({
+  sub,
+  isArabic,
+}: {
+  sub: SubServiceItem;
+  isArabic: boolean;
+}) {
+  return (
+    <div className="border-b border-stone-100 pb-7 last:border-0 last:pb-0">
+      {/* Title */}
+      <h3 className="text-[16px] sm:text-[17px] font-extrabold text-[#009e90] mb-2 leading-snug">
+        {sub.serviceTitle}
+      </h3>
+
+      {/* Description */}
+      <p className="text-[13.5px] text-stone-600 leading-relaxed mb-3">
+        {sub.serviceContent || sub.shortDescription}
+      </p>
+
+      {/* Primary Applications */}
+      {sub.primaryApplications && (
+        <div className="flex items-start gap-2 mb-1.5">
+          <CheckCircle2 className="w-4 h-4 text-[#009e90] flex-shrink-0 mt-[2px]" />
+          <p className="text-[13px] text-stone-700 leading-relaxed">
+            <span className="font-semibold text-stone-900">
+              {isArabic ? "الاستخدامات الأساسية: " : "Primary Applications: "}
+            </span>
+            {sub.primaryApplications}
+          </p>
+        </div>
+      )}
+
+      {/* Competitive Advantage */}
+      {sub.competitiveAdvantage && (
+        <div className="flex items-start gap-2 mb-2">
+          <CheckCircle2 className="w-4 h-4 text-[#009e90] flex-shrink-0 mt-[2px]" />
+          <p className="text-[13px] text-stone-700 leading-relaxed">
+            <span className="font-semibold text-stone-900">
+              {isArabic ? "الميزة التنافسية: " : "Competitive Advantage: "}
+            </span>
+            {sub.competitiveAdvantage}
+          </p>
+        </div>
+      )}
+
+      {/* Key Benefits */}
+      {sub.keyBenefits && sub.keyBenefits.length > 0 && (
+        <ul className="flex flex-col gap-1.5 mt-3">
+          {sub.keyBenefits.map((b, i) => (
+            <li key={i} className="flex items-start gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#009e90] flex-shrink-0 mt-[3px]" />
+              <span className="text-[12.5px] text-stone-600 leading-relaxed">{b}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Process steps — numbered pill row */}
+      {sub.process && sub.process.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {sub.process.map((step, i) => {
+            const label = step.split(":")[0].trim();
+            return (
+              <span
+                key={i}
+                className="inline-flex items-center gap-1.5 text-[11.5px] text-stone-600 bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-full"
+              >
+                <span className="w-4 h-4 rounded-full bg-[#009e90] text-white text-[10px] font-extrabold flex items-center justify-center flex-shrink-0">
+                  {i + 1}
+                </span>
+                {label}
+              </span>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── main component ──────────────────────────────────────────── */
 interface Props {
   service: ServiceItem;
   sub: SubServiceItem;
@@ -52,208 +143,104 @@ interface Props {
 }
 
 export default function TemplateA({ service, sub, isArabic }: Props) {
-  const galleryImages =
-    sub.servicesgalaryImages?.length ? sub.servicesgalaryImages :
-    service.servicesgalaryImages?.length ? service.servicesgalaryImages : [];
+  const gallery: string[] =
+    sub.servicesgalaryImages?.length     ? sub.servicesgalaryImages :
+    service.servicesgalaryImages?.length ? service.servicesgalaryImages :
+    FALLBACK_GALLERY;
+
+  const siblings = service.subservices.filter((s) => s.serviceSlug !== sub.serviceSlug);
 
   return (
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
-      {/* ── 1. HERO: image left + description right ────────────── */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12">
-        {/* Image */}
-        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-stone-100 shadow-md">
-          <Img src={sub.serviceImage || service.serviceImage} alt={sub.serviceTitle} priority />
-          {/* Category badge */}
-          <div className="absolute top-4 left-4 bg-[#009e90] text-white text-[11px] font-bold px-3 py-1 rounded-full tracking-wide">
-            {service.category}
-          </div>
-        </div>
+      {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
+      <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-l-4 border-[#009e90]/40 pl-4">
+        {service.serviceContent}
+      </p>
+    
 
-        {/* Content */}
-        <div className="flex flex-col justify-center gap-5">
-          <div>
-            <p className="text-[11px] font-extrabold tracking-[0.22em] uppercase text-[#009e90] mb-2">
-              {service.serviceTitle}
-            </p>
-            <h2 className="text-[26px] sm:text-[30px] font-extrabold text-stone-900 leading-tight mb-3">
-              {sub.serviceTitle}
-            </h2>
-            <p className="text-[14.5px] text-stone-600 leading-relaxed">
-              {sub.serviceContent}
-            </p>
-          </div>
-
-          {/* Short description highlight */}
-          {sub.shortDescription && (
-            <div className="border-l-4 border-[#009e90] pl-4 bg-[#f0faf9] py-3 pr-3 rounded-r-xl">
-              <p className="text-[13px] text-stone-700 leading-relaxed italic">
-                {sub.shortDescription}
-              </p>
+      {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
+      <section className="mb-10">
+        <SubBlock sub={sub} isArabic={isArabic} />
+      </section>
+  <pre className="whitespace-pre-wrap">
+    {JSON.stringify(service, null, 2)}
+  </pre>
+      {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
+      {service.whyChooseTitle && (
+        <section className="mb-10">
+          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-stone-900 mb-2 leading-snug">
+            {service.whyChooseTitle}
+          </h3>
+          <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
+            {service.whyChooseContent}
+          </p>
+          {service.whyChoosePoints?.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {service.whyChoosePoints.map((pt, i) => (
+                <div key={i} className="bg-stone-50 border border-stone-100 rounded-xl p-4">
+                  <h4 className="text-[13px] font-bold text-stone-900 mb-1 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#009e90] flex-shrink-0" />
+                    {pt.title}
+                  </h4>
+                  <p className="text-[12px] text-stone-500 leading-relaxed pl-5">
+                    {pt.description}
+                  </p>
+                </div>
+              ))}
             </div>
           )}
+        </section>
+      )}
 
-          {/* CTA */}
-          <div className="flex flex-wrap gap-3 mt-2">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] px-6 py-2.5 rounded-full transition-colors shadow-sm"
-            >
-              {isArabic ? "احجز استشارة" : "Request a Consultation"}
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-            <Link
-              href={`/services-details?service=${service.serviceNumber}`}
-              className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-stone-600 hover:text-[#009e90] transition-colors"
-            >
-              <ChevronRight className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
-              {isArabic ? "جميع خدمات " + service.serviceTitle : "All " + service.serviceTitle}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 2. KEY BENEFITS ────────────────────────────────────── */}
-      {sub.keyBenefits && sub.keyBenefits.length > 0 && (
-        <section className="mb-12">
-          <div className="flex items-center gap-2 mb-5">
-            <Layers className="w-5 h-5 text-[#009e90]" />
-            <h3 className="text-[18px] font-extrabold text-stone-900">
-              {isArabic ? "المزايا الرئيسية" : "Key Benefits"}
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {sub.keyBenefits.map((benefit, i) => (
+      {/* ── 4. GALLERY GRID ───────────────────────────────────── */}
+      {gallery.length > 0 && (
+        <section className="mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+            {gallery.map((src, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 bg-white border border-stone-100 rounded-xl p-4 shadow-xs hover:border-[#009e90]/30 transition-colors"
+                className="relative aspect-square rounded-lg overflow-hidden bg-stone-100"
               >
-                <CheckCircle2 className="w-4.5 h-4.5 text-[#009e90] flex-shrink-0 mt-0.5" />
-                <p className="text-[13px] text-stone-700 leading-relaxed">{benefit}</p>
+                <SmartImg src={src} alt={`${sub.serviceTitle} ${i + 1}`} />
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {/* ── 3. PRIMARY APPLICATIONS + COMPETITIVE ADVANTAGE ──────── */}
-      {(sub.primaryApplications || sub.competitiveAdvantage) && (
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
-          {sub.primaryApplications && (
-            <div className="bg-stone-50 border border-stone-200 rounded-2xl p-5">
-              <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90] mb-2">
-                {isArabic ? "الاستخدامات الأساسية" : "Primary Applications"}
-              </p>
-              <p className="text-[13.5px] text-stone-700 leading-relaxed">
-                {sub.primaryApplications}
-              </p>
-            </div>
-          )}
-          {sub.competitiveAdvantage && (
-            <div className="bg-[#f0faf9] border border-[#009e90]/20 rounded-2xl p-5">
-              <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90] mb-2">
-                {isArabic ? "ميزتنا التنافسية" : "Competitive Advantage"}
-              </p>
-              <p className="text-[13.5px] text-stone-700 leading-relaxed">
-                {sub.competitiveAdvantage}
-              </p>
-            </div>
-          )}
-        </section>
-      )}
-
-      {/* ── 4. EXECUTION PROCESS ───────────────────────────────── */}
-      {sub.process && sub.process.length > 0 && (
-        <section className="mb-12">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="w-5 h-5 rounded-full bg-[#009e90] flex items-center justify-center flex-shrink-0">
-              <span className="text-[10px] font-extrabold text-white">✓</span>
-            </span>
-            <h3 className="text-[18px] font-extrabold text-stone-900">
-              {isArabic ? "مراحل التنفيذ" : "Execution Process"}
-            </h3>
-          </div>
-          <div className="flex flex-col gap-0">
-            {sub.process.map((step, i) => {
-              const [title, ...rest] = step.split(":");
-              const desc = rest.join(":").trim();
-              return (
-                <div key={i} className="flex gap-4 pb-6 relative">
-                  {/* vertical line */}
-                  {i < sub.process!.length - 1 && (
-                    <div className="absolute left-[18px] top-9 bottom-0 w-[2px] bg-[#009e90]/20" />
-                  )}
-                  {/* step number */}
-                  <div className="w-9 h-9 rounded-full bg-[#009e90] text-white flex items-center justify-center flex-shrink-0 text-[13px] font-extrabold shadow-sm z-10">
-                    {i + 1}
-                  </div>
-                  <div className="pt-1.5">
-                    <p className="text-[13.5px] font-bold text-stone-900 mb-0.5">
-                      {desc ? title : step}
-                    </p>
-                    {desc && (
-                      <p className="text-[12.5px] text-stone-500 leading-relaxed">{desc}</p>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
-
-      {/* ── 5. PROJECT GALLERY ─────────────────────────────────── */}
-      {galleryImages.length > 0 && (
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-[18px] font-extrabold text-stone-900">
-              {isArabic ? "معرض المشاريع" : "Project Gallery"}
-            </h3>
-            <span className="text-[11px] text-stone-400">{galleryImages.length} {isArabic ? "صورة" : "photos"}</span>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {galleryImages.map((src, i) => (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-stone-100 shadow-xs hover:shadow-md transition-shadow">
-                <Img src={src} alt={`${sub.serviceTitle} ${i + 1}`} />
-              </div>
+      {/* ── 5. OTHER SUB-SERVICES ─────────────────────────────── */}
+      {siblings.length > 0 && (
+        <section className="mb-10">
+          <h3 className="text-[13px] font-extrabold text-stone-500 uppercase tracking-wider mb-3">
+            {isArabic ? "خدمات فرعية أخرى" : "Other Sub-Services"}
+          </h3>
+          <div className="flex flex-col gap-1.5">
+            {siblings.map((s) => (
+              <Link
+                key={s.serviceSlug}
+                href={`/services-details?service=${service.serviceNumber}&sub=${s.serviceSlug}`}
+                className="flex items-center justify-between px-4 py-3 rounded-xl border border-stone-100 hover:border-[#009e90]/30 hover:bg-[#f0faf9] transition-all group"
+              >
+                <span className="text-[13px] font-medium text-stone-700 group-hover:text-[#009e90] transition-colors">
+                  {s.serviceTitle}
+                </span>
+                <ArrowRight className={`w-3.5 h-3.5 text-stone-300 group-hover:text-[#009e90] transition-colors flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
+              </Link>
             ))}
           </div>
         </section>
       )}
 
-      {/* ── 6. BOTTOM CTA STRIP ────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-[#0b2447] to-[#0d2e5a] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-5">
-        <div>
-          <p className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#009e90] mb-1">
-            {isArabic ? "ابدأ مشروعك اليوم" : "Start Your Project Today"}
-          </p>
-          <h4 className="text-[17px] sm:text-[19px] font-extrabold text-white leading-snug">
-            {isArabic
-              ? `هل تحتاج ${sub.serviceTitle}؟ تواصل معنا الآن`
-              : `Need ${sub.serviceTitle}? Get in touch`}
-          </h4>
-          <p className="text-[12px] text-white/70 mt-1">
-            {isArabic
-              ? "فريقنا الهندسي جاهز لمعاينة موقعك وتقديم عرض سعر مخصص."
-              : "Our engineering team is ready to inspect your site and provide a tailored quote."}
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] px-6 py-3 rounded-full transition-colors whitespace-nowrap"
-          >
-            {isArabic ? "احجز معاينة مجانية" : "Book Free Site Visit"}
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-          <a
-            href="tel:+97155617330"
-            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-[13px] px-5 py-3 rounded-full transition-colors whitespace-nowrap"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            {isArabic ? "اتصل بنا" : "Call Us Now"}
-          </a>
-        </div>
+      {/* ── 6. CTA BUTTON ─────────────────────────────────────── */}
+      <section className="flex justify-center pt-2 pb-4">
+        <Link
+          href="/contact"
+          className="inline-flex items-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[14px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+        >
+          {isArabic ? "احجز زيارة فنية" : "Schedule a Visit"}
+          <ArrowRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+        </Link>
       </section>
 
     </article>

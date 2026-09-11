@@ -31,7 +31,7 @@ const SERVICE_TEMPLATE_MAP: Record<string, TemplateKey> = {
   // All currently use default; swap when designs are ready:
   "waterproofing":               "default",
   "swimming-pools":              "default",
-  "electrical-installations":    "default",
+  "electrical-installations":    "A",
   "electrical":                  "default",
   "plumbing-sanitary":           "default",
   "plumbing":                    "default",

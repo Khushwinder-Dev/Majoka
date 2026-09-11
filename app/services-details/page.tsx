@@ -484,11 +484,13 @@ function ServiceDetailsContent() {
               <div className="flex items-center gap-2.5 pb-4 border-b border-stone-100">
                 <span className="w-[3px] h-7 bg-[#009e90] rounded-full flex-shrink-0" />
                 <div>
-                  <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90]">
-                    {activeSub ? service.serviceTitle : service.category}
+                  <p className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-[#009e90] hidden">
+                    {/* {activeSub ? service.serviceTitle : service.category} */}
+                    {service.serviceTitle + service.tagline}
                   </p>
-                  <h2 className="text-[20px] sm:text-[24px] font-extrabold text-stone-900 leading-tight">
-                    {activeSub ? activeSub.serviceTitle : service.serviceTitle}
+                  <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight">
+                    {/* {activeSub ? activeSub.serviceTitle : service.serviceTitle} */}
+                    {service.serviceTitle + service.tagline}
                   </h2>
                 </div>
               </div>

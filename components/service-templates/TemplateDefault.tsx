@@ -168,9 +168,6 @@ export default function TemplateDefault({ service, sub, isArabic }: Props) {
       {/* ── 2. THIS SUB-SERVICE BLOCK ─────────────────────────── */}
       <section className="mb-10">
         <SubBlock sub={sub} isArabic={isArabic} />
-        <pre className="whitespace-pre-wrap">
-    {JSON.stringify(sub, null, 2)}
-  </pre>
       </section>
 
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
