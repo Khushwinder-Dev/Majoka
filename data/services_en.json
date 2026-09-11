@@ -56,6 +56,13 @@
     "subservices": [
       {
         "id": "grp-fiberglass",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "GRP & Fiberglass Waterproofing",
         "serviceSlug": "grp-fiberglass",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/whatsapp-image-2025-12-21-at-10-54-34-pm-standard-p2j3we.webp",
@@ -70,7 +77,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-23-at-11-47-23-pm-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-25-at-5-24-19-pm-high.webp"
         ],
-        "serviceContent": "Known as the 'King of Insulation' due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer. It provides a single, seamless, joint-free layer that lasts for decades and is completely safe for health and potable water storage (Food Grade).",
+        "serviceContent": "<h3>1. GRP & Fiberglass Waterproofing</h3><p>Known as the 'King of Insulation' due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer.</p><ul><li><strong>Durability:</strong> Provides a single, seamless, joint-free layer that lasts for decades.</li><li><strong>Safety:</strong> Completely safe for health and potable water storage (Food Grade).</li></ul>",
         "shortDescription": "King of insulation: tough glass fiber embedded resins for water tanks and chemical channels.",
         "primaryApplications": "Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.",
         "competitiveAdvantage": "Provides a single, seamless, joint-free layer that lasts for decades. Completely safe for health and water storage (Food Grade).",
@@ -82,6 +89,13 @@
       },
       {
         "id": "combo-system",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "Combo System Roof Waterproofing",
         "serviceSlug": "combo-system",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/banner/combo-roof-waterproof-standard-qz7u78.webp",
@@ -96,7 +110,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/images-68-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/roofer-inspecting-a-roof-coated-coating-fluid-applied-liquid-applied-roof-for-damage-and-maintenance-comm.webp"
         ],
-        "serviceContent": "Combo System Roof Waterproofing is the smart dual solution for water & heat insulation. In light of harsh climatic conditions and soaring temperatures, waterproofing alone is no longer enough to protect buildings. At Taj Al Rahmah, we offer the integrated 'Combo System' - a revolutionary technology that combines waterproofing, thermal insulation, and final finishing in a single process. Consisting of Polyurethane Foam topped with cementitious and acrylic protective layers, it creates a single, solid, seamless joint-free layer.",
+        "serviceContent": "<h3>2. Combo System Roof Waterproofing</h3><p>The smart dual solution for water and heat insulation combining waterproofing, thermal insulation, and final finishing in a single process.</p><ul><li><strong>The System:</strong> Polyurethane Foam topped with cementitious and acrylic protective layers forming a seamless joint-free barrier.</li><li><strong>Energy Savings:</strong> Reduces air conditioning electricity consumption by up to 40%.</li><li><strong>Warranty:</strong> Up to 25 years against leakage.</li></ul>",
         "shortDescription": "Revolutionary dual-action system combining thermal insulation (Polyurethane foam) with complete water barrier protection.",
         "primaryApplications": "Villa roofs, commercial buildings, industrial warehouses, and residential towers.",
         "competitiveAdvantage": "Reduces AC electricity consumption by up to 40% while offering warranties up to 25 years against leakage.",
@@ -116,6 +130,13 @@
       },
       {
         "id": "epoxy-floor-coating",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "Epoxy Floor Coating",
         "serviceSlug": "epoxy-floor-coating",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/banner/003e96cf-5d33-4dff-98bf-74477b9228b3-standard.webp",
@@ -130,7 +151,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-35-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-36-high.webp"
         ],
-        "serviceContent": "Epoxy Floor Coating transforms traditional concrete floors into solid, glossy, and highly resistant surfaces capable of withstanding harsh operating conditions. Formulated with high-grade resin and hardener, epoxy forms a rigid plastic layer with superior abrasion, chemical, and oil resistance.",
+        "serviceContent": "<h3>3. Epoxy Floor Coating</h3><p>Transforms traditional concrete floors into solid, glossy, and highly resistant surfaces capable of withstanding harsh operating conditions.</p><ul><li><strong>The Material:</strong> High-grade resin and hardener forming a rigid plastic layer with superior abrasion, chemical, and oil resistance.</li><li><strong>Applications:</strong> Car parks, warehouses, industrial factories, laboratories, hospitals, and showrooms.</li></ul>",
         "shortDescription": "High-durability polymeric flooring offering anti-slip, chemical resistance, and polished aesthetics.",
         "primaryApplications": "Car parks, warehouses, industrial factories, laboratories, hospitals, and showrooms.",
         "competitiveAdvantage": "High resistance to oils, chemicals, heavy forklift traffic, seamless hygienic cleaning, and long service life.",
@@ -150,6 +171,13 @@
       },
       {
         "id": "bitumen-membrane",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "Bitumen Membrane Waterproofing",
         "serviceSlug": "bitumen-membrane",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/banner/alevli-yalitim-uygulamasi-standard-amwtjn.webp",
@@ -164,7 +192,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/yalitim-malzemesi-suren-isciler-1-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/yalitim-uygulamasi-high.webp"
         ],
-        "serviceContent": "Bitumen Membrane is the integrated engineering solution for protecting structures against water leakage and groundwater moisture. Manufactured from modified bitumen reinforced with non-woven polyester or fiberglass mats, these torch-applied 3mm-4mm rolls form an impenetrable shield.",
+        "serviceContent": "<h3>4. Bitumen Membrane Waterproofing</h3><p>The integrated engineering solution for protecting structures against water leakage and groundwater moisture using torch-applied modified bitumen rolls.</p><ul><li><strong>APP Type:</strong> Thermoplastic-modified, ideal for high-temperature Gulf climates with excellent UV resistance.</li><li><strong>SBS Type:</strong> Synthetic rubber-modified, delivering extreme elasticity across thermal expansion cycles.</li></ul>",
         "shortDescription": "Torch-applied SBS and APP modified bituminous rolls for foundations, basements, and podium roofs.",
         "primaryApplications": "Building foundations, concrete raft bases, retaining walls, podium roofs, bathrooms, and wet areas.",
         "competitiveAdvantage": "High flexibility in handling minor structural settlement and outstanding resistance to soil moisture and salts.",
@@ -184,6 +212,13 @@
       },
       {
         "id": "polyurea-coating",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "Polyurea Coating Waterproofing",
         "serviceSlug": "polyurea-coating",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/banner/what-is-polyurea-coatings-newtec-group-standard-ewgzkt.webp",
@@ -198,7 +233,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-50-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/spray-on-polyurea-coating-for-roof-waterproofing-p-120-high.webp"
         ],
-        "serviceContent": "Polyurea stands out as the pinnacle of modern waterproofing and surface protection technology. Applied using specialized high-pressure, high-temperature plural component spray equipment, Polyurea cures within 10 to 30 seconds. With elongation up to 400% and extraordinary mechanical tenacity, it creates impenetrable armor.",
+        "serviceContent": "<h3>5. Polyurea Coating Waterproofing</h3><p>The pinnacle of modern waterproofing technology, applied using specialized high-pressure spray equipment and curing within 10 to 30 seconds.</p><ul><li><strong>Flexibility:</strong> 400% elongation bridges thermal cracks and active vibrations without tearing.</li><li><strong>Eco-Friendly:</strong> 100% solids, zero VOCs, certified safe for potable water reservoirs.</li></ul>",
         "shortDescription": "Ultra-fast curing elastomeric spray membrane curing in seconds with up to 400% elongation.",
         "primaryApplications": "Large-scale commercial roofs, industrial factories, water reservoirs, sewage treatment plants, bridge decks, and aircraft hangars.",
         "competitiveAdvantage": "Cures in seconds allowing same-day return to service; withstands temperatures up to 120C and high dynamic movements.",
@@ -211,6 +246,13 @@
       },
       {
         "id": "injection-waterproofing",
+        "service": {
+          "serviceTitle": "All Types of Waterproofing",
+          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "category": "Waterproofing",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+        },
         "serviceTitle": "Injection Waterproofing & Crack Repair",
         "serviceSlug": "injection-waterproofing",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/banner/images-25-standard.webp",
@@ -225,7 +267,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-55-high-x9v220.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-56-high.webp"
         ],
-        "serviceContent": "Crack Injection is the specialized engineering solution for active leak stoppage and structural strengthening. Pumping high-performance chemical resins (such as hydrophilic polyurethane or structural epoxy) under controlled high pressure deep into concrete fractures seals water leaks from within and restores structural integrity.",
+        "serviceContent": "<h3>6. Injection Waterproofing & Crack Repair</h3><p>The specialized engineering solution for active leak stoppage and structural strengthening using high-performance chemical resins injected under controlled pressure.</p><ul><li><strong>PU Injection:</strong> Reacts instantly with water to expand and stop running leaks immediately.</li><li><strong>Epoxy Injection:</strong> Delivers tensile strength surpassing native concrete to heal dry structural cracks.</li></ul>",
         "shortDescription": "High-pressure polyurethane and epoxy injection grouting sealing active water leaks and restoring concrete cohesion without demolition.",
         "primaryApplications": "Basement walls, water retaining structures, swimming pool shell cracks, elevator pits, and leaking expansion joints.",
         "competitiveAdvantage": "No demolition required; treats deep-seated fissures from within; stops running water instantly upon contact.",
@@ -293,6 +335,13 @@
     "subservices": [
       {
         "id": "pool-structural-construction",
+        "service": {
+          "serviceTitle": "Swimming Pool Installation & Maintenance",
+          "tagline": "The Art of Pool Construction: Taj Alrahmah's Guide to Integrated Excellence",
+          "category": "Swimming Pools",
+          "serviceContent": "Building a swimming pool is not merely a construction task; it is a precise engineering project that requires a perfect balance between structural strength, mechanical systems, and aesthetic appeal. At Taj Alrahmah, we follow an 'Integrated Execution' methodology to ensure the delivery of a pool built to last for generations, seamlessly uniting civil, mechanical, and electrical engineering.",
+          "whyChooseContent": "Because we integrate all disciplines - civil, mechanical, and electrical - under one management. This means one point of accountability, one comprehensive warranty, and unmatched quality. We turn your dream of owning a private pool into a safe, enjoyable, and engineered reality."
+        },
         "serviceTitle": "Structural Construction",
         "serviceSlug": "structural-construction",
         "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/banner/swimming-pool-water-proofing-services-500x500-1-standard.webp",
@@ -307,13 +356,20 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/structural-construction/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-        "serviceContent": "Every successful pool journey begins with a solid concrete foundation. In this stage, we focus on soil engineering and the use of high-quality, Sulfate-Resistant reinforced concrete to ensure the pool withstands internal water pressure and external soil pressure, preventing any future subsidence or structural cracking.",
+        "serviceContent": "<h3>1. Structural Construction</h3><p>Every successful pool journey begins with a solid concrete foundation engineered to withstand both internal water pressure and external soil pressure.</p><ul><li><strong>The Process:</strong> Soil engineering using high-quality Sulfate-Resistant reinforced concrete preventing any future subsidence or structural cracking.</li><li><strong>The Goal:</strong> A structurally sound shell that forms the permanent backbone of the pool for generations.</li></ul>",
         "shortDescription": "Heavy-duty sulfate-resistant reinforced concrete pool foundations engineered against soil and hydraulic stresses.",
         "primaryApplications": "Residential private pools, rooftop infinity pools, hotel and resort aquatic facilities.",
         "competitiveAdvantage": "Engineered rebar reinforcement and high-grade concrete casting eliminating subsidence and cracks."
       },
       {
         "id": "pool-filtration-pumps",
+        "service": {
+          "serviceTitle": "Swimming Pool Installation & Maintenance",
+          "tagline": "The Art of Pool Construction: Taj Alrahmah's Guide to Integrated Excellence",
+          "category": "Swimming Pools",
+          "serviceContent": "Building a swimming pool is not merely a construction task; it is a precise engineering project that requires a perfect balance between structural strength, mechanical systems, and aesthetic appeal. At Taj Alrahmah, we follow an 'Integrated Execution' methodology to ensure the delivery of a pool built to last for generations, seamlessly uniting civil, mechanical, and electrical engineering.",
+          "whyChooseContent": "Because we integrate all disciplines - civil, mechanical, and electrical - under one management. This means one point of accountability, one comprehensive warranty, and unmatched quality. We turn your dream of owning a private pool into a safe, enjoyable, and engineered reality."
+        },
         "serviceTitle": "Filtration & Pump Systems",
         "serviceSlug": "filtration-pump-systems",
         "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/banner/outdoor-pool-750x750-c-default-standard-v54qzf.webp",
@@ -328,13 +384,20 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/filtration-pump-systems/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-        "serviceContent": "Mechanical systems are the beating heart of the pool. We design a complete hydraulic cycle that ensures efficient water circulation and purification. Utilizing advanced sand filters, smart disinfection systems (such as automated salt or chlorine systems), and energy-efficient variable speed pumps to guarantee healthy water at all times.",
+        "serviceContent": "<h3>2. Filtration & Pump Systems</h3><p>Mechanical systems are the beating heart of the pool, ensuring efficient water circulation and purification at all times.</p><ul><li><strong>The System:</strong> Advanced sand filters, smart automated salt or chlorine disinfection systems, and energy-efficient variable speed pumps.</li><li><strong>The Result:</strong> Guaranteed healthy, crystal-clear water with minimized operating costs.</li></ul>",
         "shortDescription": "Smart hydraulic circulation, sand filters, automated chlorinators, and energy-efficient pumps.",
         "primaryApplications": "Commercial and residential pool water purification systems.",
         "competitiveAdvantage": "Silent, energy-saving pump systems with automated chemical dosing and balanced water turnover."
       },
       {
         "id": "pool-advanced-waterproofing",
+        "service": {
+          "serviceTitle": "Swimming Pool Installation & Maintenance",
+          "tagline": "The Art of Pool Construction: Taj Alrahmah's Guide to Integrated Excellence",
+          "category": "Swimming Pools",
+          "serviceContent": "Building a swimming pool is not merely a construction task; it is a precise engineering project that requires a perfect balance between structural strength, mechanical systems, and aesthetic appeal. At Taj Alrahmah, we follow an 'Integrated Execution' methodology to ensure the delivery of a pool built to last for generations, seamlessly uniting civil, mechanical, and electrical engineering.",
+          "whyChooseContent": "Because we integrate all disciplines - civil, mechanical, and electrical - under one management. This means one point of accountability, one comprehensive warranty, and unmatched quality. We turn your dream of owning a private pool into a safe, enjoyable, and engineered reality."
+        },
         "serviceTitle": "Advanced Waterproofing System",
         "serviceSlug": "advanced-waterproofing",
         "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/banner/outdoor-pool-750x750-c-default-standard-v54qzf.webp",
@@ -349,13 +412,20 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/advanced-waterproofing/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-        "serviceContent": "A beautiful pool is worthless if it leaks. We apply specialized waterproofing layers (such as GRP lining or flexible cementitious coatings) followed by rigorous hydrostatic pressure testing to protect neighboring foundations, prevent water waste, and seal critical points like lighting fixtures and pipe outlets.",
+        "serviceContent": "<h3>3. Advanced Waterproofing System</h3><p>A beautiful pool is worthless if it leaks. We apply multi-layer specialized waterproofing followed by rigorous hydrostatic pressure testing.</p><ul><li><strong>The System:</strong> GRP lining or flexible cementitious coatings protecting neighboring foundations and preventing water waste.</li><li><strong>Critical Points:</strong> All lighting fixtures, pipe outlets, and penetrations are hermetically sealed.</li></ul>",
         "shortDescription": "Hydrostatic leak protection using multi-layer GRP lining and flexible cementitious membranes.",
         "primaryApplications": "New pool shell insulation, underwater light niches, skimmers, and return nozzle penetrations.",
         "competitiveAdvantage": "Hermetic sealing around all plumbing penetration points tested with full water submersion."
       },
       {
         "id": "pool-tile-mosaic",
+        "service": {
+          "serviceTitle": "Swimming Pool Installation & Maintenance",
+          "tagline": "The Art of Pool Construction: Taj Alrahmah's Guide to Integrated Excellence",
+          "category": "Swimming Pools",
+          "serviceContent": "Building a swimming pool is not merely a construction task; it is a precise engineering project that requires a perfect balance between structural strength, mechanical systems, and aesthetic appeal. At Taj Alrahmah, we follow an 'Integrated Execution' methodology to ensure the delivery of a pool built to last for generations, seamlessly uniting civil, mechanical, and electrical engineering.",
+          "whyChooseContent": "Because we integrate all disciplines - civil, mechanical, and electrical - under one management. This means one point of accountability, one comprehensive warranty, and unmatched quality. We turn your dream of owning a private pool into a safe, enjoyable, and engineered reality."
+        },
         "serviceTitle": "Tile & Mosaic Fixing",
         "serviceSlug": "tile-mosaic-fixing",
         "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/banner/alignment-mosaic-standard-lz1vfy.webp",
@@ -370,13 +440,20 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-        "serviceContent": "We select the finest glass mosaics and ceramics resistant to pool chemicals and UV sunlight. Using anti-bacterial and anti-fungal adhesives and epoxy grouting, we guarantee a perfectly level installation that provides a luxurious look while ensuring a smooth, safe surface for swimmers.",
+        "serviceContent": "<h3>4. Tile & Mosaic Fixing</h3><p>We select the finest glass mosaics and ceramics resistant to pool chemicals and UV sunlight for a luxurious and safe finish.</p><ul><li><strong>The Materials:</strong> Anti-bacterial and anti-fungal adhesives with epoxy grouting for a perfectly level installation.</li><li><strong>The Result:</strong> A luxurious look with a smooth, safe surface that resists chlorine and solar discoloration.</li></ul>",
         "shortDescription": "Glass mosaic and ceramic installation with chemical-resistant, anti-fungal epoxy grout.",
         "primaryApplications": "Pool floor, wall steps, coping edge tiles, and underwater accent artwork.",
         "competitiveAdvantage": "Smooth non-abrasive edges with zero discoloration from chlorine or solar exposure."
       },
       {
         "id": "pool-maintenance-repair",
+        "service": {
+          "serviceTitle": "Swimming Pool Installation & Maintenance",
+          "tagline": "The Art of Pool Construction: Taj Alrahmah's Guide to Integrated Excellence",
+          "category": "Swimming Pools",
+          "serviceContent": "Building a swimming pool is not merely a construction task; it is a precise engineering project that requires a perfect balance between structural strength, mechanical systems, and aesthetic appeal. At Taj Alrahmah, we follow an 'Integrated Execution' methodology to ensure the delivery of a pool built to last for generations, seamlessly uniting civil, mechanical, and electrical engineering.",
+          "whyChooseContent": "Because we integrate all disciplines - civil, mechanical, and electrical - under one management. This means one point of accountability, one comprehensive warranty, and unmatched quality. We turn your dream of owning a private pool into a safe, enjoyable, and engineered reality."
+        },
         "serviceTitle": "Maintenance & Repair Solutions",
         "serviceSlug": "maintenance-repair",
         "serviceBanner": "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/banner/pool-filter-cleaning-1-standard.webp",
@@ -391,7 +468,7 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/maintenance-repair/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-        "serviceContent": "Our commitment does not end at handover. We provide comprehensive maintenance packages to keep all equipment in peak condition. Services include water chemical balancing, filter backwashing, underwater lighting repair, and full pool refurbishment to make old pools look and function like brand new.",
+        "serviceContent": "<h3>5. Maintenance & Repair Solutions</h3><p>Our commitment does not end at handover. We provide comprehensive maintenance packages to keep all equipment in peak condition.</p><ul><li><strong>Services Include:</strong> Water chemical balancing, filter backwashing, underwater lighting repair, and full pool refurbishment.</li><li><strong>Support:</strong> 24/7 technical support with certified pool operators and original spare parts.</li></ul>",
         "shortDescription": "Preventive servicing, chemical balancing, leak inspection, and pool restoration packages.",
         "primaryApplications": "Scheduled weekly pool servicing, urgent pump repairs, and complete pool resurfacing.",
         "competitiveAdvantage": "24/7 technical support with certified pool operators and original spare parts."
@@ -447,12 +524,13 @@
     "subservices": [
       {
         "id": "elec-panel-board",
-        "service":{"serviceTitle": "Electrical Installations & Fit-out",
-        "tagline": "Power and Precision Behind Every Wall",
-        "category": "Electrical",
-        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
-        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
-      },
+        "service": {
+          "serviceTitle": "Electrical Installations & Fit-out",
+          "tagline": "Power and Precision Behind Every Wall",
+          "category": "Electrical",
+          "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+          "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+        },
         "serviceTitle": "Panel Board Installation",
         "serviceSlug": "panel-board-installation",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/panel-board-installation/banner/control-panel-testing-standard.webp",
@@ -474,12 +552,13 @@
       },
       {
         "id": "elec-conduit-trunking",
-        "service":{"serviceTitle": "Electrical Installations & Fit-out",
-        "tagline": "Power and Precision Behind Every Wall",
-        "category": "Electrical",
-        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
-        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
-      },
+        "service": {
+          "serviceTitle": "Electrical Installations & Fit-out",
+          "tagline": "Power and Precision Behind Every Wall",
+          "category": "Electrical",
+          "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+          "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+        },
         "serviceTitle": "Conduit & Trunking",
         "serviceSlug": "conduit-trunking",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/conduit-trunking/banner/normal_66cb1c3df0780-standard.webp",
@@ -501,12 +580,13 @@
       },
       {
         "id": "elec-db-box",
-       "service":{"serviceTitle": "Electrical Installations & Fit-out",
-        "tagline": "Power and Precision Behind Every Wall",
-        "category": "Electrical",
-        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
-        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
-      },
+        "service": {
+          "serviceTitle": "Electrical Installations & Fit-out",
+          "tagline": "Power and Precision Behind Every Wall",
+          "category": "Electrical",
+          "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+          "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+        },
         "serviceTitle": "DB Box Installation",
         "serviceSlug": "db-box-installation",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/db-box-installation/banner/whatsapp-image-2025-12-30-at-9-33-01-pm-1-standard.webp",
@@ -528,12 +608,13 @@
       },
       {
         "id": "elec-low-voltage",
-        "service":{"serviceTitle": "Electrical Installations & Fit-out",
-        "tagline": "Power and Precision Behind Every Wall",
-        "category": "Electrical",
-        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
-        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
-      },
+        "service": {
+          "serviceTitle": "Electrical Installations & Fit-out",
+          "tagline": "Power and Precision Behind Every Wall",
+          "category": "Electrical",
+          "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+          "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+        },
         "serviceTitle": "Low Voltage (LV) Systems",
         "serviceSlug": "low-voltage-systems",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/low-voltage-systems/banner/8-standard.webp",
@@ -555,12 +636,13 @@
       },
       {
         "id": "elec-testing-commissioning",
-       "service":{"serviceTitle": "Electrical Installations & Fit-out",
-        "tagline": "Power and Precision Behind Every Wall",
-        "category": "Electrical",
-        "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
-        "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
-      },
+        "service": {
+          "serviceTitle": "Electrical Installations & Fit-out",
+          "tagline": "Power and Precision Behind Every Wall",
+          "category": "Electrical",
+          "serviceContent": "Electrical systems are the 'nervous system' of any building, requiring extreme precision to ensure continuous performance and maximum safety. At Taj Alrahmah, we provide electrical wiring and interior fit-out services in accordance with the highest engineering standards and international safety regulations.",
+          "whyChooseContent": "Because we believe that 'Electricity accepts no errors.' Our team of engineers and technicians strictly adheres to local building codes and Civil Defense requirements. This ensures an interior finish that blends luxury and aesthetics on the outside with power and absolute safety on the inside."
+        },
         "serviceTitle": "Testing & Commissioning",
         "serviceSlug": "testing-commissioning",
         "serviceBanner": "/servicesSubServicesContent/services/electrical-installations/subservices/testing-commissioning/banner/electrical-testing-commissioning-5-1024x725-standard.webp",
@@ -631,6 +713,13 @@
     "subservices": [
       {
         "id": "plumb-water-supply",
+        "service": {
+          "serviceTitle": "Plumbing & Sanitary Installation Works",
+          "tagline": "Engineering Flow and Sustainability",
+          "category": "Plumbing",
+          "serviceContent": "Plumbing systems are the vital 'arteries' of any facility; even a minor defect can lead to severe structural damage. At Taj Alrahmah, we provide integrated engineering plumbing solutions that ensure supply efficiency and smooth drainage using the highest quality materials and the latest technologies.",
+          "whyChooseContent": "We engineer flow and eliminate leak risks through fused joint technology, precise drainage slopes, and heavy-duty pressure testing. Every fixture is installed with flawless waterproofing behind walls."
+        },
         "serviceTitle": "Water Supply Networks",
         "serviceSlug": "water-supply-networks",
         "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/banner/istockphoto-1093678798-612x612-1-standard (1).webp",
@@ -645,13 +734,20 @@
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/gallery/rsw_1280-94-high.webp",
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/water-supply-networks/gallery/shutterstock_1063804841-min-scaled-high-qjxeve.jpg"
         ],
-        "serviceContent": "Establishing water networks requires precise planning to ensure balanced water pressure and continuous purity. We design and install hot and cold water networks using thermal PPR or PEX piping, which are resistant to corrosion and scale buildup. Tight thermal fusion connections prevent future leaks, while external thermal insulation protects against ambient heat.",
+        "serviceContent": "<h3>1. Water Supply Networks</h3><p>Establishing water networks requires precise planning to ensure balanced water pressure and continuous purity throughout the facility.</p><ul><li><strong>The Materials:</strong> Thermal PPR or PEX piping resistant to corrosion and scale buildup with thermal fusion connections preventing future leaks.</li><li><strong>The Protection:</strong> External thermal insulation maintains pure taste and prevents scalding summer tap water.</li></ul>",
         "shortDescription": "Corrosion-resistant thermal PPR and flexible PEX piping networks engineered for balanced water pressure.",
         "primaryApplications": "Villas, apartments, commercial restrooms, and central water heater manifolds.",
         "competitiveAdvantage": "Thermally insulated pipe runs maintaining pure taste and preventing scalding summer tap water."
       },
       {
         "id": "plumb-drainage-sewage",
+        "service": {
+          "serviceTitle": "Plumbing & Sanitary Installation Works",
+          "tagline": "Engineering Flow and Sustainability",
+          "category": "Plumbing",
+          "serviceContent": "Plumbing systems are the vital 'arteries' of any facility; even a minor defect can lead to severe structural damage. At Taj Alrahmah, we provide integrated engineering plumbing solutions that ensure supply efficiency and smooth drainage using the highest quality materials and the latest technologies.",
+          "whyChooseContent": "We engineer flow and eliminate leak risks through fused joint technology, precise drainage slopes, and heavy-duty pressure testing. Every fixture is installed with flawless waterproofing behind walls."
+        },
         "serviceTitle": "Drainage & Sewage Systems",
         "serviceSlug": "drainage-sewage-systems",
         "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/banner/istockphoto-1277115831-612x612-standard.webp",
@@ -666,13 +762,20 @@
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/gallery/rsw_1280-94-high.webp",
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/drainage-sewage-systems/gallery/shutterstock_1063804841-min-scaled-high-qjxeve.jpg"
         ],
-        "serviceContent": "Effective water drainage is the only guarantee to prevent unpleasant odors and blockages. We install internal and external sewage networks adhering to precise engineering slopes to ensure smooth gravity-based flow. High-quality UPVC or HDPE pipes withstand pressure and prevent root penetration, with easy-access cleanout manholes.",
+        "serviceContent": "<h3>2. Drainage & Sewage Systems</h3><p>Effective water drainage is the only guarantee to prevent unpleasant odors and blockages in any facility.</p><ul><li><strong>The System:</strong> High-quality UPVC or HDPE pipes with precise engineering slopes ensuring smooth gravity-based flow.</li><li><strong>The Access:</strong> Easy-access cleanout manholes and precision laser gradient leveling eliminating stagnant water.</li></ul>",
         "shortDescription": "High-durability UPVC/HDPE gravity drainage systems with anti-odor traps and accessible inspection manholes.",
         "primaryApplications": "Soil and waste stack plumbing, storm water roof drains, and external inspection chambers.",
         "competitiveAdvantage": "Precision laser gradient leveling eliminating stagnant water and foul gas backdraft."
       },
       {
         "id": "plumb-sanitary-ware",
+        "service": {
+          "serviceTitle": "Plumbing & Sanitary Installation Works",
+          "tagline": "Engineering Flow and Sustainability",
+          "category": "Plumbing",
+          "serviceContent": "Plumbing systems are the vital 'arteries' of any facility; even a minor defect can lead to severe structural damage. At Taj Alrahmah, we provide integrated engineering plumbing solutions that ensure supply efficiency and smooth drainage using the highest quality materials and the latest technologies.",
+          "whyChooseContent": "We engineer flow and eliminate leak risks through fused joint technology, precise drainage slopes, and heavy-duty pressure testing. Every fixture is installed with flawless waterproofing behind walls."
+        },
         "serviceTitle": "Sanitary Ware Fixing",
         "serviceSlug": "sanitary-ware-fixing",
         "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/banner/plumbing-sanitary-works-jpg-standard.webp",
@@ -687,13 +790,20 @@
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/gallery/rsw_1280-94-high.webp",
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/sanitary-ware-fixing/gallery/shutterstock_1063804841-min-scaled-high-qjxeve.jpg"
         ],
-        "serviceContent": "The final touch that blends functionality with elegance. We execute meticulous installation of bathroom sets, wall-hung toilets, washbasins, mixers, showers, and jacuzzis. We focus on sealing the connection points to ensure no water seeps behind walls, guaranteeing a high-end finish.",
+        "serviceContent": "<h3>3. Sanitary Ware Fixing</h3><p>The final touch that blends functionality with elegance through meticulous installation of premium bathroom fixtures.</p><ul><li><strong>The Scope:</strong> Installation of bathroom sets, wall-hung toilets, washbasins, mixers, showers, and jacuzzis.</li><li><strong>The Guarantee:</strong> Watertight perimeter silicone sealing preventing internal moisture buildup behind walls.</li></ul>",
         "shortDescription": "Precision fitting of luxury bathroom sets, wall-hung sanitary fixtures, and thermostatic mixers.",
         "primaryApplications": "Residential master bathrooms, luxury powder rooms, and commercial washrooms.",
         "competitiveAdvantage": "Watertight perimeter silicone sealing preventing internal moisture buildup."
       },
       {
         "id": "plumb-pump-tank",
+        "service": {
+          "serviceTitle": "Plumbing & Sanitary Installation Works",
+          "tagline": "Engineering Flow and Sustainability",
+          "category": "Plumbing",
+          "serviceContent": "Plumbing systems are the vital 'arteries' of any facility; even a minor defect can lead to severe structural damage. At Taj Alrahmah, we provide integrated engineering plumbing solutions that ensure supply efficiency and smooth drainage using the highest quality materials and the latest technologies.",
+          "whyChooseContent": "We engineer flow and eliminate leak risks through fused joint technology, precise drainage slopes, and heavy-duty pressure testing. Every fixture is installed with flawless waterproofing behind walls."
+        },
         "serviceTitle": "Pump & Tank Installation",
         "serviceSlug": "pump-tank-installation",
         "serviceBanner": "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/banner/download-5-standard-6c9t2b.jpg",
@@ -708,7 +818,7 @@
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/gallery/rsw_1280-94-high.webp",
           "/servicesSubServicesContent/services/plumbing-sanitary/subservices/pump-tank-installation/gallery/shutterstock_1063804841-min-scaled-high-qjxeve.jpg"
         ],
-        "serviceContent": "Ensuring water reaches all floors with consistent power and speed. We supply and install booster pumps, submersible lifting pumps, and automated pressure vessels, in addition to installing overhead and underground certified potable water tanks with automatic level switches.",
+        "serviceContent": "<h3>4. Pump & Tank Installation</h3><p>Ensuring water reaches all floors with consistent power and speed using premium-grade pumping and storage solutions.</p><ul><li><strong>The Scope:</strong> Booster pumps, submersible lifting pumps, and automated pressure vessels plus certified potable water tanks.</li><li><strong>The Technology:</strong> Constant pressure control with dry-run protection and quiet vibration-damped motor bases.</li></ul>",
         "shortDescription": "Variable-speed pressure booster pumps, transfer pumps, and hygienic potable storage tanks.",
         "primaryApplications": "Multi-story villa water pressure enhancement, basement sumps, and overhead water storage.",
         "competitiveAdvantage": "Constant pressure control with dry-run protection and quiet vibration-damped motor bases."
@@ -764,6 +874,13 @@
     "subservices": [
       {
         "id": "tile-ceramic-porcelain",
+        "service": {
+          "serviceTitle": "Floor & Wall Tiling Work",
+          "tagline": "The Quality You Feel Underfoot",
+          "category": "Tiling",
+          "serviceContent": "Tiling and cladding are the true soul of interior and exterior design; they give spaces their final identity. At Taj Alrahmah, we don't just lay tiles; we execute an integrated engineering process that ensures surface leveling, corner symmetry, and permanent adhesion.",
+          "whyChooseContent": "Because we prioritize Layout Planning. We study room dimensions before starting to avoid small, unsightly cuts at entrances or visible corners. We guarantee work that combines precise engineering with aesthetic beauty."
+        },
         "serviceTitle": "Ceramic & Porcelain Installation",
         "serviceSlug": "ceramic-porcelain-installation",
         "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/banner/unnamed-standard (1).webp",
@@ -778,13 +895,20 @@
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/gallery/tiles-high.webp",
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/ceramic-porcelain-installation/gallery/unnamed-high.jpg"
         ],
-        "serviceContent": "Porcelain and ceramic are preferred choices due to diverse designs and durability. We install all formats from mosaic tiles to large-format porcelain slabs (120x240cm). Using Tile Leveling Systems, we guarantee a perfectly flat surface with zero margin of error, preventing lippage.",
+        "serviceContent": "<h3>1. Ceramic & Porcelain Installation</h3><p>Porcelain and ceramic are preferred choices due to diverse designs and durability, installed in all formats from mosaic tiles to large-format porcelain slabs (120x240cm).</p><ul><li><strong>The Method:</strong> Tile Leveling Systems guarantee a perfectly flat surface with zero margin of error, preventing lippage.</li><li><strong>The Finish:</strong> Flawless joint consistency and hollow-sound free full mortar coverage.</li></ul>",
         "shortDescription": "Precision installation of standard ceramic and ultra-large porcelain slabs with zero lippage.",
         "primaryApplications": "Living rooms, corridors, commercial retail floors, and executive spaces.",
         "competitiveAdvantage": "Flawless joint consistency and hollow-sound free full mortar coverage."
       },
       {
         "id": "tile-marble-granite",
+        "service": {
+          "serviceTitle": "Floor & Wall Tiling Work",
+          "tagline": "The Quality You Feel Underfoot",
+          "category": "Tiling",
+          "serviceContent": "Tiling and cladding are the true soul of interior and exterior design; they give spaces their final identity. At Taj Alrahmah, we don't just lay tiles; we execute an integrated engineering process that ensures surface leveling, corner symmetry, and permanent adhesion.",
+          "whyChooseContent": "Because we prioritize Layout Planning. We study room dimensions before starting to avoid small, unsightly cuts at entrances or visible corners. We guarantee work that combines precise engineering with aesthetic beauty."
+        },
         "serviceTitle": "Marble & Granite Works",
         "serviceSlug": "marble-granite-works",
         "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/banner/istockphoto-469201398-612x612-standard.webp",
@@ -799,13 +923,20 @@
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/gallery/tiles-high.webp",
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/marble-granite-works/gallery/unnamed-high.jpg"
         ],
-        "serviceContent": "Marble is the symbol of luxury, and granite is the symbol of strength. We treat these natural materials as pieces of art. We supply and install marble floors, custom vanity fabrication, and granite counter slabs using mechanical fixing or specialized adhesives, with meticulous attention to Bookmatching.",
+        "serviceContent": "<h3>2. Marble & Granite Works</h3><p>Marble is the symbol of luxury, and granite is the symbol of strength. We treat these natural materials as pieces of art.</p><ul><li><strong>The Scope:</strong> Marble floors, custom vanity fabrication, and granite counter slabs with meticulous attention to Bookmatching.</li><li><strong>The Finish:</strong> Mirror-finish diamond pad polishing with natural vein continuation.</li></ul>",
         "shortDescription": "Luxury Italian & Greek marble installation, bookmatched feature walls, and granite countertops.",
         "primaryApplications": "Palace entrances, luxury villa foyers, hotel lobbies, and kitchen island worktops.",
         "competitiveAdvantage": "Bookmatched natural vein continuation and mirror-finish diamond pad polishing."
       },
       {
         "id": "tile-kitchen-bathroom",
+        "service": {
+          "serviceTitle": "Floor & Wall Tiling Work",
+          "tagline": "The Quality You Feel Underfoot",
+          "category": "Tiling",
+          "serviceContent": "Tiling and cladding are the true soul of interior and exterior design; they give spaces their final identity. At Taj Alrahmah, we don't just lay tiles; we execute an integrated engineering process that ensures surface leveling, corner symmetry, and permanent adhesion.",
+          "whyChooseContent": "Because we prioritize Layout Planning. We study room dimensions before starting to avoid small, unsightly cuts at entrances or visible corners. We guarantee work that combines precise engineering with aesthetic beauty."
+        },
         "serviceTitle": "Kitchen & Bathroom Tiling",
         "serviceSlug": "kitchen-bathroom-tiling",
         "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/banner/kitchen-floor-tiles-1-min-standard.webp",
@@ -820,13 +951,20 @@
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/gallery/tiles-high.webp",
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/kitchen-bathroom-tiling/gallery/unnamed-high.jpg"
         ],
-        "serviceContent": "Wet areas require specialized care due to constant exposure to water and humidity. We focus on comprehensive waterproofing directly beneath the tiles, using moisture-resistant polymer-modified adhesives to ensure tiles never detach and moisture never penetrates wall cavities.",
+        "serviceContent": "<h3>3. Kitchen & Bathroom Tiling</h3><p>Wet areas require specialized care due to constant exposure to water and humidity, demanding comprehensive waterproofing beneath the tiles.</p><ul><li><strong>The Materials:</strong> Moisture-resistant polymer-modified adhesives ensuring tiles never detach.</li><li><strong>The Protection:</strong> Integrated waterproofing underlayment guaranteeing total wall and floor leak safety.</li></ul>",
         "shortDescription": "Waterproofed floor and wall tile fixing for wet areas, walk-in showers, and kitchen splashbacks.",
         "primaryApplications": "Master bathrooms, powder rooms, kitchen splashbacks, and laundry rooms.",
         "competitiveAdvantage": "Integrated waterproofing underlayment guaranteeing total wall and floor leak safety."
       },
       {
         "id": "tile-exterior-cladding",
+        "service": {
+          "serviceTitle": "Floor & Wall Tiling Work",
+          "tagline": "The Quality You Feel Underfoot",
+          "category": "Tiling",
+          "serviceContent": "Tiling and cladding are the true soul of interior and exterior design; they give spaces their final identity. At Taj Alrahmah, we don't just lay tiles; we execute an integrated engineering process that ensures surface leveling, corner symmetry, and permanent adhesion.",
+          "whyChooseContent": "Because we prioritize Layout Planning. We study room dimensions before starting to avoid small, unsightly cuts at entrances or visible corners. We guarantee work that combines precise engineering with aesthetic beauty."
+        },
         "serviceTitle": "Exterior Wall Cladding",
         "serviceSlug": "exterior-wall-cladding",
         "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/banner/exterior-cladding-standard.jpg",
@@ -841,13 +979,20 @@
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/gallery/tiles-high.webp",
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/exterior-wall-cladding/gallery/unnamed-high.jpg"
         ],
-        "serviceContent": "The facade is the first impression of any building. We install natural stone, exterior porcelain, and granite facades utilizing Mechanical Fixing systems with stainless steel brackets, anchors, and expansion bolts to ensure maximum safety and durability against wind, seismic loads, and Gulf heat.",
+        "serviceContent": "<h3>4. Exterior Wall Cladding</h3><p>The facade is the first impression of any building, requiring mechanical fixing systems that ensure maximum safety and durability.</p><ul><li><strong>The System:</strong> Natural stone, exterior porcelain, and granite facades using stainless steel brackets, anchors, and expansion bolts.</li><li><strong>The Safety:</strong> Mechanically anchored with safety cavity, preventing detachment in extreme thermal cycles.</li></ul>",
         "shortDescription": "Mechanical stainless-steel bracket fixing for exterior natural stone, travertine, and porcelain facades.",
         "primaryApplications": "Building facades, villa boundary walls, and entrance architectural features.",
         "competitiveAdvantage": "Mechanically anchored with safety cavity, preventing detachment in extreme thermal cycles."
       },
       {
         "id": "tile-grouting-refinishing",
+        "service": {
+          "serviceTitle": "Floor & Wall Tiling Work",
+          "tagline": "The Quality You Feel Underfoot",
+          "category": "Tiling",
+          "serviceContent": "Tiling and cladding are the true soul of interior and exterior design; they give spaces their final identity. At Taj Alrahmah, we don't just lay tiles; we execute an integrated engineering process that ensures surface leveling, corner symmetry, and permanent adhesion.",
+          "whyChooseContent": "Because we prioritize Layout Planning. We study room dimensions before starting to avoid small, unsightly cuts at entrances or visible corners. We guarantee work that combines precise engineering with aesthetic beauty."
+        },
         "serviceTitle": "Grouting & Surface Refinishing",
         "serviceSlug": "grouting-surface-refinishing",
         "serviceBanner": "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/banner/grout-blog-person-grouting-min_600x600-standard.webp",
@@ -862,7 +1007,7 @@
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/gallery/tiles-high.webp",
           "/servicesSubServicesContent/services/floor-wall-tiling/subservices/grouting-surface-refinishing/gallery/unnamed-high.jpg"
         ],
-        "serviceContent": "Application of anti-fungal, non-yellowing epoxy grout along with professional Italian diamond marble grinding and crystallization polishing. Seals all joints against water and dirt ingress, restoring the radiant luster of stone.",
+        "serviceContent": "<h3>5. Grouting & Surface Refinishing</h3><p>Application of anti-fungal, non-yellowing epoxy grout along with professional diamond marble grinding and crystallization polishing.</p><ul><li><strong>The Protection:</strong> Seals all joints against water and dirt ingress permanently.</li><li><strong>The Restoration:</strong> Restores the radiant luster of stone with a mirror-like crystal reflection.</li></ul>",
         "shortDescription": "Stain-proof epoxy grouting and Italian diamond grinding restoration for gleaming tiled surfaces.",
         "primaryApplications": "Existing marble floor restoration, wet room tile re-grouting, and hotel floor rejuvenation.",
         "competitiveAdvantage": "Permanent stain protection and mirror-like crystal reflection."
@@ -914,6 +1059,13 @@
     "subservices": [
       {
         "id": "plaster-block-works",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "Construction Block Works",
         "serviceSlug": "construction-block-works",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/banner/banner.jpg",
@@ -922,13 +1074,20 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/construction-block-works/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Building interior partition and exterior load-bearing walls using cement, insulated (thermal), or lightweight blocks. We adhere to engineering line strings and plumb lines to ensure verticality, installing galvanized steel ties and mesh to bond masonry with concrete columns to prevent structural cracking.",
+        "serviceContent": "<h3>1. Construction Block Works</h3><p>Building interior partition and exterior load-bearing walls using cement, insulated, or lightweight blocks with strict engineering alignment.</p><ul><li><strong>The Method:</strong> Engineering line strings and plumb lines ensuring verticality with galvanized steel ties bonding masonry to concrete columns.</li><li><strong>The Result:</strong> Heavy-duty column ties and lintel beam reinforcements preventing settlement cracks.</li></ul>",
         "shortDescription": "Precision masonry block installation with structural tie anchors and alignment strings.",
         "primaryApplications": "Internal partition walls, boundary walls, and exterior insulated thermal masonry.",
         "competitiveAdvantage": "Heavy-duty column ties and lintel beam reinforcements preventing settlement cracks."
       },
       {
         "id": "plaster-internal",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "Internal Plastering",
         "serviceSlug": "internal-plastering",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/banner/banner.jpg",
@@ -937,13 +1096,20 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/internal-plastering/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Creating smooth, plumb, and true interior wall and ceiling surfaces using high-grade cement and washed sand. We focus on 'squaring' rooms to ensure all corners form precise 90-degree angles, facilitating gap-free furniture and tile installation.",
+        "serviceContent": "<h3>2. Internal Plastering</h3><p>Creating smooth, plumb, and true interior wall and ceiling surfaces using high-grade cement and washed sand.</p><ul><li><strong>The Focus:</strong> 'Squaring' rooms to ensure all corners form precise 90-degree angles for gap-free furniture and tile installation.</li><li><strong>The System:</strong> Perfect boqa/awtar leveling ensuring zero deviation across straight edge checks.</li></ul>",
         "shortDescription": "Internal smooth plastering with room squaring for seamless decoration.",
         "primaryApplications": "Bedrooms, living spaces, offices, and commercial interior walls.",
         "competitiveAdvantage": "Perfect 90-degree corner geometry with boqa/awtar leveling."
       },
       {
         "id": "plaster-external-rendering",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "External Rendering",
         "serviceSlug": "external-rendering",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/banner/banner.jpg",
@@ -952,13 +1118,20 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/external-rendering/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Protecting buildings from harsh outdoor elements (heat, humidity, wind, and airborne salts). We apply external render coats incorporating sulfate-resistant cement and waterproof polymer additives to deliver a durable weather envelope that prevents moisture penetration.",
+        "serviceContent": "<h3>3. External Rendering</h3><p>Protecting buildings from harsh outdoor elements including heat, humidity, wind, and airborne salts.</p><ul><li><strong>The Materials:</strong> Sulfate-resistant cement and waterproof polymer additives delivering a durable weather envelope.</li><li><strong>The Protection:</strong> High thermal and salt resistance preventing spalling and efflorescence.</li></ul>",
         "shortDescription": "Sulfate-resistant waterproof external rendering shielding buildings from harsh weather.",
         "primaryApplications": "Villa facades, commercial exteriors, and compound perimeter walls.",
         "competitiveAdvantage": "High thermal and salt resistance preventing spalling and efflorescence."
       },
       {
         "id": "plaster-decorative-finishes",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "Decorative Plaster & Finishes",
         "serviceSlug": "decorative-plaster-finishes",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/banner/banner.jpg",
@@ -967,13 +1140,20 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/decorative-plaster-finishes/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Adding unique artistic and architectural textures to walls. We execute textured plaster applications including Tyrolean, Profile, and rough-cast decorative finishes that bestow exterior facades and interior feature walls with distinct character.",
+        "serviceContent": "<h3>4. Decorative Plaster & Finishes</h3><p>Adding unique artistic and architectural textures to walls with specialized plaster application techniques.</p><ul><li><strong>The Techniques:</strong> Tyrolean, Profile, and rough-cast decorative finishes bestowing distinct character on exterior facades and interior feature walls.</li><li><strong>The Durability:</strong> Even spray texture distribution that resists peeling and weather fading.</li></ul>",
         "shortDescription": "Artistic textures including Tyrolean, Profile, and textured architectural stucco.",
         "primaryApplications": "Exterior villa elevations, boundary wall panels, and traditional Arabic accents.",
         "competitiveAdvantage": "Even spray texture distribution that resists peeling and weather fading."
       },
       {
         "id": "plaster-repair-patching",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "Plaster Repair & Patching",
         "serviceSlug": "plaster-repair-patching",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/banner/banner.jpg",
@@ -982,13 +1162,20 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/plaster-repair-patching/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Rehabilitating damaged, hollow, or cracked walls. We treat 'hollow' plaster (tabteel), repair cracks caused by thermal expansion, and restore moisture-eroded surfaces using fiber-reinforced polymer mortars.",
+        "serviceContent": "<h3>5. Plaster Repair & Patching</h3><p>Rehabilitating damaged, hollow, or cracked walls using fiber-reinforced polymer mortars for seamless restoration.</p><ul><li><strong>The Scope:</strong> Treating hollow plaster (tabteel), repairing thermal expansion cracks, and restoring moisture-eroded surfaces.</li><li><strong>The Quality:</strong> Seamless blending with existing substrate leaving zero patch lines.</li></ul>",
         "shortDescription": "Hollow sound removal, settlement crack repair, and moisture damage restoration.",
         "primaryApplications": "Property renovations, pre-paint remedial works, and post-water damage restoration.",
         "competitiveAdvantage": "Seamless blending with existing substrate leaving zero patch lines."
       },
       {
         "id": "plaster-leveling-surface-prep",
+        "service": {
+          "serviceTitle": "Plastering & Block Works",
+          "tagline": "Crafting Walls with Engineering Precision",
+          "category": "Plastering",
+          "serviceContent": "Plastering and block works form the fundamental skeleton that defines the features of any facility. At Taj Alrahmah, we believe that perfectly level walls and right-angled corners are the primary standards of quality, providing the ideal foundation for subsequent painting and decoration works.",
+          "whyChooseContent": "Because we implement the 'Pads & Guides' (Boqa & Awtar) system in all our projects - the most accurate engineering method to ensure walls are perfectly level both vertically and horizontally. We don't just hand over a wall; we deliver an engineered canvas ready for the most refined finishes."
+        },
         "serviceTitle": "Leveling & Surface Preparation",
         "serviceSlug": "leveling-surface-preparation",
         "serviceBanner": "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/banner/banner.jpg",
@@ -997,7 +1184,7 @@
           "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/plastering-block-works/subservices/leveling-surface-preparation/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "The secret to durable plastering lies in the base preparation. Includes applying high-bonding rough 'Splash Coat' (Tartasha), installing galvanized corner beads, and bedding fiberglass joint mesh over casting joints to maximize mechanical interlock and stop cracks.",
+        "serviceContent": "<h3>6. Leveling & Surface Preparation</h3><p>The secret to durable plastering lies in the base preparation using specialized bonding techniques.</p><ul><li><strong>The Process:</strong> High-bonding Splash Coat (Tartasha), galvanized corner beads, and fiberglass joint mesh maximizing mechanical interlock.</li><li><strong>The Result:</strong> Provides rough mechanical grip ensuring plaster never de-bonds.</li></ul>",
         "shortDescription": "Tartasha key coat, corner bead installation, and fiberglass mesh joint reinforcement.",
         "primaryApplications": "Smooth concrete columns, ceiling soffits, and joint interfaces.",
         "competitiveAdvantage": "Provides rough mechanical grip ensuring plaster never de-bonds."
@@ -1049,6 +1236,13 @@
     "subservices": [
       {
         "id": "paint-interior",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Interior Painting",
         "serviceSlug": "interior-painting",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/banner/banner.jpg",
@@ -1057,13 +1251,20 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/interior-painting/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Transforming interior spaces with color and style. Applying high-grade emulsion paint to interior walls and ceilings using premium matte, eggshell, and silk finishes. We ensure smooth, even coats, sharp cut-in lines, and spotless cleanups.",
+        "serviceContent": "<h3>1. Interior Painting</h3><p>Transforming interior spaces with premium high-grade emulsion paint using matte, eggshell, and silk finishes.</p><ul><li><strong>The Quality:</strong> Smooth, even coats with sharp cut-in lines ensuring zero lap marks or flashing under natural light.</li><li><strong>The Coverage:</strong> Full room masking protection of doors, windows, and floors from all paint drips.</li></ul>",
         "shortDescription": "Interior walls and ceilings painted in matte, silk, or satin finishes with razor-sharp edges.",
         "primaryApplications": "Bedrooms, living rooms, corridors, residential villas, and office fit-outs.",
         "competitiveAdvantage": "Even roller coverage with zero lap marks or flashing under natural light."
       },
       {
         "id": "paint-exterior",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Exterior Painting",
         "serviceSlug": "exterior-painting",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/banner/banner.jpg",
@@ -1072,13 +1273,20 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/exterior-painting/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Protecting and beautifying your building's exterior. Applying 100% acrylic, anti-carbonation, and UV-resistant exterior paint to exterior facades, boundary walls, and eaves. Withstands severe sun, dust storms, and humidity while preserving color richness.",
+        "serviceContent": "<h3>2. Exterior Painting</h3><p>Protecting and beautifying your building's exterior with 100% acrylic, anti-carbonation, and UV-resistant coatings.</p><ul><li><strong>The Performance:</strong> Withstands severe sun, dust storms, and humidity while preserving color richness.</li><li><strong>The Longevity:</strong> Long-term UV stability preventing peeling, cracking, or color fading.</li></ul>",
         "shortDescription": "Weatherproof, anti-carbonation exterior coatings guarding against UV and dirt accumulation.",
         "primaryApplications": "Villa exteriors, commercial building facades, and boundary walls.",
         "competitiveAdvantage": "Long-term UV stability preventing peeling, cracking, or color fading."
       },
       {
         "id": "paint-decorative",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Decorative Painting",
         "serviceSlug": "decorative-painting",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/banner/banner.jpg",
@@ -1087,13 +1295,20 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/decorative-painting/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Adding artistic and personalized touches to your walls. Creating unique textured finishes including Venetian Stucco, Velvet/Velour, Metallic effects, and sponge textures that turn feature walls into luxurious focal points.",
+        "serviceContent": "<h3>3. Decorative Painting</h3><p>Adding artistic and personalized touches to walls with luxurious handcrafted texture finishes.</p><ul><li><strong>The Techniques:</strong> Venetian Stucco, Velvet/Velour, Metallic effects, and sponge textures turning feature walls into focal points.</li><li><strong>The Craftsmanship:</strong> Master artisans with custom color matching tailored to interior decor.</li></ul>",
         "shortDescription": "Luxury artisanal wall finishes: Venetian plaster, metallic glazes, and velvet textures.",
         "primaryApplications": "Majlis feature walls, dining rooms, reception foyers, and executive office backdrops.",
         "competitiveAdvantage": "Master craftsmanship with custom color matching tailored to interior decor."
       },
       {
         "id": "paint-furniture-refinishing",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Furniture Painting & Refinishing",
         "serviceSlug": "furniture-painting-refinishing",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/banner/banner.jpg",
@@ -1102,13 +1317,20 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/furniture-painting-refinishing/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Revitalizing wooden furniture, kitchen cabinets, and doors with factory-grade spray finishes. Services include polyurethane lacquering, chalk paints, stain refinishing, and duco spray painting.",
+        "serviceContent": "<h3>4. Furniture Painting & Refinishing</h3><p>Revitalizing wooden furniture, kitchen cabinets, and doors with factory-grade spray finishes.</p><ul><li><strong>The Scope:</strong> Polyurethane lacquering, chalk paints, stain refinishing, and duco spray painting.</li><li><strong>The Result:</strong> Smooth glass-like spray booth quality with high scratch resistance.</li></ul>",
         "shortDescription": "Spray polyurethane lacquering and duco paint restoration for doors and cabinetry.",
         "primaryApplications": "Kitchen cabinets, interior wooden doors, wardrobes, and vanity units.",
         "competitiveAdvantage": "Smooth glass-like spray booth quality with high scratch resistance."
       },
       {
         "id": "paint-repair-touchups",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Paint Repair & Touch-ups",
         "serviceSlug": "paint-repair-touch-ups",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/banner/banner.jpg",
@@ -1117,13 +1339,20 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/paint-repair-touch-ups/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Maintaining the pristine appearance of painted surfaces. Repairing chipped, faded, water-stained, or scratched paint with precise electronic color matching and seamless blending into existing wall coats.",
+        "serviceContent": "<h3>5. Paint Repair & Touch-ups</h3><p>Maintaining the pristine appearance of painted surfaces with invisible precision repairs.</p><ul><li><strong>The Process:</strong> Electronic color matching and seamless blending into existing wall coats.</li><li><strong>The Quality:</strong> Exact color code matching leaving zero visible patchwork halos.</li></ul>",
         "shortDescription": "Invisible touch-up repairs, spot filling, and color blending for scuffed walls.",
         "primaryApplications": "Move-in / move-out repainting, post-plumbing repairs, and high-traffic touch-ups.",
         "competitiveAdvantage": "Exact color code matching leaving zero visible patchwork halos."
       },
       {
         "id": "paint-surface-preparation",
+        "service": {
+          "serviceTitle": "Painting Contracting Services",
+          "tagline": "Transforming Spaces with Color and Precision",
+          "category": "Painting",
+          "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your interior and exterior spaces.",
+          "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision masking, dustless sanding, and rich colors."
+        },
         "serviceTitle": "Surface Preparation",
         "serviceSlug": "surface-preparation",
         "serviceBanner": "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/banner/banner.jpg",
@@ -1132,7 +1361,7 @@
           "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/painting-contracting/subservices/surface-preparation/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Ensuring an enduring, flawless finish through rigorous preparation. Includes scraping loose paint, applying alkali-resistant primers, two to three coats of fine putty filler, and dustless sanding to deliver a baby-smooth substrate.",
+        "serviceContent": "<h3>6. Surface Preparation</h3><p>Ensuring an enduring, flawless finish through rigorous preparation of all substrates.</p><ul><li><strong>The Process:</strong> Scraping loose paint, alkali-resistant primers, two to three coats of fine putty filler, and dustless sanding.</li><li><strong>The Result:</strong> Ultra-flat foundation preventing future blistering and peeling.</li></ul>",
         "shortDescription": "Deep scraping, alkali-resistant primer, fine acrylic putty coats, and dustless sanding.",
         "primaryApplications": "New plastered walls, peeling old walls, and renovated gypsum surfaces.",
         "competitiveAdvantage": "Forms an ultra-flat foundation preventing future blistering and peeling."
@@ -1185,6 +1414,13 @@
     "subservices": [
       {
         "id": "ceiling-false-ceiling",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "False Ceiling Installation",
         "serviceSlug": "false-ceiling-installation",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/banner/banner.jpg",
@@ -1193,13 +1429,20 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/false-ceiling-installation/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Installing suspended ceilings using moisture-resistant and regular gypsum boards, mineral fiber tiles, or metal clip-in systems. Integrated with linear AC diffusers, recessed spotlights, and access panels for concealed MEP services.",
+        "serviceContent": "<h3>1. False Ceiling Installation</h3><p>Installing suspended ceilings using moisture-resistant gypsum boards, mineral fiber tiles, or metal clip-in systems integrated with all MEP services.</p><ul><li><strong>The Integration:</strong> Linear AC diffusers, recessed spotlights, and access panels for concealed services.</li><li><strong>The Stability:</strong> Heavy-duty perimeter angles and intermediate hangers eliminating ceiling bounce.</li></ul>",
         "shortDescription": "Suspended gypsum ceilings with integrated AC slots, spotlight cutouts, and concealed framing.",
         "primaryApplications": "Residential villas, corporate office floors, retail malls, and hospitality suites.",
         "competitiveAdvantage": "Heavy-duty perimeter angles and intermediate hangers eliminating ceiling bounce."
       },
       {
         "id": "ceiling-light-partitions",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "Light Partition Installation",
         "serviceSlug": "light-partition-installation",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/banner/banner.jpg",
@@ -1208,13 +1451,20 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/light-partition-installation/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Dividing open spaces with lightweight, fast-to-erect, and adaptable drywall partitions. Constructed with galvanized steel studs and tracks, single or double layer gypsum board, with integrated sound-insulating rockwool to create private, well-lit spaces.",
+        "serviceContent": "<h3>2. Light Partition Installation</h3><p>Dividing open spaces with lightweight, fast-to-erect, and adaptable drywall partitions for any spatial requirement.</p><ul><li><strong>The Construction:</strong> Galvanized steel studs with single or double layer gypsum board and integrated sound-insulating rockwool.</li><li><strong>The Performance:</strong> Rapid clean installation with high acoustic isolation between adjacent rooms.</li></ul>",
         "shortDescription": "Drywall office divider walls with internal sound-absorbing insulation and reinforced door frames.",
         "primaryApplications": "Commercial office cabins, clinic consultation rooms, residential room divisions.",
         "competitiveAdvantage": "Rapid clean installation with high acoustic isolation between adjacent rooms."
       },
       {
         "id": "ceiling-decorative-design",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "Decorative Ceiling Design",
         "serviceSlug": "decorative-ceiling-design",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/banner/banner.jpg",
@@ -1223,13 +1473,20 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/decorative-ceiling-design/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Crafting bespoke multi-level ceiling designs, floating islands, modern shadow gaps (reveal beads), and coffered ceilings. Creates luxurious visual focal points enhanced by ambient concealed LED illumination.",
+        "serviceContent": "<h3>3. Decorative Ceiling Design</h3><p>Crafting bespoke multi-level ceiling designs, floating islands, and coffered ceilings for luxurious visual impact.</p><ul><li><strong>The Design:</strong> Modern shadow gaps (reveal beads), floating ceiling islands, and multi-tiered architectural elements.</li><li><strong>The Lighting:</strong> Enhanced by ambient concealed LED illumination without wavy imperfections.</li></ul>",
         "shortDescription": "Floating ceiling islands, perimeter shadow gap trims, and multi-tiered decorative ceilings.",
         "primaryApplications": "Villa majlis, luxury master suites, dining rooms, and executive boardrooms.",
         "competitiveAdvantage": "Clean architectural shadow line details without wavy imperfections."
       },
       {
         "id": "ceiling-partition-customization",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "Partition Customization & Design",
         "serviceSlug": "partition-customization-design",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/banner/banner.jpg",
@@ -1238,13 +1495,20 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/partition-customization-design/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Designing bespoke partition solutions incorporating frameless glass panels, acoustic timber slats, display niches with warm LED backlighting, and sliding partition tracks tailored to client spatial needs.",
+        "serviceContent": "<h3>4. Partition Customization & Design</h3><p>Designing bespoke partition solutions tailored to each client's unique spatial and aesthetic needs.</p><ul><li><strong>The Elements:</strong> Frameless glass panels, acoustic timber slats, display niches with warm LED backlighting, and sliding partition tracks.</li><li><strong>The Balance:</strong> Structural stability combined with open, light-filled architectural elegance.</li></ul>",
         "shortDescription": "Bespoke dividers featuring decorative display niches, timber slats, and frameless glass integration.",
         "primaryApplications": "Modern open-plan offices, luxury villa entryways, and boutique stores.",
         "competitiveAdvantage": "Blends structural stability with open, light-filled architectural elegance."
       },
       {
         "id": "ceiling-repair-maintenance",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "Ceiling and Partition Repair & Maintenance",
         "serviceSlug": "ceiling-partition-repair-maintenance",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/banner/banner.jpg",
@@ -1253,13 +1517,20 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/ceiling-partition-repair-maintenance/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Repairing sagging ceiling channels, fixing water-damaged plasterboards following AC leakages, replacing broken 60x60 grid tiles, taping settlement joint cracks, and upgrading access panels.",
+        "serviceContent": "<h3>5. Ceiling and Partition Repair & Maintenance</h3><p>Fast restoration of all ceiling and partition defects to original structural strength and flawless appearance.</p><ul><li><strong>The Scope:</strong> Repairing sagging channels, water-damaged plasterboards from AC leakages, and broken 60x60 grid tiles.</li><li><strong>The Quality:</strong> Restores original ceiling structural strength and flawless surface appearance.</li></ul>",
         "shortDescription": "Fast restoration of water-damaged gypsum boards, sagging framing, and fractured joints.",
         "primaryApplications": "Post-AC condensation leaks, tenant turnover refurbs, and old ceiling repairs.",
         "competitiveAdvantage": "Restores original ceiling structural strength and flawless surface appearance."
       },
       {
         "id": "ceiling-acoustic-solutions",
+        "service": {
+          "serviceTitle": "False Ceiling & Light Partitions Installation",
+          "tagline": "Designing Elegant and Functional Spaces",
+          "category": "Ceilings & Partitions",
+          "serviceContent": "False ceilings and light partitions redefine interior spaces, offering both aesthetic appeal and practical benefits. At Taj Alrahmah, we believe that innovative design and precise installation are key to creating sophisticated and functional environments. We provide the perfect blend of style, acoustics, and utility for your space.",
+          "whyChooseContent": "Because we combine innovative design with expert installation to create spaces that are both beautiful and functional. We use heavy-gauge galvanized steel framing, certified acoustic rockwool insulation, and skilled master tapers."
+        },
         "serviceTitle": "Acoustic Solutions",
         "serviceSlug": "acoustic-solutions",
         "serviceBanner": "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/banner/banner.jpg",
@@ -1268,7 +1539,7 @@
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/false-ceiling-partitions/subservices/acoustic-solutions/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Installing specialized acoustic soundproofing materials within false ceilings and drywall partitions: high-density rockwool batts, sound-damping resilient channels, perforated acoustic gypsum boards (Cleaneo), and acoustic perimeter sealant to minimize sound transmission between rooms.",
+        "serviceContent": "<h3>6. Acoustic Solutions</h3><p>Installing specialized acoustic soundproofing materials for significant decibel noise reduction between rooms.</p><ul><li><strong>The Materials:</strong> High-density rockwool batts, sound-damping resilient channels, and perforated acoustic gypsum boards (Cleaneo).</li><li><strong>The Result:</strong> Significant decibel noise reduction ensuring confidential, peaceful interiors.</li></ul>",
         "shortDescription": "High STC-rated soundproofing using high-density rockwool and acoustic perforated gypsum panels.",
         "primaryApplications": "Home cinemas, podcast/recording studios, executive conference rooms, and meeting spaces.",
         "competitiveAdvantage": "Significant decibel noise reduction ensuring confidential, peaceful interiors."
@@ -1320,6 +1591,13 @@
     "subservices": [
       {
         "id": "hvac-ac-install-repair",
+        "service": {
+          "serviceTitle": "Air Conditioning, Ventilation & Air Filtration (HVAC)",
+          "tagline": "Integrated Solutions for Climate Comfort & Indoor Air Quality",
+          "category": "HVAC",
+          "serviceContent": "In an ever-changing climate, an HVAC system is no longer a luxury; it is an investment in comfort, health, and productivity. Taj Al Rahma is your trusted partner in providing the perfect indoor environment through cutting-edge HVAC technology. We combine technical precision with high quality to meet the diverse needs of residential, commercial, and industrial sectors.",
+          "whyChooseContent": "Our Motto: Precision in Execution, Compassion in Service. A specialized team trained in the latest HVAC technologies, rapid emergency dispatch, original spare parts, and comprehensive warranties."
+        },
         "serviceTitle": "AC Installation & Repair",
         "serviceSlug": "ac-installation-repair",
         "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/banner/banner.jpg",
@@ -1328,13 +1606,20 @@
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Professional installation and urgent breakdown repair for Central Packaged Units, Ducted Split systems, VRF systems, and wall-mounted splits. We perform digital refrigerant leak checks, compressor replacements, fan motor repairs, and thermostat calibrations to restore optimal cooling.",
+        "serviceContent": "<h3>1. AC Installation & Repair</h3><p>Professional installation and urgent breakdown repair for all AC system types with digital diagnosis and precision restoration.</p><ul><li><strong>The Scope:</strong> Central Packaged Units, Ducted Split systems, VRF systems, and wall-mounted splits.</li><li><strong>The Service:</strong> Digital refrigerant leak checks, compressor replacements, fan motor repairs, and thermostat calibrations.</li></ul>",
         "shortDescription": "Urgent fault diagnosis, gas top-ups, compressor repairs, and new energy-efficient AC unit installations.",
         "primaryApplications": "Villas, apartments, commercial shops, server rooms, and offices.",
         "competitiveAdvantage": "Rapid on-site response with accurate digital troubleshooting instruments."
       },
       {
         "id": "hvac-ducting-ventilation",
+        "service": {
+          "serviceTitle": "Air Conditioning, Ventilation & Air Filtration (HVAC)",
+          "tagline": "Integrated Solutions for Climate Comfort & Indoor Air Quality",
+          "category": "HVAC",
+          "serviceContent": "In an ever-changing climate, an HVAC system is no longer a luxury; it is an investment in comfort, health, and productivity. Taj Al Rahma is your trusted partner in providing the perfect indoor environment through cutting-edge HVAC technology. We combine technical precision with high quality to meet the diverse needs of residential, commercial, and industrial sectors.",
+          "whyChooseContent": "Our Motto: Precision in Execution, Compassion in Service. A specialized team trained in the latest HVAC technologies, rapid emergency dispatch, original spare parts, and comprehensive warranties."
+        },
         "serviceTitle": "Ducting & Ventilation Works",
         "serviceSlug": "ducting-ventilation-works",
         "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/banner/banner.jpg",
@@ -1343,13 +1628,20 @@
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ducting-ventilation-works/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Good ventilation is the 'lungs' of any building. We design and execute galvanized iron (GI) and pre-insulated (PI) duct networks that ensure balanced airflow distribution. We install exhaust systems for central kitchens, factories, and basement car parks using acoustic insulation to eliminate air rushing noise.",
+        "serviceContent": "<h3>2. Ducting & Ventilation Works</h3><p>Good ventilation is the 'lungs' of any building. We design and execute balanced airflow distribution networks.</p><ul><li><strong>The Materials:</strong> Galvanized iron (GI) and pre-insulated (PI) duct networks with acoustic insulation eliminating air rushing noise.</li><li><strong>The Performance:</strong> Low-loss aerodynamic fittings with zero air leakage along longitudinal seams.</li></ul>",
         "shortDescription": "GI and PIR duct fabrication, acoustic fiberglass liner insulation, and mechanical fresh air extraction.",
         "primaryApplications": "Restaurant kitchen hoods, commercial restrooms, underground car parks, and central ducted AC.",
         "competitiveAdvantage": "Low-loss aerodynamic fittings with zero air leakage along longitudinal seams."
       },
       {
         "id": "hvac-air-filtration",
+        "service": {
+          "serviceTitle": "Air Conditioning, Ventilation & Air Filtration (HVAC)",
+          "tagline": "Integrated Solutions for Climate Comfort & Indoor Air Quality",
+          "category": "HVAC",
+          "serviceContent": "In an ever-changing climate, an HVAC system is no longer a luxury; it is an investment in comfort, health, and productivity. Taj Al Rahma is your trusted partner in providing the perfect indoor environment through cutting-edge HVAC technology. We combine technical precision with high quality to meet the diverse needs of residential, commercial, and industrial sectors.",
+          "whyChooseContent": "Our Motto: Precision in Execution, Compassion in Service. A specialized team trained in the latest HVAC technologies, rapid emergency dispatch, original spare parts, and comprehensive warranties."
+        },
         "serviceTitle": "Air Filtration Systems",
         "serviceSlug": "air-filtration-systems",
         "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/banner/banner.jpg",
@@ -1358,13 +1650,20 @@
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/air-filtration-systems/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Your health begins with the purity of the air you breathe. We provide advanced filtration solutions including HEPA filters, activated carbon filters, UV-C germicidal air purifiers, and electrostatic precipitators that remove fine particulate dust, airborne allergens, bacteria, and kitchen grease odors.",
+        "serviceContent": "<h3>3. Air Filtration Systems</h3><p>Your health begins with the purity of the air you breathe. We provide advanced filtration solutions for laboratory-grade indoor air quality.</p><ul><li><strong>The Technology:</strong> HEPA filters, activated carbon filters, UV-C germicidal air purifiers, and electrostatic precipitators.</li><li><strong>The Result:</strong> Removes fine particulate dust, airborne allergens, bacteria, and kitchen grease odors.</li></ul>",
         "shortDescription": "HEPA, carbon, and UV-C germicidal air filtration eliminating dust, mold spores, and airborne allergens.",
         "primaryApplications": "Healthcare clinics, cleanrooms, luxury residential villas, and commercial kitchens.",
         "competitiveAdvantage": "Laboratory-grade indoor air quality reducing allergy triggers and respiratory irritants."
       },
       {
         "id": "hvac-preventive-maintenance",
+        "service": {
+          "serviceTitle": "Air Conditioning, Ventilation & Air Filtration (HVAC)",
+          "tagline": "Integrated Solutions for Climate Comfort & Indoor Air Quality",
+          "category": "HVAC",
+          "serviceContent": "In an ever-changing climate, an HVAC system is no longer a luxury; it is an investment in comfort, health, and productivity. Taj Al Rahma is your trusted partner in providing the perfect indoor environment through cutting-edge HVAC technology. We combine technical precision with high quality to meet the diverse needs of residential, commercial, and industrial sectors.",
+          "whyChooseContent": "Our Motto: Precision in Execution, Compassion in Service. A specialized team trained in the latest HVAC technologies, rapid emergency dispatch, original spare parts, and comprehensive warranties."
+        },
         "serviceTitle": "Preventive Maintenance (AMC)",
         "serviceSlug": "preventive-maintenance",
         "serviceBanner": "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/banner/banner.jpg",
@@ -1373,7 +1672,7 @@
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/preventive-maintenance/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Don't wait for your system to fail! Taj Al Rahma's preventive maintenance programs are a smart investment that saves you money: Regular pressure washing of outdoor condenser coils, deep cleaning of indoor evaporator coils and drain trays, checking refrigerant levels and electrical contactors, lowering electricity consumption by up to 25%.",
+        "serviceContent": "<h3>4. Preventive Maintenance (AMC)</h3><p>Don't wait for your system to fail. Taj Al Rahma's preventive maintenance programs are a smart investment that extends equipment life and saves money.</p><ul><li><strong>The Service:</strong> Regular condenser coil washing, deep cleaning of evaporator coils and drain trays, refrigerant level checks, and electrical contactor inspection.</li><li><strong>The Savings:</strong> Lowers electricity consumption by up to 25% and extends compressor life.</li></ul>",
         "shortDescription": "Comprehensive seasonal servicing, coil deep cleaning, electrical contact inspection, and filter sanitization.",
         "primaryApplications": "Annual Maintenance Contracts (AMC) for residential villas, schools, corporate offices, and towers.",
         "competitiveAdvantage": "Extends compressor life, prevents water leaks from clogged drain lines, and lowers DEWA power bills."
@@ -1425,6 +1724,13 @@
     "subservices": [
       {
         "id": "carpentry-parquet-flooring",
+        "service": {
+          "serviceTitle": "Carpentry & Professional Wood Flooring",
+          "tagline": "The Art of Modern Carpentry & Luxury Wood Flooring",
+          "category": "Carpentry",
+          "serviceContent": "Carpentry and woodwork are the soul that brings incomparable warmth and luxury to homes and offices. At Taj Al Rahma, we blend traditional craftsmanship with modern design to transform wood into functional masterpieces that serve your daily needs and stand the test of time.",
+          "whyChooseContent": "We use the finest types of reliable hardwood (Beech, Oak, Walnut, Mahogany), focus on meticulous finishing touches, tailor custom designs to your exact room dimensions, and provide competitive pricing."
+        },
         "serviceTitle": "Wood Flooring & Parquet Installation",
         "serviceSlug": "wood-flooring-parquet-installation",
         "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/banner/banner.jpg",
@@ -1433,13 +1739,20 @@
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wood-flooring-parquet-installation/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Flooring is the foundation of elegance. We offer integrated solutions for installing natural solid wood, engineered hardwood, and high-density laminate parquet (AC4/AC5 rated). We execute intricate architectural patterns including Chevron, Herringbone, and continuous plank layouts with underlayment insulation.",
+        "serviceContent": "<h3>1. Wood Flooring & Parquet Installation</h3><p>Flooring is the foundation of elegance. We offer integrated solutions for installing natural solid wood, engineered hardwood, and high-density laminate parquet.</p><ul><li><strong>The Patterns:</strong> Intricate architectural Chevron, Herringbone, and continuous plank layouts with underlayment insulation.</li><li><strong>The Quality:</strong> Acoustic underlayment and perimeter expansion gaps preventing creaking or seasonal buckling.</li></ul>",
         "shortDescription": "Natural engineered timber and laminate parquet in modern Chevron and Herringbone geometric layouts.",
         "primaryApplications": "Master bedrooms, living halls, executive offices, and luxury retail boutiques.",
         "competitiveAdvantage": "Acoustic underlayment and perimeter expansion gaps preventing creaking or seasonal buckling."
       },
       {
         "id": "carpentry-custom-cabinetry",
+        "service": {
+          "serviceTitle": "Carpentry & Professional Wood Flooring",
+          "tagline": "The Art of Modern Carpentry & Luxury Wood Flooring",
+          "category": "Carpentry",
+          "serviceContent": "Carpentry and woodwork are the soul that brings incomparable warmth and luxury to homes and offices. At Taj Al Rahma, we blend traditional craftsmanship with modern design to transform wood into functional masterpieces that serve your daily needs and stand the test of time.",
+          "whyChooseContent": "We use the finest types of reliable hardwood (Beech, Oak, Walnut, Mahogany), focus on meticulous finishing touches, tailor custom designs to your exact room dimensions, and provide competitive pricing."
+        },
         "serviceTitle": "Custom Cabinetry & Wardrobes",
         "serviceSlug": "custom-cabinetry-wardrobes",
         "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/banner/banner.jpg",
@@ -1448,13 +1761,20 @@
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/custom-cabinetry-wardrobes/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "We maximize every inch of your space to create smart, stylish storage solutions: Bespoke Walk-in Closets with integrated LED sensor illumination, jewelry organizer drawers, and contemporary custom kitchen cabinetry crafted from moisture-resistant marine-grade MDF and solid wood veneers.",
+        "serviceContent": "<h3>2. Custom Cabinetry & Wardrobes</h3><p>Maximizing every inch of your space with smart, stylish storage solutions crafted to millimetric precision.</p><ul><li><strong>The Scope:</strong> Bespoke Walk-in Closets with integrated LED sensor illumination and contemporary custom kitchen cabinetry.</li><li><strong>The Materials:</strong> Moisture-resistant marine-grade MDF and solid wood veneers with premium soft-close runners.</li></ul>",
         "shortDescription": "Bespoke luxury walk-in closets, modular wardrobes, and moisture-resistant modern kitchen cabinets.",
         "primaryApplications": "Dressing rooms, bedrooms, kitchens, and pantry storage.",
         "competitiveAdvantage": "Ergonomic interior division with premium soft-close runners and aluminum-framed glass doors."
       },
       {
         "id": "carpentry-door-repair",
+        "service": {
+          "serviceTitle": "Carpentry & Professional Wood Flooring",
+          "tagline": "The Art of Modern Carpentry & Luxury Wood Flooring",
+          "category": "Carpentry",
+          "serviceContent": "Carpentry and woodwork are the soul that brings incomparable warmth and luxury to homes and offices. At Taj Al Rahma, we blend traditional craftsmanship with modern design to transform wood into functional masterpieces that serve your daily needs and stand the test of time.",
+          "whyChooseContent": "We use the finest types of reliable hardwood (Beech, Oak, Walnut, Mahogany), focus on meticulous finishing touches, tailor custom designs to your exact room dimensions, and provide competitive pricing."
+        },
         "serviceTitle": "Door Installation & Repair",
         "serviceSlug": "door-installation-repair",
         "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/banner/banner.jpg",
@@ -1463,13 +1783,20 @@
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/door-installation-repair/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "A door is the first impression of your home. We provide expert installation of solid wood entrance doors, semi-solid internal doors, and acoustic fire-rated doors. Our repair services address seasonal wood expansion, frame realignment, hinge adjustments, and smart digital lock fittings.",
+        "serviceContent": "<h3>3. Door Installation & Repair</h3><p>A door is the first impression of your home. We provide expert installation and precision repair for all door types.</p><ul><li><strong>The Scope:</strong> Solid wood entrance doors, semi-solid internal doors, acoustic fire-rated doors, and smart digital lock fittings.</li><li><strong>The Quality:</strong> Precision plumb hanging with smooth, silent latching and acoustic perimeter drop seals.</li></ul>",
         "shortDescription": "Expert fitting of solid wood entrance doors, flush interior doors, frame realignment, and hinge repairs.",
         "primaryApplications": "Main villa entrances, bedroom doors, bathroom moisture-resistant doors, and hotel rooms.",
         "competitiveAdvantage": "Precision plumb hanging with smooth, silent latching and acoustic perimeter drop seals."
       },
       {
         "id": "carpentry-wood-paneling",
+        "service": {
+          "serviceTitle": "Carpentry & Professional Wood Flooring",
+          "tagline": "The Art of Modern Carpentry & Luxury Wood Flooring",
+          "category": "Carpentry",
+          "serviceContent": "Carpentry and woodwork are the soul that brings incomparable warmth and luxury to homes and offices. At Taj Al Rahma, we blend traditional craftsmanship with modern design to transform wood into functional masterpieces that serve your daily needs and stand the test of time.",
+          "whyChooseContent": "We use the finest types of reliable hardwood (Beech, Oak, Walnut, Mahogany), focus on meticulous finishing touches, tailor custom designs to your exact room dimensions, and provide competitive pricing."
+        },
         "serviceTitle": "Wooden Partitions & Wall Paneling",
         "serviceSlug": "wooden-partitions-wall-paneling",
         "serviceBanner": "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/banner/banner.jpg",
@@ -1478,7 +1805,7 @@
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/carpentry-wood-flooring/subservices/wooden-partitions-wall-paneling/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Add a touch of architectural luxury to your interiors. We craft custom wall cladding including classic Wainscoting, contemporary vertical acoustic wooden slats, fluted panels, and open wood louvers that divide open spaces while maintaining natural light and air circulation.",
+        "serviceContent": "<h3>4. Wooden Partitions & Wall Paneling</h3><p>Adding a touch of architectural luxury to interiors through custom wall cladding and room-dividing timber screens.</p><ul><li><strong>The Design:</strong> Classic Wainscoting, contemporary vertical acoustic wooden slats, fluted panels, and open wood louvers.</li><li><strong>The Finish:</strong> Rich natural grain with concealed fixings and integrated LED channel lighting.</li></ul>",
         "shortDescription": "Architectural acoustic timber slat walls, classic wainscoting, and room-divider timber screens.",
         "primaryApplications": "Living room TV feature walls, bed headboard accents, reception feature paneling.",
         "competitiveAdvantage": "Rich natural grain finishes with concealed fixings and integrated LED channel lighting."
@@ -1529,6 +1856,13 @@
     "subservices": [
       {
         "id": "clean-post-construction",
+        "service": {
+          "serviceTitle": "Building Cleaning Services",
+          "tagline": "Professional Building Cleaning & Comprehensive Hygiene Solutions",
+          "category": "Cleaning",
+          "serviceContent": "Cleanliness is the true reflection of any facility, whether residential or commercial. At Taj Al Rahma, we provide advanced cleaning solutions that go beyond surface-level appearance to include deep disinfection and meticulous attention to detail. Utilizing the latest German and Italian equipment and eco-friendly materials, we ensure a safe, healthy, and welcoming environment for everyone.",
+          "whyChooseContent": "A professional workforce trained to the highest safety and vocational standards, utilizing advanced German and Italian machinery, eco-friendly health-certified detergents, and flexible timing tailored to your operations."
+        },
         "serviceTitle": "Post-Construction Cleaning",
         "serviceSlug": "post-construction-cleaning",
         "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/banner/banner.jpg",
@@ -1537,13 +1871,20 @@
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/post-construction-cleaning/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Removing construction debris is a demanding task requiring high precision. We take over the hard work to make your building move-in ready: eliminating paint splatters, cement residue, silicone hazing, fine masonry dust from all surfaces, deep scrubbing floors, and cleaning hard-to-reach tracks.",
+        "serviceContent": "<h3>1. Post-Construction Cleaning</h3><p>Removing construction debris is a demanding task requiring high precision to make your building truly move-in ready.</p><ul><li><strong>The Scope:</strong> Eliminating paint splatters, cement residue, silicone hazing, and fine masonry dust from all surfaces.</li><li><strong>The Result:</strong> Spotless scratch-free detailing of delicate sanitary ware, windows, and fixtures.</li></ul>",
         "shortDescription": "Removal of paint overspray, cement residue, dust, and deep sanitization for move-in ready handover.",
         "primaryApplications": "Newly constructed villas, fit-out handover commercial spaces, and renovated properties.",
         "competitiveAdvantage": "Spotless scratch-free detailing of delicate sanitary ware, windows, and fixtures."
       },
       {
         "id": "clean-facade-glass",
+        "service": {
+          "serviceTitle": "Building Cleaning Services",
+          "tagline": "Professional Building Cleaning & Comprehensive Hygiene Solutions",
+          "category": "Cleaning",
+          "serviceContent": "Cleanliness is the true reflection of any facility, whether residential or commercial. At Taj Al Rahma, we provide advanced cleaning solutions that go beyond surface-level appearance to include deep disinfection and meticulous attention to detail. Utilizing the latest German and Italian equipment and eco-friendly materials, we ensure a safe, healthy, and welcoming environment for everyone.",
+          "whyChooseContent": "A professional workforce trained to the highest safety and vocational standards, utilizing advanced German and Italian machinery, eco-friendly health-certified detergents, and flexible timing tailored to your operations."
+        },
         "serviceTitle": "External Glass & Facade Cleaning",
         "serviceSlug": "external-glass-facade-cleaning",
         "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/banner/banner.jpg",
@@ -1552,13 +1893,20 @@
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/external-glass-facade-cleaning/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "We maintain your building's brilliance from the outside, regardless of height. Specialized care for glass curtain walls, aluminum ACP cladding, and stone facades. Our IRATA-certified high-access rope access and cradle teams work with strict adherence to international safety standards.",
+        "serviceContent": "<h3>2. External Glass & Facade Cleaning</h3><p>Maintaining your building's brilliance from the outside regardless of height using IRATA-certified access teams.</p><ul><li><strong>The Method:</strong> Specialized rope access and cradle teams for glass curtain walls, aluminum ACP cladding, and stone facades.</li><li><strong>The Technology:</strong> Pure water reach-and-wash leaving spotless, streak-free glass that repels dust.</li></ul>",
         "shortDescription": "High-access rope and cradle glass facade washing using purified deionized water systems.",
         "primaryApplications": "Commercial office towers, hotel exterior glass, and residential multi-story buildings.",
         "competitiveAdvantage": "Pure water reach-and-wash technology leaving spotless, streak-free glass that repels dust."
       },
       {
         "id": "clean-industrial-warehouse",
+        "service": {
+          "serviceTitle": "Building Cleaning Services",
+          "tagline": "Professional Building Cleaning & Comprehensive Hygiene Solutions",
+          "category": "Cleaning",
+          "serviceContent": "Cleanliness is the true reflection of any facility, whether residential or commercial. At Taj Al Rahma, we provide advanced cleaning solutions that go beyond surface-level appearance to include deep disinfection and meticulous attention to detail. Utilizing the latest German and Italian equipment and eco-friendly materials, we ensure a safe, healthy, and welcoming environment for everyone.",
+          "whyChooseContent": "A professional workforce trained to the highest safety and vocational standards, utilizing advanced German and Italian machinery, eco-friendly health-certified detergents, and flexible timing tailored to your operations."
+        },
         "serviceTitle": "Industrial & Warehouse Cleaning",
         "serviceSlug": "industrial-warehouse-cleaning",
         "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/banner/banner.jpg",
@@ -1567,13 +1915,20 @@
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/industrial-warehouse-cleaning/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "Industrial environments demand specialized equipment to handle heavy oils, tire marks, and stubborn grime. We deep-clean large-scale factories, logistics warehouses, and workshops using industrial ride-on scrubber dryers and high-pressure thermal degreasers to ensure safe, compliant workspaces.",
+        "serviceContent": "<h3>3. Industrial & Warehouse Cleaning</h3><p>Industrial environments demand specialized equipment to handle heavy oils, tire marks, and stubborn grime safely.</p><ul><li><strong>The Equipment:</strong> Industrial ride-on scrubber dryers and high-pressure thermal degreasers ensuring compliant workspaces.</li><li><strong>The Efficiency:</strong> Fast turnaround with zero disruption to warehouse logistics operations.</li></ul>",
         "shortDescription": "Heavy-duty ride-on scrubbing, oil degreasing, and dust removal for industrial facilities.",
         "primaryApplications": "Logistics storage hubs, food manufacturing plants, workshops, and distribution centers.",
         "competitiveAdvantage": "Fast turnaround with zero disruption to warehouse logistics operations."
       },
       {
         "id": "clean-floor-polishing",
+        "service": {
+          "serviceTitle": "Building Cleaning Services",
+          "tagline": "Professional Building Cleaning & Comprehensive Hygiene Solutions",
+          "category": "Cleaning",
+          "serviceContent": "Cleanliness is the true reflection of any facility, whether residential or commercial. At Taj Al Rahma, we provide advanced cleaning solutions that go beyond surface-level appearance to include deep disinfection and meticulous attention to detail. Utilizing the latest German and Italian equipment and eco-friendly materials, we ensure a safe, healthy, and welcoming environment for everyone.",
+          "whyChooseContent": "A professional workforce trained to the highest safety and vocational standards, utilizing advanced German and Italian machinery, eco-friendly health-certified detergents, and flexible timing tailored to your operations."
+        },
         "serviceTitle": "Floor Deep Cleaning & Polishing",
         "serviceSlug": "floor-deep-cleaning-polishing",
         "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/banner/banner.jpg",
@@ -1582,13 +1937,20 @@
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/floor-deep-cleaning-polishing/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "We restore the original glow of your floors, making them look brand new: Diamond disc grinding, chemical crystallization polishing for marble and granite, and rotary scrubbing of ceramic tiles with protective acrylic sealant wax application.",
+        "serviceContent": "<h3>4. Floor Deep Cleaning & Polishing</h3><p>Restoring the original glow of your floors making them look brand new through professional-grade processes.</p><ul><li><strong>The Process:</strong> Diamond disc grinding, chemical crystallization polishing for marble and granite, and rotary scrubbing of ceramic tiles.</li><li><strong>The Finish:</strong> Long-lasting protective mirror gloss that removes stubborn scuffs.</li></ul>",
         "shortDescription": "Rotary deep scrubbing, stain lifting, and Italian crystallization polishing for marble and tiles.",
         "primaryApplications": "Hotel lobbies, high-traffic commercial mall floors, and luxury residential villas.",
         "competitiveAdvantage": "Removes stubborn scuffs and creates a long-lasting protective mirror gloss."
       },
       {
         "id": "clean-water-tank",
+        "service": {
+          "serviceTitle": "Building Cleaning Services",
+          "tagline": "Professional Building Cleaning & Comprehensive Hygiene Solutions",
+          "category": "Cleaning",
+          "serviceContent": "Cleanliness is the true reflection of any facility, whether residential or commercial. At Taj Al Rahma, we provide advanced cleaning solutions that go beyond surface-level appearance to include deep disinfection and meticulous attention to detail. Utilizing the latest German and Italian equipment and eco-friendly materials, we ensure a safe, healthy, and welcoming environment for everyone.",
+          "whyChooseContent": "A professional workforce trained to the highest safety and vocational standards, utilizing advanced German and Italian machinery, eco-friendly health-certified detergents, and flexible timing tailored to your operations."
+        },
         "serviceTitle": "Water Tank Cleaning & Disinfection",
         "serviceSlug": "water-tank-cleaning-disinfection",
         "serviceBanner": "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/banner/banner.jpg",
@@ -1597,7 +1959,7 @@
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/gallery/gallery-1.jpg",
           "/servicesSubServicesContent/services/building-cleaning-services/subservices/water-tank-cleaning-disinfection/gallery/gallery-2.jpg"
         ],
-        "serviceContent": "The health of your family and employees begins with pure, clean water. We drain, sludge-pump, high-pressure wash sediment and algae from tank walls and floors, followed by thorough chemical disinfection using Dubai Municipality-approved chlorine solutions, followed by microbiological water testing.",
+        "serviceContent": "<h3>5. Water Tank Cleaning & Disinfection</h3><p>The health of your family and employees begins with pure, clean water from properly maintained storage tanks.</p><ul><li><strong>The Process:</strong> Draining, sludge-pumping, high-pressure washing, and thorough chemical disinfection with Dubai Municipality-approved chlorine solutions.</li><li><strong>The Certification:</strong> Full microbiological compliance certificate provided after testing.</li></ul>",
         "shortDescription": "Sludge extraction, biofilm removal, chemical sterilization, and lab testing for domestic water tanks.",
         "primaryApplications": "GRP, concrete, and polyethylene underground and overhead potable water storage tanks.",
         "competitiveAdvantage": "Municipality-approved sterilization with full microbiological compliance certificate."
