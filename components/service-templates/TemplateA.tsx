@@ -144,9 +144,9 @@ interface Props {
 
 export default function TemplateA({ service, sub, isArabic }: Props) {
   const gallery: string[] =
-    sub.servicesgalaryImages?.length     ? sub.servicesgalaryImages :
-    service.servicesgalaryImages?.length ? service.servicesgalaryImages :
-    FALLBACK_GALLERY;
+    sub.servicesgalaryImages?.length ? sub.servicesgalaryImages :
+      service.servicesgalaryImages?.length ? service.servicesgalaryImages :
+        FALLBACK_GALLERY;
 
   const siblings = service.subservices.filter((s) => s.serviceSlug !== sub.serviceSlug);
 
@@ -155,21 +155,36 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
       <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-l-4 border-[#009e90]/40 pl-4">
-        {service.serviceContent}
+        {/* {service.} */}
       </p>
-    
+
 
       {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
       <section className="mb-10">
-        <SubBlock sub={sub} isArabic={isArabic} />
+        {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
+
+        {service.subservices.map((subservice) => (
+          <div
+            className="
+      text-[14px] text-stone-600 leading-relaxed
+      [&_p]:mb-1
+      [&_ul]:list-disc
+      [&_ul]:pl-6
+      [&_ul]:mb-5
+      [&_li]:mb-1
+      [&_strong]:font-bold
+    "
+            dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
+          />
+        ))}
+
+
       </section>
-  <pre className="whitespace-pre-wrap">
-    {JSON.stringify(service, null, 2)}
-  </pre>
+
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
       {service.whyChooseTitle && (
         <section className="mb-10">
-          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-stone-900 mb-2 leading-snug">
+          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
             {service.whyChooseTitle}
           </h3>
           <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
@@ -200,7 +215,7 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
             {gallery.map((src, i) => (
               <div
                 key={i}
-                className="relative aspect-square rounded-lg overflow-hidden bg-stone-100"
+                className="relative aspect-square overflow-hidden bg-stone-100"
               >
                 <SmartImg src={src} alt={`${sub.serviceTitle} ${i + 1}`} />
               </div>
@@ -209,28 +224,6 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
         </section>
       )}
 
-      {/* ── 5. OTHER SUB-SERVICES ─────────────────────────────── */}
-      {siblings.length > 0 && (
-        <section className="mb-10">
-          <h3 className="text-[13px] font-extrabold text-stone-500 uppercase tracking-wider mb-3">
-            {isArabic ? "خدمات فرعية أخرى" : "Other Sub-Services"}
-          </h3>
-          <div className="flex flex-col gap-1.5">
-            {siblings.map((s) => (
-              <Link
-                key={s.serviceSlug}
-                href={`/services-details?service=${service.serviceNumber}&sub=${s.serviceSlug}`}
-                className="flex items-center justify-between px-4 py-3 rounded-xl border border-stone-100 hover:border-[#009e90]/30 hover:bg-[#f0faf9] transition-all group"
-              >
-                <span className="text-[13px] font-medium text-stone-700 group-hover:text-[#009e90] transition-colors">
-                  {s.serviceTitle}
-                </span>
-                <ArrowRight className={`w-3.5 h-3.5 text-stone-300 group-hover:text-[#009e90] transition-colors flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ── 6. CTA BUTTON ─────────────────────────────────────── */}
       <section className="flex justify-center pt-2 pb-4">
