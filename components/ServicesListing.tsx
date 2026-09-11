@@ -296,7 +296,7 @@ export default function ServicesListing() {
                     </button>
 
                     {/* Subservices list under active service in sidebar */}
-                    {isServiceActive && svc.subservices && svc.subservices.length > 0 && (
+                    {/* {isServiceActive && svc.subservices && svc.subservices.length > 0 && (
                       <div
                         className={`flex flex-col gap-1 mt-1 mb-1.5 ${
                           isArabic ? "mr-3 pr-3 border-r-2" : "ml-3 pl-3 border-l-2"
@@ -315,7 +315,7 @@ export default function ServicesListing() {
                           </Link>
                         ))}
                       </div>
-                    )}
+                    )} */}
                   </div>
                 );
               })}
@@ -346,16 +346,16 @@ export default function ServicesListing() {
           {/* ── CONTENT AREA ────────────────────────────────────── */}
           <div className="flex-1 min-w-0">
             {/* Heading row */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4 border-b border-stone-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 pb-4">
               <div className="flex items-center gap-2.5">
                 <span className="inline-block w-[4px] h-6 bg-[#009e90] rounded-full flex-shrink-0" />
                 <div>
                   <h2 className="text-[18px] sm:text-[21px] font-extrabold text-stone-900 leading-tight">
                     {activeService.serviceTitle}
                   </h2>
-                  <p className="text-[12px] text-stone-500 mt-0.5">
+                  {/* <p className="text-[12px] text-stone-500 mt-0.5">
                     {activeService.tagline}
-                  </p>
+                  </p> */}
                 </div>
               </div>
               <Link
@@ -368,9 +368,9 @@ export default function ServicesListing() {
             </div>
 
             {/* Service intro preview */}
-            <div className="bg-stone-50 rounded-xl p-4 mb-6 text-[13px] text-stone-600 leading-relaxed border border-stone-100">
+            {/* <div className="bg-stone-50 rounded-xl p-4 mb-6 text-[13px] text-stone-600 leading-relaxed border border-stone-100">
               {activeService.shortDescription || activeService.serviceContent}
-            </div>
+            </div> */}
 
             {/* Subservices Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">

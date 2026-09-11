@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   ShieldCheck,
   Waves,
@@ -132,10 +133,36 @@ const SUBSERVICE_ICONS: Record<string, LucideIcon> = {
   "water-tank-cleaning-disinfection": Droplets,
 };
 
+const SERVICE_SVG_ICONS: Record<string, string> = {
+  "waterproofing": "/serviceListingIcons/SVG.svg",
+  "swimming-pools": "/serviceListingIcons/solar_swimming-linear.svg",
+  "electrical-installations": "/serviceListingIcons/icons8_electrical.svg",
+  "plumbing-sanitary": "/serviceListingIcons/material-symbols-light_plumbing.svg",
+  "floor-wall-tiling": "/serviceListingIcons/SVG (1).svg",
+  "plastering-block-works": "/serviceListingIcons/griddy-icons_plaster.svg",
+  "painting-contracting": "/serviceListingIcons/boxicons_paint.svg",
+};
+
 export function ServiceIcon({ slug, active = false, className = "", size = 18 }: ServiceIconProps) {
   const normalizedSlug = slug.toLowerCase();
-  const IconComponent = SERVICE_ICONS[normalizedSlug] || ShieldCheck;
+  const svgPath = SERVICE_SVG_ICONS[normalizedSlug];
 
+  if (svgPath) {
+    return (
+      <Image
+        src={svgPath}
+        alt={slug}
+        width={size}
+        height={size}
+        className={`flex-shrink-0 transition-opacity duration-200 ${active ? "brightness-0 invert" : ""} ${className}`}
+        style={{ width: size, height: size }}
+        unoptimized
+      />
+    );
+  }
+
+  // Fallback to Lucide icon for services without custom SVG
+  const IconComponent = SERVICE_ICONS[normalizedSlug] || ShieldCheck;
   return (
     <IconComponent
       size={size}
