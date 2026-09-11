@@ -1,14 +1,10 @@
 /**
- * TEMPLATE DEFAULT
- * Matches the approved design screenshot:
- *   - Service intro paragraph
- *   - Each sub-service as a section: bold title, description,
- *     Primary Applications row, Competitive Advantage row (with ✓ icon)
- *   - "Why Choose Taj Alrahmah for X?" section
- *   - Gallery grid (4-col)
- *   - "Schedule a Visit" CTA button
+ * TEMPLATE A — "Technical Deep-Dive"
+ * Layout: service intro → sub-service detail block (title, description,
+ * primary applications, competitive advantage, key benefits, process pills)
+ * → Why Choose section → gallery grid → CTA
  *
- * This is used for ALL sub-services until individual templates are designed.
+ * Assign via index.ts SUBSERVICE_TEMPLATE_OVERRIDE or SERVICE_TEMPLATE_MAP.
  */
 
 "use client";
@@ -18,9 +14,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
-import { json } from "stream/consumers";
 
-/* ─── helpers ───────────────────────────────────────────────── */
+/* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
 const FALLBACK_GALLERY = [
   "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png",
@@ -59,7 +54,7 @@ function SmartImg({
   );
 }
 
-/* ─── single sub-service block ──────────────────────────────── */
+/* ─── sub-service detail block ────────────────────────────────── */
 function SubBlock({
   sub,
   isArabic,
@@ -69,7 +64,7 @@ function SubBlock({
 }) {
   return (
     <div className="border-b border-stone-100 pb-7 last:border-0 last:pb-0">
-      {/* Sub-service title */}
+      {/* Title */}
       <h3 className="text-[16px] sm:text-[17px] font-extrabold text-[#009e90] mb-2 leading-snug">
         {sub.serviceTitle}
       </h3>
@@ -105,7 +100,7 @@ function SubBlock({
         </div>
       )}
 
-      {/* Key Benefits list */}
+      {/* Key Benefits */}
       {sub.keyBenefits && sub.keyBenefits.length > 0 && (
         <ul className="flex flex-col gap-1.5 mt-3">
           {sub.keyBenefits.map((b, i) => (
@@ -117,7 +112,7 @@ function SubBlock({
         </ul>
       )}
 
-      {/* Process steps (compact pill row) */}
+      {/* Process steps — numbered pill row */}
       {sub.process && sub.process.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
           {sub.process.map((step, i) => {
@@ -140,7 +135,7 @@ function SubBlock({
   );
 }
 
-/* ─── main component ────────────────────────────────────────── */
+/* ─── main component ──────────────────────────────────────────── */
 interface Props {
   service: ServiceItem;
   sub: SubServiceItem;
@@ -148,64 +143,68 @@ interface Props {
 }
 
 export default function TemplateDefault({ service, sub, isArabic }: Props) {
-  /* Gallery: prefer sub gallery, fall back to service gallery, then defaults */
   const gallery: string[] =
-    sub.servicesgalaryImages?.length  ? sub.servicesgalaryImages :
-    service.servicesgalaryImages?.length ? service.servicesgalaryImages :
-    FALLBACK_GALLERY;
+    sub.servicesgalaryImages?.length ? sub.servicesgalaryImages :
+      service.servicesgalaryImages?.length ? service.servicesgalaryImages :
+        FALLBACK_GALLERY;
 
-  /* Other sub-services of the same parent (for the "related" list below) */
   const siblings = service.subservices.filter((s) => s.serviceSlug !== sub.serviceSlug);
 
   return (
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
-      <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-l-4 border-[#009e90]/40 pl-4">
-        {service.shortDescription || service.serviceContent}
+      <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
+        {service.serviceContent}
       </p>
 
-      {/* ── 2. THIS SUB-SERVICE BLOCK ─────────────────────────── */}
+
+      {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
       <section className="mb-10">
-        <SubBlock sub={sub} isArabic={isArabic} />
+        {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
+
+        {service.subservices.map((subservice) => (
+          <div key={subservice.id} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+            <div
+              className="
+      text-[14px] text-stone-600 leading-relaxed
+      [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#009e90] [&_h3]:mb-3 [&_h3]:mt-6
+      [&_p]:mb-1
+      [&_ul]:list-disc
+      [&_ul]:pl-6
+      [&_ul]:mb-5
+      [&_li]:mb-1
+      [&_strong]:font-bold [&_strong]:text-black
+    "
+              dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
+            />
+          </div>
+        ))}
+
+
       </section>
 
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
       {service.whyChooseTitle && (
         <section className="mb-10">
-          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-stone-900 mb-2 leading-snug">
+          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
             {service.whyChooseTitle}
           </h3>
           <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
             {service.whyChooseContent}
           </p>
-          {/* {service.whyChoosePoints?.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {service.whyChoosePoints.map((pt, i) => (
-                <div key={i} className="bg-stone-50 border border-stone-100 rounded-xl p-4">
-                  <h4 className="text-[13px] font-bold text-stone-900 mb-1 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#009e90] flex-shrink-0" />
-                    {pt.title}
-                  </h4>
-                  <p className="text-[12px] text-stone-500 leading-relaxed pl-5">
-                    {pt.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          )} */}
         </section>
       )}
 
       {/* ── 4. GALLERY GRID ───────────────────────────────────── */}
       {gallery.length > 0 && (
         <section className="mb-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
             {gallery.map((src, i) => (
               <div
                 key={i}
                 className="relative aspect-square overflow-hidden bg-stone-100"
-              >                
+              >
                 <SmartImg src={src} alt={`${sub.serviceTitle} ${i + 1}`} />
               </div>
             ))}
@@ -213,28 +212,6 @@ export default function TemplateDefault({ service, sub, isArabic }: Props) {
         </section>
       )}
 
-      {/* ── 5. RELATED SUB-SERVICES ───────────────────────────── */}
-      {/* {siblings.length > 0 && (
-        <section className="mb-10">
-          <h3 className="text-[14px] font-extrabold text-stone-700 uppercase tracking-wider mb-3">
-            {isArabic ? "خدمات فرعية أخرى" : "Other Sub-Services"}
-          </h3>
-          <div className="flex flex-col gap-1.5">
-            {siblings.map((s) => (
-              <Link
-                key={s.serviceSlug}
-                href={`/services-details?service=${service.serviceNumber}&sub=${s.serviceSlug}`}
-                className="flex items-center justify-between px-4 py-3 rounded-xl border border-stone-100 hover:border-[#009e90]/30 hover:bg-[#f0faf9] transition-all group"
-              >
-                <span className="text-[13px] font-medium text-stone-700 group-hover:text-[#009e90] transition-colors">
-                  {s.serviceTitle}
-                </span>
-                <ArrowRight className={`w-3.5 h-3.5 text-stone-300 group-hover:text-[#009e90] transition-colors flex-shrink-0 ${isArabic ? "rotate-180" : ""}`} />
-              </Link>
-            ))}
-          </div>
-        </section>
-      )} */}
 
       {/* ── 6. CTA BUTTON ─────────────────────────────────────── */}
       <section className="flex justify-center pt-2 pb-4">
