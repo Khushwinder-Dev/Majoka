@@ -83,8 +83,8 @@ function ServiceCard({
           {sub.shortDescription
             ? sub.shortDescription
             : sub.serviceContent
-            ? stripHtml(sub.serviceContent)
-            : ""}
+              ? stripHtml(sub.serviceContent)
+              : ""}
         </p>
         <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#009e90] group-hover:gap-2 transition-all duration-200 mt-auto">
           {isArabic ? "اقرأ المزيد" : "Read more"}
@@ -155,16 +155,16 @@ function ServicesContent() {
   const activeService: ServiceItem =
     (serviceParam
       ? services.find(
-          (s) =>
-            s.serviceNumber.toString() === serviceParam ||
-            s.serviceSlug.toLowerCase() === serviceParam.toLowerCase()
-        )
+        (s) =>
+          s.serviceNumber.toString() === serviceParam ||
+          s.serviceSlug.toLowerCase() === serviceParam.toLowerCase()
+      )
       : null) ?? services[0];
 
   const activeSub: SubServiceItem | null = subParam
     ? activeService.subservices.find(
-        (s) => s.serviceSlug.toLowerCase() === subParam.toLowerCase()
-      ) ?? null
+      (s) => s.serviceSlug.toLowerCase() === subParam.toLowerCase()
+    ) ?? null
     : null;
 
   // Navigate to a service (listing view)
@@ -189,8 +189,8 @@ function ServicesContent() {
     ? activeSub.shortDescription
       ? activeSub.shortDescription
       : activeSub.serviceContent
-      ? stripHtml(activeSub.serviceContent).slice(0, 120) + "..."
-      : ""
+        ? stripHtml(activeSub.serviceContent).slice(0, 120) + "..."
+        : ""
     : activeService.tagline || "";
 
   // Contact form state
@@ -274,11 +274,10 @@ function ServicesContent() {
                   <button
                     key={svc.serviceSlug}
                     onClick={() => goToService(svc)}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 cursor-pointer text-left group ${
-                      isActive
-                        ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
-                        : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
-                    }`}
+                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl w-full transition-all duration-200 cursor-pointer text-left group ${isActive
+                      ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
+                      : "text-stone-700 hover:bg-stone-100 hover:text-stone-900"
+                      }`}
                   >
                     <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 transition-colors ${isActive ? "bg-white/20" : "bg-[#009e90]/10"}`}>
                       <ServiceIcon slug={svc.serviceSlug} active={isActive} size={15} />
@@ -366,10 +365,18 @@ function ServicesContent() {
                 </button>
 
                 {/* Sub-service title */}
-                <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight mb-6">
-                  {activeSub.service.serviceTitle +" : " +activeSub.service.tagline}
-                </h2>
-                
+               
+                {["grp-fiberglass", "combo-system-roof-waterproofing"].includes(activeSub.id) ? (
+                  <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight mb-6">
+                    {activeSub.subServiceContent.serviceTitle} : {activeSub.subServiceContent.tagline}
+                  </h2>
+                ) : (
+                  <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight mb-6">
+                    {activeSub.service.serviceTitle} : {activeSub.service.tagline}
+                  </h2>
+                )}
+
+
                 {/* Render the correct template based on service/sub slug */}
                 {(() => {
                   const key = getTemplateKey(activeService.serviceSlug, activeSub.serviceSlug);
@@ -386,53 +393,55 @@ function ServicesContent() {
       </div>
 
       {/* ══ CONTACT / INQUIRY SECTION (listing view only) ════════ */}
-      {!activeSub && <section className="w-full bg-[#f4f6f8] py-16 sm:py-20 lg:py-24 border-t border-stone-200/60">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="flex items-center gap-1">
-              <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
-              <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
-            </span>
-            <span className="text-[12px] sm:text-[13px] font-semibold tracking-wide text-stone-600">
-              {isArabic ? "تواصل معنا الآن" : "Contact With Us Now"}
-            </span>
+      {
+        !activeSub && <section className="w-full bg-[#f4f6f8] py-16 sm:py-20 lg:py-24 border-t border-stone-200/60">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="flex items-center gap-1">
+                <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
+                <span className="w-1 h-3.5 bg-[#009e90] -skew-x-[20deg] rounded-full inline-block" />
+              </span>
+              <span className="text-[12px] sm:text-[13px] font-semibold tracking-wide text-stone-600">
+                {isArabic ? "تواصل معنا الآن" : "Contact With Us Now"}
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-[38px] font-extrabold text-stone-900 text-center leading-tight mb-8 sm:mb-12 max-w-2xl mx-auto tracking-tight">
+              {isArabic ? "لا تتردد في مراسلة خبرائنا التقنيين" : "Feel Free to Write Our Technology Experts"}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
+                  placeholder={isArabic ? "الاسم الكامل" : "Full Name"}
+                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
+                  placeholder={isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
+                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
+                  placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
+                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
+                  placeholder={isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
+                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+              </div>
+              <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
+                placeholder={isArabic ? "الرسالة والتفاصيل" : "Message and details"}
+                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all resize-y ${isArabic ? "text-right" : "text-left"}`} />
+              <div className="flex justify-center pt-2 sm:pt-4">
+                <button type="submit" disabled={isSubmitting}
+                  className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-[15px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed">
+                  {isSubmitting ? (
+                    <><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>{isArabic ? "جاري الإرسال..." : "Sending..."}</span></>
+                  ) : (
+                    <span>{isArabic ? "إرسال الرسالة" : "Send Message"}</span>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-[38px] font-extrabold text-stone-900 text-center leading-tight mb-8 sm:mb-12 max-w-2xl mx-auto tracking-tight">
-            {isArabic ? "لا تتردد في مراسلة خبرائنا التقنيين" : "Feel Free to Write Our Technology Experts"}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-              <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
-                placeholder={isArabic ? "الاسم الكامل" : "Full Name"}
-                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-              <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
-                placeholder={isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
-                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-              <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
-                placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
-                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-              <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
-                placeholder={isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
-                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-            </div>
-            <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
-              placeholder={isArabic ? "الرسالة والتفاصيل" : "Message and details"}
-              className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all resize-y ${isArabic ? "text-right" : "text-left"}`} />
-            <div className="flex justify-center pt-2 sm:pt-4">
-              <button type="submit" disabled={isSubmitting}
-                className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-[15px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed">
-                {isSubmitting ? (
-                  <><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>{isArabic ? "جاري الإرسال..." : "Sending..."}</span></>
-                ) : (
-                  <span>{isArabic ? "إرسال الرسالة" : "Send Message"}</span>
-                )}
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>}
+        </section>
+      }
 
       {/* ══ FAQ SECTION ══════════════════════════════════════════ */}
       <section className="w-full bg-[#f4f6f8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
@@ -509,7 +518,7 @@ function ServicesContent() {
         </div>
       </section>
 
-    </div>
+    </div >
   );
 }
 

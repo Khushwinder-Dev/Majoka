@@ -56,6 +56,31 @@
     "subservices": [
       {
         "id": "grp-fiberglass",
+        "subServiceContent":
+          {
+            "serviceTitle": "All Types of Waterproofing",
+            "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+            "content": [
+              {
+                "serviceContent": "<h3>What is the Combo System?</h3><p>It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage.</p>"
+              },
+              {
+                "serviceContent": "<h3>1. Dual Insulation (Thermal & Water)</h3><p>The system acts as a shield against rainwater while simultaneously blocking solar heat from penetrating the building, ensuring a cool and comfortable indoor environment.</p>"
+              },
+              {
+                "serviceContent": "<h3>2. Massive Energy Savings</h3><p>Thanks to its superior thermal efficiency, the Combo System helps reduce electricity bills by up to 40% by significantly decreasing the load on air conditioning units.</p>"
+              },
+              {
+                "serviceContent": "<h3>3. Lightweight & Durable</h3><p>Unlike traditional heavy insulation systems, the Combo System is lightweight, reducing the dead load on the building's structure while remaining durable enough to withstand foot traffic and movement on the roof.</p>"
+              },
+              {
+                "serviceContent": "<h3>4. Long-term Warranty</h3><p>Due to the system's robustness and reliability, Taj Al Rahmah provides a warranty of up to 25 years against leakage, giving you total peace of mind for decades.</p>"
+              },
+              {
+                "serviceContent": "<h3>Our Implementation Stages</h3><ul><li><strong>Surface Cleaning:</strong> Removing all dust and impurities to ensure maximum adhesion of materials to the concrete.</li><li><strong>Polyurethane (PU Foam) Spraying:</strong> Applying a dense layer of foam that expands to seal all holes and corners, providing instant thermal and water insulation.</li><li><strong>UV Coating:</strong> Applying a protective layer to shield the foam from ultraviolet rays and extreme weather fluctuations.</li><li><strong>Flood Test:</strong> Submerging the roof in water for 48 hours to ensure a 100% leak-free application.</li><li><strong>Final Screed:</strong> Casting a protective cementitious screed with precise slopes to ensure proper water drainage toward the outlets.</li></ul>"
+              }
+            ]
+          },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -64,7 +89,7 @@
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "GRP & Fiberglass Waterproofing",
-        "serviceSlug": "grp-fiberglass",
+        "serviceSlug": "grp-fiberglass-waterproofing",
         "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/whatsapp-image-2025-12-21-at-10-54-34-pm-standard-p2j3we.webp",
         "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/download-40-high.webp",
         "servicesgalaryImages": [
@@ -77,7 +102,7 @@
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-23-at-11-47-23-pm-high.webp",
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-25-at-5-24-19-pm-high.webp"
         ],
-        "serviceContent": "<h3>1. GRP & Fiberglass Waterproofing</h3><p>Known as the 'King of Insulation' due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer.</p><ul><li><strong>Durability:</strong> Provides a single, seamless, joint-free layer that lasts for decades.</li><li><strong>Safety:</strong> Completely safe for health and potable water storage (Food Grade).</li></ul>",
+        "serviceContent": "<h3>1. GRP & Fiberglass Lining</h3><p>Known as the \"King of Insulation\" due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer.</p><ul><li><strong>Primary Applications:</strong> Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.</li><li><strong>Competitive Advantage:</strong> It provides a single, seamless, joint-free layer that lasts for decades. It is completely safe for health and water storage (Food Grade).</li></ul>",
         "shortDescription": "King of insulation: tough glass fiber embedded resins for water tanks and chemical channels.",
         "primaryApplications": "Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.",
         "competitiveAdvantage": "Provides a single, seamless, joint-free layer that lasts for decades. Completely safe for health and water storage (Food Grade).",
@@ -88,7 +113,32 @@
         ]
       },
       {
-        "id": "combo-system",
+        "id": "combo-system-roof-waterproofing",
+        "subServiceContent":
+          {
+            "serviceTitle": "Combo System Roof Waterproofing",
+            "tagline": "The Smart Dual Solution for Water & Heat Insulation In light of harsh climatic conditions and soaring temperatures, waterproofing alone is no longer enough to protect buildings. At Taj Al Rahmah, we offer the integrated 'Combo System'—a revolutionary technology that combines waterproofing, thermal insulation, and final finishing in a single process. This makes it the premier choice for modern projects, commercial buildings, and residential villas.",
+            "content": [
+              {
+                "serviceContent": "<h3>What is the Combo System?</h3><p>It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage.</p>"
+              },
+              {
+                "serviceContent": "<h3>1. Dual Insulation (Thermal & Water)</h3><p>The system acts as a shield against rainwater while simultaneously blocking solar heat from penetrating the building, ensuring a cool and comfortable indoor environment.</p>"
+              },
+              {
+                "serviceContent": "<h3>2. Massive Energy Savings</h3><p>Thanks to its superior thermal efficiency, the Combo System helps reduce electricity bills by up to 40% by significantly decreasing the load on air conditioning units.</p>"
+              },
+              {
+                "serviceContent": "<h3>3. Lightweight & Durable</h3><p>Unlike traditional heavy insulation systems, the Combo System is lightweight, reducing the dead load on the building's structure while remaining durable enough to withstand foot traffic and movement on the roof.</p>"
+              },
+              {
+                "serviceContent": "<h3>4. Long-term Warranty</h3><p>Due to the system's robustness and reliability, Taj Al Rahmah provides a warranty of up to 25 years against leakage, giving you total peace of mind for decades.</p>"
+              },
+              {
+                "serviceContent": "<h3>Our Implementation Stages</h3><ul><li><strong>Surface Cleaning:</strong> Removing all dust and impurities to ensure maximum adhesion of materials to the concrete.</li><li><strong>Polyurethane (PU Foam) Spraying:</strong> Applying a dense layer of foam that expands to seal all holes and corners, providing instant thermal and water insulation.</li><li><strong>UV Coating:</strong> Applying a protective layer to shield the foam from ultraviolet rays and extreme weather fluctuations.</li><li><strong>Flood Test:</strong> Submerging the roof in water for 48 hours to ensure a 100% leak-free application.</li><li><strong>Final Screed:</strong> Casting a protective cementitious screed with precise slopes to ensure proper water drainage toward the outlets.</li></ul>"
+              }
+            ]
+          },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -97,39 +147,23 @@
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Combo System Roof Waterproofing",
-        "serviceSlug": "combo-system",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/banner/combo-roof-waterproof-standard-qz7u78.webp",
-        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/combo-roof-waterproof-high.webp",
-        "servicesgalaryImages": [
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/1-3-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/combo-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/epoxy-flooring-contractors-in-dubai-abu-dhabi-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/final-roof-640x480-1-pvlh7cn2isd23hxtt45d5mjwzfqge2ivqar9xtrcqo-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/floor-2-terrace-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/heat-resistant-02-qd29e9rhgsg50njhoo2pac0d7gfr5flk63ccfleul4-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/images-68-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/gallery/roofer-inspecting-a-roof-coated-coating-fluid-applied-liquid-applied-roof-for-damage-and-maintenance-comm.webp"
-        ],
-        "serviceContent": "<h3>2. Combo System Roof Waterproofing</h3><p>The smart dual solution for water and heat insulation combining waterproofing, thermal insulation, and final finishing in a single process.</p><ul><li><strong>The System:</strong> Polyurethane Foam topped with cementitious and acrylic protective layers forming a seamless joint-free barrier.</li><li><strong>Energy Savings:</strong> Reduces air conditioning electricity consumption by up to 40%.</li><li><strong>Warranty:</strong> Up to 25 years against leakage.</li></ul>",
-        "shortDescription": "Revolutionary dual-action system combining thermal insulation (Polyurethane foam) with complete water barrier protection.",
-        "primaryApplications": "Villa roofs, commercial buildings, industrial warehouses, and residential towers.",
-        "competitiveAdvantage": "Reduces AC electricity consumption by up to 40% while offering warranties up to 25 years against leakage.",
+        "serviceSlug": "combo-system-roof-waterproofing",
+        "serviceBanner": "",
+        "serviceImage": "",
+        "servicesgalaryImages": [],
+        "serviceContent": "<h3>2. Combo System Roof Waterproofing</h3><p>The modern and ideal solution for roofs, combining Waterproofing and Thermal Insulation into one integrated system.</p><ul><li><strong>Primary Applications:</strong> Villa roofs, commercial buildings, and residential towers.</li><li><strong>Competitive Advantage:</strong> Significantly reduces energy consumption (due to thermal insulation), provides absolute water protection, and often comes with long-term warranties reaching 10 to 15 years.</li></ul>",
+        "shortDescription": "Dual-action roof insulation system combining waterproof protection and high thermal resistance.",
+        "primaryApplications": "Villa roofs, commercial buildings, and residential towers.",
+        "competitiveAdvantage": "Significantly reduces energy consumption (due to thermal insulation), provides absolute water protection, and often comes with long-term warranties reaching 10 to 15 years.",
         "keyBenefits": [
-          "Dual Insulation: Complete shield against rainwater while blocking solar heat penetration.",
-          "Massive Energy Savings: Reduces air conditioning electricity load by up to 40%.",
-          "Lightweight & Durable: Eliminates dead load on the structure while withstanding heavy foot traffic.",
-          "Long-term Warranty: Up to 25 years leakage warranty for total peace of mind."
-        ],
-        "process": [
-          "Surface Cleaning: Removing all dust and impurities to ensure maximum adhesion to concrete.",
-          "Polyurethane (PU Foam) Spraying: Applying dense expanding foam that seals all holes and corners.",
-          "UV Coating: Protective layer shielding foam from ultraviolet rays and extreme weather.",
-          "Flood Test: Submerging roof in water for 48 hours for 100% leak verification.",
-          "Final Screed: Casting protective cementitious screed with precise slope toward outlets."
+          "Combines thermal and waterproof insulation in a single application",
+          "Substantially lowers HVAC power consumption",
+          "Backing of 10-15 year multi-layer protection warranty"
         ]
       },
       {
         "id": "epoxy-floor-coating",
+        "subServiceContent": [],
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -139,38 +173,22 @@
         },
         "serviceTitle": "Epoxy Floor Coating",
         "serviceSlug": "epoxy-floor-coating",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/banner/003e96cf-5d33-4dff-98bf-74477b9228b3-standard.webp",
-        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/thumbnail/epoxy-floor-coating-service-500x500-high.webp",
-        "servicesgalaryImages": [
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/clean-modern-factory-interior-shiny-blue-epoxy-floor-reflecting-lights-machinery-clean-modern-fact.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/diy-epoxy-flooring-installation-a-comprehensive-guide-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/download-52-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/download-53-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-33-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-34-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-35-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/gallery/images-36-high.webp"
-        ],
-        "serviceContent": "<h3>3. Epoxy Floor Coating</h3><p>Transforms traditional concrete floors into solid, glossy, and highly resistant surfaces capable of withstanding harsh operating conditions.</p><ul><li><strong>The Material:</strong> High-grade resin and hardener forming a rigid plastic layer with superior abrasion, chemical, and oil resistance.</li><li><strong>Applications:</strong> Car parks, warehouses, industrial factories, laboratories, hospitals, and showrooms.</li></ul>",
-        "shortDescription": "High-durability polymeric flooring offering anti-slip, chemical resistance, and polished aesthetics.",
-        "primaryApplications": "Car parks, warehouses, industrial factories, laboratories, hospitals, and showrooms.",
-        "competitiveAdvantage": "High resistance to oils, chemicals, heavy forklift traffic, seamless hygienic cleaning, and long service life.",
+        "serviceBanner": "",
+        "serviceImage": "",
+        "servicesgalaryImages": [],
+        "serviceContent": "<h3>3. Epoxy Floor Coating</h3><p>A protection and beautification system for concrete floors, transforming them into a smooth, hard, and liquid-resistant surface.</p><ul><li><strong>Primary Applications:</strong> Car parks, warehouses, factories, and laboratories.</li><li><strong>Competitive Advantage:</strong> High resistance to oils and chemicals, extreme ease of cleaning, and a professional aesthetic appearance.</li></ul>",
+        "shortDescription": "Smooth, chemical-resistant floor coating engineered for industrial and high-traffic areas.",
+        "primaryApplications": "Car parks, warehouses, factories, and laboratories.",
+        "competitiveAdvantage": "High resistance to oils and chemicals, extreme ease of cleaning, and a professional aesthetic appearance.",
         "keyBenefits": [
-          "Industrial Epoxy for Warehouses: Heavy load bearing with extreme scratch resistance.",
-          "Car Park Coatings: Hot-tire resistant with Anti-Slip texture for pedestrian and vehicular safety.",
-          "Hygienic Floors for Hospitals & Labs: Joint-free seamless finish preventing bacteria and dust buildup.",
-          "Decorative & Metallic Epoxy: Vibrant colors and artistic patterns for showrooms and executive spaces."
-        ],
-        "process": [
-          "Mechanical Preparation (Grinding): Sanding floor to open concrete pores for adhesion.",
-          "Defect Repair: Filling cracks and voids with specialized epoxy putty.",
-          "Priming: Penetrating epoxy primer bridging concrete and topcoat.",
-          "Base Coat: Applying heavy-duty colored epoxy base.",
-          "Top Coat: Adding final protective polyurethane or epoxy wear coat with selected gloss level."
+          "Resistant to heavy oils, chemicals, and mechanical impact",
+          "Seamless, easy-to-clean hygienic surface finish",
+          "Enhances floor aesthetics and light reflectivity"
         ]
       },
       {
-        "id": "bitumen-membrane",
+        "id": "bitumen-membrane-waterproofing",
+        "subServiceContent": [],
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -178,40 +196,24 @@
           "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
-        "serviceTitle": "Bitumen Membrane Waterproofing",
-        "serviceSlug": "bitumen-membrane",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/banner/alevli-yalitim-uygulamasi-standard-amwtjn.webp",
-        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/thumbnail/alevli-yalitim-uygulamasi-high.webp",
-        "servicesgalaryImages": [
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/download-50-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/gb-bitumen-roof-everbuild4_16-9-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/glo-bitumen-roof-membrane-parapet_3-2-1-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/glo-bituminous-membrane-rolls-torching_16-9-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/glo-men-rolling-bitumen-membrane_16-9-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/images-38-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/yalitim-malzemesi-suren-isciler-1-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/gallery/yalitim-uygulamasi-high.webp"
-        ],
-        "serviceContent": "<h3>4. Bitumen Membrane Waterproofing</h3><p>The integrated engineering solution for protecting structures against water leakage and groundwater moisture using torch-applied modified bitumen rolls.</p><ul><li><strong>APP Type:</strong> Thermoplastic-modified, ideal for high-temperature Gulf climates with excellent UV resistance.</li><li><strong>SBS Type:</strong> Synthetic rubber-modified, delivering extreme elasticity across thermal expansion cycles.</li></ul>",
-        "shortDescription": "Torch-applied SBS and APP modified bituminous rolls for foundations, basements, and podium roofs.",
-        "primaryApplications": "Building foundations, concrete raft bases, retaining walls, podium roofs, bathrooms, and wet areas.",
-        "competitiveAdvantage": "High flexibility in handling minor structural settlement and outstanding resistance to soil moisture and salts.",
+        "serviceTitle": "Bitumen membrane waterproofing",
+        "serviceSlug": "bitumen-membrane-waterproofing",
+        "serviceBanner": "",
+        "serviceImage": "",
+        "servicesgalaryImages": [],
+        "serviceContent": "<h3>4. Bitumen Membrane Waterproofing</h3><p>The most common and reliable system for protecting foundations and roofs. It relies on reinforced bituminous rolls installed using heat (torch-applied).</p><ul><li><strong>Primary Applications:</strong> Insulation of foundations, concrete bases, bathrooms, and kitchens.</li><li><strong>Competitive Advantage:</strong> High flexibility in handling minor structural movements and excellent resistance to ground moisture and humidity.</li></ul>",
+        "shortDescription": "Reinforced torch-applied bituminous rolls ideal for foundation and wet area waterproofing.",
+        "primaryApplications": "Insulation of foundations, concrete bases, bathrooms, and kitchens.",
+        "competitiveAdvantage": "High flexibility in handling minor structural movements and excellent resistance to ground moisture and humidity.",
         "keyBenefits": [
-          "APP (Atactic Polypropylene): Thermoplastic-modified, ideal for high-temperature Gulf climates with excellent UV resistance.",
-          "SBS (Styrene Butadiene Styrene): Synthetic rubber-modified, delivering extreme elasticity across thermal expansion cycles.",
-          "Hermetic Joint Welds: 10cm overlap zones torch-fused into a unified continuous barrier.",
-          "Decades of Field Proven Performance: Withstands soil chemicals, aggressive salts, and ground hydrostatic pressure."
-        ],
-        "process": [
-          "Surface Preparation: Cleaning concrete and treating honeycombs or cracks.",
-          "Priming: Applying quick-drying bituminous primer for strong adhesion.",
-          "Torch Welding: Precision blowtorch heating of membrane underside.",
-          "Overlapping: 10cm joint overlap thermal fusion ensuring no water seams.",
-          "Testing: Comprehensive flood testing prior to protective screed application."
+          "Torch-applied reinforced bituminous rolls",
+          "High elasticity to accommodate structural expansion",
+          "Superior ground moisture barrier"
         ]
       },
       {
-        "id": "polyurea-coating",
+        "id": "polyurea-coating-waterproofing",
+        "subServiceContent": [],
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -220,32 +222,23 @@
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Polyurea Coating Waterproofing",
-        "serviceSlug": "polyurea-coating",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/banner/what-is-polyurea-coatings-newtec-group-standard-ewgzkt.webp",
-        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/thumbnail/what-is-polyurea-coatings-newtec-group-high.webp",
-        "servicesgalaryImages": [
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/12619011_bitmap-3_original-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-45-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-46-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-47-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-48-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-49-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/images-50-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/gallery/spray-on-polyurea-coating-for-roof-waterproofing-p-120-high.webp"
-        ],
-        "serviceContent": "<h3>5. Polyurea Coating Waterproofing</h3><p>The pinnacle of modern waterproofing technology, applied using specialized high-pressure spray equipment and curing within 10 to 30 seconds.</p><ul><li><strong>Flexibility:</strong> 400% elongation bridges thermal cracks and active vibrations without tearing.</li><li><strong>Eco-Friendly:</strong> 100% solids, zero VOCs, certified safe for potable water reservoirs.</li></ul>",
-        "shortDescription": "Ultra-fast curing elastomeric spray membrane curing in seconds with up to 400% elongation.",
-        "primaryApplications": "Large-scale commercial roofs, industrial factories, water reservoirs, sewage treatment plants, bridge decks, and aircraft hangars.",
-        "competitiveAdvantage": "Cures in seconds allowing same-day return to service; withstands temperatures up to 120C and high dynamic movements.",
+        "serviceSlug": "polyurea-coating-waterproofing",
+        "serviceBanner": "",
+        "serviceImage": "",
+        "servicesgalaryImages": [],
+        "serviceContent": "<h3>5. Polyurea Coating Waterproofing</h3><p>An ultra-fast curing spray-applied protective membrane designed to form a seamless, flexible, and extremely durable barrier against water and chemical exposure.</p><ul><li><strong>Primary Applications:</strong> Roofs, water tanks, bridge decks, wastewater treatment facilities, and high-traffic secondary containment units.</li><li><strong>Competitive Advantage:</strong> Rapid set time allows for quick turnaround, exceptional elongation properties, and high resistance to abrasion and impact.</li></ul>",
+        "shortDescription": "Ultra-fast curing spray-applied membrane for instant seamless water protection.",
+        "primaryApplications": "Roofs, water tanks, bridge decks, wastewater treatment facilities, and containment units.",
+        "competitiveAdvantage": "Rapid set time allows quick turnaround, exceptional elasticity, and high impact resistance.",
         "keyBenefits": [
-          "Ultra-Fast Curing: Sets in 10-30 seconds, returning facilities to service the very same day.",
-          "Incredible Flexibility: 400% elongation bridges thermal cracks and active vibrations without tearing.",
-          "Eco-Friendly & Safe: 100% solids, zero VOCs, and solvent-free - certified safe for potable water reservoirs.",
-          "Extreme Climate Resistance: Unaffected by intense humidity or Gulf summer heat up to 120C."
+          "Rapid curing within seconds for instant return to service",
+          "Seamless protective barrier with high tensile strength",
+          "Superior chemical, moisture, and abrasion resistance"
         ]
       },
       {
         "id": "injection-waterproofing",
+        "subServiceContent": [],
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
@@ -253,35 +246,19 @@
           "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
-        "serviceTitle": "Injection Waterproofing & Crack Repair",
+        "serviceTitle": "Injection Waterproofing",
         "serviceSlug": "injection-waterproofing",
-        "serviceBanner": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/banner/images-25-standard.webp",
-        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/thumbnail/1d10cdae-c23a-408e-a59e-96bd950fdbe7-high.webp",
-        "servicesgalaryImages": [
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/crackinjection_picture52-pl6il5g12p6hfsnkeebaft4wirsnp9pftioukpkqfk-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/download-59-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/download-60-high.jpg",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-51-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-53-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-54-high.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-55-high-x9v220.webp",
-          "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/gallery/images-56-high.webp"
-        ],
-        "serviceContent": "<h3>6. Injection Waterproofing & Crack Repair</h3><p>The specialized engineering solution for active leak stoppage and structural strengthening using high-performance chemical resins injected under controlled pressure.</p><ul><li><strong>PU Injection:</strong> Reacts instantly with water to expand and stop running leaks immediately.</li><li><strong>Epoxy Injection:</strong> Delivers tensile strength surpassing native concrete to heal dry structural cracks.</li></ul>",
-        "shortDescription": "High-pressure polyurethane and epoxy injection grouting sealing active water leaks and restoring concrete cohesion without demolition.",
-        "primaryApplications": "Basement walls, water retaining structures, swimming pool shell cracks, elevator pits, and leaking expansion joints.",
-        "competitiveAdvantage": "No demolition required; treats deep-seated fissures from within; stops running water instantly upon contact.",
+        "serviceBanner": "",
+        "serviceImage": "",
+        "servicesgalaryImages": [],
+        "serviceContent": "<h3>6. Injection Waterproofing</h3><p>A specialized repair method that pumps polyurethane or acrylic resins under high pressure directly into structural cracks and void spaces to stop active water leaks.</p><ul><li><strong>Primary Applications:</strong> Concrete basements, retaining walls, expansion joints, tunnels, and underground structures.</li><li><strong>Competitive Advantage:</strong> Expands upon contact with water to completely seal microscopic voids without requiring invasive excavation or demolition.</li></ul>",
+        "shortDescription": "High-pressure chemical resin injection to instantly seal active structural leaks and concrete cracks.",
+        "primaryApplications": "Concrete basements, retaining walls, expansion joints, tunnels, and underground structures.",
+        "competitiveAdvantage": "Expands on contact with water to permanently seal voids without major excavation work.",
         "keyBenefits": [
-          "Polyurethane Injection (PU): Reacts instantly with water to expand into dense closed-cell foam, stopping running leaks immediately.",
-          "Epoxy Injection: Delivers tensile and bond strength surpassing native concrete to heal dry structural cracks.",
-          "Expansion Joint Repair: Restores watertight elastomeric joint seals while maintaining structural movement freedom.",
-          "Rebar Rust Prevention: Blocks moisture and chlorides from reaching internal steel reinforcement."
-        ],
-        "process": [
-          "Inspection & Diagnosis: Differentiating structural movement cracks from active hydraulic leaks.",
-          "Packer Installation: Drilling staggered diagonal injection holes and fixing high-pressure mechanical packers.",
-          "Injection: Pumping resin until continuous refusal or emergence at adjacent packer.",
-          "Finishing: Removing packers and plugging drill holes with non-shrink structural repair mortar."
+          "Stops active water leaks instantaneously under high pressure",
+          "Non-destructive localized repair process",
+          "Flexible resin filler seals dynamic concrete micro-cracks"
         ]
       }
     ]
@@ -440,7 +417,7 @@
           "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/gallery/swimming-pool-waterproofing-services-high-mpu2th.jpg",
           "/servicesSubServicesContent/services/swimming-pools/subservices/tile-mosaic-fixing/gallery/whatsapp-image-2025-12-21-at-11-10-40-pm-high-hveccw.jpg"
         ],
-       "serviceContent": "<h3>4. Tile & Mosaic Fixing</h3><p>Beauty lies in the details. We select the finest mosaics and ceramics that are resistant to chemicals and sunlight, ensuring they never lose their vibrant color.</p><ul><li><strong>Precision:</strong> We use anti-bacterial and anti-fungal adhesives and grouting. We guarantee a perfectly level installation that provides a luxurious look while ensuring a smooth, safe surface for users.</li></ul>",
+        "serviceContent": "<h3>4. Tile & Mosaic Fixing</h3><p>Beauty lies in the details. We select the finest mosaics and ceramics that are resistant to chemicals and sunlight, ensuring they never lose their vibrant color.</p><ul><li><strong>Precision:</strong> We use anti-bacterial and anti-fungal adhesives and grouting. We guarantee a perfectly level installation that provides a luxurious look while ensuring a smooth, safe surface for users.</li></ul>",
         "shortDescription": "Glass mosaic and ceramic installation with chemical-resistant, anti-fungal epoxy grout.",
         "primaryApplications": "Pool floor, wall steps, coping edge tiles, and underwater accent artwork.",
         "competitiveAdvantage": "Smooth non-abrasive edges with zero discoloration from chlorine or solar exposure."
@@ -1377,7 +1354,7 @@
         "service": {
           "serviceTitle": "Painting Contracting Services",
           "tagline": "Transforming Spaces with Color and Precision",
-          "category": "Painting", 
+          "category": "Painting",
           "serviceContent": "Painting is the final flourish that brings character and life to any space. At Taj Alrahmah, we believe that flawless application and vibrant colors are essential for creating the perfect ambiance. We provide the ideal finishing touch that elevates your space. Here are the details of our comprehensive services:",
           "whyChooseContent": "Because we use only the highest quality paints and employ skilled professionals dedicated to delivering exceptional results. We don't just apply paint; we transform your vision into reality with precision and care."
         },
@@ -1635,7 +1612,7 @@
           "/servicesSubServicesContent/services/hvac-air-conditioning/subservices/ac-installation-repair/gallery/gallery-2.jpg"
         ],
         "serviceContent": "<h3>Our Core Services: Comprehensive Solutions Under One Roof</h3><p>We believe every space has its own unique requirements. Therefore, we offer a complete suite of services tailored specifically to your needs:</p><h3>1. AC Installation & Repair</h3><p>Whether you are looking to install a new cooling system or need an urgent fix for a sudden breakdown, our team of engineers and technicians is ready to provide:</p><ul><li><strong>Professional Installation:</strong> Ensuring maximum energy efficiency and the longest possible lifespan for your equipment.</li><li><strong>Rapid Repair:</strong> Accurate fault diagnosis using the latest tools to restore cooling as quickly as possible.</li></ul>",
-         "shortDescription": "Urgent fault diagnosis, gas top-ups, compressor repairs, and new energy-efficient AC unit installations.",
+        "shortDescription": "Urgent fault diagnosis, gas top-ups, compressor repairs, and new energy-efficient AC unit installations.",
         "primaryApplications": "Villas, apartments, commercial shops, server rooms, and offices.",
         "competitiveAdvantage": "Rapid on-site response with accurate digital troubleshooting instruments."
       },

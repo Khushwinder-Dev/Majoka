@@ -29,7 +29,7 @@ const SUBSERVICE_TEMPLATE_OVERRIDE: Record<string, TemplateKey> = {
 /* ── Per parent service slug defaults ─────────────────────────── */
 const SERVICE_TEMPLATE_MAP: Record<string, TemplateKey> = {
   // All currently use default; swap when designs are ready:
-  "waterproofing":               "default",
+  "waterproofing":               "B",
   "swimming-pools":              "default",
   "electrical-installations":    "A",
   "electrical":                  "default",

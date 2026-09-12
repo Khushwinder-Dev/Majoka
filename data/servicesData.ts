@@ -7,6 +7,7 @@ export interface ServiceWhyChoosePoint {
 }
 
 export interface SubServiceItem {
+  subServiceContent: any;
   service: any;
   id: string;
   serviceTitle: string;
