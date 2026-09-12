@@ -154,7 +154,7 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
-      {["grp-fiberglass", "combo-system-roof-waterproofing"].includes(activeSub.id) ? (
+      {["grp-fiberglass-waterproofing"].includes(sub.serviceSlug) ? (
         <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
         {sub.service.serviceContent}
       </p>
@@ -191,15 +191,22 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
 
       </section>
 
+           {/* <pre>
+  {JSON.stringify(sub, null, 2)}
+</pre> */}
+
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
       {service.whyChooseTitle && (
         <section className="mb-10">
           <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
-            {service.whyChooseTitle}
+            {sub.service.whyChooseTitle}
           </h3>
           <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
-            {service.whyChooseContent}
+            {sub.service.whyChooseContent}
           </p>
+           <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
+            {sub.service.bottomText}
+          </h3>
         </section>
       )}
 
