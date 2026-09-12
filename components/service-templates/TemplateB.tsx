@@ -197,7 +197,7 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
       {["bitumen-membrane-waterproofing"].includes(sub.serviceSlug) ? (
         sub.service?.bottomContent && (
           <section className="mb-10">
-            {sub.service.bottomContent.map((item, index) => (
+            {sub.service.bottomContent.map((item: any, index: number) => (
               <div
                 key={index}
                 className="
