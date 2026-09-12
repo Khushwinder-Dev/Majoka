@@ -167,8 +167,8 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
       <section className="mb-10">
         {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
 
-        {(sub.subServiceContent?.content ?? []).map((subservice: { id: React.Key | null | undefined; serviceContent: any; }) => (
-          <div key={subservice.id} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+        {(sub.subServiceContent?.content ?? []).map((subservice: any, idx: number) => (
+          <div key={subservice.id || idx} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
             <div
               className="
       text-[14px] text-stone-600 leading-relaxed

@@ -163,8 +163,8 @@ export default function TemplateA({ service, sub, isArabic }: Props) {
       <section className="mb-10">
         {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
 
-        {service.subservices.map((subservice) => (
-          <div key={subservice.id} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+        {service.subservices.map((subservice, idx) => (
+          <div key={subservice.id || subservice.serviceSlug || idx} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
             <div
               className="
       text-[14px] text-stone-600 leading-relaxed
