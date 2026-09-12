@@ -154,23 +154,20 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
-      {["grp-fiberglass-waterproofing"].includes(sub.serviceSlug) ? (
+      {["grp-fiberglass-waterproofing", "epoxy-floor-coating", "bitumen-membrane-waterproofing", "polyurea-coating-waterproofing", "injection-waterproofing", "bitumen-membrane-waterproofing"].includes(sub.serviceSlug) ? (
         <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
-        {sub.service.serviceContent}
-      </p>
+          {sub.service.serviceContent}
+        </p>
       ) : (
-       <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
-        {/* {sub.service.serviceContent} */}
-      </p>
+        <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
+          {/* {sub.service.serviceContent} */}
+        </p>
       )}
-      {/* <pre>
-  {JSON.stringify(sub, null, 2)}
-</pre> */}
       {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
       <section className="mb-10">
         {/* <SubBlock sub={sub} isArabic={isArabic} /> */}
 
-        {sub.subServiceContent.content.map((subservice: { id: React.Key | null | undefined; serviceContent: any; }) => (
+        {(sub.subServiceContent?.content ?? []).map((subservice: { id: React.Key | null | undefined; serviceContent: any; }) => (
           <div key={subservice.id} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
             <div
               className="
@@ -191,23 +188,49 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
 
       </section>
 
-           {/* <pre>
+      {/* <pre>
   {JSON.stringify(sub, null, 2)}
 </pre> */}
 
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
-      {service.whyChooseTitle && (
-        <section className="mb-10">
-          <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
-            {sub.service.whyChooseTitle}
-          </h3>
-          <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
-            {sub.service.whyChooseContent}
-          </p>
-           <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
-            {sub.service.bottomText}
-          </h3>
-        </section>
+
+      {["bitumen-membrane-waterproofing"].includes(sub.serviceSlug) ? (
+        sub.service?.bottomContent && (
+          <section className="mb-10">
+            {sub.service.bottomContent.map((item, index) => (
+              <div
+                key={index}
+                className="
+            text-[14px] text-stone-600 leading-relaxed
+            [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#009e90] [&_h3]:mb-3 [&_h3]:mt-6
+            [&_p]:mb-1
+            [&_ul]:list-disc
+            [&_ul]:pl-6
+            [&_ul]:mb-5
+            [&_li]:mb-1
+            [&_strong]:font-bold [&_strong]:text-black
+          "
+                dangerouslySetInnerHTML={{ __html: item.serviceContent }}
+              />
+            ))}
+          </section>
+        )
+      ) : (
+        sub.service?.whyChooseTitle && (
+          <section className="mb-10">
+            <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
+              {sub.service.whyChooseTitle}
+            </h3>
+            <p className="text-[13.5px] text-stone-600 leading-relaxed mb-5">
+              {sub.service.whyChooseContent}
+            </p>
+            {sub.service?.bottomText && (
+              <h3 className="text-[17px] sm:text-[18px] font-extrabold text-[#009e90] mb-2 leading-snug">
+                {sub.service.bottomText}
+              </h3>
+            )}
+          </section>
+        )
       )}
 
       {/* ── 4. GALLERY GRID ───────────────────────────────────── */}

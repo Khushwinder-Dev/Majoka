@@ -140,7 +140,7 @@
           "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
           "whyChooseContent": "Modern Technology: We use the latest high-pressure foam spray machines to ensure precise and even distribution. Speed of Execution: The entire system can be completed in record time compared to traditional multi-stage systems. Approved Standards: We adhere to the engineering standards approved by municipalities and relevant authorities. Economic Solution: A smart investment that saves on future maintenance costs and long-term energy bills.",
           "whyChooseTitle": "Why Choose Taj Alrahmah for Waterproofing?",
-          "bottomText":"Combo System by Taj Al Rahmah... Comprehensive protection for your home under one roof."
+          "bottomText": "Combo System by Taj Al Rahmah... Comprehensive protection for your home under one roof."
         },
         "serviceTitle": "Combo System Roof Waterproofing",
         "serviceSlug": "combo-system-roof-waterproofing",
@@ -159,13 +159,38 @@
       },
       {
         "id": "epoxy-floor-coating",
-        "subServiceContent": [],
+        "subServiceContent": {
+          "serviceTitle": "Epoxy Floor Coating",
+          "tagline": "The Ideal Solution for High-Performance Floors",
+          "content": [
+            {
+              "serviceContent": "<h3>What is Epoxy Coating?</h3><p>Epoxy is a \"polymeric\" chemical material consisting of two components: resin and a hardener. When mixed and applied to concrete, they react to form a rigid plastic layer that bonds powerfully with the surface. This system provides superior protection for concrete against abrasion, oils, and chemicals.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Specialized Epoxy Systems</h3><h3>1. Industrial Epoxy for Warehouses</h3><p>Specially designed for spaces experiencing heavy traffic from forklifts and trucks. It features a high load-bearing capacity and excellent scratch resistance.</p>"
+            },
+            {
+              "serviceContent": "<h3>2. Car Park Coatings</h3><p>We offer coating systems resistant to hot tires, oils, and fuels. These systems include Anti-Slip properties to ensure the safety of both vehicles and pedestrians.</p>"
+            },
+            {
+              "serviceContent": "<h3>3. Hygienic Floors for Hospitals & Labs</h3><p>Epoxy provides a \"seamless\" surface without joints, preventing the accumulation of dust and bacteria. Its resistance to harsh chemical cleaners makes it ideal for medical facilities and food processing plants.</p>"
+            },
+            {
+              "serviceContent": "<h3>4. Decorative & Metallic Epoxy</h3><p>For offices, showrooms, and homes seeking a modern and attractive look. We offer a wide range of colors and artistic designs that reflect luxury and sophistication.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Professional Methodology</h3><ol><li><strong>1. Mechanical Preparation (Grinding):</strong> Sanding the concrete floor to remove weak layers and open pores for maximum adhesion.</li><li><strong>2. Defect Repair:</strong> Filling cracks and holes with specialized epoxy putty to ensure a perfectly level surface.</li><li><strong>3. Priming:</strong> Applying a primer layer that penetrates deep into the concrete to act as a bridge between the floor and the coating.</li><li><strong>4. Base Coat:</strong> Spreading a thick layer of epoxy and distributing it with high precision.</li><li><strong>5. Top Coat:</strong> Adding a final protective layer that determines the gloss level and provides slip resistance.</li></ol>"
+            }
+          ]
+        },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "B",
-          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+          "serviceContent": "Are you looking for a flooring solution that combines extreme durability, aesthetic appeal, and ease of maintenance? At Taj Al Rahmah, we provide professional epoxy floor coating solutions that transform traditional concrete floors into solid, glossy, and highly resistant surfaces capable of withstanding the harshest operating conditions.",
+          "whyChooseContent": "Chemical Resistance: Complete protection against acids, alkalis, and chemical spills. Easy Maintenance: A smooth surface that does not absorb liquids, making the cleaning process fast and simple. Superior Adhesion: We use mechanical surface preparation techniques to ensure the epoxy never peels or flakes. Color Versatility: Ability to designate pedestrian walkways and work zones with different colors for better organization and safety.",
+          "whyChooseTitle": "Why Choose 'Taj Al Rahmah' as Your First Choice?",
+          "bottomText": "With Taj Al Rahmah... Your floor is not just a surface; it is a foundation for your business success."
         },
         "serviceTitle": "Epoxy Floor Coating",
         "serviceSlug": "epoxy-floor-coating",
@@ -184,13 +209,40 @@
       },
       {
         "id": "bitumen-membrane-waterproofing",
-        "subServiceContent": [],
+        "subServiceContent": {
+          "serviceTitle": "Bitumen Membrane",
+          "tagline": "The Integrated Engineering Solution for Protecting Structures Against Water Leakage",
+          "content": [
+            {
+              "serviceContent": "<h3>What is a Bitumen Membrane?</h3><p>Bitumen membranes are waterproofing shields made from Modified Bitumen. They are internally reinforced with layers of polyester or fiberglass to provide the necessary strength and flexibility. They usually come in rolls with a thickness typically ranging from 3 mm to 4 mm.</p>"
+            },
+            {
+              "serviceContent": "<h3>Why Do We Rely on Bitumen Membranes in Our Projects?</h3><p>These membranes possess characteristics that make them the first choice for contractors and engineers, most notably:</p><ul><li><strong>Superior Water Resistance:</strong> Provides a completely impermeable protective layer against rainwater and groundwater.</li><li><strong>High Flexibility:</strong> Thanks to additives like SBS or APP, the membranes withstand minor structural movements without cracking.</li><li><strong>Long Lifespan:</strong> They resist soil chemical reactions and temperature fluctuations for many years.</li><li><strong>Strong Adhesion:</strong> When installed correctly, they bond perfectly to the concrete surface, preventing water from seeping under the insulation layer.</li></ul>"
+            },
+            {
+              "serviceContent": "<h3>Common Types of Bitumen Membranes</h3><p><strong>APP (Atactic Polypropylene):</strong> Modified with thermoplastic, making it ideal for high-temperature regions (such as the Gulf countries) due to its high UV resistance.</p><p><strong>SBS (Styrene Butadiene Styrene):</strong> Modified with synthetic rubber, offering extreme flexibility, making it best for areas exposed to severe cold or constant thermal expansion and contraction.</p>"
+            },
+            {
+              "serviceContent": "<h3>Professional Waterproofing Stages at \"Taj Al Rahmah\"</h3><ol><li><strong>1. Surface Preparation:</strong> Thoroughly cleaning the surface and treating any cracks or honeycombing in the concrete.</li><li><strong>2. Priming:</strong> Applying a liquid bitumen primer to ensure strong adhesion of the membranes.</li><li><strong>3. Torch Welding:</strong> Using a blowtorch to heat the underside of the membrane and bond it accurately.</li><li><strong>4. Overlapping:</strong> Ensuring a proper overlap (approximately 10 cm) and carefully welding the joints to eliminate any gaps.</li><li><strong>5. Testing:</strong> Conducting a flood test to ensure the success of the waterproofing process before proceeding to the next steps.</li></ol>"
+            }
+          ]
+        },
         "service": {
-          "serviceTitle": "All Types of Waterproofing",
-          "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
+          "serviceTitle": "Bitumen Membrane",
+          "tagline": "The Integrated Engineering Solution for Protecting Structures Against Water Leakage",
           "category": "Waterproofing",
-          "serviceContent": "C",
-          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+          "serviceContent": "Moisture and water accumulation are among the most dangerous factors threatening the structural integrity of buildings. Over time, they lead to concrete deterioration and steel corrosion. At Taj Al Rahmah, we recognize that choosing the right waterproofing system is the most critical investment in a building’s lifespan. Therefore, in this article, we highlight Bitumen Membranes as one of the world's most trusted and approved waterproofing solutions.",
+          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "whyChooseTitle": "Why Choose 'Taj Al Rahmah' for Bitumen Waterproofing?",
+          "bottomText": "With Taj Al Rahmah... Your floor is not just a surface; it is a foundation for your business success.",
+          "bottomContent": [
+            {
+              "serviceContent": "<h3>Why Choose \"Taj Al Rahmah\" for Bitumen Waterproofing?</h3><p>In a market full of options, Taj Al Rahmah Establishment is proud to offer standards that make us your trusted partner. Choosing us means you get:</p><ul><li><strong>Specialized Technical Expertise:</strong> We don’t just install; we have a team of trained technicians capable of dealing with various surfaces and foundations to ensure every detail is addressed.</li><li><strong>Premium Global Materials:</strong> We are committed to supplying bitumen membranes that meet international standards (both APP and SBS) from top manufacturers to ensure maximum durability.</li><li><strong>Precision in Execution and Welding:</strong> We pay ultimate attention to \"overlap zones\" and joints—the critical points where leaks usually occur—using thermal welding techniques that fuse layers into a single unit.</li><li><strong>Commitment to Schedule:</strong> We value our clients' time; therefore, we commit to delivering projects on schedule while maintaining the highest quality standards.</li><li><strong>Warranty and After-Sales Service:</strong> We provide real warranties on our work, along with periodic inspection services to ensure the long-term efficiency of the insulation.</li></ul>"
+            },
+            {
+              "serviceContent": "<h3>Conclusion</h3><p>Building insulation is not just a supplementary step; it is the safety shield that protects your investment. At Taj Al Rahmah, we take pride in offering our consultations and services in supplying and installing the best types of waterproofing to ensure a safe and moisture-free environment.</p>"
+            }
+          ]
         },
         "serviceTitle": "Bitumen membrane waterproofing",
         "serviceSlug": "bitumen-membrane-waterproofing",
@@ -209,13 +261,35 @@
       },
       {
         "id": "polyurea-coating-waterproofing",
-        "subServiceContent": [],
+        "subServiceContent": {
+          "serviceTitle": "Polyurea Coating",
+          "tagline": "The Fastest & Strongest Technology for Ultimate Protection",
+          "content": [
+            {
+              "serviceContent": "<h3>What is Polyurea?</h3><p>Polyurea is an \"elastomeric\" substance resulting from a chemical reaction between two components sprayed using specialized high-pressure and high-temperature machinery. It is characterized by extreme flexibility (up to 400% elongation) and powerful adhesion to almost any surface, creating an impenetrable armor.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Polyurea Applications</h3><h3>1. Large-Scale Roofing & Industrial Insulation</h3><p>Ideal for vast commercial spaces and factories, Polyurea provides a seamless, integrated water and thermal barrier, completely eliminating any possibility of leaks at joints or seams.</p>"
+            },
+            {
+              "serviceContent": "<h3>2. Tank & Water Plant Lining</h3><p>Due to its high resistance to chemicals and corrosion, Polyurea is the ultimate solution for lining massive water reservoirs, sewage treatment plants, and chemical storage secondary containments.</p>"
+            },
+            {
+              "serviceContent": "<h3>3. Bridge & Steel Structure Protection</h3><p>Polyurea offers superior defense against rust and corrosion caused by harsh environmental factors, significantly extending the lifespan of critical metal and concrete infrastructure.</p>"
+            },
+            {
+              "serviceContent": "<h3>4. High-Traffic Industrial Floors</h3><p>Used in areas requiring extreme resistance to friction and impact, such as aircraft hangars, loading docks, and high-frequency car parks.</p>"
+            }
+          ]
+        },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "D",
-          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+          "serviceContent": "In the world of waterproofing and surface protection, Polyurea stands out as the pinnacle of modern technology. At Taj Al Rahmah, we provide Polyurea coating solutions for projects requiring exceptional durability and record-breaking execution speeds. This system is distinguished by its ability to cure within seconds, providing a protective shield that lasts a lifetime.",
+          "whyChooseContent": "Feature: Ultra-Fast Curing | Benefit: Sets within 10 to 30 seconds, allowing the facility to return to service on the very same day. Feature: Incredible Flexibility | Benefit: Moves with the building and withstands structural vibrations or cracks without tearing. Feature: Eco-Friendly | Benefit: VOC-free and solvent-free, making it perfectly safe for use in potable water tanks. Feature: Extreme Climate Resistance | Benefit: Unaffected by high humidity or extreme heat (withstands temperatures up to 120°C).",
+          "whyChooseTitle": "Why is Polyurea a Revolution in Insulation?",
+          "bottomText": "With Taj Al Rahmah... We provide the protection of the future with the technologies of today."
         },
         "serviceTitle": "Polyurea Coating Waterproofing",
         "serviceSlug": "polyurea-coating-waterproofing",
@@ -234,13 +308,35 @@
       },
       {
         "id": "injection-waterproofing",
-        "subServiceContent": [],
+        "subServiceContent": {
+          "serviceTitle": "Crack Injection",
+          "tagline": "The Engineering Solution for Leak Repair & Structural Strengthening",
+          "content": [
+            {
+              "serviceContent": "<h3>What is Crack Injection?</h3><p>It is a specialized engineering process that involves pumping high-performance chemical resins (such as Epoxy or Polyurethane) under high pressure into concrete cracks. These materials penetrate the finest pores to completely fill the void, creating a watertight seal and a powerful bond that restores concrete cohesion.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Injection Specialties</h3><h3>1. Polyurethane Injection for Active Leaks (PU Injection)</h3><p>Used specifically where there is active water leakage (e.g., in basements, swimming pools, and water tanks). The Polyurethane reacts with water, expanding into a dense foam that seals the leak source instantly.</p>"
+            },
+            {
+              "serviceContent": "<h3>2. Epoxy Injection for Structural Strengthening</h3><p>Ideal for dry cracks that affect the building's load-bearing capacity. Epoxy features a tensile and bonding strength superior to the concrete itself, restoring structural rigidity and preventing future crack propagation.</p>"
+            },
+            {
+              "serviceContent": "<h3>3. Expansion Joint Repair & Treatment</h3><p>We offer integrated solutions for injecting and treating leaking expansion joints, ensuring the necessary movement flexibility while providing total protection against water infiltration.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Professional Process</h3><ol><li><strong>1. Inspection & Diagnosis:</strong> Examining the type of crack (structural vs. hairline) to determine the most suitable injection material.</li><li><strong>2. Packer Installation:</strong> Drilling small holes along the crack and precisely fixing metal injection ports (packers).</li><li><strong>3. Injection Process:</strong> Pumping the material under controlled pressure until the excess emerges from the next port, ensuring a complete fill.</li><li><strong>4. Closing & Finishing:</strong> Removing the packers and sealing the holes with specialized non-shrink cementitious materials to restore the surface's original appearance.</li></ol>"
+            }
+          ]
+        },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "F",
-          "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
+          "serviceContent": "Cracks in concrete walls and ceilings are more than just a visual defect; they are pathways for water penetration and reinforcement steel corrosion. At Taj Al Rahmah, we provide professional Crack Injection services using the latest technologies and advanced chemical materials to treat cracks from within, restoring the structural integrity of the building.",
+          "whyChooseContent": "FeatureBenefitNo DemolitionWe treat the problem from within without the need to break walls or remove decor, saving both time and cost.Root-Cause SolutionThe injected material reaches the full depth of the concrete pour, treating the core issue rather than just the surface.Rebar ProtectionPrevents moisture and salts from reaching the steel reinforcement, protecting it from rust and deterioration.Precision ExecutionWe use advanced high-pressure pumps that ensure the crack is filled from start to finish.",
+          "whyChooseTitle": "Why is Taj Al Rahmah's Injection Service Essential?",
+          "bottomText": "With Taj Al Rahmah... We don't just plug cracks; we restore your home's strength and safety."
         },
         "serviceTitle": "Injection Waterproofing",
         "serviceSlug": "injection-waterproofing",
