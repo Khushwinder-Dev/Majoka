@@ -35,7 +35,7 @@
       "/servicesSubServicesContent/services/waterproofing/gallery/whatsapp-image-2025-12-25-at-5-24-19-pm-high.webp",
       "/servicesSubServicesContent/services/waterproofing/gallery/yere-serili-membranlar-high.webp"
     ],
-    "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+    "serviceContent": "A",
     "shortDescription": "Comprehensive waterproofing solutions including GRP lining, Combo roofing, epoxy flooring, bituminous membrane, polyurea spray coating, and crack injection grouting.",
     "whyChooseTitle": "Why Choose Taj Alrahmah for Waterproofing?",
     "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
@@ -56,36 +56,30 @@
     "subservices": [
       {
         "id": "grp-fiberglass",
-        "subServiceContent":
-          {
-            "serviceTitle": "All Types of Waterproofing",
-            "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
-            "content": [
-              {
-                "serviceContent": "<h3>What is the Combo System?</h3><p>It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage.</p>"
-              },
-              {
-                "serviceContent": "<h3>1. Dual Insulation (Thermal & Water)</h3><p>The system acts as a shield against rainwater while simultaneously blocking solar heat from penetrating the building, ensuring a cool and comfortable indoor environment.</p>"
-              },
-              {
-                "serviceContent": "<h3>2. Massive Energy Savings</h3><p>Thanks to its superior thermal efficiency, the Combo System helps reduce electricity bills by up to 40% by significantly decreasing the load on air conditioning units.</p>"
-              },
-              {
-                "serviceContent": "<h3>3. Lightweight & Durable</h3><p>Unlike traditional heavy insulation systems, the Combo System is lightweight, reducing the dead load on the building's structure while remaining durable enough to withstand foot traffic and movement on the roof.</p>"
-              },
-              {
-                "serviceContent": "<h3>4. Long-term Warranty</h3><p>Due to the system's robustness and reliability, Taj Al Rahmah provides a warranty of up to 25 years against leakage, giving you total peace of mind for decades.</p>"
-              },
-              {
-                "serviceContent": "<h3>Our Implementation Stages</h3><ul><li><strong>Surface Cleaning:</strong> Removing all dust and impurities to ensure maximum adhesion of materials to the concrete.</li><li><strong>Polyurethane (PU Foam) Spraying:</strong> Applying a dense layer of foam that expands to seal all holes and corners, providing instant thermal and water insulation.</li><li><strong>UV Coating:</strong> Applying a protective layer to shield the foam from ultraviolet rays and extreme weather fluctuations.</li><li><strong>Flood Test:</strong> Submerging the roof in water for 48 hours to ensure a 100% leak-free application.</li><li><strong>Final Screed:</strong> Casting a protective cementitious screed with precise slopes to ensure proper water drainage toward the outlets.</li></ul>"
-              }
-            ]
-          },
+        "subServiceContent": {
+          "serviceTitle": "Integrated Protection Shield",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
+          "tagline": "A Guide to Waterproofing & Structural Solutions",
+          "content": [
+            {
+              "serviceContent": "<h3>1. GRP & Fiberglass Lining</h3><p>Known as the \"King of Insulation\" due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer.</p><ul><li><strong>Primary Applications:</strong> Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.</li><li><strong>Competitive Advantage:</strong> It provides a single, seamless, joint-free layer that lasts for decades. It is completely safe for health and water storage (Food Grade).</li></ul>"
+            },
+            {
+              "serviceContent": "<h3>2. Bitumen Membrane Waterproofing</h3><p>The most common and reliable system for protecting foundations and roofs. It relies on reinforced bituminous rolls installed using heat (torch-applied).</p><ul><li><strong>Primary Applications:</strong> Insulation of foundations, concrete bases, bathrooms, and kitchens.</li><li><strong>Competitive Advantage:</strong> High flexibility in handling minor structural movements and excellent resistance to ground moisture and humidity.</li></ul>"
+            },
+            {
+              "serviceContent": "<h3>3. Epoxy Floor Coating</h3><p>A protection and beautification system for concrete floors, transforming them into a smooth, hard, and liquid-resistant surface.</p><ul><li><strong>Primary Applications:</strong> Car parks, warehouses, factories, and laboratories.</li><li><strong>Competitive Advantage:</strong> High resistance to oils and chemicals, extreme ease of cleaning, and a professional aesthetic appearance.</li></ul>"
+            },
+            {
+              "serviceContent": "<h3>4. Combo System Roof Waterproofing</h3><p>The modern and ideal solution for roofs, combining Waterproofing and Thermal Insulation into one integrated system.</p><ul><li><strong>Primary Applications:</strong> Villa roofs, commercial buildings, and residential towers.</li><li><strong>Competitive Advantage:</strong> Significantly reduces energy consumption (due to thermal insulation), provides absolute water protection, and often comes with long-term warranties reaching 10 to 15 years.</li></ul>"
+            }
+          ]
+        },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "GRP & Fiberglass Waterproofing",
@@ -114,36 +108,35 @@
       },
       {
         "id": "combo-system-roof-waterproofing",
-        "subServiceContent":
-          {
-            "serviceTitle": "Combo System Roof Waterproofing",
-            "tagline": "The Smart Dual Solution for Water & Heat Insulation In light of harsh climatic conditions and soaring temperatures, waterproofing alone is no longer enough to protect buildings. At Taj Al Rahmah, we offer the integrated 'Combo System'—a revolutionary technology that combines waterproofing, thermal insulation, and final finishing in a single process. This makes it the premier choice for modern projects, commercial buildings, and residential villas.",
-            "content": [
-              {
-                "serviceContent": "<h3>What is the Combo System?</h3><p>It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage.</p>"
-              },
-              {
-                "serviceContent": "<h3>1. Dual Insulation (Thermal & Water)</h3><p>The system acts as a shield against rainwater while simultaneously blocking solar heat from penetrating the building, ensuring a cool and comfortable indoor environment.</p>"
-              },
-              {
-                "serviceContent": "<h3>2. Massive Energy Savings</h3><p>Thanks to its superior thermal efficiency, the Combo System helps reduce electricity bills by up to 40% by significantly decreasing the load on air conditioning units.</p>"
-              },
-              {
-                "serviceContent": "<h3>3. Lightweight & Durable</h3><p>Unlike traditional heavy insulation systems, the Combo System is lightweight, reducing the dead load on the building's structure while remaining durable enough to withstand foot traffic and movement on the roof.</p>"
-              },
-              {
-                "serviceContent": "<h3>4. Long-term Warranty</h3><p>Due to the system's robustness and reliability, Taj Al Rahmah provides a warranty of up to 25 years against leakage, giving you total peace of mind for decades.</p>"
-              },
-              {
-                "serviceContent": "<h3>Our Implementation Stages</h3><ul><li><strong>Surface Cleaning:</strong> Removing all dust and impurities to ensure maximum adhesion of materials to the concrete.</li><li><strong>Polyurethane (PU Foam) Spraying:</strong> Applying a dense layer of foam that expands to seal all holes and corners, providing instant thermal and water insulation.</li><li><strong>UV Coating:</strong> Applying a protective layer to shield the foam from ultraviolet rays and extreme weather fluctuations.</li><li><strong>Flood Test:</strong> Submerging the roof in water for 48 hours to ensure a 100% leak-free application.</li><li><strong>Final Screed:</strong> Casting a protective cementitious screed with precise slopes to ensure proper water drainage toward the outlets.</li></ul>"
-              }
-            ]
-          },
+        "subServiceContent": {
+          "serviceTitle": "Combo System Roof Waterproofing",
+          "tagline": "The Smart Dual Solution for Water & Heat Insulation In light of harsh climatic conditions and soaring temperatures, waterproofing alone is no longer enough to protect buildings. At Taj Al Rahmah, we offer the integrated 'Combo System'—a revolutionary technology that combines waterproofing, thermal insulation, and final finishing in a single process. This makes it the premier choice for modern projects, commercial buildings, and residential villas.",
+          "content": [
+            {
+              "serviceContent": "<h3>What is the Combo System?</h3><p>It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage.</p>"
+            },
+            {
+              "serviceContent": "<h3>1. Dual Insulation (Thermal & Water)</h3><p>The system acts as a shield against rainwater while simultaneously blocking solar heat from penetrating the building, ensuring a cool and comfortable indoor environment.</p>"
+            },
+            {
+              "serviceContent": "<h3>2. Massive Energy Savings</h3><p>Thanks to its superior thermal efficiency, the Combo System helps reduce electricity bills by up to 40% by significantly decreasing the load on air conditioning units.</p>"
+            },
+            {
+              "serviceContent": "<h3>3. Lightweight & Durable</h3><p>Unlike traditional heavy insulation systems, the Combo System is lightweight, reducing the dead load on the building's structure while remaining durable enough to withstand foot traffic and movement on the roof.</p>"
+            },
+            {
+              "serviceContent": "<h3>4. Long-term Warranty</h3><p>Due to the system's robustness and reliability, Taj Al Rahmah provides a warranty of up to 25 years against leakage, giving you total peace of mind for decades.</p>"
+            },
+            {
+              "serviceContent": "<h3>Our Implementation Stages</h3><ul><li><strong>Surface Cleaning:</strong> Removing all dust and impurities to ensure maximum adhesion of materials to the concrete.</li><li><strong>Polyurethane (PU Foam) Spraying:</strong> Applying a dense layer of foam that expands to seal all holes and corners, providing instant thermal and water insulation.</li><li><strong>UV Coating:</strong> Applying a protective layer to shield the foam from ultraviolet rays and extreme weather fluctuations.</li><li><strong>Flood Test:</strong> Submerging the roof in water for 48 hours to ensure a 100% leak-free application.</li><li><strong>Final Screed:</strong> Casting a protective cementitious screed with precise slopes to ensure proper water drainage toward the outlets.</li></ul>"
+            }
+          ]
+        },
         "service": {
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Combo System Roof Waterproofing",
@@ -168,7 +161,7 @@
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "B",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Epoxy Floor Coating",
@@ -193,7 +186,7 @@
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "C",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Bitumen membrane waterproofing",
@@ -218,7 +211,7 @@
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "D",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Polyurea Coating Waterproofing",
@@ -243,7 +236,7 @@
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don't just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover.",
+          "serviceContent": "F",
           "whyChooseContent": "We don't just sell materials; we provide 'Root-Cause Solutions.' Our process begins with a precise engineering site inspection to select the most suitable system and ends with rigorous quality tests (Leak Testing) to ensure a defect-free project handover."
         },
         "serviceTitle": "Injection Waterproofing",

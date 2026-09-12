@@ -154,11 +154,16 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ── 1. SERVICE INTRO ──────────────────────────────────── */}
-      {/* <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
-        {service.serviceContent}  
-      </p> */}
-
-{/* <pre>
+      {["grp-fiberglass", "combo-system-roof-waterproofing"].includes(activeSub.id) ? (
+        <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
+        {sub.service.serviceContent}
+      </p>
+      ) : (
+       <p className="text-[14px] text-stone-600 leading-relaxed mb-8 border-[#009e90]/40">
+        {/* {sub.service.serviceContent} */}
+      </p>
+      )}
+      {/* <pre>
   {JSON.stringify(sub, null, 2)}
 </pre> */}
       {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
