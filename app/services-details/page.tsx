@@ -128,6 +128,20 @@ function Sidebar({
   activeSub: SubServiceItem | null;
   isArabic: boolean;
 }) {
+  const [openServiceSlug, setOpenServiceSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (activeService?.serviceSlug) {
+      setOpenServiceSlug(activeService.serviceSlug);
+    }
+  }, [activeService?.serviceSlug]);
+
+  const toggleDropdown = (slug: string, e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    setOpenServiceSlug((prev) => (prev === slug ? null : slug));
+  };
+
   return (
     <aside className="w-full lg:w-[240px] xl:w-[260px] flex-shrink-0 lg:sticky lg:top-24">
       {/* Label */}
@@ -135,33 +149,122 @@ function Sidebar({
         {isArabic ? "الخدمات" : "TRADES"}
       </p>
 
-      <nav className="flex flex-col gap-0.5">
+      <nav className="flex flex-col gap-1">
         {services.map((svc) => {
           const isActive = svc.serviceSlug === activeService.serviceSlug;
+          const hasSubs = Boolean(svc.subservices && svc.subservices.length > 0);
+          const isOpen = openServiceSlug === svc.serviceSlug;
+
           return (
             <div key={svc.serviceSlug} className="flex flex-col">
-              {/* Parent service */}
-              <Link
-                href={`/services-details?service=${svc.serviceNumber}`}
-                className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg w-full transition-all duration-150 group ${
+              {/* Parent service row */}
+              <div
+                className={`flex items-center justify-between rounded-lg w-full transition-all duration-150 group ${
                   isActive
                     ? "bg-[#009e90] text-white shadow-[0_4px_14px_rgba(0,158,144,0.28)]"
                     : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
                 }`}
               >
-                <div className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 ${
-                  isActive ? "bg-white/20" : "bg-[#009e90]/10"
-                }`}>
-                  <ServiceIcon slug={svc.serviceSlug} active={isActive} size={14} />
+                <Link
+                  href={`/services-details?service=${svc.serviceNumber}`}
+                  className="flex items-center gap-2.5 px-3 py-2.5 flex-grow min-w-0"
+                  onClick={() => {
+                    setOpenServiceSlug(svc.serviceSlug);
+                  }}
+                >
+                  <div
+                    className={`w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 ${
+                      isActive ? "bg-white/20" : "bg-[#009e90]/10"
+                    }`}
+                  >
+                    <ServiceIcon slug={svc.serviceSlug} active={isActive} size={14} />
+                  </div>
+                  <span className="text-[13px] font-semibold flex-grow truncate leading-snug">
+                    {svc.serviceTitle}
+                  </span>
+                </Link>
+
+                {hasSubs && (
+                  <button
+                    type="button"
+                    onClick={(e) => toggleDropdown(svc.serviceSlug, e)}
+                    title={
+                      isOpen
+                        ? isArabic
+                          ? "إخفاء الخدمات الفرعية"
+                          : "Hide sub-services"
+                        : isArabic
+                          ? "عرض الخدمات الفرعية"
+                          : "Show sub-services"
+                    }
+                    className={`p-2.5 rounded-r-lg transition-colors cursor-pointer flex-shrink-0 ${
+                      isActive ? "hover:bg-white/10 text-white" : "text-stone-400 hover:text-stone-700"
+                    }`}
+                  >
+                    {isOpen ? (
+                      <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 opacity-80" />
+                    ) : (
+                      <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 opacity-40 group-hover:opacity-75 ${isArabic ? "rotate-180" : ""}`} />
+                    )}
+                  </button>
+                )}
+              </div>
+
+              {/* Sub-services dropdown */}
+              {hasSubs && isOpen && (
+                <div
+                  className={`mt-1 mb-2 flex flex-col gap-0.5 py-1 ${
+                    isArabic ? "pr-3 mr-3 border-r-2" : "pl-3 ml-3 border-l-2"
+                  } border-[#009e90]/30 transition-all`}
+                >
+                  {/* Overview link */}
+                  <Link
+                    href={`/services-details?service=${svc.serviceNumber}`}
+                    className={`text-[11.5px] py-1 px-2 rounded-md transition-all flex items-center gap-2 ${
+                      isActive && !activeSub
+                        ? "bg-[#009e90]/10 text-[#009e90] font-bold"
+                        : "text-stone-500 hover:text-stone-900 hover:bg-stone-200/50 font-medium"
+                    }`}
+                  >
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                        isActive && !activeSub ? "bg-[#009e90]" : "bg-stone-300"
+                      }`}
+                    />
+                    <span className="truncate">
+                      {isArabic ? "نظرة عامة على جميع الخدمات" : "All Sub-Services"}
+                    </span>
+                  </Link>
+
+                  {/* Individual subservices */}
+                  {svc.subservices.map((sub) => {
+                    const isSubActive =
+                      isActive &&
+                      activeSub &&
+                      (activeSub.id === sub.id ||
+                        activeSub.serviceSlug.toLowerCase() === sub.serviceSlug.toLowerCase());
+
+                    return (
+                      <Link
+                        key={sub.id || sub.serviceSlug}
+                        href={`/services-details?service=${svc.serviceNumber}&sub=${sub.serviceSlug}`}
+                        className={`text-[12px] py-1.5 px-2 rounded-md transition-all flex items-center gap-2 ${
+                          isSubActive
+                            ? "bg-[#009e90] text-white font-semibold shadow-xs"
+                            : "text-stone-600 hover:text-[#009e90] hover:bg-stone-100 font-medium"
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                            isSubActive ? "bg-white" : "bg-stone-400"
+                          }`}
+                        />
+                        <span className="truncate flex-grow">{sub.serviceTitle}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
-                <span className="text-[13px] font-semibold flex-grow truncate leading-snug">
-                  {svc.serviceTitle}
-                </span>
-                {isActive
-                  ? <ChevronDown className="w-3.5 h-3.5 flex-shrink-0 opacity-70" />
-                  : <ChevronRight className={`w-3.5 h-3.5 flex-shrink-0 opacity-35 group-hover:opacity-70 ${isArabic ? "rotate-180" : ""}`} />
-                }
-              </Link>             
+              )}
             </div>
           );
         })}
