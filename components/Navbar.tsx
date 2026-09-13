@@ -409,9 +409,9 @@ const Navbar = () => {
                       onClick={() => setActiveMega(null)}
                     >
                       {item.name}
-                      {hasMega && (
+                      {/* {hasMega && (
                         <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
-                      )}
+                      )} */}
                     </Link>
 
                     {/* Active underline */}

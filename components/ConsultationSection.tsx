@@ -4,6 +4,109 @@ import React, { useState } from "react";
 import { Phone, Users, MapPin, ArrowRight, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+// ── Floating-label input ──────────────────────────────────────────────────────
+interface FloatFieldProps {
+  type?: string;
+  name: string;
+  value: string;
+  label: string;
+  required?: boolean;
+  isArabic: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function FloatField({ type = "text", name, value, label, required, isArabic, onChange }: FloatFieldProps) {
+  const [focused, setFocused] = useState(false);
+  const lifted = focused || value.length > 0;
+
+  return (
+    <div className="relative w-full">
+      <input
+        type={type}
+        name={name}
+        value={value}
+        required={required}
+        onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        dir={isArabic ? "rtl" : "ltr"}
+        className={`
+          peer w-full rounded-full
+          border bg-white/70 shadow-sm
+          px-5 pt-5 pb-2
+          text-sm text-stone-800
+          focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white
+          transition-all duration-200
+          ${lifted ? "border-[#009e90]" : "border-teal-500/40"}
+        `}
+      />
+      <label
+        className={`
+          pointer-events-none absolute
+          ${isArabic ? "right-5" : "left-5"}
+          transition-all duration-200 origin-left
+          ${lifted
+            ? "top-1.5 text-[10px] font-semibold text-[#009e90]"
+            : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400"
+          }
+        `}
+      >
+        {label}
+      </label>
+    </div>
+  );
+}
+
+// ── Floating-label textarea ───────────────────────────────────────────────────
+interface FloatTextareaProps {
+  name: string;
+  value: string;
+  label: string;
+  isArabic: boolean;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+function FloatTextarea({ name, value, label, isArabic, onChange }: FloatTextareaProps) {
+  const [focused, setFocused] = useState(false);
+  const lifted = focused || value.length > 0;
+
+  return (
+    <div className="relative w-full">
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        dir={isArabic ? "rtl" : "ltr"}
+        rows={4}
+        className={`
+          peer w-full rounded-3xl
+          border bg-white/70 shadow-sm
+          px-5 pt-7 pb-3
+          text-sm text-stone-800
+          focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white
+          transition-all duration-200 resize-none h-32 sm:h-36
+          ${lifted ? "border-[#009e90]" : "border-teal-500/40"}
+        `}
+      />
+      <label
+        className={`
+          pointer-events-none absolute
+          ${isArabic ? "right-5" : "left-5"}
+          transition-all duration-200
+          ${lifted
+            ? "top-2 text-[10px] font-semibold text-[#009e90]"
+            : "top-4 text-xs sm:text-sm text-stone-400"
+          }
+        `}
+      >
+        {label}
+      </label>
+    </div>
+  );
+}
+
 export default function ConsultationSection() {
   const { isArabic } = useLanguage();
 
@@ -203,59 +306,55 @@ export default function ConsultationSection() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
               {/* Row 1: First & Last Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input
+                <FloatField
                   type="text"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  placeholder={isArabic ? "الاسم الأول *" : "First Name*"}
+                  label={isArabic ? "الاسم الأول *" : "First Name *"}
                   required
-                  className="w-full rounded-full border border-teal-500/40 bg-white/70 px-5 py-3 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white transition-all shadow-sm"
+                  isArabic={isArabic}
                 />
-                <input
+                <FloatField
                   type="text"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  placeholder={isArabic ? "اسم العائلة *" : "Last Name*"}
-                  required
-                  className="w-full rounded-full border border-teal-500/40 bg-white/70 px-5 py-3 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white transition-all shadow-sm"
+                  label={isArabic ? "اسم العائلة" : "Last Name"}
+                  isArabic={isArabic}
                 />
               </div>
 
               {/* Row 2: Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input
+                <FloatField
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder={isArabic ? "البريد الإلكتروني *" : "Email Address*"}
+                  label={isArabic ? "البريد الإلكتروني *" : "Email Address *"}
                   required
-                  className="w-full rounded-full border border-teal-500/40 bg-white/70 px-5 py-3 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white transition-all shadow-sm"
+                  isArabic={isArabic}
                 />
-                <input
+                <FloatField
                   type="tel"
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder={isArabic ? "رقم الهاتف *" : "Phone Number*"}
+                  label={isArabic ? "رقم الهاتف *" : "Phone Number *"}
                   required
-                  className="w-full rounded-full border border-teal-500/40 bg-white/70 px-5 py-3 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white transition-all shadow-sm"
+                  isArabic={isArabic}
                 />
               </div>
 
               {/* Row 3: Message Textarea */}
-              <div>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder={isArabic ? "تفاصيل المشروع أو الاستفسار..." : "Message"}
-                  rows={4}
-                  className="w-full rounded-3xl border border-teal-500/40 bg-white/70 p-5 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white transition-all shadow-sm resize-none h-32 sm:h-36"
-                />
-              </div>
+              <FloatTextarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                label={isArabic ? "تفاصيل المشروع أو الاستفسار..." : "Message"}
+                isArabic={isArabic}
+              />
 
               {/* Error Message */}
               {status === "error" && (
