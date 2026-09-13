@@ -60,14 +60,15 @@ function StatCard({
     <div
       className="
         flex flex-col items-start
-        bg-[#1e2a2a] hover:bg-[#243535]
-        border border-white/5 hover:border-[#01a9a0]/30
+        bg-white/10 hover:bg-white/20
+        backdrop-blur-md
+        border border-white/20 hover:border-white/40
         rounded-2xl
         px-6 py-5 sm:px-7 sm:py-6
         transition-all duration-300
-        shadow-[0_4px_20px_rgba(0,0,0,0.25)]
-        hover:shadow-[0_6px_28px_rgba(1,169,160,0.15)]
-        hover:-translate-y-0.5
+        shadow-[0_8px_32px_rgba(0,0,0,0.15)]
+        hover:shadow-[0_12px_40px_rgba(0,0,0,0.2)]
+        hover:-translate-y-1
         min-w-0
       "
       style={{ animationDelay: `${index * 80}ms` }}
@@ -79,6 +80,7 @@ function StatCard({
           font-black text-white
           leading-none tracking-tight
           tabular-nums
+          drop-shadow-sm
         "
       >
         {count}
@@ -89,7 +91,7 @@ function StatCard({
       <span
         className={`
           mt-2 text-sm sm:text-base
-          text-white/55 font-medium
+          text-white/80 font-medium
           leading-snug
           ${isArabic ? "text-right" : "text-left"}
         `}
@@ -128,7 +130,7 @@ export default function StatsBar() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-[#161f1f] py-10 sm:py-12 px-4 sm:px-6 lg:px-8"
+      className="w-full bg-[#01a9a0] py-10 sm:py-12 px-4 sm:px-6 lg:px-8"
       aria-label={isArabic ? "إحصائيات الشركة" : "Company Statistics"}
     >
       <div className="max-w-7xl mx-auto">
