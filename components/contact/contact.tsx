@@ -79,8 +79,8 @@ export default function ContactPage() {
       icon: Clock,
       title: "Office Hours",
       items: [
-        { text: "Sat - Thu: 8:00 AM - 9:00 PM" },
-        { text: "Friday - Closed", isAlert: true },
+        { text: "Mon - Sat: 8:00 AM - 9:00 PM" },
+        { text: "Sunday - Closed", isAlert: true },
       ],
     },
   ];

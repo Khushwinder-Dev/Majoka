@@ -88,9 +88,9 @@ export default function Home() {
           <GetStarted />
         </div> */}
 
-        <div data-aos="fade-up" data-aos-delay="200">
+        {/* <div data-aos="fade-up" data-aos-delay="200">
           <BlogSection />
-        </div>
+        </div> */}
 
         {/* Welcome Offer Popup Modal */}
         <WelcomeOfferModal />
