@@ -372,7 +372,7 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/">
               <Image
-                src="/TajAlrahmanlqogo.png"
+                src="/TajAlrahmanlkogo.png"
                 alt="Company Logo"
                 width={100}
                 height={80}
@@ -503,7 +503,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <div className="px-6 pt-6 pb-4 border-b border-white/10">
-          <Image src="/TajAlrahmanlqogo.png" alt="Logo" width={80} height={64} className="w-auto h-auto max-h-11 object-contain" />
+          <Image src="/TajAlrahmanlkogo.png" alt="Logo" width={80} height={64} className="w-auto h-auto max-h-11 object-contain" />
         </div>
 
         {/* Nav list */}
