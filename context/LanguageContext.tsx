@@ -393,12 +393,12 @@ const translations: Record<Language, Translations> = {
       companyDescription:
         "Taj Al Rahmah Contracting Company Delivers Reliable Contracting Solutions With A Focus On Quality, Safety, And Customer Satisfaction.",
       newsletter: {
-        title: "SUBSCRIBE & GET 15% DISCOUNT",
+        title: "Enjoy 10% Off Your First Service",
         description:
-          "Enjoy 15% off your first service and stay updated with exclusive offers, project insights, expert tips, and the latest waterproofing and contracting solutions.",
+          "Get exclusive offers, expert waterproofing tips, project insights, and the latest solutions delivered to you.",
         placeholder: "Enter Your Email",
         subscribe: "Subscribe",
-        successMsg: "🎉 Subscribed successfully! Check your email for your 15% discount code.",
+        successMsg: "🎉 Subscribed successfully! Check your email for your 10% discount code.",
         errorMsg: "Something went wrong. Please try again.",
         invalidMsg: "Please enter a valid email address.",
       },
@@ -725,12 +725,12 @@ const translations: Record<Language, Translations> = {
       companyDescription:
         "شركة تاج الرحمة للمقاولات تقدم حلول مقاولات موثوقة مع تركيز على الجودة والسلامة ورضا العملاء.",
       newsletter: {
-        title: "اشترك واحصل على خصم 15%",
+        title: "استمتع بخصم 10% على أول خدمة لك",
         description:
-          "استمتع بخصم 15% على أول خدمة لك وابق على اطلاع بالعروض الحصرية ورؤى المشاريع ونصائح الخبراء وأحدث حلول العزل المائي والمقاولات.",
+          "احصل على عروض حصرية ونصائح خبراء العزل المائي ورؤى المشاريع وأحدث الحلول مباشرةً إليك.",
         placeholder: "أدخل بريدك الإلكتروني",
         subscribe: "اشترك",
-        successMsg: "🎉 تم الاشتراك بنجاح! تحقق من بريدك الإلكتروني للحصول على رمز خصم 15%.",
+        successMsg: "🎉 تم الاشتراك بنجاح! تحقق من بريدك الإلكتروني للحصول على رمز خصم 10%.",
         errorMsg: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
         invalidMsg: "يرجى إدخال عنوان بريد إلكتروني صالح.",
       },

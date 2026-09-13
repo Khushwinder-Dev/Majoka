@@ -252,13 +252,13 @@ export default function TrustedClientsSection() {
                     </motion.div>
                   </AnimatePresence>
 
-                  <button
+                  {/* <button
                     onClick={() => setIsVideoOpen(true)}
                     aria-label={isArabic ? "تشغيل قصة العميل" : "Play Client Story"}
                     className="absolute inset-0 m-auto z-20 w-12 h-12 rounded-full bg-white text-[#009e90] flex items-center justify-center shadow-lg hover:scale-110 hover:bg-teal-50 transition-all duration-300 cursor-pointer"
                   >
                     <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
 
