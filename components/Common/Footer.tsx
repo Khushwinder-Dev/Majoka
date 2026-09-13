@@ -68,12 +68,12 @@ export default function Footer() {
 
 
   const companyHrefs = [
-    "/about-us",      // About Us
-    "/about-us",      // Certifications (no dedicated page, link to about-us)
-    "/media",         // Media
-    "/blogs",         // Blog
-    "/career",        // Careers
-    "/contact",       // Contact
+    "/about-us",          // About Us
+    "/certifications",    // Certifications
+    "/media",             // Media
+    "/blogs",             // Blog
+    "/career",            // Careers
+    "/contact",           // Contact
   ];
 
   return (
