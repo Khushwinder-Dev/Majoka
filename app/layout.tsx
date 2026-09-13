@@ -36,9 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/TajAlrahmanlogo.png" sizes="any" />
-        <link rel="icon" href="/TajAlrahmanlogo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/TajAlrahmanlogo.png" />
+        <link rel="icon" href="/TajAlrahmanlqogo.png" sizes="any" />
+        <link rel="icon" href="/TajAlrahmanlqogo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/TajAlrahmanlqogo.png" />
       </head>
       <body
         className={`${anekMalayalam.variable} antialiased bg-white overflow-x-hidden!`}
