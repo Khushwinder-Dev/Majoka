@@ -405,7 +405,7 @@ const HeroSection = () => {
       </div>
 
       {/* 8. Bottom Glassmorphic Stats Section */}
-      <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12">
+      <div className="relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 mt-12 sm:mt-16 pb-8 sm:pb-12 invisible">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2 lg:gap-3 w-fit">
           {isPlayingVideo || statsData.map((stat, idx) => (
             <div
