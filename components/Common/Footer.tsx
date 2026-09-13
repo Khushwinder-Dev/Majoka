@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import {
   Facebook,
   Instagram,
+  Linkedin,
+  Youtube,
   ArrowRight,
   ArrowLeft,
   MapPin,
@@ -241,6 +243,29 @@ export default function Footer() {
                     <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-3.77A4.793 4.793 0 0 1 15.5 2h-3.03v13.244a2.812 2.812 0 1 1-2.812-2.812c.294 0 .58.045.847.13v-3.1a5.93 5.93 0 1 0 5.001 5.782V8.91a7.78 7.78 0 0 0 4.083 1.154V7.03a4.79 4.79 0 0 1-4.083-2.187v1.843c.97.001 1.89.3 2.65.82l1.433-.82z" />
                   </svg>
                 </Link>
+
+                {/* LinkedIn */}
+                <Link
+                  href="https://www.linkedin.com/company/tajalrahmah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                </Link>
+
+                {/* YouTube */}
+                <Link
+                  href="https://www.youtube.com/@tajalrahmah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                </Link>
+
               </div>
             </div>
 
