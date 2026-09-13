@@ -12,63 +12,63 @@ export default function ProtectionServicesSection() {
   const services = [
     {
       id: 1,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (1).png",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/download-40-high.webp",
+      icon: "/media/protection/fi_7368818.svg",
+      title: isArabic ? "عزل GRP والألياف الزجاجية" : "GRP & Fiberglass Waterproofing",
+      description: isArabic
+        ? "طبقة عزل سلسة وصحية مثالية لخزانات المياه والأسطح المعرضة للرطوبة."
+        : "Seamless Food-Grade Lining for Water Tanks & Exposed Roofs",
+      link: "/services?service=1&sub=grp-fiberglass",
+    },
+    {
+      id: 2,
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/combo-roof-waterproof-high.webp",
+      icon: "/media/protection/fi_11495742.svg",
+      title: isArabic ? "نظام الكومبو للأسطح" : "Combo System Roof Waterproofing",
+      description: isArabic
+        ? "نظام عزل مزدوج يجمع العزل المائي والحراري في طبقة واحدة متكاملة."
+        : "Dual Water & Thermal Insulation in One Integrated System",
+      link: "/services?service=1&sub=combo-system-roof-waterproofing",
+    },
+    {
+      id: 3,
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/thumbnail/epoxy-floor-coating-service-500x500-high.webp",
       icon: "/media/protection/fi_18882906.svg",
       title: isArabic ? "طلاء أرضيات الإيبوكسي" : "Epoxy Floor Coating",
       description: isArabic
         ? "حلول أرضيات متينة وسلسة وعالية الأداء للمنشآت والمستودعات."
         : "Durable, Seamless & High-Performance Flooring Solutions",
-      link: "/services",
+      link: "/services?service=1&sub=epoxy-floor-coating",
     },
     {
-      id: 2,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (2).png",
+      id: 4,
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/thumbnail/alevli-yalitim-uygulamasi-high.webp",
+      icon: "/media/protection/fi_14850017.svg",
+      title: isArabic ? "عزل الغشاء البيتوميني" : "Bitumen Membrane Waterproofing",
+      description: isArabic
+        ? "لفائح بيتومينية مسلحة مثالية للأسطح والأساسات والمناطق الرطبة."
+        : "Reinforced Torch-Applied Rolls for Foundations & Wet Areas",
+      link: "/services?service=1&sub=bitumen-membrane-waterproofing",
+    },
+    {
+      id: 5,
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/thumbnail/what-is-polyurea-coatings-newtec-group-high.webp",
       icon: "/media/protection/fi_12071074.svg",
       title: isArabic ? "عزل البولي يوريا" : "Polyurea Waterproofing",
       description: isArabic
         ? "حماية متقدمة للأسطح الممتدة وسريعة الجفاف للمتانة طويلة الأمد."
         : "Advanced Protection for Durable Seamless & Long Surfaces",
-      link: "/services",
+      link: "/services?service=1&sub=polyurea-coating-waterproofing",
     },
     {
-      id: 3,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (3).png",
+      id: 6,
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/thumbnail/1d10cdae-c23a-408e-a59e-96bd950fdbe7-high.webp",
       icon: "/media/protection/fi_16076200.svg",
       title: isArabic ? "عزل الحقن المائي" : "Injection Waterproofing",
       description: isArabic
         ? "حقن وسد دقيق للشقوق الخرسانية لحماية دائمة من تسرب المياه."
         : "Precision Sealing for Lasting Water Protection",
-      link: "/services",
-    },
-    {
-      id: 4,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (4).png",
-      icon: "/media/protection/fi_7368818.svg",
-      title: isArabic ? "تركيب لوحات التوزيع" : "DB Box Installation",
-      description: isArabic
-        ? "حلول توزيع كهربائي آمنة وموثوقة للمباني والمنشآت الحديثة."
-        : "Safe & Reliable Electrical Distribution Solutions",
-      link: "/services",
-    },
-    {
-      id: 5,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (5).png",
-      icon: "/media/protection/fi_11495742.svg",
-      title: isArabic ? "الطلاءات الصناعية" : "Industrial Coatings",
-      description: isArabic
-        ? "حماية متينة فائقة للمنشآت المتطلبة والبيئات الصناعية القاسية."
-        : "Durable Protection for Demand Industrial Environments",
-      link: "/services",
-    },
-    {
-      id: 6,
-      image: "/media/Images/section3/medium-shot-delivery-woman-wearing-mask (6).png",
-      icon: "/media/protection/fi_14850017.svg",
-      title: isArabic ? "العزل المائي الشامل" : "WATERPROOFING",
-      description: isArabic
-        ? "حماية متقدمة ومضمونة ضد تسرب المياه والرطوبة للمسابح والأسطح."
-        : "Advanced Protection Against Water & Moisture",
-      link: "/services",
+      link: "/services?service=1&sub=injection-waterproofing",
     },
   ];
 
@@ -181,6 +181,26 @@ export default function ProtectionServicesSection() {
             </div>
           ))}
         </div>
+
+        {/* ============================================================
+            BOTTOM CTA
+            ============================================================ */}
+        <div className="flex justify-center mt-12 sm:mt-16">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-3.5 bg-[#009e90] hover:bg-[#01887e] text-white pl-6 pr-2.5 py-2.5 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-[0_4px_16px_rgba(0,158,144,0.25)] hover:shadow-[0_6px_22px_rgba(0,158,144,0.35)] hover:-translate-y-0.5 transition-all duration-300 group"
+          >
+            <span>{isArabic ? "عرض جميع الخدمات" : "VIEW ALL SERVICES"}</span>
+            <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+              {isArabic ? (
+                <ArrowLeft className="w-4 h-4 text-[#009e90] group-hover:-translate-x-0.5 transition-transform duration-300" />
+              ) : (
+                <ArrowRight className="w-4 h-4 text-[#009e90] group-hover:translate-x-0.5 transition-transform duration-300" />
+              )}
+            </span>
+          </Link>
+        </div>
+
       </div>
     </section>
   );
