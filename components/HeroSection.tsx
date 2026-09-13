@@ -64,7 +64,7 @@ const HeroSection = () => {
   const { t, isArabic } = useLanguage();
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [isVideoPaused, setIsVideoPaused] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const videoRef = useRef<HTMLVideoElement>(null);
