@@ -388,10 +388,10 @@ const translations: Record<Language, Translations> = {
       ],
     },
     footer: {
-      tagline1: "Building Better",
-      tagline2: "Spaces For Tomorrow",
+      tagline1: "Protecting Structures.",
+      tagline2: "Delivering Lasting Solutions",
       companyDescription:
-        "Taj Al Rahmah Contracting Company Delivers Reliable Contracting Solutions With A Focus On Quality, Safety, And Customer Satisfaction.",
+        "We provide reliable waterproofing and protective coating solutions for residential, commercial, and industrial projects, delivering durable protection through GRP & Fiberglass, Roof Systems, Epoxy, Bitumen Membrane, and Polyurea solutions.",
       newsletter: {
         title: "Enjoy 10% Off Your First Service",
         description:
@@ -720,10 +720,10 @@ const translations: Record<Language, Translations> = {
       ],
     },
     footer: {
-      tagline1: "بناء مساحات",
-      tagline2: "أفضل للغد",
+      tagline1: "حماية المنشآت.",
+      tagline2: "حلول دائمة وموثوقة",
       companyDescription:
-        "شركة تاج الرحمة للمقاولات تقدم حلول مقاولات موثوقة مع تركيز على الجودة والسلامة ورضا العملاء.",
+        "نقدم حلول عزل مائي وطلاءات حماية موثوقة للمشاريع السكنية والتجارية والصناعية، بحماية متينة عبر أنظمة GRP والألياف الزجاجية وأسطح الكومبو والإيبوكسي والغشاء البيتوميني والبولي يوريا.",
       newsletter: {
         title: "استمتع بخصم 10% على أول خدمة لك",
         description:

@@ -5,6 +5,7 @@ import {
   Facebook,
   Instagram,
   ArrowRight,
+  ArrowLeft,
   MapPin,
   Phone,
   Mail,
@@ -190,6 +191,19 @@ export default function Footer() {
               <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-md">
                 {t.footer.companyDescription}
               </p>
+
+              {/* Read More → About Us */}
+              <Link
+                href="/about-us"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#01a9a0] hover:text-[#00968e] transition-colors duration-200 group w-fit"
+              >
+                <span>{isArabic ? "اقرأ المزيد" : "Read More"}</span>
+                {isArabic ? (
+                  <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />
+                ) : (
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                )}
+              </Link>
 
               {/* Social media icons — client profiles */}
               <div className="flex items-center gap-2.5 sm:gap-3 pt-1 flex-wrap">
