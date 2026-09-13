@@ -218,24 +218,6 @@ function Sidebar({
                   } border-[#009e90]/30 transition-all`}
                 >
                   {/* Overview link */}
-                  <Link
-                    href={`/services-details?service=${svc.serviceNumber}`}
-                    className={`text-[11.5px] py-1 px-2 rounded-md transition-all flex items-center gap-2 ${
-                      isActive && !activeSub
-                        ? "bg-[#009e90]/10 text-[#009e90] font-bold"
-                        : "text-stone-500 hover:text-stone-900 hover:bg-stone-200/50 font-medium"
-                    }`}
-                  >
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                        isActive && !activeSub ? "bg-[#009e90]" : "bg-stone-300"
-                      }`}
-                    />
-                    <span className="truncate">
-                      {isArabic ? "نظرة عامة على جميع الخدمات" : "All Sub-Services"}
-                    </span>
-                  </Link>
-
                   {/* Individual subservices */}
                   {svc.subservices.map((sub) => {
                     const isSubActive =

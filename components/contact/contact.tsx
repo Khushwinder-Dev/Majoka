@@ -284,7 +284,7 @@ export default function ContactPage() {
                             <p
                               key={idx}
                               className={`text-lg sm:text-xl font-bold leading-relaxed ${
-                                item.isAlert ? "text-red-600" : "text-gray-700"
+                                item.isAlert ? "text-gray-700" : "text-gray-700"
                               }`}
                             >
                               {item.text}
