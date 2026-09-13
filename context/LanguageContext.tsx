@@ -404,11 +404,11 @@ const translations: Record<Language, Translations> = {
       },
       servicesTitle: "Services",
       servicesLinks: [
-        "Waterproofing",
-        "Swimming Pool Installation",
-        "Electrical Fit-Out",
-        "Plumbing & Sanitary",
-        "Floor & Wall Tiling",
+        "GRP & Fiberglass",
+        "Combo Roof System",
+        "Epoxy Floor Coating",
+        "Bitumen Membrane",
+        "Polyurea Waterproofing",
       ],
       resourcesTitle: "Resources",
       resourcesLinks: [
@@ -436,7 +436,7 @@ const translations: Record<Language, Translations> = {
       closedDay: "Sunday - Closed",
       copyright: "© 2026 Taj Al Rahmah. All Rights Reserved.",
       scrollToTop: "Scroll to top",
-      exploreMore: "Explore More",
+      exploreMore: "View All Services",
     },
     faq: {
       titlePrefix: "Frequently Asked",
@@ -734,11 +734,11 @@ const translations: Record<Language, Translations> = {
       },
       servicesTitle: "الخدمات",
       servicesLinks: [
-        "العزل المائي",
-        "تركيب حمامات السباحة",
-        "تجهيزات الكهربائية",
-        "السباكة والصرف الصحي",
-        "تركيب الأرضيات والجدران",
+        "GRP والألياف الزجاجية",
+        "نظام الكومبو للأسطح",
+        "طلاء أرضيات الإيبوكسي",
+        "الغشاء البيتوميني",
+        "عزل البولي يوريا",
       ],
       resourcesTitle: "الموارد",
       resourcesLinks: [
@@ -766,7 +766,7 @@ const translations: Record<Language, Translations> = {
       closedDay: "الجمعة - مغلق",
       copyright: "© 2026 تاج الرحمة. جميع الحقوق محفوظة.",
       scrollToTop: "العودة للأعلى",
-      exploreMore: "استكشف المزيد",
+      exploreMore: "عرض جميع الخدمات",
     },
     faq: {
       titlePrefix: "الأسئلة",
