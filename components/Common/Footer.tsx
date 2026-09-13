@@ -164,7 +164,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 sm:gap-3.5">
                 <div className="relative w-11 h-11 sm:w-14 sm:h-14 flex-shrink-0">
                   <Image
-                    src="/TajAlrahmanlkogo.png"
+                    src="/logo.png"
                     alt="Taj Al Rahmah Logo"
                     fill
                     className="object-contain"
