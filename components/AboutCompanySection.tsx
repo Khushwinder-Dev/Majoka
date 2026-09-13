@@ -201,7 +201,7 @@ export default function AboutCompanySection() {
                 href="/about-us"
                 className="inline-flex items-center gap-4 pl-6 pr-2 py-2 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-[0_4px_18px_rgba(1,169,160,0.35)] hover:shadow-[0_6px_22px_rgba(1,169,160,0.5)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 group"
               >
-                <span>{isArabic ? "المزيد عنا" : "ABOUT MORE"}</span>
+                <span>{isArabic ? "من نحن" : "ABOUT US"}</span>
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#01a9a0] flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 shadow-xs">
                   <ArrowRight
                     className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.5] ${

@@ -110,7 +110,7 @@ export default function WelcomeOfferModal() {
         {/* ========================================= */}
         <div className="relative md:col-span-5 h-52 sm:h-64 md:h-auto min-h-[220px] md:min-h-[440px] overflow-hidden bg-slate-900">
           <Image
-            src="/media/welcompop.png"
+            src="/qwertyu.jpg"
             alt={isArabic ? "عرض خاص تاج الرحمة" : "Taj Al Rahmah Welcome Offer"}
             fill
             priority
@@ -138,13 +138,13 @@ export default function WelcomeOfferModal() {
             {isArabic ? (
               <>
                 اشترك واحصل على <br />
-                15% خصم على أول <br />
+                10% خصم على أول <br />
                 خدمة لك
               </>
             ) : (
               <>
                 SUBSCRIBE & GET <br />
-                15% OFF YOUR FIRST <br />
+                10% OFF YOUR FIRST <br />
                 SERVICE
               </>
             )}
@@ -153,8 +153,8 @@ export default function WelcomeOfferModal() {
           {/* Description */}
           <p className="text-xs sm:text-sm text-stone-700 font-normal leading-relaxed mb-6 sm:mb-7 max-w-md">
             {isArabic
-              ? "استمتع بخصم 15% على خدمتك الأولى وابق على اطلاع بأحدث العروض الحصرية، وأفكار المشاريع، ونصائح الخبراء، وأحدث حلول العزل والمقاولات."
-              : "Enjoy 15% off your first service and stay updated with exclusive offers, project insights, expert tips, and the latest waterproofing and contracting solutions."}
+              ? "استمتع بخصم 10% على خدمتك الأولى وابق على اطلاع بأحدث العروض الحصرية، وأفكار المشاريع، ونصائح الخبراء، وأحدث حلول العزل والمقاولات."
+              : "Enjoy 10% off your first service and stay updated with exclusive offers, project insights, expert tips, and the latest waterproofing and contracting solutions."}
           </p>
 
           {/* Form or Success State */}
@@ -167,8 +167,8 @@ export default function WelcomeOfferModal() {
                 </h4>
                 <p className="text-xs text-stone-600">
                   {isArabic
-                    ? "استخدم الكود WELCOME15 عند طلب الخدمة."
-                    : "Use code WELCOME15 when booking your service."}
+                    ? "استخدم الكود WELCOME10 عند طلب الخدمة."
+                    : "Use code WELCOME10 when booking your service."}
                 </p>
               </div>
             </div>
