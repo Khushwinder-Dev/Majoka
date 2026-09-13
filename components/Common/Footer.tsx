@@ -161,7 +161,7 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 1: BRAND  */}
             {/* ---------------- */}
-            <div className="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 flex flex-col gap-5 sm:gap-6">
+            <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 flex flex-col gap-5 sm:gap-6">
               {/* Logo + Tagline */}
               <div className="flex items-center gap-3 sm:gap-3.5">
                 <div className="relative w-11 h-11 sm:w-14 sm:h-14 flex-shrink-0">
@@ -266,7 +266,7 @@ export default function Footer() {
             {/* ------------------ */}
             {/* COLUMN 2: SERVICES */}
             {/* ------------------ */}
-            <div className="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 flex flex-col gap-4 sm:gap-5">
+            <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-3 xl:col-span-3 flex flex-col gap-4 sm:gap-5">
               <FooterHeading title={t.footer.servicesTitle} />
               <ul className="flex flex-col gap-2.5 sm:gap-3">
                 {t.footer.servicesLinks.map((link, i) => (
@@ -291,7 +291,7 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 4: COMPANY */}
             {/* ---------------- */}
-            <div className="col-span-6 sm:col-span-6 md:col-span-3 lg:col-span-2 xl:col-span-2 flex flex-col gap-4 sm:gap-5">
+            <div className="col-span-6 sm:col-span-4 md:col-span-4 lg:col-span-2 xl:col-span-2 flex flex-col gap-4 sm:gap-5">
               <FooterHeading title={t.footer.companyTitle} />
               <ul className="flex flex-col gap-2.5 sm:gap-3">
                 {t.footer.companyLinks.map((link, i) => (
@@ -308,7 +308,7 @@ export default function Footer() {
             {/* ---------------- */}
             {/* COLUMN 5: CONTACT */}
             {/* ---------------- */}
-            <div className="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-4 flex flex-col gap-4 sm:gap-5">
+            <div className="col-span-12 sm:col-span-4 md:col-span-4 lg:col-span-3 xl:col-span-3 flex flex-col gap-4 sm:gap-5">
               <FooterHeading title={t.footer.contactTitle} />
               <ul className="flex flex-col gap-3.5 sm:gap-4">
                 {/* Phones */}
