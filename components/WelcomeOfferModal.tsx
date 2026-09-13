@@ -64,8 +64,8 @@ export default function WelcomeOfferModal() {
       setIsSubmitted(true);
       toast.success(
         isArabic
-          ? "شكراً لاشتراكك! تم تطبيق كود الخصم 15%."
-          : "Thank you for subscribing! Your 15% discount code has been applied."
+          ? "شكراً لاشتراكك! تم تطبيق كود الخصم 10%."
+          : "Thank you for subscribing! Your 10% discount code has been applied."
       );
       if (!SHOW_ON_EVERY_RELOAD) {
         sessionStorage.setItem(DISMISS_KEY, "true");

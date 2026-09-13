@@ -279,7 +279,7 @@ export default function TemplateC({ service, sub, isArabic }: Props) {
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           <a
-            href="tel:+97155617330"
+            href="tel:+971556173300"
             className="inline-flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 border border-white/30 text-white font-semibold text-[13px] px-5 py-3 rounded-full transition-colors whitespace-nowrap"
           >
             <Phone className="w-3.5 h-3.5" />
