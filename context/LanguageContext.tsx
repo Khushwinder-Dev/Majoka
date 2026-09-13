@@ -412,8 +412,6 @@ const translations: Record<Language, Translations> = {
       ],
       resourcesTitle: "Resources",
       resourcesLinks: [
-        "Media",
-        "Blog",
         "Downloads",
         "FAQs",
         "Privacy",
@@ -422,9 +420,9 @@ const translations: Record<Language, Translations> = {
       companyTitle: "Company",
       companyLinks: [
         "About Us",
-        "Clients",
-        "Expertise",
         "Certifications",
+        "Media",
+        "Blog",
         "Careers",
         "Contact",
       ],
@@ -744,8 +742,6 @@ const translations: Record<Language, Translations> = {
       ],
       resourcesTitle: "الموارد",
       resourcesLinks: [
-        "الوسائط",
-        "المدونة",
         "التحميلات",
         "الأسئلة الشائعة",
         "الخصوصية",
@@ -754,9 +750,9 @@ const translations: Record<Language, Translations> = {
       companyTitle: "الشركة",
       companyLinks: [
         "عن الشركة",
-        "العملاء",
-        "الخبرة",
         "الشهادات",
+        "الميديا",
+        "المدونة",
         "الوظائف",
         "اتصل بنا",
       ],

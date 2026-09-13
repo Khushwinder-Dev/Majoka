@@ -66,20 +66,14 @@ export default function Footer() {
     "/services",
   ];
 
-  const resourcesHrefs = [
-    "/media",
-    "/blogs",
-    "/resources",
-    "/resources",
-    "/resources",
-    "/resources",
-  ];
 
   const companyHrefs = [
     "/about-us",
     "/about-us",
     "/about-us",
     "/about-us",
+    "/media",
+    "/blogs",
     "/career",
     "/contact",
   ];
@@ -294,22 +288,6 @@ export default function Footer() {
             </div>
 
             {/* ------------------- */}
-            {/* COLUMN 3: RESOURCES */}
-            {/* ------------------- */}
-            <div className="col-span-6 sm:col-span-6 md:col-span-4 lg:col-span-2 xl:col-span-2 flex flex-col gap-4 sm:gap-5">
-              <FooterHeading title={t.footer.resourcesTitle} />
-              <ul className="flex flex-col gap-2.5 sm:gap-3">
-                {t.footer.resourcesLinks.map((link, i) => (
-                  <li key={i}>
-                    <FooterLink
-                      href={resourcesHrefs[i] || "/resources"}
-                      label={link}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             {/* ---------------- */}
             {/* COLUMN 4: COMPANY */}
             {/* ---------------- */}
