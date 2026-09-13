@@ -51,21 +51,24 @@
       {
         "id": "grp-fiberglass",
         "subServiceContent": {
-          "serviceTitle": "Integrated Protection Shield",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
-          "tagline": "A Guide to Waterproofing & Structural Solutions",
+          "serviceTitle": "GRP & Fiberglass Lining",
+          "serviceContent": "At Taj Al Rahmah, we understand that tank corrosion and water leakage pose a significant threat to infrastructure and human health. Therefore, we provide GRP (Fiberglass Waterproofing) lining services—the most advanced technology in the insulation world. This system provides a solid, impenetrable protective layer that transforms your old or damaged tanks into completely renewed units.",
+          "tagline": "The Ultimate Protection for Tanks and Surfaces",
           "content": [
             {
-              "serviceContent": "<h3>1. GRP & Fiberglass Lining</h3><p>Known as the \"King of Insulation\" due to its superior strength. It consists of glass fibers embedded in specialized resins to form an incredibly tough and solid layer.</p><ul><li><strong>Primary Applications:</strong> Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.</li><li><strong>Competitive Advantage:</strong> It provides a single, seamless, joint-free layer that lasts for decades. It is completely safe for health and water storage (Food Grade).</li></ul>"
+              "serviceContent": "<h3>What is GRP Lining?</h3><p>GRP lining is a process of fusing glass fibers with specialized chemical resins, applied manually to tank surfaces or floors to form a high-strength \"reinforced plastic\" layer. This layer bonds permanently to the original surface, preventing any chemical reaction or water leakage.</p>"
             },
             {
-              "serviceContent": "<h3>2. Bitumen Membrane Waterproofing</h3><p>The most common and reliable system for protecting foundations and roofs. It relies on reinforced bituminous rolls installed using heat (torch-applied).</p><ul><li><strong>Primary Applications:</strong> Insulation of foundations, concrete bases, bathrooms, and kitchens.</li><li><strong>Competitive Advantage:</strong> High flexibility in handling minor structural movements and excellent resistance to ground moisture and humidity.</li></ul>"
+              "serviceContent": "<h3>Our GRP Services</h3><h3>1. Potable Water Tank Lining</h3><p>We use certified \"Food Grade\" and eco-friendly materials that ensure water does not react with the tank walls. This prevents the growth of algae and bacteria, maintaining water purity for the longest possible period.</p>"
             },
             {
-              "serviceContent": "<h3>3. Epoxy Floor Coating</h3><p>A protection and beautification system for concrete floors, transforming them into a smooth, hard, and liquid-resistant surface.</p><ul><li><strong>Primary Applications:</strong> Car parks, warehouses, factories, and laboratories.</li><li><strong>Competitive Advantage:</strong> High resistance to oils and chemicals, extreme ease of cleaning, and a professional aesthetic appearance.</li></ul>"
+              "serviceContent": "<h3>2. Chemical & Sewage Tank Lining</h3><p>Our systems feature superior resistance to strong acids and harsh chemicals, making them the ideal solution for factories, treatment plants, and septic tanks that suffer from constant corrosion.</p>"
             },
             {
-              "serviceContent": "<h3>4. Combo System Roof Waterproofing</h3><p>The modern and ideal solution for roofs, combining Waterproofing and Thermal Insulation into one integrated system.</p><ul><li><strong>Primary Applications:</strong> Villa roofs, commercial buildings, and residential towers.</li><li><strong>Competitive Advantage:</strong> Significantly reduces energy consumption (due to thermal insulation), provides absolute water protection, and often comes with long-term warranties reaching 10 to 15 years.</li></ul>"
+              "serviceContent": "<h3>3. Manhole & Channel Lining</h3><p>We provide full protection for manholes and irrigation channels against sulfuric gases and ground moisture, preventing the collapse of the concrete structure over time.</p>"
+            },
+            {
+              "serviceContent": "<h3>4. Industrial Floor & Roof Lining</h3><p>To protect surfaces exposed to harsh operating conditions or chemical spills, GRP provides a durable surface that withstands high impact and heavy loads.</p>"
             }
           ]
         },
@@ -73,9 +76,10 @@
           "serviceTitle": "All Types of Waterproofing",
           "tagline": "Integrated Protection Shield: A Guide to Waterproofing & Structural Solutions",
           "category": "Waterproofing",
-          "serviceContent": "Waterproofing is the fundamental pillar for preserving the lifespan of any building. At Taj Alrahmah, we don’t just offer insulation; we provide integrated protection systems that guarantee a permanent end to leaks and corrosion. Here is a detailed explanation of the cutting-edge waterproofing technologies we provide:",
-          "whyChooseContent": "Modern Technology: We use the latest high-pressure foam spray machines to ensure precise and even distribution. Speed of Execution: The entire system can be completed in record time compared to traditional multi-stage systems. Approved Standards: We adhere to the engineering standards approved by municipalities and relevant authorities. Economic Solution: A smart investment that saves on future maintenance costs and long-term energy bills.",
-          "whyChooseTitle": "Why Choose Taj Alrahmah for Waterproofing?"
+          "serviceContent": "At Taj Al Rahmah, we understand that tank corrosion and water leakage pose a significant threat to infrastructure and human health. Therefore, we provide GRP (Fiberglass Waterproofing) lining services—the most advanced technology in the insulation world. This system provides a solid, impenetrable protective layer that transforms your old or damaged tanks into completely renewed units.",
+          "whyChooseContent": "FeatureBenefitSeamless ApplicationGRP is applied as a single continuous piece, completely eliminating the weak points that cause leaks.Corrosion ResistanceIt does not rust and is unaffected by humidity, salts, or harsh chemicals.Long LifespanIt lasts for over 20 years without the need for complex periodic maintenance.Structural IntegrityIt adds structural strength to cracked or deteriorated tanks, saving you the cost of total replacement.",
+          "whyChooseTitle": "Why is GRP the Best Choice with 'Taj Al Rahmah'?",
+          "bottomText": "At Taj Al Rahmah, we don't just insulate tanks; we extend the life of your investments."
         },
         "serviceTitle": "GRP & Fiberglass Waterproofing",
         "serviceSlug": "grp-fiberglass-waterproofing",
