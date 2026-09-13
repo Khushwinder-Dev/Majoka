@@ -36,7 +36,7 @@ const servicesMegaMenu = {
     cta: "All Services",
     ctaHref: "/services",
     items: [
-      { icon: "/headerIcon/SVG (6).svg",  title: "GRP & Fiberglass Waterproofing",    sub: "Seamless Food-Grade Lining for Water Tanks",     href: "/services?service=1&sub=grp-fiberglass" },
+      { icon: "/headerIcon/SVG (6).svg",  title: "GRP & Fiberglass Waterproofing",    sub: "Seamless Food-Grade Lining for Water Tanks",     href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
       { icon: "/headerIcon/SVG (7).svg",  title: "Combo System Roof Waterproofing",   sub: "Dual Water & Thermal Insulation System",          href: "/services?service=1&sub=combo-system-roof-waterproofing" },
       { icon: "/headerIcon/SVG (11).svg", title: "Epoxy Floor Coating",               sub: "Durable Seamless High-Performance Flooring",       href: "/services?service=1&sub=epoxy-floor-coating" },
       { icon: "/headerIcon/SVG (12).svg", title: "Bitumen Membrane Waterproofing",    sub: "Reinforced Torch-Applied Rolls for Foundations",   href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
@@ -51,7 +51,7 @@ const servicesMegaMenu = {
     cta: "جميع الخدمات",
     ctaHref: "/services",
     items: [
-      { icon: "/headerIcon/SVG (6).svg",  title: "عزل GRP والألياف الزجاجية",   sub: "تبطين سلس وصحي لخزانات المياه والأسطح",         href: "/services?service=1&sub=grp-fiberglass" },
+      { icon: "/headerIcon/SVG (6).svg",  title: "عزل GRP والألياف الزجاجية",   sub: "تبطين سلس وصحي لخزانات المياه والأسطح",         href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
       { icon: "/headerIcon/SVG (7).svg",  title: "نظام الكومبو للأسطح",          sub: "عزل مزدوج مائي وحراري في طبقة واحدة",           href: "/services?service=1&sub=combo-system-roof-waterproofing" },
       { icon: "/headerIcon/SVG (11).svg", title: "طلاء أرضيات الإيبوكسي",       sub: "أرضيات متينة وسلسة وعالية الأداء",              href: "/services?service=1&sub=epoxy-floor-coating" },
       { icon: "/headerIcon/SVG (12).svg", title: "عزل الغشاء البيتوميني",        sub: "لفائح بيتومينية مسلحة للأسطح والأساسات",        href: "/services?service=1&sub=bitumen-membrane-waterproofing" },

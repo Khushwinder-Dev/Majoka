@@ -18,7 +18,7 @@ export default function ProtectionServicesSection() {
       description: isArabic
         ? "طبقة عزل سلسة وصحية مثالية لخزانات المياه والأسطح المعرضة للرطوبة."
         : "Seamless Food-Grade Lining for Water Tanks & Exposed Roofs",
-      link: "/services?service=1&sub=grp-fiberglass",
+      link: "/services?service=1&sub=grp-fiberglass-waterproofing",
     },
     {
       id: 2,

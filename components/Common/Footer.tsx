@@ -59,7 +59,7 @@ export default function Footer() {
   };
 
   const servicesHrefs = [
-    "/services?service=1&sub=grp-fiberglass",
+    "/services?service=1&sub=grp-fiberglass-waterproofing",
     "/services?service=1&sub=combo-system-roof-waterproofing",
     "/services?service=1&sub=epoxy-floor-coating",
     "/services?service=1&sub=bitumen-membrane-waterproofing",
