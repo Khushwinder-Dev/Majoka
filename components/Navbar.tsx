@@ -397,7 +397,7 @@ const Navbar = () => {
                 return (
                   <div
                     key={item.name}
-                    className="relative"
+                    className={`relative ${item.href === "/resources" ? "hidden" : ""}`}
                     onMouseEnter={() => hasMega ? openMega(item.megaKey!) : openMega(null)}
                     onMouseLeave={() => hasMega ? closeMega() : undefined}
                   >
