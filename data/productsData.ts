@@ -428,11 +428,18 @@ const rawProducts = [
   },
   {
     id: 50,
-    name: "Swimming Pool Ladder",
+    name: "Steel stainless ladder swimming pools",
     longName: "Swimming Pool Entry and Exit Ladder",
     description:
       "Durable FRP swimming pool ladder designed for safe and convenient pool entry and exit in residential and commercial swimming facilities.",
   },
+  {
+    id: 51,
+    name: "Grp/fiberglass Shower Trey 1mx80",
+    longName: "White Rectangular Shower Tray",
+    description:
+      "White molded FRP shower tray designed for residential, hotel and commercial bathroom installations.",
+  }
 ];
 
 export const allProductsData: ProductDetailItem[] = rawProducts.map((p, idx) => {
