@@ -619,12 +619,12 @@ export default function ProductsPage() {
 
                           {/* Tooltip Card anchored relative to this product */}
                           <div
-                            className="absolute top-2 right-2 z-50 w-72 sm:w-80 bg-white rounded-2xl p-4 sm:p-5 shadow-[0_12px_40px_rgba(0,0,0,0.18)] border border-gray-100 animate-in fade-in zoom-in-95 duration-150 text-left cursor-default"
+                            className="absolute top-2 right-2 z-50 w-72 sm:w-80 bg-[#01a9a0] rounded-2xl p-4 sm:p-5 shadow-[0_12px_40px_rgba(1,169,160,0.35)] border border-[#01a9a0]/30 animate-in fade-in zoom-in-95 duration-150 text-left cursor-default"
                             onClick={(e) => e.stopPropagation()}
                           >
                             {/* Header */}
                             <div className="flex items-center justify-between mb-3">
-                              <h3 className="text-sm sm:text-base font-bold text-gray-900">
+                              <h3 className="text-sm sm:text-base font-bold text-white">
                                 Share Now
                               </h3>
                               <button
@@ -632,14 +632,14 @@ export default function ProductsPage() {
                                   e.stopPropagation();
                                   setShareModalProduct(null);
                                 }}
-                                className="w-6 h-6 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors cursor-pointer"
+                                className="w-6 h-6 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors cursor-pointer"
                               >
                                 <X className="w-3.5 h-3.5" />
                               </button>
                             </div>
 
                             {/* Subtitle */}
-                            <p className="text-[11px] text-gray-500 font-medium mb-2.5">
+                            <p className="text-[11px] text-white/80 font-medium mb-2.5">
                               Share this link via
                             </p>
 
@@ -717,23 +717,23 @@ export default function ProductsPage() {
                             </div>
 
                             {/* Copy Link Section */}
-                            <p className="text-[11px] text-gray-500 font-medium mb-1.5">
+                            <p className="text-[11px] text-white/80 font-medium mb-1.5">
                               Or copy link
                             </p>
-                            <div className="flex items-center gap-2 p-1 pl-2.5 border border-gray-200 rounded-full bg-white focus-within:border-[#01a9a0]">
-                              <Link2 className="w-3 h-3 text-gray-400 flex-shrink-0" />
+                            <div className="flex items-center gap-2 p-1 pl-2.5 border border-white/30 rounded-full bg-white/15 backdrop-blur-sm focus-within:border-white/60">
+                              <Link2 className="w-3 h-3 text-white/70 flex-shrink-0" />
                               <input
                                 type="text"
                                 readOnly
                                 value="example.com/share-link"
-                                className="w-full text-[11px] text-gray-600 bg-transparent outline-none truncate"
+                                className="w-full text-[11px] text-white bg-transparent outline-none truncate placeholder:text-white/50"
                               />
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleCopyLink();
                                 }}
-                                className="px-3.5 py-1 bg-[#01a9a0] hover:bg-[#00968e] text-white text-[11px] font-semibold rounded-full transition-colors flex-shrink-0 cursor-pointer shadow-xs"
+                                className="px-3.5 py-1 bg-white hover:bg-white/90 text-[#01a9a0] text-[11px] font-semibold rounded-full transition-colors flex-shrink-0 cursor-pointer shadow-xs"
                               >
                                 Copy
                               </button>
