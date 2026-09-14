@@ -85,14 +85,14 @@ const defaultRatingBreakdown = [
 const rawProducts = [
   {
     id: 1,
-    name: "Wall Ladder",
+    name: "Steel stainless wall ladder",
     longName: "Vertical Wall Mounted Access Ladder",
     description:
       "Strong and corrosion-resistant FRP wall ladder designed for safe vertical access to elevated areas, walls, tanks and industrial structures.",
   },
   {
     id: 2,
-    name: "Swimming Pool Ladder",
+    name: "Steel stainless ladder swimming pools",
     longName: "Stainless Style Swimming Pool Access Ladder",
     description:
       "Durable corrosion-resistant FRP swimming pool ladder designed to provide safe and convenient entry and exit from swimming pools.",
@@ -113,7 +113,7 @@ const rawProducts = [
   },
   {
     id: 5,
-    name: "Drain Fitting",
+    name: "Grp/fiberglass catch basin bucket",
     longName: "Molded Drainage Pipe Fitting",
     description:
       "Durable FRP drainage fitting designed for connecting drainage components and directing water or wastewater through piping systems.",
@@ -127,7 +127,7 @@ const rawProducts = [
   },
   {
     id: 7,
-    name: "Bathtub",
+    name: "Grp/fiberglass planter box",
     longName: "White FRP Rectangular Bathtub",
     description:
       "Smooth and durable FRP bathtub designed for residential, hotel and commercial bathroom installations.",
@@ -155,14 +155,14 @@ const rawProducts = [
   },
   {
     id: 11,
-    name: "Drain Fitting",
+    name: "Grp/fiberglass catch basin bucket",
     longName: "FRP Drainage Pipe Connection Fitting",
     description:
       "Molded FRP drainage fitting designed for connecting and directing drainage pipelines with excellent corrosion resistance.",
   },
   {
     id: 12,
-    name: "Pool Ladder",
+    name: "Steel stainless swimming pools ladder",
     longName: "Swimming Pool Safety Access Ladder",
     description:
       "Durable swimming pool ladder designed to provide safe access in and out of residential and commercial swimming pools.",
@@ -176,7 +176,7 @@ const rawProducts = [
   },
   {
     id: 14,
-    name: "Drainage Fitting",
+    name: "Grp/fiberglass Catch basin bucket",
     longName: "FRP Drainage Pipe and Chamber Fitting",
     description:
       "FRP drainage fitting designed for reliable connection of drainage pipes and water management systems.",
@@ -197,7 +197,7 @@ const rawProducts = [
   },
   {
     id: 17,
-    name: "Access Cover",
+    name: "Grp/fiberglass sealing plate for manhole cover",
     longName: "Reinforced Molded FRP Access Cover",
     description:
       "Strong molded FRP access cover designed for inspection openings, drainage systems, tanks and utility access points.",
@@ -246,21 +246,21 @@ const rawProducts = [
   },
   {
     id: 24,
-    name: "Shower Tray",
+    name: "Grp/fiberglass Shower Trey 1mx600",
     longName: "White Rectangular Shower Tray",
     description:
       "White molded FRP shower tray designed for residential, hotel and commercial bathroom installations.",
   },
   {
     id: 25,
-    name: "Ladder",
+    name: "Grp/fiberglass ladder for water tank",
     longName: "Multi Purpose Industrial Access Ladder",
     description:
       "Strong and lightweight FRP ladder suitable for industrial maintenance, construction, commercial and general access applications.",
   },
   {
     id: 26,
-    name: "Step Ladder",
+    name: "Grp/fiberglass  ladder for water tank",
     longName: "Heavy Duty FRP Step Ladder",
     description:
       "Heavy-duty FRP step ladder designed for maintenance, construction and industrial working-at-height applications.",
@@ -274,14 +274,14 @@ const rawProducts = [
   },
   {
     id: 28,
-    name: "Roofing Sheet",
+    name: "Grp/fiberglass sheets",
     longName: "Corrugated FRP Roofing Sheet",
     description:
       "Lightweight corrugated FRP roofing sheet designed for weather-resistant roofing and industrial construction applications.",
   },
   {
     id: 29,
-    name: "Access Cover",
+    name: "Grp/fiberglass  Manhole cover",
     longName: "Reinforced Utility Access Cover",
     description:
       "Reinforced FRP access cover designed to protect utility openings, inspection chambers, drainage systems and service areas.",
@@ -323,14 +323,14 @@ const rawProducts = [
   },
   {
     id: 35,
-    name: "Planter",
+    name: "Grp/fiberglass Planter",
     longName: "Outdoor Decorative Planter Set",
     description:
       "Stylish FRP planter suitable for indoor and outdoor decorative plants, flowers and landscaping applications.",
   },
   {
     id: 36,
-    name: "Shower Tray",
+    name: "Grp/fiberglass Shower Trey 600x600 800x800",
     longName: "Molded FRP Shower Base",
     description:
       "Molded FRP shower tray designed with a smooth surface and drainage opening for bathroom installations.",
@@ -421,7 +421,7 @@ const rawProducts = [
   },
   {
     id: 49,
-    name: "Safety Ladder",
+    name: "Steel stainless safety ladder",
     longName: "Vertical Safety Access Ladder with Cage",
     description:
       "Corrosion-resistant FRP safety ladder with protective cage designed for secure vertical access to elevated structures.",
