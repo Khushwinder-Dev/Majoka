@@ -60,7 +60,7 @@ export default function ProductDetailsPage() {
   // Share via social
   const handleSocialShare = (platform: string) => {
     const url = typeof window !== "undefined" ? window.location.href : "https://example.com/share-link";
-    const text = product.longName || product.name || "Check out this product";
+    const text = product.name || "Check out this product";
 
     let shareUrl = "";
     if (platform === "facebook") {
@@ -87,7 +87,7 @@ export default function ProductDetailsPage() {
   };
 
   const handleAddToCart = () => {
-    toast.success(`Added ${quantity} × ${product.longName || product.name} to cart!`);
+    toast.success(`Added ${quantity} × ${product.name} to cart!`);
   };
 
   const handleToggleWishlist = () => {
@@ -155,7 +155,7 @@ export default function ProductDetailsPage() {
           </Link>
           <span className="text-gray-300">/</span>
           <span className="text-gray-900 font-medium truncate max-w-[240px] sm:max-w-none">
-            {product.longName || product.name}
+            {product.name}
           </span>
         </nav>
 
@@ -166,7 +166,7 @@ export default function ProductDetailsPage() {
             <div className="w-full aspect-square bg-[#f8f9fa] rounded-3xl p-8 sm:p-14 flex items-center justify-center relative overflow-hidden group border border-gray-100/60 transition-shadow hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <Image
                 src={product.image}
-                alt={product.longName || product.name}
+                alt={product.name}
                 width={700}
                 height={700}
                 priority
@@ -292,7 +292,7 @@ export default function ProductDetailsPage() {
 
             {/* Product Title */}
             <h1 className="text-3xl sm:text-4xl font-bold font-anek text-gray-900 tracking-tight leading-tight mb-3">
-              {product.longName || product.name}
+              {product.name}
             </h1>
 
             {/* Rating Stars & Count */}
