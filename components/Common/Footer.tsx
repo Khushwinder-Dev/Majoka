@@ -418,7 +418,7 @@ export default function Footer() {
             <div className="order-1 md:order-2 flex items-center justify-center">
               <button
                 onClick={scrollToTop}
-                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-md shadow-[#01a9a0]/30 hover:shadow-lg hover:shadow-[#01a9a0]/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-300"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-md shadow-[#01a9a0]/30 hover:shadow-lg hover:shadow-[#01a9a0]/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
                 aria-label={t.footer.scrollToTop}
                 title={t.footer.scrollToTop}
               >
