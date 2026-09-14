@@ -363,7 +363,7 @@ const Navbar = () => {
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 sm:py-4 ${navBg}`}
-      style={{ zIndex: 9998 }}
+      style={{ zIndex: 99999 }}
     >
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
         <div className="flex items-center justify-between h-16">
@@ -453,7 +453,7 @@ const Navbar = () => {
           </div>
 
           {/* ── MOBILE HAMBURGER ────────────────────────────────── */}
-          <div className="lg:hidden">
+          <div className="lg:hidden" style={{ zIndex: 100000, position: "relative" }}>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="relative w-11 h-11 text-[#01a9a0] hover:opacity-60 transition-opacity flex items-center justify-center cursor-pointer"
@@ -537,7 +537,7 @@ const Navbar = () => {
                         className="px-5 py-4 text-white/40 hover:text-[#00c2b2] transition-colors cursor-pointer"
                         aria-label={`Toggle ${item.name}`}
                       >
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                        {/* <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} /> */}
                       </button>
                     )}
                   </div>
