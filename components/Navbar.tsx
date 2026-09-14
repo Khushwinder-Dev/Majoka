@@ -527,7 +527,7 @@ const Navbar = () => {
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex-1 px-6 py-4 text-[14px] font-semibold uppercase tracking-wider font-anek transition-colors ${
                         active ? "text-[#00c2b2]" : "text-white/80 hover:text-white"
-                      }`}
+                      } ${item.href === "/resources" ? "hidden" : ""}`}
                     >
                       {item.name}
                     </Link>
