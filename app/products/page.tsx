@@ -412,7 +412,7 @@ export default function ProductsPage() {
               </div>
 
               {/* EXPERT CALLOUT BOX (TEAL) */}
-              <div className="bg-[#01a9a0] rounded-2xl p-6 text-white shadow-sm relative overflow-hidden">
+              {/* <div className="bg-[#01a9a0] rounded-2xl p-6 text-white shadow-sm relative overflow-hidden">
                 <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-4">
                   <Headphones className="w-4 h-4 text-white" />
                 </div>
@@ -432,7 +432,7 @@ export default function ProductsPage() {
                 >
                   Talk to an expert
                 </button>
-              </div>
+              </div> */}
 
               {isMobileFilterOpen && (
                 <button
