@@ -415,7 +415,7 @@ export default function Footer() {
             </div>
 
             {/* Right: App store badges */}
-            <div className="order-3 flex items-center justify-center md:justify-end gap-2.5 sm:gap-3 hidden">
+            <div className="order-3 flex items-center justify-center md:justify-end gap-2.5 sm:gap-3 invisible">
               {/* Google Play */}
               <Link
                 href="#"
