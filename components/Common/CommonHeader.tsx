@@ -23,7 +23,7 @@ const Header = ({ title, breadcrumb, imagePath }: HeaderProps) => {
   }, []);
 
   return (
-    <section className="relative w-full h-[528px] overflow-hidden">
+    <section className="relative w-full h-[400px] overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <div

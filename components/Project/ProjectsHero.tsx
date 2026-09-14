@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
-const BG_IMAGE = "/media/Dubai modern skyline at twilight (2).png";
+const BG_IMAGE = "/banners/Project_.png";
 
 export default function ProjectsHero() {
   const { isArabic } = useLanguage();
