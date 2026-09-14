@@ -18,7 +18,7 @@ import {
 } from "@/components/service-templates";
 
 /* ─── ASSETS ──────────────────────────────────────────────────── */
-const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
+const DEFAULT_BANNER = "/banners/Services_.png";
 const FALLBACK_IMAGES = [
   "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png",
   "/media/servicesListing/unsplash_CPs2X8JYmS8.png",
@@ -197,7 +197,7 @@ function ServicesContent() {
   };
 
   // Hero content
-  const heroBanner = activeSub?.serviceBanner || activeService.serviceBanner || DEFAULT_BANNER;
+  const heroBanner = DEFAULT_BANNER;
   const heroTitle = activeSub ? activeSub.serviceTitle : activeService.serviceTitle;
   const heroTagline = activeSub
     ? activeSub.shortDescription
@@ -254,7 +254,7 @@ function ServicesContent() {
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══ HERO BANNER ══════════════════════════════════════════ */}
-      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[300px] overflow-hidden bg-[#0b2447]">
+      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[400px] overflow-hidden bg-[#0b2447]">
         <SmartImage src={heroBanner} alt={heroTitle} fallbackSrc={DEFAULT_BANNER} priority className="object-cover object-center" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
