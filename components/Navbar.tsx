@@ -360,6 +360,7 @@ const Navbar = () => {
   ];
 
   return (
+    <>
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 sm:py-4 ${navBg}`}
@@ -469,6 +470,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+    </nav>
 
       {/* ── MOBILE OVERLAY ──────────────────────────────────────────── */}
       {isMobileMenuOpen && (
@@ -537,7 +539,7 @@ const Navbar = () => {
                         className="px-5 py-4 text-white/40 hover:text-[#00c2b2] transition-colors cursor-pointer"
                         aria-label={`Toggle ${item.name}`}
                       >
-                        {/* <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} /> */}
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
                       </button>
                     )}
                   </div>
@@ -613,7 +615,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
