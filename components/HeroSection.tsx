@@ -173,7 +173,7 @@ const HeroSection = () => {
           }`}
       >
         <Image
-          src="/hero-bg.jpg"
+          src="/banners/Home__.png"
           alt="Taj Al Rahmah City Skyline Hero"
           fill
           priority
