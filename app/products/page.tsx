@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { allProductsData, ProductDetailItem } from "@/data/productsData";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 const categoryList: { name: string; count: number }[] = [];
 
@@ -146,8 +147,14 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafbfc] text-gray-900 pt-28 pb-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+    <div>
+      <CommonHeader
+        title="Our Products"
+        breadcrumb="Products"
+        imagePath="/about-us/about-us-1.png"
+      />
+    <div className="min-h-screen bg-[#fafbfc] text-gray-900 pb-20">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-16">
         {/* Mobile Filter Toggle */}
         <div className="lg:hidden flex items-center justify-between mb-6">
           <div>
@@ -464,7 +471,7 @@ export default function ProductsPage() {
                   >
                     <LayoutGrid className="w-3.5 h-3.5" />
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => setViewMode("list")}
                     className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${viewMode === "list"
                       ? "bg-[#01a9a0] text-white shadow-xs"
@@ -473,7 +480,7 @@ export default function ProductsPage() {
                     title="List View"
                   >
                     <ListIcon className="w-3.5 h-3.5" />
-                  </button>
+                  </button> */}
                 </div>
 
                 {/* Show Page Dropdown */}
@@ -892,6 +899,7 @@ export default function ProductsPage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
