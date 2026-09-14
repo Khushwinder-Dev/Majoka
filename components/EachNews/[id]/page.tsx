@@ -29,7 +29,7 @@ The aim of using placeholder text in civil engineering is to provide a visually 
       <CommonHeader
         title="News Details"
         breadcrumb={`News / ${mockArticle.title}`}
-        imagePath="/project.jpg"
+        imagePath="/banners/Project_.png"
       />
       <EachNews article={mockArticle} />
       <Stats />

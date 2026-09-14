@@ -219,7 +219,7 @@ export default function IndustriesPage() {
       <CommonHeader
         title="Industries We Empower & Serve"
         breadcrumb="Industries"
-        imagePath="/featured-bg.jpeg"
+        imagePath="/banners/industray_.png"
       />
 
       {/* Main Content */}

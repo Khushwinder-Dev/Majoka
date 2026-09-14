@@ -10,7 +10,7 @@ const AboutUs = () => {
       <CommonHeader
         title="About Our Company"
         breadcrumb="About Us"
-        imagePath="/about-us/about-us-1.png"
+        imagePath="/banners/About us_.png"
       />
       <AboutUsSection />
       <OurMission />

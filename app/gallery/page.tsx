@@ -9,7 +9,7 @@ export default function ContactPage() {
       <CommonHeader
         title="Gallery"
         breadcrumb="Gallery"
-        imagePath="/project.jpg"
+        imagePath="/banners/Project_.png"
       />
       <AllGallery />
       <Stats />

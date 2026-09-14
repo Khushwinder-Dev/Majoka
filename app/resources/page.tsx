@@ -174,7 +174,7 @@ export default function ResourcesPage() {
       <CommonHeader
         title="Engineering Resources & Insights"
         breadcrumb="Resources"
-        imagePath="/project.jpg"
+        imagePath="/banners/Project_.png"
       />
 
       {/* Main Container */}

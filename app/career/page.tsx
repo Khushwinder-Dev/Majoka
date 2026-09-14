@@ -10,7 +10,7 @@ export default function ContactPage() {
       <CommonHeader
         title="Career"
         breadcrumb="Career"
-        imagePath="/project.jpg"
+        imagePath="/banners/Careers_.png"
       />
       <JoinTeam />
       <Position />

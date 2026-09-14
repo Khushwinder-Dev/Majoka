@@ -13,7 +13,7 @@ export default function CertificationsPage() {
       <CommonHeader
         title="Our Certifications & Accreditations"
         breadcrumb="Certifications"
-        imagePath="/about-us/about-us-1.png"
+        imagePath="/banners/About us_.png"
       />
     </div>
   );

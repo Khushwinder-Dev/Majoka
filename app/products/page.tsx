@@ -151,7 +151,7 @@ export default function ProductsPage() {
       <CommonHeader
         title="Our Products"
         breadcrumb="Products"
-        imagePath="/about-us/about-us-1.png"
+        imagePath="/banners/Product_.png"
       />
     <div className="min-h-screen bg-[#fafbfc] text-gray-900 pb-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-16">

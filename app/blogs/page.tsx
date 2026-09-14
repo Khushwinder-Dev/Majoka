@@ -131,7 +131,7 @@ const News = () => {
       <CommonHeader
         title="Blogs"
         breadcrumb="Blogs"
-        imagePath="/about-us/about-us-1.png"
+        imagePath="/banners/About us_.png"
       />
 
       <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
