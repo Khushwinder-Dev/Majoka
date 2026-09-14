@@ -6,6 +6,7 @@ import {
   Instagram,
   Linkedin,
   Youtube,
+  Twitter,
   ArrowRight,
   ArrowLeft,
   MapPin,
@@ -161,7 +162,7 @@ export default function Footer() {
             {/* ---------------- */}
             <div className="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-4 flex flex-col gap-5 sm:gap-6">
               {/* Logo + Tagline */}
-              <div className="flex items-center gap-3 sm:gap-3.5">
+              <Link href="/" className="flex items-center gap-3 sm:gap-3.5 w-fit cursor-pointer">
                 <div className="relative w-11 h-11 sm:w-14 sm:h-14 flex-shrink-0">
                   <Image
                     src="/logo.png"
@@ -179,7 +180,7 @@ export default function Footer() {
                     {t.footer.tagline2}
                   </span>
                 </div>
-              </div>
+              </Link>
 
               {/* Company description */}
               <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed max-w-md">
@@ -205,7 +206,7 @@ export default function Footer() {
                   href="https://www.facebook.com/profile.php?id=100081089335552&mibextid=wwXIfr&rdid=87mK4XbMigWNKr3R&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1C5jT8ztE2%2F%3Fmibextid%3DwwXIfr#"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                   aria-label="Facebook"
                 >
                   <Facebook className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -214,16 +215,27 @@ export default function Footer() {
                   href="https://www.instagram.com/tajalrahmahtechnicalservices?igsh=czJkZmUybjk5czJ0&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60 cursor-pointer"
                   aria-label="Instagram"
                 >
                   <Instagram className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                </Link>
+
+                {/* X (Twitter) */}
+                <Link
+                  href="https://x.com/tajalrahmah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60 cursor-pointer"
+                  aria-label="X (Twitter)"
+                >
+                  <Twitter className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 </Link>
                 <Link
                   href="https://www.tiktok.com/@tajalrahmah.grpworks"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60 cursor-pointer"
                   aria-label="TikTok"
                 >
                   <svg
@@ -241,7 +253,7 @@ export default function Footer() {
                   href="https://www.linkedin.com/company/tajalrahmah"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60 cursor-pointer"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -252,7 +264,7 @@ export default function Footer() {
                   href="https://www.youtube.com/@tajalrahmah"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#01a9a0]/30 text-stone-500 hover:text-[#01a9a0] hover:border-[#01a9a0]/60 flex items-center justify-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 bg-white/60 cursor-pointer"
                   aria-label="YouTube"
                 >
                   <Youtube className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -520,7 +532,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="flex items-start gap-2 text-sm sm:text-[15px] text-stone-700 hover:text-[#01a9a0] font-medium transition-all duration-200 group leading-snug"
+      className="flex items-start gap-2 text-sm sm:text-[15px] text-stone-700 hover:text-[#01a9a0] font-medium transition-all duration-200 group leading-snug cursor-pointer"
     >
       <ArrowRight
         className={`w-3.5 h-3.5 text-[#01a9a0] flex-shrink-0 mt-[3px] transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
