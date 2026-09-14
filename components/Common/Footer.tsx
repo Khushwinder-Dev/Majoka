@@ -139,7 +139,7 @@ export default function Footer() {
                   type="submit"
                   disabled={isSubmitting}
                   className={`absolute top-1/2 ${isArabic ? "left-1.5 sm:left-2" : "right-1.5 sm:right-2"
-                    } -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] active:scale-95 text-white flex items-center justify-center shadow-md shadow-[#01a9a0]/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed`}
+                    } -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] active:scale-95 text-white flex items-center justify-center shadow-md shadow-[#01a9a0]/30 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer`}
                   aria-label={t.footer.newsletter.subscribe}
                 >
                   <ArrowRight
@@ -332,13 +332,13 @@ export default function Footer() {
                 >
                   <Link
                     href={`tel:${t.footer.phone1.replace(/\s/g, "")}`}
-                    className="hover:text-[#01a9a0] transition-colors"
+                    className="hover:text-[#01a9a0] transition-colors cursor-pointer"
                   >
                     {t.footer.phone1}
                   </Link>
                   <Link
                     href={`tel:${t.footer.phone2.replace(/\s/g, "")}`}
-                    className="hover:text-[#01a9a0] transition-colors"
+                    className="hover:text-[#01a9a0] transition-colors cursor-pointer"
                   >
                     {t.footer.phone2}
                   </Link>
@@ -355,13 +355,13 @@ export default function Footer() {
                 >
                   <Link
                     href={`mailto:${t.footer.email1}`}
-                    className="hover:text-[#01a9a0] transition-colors break-all"
+                    className="hover:text-[#01a9a0] transition-colors break-all cursor-pointer"
                   >
                     {t.footer.email1}
                   </Link>
                   <Link
                     href={`mailto:${t.footer.email2}`}
-                    className="hover:text-[#01a9a0] transition-colors break-all"
+                    className="hover:text-[#01a9a0] transition-colors break-all cursor-pointer"
                   >
                     {t.footer.email2}
                   </Link>
@@ -553,7 +553,7 @@ function ContactRow({
 }) {
   return (
     <li className="flex items-start gap-3">
-      <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#01a9a0]/30 bg-white/60 flex items-center justify-center text-stone-500 hover:shadow-md hover:border-[#01a9a0]/50 hover:text-[#01a9a0] transition-all duration-300">
+      <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-[#01a9a0]/30 bg-white/60 flex items-center justify-center text-stone-500 hover:shadow-md hover:border-[#01a9a0]/50 hover:text-[#01a9a0] transition-all duration-300 cursor-pointer">
         {icon}
       </div>
       <div className="flex flex-col gap-0.5 pt-0.5 text-sm sm:text-[15px] text-stone-700 font-medium min-w-0">
