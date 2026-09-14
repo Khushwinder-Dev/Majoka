@@ -590,7 +590,9 @@ function ServiceDetailsContent() {
             {/* Right: buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
               <Link
-                href="/contact"
+                href="https://wa.me/971527492002"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
               >
                 {isArabic ? "احجز فنياً" : "Book a Technician"}

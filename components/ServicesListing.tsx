@@ -596,10 +596,13 @@ function ServicesContent() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
-              <Link href="/contact"
+              <a
+                href="https://wa.me/971527492002"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap">
                 {isArabic ? "احجز فنياً" : "Book a Technician"}
-              </Link>
+              </a>
               <a href="tel:+971556173300"
                 className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-white/30 hover:border-white/50 text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 whitespace-nowrap">
                 <Phone className="w-4 h-4 flex-shrink-0" />

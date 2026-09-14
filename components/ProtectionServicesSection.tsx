@@ -185,7 +185,7 @@ export default function ProtectionServicesSection() {
         {/* ============================================================
             BOTTOM CTA
             ============================================================ */}
-        <div className="flex justify-center mt-12 sm:mt-16">
+        {/* <div className="flex justify-center mt-12 sm:mt-16">
           <Link
             href="/services"
             className="inline-flex items-center gap-3.5 bg-[#009e90] hover:bg-[#01887e] text-white pl-6 pr-2.5 py-2.5 rounded-full font-bold text-xs sm:text-sm tracking-wider uppercase shadow-[0_4px_16px_rgba(0,158,144,0.25)] hover:shadow-[0_6px_22px_rgba(0,158,144,0.35)] hover:-translate-y-0.5 transition-all duration-300 group"
@@ -199,7 +199,7 @@ export default function ProtectionServicesSection() {
               )}
             </span>
           </Link>
-        </div>
+        </div> */}
 
       </div>
     </section>
