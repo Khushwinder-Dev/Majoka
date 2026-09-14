@@ -126,7 +126,7 @@ export default function ProtectionServicesSection() {
               key={service.id}
               data-aos="fade-up"
               data-aos-delay={100 + index * 50}
-              className="group flex flex-col"
+              className="group flex flex-col cursor-pointer"
             >
               {/* Card Image Container */}
               <div className="relative w-full h-[220px] sm:h-[240px] md:h-[250px] lg:h-[260px] rounded-3xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(0,0,0,0.12)] bg-stone-100">
