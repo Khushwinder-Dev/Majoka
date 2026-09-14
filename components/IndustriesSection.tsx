@@ -194,7 +194,7 @@ export default function IndustriesSection() {
                 </div>
 
                 {/* Title (Dark Stone in Right Column as in refe0rence) */}
-                <h3 className="text-lg sm:text-[19px] font-bold text-[#01a9a] group-hover:text-[#01a9a0] transition-colors duration-300 mb-2 tracking-tight leading-snug">
+                <h3 className="text-lg sm:text-[19px] font-bold text-[#01a9a0] group-hover:text-[#01a9a0] transition-colors duration-300 mb-2 tracking-tight leading-snug">
                   {item.title}
                 </h3>
 
