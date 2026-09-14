@@ -218,7 +218,7 @@ const rawProducts = [
   },
   {
     id: 20,
-    name: "Carport",
+    name: "Parking shed",
     longName: "Residential Outdoor Carport Structure",
     description:
       "Modern FRP carport structure designed to provide covered vehicle parking and protection from weather conditions.",
@@ -288,7 +288,7 @@ const rawProducts = [
   },
   {
     id: 30,
-    name: "Playground",
+    name: "Grp/fiberglass baby slide ( playground )",
     longName: "Outdoor Children's Playground Set",
     description:
       "Durable outdoor playground set designed for children with multiple play and recreational structures.",
