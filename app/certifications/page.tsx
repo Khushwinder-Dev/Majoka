@@ -9,6 +9,7 @@ const certifications = [
   {
     id: 1,
     logo: "/certifications/logos/Overlay+Border (1).png",
+    icon: "/certifications/logos/SVG - Globe Icon.svg",
     titleEn: "Dubai Municipality DM Approved",
     titleAr: "معتمد من بلدية دبي",
     descriptionEn:
@@ -19,6 +20,7 @@ const certifications = [
   {
     id: 2,
     logo: "/certifications/logos/Overlay+Border (2).png",
+    icon: "/certifications/logos/SVG - Badge Icon.svg",
     titleEn: "DGL-Approved Products",
     titleAr: "منتجات معتمدة من DGL",
     descriptionEn:
@@ -29,6 +31,7 @@ const certifications = [
   {
     id: 3,
     logo: "/certifications/logos/Overlay+Border (3).png",
+    icon: "/certifications/logos/SVG - Shield Icon.svg",
     titleEn: "WRAS Certified Products",
     titleAr: "منتجات معتمدة من WRAS",
     descriptionEn:
@@ -39,6 +42,7 @@ const certifications = [
   {
     id: 4,
     logo: "/certifications/logos/Overlay+Border (4).png",
+    icon: "/certifications/logos/SVG - Leaf Icon.svg",
     titleEn: "DM Green Building Compliant",
     titleAr: "متوافق مع معايير المباني الخضراء لبلدية دبي",
     descriptionEn:
@@ -97,37 +101,42 @@ export default function CertificationsPage() {
             {certifications.map((cert) => (
               <div
                 key={cert.id}
-                className="group relative bg-white border border-stone-200/80 rounded-2xl p-6 sm:p-8 hover:border-[#01a9a0]/40 hover:shadow-[0_8px_32px_rgba(1,169,160,0.10)] transition-all duration-300 flex flex-col gap-5 overflow-hidden"
+                className="group bg-white border border-stone-100 rounded-2xl p-6 sm:p-7 hover:border-[#01a9a0]/30 hover:shadow-[0_8px_32px_rgba(1,169,160,0.08)] transition-all duration-300 flex flex-row items-start gap-4"
               >
-                {/* Subtle teal corner accent */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#01a9a0]/5 rounded-bl-[80px] pointer-events-none" />
-
-                {/* Logo + Title row */}
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-extrabold text-stone-900 leading-snug group-hover:text-[#01a9a0] transition-colors duration-200">
-                      {isArabic ? cert.titleAr : cert.titleEn}
-                    </h3>
-                  </div>
-                  {/* Logo badge */}
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 rounded-xl overflow-hidden bg-stone-50 border border-stone-100 shadow-sm">
+                {/* LEFT: icon + title + description */}
+                <div className="flex-1 min-w-0 flex flex-col gap-2.5">
+                  {/* SVG icon from file */}
+                  <div className="w-9 h-9 rounded-full bg-[#e6f7f6] flex items-center justify-center flex-shrink-0 mb-1">
                     <Image
-                      src={cert.logo}
-                      alt={isArabic ? cert.titleAr : cert.titleEn}
-                      fill
-                      unoptimized
-                      className="object-contain p-2"
+                      src={cert.icon}
+                      alt="icon"
+                      width={20}
+                      height={20}
+                      className="w-5 h-5 object-contain"
                     />
                   </div>
+
+                  {/* Title */}
+                  <h3 className="text-[15px] sm:text-base font-bold text-stone-900 leading-snug group-hover:text-[#01a9a0] transition-colors duration-200">
+                    {isArabic ? cert.titleAr : cert.titleEn}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
+                    {isArabic ? cert.descriptionAr : cert.descriptionEn}
+                  </p>
                 </div>
 
-                {/* Divider */}
-                <div className="w-full h-[1px] bg-stone-100" />
-
-                {/* Description */}
-                <p className="text-sm text-stone-600 leading-relaxed">
-                  {isArabic ? cert.descriptionAr : cert.descriptionEn}
-                </p>
+                {/* RIGHT: logo badge */}
+                <div className="relative w-24 h-20 flex-shrink-0 rounded-xl overflow-hidden bg-stone-50 border border-stone-100 shadow-sm self-start">
+                  <Image
+                    src={cert.logo}
+                    alt={isArabic ? cert.titleAr : cert.titleEn}
+                    fill
+                    unoptimized
+                    className="object-contain p-2"
+                  />
+                </div>
               </div>
             ))}
           </div>
