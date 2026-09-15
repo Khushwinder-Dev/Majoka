@@ -222,7 +222,7 @@ export default function Footer() {
                 </Link>
 
                 {/* X (Twitter) */}
-                <Link
+                {/* <Link
                   href="https://x.com/tajalrahmah"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -230,7 +230,7 @@ export default function Footer() {
                   aria-label="X (Twitter)"
                 >
                   <Twitter className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </Link>
+                </Link> */}
                 <Link
                   href="https://www.tiktok.com/@tajalrahmah.grpworks"
                   target="_blank"
@@ -249,7 +249,7 @@ export default function Footer() {
                 </Link>
 
                 {/* LinkedIn */}
-                <Link
+                {/* <Link
                   href="https://www.linkedin.com/company/tajalrahmah"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -257,10 +257,10 @@ export default function Footer() {
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </Link>
+                </Link> */}
 
                 {/* YouTube */}
-                <Link
+                {/* <Link
                   href="https://www.youtube.com/@tajalrahmah"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -268,8 +268,7 @@ export default function Footer() {
                   aria-label="YouTube"
                 >
                   <Youtube className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </Link>
-
+                </Link> */} 
               </div>
             </div>
 

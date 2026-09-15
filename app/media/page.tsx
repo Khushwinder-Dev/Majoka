@@ -139,7 +139,7 @@ export default function MediaPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/media/media-hero.jpg"
+            src="/banners/Media_.png"
             alt="Media Showcase Background"
             fill
             priority

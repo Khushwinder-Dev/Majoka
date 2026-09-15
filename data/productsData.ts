@@ -153,13 +153,13 @@ const rawProducts = [
     description:
       "Lightweight and corrosion-resistant FRP ladder designed for wall-mounted maintenance and access applications.",
   },
-  {
-    id: 11,
-    name: "Grp/fiberglass catch basin bucket",
-    longName: "FRP Drainage Pipe Connection Fitting",
-    description:
-      "Molded FRP drainage fitting designed for connecting and directing drainage pipelines with excellent corrosion resistance.",
-  },
+  // {
+  //   id: 11,
+  //   name: "Grp/fiberglass catch basin bucket",
+  //   longName: "FRP Drainage Pipe Connection Fitting",
+  //   description:
+  //     "Molded FRP drainage fitting designed for connecting and directing drainage pipelines with excellent corrosion resistance.",
+  // },
   {
     id: 12,
     name: "Steel stainless swimming pools ladder",
