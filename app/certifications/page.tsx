@@ -41,7 +41,7 @@ const certifications = [
   },
   {
     id: 4,
-    logo: "/certifications/logos/Overlay+Border (4).png",
+    logo: "/certifications/logos/cert-logo-4.png",
     icon: "/certifications/logos/SVG - Leaf Icon.svg",
     titleEn: "DM Green Building Compliant",
     titleAr: "متوافق مع معايير المباني الخضراء لبلدية دبي",
@@ -65,8 +65,19 @@ export default function CertificationsPage() {
       />
 
       {/* ── Intro section ──────────────────────────────────────── */}
-      <section className="w-full bg-white py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="w-full relative py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Section background image */}
+        <Image
+          src="/certifications/logos/sectionBg.png"
+          alt=""
+          fill
+          unoptimized
+          className="object-cover object-center"
+          priority
+        />
+        {/* Light overlay so text stays readable */}
+        <div className="absolute inset-0 bg-white/50 pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
 
           {/* Eyebrow */}
           <div className="flex items-center gap-2.5 mb-3">
