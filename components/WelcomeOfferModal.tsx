@@ -86,7 +86,7 @@ export default function WelcomeOfferModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/65 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
+      className="fixed inset-0 z-[100000] flex items-center justify-center p-3 sm:p-5 md:p-6 bg-black/65 backdrop-blur-xs transition-opacity duration-300 animate-in fade-in"
       onClick={handleClose}
     >
       {/* Modal Card */}
