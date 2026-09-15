@@ -122,63 +122,65 @@ export default function ProtectionServicesSection() {
             ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-14 gap-x-6 lg:gap-x-8">
           {services.map((service, index) => (
-            <div
-              key={service.id}
-              data-aos="fade-up"
-              data-aos-delay={100 + index * 50}
-              className="group flex flex-col cursor-pointer"
+            <Link
+              href={service.link}
+              className=""
             >
-              {/* Card Image Container */}
-              <div className="relative w-full h-[220px] sm:h-[240px] md:h-[250px] lg:h-[260px] rounded-3xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(0,0,0,0.12)] bg-stone-100">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  unoptimized
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
+              <div
+                key={service.id}
+                data-aos="fade-up"
+                data-aos-delay={100 + index * 50}
+                className="group flex flex-col cursor-pointer"
+              >
+                {/* Card Image Container */}
+                <div className="relative w-full h-[220px] sm:h-[240px] md:h-[250px] lg:h-[260px] rounded-3xl overflow-hidden shadow-[0_8px_25px_-10px_rgba(0,0,0,0.12)] bg-stone-100">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                </div>
 
-              {/* Overlapping Floating Info Card */}
-              <div className="relative -mt-14 sm:-mt-16 mx-4 sm:mx-5 bg-white rounded-2xl p-5 sm:p-6 shadow-[0_12px_32px_-8px_rgba(0,0,0,0.1)] border border-stone-100/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_38px_-8px_rgba(1,169,160,0.18)]">
-                {/* Header: Icon + Title */}
-                <div className="flex items-center gap-3.5 mb-2.5">
-                  <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
-                    <Image
-                      src={service.icon}
-                      alt={service.title}
-                      width={36}
-                      height={36}
-                      className="w-8 h-8 sm:w-9 sm:h-9 object-contain"
-                    />
+                {/* Overlapping Floating Info Card */}
+                <div className="relative -mt-14 sm:-mt-16 mx-4 sm:mx-5 bg-white rounded-2xl p-5 sm:p-6 shadow-[0_12px_32px_-8px_rgba(0,0,0,0.1)] border border-stone-100/90 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_38px_-8px_rgba(1,169,160,0.18)]">
+                  {/* Header: Icon + Title */}
+                  <div className="flex items-center gap-3.5 mb-2.5">
+                    <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center">
+                      <Image
+                        src={service.icon}
+                        alt={service.title}
+                        width={36}
+                        height={36}
+                        className="w-8 h-8 sm:w-9 sm:h-9 object-contain"
+                      />
+                    </div>
+                    <h3 className="text-base sm:text-[17px] font-bold text-stone-900 leading-snug tracking-tight group-hover:text-[#01a9a0] transition-colors duration-300 line-clamp-1">
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className="text-base sm:text-[17px] font-bold text-stone-900 leading-snug tracking-tight group-hover:text-[#01a9a0] transition-colors duration-300 line-clamp-1">
-                    {service.title}
-                  </h3>
-                </div>
 
-                {/* Subtitle / Description */}
-                <p className="text-xs sm:text-[13px] text-stone-500 font-normal leading-relaxed min-h-[38px] line-clamp-2">
-                  {service.description}
-                </p>
+                  {/* Subtitle / Description */}
+                  <p className="text-xs sm:text-[13px] text-stone-500 font-normal leading-relaxed min-h-[38px] line-clamp-2">
+                    {service.description}
+                  </p>
 
-                {/* CTA Link: Get Started */}
-                <div className="mt-4 pt-1">
-                  <Link
-                    href={service.link}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#01a9a0] hover:text-[#01887e] transition-colors duration-200 group/link"
-                  >
-                    <span>{isArabic ? "ابدأ الآن" : "Get Started"}</span>
-                    {isArabic ? (
-                      <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:-translate-x-1" />
-                    ) : (
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
-                    )}
-                  </Link>
+                  {/* CTA Link: Get Started */}
+                  <div className="mt-4 pt-1">
+                    <div className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#01a9a0] hover:text-[#01887e] transition-colors duration-200 group/link">
+                      <span>{isArabic ? "ابدأ الآن" : "Get Started"}</span>
+                      {isArabic ? (
+                        <ArrowLeft className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:-translate-x-1" />
+                      ) : (
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
