@@ -64,7 +64,7 @@ export default function CertificationsPage() {
         imagePath="/banners/certifications.png"
       />
 
-      {/* ── Intro section ──────────────────────────────────────── */}
+      {/* ── SECTION 1: Cards (with sectionBg) ─────────────────── */}
       <section className="w-full relative py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Section background image */}
         <Image
@@ -152,8 +152,15 @@ export default function CertificationsPage() {
             ))}
           </div>
 
-          {/* ── Bottom Company Profile Banner ───────────────────── */}
-          <div className="mt-16 sm:mt-20 relative rounded-2xl overflow-hidden min-h-[160px] sm:min-h-[180px]">
+        </div>
+      </section>
+
+      {/* ── SECTION 2: Company Profile Banner (plain white bg) ── */}
+      <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+
+          {/* Company Profile Banner */}
+          <div className="relative rounded-2xl overflow-hidden min-h-[160px] sm:min-h-[180px]">
 
             {/* Full background image */}
             <Image
@@ -164,12 +171,11 @@ export default function CertificationsPage() {
               className="object-cover object-right-center"
             />
 
-            {/* Left overlay — lighter so image teal shows through */}
+            {/* Left overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-white/30 to-transparent pointer-events-none" />
 
-            {/* Content — sits on top */}
+            {/* Content */}
             <div className="relative z-10 flex flex-col justify-center px-7 sm:px-10 py-8 sm:py-10 max-w-lg">
-              {/* Eyebrow */}
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-block h-[2px] w-6 bg-[#01a9a0] rounded-full" />
                 <span className="text-[16px] font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
@@ -177,16 +183,13 @@ export default function CertificationsPage() {
                 </span>
               </div>
 
-              {/* Description */}
               <p className="text-sm sm:text-[15px] text-stone-800 leading-relaxed mb-6 max-w-xs font-medium">
                 {isArabic
                   ? "اكتشف خبرتنا وخدماتنا والتزامنا ببناء غدٍ أكثر أماناً وقوة."
                   : "Discover our expertise, services and commitment to building a safer, stronger tomorrow."}
               </p>
 
-              {/* PDF badge + Download button */}
               <div className="flex flex-wrap items-center gap-3">
-                {/* PDF badge */}
                 <div className="flex items-center gap-2.5 bg-white border border-stone-200 rounded-xl px-3.5 py-2.5 shadow-sm">
                   <Image
                     src="/certifications/logos/Custom Teal PDF File Badge.svg"
@@ -203,7 +206,6 @@ export default function CertificationsPage() {
                   </div>
                 </div>
 
-                {/* Download button */}
                 <a
                   href="/contact"
                   className="inline-flex items-center gap-2 bg-[#01a9a0] hover:bg-[#009e90] active:scale-95 text-white font-bold text-sm px-5 py-3 rounded-full transition-all duration-200 shadow-md whitespace-nowrap cursor-pointer"
@@ -220,7 +222,6 @@ export default function CertificationsPage() {
             </div>
 
           </div>
-
         </div>
       </section>
     </div>
