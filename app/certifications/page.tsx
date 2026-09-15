@@ -156,7 +156,7 @@ export default function CertificationsPage() {
       </section>
 
       {/* ── SECTION 2: Company Profile Banner (plain white bg) ── */}
-      <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+      <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8 hidden">
         <div className="max-w-7xl mx-auto">
 
           {/* Company Profile Banner */}
