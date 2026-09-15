@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anek_Malayalam } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -61,14 +61,14 @@ export default function RootLayout({
               success: {
                 duration: 5000,
                 style: {
-                  background: "#10b981",
+                  background: "#01a9a0",
                   color: "#fff",
                   padding: "16px",
                   borderRadius: "8px",
                 },
                 iconTheme: {
                   primary: "#fff",
-                  secondary: "#10b981",
+                  secondary: "#01a9a0",
                 },
               },
               error: {

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
@@ -100,14 +100,14 @@ const GetStarted = () => {
           {
             duration: 5000,
             style: {
-              background: "#10b981",
+              background: "#01a9a0",
               color: "#fff",
               padding: "16px",
               borderRadius: "8px",
             },
             iconTheme: {
               primary: "#fff",
-              secondary: "#10b981",
+              secondary: "#01a9a0",
             },
           }
         );

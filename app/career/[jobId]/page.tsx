@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -197,7 +197,7 @@ const JobApplicationPage = () => {
           </h1>
           <button
             onClick={() => router.push("/careers")}
-            className="text-red-900 hover:text-red-800 font-medium"
+            className="text-[#01a9a0] hover:text-[#009e90] font-medium"
           >
             ← Back to Careers
           </button>
@@ -268,14 +268,14 @@ const JobApplicationPage = () => {
           {
             duration: 5000,
             style: {
-              background: "#10b981",
+              background: "#01a9a0",
               color: "#fff",
               padding: "16px",
               borderRadius: "8px",
             },
             iconTheme: {
               primary: "#fff",
-              secondary: "#10b981",
+              secondary: "#01a9a0",
             },
           }
         );
@@ -338,7 +338,7 @@ const JobApplicationPage = () => {
           {/* Back Button */}
           <motion.button
             onClick={() => router.push("/career")}
-            className="flex items-center gap-2 text-red-900 hover:text-red-800 mb-6 group font-medium"
+            className="flex items-center gap-2 text-[#01a9a0] hover:text-[#009e90] mb-6 group font-medium"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             whileHover={{ x: -5 }}
@@ -358,7 +358,7 @@ const JobApplicationPage = () => {
               {/* Job Header */}
               <div className="bg-white rounded-xl shadow p-6 md:p-8">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-16 h-16 theme-bg-main rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-[#01a9a0] rounded-full flex items-center justify-center flex-shrink-0">
                     <Image
                       src="/q.svg"
                       alt="Company Logo"
@@ -367,7 +367,7 @@ const JobApplicationPage = () => {
                     />
                   </div>
                   <div className="flex-1">
-                    <h1 className="text-3xl md:text-4xl font-bold text-pink-950">
+                    <h1 className="text-3xl md:text-4xl font-bold text-stone-900">
                       {job.title}
                     </h1>
                   </div>
@@ -377,7 +377,7 @@ const JobApplicationPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <Briefcase className="w-5 h-5 text-red-900" />
+                      <Briefcase className="w-5 h-5 text-[#01a9a0]" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 font-medium">
@@ -389,7 +389,7 @@ const JobApplicationPage = () => {
 
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <MapPin className="w-5 h-5 text-red-900" />
+                      <MapPin className="w-5 h-5 text-[#01a9a0]" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 font-medium">
@@ -401,7 +401,7 @@ const JobApplicationPage = () => {
 
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <Clock className="w-5 h-5 text-red-900" />
+                      <Clock className="w-5 h-5 text-[#01a9a0]" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 font-medium">
@@ -415,7 +415,7 @@ const JobApplicationPage = () => {
 
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-red-900" />
+                      <Calendar className="w-5 h-5 text-[#01a9a0]" />
                     </div>
                     <div>
                       <p className="text-sm text-gray-600 font-medium">
@@ -429,19 +429,14 @@ const JobApplicationPage = () => {
 
               {/* Job Description */}
               <div className="bg-white rounded-xl shadow p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-pink-950 mb-4">
-                  Job Description
-                </h2>
+                <h2 className="text-2xl font-bold text-stone-900 mb-4">Job Description</h2>
                 <p className="text-gray-700 leading-relaxed text-lg">
                   {job.fullDescription}
                 </p>
               </div>
 
               {/* Responsibilities */}
-              <div className="bg-[#EDE8E9] rounded-xl shadow p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Key Responsibilities
-                </h2>
+              <div className="bg-[#e6f7f6] rounded-xl shadow p-6 md:p-8">
                 <ul className="space-y-3">
                   {job.responsibilities.map((item, index) => (
                     <motion.li
@@ -451,7 +446,7 @@ const JobApplicationPage = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                     >
-                      <CheckCircle className="w-5 h-5 text-red-900 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-[#01a9a0] flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 leading-relaxed">
                         {item}
                       </span>
@@ -461,8 +456,8 @@ const JobApplicationPage = () => {
               </div>
 
               {/* Requirements */}
-              <div className="bg-[#EDE8E9] rounded-xl shadow p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-pink-950 mb-6">
+              <div className="bg-[#e6f7f6] rounded-xl shadow p-6 md:p-8">
+                <h2 className="text-2xl font-bold text-stone-900 mb-6">
                   Requirements & Qualifications
                 </h2>
                 <ul className="space-y-3">
@@ -474,7 +469,7 @@ const JobApplicationPage = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                     >
-                      <CheckCircle className="w-5 h-5 text-red-900 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-[#01a9a0] flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 leading-relaxed">
                         {item}
                       </span>
@@ -492,9 +487,7 @@ const JobApplicationPage = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="bg-white rounded-xl shadow p-6 sticky top-8">
-                <h2 className="text-2xl font-bold text-pink-950 mb-6">
-                  Apply for this Position
-                </h2>
+                <h2 className="text-2xl font-bold text-stone-900 mb-6">Apply for this Position</h2>
 
                 {/* Status Messages */}
                 <AnimatePresence>
@@ -534,12 +527,12 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-[#01a9a0] transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
                         formData.fullName || focusedField === "fullName"
-                          ? "-translate-y-1/2 text-xs text-pink-950"
+                          ? "-translate-y-1/2 text-xs text-[#01a9a0]"
                           : "translate-y-3 text-base text-gray-500"
                       }`}
                     >
@@ -559,12 +552,12 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-[#01a9a0] transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
                         formData.email || focusedField === "email"
-                          ? "-translate-y-1/2 text-xs text-pink-950"
+                          ? "-translate-y-1/2 text-xs text-[#01a9a0]"
                           : "translate-y-3 text-base text-gray-500"
                       }`}
                     >
@@ -584,12 +577,12 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-[#01a9a0] transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
                         formData.phone || focusedField === "phone"
-                          ? "-translate-y-1/2 text-xs text-pink-950"
+                          ? "-translate-y-1/2 text-xs text-[#01a9a0]"
                           : "translate-y-3 text-base text-gray-500"
                       }`}
                     >
@@ -609,12 +602,12 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 bg-white rounded-lg border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-[#01a9a0] transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
                         formData.experience || focusedField === "experience"
-                          ? "-translate-y-1/2 text-xs text-pink-950"
+                          ? "-translate-y-1/2 text-xs text-[#01a9a0]"
                           : "translate-y-3 text-base text-gray-500"
                       }`}
                     >
@@ -628,7 +621,7 @@ const JobApplicationPage = () => {
                       Upload CV/Resume *
                     </label>
                     {!formData.cv ? (
-                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-red-900 transition-colors bg-white hover:bg-gray-50">
+                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#01a9a0] transition-colors bg-white hover:bg-gray-50">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <Upload className="w-8 h-8 text-gray-400 mb-2" />
                           <p className="text-sm text-gray-600 text-center">
@@ -653,7 +646,7 @@ const JobApplicationPage = () => {
                     ) : (
                       <div className="flex items-center justify-between p-4 bg-white border border-gray-300 rounded-lg">
                         <div className="flex items-center gap-3">
-                          <FileText className="w-5 h-5 text-red-900" />
+                          <FileText className="w-5 h-5 text-[#01a9a0]" />
                           <div>
                             <p className="text-sm font-medium text-gray-900">
                               {formData.cv.name}
@@ -669,7 +662,7 @@ const JobApplicationPage = () => {
                           disabled={isSubmitting}
                           className="p-1 hover:bg-red-100 rounded-full transition-colors disabled:opacity-50"
                         >
-                          <X className="w-5 h-5 text-red-900" />
+                          <X className="w-5 h-5 text-[#01a9a0]" />
                         </button>
                       </div>
                     )}
@@ -686,12 +679,12 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       rows={4}
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-pink-950 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none focus:border-[#01a9a0] transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg"
                     />
                     <label
                       className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
                         formData.coverLetter || focusedField === "coverLetter"
-                          ? "-translate-y-1/2 text-xs text-pink-950"
+                          ? "-translate-y-1/2 text-xs text-[#01a9a0]"
                           : "translate-y-3 text-base text-gray-500"
                       }`}
                     >
@@ -703,7 +696,7 @@ const JobApplicationPage = () => {
                   <motion.button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-pink-900 hover:bg-pink-950 disabled:bg-red-300 text-white font-bold rounded-full transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg shadow-lg"
+                    className="w-full py-4 bg-[#01a9a0] hover:bg-[#009e90] disabled:bg-[#01a9a0]/50 text-white font-bold rounded-full transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg shadow-lg"
                     whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   >

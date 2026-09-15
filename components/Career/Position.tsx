@@ -71,7 +71,7 @@ const Position = () => {
           {jobPositions.map((job) => (
             <div
               key={job.id}
-              className="bg-[#10b981]/10 shadow rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6"
+              className="bg-[#01a9a0]/10 shadow rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6"
             >
               {/* Company Logo/Icon */}
               <div className="flex-shrink-0">
