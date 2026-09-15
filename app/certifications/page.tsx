@@ -132,24 +132,79 @@ export default function CertificationsPage() {
             ))}
           </div>
 
-          {/* ── Bottom trust bar ────────────────────────────────── */}
-          <div className="mt-16 sm:mt-20 bg-gradient-to-r from-[#01a9a0] to-[#009e90] rounded-2xl px-8 py-10 sm:px-12 sm:py-12 flex flex-col sm:flex-row items-center justify-between gap-6 text-white">
-            <div className="text-center sm:text-left">
-              <h3 className="text-xl sm:text-2xl font-extrabold leading-snug">
-                {isArabic ? "هل تريد التحقق من اعتماداتنا؟" : "Want to verify our accreditations?"}
-              </h3>
-              <p className="text-sm text-white/80 mt-1.5 max-w-lg">
-                {isArabic
-                  ? "تواصل مع فريقنا للحصول على نسخ من شهاداتنا أو لمناقشة متطلبات مشروعك."
-                  : "Contact our team to receive copies of our certificates or to discuss your project compliance requirements."}
-              </p>
+          {/* ── Bottom Company Profile Banner ───────────────────── */}
+          <div className="mt-16 sm:mt-20 relative rounded-2xl overflow-hidden bg-[#e8faf8]"
+            style={{ minHeight: "160px" }}
+          >
+            {/* Layout: left content + right image */}
+            <div className="flex flex-col lg:flex-row items-stretch">
+
+              {/* LEFT: content */}
+              <div className="flex-1 flex flex-col justify-center px-7 sm:px-10 py-8 sm:py-10 z-10">
+                {/* Eyebrow */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="inline-block h-[2px] w-6 bg-[#01a9a0] rounded-full" />
+                  <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
+                    {isArabic ? "ملف الشركة" : "COMPANY PROFILE"}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed mb-6 max-w-sm">
+                  {isArabic
+                    ? "اكتشف خبرتنا وخدماتنا والتزامنا ببناء غدٍ أكثر أماناً وقوة."
+                    : "Discover our expertise, services and commitment to building a safer, stronger tomorrow."}
+                </p>
+
+                {/* PDF badge + Download button — same row */}
+                <div className="flex flex-wrap items-center gap-3">
+                  {/* PDF file badge */}
+                  <div className="flex items-center gap-2.5 bg-white border border-stone-200 rounded-xl px-3.5 py-2.5 shadow-sm">
+                    <Image
+                      src="/certifications/logos/Custom Teal PDF File Badge.svg"
+                      alt="PDF"
+                      width={36}
+                      height={36}
+                      className="w-9 h-9 object-contain flex-shrink-0"
+                    />
+                    <div className="flex flex-col leading-tight">
+                      <span className="text-[12px] font-bold text-stone-800 whitespace-nowrap">
+                        {isArabic ? "ملف الشركة" : "Company Profile"}
+                      </span>
+                      <span className="text-[10px] text-stone-400 font-medium">12.4 MB</span>
+                    </div>
+                  </div>
+
+                  {/* Download button */}
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-[#01a9a0] hover:bg-[#009e90] active:scale-95 text-white font-bold text-sm px-5 py-3 rounded-full transition-all duration-200 shadow-md whitespace-nowrap cursor-pointer"
+                  >
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    {isArabic ? "تحميل الملف" : "Download Profile"}
+                    <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* RIGHT: image — hidden on mobile, shows on lg+ */}
+              <div className="hidden lg:block relative w-[420px] xl:w-[480px] flex-shrink-0">
+                <Image
+                  src="/certifications/logos/e500da08-f078-4dec-a716-760cf969e80b (1) 1.png"
+                  alt="Company building"
+                  fill
+                  unoptimized
+                  className="object-cover object-center"
+                />
+                {/* Left fade to blend with teal bg */}
+                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#e8faf8] to-transparent pointer-events-none" />
+              </div>
+
             </div>
-            <a
-              href="/contact"
-              className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-[#01a9a0] font-bold text-sm px-7 py-3.5 rounded-full hover:bg-stone-50 transition-colors duration-200 shadow-md whitespace-nowrap"
-            >
-              {isArabic ? "تواصل معنا" : "Contact Us"}
-            </a>
           </div>
 
         </div>
