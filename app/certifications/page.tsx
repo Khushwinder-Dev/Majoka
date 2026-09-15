@@ -8,7 +8,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const certifications = [
   {
     id: 1,
-    logo: "/certifications/logos/Overlay+Border (1).png",
+    logo: "/certifications/logos/cert-logo-1.png",
     icon: "/certifications/logos/SVG - Globe Icon.svg",
     titleEn: "Dubai Municipality DM Approved",
     titleAr: "معتمد من بلدية دبي",
@@ -19,7 +19,7 @@ const certifications = [
   },
   {
     id: 2,
-    logo: "/certifications/logos/Overlay+Border (2).png",
+    logo: "/certifications/logos/cert-logo-2.png",
     icon: "/certifications/logos/SVG - Badge Icon.svg",
     titleEn: "DGL-Approved Products",
     titleAr: "منتجات معتمدة من DGL",
@@ -30,7 +30,7 @@ const certifications = [
   },
   {
     id: 3,
-    logo: "/certifications/logos/Overlay+Border (3).png",
+    logo: "/certifications/logos/cert-logo-3.png",
     icon: "/certifications/logos/SVG - Shield Icon.svg",
     titleEn: "WRAS Certified Products",
     titleAr: "منتجات معتمدة من WRAS",
