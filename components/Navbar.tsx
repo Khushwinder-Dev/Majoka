@@ -405,7 +405,7 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       className={`inline-flex items-center gap-1 font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${
-                        active ? "text-[#00c2b2] font-bold" : "text-[#01a9a0]"
+                        active ? "text-[#00c2b2] font-bold" : "text-white"
                       } hover:text-[#00c2b2]`}
                       onClick={() => setActiveMega(null)}
                     >
