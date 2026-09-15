@@ -130,7 +130,7 @@ export default function ExperienceSection() {
             {/* Image Container with rounded top and soft elevation */}
             <div className="relative w-full max-w-[380px] lg:max-w-none h-[380px] sm:h-[440px] md:h-[470px] rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.12)] group bg-stone-100">
               <Image
-                src="/media/img001.png"
+                src="/hs5img1.png"
                 alt={isArabic ? "مهندسون واستشاريون في الموقع" : "Engineers reviewing project blueprints"}
                 fill
                 unoptimized

@@ -148,7 +148,7 @@ export default function IndustriesSection() {
           >
             <div className="relative w-full max-w-[360px] lg:max-w-none h-[420px] sm:h-[480px] md:h-[520px] rounded-[30px] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.12)] group bg-stone-100">
               <Image
-                src="/media/Img0002.png"
+                src="hs7img1.png"
                 alt={
                   isArabic
                     ? "مهندسون ومستشارون في قطاع المقاولات"

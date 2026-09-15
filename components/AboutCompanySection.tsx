@@ -86,7 +86,7 @@ export default function AboutCompanySection() {
           <div className="md:col-span-1 lg:col-span-4 flex flex-col">
             <div className="relative w-full h-[400px] sm:h-[460px] lg:h-[490px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-15px_rgba(0,0,0,0.25)] group bg-stone-100">
               <Image
-                src="/about-us/company-workers.png"
+                src="/hs2Img2.png"
                 alt={isArabic ? "مهندسون وعمال شركة تاج الرحمة" : "Taj Al Rahmah site engineers and workers"}
                 fill
                 unoptimized
@@ -148,9 +148,9 @@ export default function AboutCompanySection() {
               ------------------------------------------------------------ */}
           <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col justify-between">
             {/* Top Image with Attached Experience Badge */}
-            <div className="relative w-full h-[240px] sm:h-[280px] lg:h-[270px] xl:h-[290px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-15px_rgba(0,0,0,0.25)] group bg-stone-100">
+            <div className="relative w-full h-[240px] sm:h-[320px] lg:h-[380px] xl:h-[395] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_10px_35px_-15px_rgba(0,0,0,0.25)] group bg-stone-100">
               <Image
-                src="/unnamed.png"
+                src="/hs2Img1.png"
                 alt={isArabic ? "فريق تاج الرحمة في العمل" : "Taj Al Rahmah team applying floor coating"}
                 fill
                 unoptimized
