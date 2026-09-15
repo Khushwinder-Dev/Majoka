@@ -10,7 +10,7 @@ export default function ProjectsHero() {
 
   return (
     <section
-      className="relative w-full min-h-[100svh] overflow-hidden bg-[#01161c]"
+      className="relative w-full h-[400px] overflow-hidden bg-[#01161c]"
       dir={isArabic ? "rtl" : "ltr"}
     >
       <div className="absolute inset-0">
@@ -43,8 +43,8 @@ export default function ProjectsHero() {
         }}
       />
 
-      <div className="relative z-10 flex min-h-[100svh] items-center">
-        <div className="w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14 2xl:px-16 pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <div className="relative z-10 flex h-[400px] items-center">
+        <div className="w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-14 2xl:px-16">
           <div className="max-w-[640px] lg:max-w-[720px]">
             <div className="flex items-center gap-2.5 sm:gap-3 mb-4 sm:mb-5">
               <span className="inline-block h-[2px] w-7 sm:w-9 bg-[#00c4b4] rounded-full shrink-0" />

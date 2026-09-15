@@ -123,11 +123,11 @@ export default function ProtectionServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-14 gap-x-6 lg:gap-x-8">
           {services.map((service, index) => (
             <Link
+            key={service.id}
               href={service.link}
               className=""
             >
-              <div
-                key={service.id}
+              <div                
                 data-aos="fade-up"
                 data-aos-delay={100 + index * 50}
                 className="group flex flex-col cursor-pointer"
