@@ -144,21 +144,21 @@ export default function CertificationsPage() {
               className="object-cover object-right-center"
             />
 
-            {/* Left overlay so text stays readable */}
-            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent pointer-events-none" />
+            {/* Left overlay — lighter so image teal shows through */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-white/30 to-transparent pointer-events-none" />
 
             {/* Content — sits on top */}
             <div className="relative z-10 flex flex-col justify-center px-7 sm:px-10 py-8 sm:py-10 max-w-lg">
               {/* Eyebrow */}
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-block h-[2px] w-6 bg-[#01a9a0] rounded-full" />
-                <span className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
+                <span className="text-[16px] font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
                   {isArabic ? "ملف الشركة" : "COMPANY PROFILE"}
                 </span>
               </div>
 
               {/* Description */}
-              <p className="text-sm sm:text-[15px] text-stone-700 leading-relaxed mb-6 max-w-xs">
+              <p className="text-sm sm:text-[15px] text-stone-800 leading-relaxed mb-6 max-w-xs font-medium">
                 {isArabic
                   ? "اكتشف خبرتنا وخدماتنا والتزامنا ببناء غدٍ أكثر أماناً وقوة."
                   : "Discover our expertise, services and commitment to building a safer, stronger tomorrow."}
