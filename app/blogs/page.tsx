@@ -476,7 +476,7 @@ const News = () => {
         </div>
       </div>
 
-      <Stats />
+      {/* <Stats /> */}
     </div>
   );
 };
