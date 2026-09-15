@@ -134,7 +134,7 @@ export default function WelcomeOfferModal() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-black text-black tracking-tight leading-[1.12] mb-3 sm:mb-4 uppercase">
+          <h2 className="text-base sm:text-3xl lg:text-[34px] xl:text-[38px] font-black text-black tracking-tight leading-[1.12] mb-2 sm:mb-4 uppercase">
             {isArabic ? (
               <>
                 اشترك واحصل على <br />
