@@ -587,24 +587,54 @@ function ServicesContent() {
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
-                  placeholder={isArabic ? "الاسم الكامل" : "Full Name"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-                <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
-                  placeholder={isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                {/* Full Name */}
+                <div className="relative">
+                  <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
+                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    {isArabic ? "الاسم الكامل" : "Full Name"}
+                  </label>
+                </div>
+                {/* Email */}
+                <div className="relative">
+                  <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
+                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    {isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
+                  </label>
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-                <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
-                  placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
-                <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
-                  placeholder={isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                {/* Phone */}
+                <div className="relative">
+                  <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
+                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    {isArabic ? "رقم الهاتف" : "Phone Number"}
+                  </label>
+                </div>
+                {/* Subject */}
+                <div className="relative">
+                  <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
+                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.subject ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    {isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
+                  </label>
+                </div>
               </div>
-              <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
-                placeholder={isArabic ? "الرسالة والتفاصيل" : "Message and details"}
-                className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y ${isArabic ? "text-right" : "text-left"}`} />
+              {/* Message */}
+              <div className="relative">
+                <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
+                  placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                  className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.message ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                  {isArabic ? "الرسالة والتفاصيل" : "Message and details"}
+                </label>
+              </div>
               <div className="flex justify-center pt-2 sm:pt-4">
                 <button type="submit" disabled={isSubmitting}
                   className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-[15px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed">
