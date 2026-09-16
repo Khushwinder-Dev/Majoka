@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
-import { ChevronRight, ChevronDown, MessageCircle, Phone, ArrowLeft } from "lucide-react";
+import { ChevronRight, ChevronDown, ChevronLeft, MessageCircle, Phone, ArrowLeft } from "lucide-react";
 import toast from "react-hot-toast";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
 import { ServiceIcon } from "@/components/ServiceIcon";
@@ -141,6 +141,102 @@ const SERVICES_FAQS = [
   },
 ];
 
+/* ─── BANNER SLIDER ───────────────────────────────────────────── */
+const SLIDER_IMAGES = [
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/whatsapp-image-2025-12-21-at-10-54-34-pm-standard-p2j3we.webp",       titleEn: "GRP & Fiberglass Waterproofing",    titleAr: "عزل GRP والألياف الزجاجية" },
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/banner/combo-roof-waterproof-standard-qz7u78.webp",                             titleEn: "Combo System Roof Waterproofing",   titleAr: "نظام الكومبو للأسطح" },
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/banner/003e96cf-5d33-4dff-98bf-74477b9228b3-standard.webp",              titleEn: "Epoxy Floor Coating",               titleAr: "طلاء أرضيات الإيبوكسي" },
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/banner/alevli-yalitim-uygulamasi-standard-amwtjn.webp",                    titleEn: "Bitumen Membrane Waterproofing",    titleAr: "عزل الغشاء البيتوميني" },
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/banner/what-is-polyurea-coatings-newtec-group-standard-ewgzkt.webp",        titleEn: "Polyurea Coating Waterproofing",    titleAr: "عزل البولي يوريا" },
+  { src: "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/banner/images-25-standard.webp",                                    titleEn: "Injection Waterproofing",           titleAr: "عزل الحقن المائي" },
+];
+
+function BannerSlider() {
+  const { isArabic } = useLanguage();
+  const [current, setCurrent] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const total = SLIDER_IMAGES.length;
+
+  const goTo = (index: number) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrent((index + total) % total);
+    setTimeout(() => setIsTransitioning(false), 600);
+  };
+
+  const startTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4500);
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, []);
+
+  const handlePrev = () => { goTo(current - 1); startTimer(); };
+  const handleNext = () => { goTo(current + 1); startTimer(); };
+
+  return (
+    <div className="relative w-full h-[220px] sm:h-[280px] md:h-[420px] overflow-hidden bg-[#0b2447] group">
+      {/* Slides */}
+      {SLIDER_IMAGES.map((slide, i) => (
+        <div
+          key={i}
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+        >
+          <Image
+            src={slide.src}
+            alt={isArabic ? slide.titleAr : slide.titleEn}
+            fill
+            unoptimized
+            className="object-cover object-center"
+            priority={i === 0}
+          />
+          <div className="absolute inset-0 bg-black/55" />
+          {/* Slide text */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight drop-shadow">
+              {isArabic ? slide.titleAr : slide.titleEn}
+            </h1>
+          </div>
+        </div>
+      ))}
+
+      {/* Prev / Next arrows */}
+      <button
+        onClick={handlePrev}
+        aria-label="Previous slide"
+        className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#009e90] text-white flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={handleNext}
+        aria-label="Next slide"
+        className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#009e90] text-white flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {SLIDER_IMAGES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { goTo(i); startTimer(); }}
+            aria-label={`Go to slide ${i + 1}`}
+            className={`rounded-full transition-all duration-300 cursor-pointer ${i === current ? "w-6 h-2 bg-[#009e90]" : "w-2 h-2 bg-white/50 hover:bg-white/80"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ─── INNER CONTENT (needs useSearchParams) ───────────────────── */
 function ServicesContent() {
   const router = useRouter();
@@ -255,24 +351,8 @@ function ServicesContent() {
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
-      {/* ══ HERO BANNER ══════════════════════════════════════════ */}
-      <div className="relative w-full h-[220px] sm:h-[260px] md:h-[400px] overflow-hidden bg-[#0b2447]">
-        <SmartImage src={heroBanner} alt={heroTitle} fallbackSrc={DEFAULT_BANNER} priority className="object-cover object-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
-          {/* <p className="text-[11px] sm:text-[12px] font-bold tracking-[0.2em] uppercase text-[#009e90]">
-            {isArabic ? "شركة تاج الرحمة للمقاولات" : "Taj Al Rahmah Contracting"}
-          </p> */}
-          <h1 className="text-2xl sm:text-[32px] md:text-4xl font-extrabold text-white leading-tight drop-shadow">
-            {heroTitle}
-          </h1>
-          {heroTagline && (
-            <p className="text-sm sm:text-[15px] text-white/85 max-w-xl leading-relaxed line-clamp-2">
-              {heroTagline}
-            </p>
-          )}
-        </div>
-      </div>
+      {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
+      <BannerSlider />
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 bg-[#f4f6f8]">
