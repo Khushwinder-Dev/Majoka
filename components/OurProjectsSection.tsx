@@ -46,8 +46,8 @@ export default function OurProjectsSection() {
   const projects = [
     {
       id: 1,
-      image: "/media/Images/section5/Rectangle 34624981 (1).png",
-      title: isArabic ? "محطة مترو دبي" : "Dubai Metro Station",
+      image: "/projects/imgs/1.jpeg",
+      title: isArabic ? "محطة مترو دبي" : "Miami-1 @JVC by Samana Developers",
       category: isArabic
         ? "مشاريع البنية التحتية والنقل الكبرى والتطوير الحضري"
         : "Major Transportation Infrastructure & Development Projects",
@@ -55,8 +55,8 @@ export default function OurProjectsSection() {
     },
     {
       id: 2,
-      image: "/media/Images/section5/Rectangle 34624981 (2).png",
-      title: isArabic ? "برج مستشفى المدينة" : "City Hospital Tower",
+      image: "/projects/imgs/2.jpeg",
+      title: isArabic ? "برج مستشفى المدينة" : "Miami Phase 2 @JVT",
       category: isArabic
         ? "المستشفيات والعيادات والمرافق الطبية المتخصصة"
         : "Hospitals, Clinics & Specialized Healthcare Facilities",
@@ -64,8 +64,8 @@ export default function OurProjectsSection() {
     },
     {
       id: 3,
-      image: "/media/Images/section5/Rectangle 34624981 (3).png",
-      title: isArabic ? "فلل نخلة جميرا الفاخرة" : "Palm Jumeirah Villa",
+      image: "/projects/imgs/3.jpg",
+      title: isArabic ? "فلل نخلة جميرا الفاخرة" : "City Premiere Marina Hotel Apartments",
       category: isArabic
         ? "الفلل الفاخرة والمنازل الخاصة والمجمعات السكنية الراقية"
         : "Luxury Villas, Private Homes & Residential Developments",
@@ -73,8 +73,8 @@ export default function OurProjectsSection() {
     },
     {
       id: 4,
-      image: "/media/Images/section5/Rectangle 34624981 (4).png",
-      title: isArabic ? "فلل نخلة جميرا ريزيدنس" : "Palm Jumeirah Villa",
+      image: "/projects/imgs/4.jpg",
+      title: isArabic ? "فلل نخلة جميرا ريزيدنس" : "NED® Al Ghurair | Al Furjan South Villas",
       category: isArabic
         ? "الفلل الفاخرة والمنازل الخاصة والمجمعات السكنية الراقية"
         : "Luxury Villas, Private Homes & Residential Developments",
@@ -82,8 +82,8 @@ export default function OurProjectsSection() {
     },
     {
       id: 5,
-      image: "/media/Images/section5/Rectangle 34624981 (2).png",
-      title: isArabic ? "أبراج الخليج التجارية" : "Gulf Business Center",
+      image: "/projects/imgs/5.webp",
+      title: isArabic ? "أبراج الخليج التجارية" : "Dubai Hills Estate or Arabian Ranches",
       category: isArabic
         ? "الأبراج التجارية والمكاتب الذكية ومجمعات الأعمال الكبرى"
         : "Smart Commercial Towers & Corporate Headquarters",
@@ -91,8 +91,8 @@ export default function OurProjectsSection() {
     },
     {
       id: 6,
-      image: "/media/Images/section5/Rectangle 34624981 (3).png",
-      title: isArabic ? "منتجع الواجهة البحرية" : "Waterfront Luxury Resort",
+      image: "/projects/imgs/6.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Dubai Hills Estate",
       category: isArabic
         ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
         : "International Hospitality & High-End Coastal Resorts",
@@ -262,7 +262,7 @@ export default function OurProjectsSection() {
 
                     {/* Project Subtitle / Category */}
                     <p
-                      className={`text-xs sm:text-[13px] text-stone-500 font-normal leading-[1.6] line-clamp-2 ${isArabic ? "pl-9" : "pr-9"
+                      className={`hidden text-xs sm:text-[13px] text-stone-500 font-normal leading-[1.6] line-clamp-2 ${isArabic ? "pl-9" : "pr-9"
                         }`}
                     >
                       {project.category}
@@ -283,7 +283,7 @@ export default function OurProjectsSection() {
 
                     {/* Circular Teal Arrow Button nestled inside the scooped corner */}
                     <div
-                      className={`absolute bottom-2.5 ${isArabic ? "left-2.5" : "right-2.5"
+                      className={`absolute top-12 bottom-2.5 ${isArabic ? "left-2.5" : "right-2.5"
                         } z-20 w-10 h-10 rounded-full bg-[#009e90] group-hover:bg-[#01887e] text-white flex items-center justify-center shadow-[0_4px_12px_rgba(0,158,144,0.35)] group-hover:scale-110 transition-all duration-300`}
                     >
                       <ArrowUpRight
