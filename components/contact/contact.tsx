@@ -373,7 +373,7 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.fullName || focusedField === "fullName"
+                    className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
                       ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                       : "top-3.5 text-sm text-stone-400"
                       }`}
@@ -397,7 +397,7 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.phone || focusedField === "phone"
+                    className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
                       ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                       : "top-3.5 text-sm text-stone-400"
                       }`}
@@ -421,7 +421,7 @@ export default function ContactPage() {
                     className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.email || focusedField === "email"
+                    className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
                       ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                       : "top-3.5 text-sm text-stone-400"
                       }`}
@@ -444,7 +444,7 @@ export default function ContactPage() {
                     className="w-full h-full min-h-[120px] px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.message || focusedField === "message"
+                    className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
                       ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                       : "top-3.5 text-sm text-stone-400"
                       }`}

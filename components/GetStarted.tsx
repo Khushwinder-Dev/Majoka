@@ -282,7 +282,7 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.fullName || focusedField === "fullName"
+                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -306,7 +306,7 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.phone || focusedField === "phone"
+                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -330,7 +330,7 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.email || focusedField === "email"
+                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -390,7 +390,7 @@ const GetStarted = () => {
                     className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 top-0 px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${formData.message || focusedField === "message"
+                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}

@@ -530,7 +530,7 @@ const JobApplicationPage = () => {
                       className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
+                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.fullName || focusedField === "fullName"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -555,7 +555,7 @@ const JobApplicationPage = () => {
                       className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
+                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.email || focusedField === "email"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -580,7 +580,7 @@ const JobApplicationPage = () => {
                       className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
+                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.phone || focusedField === "phone"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -605,7 +605,7 @@ const JobApplicationPage = () => {
                       className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
+                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.experience || focusedField === "experience"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -682,7 +682,7 @@ const JobApplicationPage = () => {
                       className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 top-0 bg-white px-1 transition-all duration-200 pointer-events-none font-['Anek_Malayalam'] ${
+                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.coverLetter || focusedField === "coverLetter"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
