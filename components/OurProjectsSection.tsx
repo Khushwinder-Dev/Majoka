@@ -92,13 +92,60 @@ export default function OurProjectsSection() {
     {
       id: 6,
       image: "/projects/imgs/6.jpg",
-      title: isArabic ? "منتجع الواجهة البحرية" : "Dubai Hills Estate",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Dubai Hills Estate – Emaar Community Management",
       category: isArabic
         ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
         : "International Hospitality & High-End Coastal Resorts",
       link: "/projects",
-    },
-  ];
+    },{
+      id: 7,
+      image: "/projects/imgs/7.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Housing Solutions | Domus Managed Housing | United Arab Emirates",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    },{
+      id: 8,
+      image: "/projects/imgs/8.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Investing in Dubai Production City",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    },{
+      id: 9,
+      image: "/projects/imgs/9.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Al Furjan Villas - Key Capital Properties",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    },{
+      id: 10,
+      image: "/projects/imgs/6.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Tilal Al Furjan - Latest Handover",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    },{
+      id: 11,
+      image: "/projects/imgs/11.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Tilal Al Furjan Phase 1 Site Progress",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    },{
+      id: 12,
+      image: "/projects/imgs/12.jpg",
+      title: isArabic ? "منتجع الواجهة البحرية" : "Tilal Al Furjan - Latest Handover",
+      category: isArabic
+        ? "الفنادق العالمية والمنتجعات الفاخرة ومشاريع الضيافة"
+        : "International Hospitality & High-End Coastal Resorts",
+      link: "/projects",
+    }];
 
   const updateScrollButtons = () => {
     if (scrollContainerRef.current) {
