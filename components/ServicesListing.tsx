@@ -366,7 +366,8 @@ function ServicesContent() {
             <nav className="flex flex-col gap-1.5">
 
               {/* ── 1. Waterproofing — always on top ── */}
-              {services.filter((svc) => svc.serviceSlug === "waterproofing").map((svc) => {
+               {services.filter((svc) => svc.serviceSlug === "waterproofing" || svc.serviceSlug === "swimming-pools").map((svc) => {
+             
                 const isActive = svc.serviceSlug === activeService.serviceSlug;
                 const hasSubs = Boolean(svc.subservices && svc.subservices.length > 0);
                 const isOpen = openServiceSlug === svc.serviceSlug;
@@ -427,7 +428,7 @@ function ServicesContent() {
 
                 {isOtherOpen && (
                   <div className={`mt-1.5 mb-2 flex flex-col gap-1 py-1 ${isArabic ? "pr-3 mr-3 border-r-2" : "pl-3 ml-3 border-l-2"} border-[#009e90]/30`}>
-                    {services.filter((svc) => svc.serviceSlug !== "waterproofing").map((svc) => {
+                    {services.filter((svc) => svc.serviceSlug !== "waterproofing" && svc.serviceSlug !== "swimming-pools").map((svc) => {
                       const isActive = svc.serviceSlug === activeService.serviceSlug;
                       const hasSubs = Boolean(svc.subservices && svc.subservices.length > 0);
                       const isExpanded = otherExpandedSlug === svc.serviceSlug;
