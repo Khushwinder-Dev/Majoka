@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
+import GallerySlider from "@/components/ui/GallerySlider";
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
@@ -233,20 +234,9 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
         )
       )}
 
-      {/* ── 4. GALLERY GRID ───────────────────────────────────── */}
+      {/* ── 4. GALLERY SLIDER ─────────────────────────────────── */}
       {gallery.length > 0 && (
-        <section className="mb-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
-            {gallery.map((src, i) => (
-              <div
-                key={i}
-                className="relative aspect-square overflow-hidden bg-stone-100"
-              >
-                <SmartImg src={src} alt={`${sub.serviceTitle} ${i + 1}`} />
-              </div>
-            ))}
-          </div>
-        </section>
+        <GallerySlider images={gallery} title={isArabic ? "معرض الصور" : "Gallery"} maxImages={6} />
       )}
 
 

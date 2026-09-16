@@ -22,6 +22,7 @@ import {
   Award,
 } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
+import GallerySlider from "@/components/ui/GallerySlider";
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
@@ -225,35 +226,9 @@ export default function TemplateC({ service, sub, isArabic }: Props) {
         </section>
       )}
 
-      {/* ── 7. GALLERY — masonry-style (3-col varying heights) ── */}
+      {/* ── 7. GALLERY SLIDER ─────────────────────────────────── */}
       {galleryImages.length > 0 && (
-        <section className="mb-12">
-          <h3 className="text-[18px] font-extrabold text-stone-900 mb-5">
-            {isArabic ? "معرض الأعمال" : "Our Work"}
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {galleryImages.slice(0, 6).map((src, i) => (
-              <div
-                key={i}
-                className={`relative overflow-hidden rounded-xl bg-stone-100 shadow-xs ${
-                  i === 0 ? "row-span-2 aspect-[3/4]" : "aspect-square"
-                }`}
-              >
-                <Img src={src} alt={`${sub.serviceTitle} gallery ${i + 1}`} />
-              </div>
-            ))}
-          </div>
-          {/* Show remaining in a row if > 6 */}
-          {galleryImages.length > 6 && (
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-3">
-              {galleryImages.slice(6).map((src, i) => (
-                <div key={i} className="relative aspect-square rounded-xl overflow-hidden bg-stone-100 shadow-xs">
-                  <Img src={src} alt={`Gallery extra ${i + 1}`} />
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+        <GallerySlider images={galleryImages} title={isArabic ? "معرض الصور" : "Gallery"} maxImages={6} />
       )}
 
       {/* ── 8. BOTTOM CTA ──────────────────────────────────────── */}
