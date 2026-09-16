@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
@@ -16,6 +16,7 @@ import {
   TemplateC,
   getTemplateKey,
 } from "@/components/service-templates";
+import { BannerSlider } from "@/components/ServiceBanners";
 
 /* ─── ASSETS ──────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/banners/Services_.png";
@@ -141,94 +142,7 @@ const SERVICES_FAQS = [
   },
 ];
 
-/* ─── BANNER SLIDER ───────────────────────────────────────────── */
-function BannerSlider({ images, title }: { images: string[]; title: string }) {
-  const [current, setCurrent] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const total = images.length;
 
-  // Reset to first slide whenever the image list changes (service switched)
-  useEffect(() => {
-    setCurrent(0);
-  }, [images]);
-
-  const goTo = (index: number) => {
-    if (isTransitioning || total === 0) return;
-    setIsTransitioning(true);
-    setCurrent((index + total) % total);
-    setTimeout(() => setIsTransitioning(false), 600);
-  };
-
-  const startTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % total);
-    }, 4500);
-  };
-
-  useEffect(() => {
-    if (total === 0) return;
-    startTimer();
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [images]);
-
-  const handlePrev = () => { goTo(current - 1); startTimer(); };
-  const handleNext = () => { goTo(current + 1); startTimer(); };
-
-  if (total === 0) return (
-    <div className="relative w-full h-[220px] sm:h-[280px] md:h-[420px] bg-[#0b2447] flex items-center justify-center">
-      <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow text-center px-4">{title}</h1>
-    </div>
-  );
-
-  return (
-    <div className="relative w-full h-[220px] sm:h-[280px] md:h-[420px] overflow-hidden bg-[#0b2447] group">
-      {/* Slides */}
-      {images.map((src, i) => (
-        <div
-          key={`${src}-${i}`}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${i === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
-        >
-          <Image
-            src={src}
-            alt={title}
-            fill
-            unoptimized
-            className="object-cover object-center"
-            priority={i === 0}
-          />
-          <div className="absolute inset-0 bg-black/55" />
-          {/* Service title overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3">
-            <h1 className="text-xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight drop-shadow">
-              {title}
-            </h1>
-          </div>
-        </div>
-      ))}
-
-      {/* Prev / Next */}
-      <button onClick={handlePrev} aria-label="Previous slide"
-        className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#009e90] text-white flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer">
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button onClick={handleNext} aria-label="Next slide"
-        className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#009e90] text-white flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer">
-        <ChevronRight className="w-5 h-5" />
-      </button>
-
-      {/* Dot indicators */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {images.map((_, i) => (
-          <button key={i} onClick={() => { goTo(i); startTimer(); }} aria-label={`Go to slide ${i + 1}`}
-            className={`rounded-full transition-all duration-300 cursor-pointer ${i === current ? "w-6 h-2 bg-[#009e90]" : "w-2 h-2 bg-white/50 hover:bg-white/80"}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ─── INNER CONTENT (needs useSearchParams) ───────────────────── */
 function ServicesContent() {
@@ -341,21 +255,43 @@ function ServicesContent() {
     }
   };
 
+  // Banner slides: All services on service page, single sub-service banner on service details
+  const activeServiceIndex = Math.max(
+    0,
+    services.findIndex(
+      (s) =>
+        s.serviceNumber === activeService.serviceNumber ||
+        s.serviceSlug.toLowerCase() === activeService.serviceSlug.toLowerCase()
+    )
+  );
+
+  const bannerSlides = activeSub
+    ? [
+        {
+          image:
+            activeSub.serviceBanner ||
+            activeSub.serviceImage ||
+            activeService.serviceBanner ||
+            DEFAULT_BANNER,
+          title: activeSub.serviceTitle,
+        },
+      ]
+    : services.map((svc) => ({
+        image: svc.serviceBanner || svc.serviceImage || DEFAULT_BANNER,
+        title: svc.serviceTitle,
+      }));
+
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
       <BannerSlider
-        images={
-          activeSub?.servicesgalaryImages?.length
-            ? activeSub.servicesgalaryImages
-            : activeService.servicesgalaryImages ?? []
-        }
-        title={heroTitle}
+        slides={bannerSlides}
+        initialIndex={!activeSub ? activeServiceIndex : 0}
       />
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 bg-[#f4f6f8]">
+      <div id="services-content-area" className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 bg-[#f4f6f8]">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
 
           {/* ── SIDEBAR ─────────────────────────────────────────── */}

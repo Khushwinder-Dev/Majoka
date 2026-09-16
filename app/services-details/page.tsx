@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
@@ -27,6 +27,7 @@ import {
   TemplateC,
   getTemplateKey,
 } from "@/components/service-templates";
+import { BannerSlider } from "@/components/ServiceBanners";
 
 /* ─── FALLBACKS ────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -276,46 +277,6 @@ function Sidebar({
   );
 }
 
-/* ─── HERO BANNER ──────────────────────────────────────────────── */
-function HeroBanner({
-  image,
-  title,
-  eyebrow,
-  tagline,
-}: {
-  image: string;
-  title: string;
-  eyebrow: string;
-  tagline: string;
-}) {
-  const [src, setSrc] = useState(image);
-  useEffect(() => { setSrc(image); }, [image]);
-  return (
-    <div className="relative w-full h-[240px] sm:h-[290px] md:h-[340px] overflow-hidden bg-[#0b2447]">
-      <Image
-        src={src}
-        alt={title}
-        fill
-        unoptimized
-        priority
-        className="object-cover object-center"
-        onError={() => { if (src !== DEFAULT_BANNER) setSrc(DEFAULT_BANNER); }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 gap-2 sm:gap-3 max-w-4xl mx-auto">
-        <p className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] uppercase text-[#009e90]">
-          {eyebrow}
-        </p>
-        <h1 className="text-[26px] sm:text-[34px] md:text-[42px] font-extrabold text-white leading-tight drop-shadow-md">
-          {title}
-        </h1>
-        <p className="text-[12px] sm:text-[14px] text-white/85 max-w-2xl leading-relaxed line-clamp-2">
-          {tagline}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 /* ─── SERVICE OVERVIEW (no ?sub) ───────────────────────────────── */
 function ServiceOverview({
@@ -466,20 +427,53 @@ function ServiceDetailsContent() {
     ? activeSub.shortDescription || activeSub.serviceContent
     : service.tagline;
 
-  /* Template selection */
+  const router = useRouter();
+
   const templateKey = activeSub
     ? getTemplateKey(service.serviceSlug, activeSub.serviceSlug)
     : null;
 
+  const goToService = (svc: ServiceItem) => {
+    router.push(`/services-details?service=${svc.serviceNumber}`);
+  };
+
+  const goBack = () => {
+    router.push(`/services-details?service=${service.serviceNumber}`);
+  };
+
+  // Banner slides: All services on service page, single sub-service banner on service details
+  const activeServiceIndex = Math.max(
+    0,
+    services.findIndex(
+      (s) =>
+        s.serviceNumber === service.serviceNumber ||
+        s.serviceSlug.toLowerCase() === service.serviceSlug.toLowerCase()
+    )
+  );
+
+  const bannerSlides = activeSub
+    ? [
+        {
+          image:
+            activeSub.serviceBanner ||
+            activeSub.serviceImage ||
+            service.serviceBanner ||
+            DEFAULT_BANNER,
+          title: activeSub.serviceTitle,
+        },
+      ]
+    : services.map((svc) => ({
+        image: svc.serviceBanner || svc.serviceImage || DEFAULT_BANNER,
+        title: svc.serviceTitle,
+      }));
+
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
-      {/* ── HERO BANNER ──────────────────────────────────────── */}
-      <HeroBanner
-        image={heroBanner}
-        title={heroTitle}
-        eyebrow={heroEyebrow}
-        tagline={heroTagline}
+      {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
+      <BannerSlider
+        slides={bannerSlides}
+        initialIndex={!activeSub ? activeServiceIndex : 0}
       />
 
       {/* ── BREADCRUMB ───────────────────────────────────────── */}
@@ -509,7 +503,7 @@ function ServiceDetailsContent() {
       </div> */}
 
       {/* ── BODY ─────────────────────────────────────────────── */}
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 bg-stone-50/70">
+      <div id="services-content-area" className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 bg-stone-50/70">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
 
           {/* Left sidebar */}

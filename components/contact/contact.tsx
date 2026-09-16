@@ -79,7 +79,7 @@ export default function ContactPage() {
       icon: Clock,
       title: "Office Hours",
       items: [
-        { text: "Mon - Sat: 8:00 AM - 9:00 PM" },
+        { text: "Mon - Sat: 9:00 AM - 6:00 PM" },
         { text: "Sunday - Closed", isAlert: true },
       ],
     },
@@ -283,9 +283,8 @@ export default function ContactPage() {
                           ) : (
                             <p
                               key={idx}
-                              className={`text-lg sm:text-xl font-bold leading-relaxed ${
-                                item.isAlert ? "text-gray-700" : "text-gray-700"
-                              }`}
+                              className={`text-lg sm:text-xl font-bold leading-relaxed ${item.isAlert ? "text-gray-700" : "text-gray-700"
+                                }`}
                             >
                               {item.text}
                             </p>
