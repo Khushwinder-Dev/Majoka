@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
@@ -828,7 +828,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, name: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -844,7 +844,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, email: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -859,7 +859,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, phone: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -874,7 +874,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, message: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-xs sm:text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all resize-none"
                 />
               </div>
 

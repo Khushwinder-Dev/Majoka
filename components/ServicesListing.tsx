@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useRef, Suspense } from "react";
 import Image from "next/image";
@@ -589,22 +589,22 @@ function ServicesContent() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
                   placeholder={isArabic ? "الاسم الكامل" : "Full Name"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
                 <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
                   placeholder={isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
                   placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
                 <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
                   placeholder={isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
-                  className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all ${isArabic ? "text-right" : "text-left"}`} />
+                  className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all ${isArabic ? "text-right" : "text-left"}`} />
               </div>
               <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
                 placeholder={isArabic ? "الرسالة والتفاصيل" : "Message and details"}
-                className={`w-full bg-white border border-stone-200/90 rounded-lg px-5 py-4 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#009e90] focus:ring-2 focus:ring-[#009e90]/15 transition-all resize-y ${isArabic ? "text-right" : "text-left"}`} />
+                className={`w-full bg-white border border-stone-200/90 rounded-xl px-4 py-3.5 text-stone-800 placeholder:text-stone-400 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y ${isArabic ? "text-right" : "text-left"}`} />
               <div className="flex justify-center pt-2 sm:pt-4">
                 <button type="submit" disabled={isSubmitting}
                   className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] active:scale-[0.98] text-white font-bold text-sm sm:text-[15px] px-10 py-3.5 rounded-full shadow-md shadow-[#009e90]/25 transition-all duration-200 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed">

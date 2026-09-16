@@ -30,24 +30,25 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         dir={isArabic ? "rtl" : "ltr"}
+        placeholder=" "
         className={`
-          peer w-full rounded-full
-          border bg-white/70 shadow-sm
-          px-5 pt-5 pb-2
-          text-sm text-stone-800
-          focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white
+          peer w-full rounded-xl border bg-white
+          px-4 pt-5 pb-2
+          text-sm sm:text-[15px] text-stone-800
+          focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200
-          ${lifted ? "border-[#009e90]" : "border-teal-500/40"}
+          ${lifted ? "border-[#01a9a0]" : "border-stone-300"}
+          ${isArabic ? "text-right" : "text-left"}
         `}
       />
       <label
         className={`
-          pointer-events-none absolute
-          ${isArabic ? "right-5" : "left-5"}
-          transition-all duration-200 origin-left
+          pointer-events-none absolute bg-white px-1
+          ${isArabic ? "right-4" : "left-4"}
+          transition-all duration-200
           ${lifted
-            ? "top-1.5 text-[10px] font-semibold text-[#009e90]"
-            : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400"
+            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+            : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
           }
         `}
       >
@@ -80,24 +81,25 @@ function FloatTextarea({ name, value, label, isArabic, onChange }: FloatTextarea
         onBlur={() => setFocused(false)}
         dir={isArabic ? "rtl" : "ltr"}
         rows={4}
+        placeholder=" "
         className={`
-          peer w-full rounded-3xl
-          border bg-white/70 shadow-sm
-          px-5 pt-7 pb-3
-          text-sm text-stone-800
-          focus:outline-none focus:ring-2 focus:ring-[#009e90] focus:bg-white
+          peer w-full rounded-xl border bg-white
+          px-4 pt-6 pb-2
+          text-sm sm:text-[15px] text-stone-800
+          focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200 resize-none h-32 sm:h-36
-          ${lifted ? "border-[#009e90]" : "border-teal-500/40"}
+          ${lifted ? "border-[#01a9a0]" : "border-stone-300"}
+          ${isArabic ? "text-right" : "text-left"}
         `}
       />
       <label
         className={`
-          pointer-events-none absolute
-          ${isArabic ? "right-5" : "left-5"}
+          pointer-events-none absolute bg-white px-1
+          ${isArabic ? "right-4" : "left-4"}
           transition-all duration-200
           ${lifted
-            ? "top-2 text-[10px] font-semibold text-[#009e90]"
-            : "top-4 text-xs sm:text-sm text-stone-400"
+            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+            : "top-4 text-sm text-stone-400"
           }
         `}
       >
