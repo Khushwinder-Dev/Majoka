@@ -135,7 +135,7 @@ export default function AboutCompanySection() {
                   <h3 className="text-base sm:text-lg font-extrabold text-stone-900 tracking-tight leading-snug group-hover:text-[#01a9a0] transition-colors duration-200">
                     {feature.title}
                   </h3>
-                  <p className="text-xs sm:text-[13px] text-stone-500 leading-relaxed mt-1 font-normal">
+                  <p className="text-sm sm:text-[15px] text-stone-500 leading-relaxed mt-1 font-normal">
                     {feature.description}
                   </p>
                 </div>
@@ -190,7 +190,7 @@ export default function AboutCompanySection() {
 
             {/* Bottom Paragraph & Action Button */}
             <div className="flex flex-col items-start mt-5 sm:mt-6">
-              <p className="text-xs sm:text-[13.5px] text-stone-600 leading-relaxed mb-6 font-normal">
+              <p className="text-sm sm:text-base text-stone-600 leading-relaxed mb-6 font-normal">
                 {isArabic
                   ? "نحدد السبب الجذري، ونختار النظام المناسب، وننفذ بدقة متناهية، ونجري اختبارات الجودة قبل التسليم."
                   : "We identify the root cause, select the right system, execute with precision, and conduct quality testing before handover."}
