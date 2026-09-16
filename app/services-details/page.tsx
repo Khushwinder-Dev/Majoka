@@ -441,16 +441,7 @@ function ServiceDetailsContent() {
     router.push(`/services-details?service=${service.serviceNumber}`);
   };
 
-  // Banner slides: All services on service page, single sub-service banner on service details
-  const activeServiceIndex = Math.max(
-    0,
-    services.findIndex(
-      (s) =>
-        s.serviceNumber === service.serviceNumber ||
-        s.serviceSlug.toLowerCase() === service.serviceSlug.toLowerCase()
-    )
-  );
-
+  // Banner slides: Sub-services of service on listing page, single sub-service banner on service details
   const bannerSlides = activeSub
     ? [
         {
@@ -462,10 +453,24 @@ function ServiceDetailsContent() {
           title: activeSub.serviceTitle,
         },
       ]
-    : services.map((svc) => ({
-        image: svc.serviceBanner || svc.serviceImage || DEFAULT_BANNER,
-        title: svc.serviceTitle,
-      }));
+    : (service.subservices && service.subservices.length > 0)
+    ? service.subservices.map((sub) => ({
+        image:
+          sub.serviceBanner ||
+          sub.serviceImage ||
+          service.serviceBanner ||
+          DEFAULT_BANNER,
+        title: sub.serviceTitle,
+      }))
+    : [
+        {
+          image:
+            service.serviceBanner ||
+            service.serviceImage ||
+            DEFAULT_BANNER,
+          title: service.serviceTitle,
+        },
+      ];
 
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
@@ -473,7 +478,7 @@ function ServiceDetailsContent() {
       {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
       <BannerSlider
         slides={bannerSlides}
-        initialIndex={!activeSub ? activeServiceIndex : 0}
+        initialIndex={0}
       />
 
       {/* ── BREADCRUMB ───────────────────────────────────────── */}

@@ -255,16 +255,7 @@ function ServicesContent() {
     }
   };
 
-  // Banner slides: All services on service page, single sub-service banner on service details
-  const activeServiceIndex = Math.max(
-    0,
-    services.findIndex(
-      (s) =>
-        s.serviceNumber === activeService.serviceNumber ||
-        s.serviceSlug.toLowerCase() === activeService.serviceSlug.toLowerCase()
-    )
-  );
-
+  // Banner slides: Sub-services of activeService on listing page, single sub-service banner on service details
   const bannerSlides = activeSub
     ? [
         {
@@ -276,10 +267,24 @@ function ServicesContent() {
           title: activeSub.serviceTitle,
         },
       ]
-    : services.map((svc) => ({
-        image: svc.serviceBanner || svc.serviceImage || DEFAULT_BANNER,
-        title: svc.serviceTitle,
-      }));
+    : (activeService.subservices && activeService.subservices.length > 0)
+    ? activeService.subservices.map((sub) => ({
+        image:
+          sub.serviceBanner ||
+          sub.serviceImage ||
+          activeService.serviceBanner ||
+          DEFAULT_BANNER,
+        title: sub.serviceTitle,
+      }))
+    : [
+        {
+          image:
+            activeService.serviceBanner ||
+            activeService.serviceImage ||
+            DEFAULT_BANNER,
+          title: activeService.serviceTitle,
+        },
+      ];
 
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
@@ -287,7 +292,7 @@ function ServicesContent() {
       {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
       <BannerSlider
         slides={bannerSlides}
-        initialIndex={!activeSub ? activeServiceIndex : 0}
+        initialIndex={0}
       />
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}
