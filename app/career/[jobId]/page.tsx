@@ -92,7 +92,7 @@ const JobApplicationPage = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "1-5 Years",
-      deadline: "14 November 2023",
+      deadline: "14 November 2026",
     },
     {
       id: 2,
@@ -122,7 +122,7 @@ const JobApplicationPage = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "1-5 Years",
-      deadline: "14 November 2023",
+      deadline: "14 November 2026",
     },
     {
       id: 3,
@@ -152,7 +152,7 @@ const JobApplicationPage = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "1-5 Years",
-      deadline: "14 November 2023",
+      deadline: "14 November 2026",
     },
     {
       id: 4,
@@ -182,7 +182,7 @@ const JobApplicationPage = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "1-5 Years",
-      deadline: "14 November 2023",
+      deadline: "14 November 2026",
     },
   ];
 

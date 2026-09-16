@@ -472,7 +472,7 @@ function ServicesContent() {
             </nav>
 
             {/* CTA box */}
-            <div className="mt-6 bg-[#009e90] rounded-2xl p-4 sm:p-5 text-white shadow-sm">
+            <div className="mt-6 bg-[#009e90] rounded-2xl p-4 sm:p-5 text-white shadow-sm hidden">
               <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center mb-3">
                 <MessageCircle className="w-[18px] h-[18px] text-white" />
               </div>

@@ -24,7 +24,7 @@ const Position = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "8 Years",
-      deadline: "30 November 2025",
+      deadline: "30 November 2026",
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ const Position = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "3 Years",
-      deadline: "30 November 2025",
+      deadline: "30 November 2026",
     },
     {
       id: 3,
@@ -44,7 +44,7 @@ const Position = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "10 Years",
-      deadline: "30 November 2025",
+      deadline: "30 November 2026",
     },
     {
       id: 4,
@@ -54,7 +54,7 @@ const Position = () => {
       jobType: "Full Time",
       location: "Remote",
       experience: "8 Years",
-      deadline: "30 November 2025",
+      deadline: "30 November 2026",
     },
   ];
 
