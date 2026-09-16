@@ -61,139 +61,152 @@ const IMG = {
   villa: "/project-page/Baniyas North Phase Luxury Villa.png",
 };
 
+
 const PROJECTS: Project[] = [
   {
     id: 1,
-    title: "Pumping Station",
+    title: "Miami-1 @JVC by Samana Developers",
     titleAr: "محطة الضخ",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "commercial",
-    image: IMG.pumping,
+    image: "/projects/imgs/1.jpeg",
     refCode: "001",
     date: "2025-11-12",
   },
+
   {
     id: 2,
-    title: "Falcon City Industrial Plant",
+    title: "Miami Phase 2 @JVT",
     titleAr: "المصنع الصناعي في فالكون سيتي",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "industrial",
-    image: IMG.falcon,
+    image: "/projects/imgs/2.jpeg",
     refCode: "002",
     date: "2025-10-28",
   },
+
   {
     id: 3,
-    title: "Grand Hospitality Interior",
+    title: "City Premiere Marina Hotel Apartments",
     titleAr: "التصميم الداخلي للضيافة الفاخرة",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "hospitality",
-    image: IMG.hotel,
+    image: "/projects/imgs/3.jpg",
     refCode: "003",
     date: "2025-10-04",
   },
+
   {
     id: 4,
-    title: "Contemporary Commercial Office Center",
+    title: "NED® Al Ghurair | Al Furjan South Villas",
     titleAr: "مركز المكاتب التجارية المعاصر",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "commercial",
-    image: IMG.office,
+    image: "/projects/imgs/4.jpg",
     refCode: "004",
     date: "2025-09-18",
   },
+
   {
     id: 5,
-    title: "Manufacturing Floor Inspection",
+    title: "Dubai Hills Estate or Arabian Ranches",
     titleAr: "تفتيش أرضية التصنيع",
     location: "Sharjah, United Arab Emirates",
     locationAr: "الشارقة، الإمارات العربية المتحدة",
     category: "manufacturing",
-    image: IMG.manufacturing,
+    image: "/projects/imgs/5.webp",
     refCode: "005",
     date: "2025-08-22",
   },
+
   {
     id: 6,
-    title: "Al Saaf Resort & Hospitality",
+    title: "Dubai Hills Estate – Emaar Community Management",
     titleAr: "منتجع الصاف والضيافة",
     location: "Ras Al Khaimah, United Arab Emirates",
     locationAr: "رأس الخيمة، الإمارات العربية المتحدة",
     category: "hospitality",
-    image: IMG.alsaaf,
+    image: "/projects/imgs/6.jpg",
     refCode: "006",
     date: "2025-07-30",
   },
+
   {
     id: 7,
-    title: "Coastal Hospitality Pool",
+    title: "Housing Solutions | Domus Managed Housing | United Arab Emirates",
     titleAr: "مسبح الضيافة الساحلي",
     location: "Abu Dhabi, United Arab Emirates",
     locationAr: "أبوظبي، الإمارات العربية المتحدة",
     category: "hospitality",
-    image: IMG.pool,
+    image: "/projects/imgs/7.jpg",
     refCode: "007",
     date: "2025-06-14",
   },
+
   {
     id: 8,
-    title: "Al Jada Oil and Gas Offshore Facility",
+    title: "Investing in Dubai Production City",
     titleAr: "منشأة الجادة النفطية البحرية",
     location: "Abu Dhabi, United Arab Emirates",
     locationAr: "أبوظبي، الإمارات العربية المتحدة",
     category: "oil-gas",
-    image: IMG.oil,
+    image: "/projects/imgs/8.jpg",
     refCode: "008",
     date: "2025-05-09",
   },
+
   {
     id: 9,
-    title: "Baniyas North Phase Luxury Villa",
+    title: "Al Furjan Villas - Key Capital Properties",
     titleAr: "فيلا بني ياس الشمالية الفاخرة",
     location: "Abu Dhabi, United Arab Emirates",
     locationAr: "أبوظبي، الإمارات العربية المتحدة",
     category: "residential",
-    image: IMG.villa,
+    image: "/projects/imgs/9.jpg",
     refCode: "009",
     date: "2025-04-21",
   },
+
   {
     id: 10,
-    title: "Business Bay Corporate Tower",
+    title: "Tilal Al Furjan - Latest Handover",
     titleAr: "برج الشركات في الخليج التجاري",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "commercial",
-    image: IMG.office,
+    image: "/projects/imgs/6.jpg",
     refCode: "010",
     date: "2025-03-16",
   },
+
   {
     id: 11,
-    title: "Jebel Ali Processing Facility",
+    title: "Tilal Al Furjan Phase 1 Site Progress",
     titleAr: "منشأة معالجة جبل علي",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "industrial",
-    image: IMG.falcon,
+    image: "/projects/imgs/11.jpg",
     refCode: "011",
     date: "2025-02-11",
   },
+
   {
     id: 12,
-    title: "Palm Jumeirah Guest Suites",
+    title: "Tilal Al Furjan - Latest Handover",
     titleAr: "أجنحة ضيوف نخلة جميرا",
     location: "Dubai, United Arab Emirates",
     locationAr: "دبي، الإمارات العربية المتحدة",
     category: "hospitality",
-    image: IMG.hotel,
+    image: "/projects/imgs/12.jpg",
     refCode: "012",
     date: "2025-01-27",
   },
+
   {
     id: 13,
     title: "District Cooling Plant",
@@ -205,6 +218,7 @@ const PROJECTS: Project[] = [
     refCode: "013",
     date: "2024-12-08",
   },
+
   {
     id: 14,
     title: "Arabian Ranches Private Villa",
@@ -216,6 +230,7 @@ const PROJECTS: Project[] = [
     refCode: "014",
     date: "2024-11-19",
   },
+
   {
     id: 15,
     title: "Expo City Transit Hub",
@@ -227,6 +242,7 @@ const PROJECTS: Project[] = [
     refCode: "015",
     date: "2024-10-03",
   },
+
   {
     id: 16,
     title: "Precision Assembly Facility",
@@ -238,6 +254,7 @@ const PROJECTS: Project[] = [
     refCode: "016",
     date: "2024-09-12",
   },
+
   {
     id: 17,
     title: "DIFC Commercial Plaza",
@@ -249,6 +266,7 @@ const PROJECTS: Project[] = [
     refCode: "017",
     date: "2024-08-05",
   },
+
   {
     id: 18,
     title: "Water Treatment Facility",
@@ -260,6 +278,7 @@ const PROJECTS: Project[] = [
     refCode: "018",
     date: "2024-07-21",
   },
+
   {
     id: 19,
     title: "Saadiyat Beach Resort Wing",
@@ -271,6 +290,7 @@ const PROJECTS: Project[] = [
     refCode: "019",
     date: "2024-06-18",
   },
+
   {
     id: 20,
     title: "Offshore Platform Maintenance",
@@ -282,6 +302,7 @@ const PROJECTS: Project[] = [
     refCode: "020",
     date: "2024-05-02",
   },
+
   {
     id: 21,
     title: "Al Barari Residence",
@@ -293,6 +314,7 @@ const PROJECTS: Project[] = [
     refCode: "021",
     date: "2024-04-14",
   },
+
   {
     id: 22,
     title: "Ras Al Khor Industrial Yard",
@@ -304,6 +326,7 @@ const PROJECTS: Project[] = [
     refCode: "022",
     date: "2024-03-09",
   },
+
   {
     id: 23,
     title: "Port Rashid Terminal",
@@ -315,6 +338,7 @@ const PROJECTS: Project[] = [
     refCode: "023",
     date: "2024-02-26",
   },
+
   {
     id: 24,
     title: "Downtown Retail Complex",
@@ -326,6 +350,7 @@ const PROJECTS: Project[] = [
     refCode: "024",
     date: "2024-01-17",
   },
+
   {
     id: 25,
     title: "Utilities Corridor Protection",
@@ -337,6 +362,7 @@ const PROJECTS: Project[] = [
     refCode: "025",
     date: "2023-12-11",
   },
+
   {
     id: 26,
     title: "Al Quoz Industrial Warehouse",
@@ -348,6 +374,7 @@ const PROJECTS: Project[] = [
     refCode: "026",
     date: "2023-11-04",
   },
+
   {
     id: 27,
     title: "Al Saaf Spa & Wellness",
@@ -360,6 +387,8 @@ const PROJECTS: Project[] = [
     date: "2023-10-08",
   },
 ];
+
+
 
 const CATEGORY_META: {
   id: CategoryId;
@@ -745,7 +774,7 @@ function ProjectCard({
           <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0 text-stone-400" />
           <span>{isArabic ? project.locationAr : project.location}</span>
         </p>
-        <div className="mt-auto pt-4 flex items-center justify-between border-t border-stone-100 text-xs sm:text-sm">
+        <div className="mt-auto pt-4 flex items-center justify-between border-t border-stone-100 text-xs sm:text-sm hidden">
           <span className="text-stone-400">{isArabic ? "رمز المرجع" : "Ref Code"}</span>
           <span className="font-extrabold text-[#01a9a0]">#{project.refCode}</span>
         </div>
