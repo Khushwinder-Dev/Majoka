@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 
 
@@ -11,6 +12,7 @@ export default function IndustriesSection() {
   const leftIndustries = [
     {
       id: "construction",
+      href: "/industries#construction",
       title: isArabic ? "البناء والتطوير العقاري" : "Construction & Real Estate",
       description: isArabic
         ? "حلول عزل وحماية موثوقة وعالية الكفاءة للمباني والهياكل والمشاريع العمرانية."
@@ -18,6 +20,7 @@ export default function IndustriesSection() {
     },
     {
       id: "oil-gas",
+      href: "/industries#oil-gas",
       title: isArabic ? "قطاع النفط والغاز" : "Oil & Gas",
       description: isArabic
         ? "حماية تخصصية متطورة ضد التآكل والكيماويات والرطوبة وظروف التشغيل القاسية."
@@ -25,6 +28,7 @@ export default function IndustriesSection() {
     },
     {
       id: "commercial-retail",
+      href: "/industries",
       title: isArabic ? "المراكز التجارية والتجزئة" : "Commercial & Retail",
       description: isArabic
         ? "حلول احترافية متكاملة لحماية المكاتب والمجمعات التجارية والمستودعات والمنشآت."
@@ -35,6 +39,7 @@ export default function IndustriesSection() {
   const rightIndustries = [
     {
       id: "industrial",
+      href: "/industries#manufacturing",
       title: isArabic ? "القطاع الصناعي والتصنيع" : "Industrial & Manufacturing",
       description: isArabic
         ? "أنظمة طلاء وعزل مائي عالية الأداء ومصممة لتحمل أقسى البيئات الصناعية."
@@ -42,6 +47,7 @@ export default function IndustriesSection() {
     },
     {
       id: "hospitality",
+      href: "/industries",
       title: isArabic ? "الضيافة والفنادق" : "Hospitality & Hotels",
       description: isArabic
         ? "حلول عزل متينة ومستدامة للفنادق والمنتجعات والمسابح والأسطح والمرافق السياحية."
@@ -49,6 +55,7 @@ export default function IndustriesSection() {
     },
     {
       id: "infrastructure",
+      href: "/industries#water-environment",
       title: isArabic ? "البنية التحتية والمرافق العامة" : "Infrastructure & Utilities",
       description: isArabic
         ? "حماية مستدامة طويلة الأمد لشبكات البنية التحتية ومحطات المياه والمنشآت الخرسانية."
@@ -127,7 +134,12 @@ export default function IndustriesSection() {
 
                 {/* Title (Teal in Left Column as in reference) */}
                 <h3 className="text-lg sm:text-[19px] font-bold text-[#01a9a0] mb-2 tracking-tight leading-snug">
-                  {item.title}
+                  <Link
+                    href={item.href}
+                    className="hover:underline hover:text-[#007f78] transition-colors duration-200"
+                  >
+                    {item.title}
+                  </Link>
                 </h3>
 
                 {/* Description */}
@@ -195,7 +207,12 @@ export default function IndustriesSection() {
 
                 {/* Title (Dark Stone in Right Column as in refe0rence) */}
                 <h3 className="text-lg sm:text-[19px] font-bold text-[#01a9a0] group-hover:text-[#01a9a0] transition-colors duration-300 mb-2 tracking-tight leading-snug">
-                  {item.title}
+                  <Link
+                    href={item.href}
+                    className="hover:underline hover:text-[#007f78] transition-colors duration-200"
+                  >
+                    {item.title}
+                  </Link>
                 </h3>
 
                 {/* Description */}
