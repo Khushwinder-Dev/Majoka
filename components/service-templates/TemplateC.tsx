@@ -78,7 +78,7 @@ export default function TemplateC({ service, sub, isArabic }: Props) {
       {/* ── 1. FULL-WIDTH BANNER + TITLE ───────────────────────── */}
       <section className="relative w-full h-[260px] sm:h-[320px] rounded-2xl overflow-hidden mb-10 bg-stone-100 shadow-md">
         <Img
-          src={sub.serviceBanner || sub.serviceImage || service.serviceBanner}
+          src={(Array.isArray(sub.serviceBanner) ? sub.serviceBanner[0] : sub.serviceBanner) || sub.serviceImage || (Array.isArray(service.serviceBanner) ? service.serviceBanner[0] : service.serviceBanner) || FALLBACK}
           alt={sub.serviceTitle}
           priority
           className="object-cover object-center"

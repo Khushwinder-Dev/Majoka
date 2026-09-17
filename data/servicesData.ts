@@ -13,6 +13,10 @@ export interface SubServiceItem {
   serviceTitle: string;
   serviceSlug: string;
   serviceBanner: string | string[];
+  serviceImage: string;
+  servicesgalaryImages: string[];
+  serviceContent: string;
+  shortDescription?: string;
   primaryApplications?: string;
   competitiveAdvantage?: string;
   keyBenefits?: string[];
@@ -41,7 +45,7 @@ export interface ServiceItem {
 }
 
 // Typed datasets
-export const servicesDataEn: ServiceItem[] = servicesJsonEn as ServiceItem[];
+export const servicesDataEn: ServiceItem[] = servicesJsonEn as unknown as ServiceItem[];
 export const servicesDataAr: ServiceItem[] = servicesJsonAr as unknown as ServiceItem[];
 export const servicesData: ServiceItem[] = servicesDataEn;
 

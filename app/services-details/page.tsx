@@ -441,36 +441,30 @@ function ServiceDetailsContent() {
     router.push(`/services-details?service=${service.serviceNumber}`);
   };
 
+  // Helper: normalize serviceBanner (string | string[]) to string[]
+  const toBannerImages = (banner: string | string[] | undefined, fallback: string): string[] => {
+    if (!banner) return [fallback];
+    if (Array.isArray(banner)) return banner.length > 0 ? banner : [fallback];
+    return [banner];
+  };
+
   // Banner slides: Sub-services of service on listing page, single sub-service banner on service details
   const bannerSlides = activeSub
-    ? [
-        {
-          image:
-            activeSub.serviceBanner ||
-            activeSub.serviceImage ||
-            service.serviceBanner ||
-            DEFAULT_BANNER,
-          title: activeSub.serviceTitle,
-        },
-      ]
+    ? toBannerImages(
+        activeSub.serviceBanner || activeSub.serviceImage || service.serviceBanner,
+        DEFAULT_BANNER
+      ).map((image) => ({ image, title: activeSub.serviceTitle }))
     : (service.subservices && service.subservices.length > 0)
-    ? service.subservices.map((sub) => ({
-        image:
-          sub.serviceBanner ||
-          sub.serviceImage ||
-          service.serviceBanner ||
-          DEFAULT_BANNER,
-        title: sub.serviceTitle,
-      }))
-    : [
-        {
-          image:
-            service.serviceBanner ||
-            service.serviceImage ||
-            DEFAULT_BANNER,
-          title: service.serviceTitle,
-        },
-      ];
+    ? service.subservices.flatMap((sub) =>
+        toBannerImages(
+          sub.serviceBanner || sub.serviceImage || service.serviceBanner,
+          DEFAULT_BANNER
+        ).map((image) => ({ image, title: sub.serviceTitle }))
+      )
+    : toBannerImages(
+        service.serviceBanner || service.serviceImage,
+        DEFAULT_BANNER
+      ).map((image) => ({ image, title: service.serviceTitle }));
 
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
