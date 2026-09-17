@@ -36,6 +36,30 @@ const videoFilenames = [
   "WhatsApp Video 2026-09-05 at 11.58.48 PM.mp4",
   "WhatsApp Video 2026-09-05 at 11.58.49 PM (1).mp4",
   "WhatsApp Video 2026-09-05 at 11.58.49 PM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.03.36 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.03.40 AM (1).mp4",
+  "WhatsApp Video 2026-09-13 at 4.03.40 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.03.43 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.06.08 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.06.38 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.06.49 AM.mp4",
+  "WhatsApp Video 2026-09-13 at 4.06.51 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.19.47 AM (1).mp4",
+  "WhatsApp Video 2026-09-17 at 7.19.47 AM (2).mp4",
+  "WhatsApp Video 2026-09-17 at 7.19.47 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.20.30 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.20.57 AM (1).mp4",
+  "WhatsApp Video 2026-09-17 at 7.20.57 AM (2).mp4",
+  "WhatsApp Video 2026-09-17 at 7.20.57 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.19 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.20 AM (1).mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.20 AM (2).mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.20 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.21 AM (1).mp4",
+  "WhatsApp Video 2026-09-17 at 7.22.21 AM.mp4",
+  "WhatsApp Video 2026-09-17 at 7.23.22 AM (1).mp4",
+  "WhatsApp Video 2026-09-17 at 7.23.22 AM (2).mp4",
+  "WhatsApp Video 2026-09-17 at 7.23.22 AM.mp4",
 ];
 
 const mediaItems: MediaItem[] = videoFilenames.map((filename, index) => ({
@@ -45,8 +69,9 @@ const mediaItems: MediaItem[] = videoFilenames.map((filename, index) => ({
   videoSrc: `/media/videos/${filename}`,
 }));
 
-// Media Images from public/media/Images
+// Media Images from public/media/Images (root + subfolders)
 const photoFilenames = [
+  // Root images
   "WhatsApp Image 2026-09-05 at 11.30.18 PM.jpeg",
   "WhatsApp Image 2026-09-05 at 11.30.28 PM.jpeg",
   "WhatsApp Image 2026-09-05 at 11.30.36 PM.jpeg",
@@ -69,8 +94,13 @@ const photoFilenames = [
   "WhatsApp Image 2026-09-05 at 11.38.27 PM.jpeg",
   "WhatsApp Image 2026-09-05 at 11.38.41 PM.jpeg",
   "WhatsApp Image 2026-09-05 at 11.38.54 PM.jpeg",
+  "WhatsApp Image 2026-09-13 at 4.06.50 AM.jpeg",
+  "WhatsApp Image 2026-09-13 at 4.08.11 AM (1).jpeg",
+  "WhatsApp Image 2026-09-13 at 4.08.11 AM.jpeg",
+  "WhatsApp Image 2026-09-13 at 4.08.12 AM.jpeg",
 ];
 
+// All photo items — root Images folder only (subfolders are internal assets)
 const photoItems: MediaItem[] = photoFilenames.map((filename, index) => ({
   id: 101 + index,
   type: "photo",
