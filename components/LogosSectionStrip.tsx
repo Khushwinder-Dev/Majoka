@@ -63,39 +63,10 @@ export default function LogosSectionStrip() {
   const { isArabic } = useLanguage();
 
   return (
-    <section className="w-full bg-white py-14 sm:py-16 lg:py-20">
+    <section className="w-full bg-white pb-14 sm:pb-16 lg:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Header ───────────────────────────────────────────────────── */}
-        <div className="text-center mb-10 sm:mb-12">
-          <div className="inline-flex items-center justify-center gap-3 mb-3">
-            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
-            <span className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-[#01a9a0]">
-              {isArabic ? "شركاؤنا وعملاؤنا" : "OUR PARTNERS & CLIENTS"}
-            </span>
-            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl md:text-[38px] font-extrabold text-stone-900 tracking-tight leading-snug">
-            {isArabic ? (
-              <>
-                علامات تجارية تثق{" "}
-                <span className="text-[#01a9a0]">بخبرتنا</span>
-              </>
-            ) : (
-              <>
-                Brands That{" "}
-                <span className="text-[#01a9a0]">Trust Our Expertise</span>
-              </>
-            )}
-          </h2>
-
-          <p className="mt-3 text-sm sm:text-[15px] text-slate-500 max-w-xl mx-auto leading-relaxed">
-            {isArabic
-              ? "نفخر بشراكتنا مع كبرى الشركات والمطورين في المنطقة"
-              : "Proud to work alongside leading developers, contractors, and consultants across the region."}
-          </p>
-        </div>
+       
 
         {/* ── Three static rows ─────────────────────────────────────────── */}
         <div className="flex flex-col gap-4 sm:gap-5">
