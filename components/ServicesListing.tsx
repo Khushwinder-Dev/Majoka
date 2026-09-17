@@ -255,36 +255,30 @@ function ServicesContent() {
     }
   };
 
+  // Helper: normalize serviceBanner which can be string | string[]
+  const toBannerImages = (banner: string | string[] | undefined, fallback: string): string[] => {
+    if (!banner) return [fallback];
+    if (Array.isArray(banner)) return banner.length > 0 ? banner : [fallback];
+    return [banner];
+  };
+
   // Banner slides: Sub-services of activeService on listing page, single sub-service banner on service details
   const bannerSlides = activeSub
-    ? [
-        {
-          image:
-            activeSub.serviceBanner ||
-            activeSub.serviceImage ||
-            activeService.serviceBanner ||
-            DEFAULT_BANNER,
-          title: activeSub.serviceTitle,
-        },
-      ]
+    ? toBannerImages(
+        activeSub.serviceBanner || activeSub.serviceImage || activeService.serviceBanner,
+        DEFAULT_BANNER
+      ).map((image) => ({ image, title: activeSub.serviceTitle }))
     : (activeService.subservices && activeService.subservices.length > 0)
-    ? activeService.subservices.map((sub) => ({
-        image:
-          sub.serviceBanner ||
-          sub.serviceImage ||
-          activeService.serviceBanner ||
-          DEFAULT_BANNER,
-        title: sub.serviceTitle,
-      }))
-    : [
-        {
-          image:
-            activeService.serviceBanner ||
-            activeService.serviceImage ||
-            DEFAULT_BANNER,
-          title: activeService.serviceTitle,
-        },
-      ];
+    ? activeService.subservices.flatMap((sub) =>
+        toBannerImages(
+          sub.serviceBanner || sub.serviceImage || activeService.serviceBanner,
+          DEFAULT_BANNER
+        ).map((image) => ({ image, title: sub.serviceTitle }))
+      )
+    : toBannerImages(
+        activeService.serviceBanner || activeService.serviceImage,
+        DEFAULT_BANNER
+      ).map((image) => ({ image, title: activeService.serviceTitle }));
 
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>

@@ -12,11 +12,7 @@ export interface SubServiceItem {
   id: string;
   serviceTitle: string;
   serviceSlug: string;
-  serviceBanner: string;
-  serviceImage: string;
-  servicesgalaryImages: string[];
-  serviceContent: string;
-  shortDescription?: string;
+  serviceBanner: string | string[];
   primaryApplications?: string;
   competitiveAdvantage?: string;
   keyBenefits?: string[];
@@ -33,7 +29,7 @@ export interface ServiceItem {
   category: string;
   icon: string;
   seoKeywords?: string[];
-  serviceBanner: string;
+  serviceBanner: string | string[];
   serviceImage: string;
   servicesgalaryImages: string[];
   serviceContent: string;
