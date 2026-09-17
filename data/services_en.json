@@ -2347,5 +2347,156 @@
         "competitiveAdvantage": "Municipality-approved sterilization with full microbiological compliance certificate."
       }
     ]
+  },
+  {
+    "serviceNumber": 12,
+    "serviceId": "renovation",
+    "serviceSlug": "renovation",
+    "serviceTitle": "Renovation",
+    "tagline": "",
+    "category": "renovation",
+    "icon": "/landing/services/6.svg",
+    "seoKeywords": [
+      "top-rated building cleaning in uae",
+      "building cleaning services dubai",
+      "post-construction cleaning",
+      "external glass facade cleaning",
+      "water tank cleaning disinfection"
+    ],
+    "serviceBanner": "/servicesSubServicesContent/services/renovation/gallery/post-construction-cleaning-01-res-768x450-high-a4l96v.jpg",
+    "serviceImage": "/servicesSubServicesContent/services/renovation/gallery/360_f_827445526_p9nfrsoycg1pptnc4afdabspx62tpgrz-high.jpg",
+    "servicesgalaryImages": [
+      "/servicesSubServicesContent/services/renovation/gallery/360_f_827445526_p9nfrsoycg1pptnc4afdabspx62tpgrz-high.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/blog_518280561-high-tn602p.webp",
+      "/servicesSubServicesContent/services/renovation/gallery/copy-of-img_1976-mp4_snapshot_00-02_2024-08-10_18-34-21-high.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/images-11-high-faut8q.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/images-12-high-ftceur.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/istockphoto-1321920250-612x612-high-5a40if.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/post-construction-cleaning-01-res-768x450-high-a4l96v.jpg",
+      "/servicesSubServicesContent/services/renovation/gallery/residential-building-cleaning-dubai-high.webp"
+    ],
+    "serviceContent": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+    "shortDescription": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+    "whyChooseTitle": "Why Choose Taj Al Rahma for Cleaning?",
+    "whyChooseContent": "Feature: Trained Staff\nWhat We Offer: A professional workforce trained to the highest security and vocational standards.\n\nFeature: Modern Technology\nWhat We Offer: We utilize advanced German and Italian machinery to guarantee superior results.\n\nFeature: Safe Materials\nWhat We Offer: Use of eco-friendly, health-certified detergents and disinfectants.\n\nFeature: Flexible Timing\nWhat We Offer: We schedule our operations at your convenience to minimize any disruption to your business.",
+    "whyChoosePoints": [
+      {
+        "title": "Trained Professional Staff",
+        "description": "Vetted and trained workforce adhering to rigorous security and hygiene protocols."
+      },
+      {
+        "title": "Advanced European Machinery",
+        "description": "German Kärcher pressure cleaners, Taski scrubbers, and Italian Klindex marble polishing machines."
+      },
+      {
+        "title": "Eco-Friendly & Municipality Certified",
+        "description": "Non-toxic, food-safe, and biodegradable chemicals approved by UAE health authorities."
+      }
+    ],
+    "subservices": [
+      {
+        "id": "renovation",
+        "subServiceContent": {
+          "serviceTitle": "Renovation",
+          "serviceContent": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+          "tagline": "",
+          "content": [
+            {
+              "serviceContent": "<h3>1. Villa Renovation</h3><p>Comprehensive villa renovation covering kitchens, bathrooms, flooring, ceilings, walls, exterior areas, and architectural improvements.</p>"
+            },
+            {
+              "serviceContent": "<h3>2. Residential Renovation</h3><p>Complete renovation solutions for villas, apartments, homes, and residential properties, including structural, interior, and finishing works.</p>"
+            },
+            {
+              "serviceContent": "<h3>3. Commercial Renovation</h3><p>Renovation of offices, retail stores, showrooms, restaurants, and other commercial spaces with minimal disruption to business operations.</p>"
+            },
+            {
+              "serviceContent": "<h3>4. Apartment Renovation</h3><p>Modern renovation solutions for apartments, including space improvements, flooring, painting, kitchens, bathrooms, and interior finishing.</p>"
+            },
+            {
+              "serviceContent": "<h3>5. Office Renovation</h3><p>Office refurbishment and remodeling, including partitions, flooring, ceilings, lighting, painting, workspaces, and reception areas.</p>"
+            },
+            {
+              "serviceContent": "<h3>6. Kitchen Renovation</h3><p>Complete kitchen remodeling including cabinets, countertops, flooring, wall finishes, plumbing, electrical work, and modern fixtures.</p>"
+            },
+            {
+              "serviceContent": "<h3>7. Bathroom Renovation</h3><p>Bathroom renovation including waterproofing, tiles, sanitary fixtures, plumbing, ceilings, lighting, and modern fittings.</p>"
+            },
+            {
+              "serviceContent": "<h3>8. Interior Renovation</h3><p>Interior transformation including walls, flooring, ceilings, partitions, decorative finishes, lighting, and customized design elements.</p>"
+            },
+            {
+              "serviceContent": "<h3>9. Flooring Renovation</h3><p>Installation and replacement of tiles, marble, ceramic, vinyl, wood, epoxy, and other flooring systems.</p>"
+            },
+            {
+              "serviceContent": "<h3>10. Wall & Ceiling Renovation</h3><p>Repair and renovation of walls and ceilings, including plastering, gypsum works, false ceilings, painting, and decorative finishes.</p>"
+            },
+            {
+              "serviceContent": "<h3>11. Exterior Renovation</h3><p>Renovation of building façades, external walls, terraces, balconies, entrances, and other exterior areas.</p>"
+            },
+            {
+              "serviceContent": "<h3>12. Painting & Decorative Works</h3><p>Interior and exterior painting, texture coatings, feature walls, decorative finishes, and surface preparation.</p>"
+            },
+            {
+              "serviceContent": "<h3>13. Waterproofing Renovation</h3><p>Repair and renewal of waterproofing systems for roofs, bathrooms, balconies, terraces, basements, and other water-exposed areas.</p>"
+            },
+            {
+              "serviceContent": "<h3>14. Roof Renovation</h3><p>Roof repair and refurbishment including waterproofing, insulation, protective coatings, drainage improvements, and surface restoration.</p>"
+            },
+            {
+              "serviceContent": "<h3>15. Structural Renovation</h3><p>Repair and modification of damaged or aging structures, including concrete repairs, crack treatment, strengthening, and related works.</p>"
+            },
+            {
+              "serviceContent": "<h3>16. MEP Renovation</h3><p>Renovation and upgrading of mechanical, electrical, and plumbing systems to improve safety, efficiency, and building functionality.</p>"
+            },
+            {
+              "serviceContent": "<h3>17. Retail & Showroom Renovation</h3><p>Complete refurbishment of retail outlets and showrooms with modern layouts, flooring, ceilings, lighting, displays, and finishes.</p>"
+            },
+            {
+              "serviceContent": "<h3>18. Restaurant Renovation</h3><p>Renovation of restaurants and food-service spaces, including kitchens, dining areas, flooring, ceilings, plumbing, electrical, and finishes.</p>"
+            }
+          ]
+        },
+        "service": {
+          "serviceTitle": "Renovation",
+          "tagline": "",
+          "category": "renovation",
+          "serviceContent": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+          "whyChooseContent": "FeatureBenefitSeamless Application Renovation is applied as a single continuous piece, completely eliminating the weak points that cause leaks.Corrosion ResistanceIt does not rust and is unaffected by humidity, salts, or harsh chemicals.Long LifespanIt lasts for over 20 years without the need for complex periodic maintenance.Structural IntegrityIt adds structural strength to cracked or deteriorated tanks, saving you the cost of total replacement.",
+          "whyChooseTitle": "Why is Renovation the Best Choice with 'Taj Al Rahmah'?",
+          "bottomText": "At Taj Al Rahmah, we don't just insulate tanks; we extend the life of your investments."
+        },
+        "serviceTitle": "Renovation",
+        "serviceSlug": "renovation",
+        "serviceBanner": [
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.06 AM.jpeg",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.07 AM (1).jpeg",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.07 AM (2).jpeg",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.07 AM.jpeg",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.08 AM.jpeg",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.32.39 AM.jpeg"
+        ],
+        "serviceImage": "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/download-40-high.webp",
+        "servicesgalaryImages": [
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/324rtfg-high.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/474745280_628559619857010_8618991257314562130_n-high-q8n7rv.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/c2cded19-43c8-48e6-a6e0-9256b01d5674-high-upqjgj.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/download-44-high.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/fe2f56c2-7ff6-443b-bab7-bc98da240d35-high.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/product-jpeg-500x500-1-high.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-23-at-11-47-23-pm-high.webp",
+          "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/gallery/whatsapp-image-2025-12-25-at-5-24-19-pm-high.webp"
+        ],
+        "serviceContent": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+        "shortDescription": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
+        "primaryApplications": "Lining potable (drinking) water tanks, roofs highly exposed to water, and chemical drainage channels.",
+        "competitiveAdvantage": "Provides a single, seamless, joint-free layer that lasts for decades. Completely safe for health and water storage (Food Grade).",
+        "keyBenefits": [
+          "Food-grade certification safe for potable water",
+          "Seamless monolithic membrane eliminates joint failures",
+          "High chemical and acid resistance"
+        ]
+      }
+    ]
   }
 ]

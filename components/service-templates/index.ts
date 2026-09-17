@@ -49,6 +49,7 @@ const SERVICE_TEMPLATE_MAP: Record<string, TemplateKey> = {
   "carpentry":                   "default",
   "building-cleaning-services":  "default",
   "cleaning":                    "default",
+  "renovation":                    "B",
 };
 
 /**
