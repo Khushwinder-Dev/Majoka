@@ -2395,7 +2395,7 @@
     ],
     "subservices": [
       {
-        "id": "renovation",
+        "id": "residential-renovation",
         "subServiceContent": {
           "serviceTitle": "Renovation",
           "serviceContent": "Transforming existing spaces into modern, functional, and durable environments through professional renovation, refurbishment, repair, and finishing solutions.",
@@ -2467,7 +2467,7 @@
           "bottomText": "At Taj Al Rahmah, we don't just insulate tanks; we extend the life of your investments."
         },
         "serviceTitle": "Renovation",
-        "serviceSlug": "renovation",
+        "serviceSlug": "residential-renovation",
         "serviceBanner": [
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.06 AM.jpeg",
           "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/banner/WhatsApp Image 2026-09-17 at 7.31.07 AM (1).jpeg",
