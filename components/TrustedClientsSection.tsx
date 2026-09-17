@@ -293,7 +293,7 @@ export default function TrustedClientsSection() {
         </div>
 
         {/* ── Auto-scroll logo strip ─────────────────────────────────────── */}
-        <LogoStrip logos={logos} />
+        {/* <LogoStrip logos={logos} /> */}
 
       </div>
 
