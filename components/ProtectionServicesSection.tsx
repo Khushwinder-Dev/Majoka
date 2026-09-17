@@ -12,7 +12,7 @@ export default function ProtectionServicesSection() {
   const services = [
     {
       id: 1,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/download-40-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_7368818.svg",
       title: isArabic ? "عزل GRP والألياف الزجاجية" : "GRP & Fiberglass Waterproofing",
       description: isArabic
@@ -22,7 +22,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 2,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/combo-roof-waterproof-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_11495742.svg",
       title: isArabic ? "نظام الكومبو للأسطح" : "Combo System Roof Waterproofing",
       description: isArabic
@@ -32,7 +32,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 3,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/thumbnail/epoxy-floor-coating-service-500x500-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/epoxy-floor-coating/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_18882906.svg",
       title: isArabic ? "طلاء أرضيات الإيبوكسي" : "Epoxy Floor Coating",
       description: isArabic
@@ -42,7 +42,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 4,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/thumbnail/alevli-yalitim-uygulamasi-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/bitumen-membrane/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_14850017.svg",
       title: isArabic ? "عزل الغشاء البيتوميني" : "Bitumen Membrane Waterproofing",
       description: isArabic
@@ -52,7 +52,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 5,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/thumbnail/what-is-polyurea-coatings-newtec-group-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/polyurea-coating/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_12071074.svg",
       title: isArabic ? "عزل البولي يوريا" : "Polyurea Waterproofing",
       description: isArabic
@@ -62,7 +62,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 6,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/thumbnail/1d10cdae-c23a-408e-a59e-96bd950fdbe7-high.webp",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/injection-waterproofing/thumbnail/thumbnail.png",
       icon: "/media/protection/fi_16076200.svg",
       title: isArabic ? "عزل الحقن المائي" : "Injection Waterproofing",
       description: isArabic
