@@ -119,7 +119,7 @@ export default function TrustedClientsSection() {
         : "From Initial Site Planning To Final Handover, Their Construction Team Delivered Structural Integrity, Precise Craftsmanship, And A Project Completed Right On Schedule And Within Budget.",
       author: isArabic ? "ريهان ميتشل" : "Rehan Mitchel",
       role:   isArabic ? "المؤسس، الرئيس التنفيذي" : "Founder, CEO",
-      image:  "/media/testimonials/testimonial-bd-1.png",
+      image:  "/media/testimonials/testimonial-bd-11.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
     {
