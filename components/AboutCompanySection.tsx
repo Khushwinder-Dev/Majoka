@@ -135,17 +135,6 @@ export default function AboutCompanySection() {
       className="relative w-full bg-white overflow-hidden"
       dir={isArabic ? "rtl" : "ltr"}
     >
-      {/* ── Background decoration image ─────────────────────────────── */}
-      {/* <div className="absolute inset-0 pointer-events-none select-none">
-        <Image
-          src="/Background+Shadow.png"
-          alt=""
-          fill
-          unoptimized
-          className="object-cover opacity-40"
-          priority
-        />
-      </div> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24">
 
@@ -215,27 +204,41 @@ export default function AboutCompanySection() {
           </div>
 
           {/* ── RIGHT: image with play button ─────────────────────── */}
-          <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[460px] rounded-[28px] overflow-hidden shadow-[0_16px_48px_-12px_rgba(0,0,0,0.2)] bg-stone-100 group">
-            <Image
-              src="/hs2Img2.png"
-              alt={isArabic ? "مهندسو تاج الرحمة في موقع العمل" : "Taj Al Rahmah engineers on site"}
-              fill
-              unoptimized
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              priority
-            />
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
+          <div className="relative flex items-center justify-center">
+            {/* Background + Shadow decorative image */}
+            {/* <div className="absolute inset-0 pointer-events-none select-none z-0">
+              <Image
+                src="/Background+Shadow.png"
+                alt=""
+                fill
+                unoptimized
+                className="object-contain object-center"
+              />
+            </div> */}
 
-            {/* Play button */}
-            <button
-              onClick={() => setIsVideoOpen(true)}
-              aria-label={isArabic ? "تشغيل الفيديو" : "Play Company Video"}
-              className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 hover:bg-white flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer z-10"
-              style={{ width: 72, height: 72, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
-            >
-              <Play className="w-7 h-7 fill-[#01a9a0] text-[#01a9a0] ml-1" />
-            </button>
+            {/* Main photo */}
+            <div className="relative z-10 w-full h-[320px] sm:h-[400px] lg:h-[460px] overflow-hidden">
+              <Image
+                src="/hs2Img4.png"
+                alt={isArabic ? "مهندسو تاج الرحمة في موقع العمل" : "Taj Al Rahmah engineers on site"}
+                fill
+                unoptimized
+                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                priority
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
+
+              {/* Play button */}
+              <button
+                onClick={() => setIsVideoOpen(true)}
+                aria-label={isArabic ? "تشغيل الفيديو" : "Play Company Video"}
+                className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 hover:bg-white flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer z-10"
+                style={{ width: 72, height: 72, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
+              >
+                <Play className="w-7 h-7 fill-[#01a9a0] text-[#01a9a0] ml-1" />
+              </button>
+            </div>
           </div>
         </div>
 
