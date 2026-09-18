@@ -313,7 +313,7 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar ──────────────────────────────────────────────── */}
-          <div className="border-t border-stone-300/50 py-5 sm:py-6">
+          <div className="py-5 sm:py-6">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
               {/* Copyright */}
