@@ -191,22 +191,13 @@ export default function AboutCompanySection() {
               ))}
             </div>
 
-            {/* CTA button */}
-            <Link
-              href="/about-us"
-              className="inline-flex items-center self-start rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-bold text-sm tracking-wide shadow-[0_4px_18px_rgba(1,169,160,0.35)] hover:shadow-[0_6px_22px_rgba(1,169,160,0.45)] hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden"
-            >
-              <span className="pl-6 pr-4 py-3">{isArabic ? "معرفة المزيد" : "ABOUT MORE"}</span>
-              <span className="flex-shrink-0 w-10 h-10 m-1 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300">
-                <ArrowRight className={`w-4 h-4 text-[#01a9a0] stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
-              </span>
-            </Link>
+
           </div>
 
-          {/* ── RIGHT: image with play button ─────────────────────── */}
-          <div className="relative flex items-center justify-center">
+          {/* ── RIGHT: image with play button + CTA below ─────────── */}
+          <div className="relative flex flex-col gap-6 items-start">
             {/* Background + Shadow decorative image */}
-            {/* <div className="absolute inset-0 pointer-events-none select-none z-0">
+            {/* <div className="absolute -inset-6 pointer-events-none select-none z-0">
               <Image
                 src="/Background+Shadow.png"
                 alt=""
@@ -235,14 +226,23 @@ export default function AboutCompanySection() {
                 aria-label={isArabic ? "تشغيل الفيديو" : "Play Company Video"}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group/play"
               >
-                {/* Pulse ring */}
                 <span className="absolute inset-0 rounded-full bg-white/40 animate-ping" />
-                {/* Button circle */}
                 <span className="relative flex items-center justify-center w-[72px] h-[72px] rounded-full bg-white shadow-[0_8px_32px_rgba(0,0,0,0.28)] group-hover/play:scale-110 active:scale-95 transition-transform duration-300">
                   <Play className="w-7 h-7 fill-[#01a9a0] text-[#01a9a0] translate-x-0.5" />
                 </span>
               </button>
             </div>
+
+            {/* CTA button — below image, left-aligned */}
+            <Link
+              href="/about-us"
+              className="relative z-10 inline-flex items-center rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-bold text-sm tracking-wide shadow-[0_4px_18px_rgba(1,169,160,0.35)] hover:shadow-[0_6px_22px_rgba(1,169,160,0.45)] hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden"
+            >
+              <span className="pl-6 pr-4 py-3">{isArabic ? "معرفة المزيد" : "ABOUT MORE"}</span>
+              <span className="flex-shrink-0 w-10 h-10 m-1 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300">
+                <ArrowRight className={`w-4 h-4 text-[#01a9a0] stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
+              </span>
+            </Link>
           </div>
         </div>
 
