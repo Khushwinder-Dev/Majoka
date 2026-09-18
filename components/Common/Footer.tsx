@@ -20,22 +20,13 @@ const servicesHrefs = [
   "/services",
 ];
 
-const resourcesHrefs = [
-  "/media",
-  "/blogs",
-  "/resources",
-  "/blogs",
-  "/contact",
-  "/contact",
-];
-
 const companyHrefs = [
   "/about-us",
+  "/expertise",
   "/certifications",
-  "/media",
-  "/blogs",
   "/career",
   "/contact",
+  "/subcontract",
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -110,13 +101,33 @@ export default function Footer() {
 
   // Resources labels from reference design
   const resourcesLabels = isArabic
-    ? ["الوسائط", "الأخبار", "الأسئلة الشائعة", "المدونة", "الدعم", "الضمان"]
-    : ["Media", "News", "FAQs", "Blog", "Support", "Warranty"];
+    ? ["الوسائط", "احصل على عرض سعر", "الأسئلة الشائعة", "المدونة", "الدعم", "الضمان"]
+    : ["Media", "Get a Quote", "FAQs", "Blog", "Support", "Warranty"];
 
-  // Company labels — use translation
+  // Resources hrefs
+  const resourcesHrefs = [
+    "/media",
+    "/get-a-quote",
+    "/faqs",
+    "/blogs",
+    "/support",
+    "/warranty",
+  ];
+
+  // Company labels
   const companyLabels = isArabic
     ? ["عن الشركة", "الخبرة", "الشهادات", "وظائف", "اتصل بنا", "المقاولون من الباطن"]
     : ["About Us", "Expertise", "Certifications", "Careers", "Contact", "Subcontract"];
+
+  // Company hrefs — all correct
+  const companyHrefs = [
+    "/about-us",
+    "/expertise",
+    "/certifications",
+    "/career",
+    "/contact",
+    "/subcontract",
+  ];
 
   const socialLinks = [
     { href: "https://www.facebook.com/profile.php?id=100081089335552", Icon: Facebook, label: "Facebook" },
