@@ -395,7 +395,7 @@ const translations: Record<Language, Translations> = {
       newsletter: {
         title: "Enjoy 10% Off Your First Service",
         description:
-          "Get exclusive offers, expert waterproofing tips, project insights, and the latest solutions delivered to you.",
+          "Get exclusive offers, expert waterproofing tips, and project insights. Stay updated with the latest solutions, industry news, and special offers.",
         placeholder: "Enter Your Email",
         subscribe: "Subscribe",
         successMsg: "🎉 Subscribed successfully! Check your email for your 10% discount code.",
