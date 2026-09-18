@@ -69,10 +69,10 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 function ContactItem({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="flex-shrink-0 w-9 h-9 rounded-full bg-[#01a9a0]/15 border border-[#01a9a0]/30 flex items-center justify-center text-[#01a9a0]">
+      <div className="flex-shrink-0 w-11 h-11 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
         {icon}
       </div>
-      <div className="flex flex-col gap-0.5 pt-1 text-sm text-stone-700 font-normal min-w-0">
+      <div className="flex flex-col gap-0.5 pt-2 text-sm text-stone-700 font-normal min-w-0">
         {children}
       </div>
     </div>
@@ -288,21 +288,21 @@ export default function Footer() {
               <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
                 <FooterHeading title={t.footer.contactTitle} />
                 <div className="flex flex-col gap-4">
-                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="phone" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
+                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="phone" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
                     <Link href={`tel:${t.footer.phone1.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone1}</Link>
                     <Link href={`tel:${t.footer.phone2.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="email" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="email" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
                     <Link href={`mailto:${t.footer.email1}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email1}</Link>
                     <Link href={`mailto:${t.footer.email2}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="location" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="location" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
                     <span className="whitespace-pre-line leading-relaxed">{t.footer.location}</span>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="hours" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="hours" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
                     <span>{t.footer.workingHours}</span>
                     <span className="text-stone-400 text-xs">{t.footer.closedDay}</span>
                   </ContactItem>
