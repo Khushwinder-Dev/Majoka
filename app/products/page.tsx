@@ -188,7 +188,7 @@ export default function ProductsPage() {
               value={searchQuery}
               onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
               placeholder="Search products…"
-              className="w-full h-11 pl-9 pr-9 rounded-xl bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
+              className="w-full h-11 pl-9 pr-9 rounded-full bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
             />
             {searchQuery && (
               <button
@@ -499,7 +499,7 @@ export default function ProductsPage() {
                       value={searchQuery}
                       onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
                       placeholder="Search products…"
-                      className="w-full h-10 pl-9 pr-9 rounded-xl bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
+                      className="w-full h-10 pl-9 pr-9 rounded-full bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
                     />
                     {searchQuery && (
                       <button
@@ -542,7 +542,7 @@ export default function ProductsPage() {
                   <div className="relative">
                     <button
                       onClick={() => setIsPageDropdownOpen(!isPageDropdownOpen)}
-                      className="bg-white border border-gray-200 rounded-xl px-3 py-1.5 pr-7 text-xs font-semibold text-gray-700 flex items-center gap-1 shadow-xs hover:border-[#01a9a0] cursor-pointer transition-colors"
+                      className="bg-white border border-gray-200 rounded-full px-3.5 py-1.5 pr-7 text-xs font-semibold text-gray-700 flex items-center gap-1 shadow-xs hover:border-[#01a9a0] cursor-pointer transition-colors"
                     >
                       <span>{itemsPerPage}</span>
                       <ChevronDown className="w-3.5 h-3.5 text-gray-400 absolute right-2 top-1/2 -translate-y-1/2" />
@@ -883,7 +883,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, name: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -899,7 +899,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, email: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -914,7 +914,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, phone: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
+                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
                 />
               </div>
 
@@ -929,7 +929,7 @@ export default function ProductsPage() {
                   onChange={(e) =>
                     setExpertForm({ ...expertForm, message: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-2xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all resize-none"
                 />
               </div>
 
@@ -937,14 +937,14 @@ export default function ProductsPage() {
                 <button
                   type="button"
                   onClick={() => setIsExpertModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs sm:text-sm font-semibold cursor-pointer"
+                  className="px-5 py-2.5 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-50 text-xs sm:text-sm font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2.5 bg-[#01a9a0] text-white text-xs sm:text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer shadow disabled:opacity-50"
+                  className="px-6 py-2.5 bg-[#01a9a0] text-white text-xs sm:text-sm font-semibold rounded-full hover:opacity-90 transition-opacity flex items-center gap-2 cursor-pointer shadow disabled:opacity-50"
                 >
                   {isSubmitting ? "Sending..." : "Submit Request"}
                   <Send className="w-3.5 h-3.5" />

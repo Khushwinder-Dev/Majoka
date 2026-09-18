@@ -627,7 +627,7 @@ export default function ProductDetailsPage() {
                   onChange={(e) =>
                     setNewReview({ ...newReview, name: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all"
                 />
               </div>
 
@@ -643,13 +643,13 @@ export default function ProductDetailsPage() {
                   onChange={(e) =>
                     setNewReview({ ...newReview, comment: e.target.value })
                   }
-                  className="w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all resize-none"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#01a9a0] hover:bg-[#00968e] text-white font-semibold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
+                className="w-full py-3 bg-[#01a9a0] hover:bg-[#00968e] text-white font-semibold text-xs rounded-full shadow-xs transition-all cursor-pointer"
               >
                 Submit Verified Review
               </button>
