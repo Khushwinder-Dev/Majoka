@@ -8,6 +8,7 @@ export type Direction = "ltr" | "rtl";
 export interface Translations {
   nav: {
     services: string;
+    solutions: string;
     projects: string;
     products: string;
     industries: string;
@@ -156,6 +157,7 @@ const translations: Record<Language, Translations> = {
   en: {
     nav: {
       services: "Services",
+      solutions: "Solutions",
       projects: "Projects",
       products: "Products",
       industries: "Industries",
@@ -486,6 +488,7 @@ const translations: Record<Language, Translations> = {
   ar: {
     nav: {
       services: "الخدمات",
+      solutions: "الحلول",
       projects: "المشاريع",
       products: "المنتجات",
       industries: "القطاعات",

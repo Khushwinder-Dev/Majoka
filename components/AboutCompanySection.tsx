@@ -201,7 +201,7 @@ export default function AboutCompanySection() {
                 priority
               />
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
+              <div className="hidden absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
 
               {/* Play button — centered with pulse ring */}
               <button

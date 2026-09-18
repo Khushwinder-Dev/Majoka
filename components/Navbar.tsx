@@ -61,6 +61,39 @@ const servicesMegaMenu = {
   },
 };
 
+const solutionsMegaMenu = {
+  en: {
+    label: "OUR SOLUTIONS",
+    tagline: "End-to-end protection — built to last",
+    bottomNote: "Every solution is backed by a site survey and quality-tested before handover.",
+    cta: "All Solutions",
+    ctaHref: "/solutions",
+    items: [
+      { icon: "/headerIcon/SVG (6).svg",  title: "Waterproofing Solutions",  sub: "Complete leak-free protection for roofs, tanks & slabs",    href: "/services?service=1" },
+      { icon: "/headerIcon/SVG (8).svg",  title: "Protective Coatings",      sub: "Polyurea, epoxy & anti-corrosion coatings for any surface",  href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "Flooring Systems",         sub: "Industrial & commercial epoxy floor solutions",              href: "/services?service=1&sub=epoxy-floor-coating" },
+      { icon: "/headerIcon/SVG (7).svg",  title: "Thermal Insulation",       sub: "Combo roof systems for heat & moisture control",             href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (9).svg",  title: "Structural Repair",        sub: "Crack injection & concrete rehabilitation works",            href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (5).svg",  title: "Swimming Pool Solutions",  sub: "Full-cycle pool construction, tiling & waterproofing",       href: "/services" },
+    ],
+  },
+  ar: {
+    label: "حلولنا",
+    tagline: "حماية شاملة من البداية للنهاية — مصممة للديمومة",
+    bottomNote: "كل حل مدعوم بمعاينة ميدانية واختبار جودة قبل التسليم.",
+    cta: "جميع الحلول",
+    ctaHref: "/solutions",
+    items: [
+      { icon: "/headerIcon/SVG (6).svg",  title: "حلول العزل المائي",     sub: "حماية شاملة من التسرب للأسطح والخزانات",             href: "/services?service=1" },
+      { icon: "/headerIcon/SVG (8).svg",  title: "الطلاءات الواقية",      sub: "طلاءات بولي يوريا وإيبوكسي ومضادة للتآكل",          href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "أنظمة الأرضيات",       sub: "حلول أرضيات إيبوكسي للمنشآت الصناعية",              href: "/services?service=1&sub=epoxy-floor-coating" },
+      { icon: "/headerIcon/SVG (7).svg",  title: "العزل الحراري",         sub: "أنظمة كومبو للتحكم في الحرارة والرطوبة",             href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (9).svg",  title: "الإصلاح الإنشائي",     sub: "حقن الشقوق وأعمال تأهيل الخرسانة",                  href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (5).svg",  title: "حلول المسابح",          sub: "إنشاء المسابح والتبليط والعزل المائي",               href: "/services" },
+    ],
+  },
+};
+
 const projectsMegaMenu = {
   en: {
     label: "OUR PROJECTS",
@@ -130,7 +163,7 @@ const industriesMegaMenu = {
 };
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
-type MegaMenuKey = "services" | "projects" | "industries" | null;
+type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | null;
 
 type MegaItem = { icon: string; title: string; sub: string; href: string };
 
@@ -350,6 +383,7 @@ const Navbar = () => {
   /* ─── NAV ITEMS ─────────────────────────────────────────────────────── */
   const navItems: { name: string; href: string; megaKey?: MegaMenuKey }[] = [
     { name: t.nav.services,   href: "/services",   megaKey: "services"   },
+    { name: t.nav.solutions,  href: "/solutions",  megaKey: "solutions"  },
     { name: t.nav.projects,   href: "/project",    megaKey: "projects"   },
     { name: t.nav.products,   href: "/products"                           },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
@@ -392,6 +426,7 @@ const Navbar = () => {
 
                 const megaData: MegaData | null =
                   item.megaKey === "services"   ? servicesMegaMenu[lang] :
+                  item.megaKey === "solutions"  ? solutionsMegaMenu[lang] :
                   item.megaKey === "projects"   ? projectsMegaMenu[lang] :
                   item.megaKey === "industries" ? industriesMegaMenu[lang] : null;
 
@@ -518,6 +553,7 @@ const Navbar = () => {
 
               const megaData: MegaData | null =
                 item.megaKey === "services"   ? servicesMegaMenu[lang] :
+                item.megaKey === "solutions"  ? solutionsMegaMenu[lang] :
                 item.megaKey === "projects"   ? projectsMegaMenu[lang] :
                 item.megaKey === "industries" ? industriesMegaMenu[lang] : null;
 
