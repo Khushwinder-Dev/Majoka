@@ -173,16 +173,17 @@ export default function ProductsPage() {
         </div>
 
         {/* Main 2-Column: Left Filters + Right Products Grid */}
-        <div className="flex flex-col lg:flex-row items-start gap-7">
+        {/* <div className="flex flex-col lg:flex-row items-start gap-7"> */}
+        <div className="">
           {/* ===================== LEFT SIDEBAR ===================== */}
           <aside
-            className={`w-full lg:w-64 xl:w-72 flex-shrink-0 space-y-5 ${isMobileFilterOpen
+            className={`hidden w-full lg:w-64 xl:w-72 flex-shrink-0 space-y-5 ${isMobileFilterOpen
               ? "fixed inset-0 z-50 bg-black/50 p-4 overflow-y-auto flex items-center justify-center lg:static lg:bg-transparent lg:p-0"
               : "hidden lg:block"
               }`}
           >
             <div
-              className={`w-full max-w-md lg:max-w-none space-y-5 ${isMobileFilterOpen
+              className={`hidden w-full max-w-md lg:max-w-none space-y-5 ${isMobileFilterOpen
                 ? "bg-white p-6 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
                 : ""
                 }`}
@@ -460,7 +461,7 @@ export default function ProductsPage() {
 
               <div className="flex items-center gap-4">
                 {/* View Mode Switcher */}
-                <div className="flex items-center gap-1.5 bg-gray-100/80 p-1 rounded-xl">
+                <div className="hidden flex items-center gap-1.5 bg-gray-100/80 p-1 rounded-xl">
                   <button
                     onClick={() => setViewMode("grid")}
                     className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all cursor-pointer ${viewMode === "grid"

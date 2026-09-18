@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import {
   Facebook, Instagram, Linkedin, Youtube, Twitter,
-  ArrowRight, ArrowLeft, MapPin, Phone, Mail, Clock, ChevronUp,
+  ArrowRight, ArrowLeft, ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -149,10 +149,14 @@ export default function Footer() {
             {/* Left: icon + text */}
             <div className="flex items-start gap-4 flex-1 max-w-xl">
               <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#01a9a0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                </svg>
+                <Image
+                  src="/footerIcon/newsletterEmailIcon.svg"
+                  alt="Newsletter"
+                  width={32}
+                  height={32}
+                  unoptimized
+                  className="w-8 h-8 object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-lg sm:text-xl font-extrabold text-stone-900 leading-tight mb-1">
@@ -284,21 +288,21 @@ export default function Footer() {
               <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
                 <FooterHeading title={t.footer.contactTitle} />
                 <div className="flex flex-col gap-4">
-                  <ContactItem icon={<Phone className="w-4 h-4" strokeWidth={2} />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="phone" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
                     <Link href={`tel:${t.footer.phone1.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone1}</Link>
                     <Link href={`tel:${t.footer.phone2.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Mail className="w-4 h-4" strokeWidth={2} />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="email" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
                     <Link href={`mailto:${t.footer.email1}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email1}</Link>
                     <Link href={`mailto:${t.footer.email2}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<MapPin className="w-4 h-4" strokeWidth={2} />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="location" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
                     <span className="whitespace-pre-line leading-relaxed">{t.footer.location}</span>
                   </ContactItem>
 
-                  <ContactItem icon={<Clock className="w-4 h-4" strokeWidth={2} />}>
+                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="hours" width={20} height={20} unoptimized className="w-5 h-5 object-contain" />}>
                     <span>{t.footer.workingHours}</span>
                     <span className="text-stone-400 text-xs">{t.footer.closedDay}</span>
                   </ContactItem>
