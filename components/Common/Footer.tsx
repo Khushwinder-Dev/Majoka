@@ -143,7 +143,7 @@ export default function Footer() {
         {/* Light overlay to keep text readable */}
         <div className="absolute inset-0 bg-white/55 pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-12">
 
             {/* Left: icon + text */}
@@ -207,14 +207,14 @@ export default function Footer() {
         {/* Dark overlay so text is readable */}
         <div className="absolute inset-0 bg-[#021f1e]/30 pointer-events-none hidden" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── 5-column grid ───────────────────────────────────────────── */}
           <div className="pt-12 sm:pt-14 lg:pt-16 pb-10 sm:pb-12">
             <div className="grid grid-cols-12 gap-8 lg:gap-6 xl:gap-8">
 
               {/* COL 1 — Brand */}
-              <div className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-5">
+              <div className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-4">
                 <Link href="/" className="flex items-center gap-3 w-fit">
                   <div className="relative w-12 h-12 flex-shrink-0">
                     <Image src="/logo.png" alt="Taj Al Rahmah Logo" fill className="object-contain" />
