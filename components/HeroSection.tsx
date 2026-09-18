@@ -203,14 +203,14 @@ const HeroSection = () => {
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, rgba(2, 38, 42, 0.95) 0%, rgba(2, 44, 49, 0.90) 35%, rgba(2, 48, 58, 0.70) 65%, rgba(1, 26, 38, 0.42) 100%)",
+            "linear-gradient(90deg, rgba(2, 38, 42, 0.78) 0%, rgba(2, 44, 49, 0.65) 35%, rgba(2, 48, 58, 0.40) 65%, rgba(1, 26, 38, 0.15) 100%)",
         }}
       />
       <div
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(1, 18, 22, 0.65) 0%, transparent 25%, transparent 70%, rgba(1, 20, 24, 0.88) 100%)",
+            "linear-gradient(180deg, rgba(1, 18, 22, 0.35) 0%, transparent 20%, transparent 70%, rgba(1, 20, 24, 0.55) 100%)",
         }}
       />
 
