@@ -60,37 +60,37 @@ function StatCard({
 
 // ── Stats data ────────────────────────────────────────────────────────────────
 const statsData = [
-  { value: 17,  suffix: "+", labelEn: "Years Of Experience",    labelAr: "سنة خبرة",        icon: "/stats/SVG - Constructioqn Hard Hat Outline Icon.svg" },
-  { value: 820, suffix: "+", labelEn: "Project Completed",      labelAr: "مشروع منجز",      icon: "/stats/Blueprint with Home Outline Icon.svg"           },
-  { value: 500, suffix: "+", labelEn: "Satisfied Clients",      labelAr: "عميل راضٍ",       icon: "/stats/Clients Group Outline Icon.svg"                 },
-  { value: 120, suffix: "+", labelEn: "Skilled Professionals",  labelAr: "محترف ماهر",      icon: "/stats/Metrics Outline Icon.svg"                       },
+  { value: 17, suffix: "+", labelEn: "Years Of Experience", labelAr: "سنة خبرة", icon: "/stats/SVG - Constructioqn Hard Hat Outline Icon.svg" },
+  { value: 820, suffix: "+", labelEn: "Project Completed", labelAr: "مشروع منجز", icon: "/stats/Blueprint with Home Outline Icon.svg" },
+  { value: 500, suffix: "+", labelEn: "Satisfied Clients", labelAr: "عميل راضٍ", icon: "/stats/Clients Group Outline Icon.svg" },
+  { value: 120, suffix: "+", labelEn: "Skilled Professionals", labelAr: "محترف ماهر", icon: "/stats/Metrics Outline Icon.svg" },
 ];
 
 // ── Feature items ─────────────────────────────────────────────────────────────
 const featuresData = [
   {
     icon: "/media/aboutSection/Frame.svg",
-    titleEn: "Quality Materials",      titleAr: "مواد عالية الجودة",
-    descEn:  "Premium materials selected durability performance, and protection.",
-    descAr:  "مواد ممتازة مختارة لتحقيق المتانة والأداء والحماية الفائقة.",
+    titleEn: "Quality Materials", titleAr: "مواد عالية الجودة",
+    descEn: "Premium materials selected durability performance, and protection.",
+    descAr: "مواد ممتازة مختارة لتحقيق المتانة والأداء والحماية الفائقة.",
   },
   {
     icon: "/media/aboutSection/Frame (1).svg",
-    titleEn: "Technical Expertise",    titleAr: "خبرة فنية متقدمة",
-    descEn:  "Professional solutions based on the condition and requirements of project.",
-    descAr:  "حلول هندسية متخصصة بناءً على متطلبات وظروف كل مشروع.",
+    titleEn: "Technical Expertise", titleAr: "خبرة فنية متقدمة",
+    descEn: "Professional solutions based on the condition and requirements of project.",
+    descAr: "حلول هندسية متخصصة بناءً على متطلبات وظروف كل مشروع.",
   },
   {
     icon: "/media/aboutSection/Frame (2).svg",
-    titleEn: "Precise Execution",      titleAr: "تنفيذ دقيق",
-    descEn:  "Careful preparation and installation to ensure reliable, long-lasting results.",
-    descAr:  "إعداد دقيق وتثبيت احترافي لضمان نتائج موثوقة وطويلة الأمد.",
+    titleEn: "Precise Execution", titleAr: "تنفيذ دقيق",
+    descEn: "Careful preparation and installation to ensure reliable, long-lasting results.",
+    descAr: "إعداد دقيق وتثبيت احترافي لضمان نتائج موثوقة وطويلة الأمد.",
   },
   {
     icon: "/media/aboutSection/Frame (4).svg",
-    titleEn: "Long-Term Protection",   titleAr: "حماية طويلة الأمد",
-    descEn:  "Solutions designed to protect your property and reduce future costs.",
-    descAr:  "حلول مصممة لحماية ممتلكاتك وتقليل التكاليف المستقبلية.",
+    titleEn: "Long-Term Protection", titleAr: "حماية طويلة الأمد",
+    descEn: "Solutions designed to protect your property and reduce future costs.",
+    descAr: "حلول مصممة لحماية ممتلكاتك وتقليل التكاليف المستقبلية.",
   },
 ];
 
@@ -98,7 +98,7 @@ const featuresData = [
 export default function AboutCompanySection() {
   const { isArabic } = useLanguage();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const statsRef  = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
 
   // Trigger counters when stats row enters viewport
@@ -193,7 +193,7 @@ export default function AboutCompanySection() {
             {/* Main photo */}
             <div className="relative z-10 w-full h-[320px] sm:h-[400px] lg:h-[460px] overflow-hidden">
               <Image
-                src="/hs2Img4.png"
+                src="/qw.jpeg"
                 alt={isArabic ? "مهندسو تاج الرحمة في موقع العمل" : "Taj Al Rahmah engineers on site"}
                 fill
                 unoptimized
