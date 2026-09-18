@@ -431,7 +431,7 @@ const translations: Record<Language, Translations> = {
       phone2: "+971 52 749 2002",
       email1: "info@tajalrahmah.com",
       email2: "tajalrahmah@gmail.com",
-      location: "Office G-01-691, Al Khabaisi,\nDubai, 00000 Dubai",
+      location: "Office G-01-691, Al,\nKhabaisi, Dubai, UAE",
       workingHours: "Mon - Sat: 9:00 AM - 6:00 PM",
       closedDay: "Sunday - Closed",
       copyright: "© 2026 Taj Al Rahmah. All Rights Reserved.",

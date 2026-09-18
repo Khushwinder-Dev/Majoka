@@ -313,17 +313,20 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar ──────────────────────────────────────────────── */}
-          <div className="relative border-t border-stone-300/40 pt-8 pb-5 sm:pb-6">
+          <div className="relative border-t border-stone-300/40 pt-9 pb-5 sm:pb-6">
 
             {/* Scroll-to-top — sits centered ON the divider line */}
-            <div className="absolute -top-5 left-1/2 -translate-x-1/2">
-              <button
-                onClick={scrollToTop}
-                aria-label={t.footer.scrollToTop}
-                className="w-10 h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
-              >
-                <ChevronUp className="w-5 h-5 stroke-[2.5]" />
-              </button>
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+              {/* White halo ring */}
+              <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center shadow-sm">
+                <button
+                  onClick={scrollToTop}
+                  aria-label={t.footer.scrollToTop}
+                  className="w-10 h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
+                >
+                  <ChevronUp className="w-5 h-5 stroke-[2.5]" />
+                </button>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
