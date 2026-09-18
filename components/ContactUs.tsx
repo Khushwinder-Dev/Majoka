@@ -85,7 +85,7 @@ const WorkSteps = () => {
           <div className="flex flex-col space-y-10">
             <div className="flex flex-col space-y-6">
               {/* Name Input */}
-              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center">
+              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center">
                 <input
                   type="text"
                   placeholder="Enter Name"
@@ -94,7 +94,7 @@ const WorkSteps = () => {
               </div>
 
               {/* Phone Input */}
-              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center">
+              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center">
                 <input
                   type="tel"
                   placeholder="Phone Number"
@@ -103,7 +103,7 @@ const WorkSteps = () => {
               </div>
 
               {/* Email Input */}
-              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center">
+              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center">
                 <input
                   type="email"
                   placeholder="Email Address"
@@ -112,7 +112,7 @@ const WorkSteps = () => {
               </div>
 
               {/* Services Dropdown */}
-              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center justify-between">
+              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center justify-between">
                 <span className="text-[#e9f5fb] text-lg">Services</span>
                 <svg
                   width="12"
@@ -131,7 +131,7 @@ const WorkSteps = () => {
               </div>
 
               {/* Message Input */}
-              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center">
+              <div className="w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center">
                 <input
                   type="text"
                   placeholder="Message"

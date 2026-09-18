@@ -32,8 +32,8 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
         dir={isArabic ? "rtl" : "ltr"}
         placeholder=" "
         className={`
-          peer w-full rounded-xl border bg-white
-          px-4 pt-5 pb-2
+          peer w-full rounded-full border bg-white
+          px-5 pt-5 pb-2
           text-sm sm:text-[15px] text-stone-800
           focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200
@@ -44,7 +44,7 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
       <label
         className={`
           pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-4" : "left-4"}
+          ${isArabic ? "right-5" : "left-5"}
           transition-all duration-200
           ${lifted
             ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
@@ -83,8 +83,8 @@ function FloatTextarea({ name, value, label, isArabic, onChange }: FloatTextarea
         rows={4}
         placeholder=" "
         className={`
-          peer w-full rounded-xl border bg-white
-          px-4 pt-6 pb-2
+          peer w-full rounded-2xl border bg-white
+          px-5 pt-6 pb-2
           text-sm sm:text-[15px] text-stone-800
           focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200 resize-none h-32 sm:h-36
@@ -95,7 +95,7 @@ function FloatTextarea({ name, value, label, isArabic, onChange }: FloatTextarea
       <label
         className={`
           pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-4" : "left-4"}
+          ${isArabic ? "right-5" : "left-5"}
           transition-all duration-200
           ${lifted
             ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"

@@ -527,8 +527,8 @@ function ServicesContent() {
                 <div className="relative">
                   <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
                     placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
                     {isArabic ? "الاسم الكامل" : "Full Name"}
                   </label>
                 </div>
@@ -536,8 +536,8 @@ function ServicesContent() {
                 <div className="relative">
                   <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
                     placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
                     {isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
                   </label>
                 </div>
@@ -547,8 +547,8 @@ function ServicesContent() {
                 <div className="relative">
                   <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
                     placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
                     {isArabic ? "رقم الهاتف" : "Phone Number"}
                   </label>
                 </div>
@@ -556,8 +556,8 @@ function ServicesContent() {
                 <div className="relative">
                   <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
                     placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.subject ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.subject ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
                     {isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
                   </label>
                 </div>
@@ -566,8 +566,8 @@ function ServicesContent() {
               <div className="relative">
                 <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
                   placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                  className={`peer w-full bg-white border border-stone-300 rounded-xl px-4 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"} peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.message ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
+                  className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
+                <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.message ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
                   {isArabic ? "الرسالة والتفاصيل" : "Message and details"}
                 </label>
               </div>

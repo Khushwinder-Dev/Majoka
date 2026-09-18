@@ -4,8 +4,8 @@ import React, { useState } from "react";
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const inputBase = `
-  peer w-full rounded-xl border bg-white
-  px-4 pt-5 pb-2
+  peer w-full rounded-full border bg-white
+  px-5 pt-5 pb-2
   text-sm sm:text-[15px] text-stone-800
   focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
   transition-all duration-200
@@ -61,7 +61,7 @@ export function FloatInput({
       <label
         className={`
           pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-4" : "left-4"}
+          ${isArabic ? "right-5" : "left-5"}
           transition-all duration-200
           ${lifted
             ? "-top-2 text-[11px] font-semibold text-[#01a9a0]"
@@ -114,8 +114,8 @@ export function FloatTextarea({
         dir={isArabic ? "rtl" : "ltr"}
         placeholder=" "
         className={`
-          peer w-full rounded-xl border bg-white
-          px-4 pt-6 pb-2
+          peer w-full rounded-2xl border bg-white
+          px-5 pt-6 pb-2
           text-sm sm:text-[15px] text-stone-800
           focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200 resize-none
@@ -127,7 +127,7 @@ export function FloatTextarea({
       <label
         className={`
           pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-4" : "left-4"}
+          ${isArabic ? "right-5" : "left-5"}
           transition-all duration-200
           ${lifted
             ? "-top-2 text-[11px] font-semibold text-[#01a9a0]"

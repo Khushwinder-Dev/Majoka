@@ -40,3 +40,15 @@ body {
 }.theme-text-main-hover-white:hover {
   color: var(--white);
 }
+
+/* Global pill shape for text/search/form inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+input[type="url"],
+input[type="number"],
+input:not([type]) {
+  border-radius: 9999px;
+}

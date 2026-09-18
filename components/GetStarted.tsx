@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
@@ -279,10 +279,10 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
+                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -303,10 +303,10 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
+                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -327,10 +327,10 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
+                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}
@@ -342,7 +342,7 @@ const GetStarted = () => {
                 {/* Services Dropdown */}
                 <div className="relative">
                   <div
-                    className={`w-full h-[50px] border border-[#e9f5fb] rounded-xl px-4 py-4 flex items-center justify-between ${isSubmitting
+                    className={`w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center justify-between ${isSubmitting
                       ? "opacity-50 cursor-not-allowed"
                       : "cursor-pointer"
                       }`}
@@ -361,11 +361,11 @@ const GetStarted = () => {
 
                   {/* Dropdown Menu */}
                   {isDropdownOpen && !isSubmitting && (
-                    <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-md border border-gray-300 rounded-xl shadow-lg z-50 max-h-48 overflow-y-auto">
+                    <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg z-50 max-h-48 overflow-y-auto">
                       {services.map((service, index) => (
                         <div
                           key={index}
-                          className="px-4 py-3 text-gray-800 hover:bg-gray-100/50 cursor-pointer transition-colors duration-150 first:rounded-t-xl last:rounded-b-xl"
+                          className="px-4 py-3 text-gray-800 hover:bg-gray-100/50 cursor-pointer transition-colors duration-150 first:rounded-t-2xl last:rounded-b-2xl"
                           onClick={() => handleServiceSelect(service)}
                         >
                           {service}
@@ -387,10 +387,10 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-4 py-3 bg-transparent border border-[#e9f5fb] rounded-xl text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
-                    className={`absolute left-3 px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
+                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
                       ? "-top-2.5 text-[11px] font-semibold text-white"
                       : "top-3.5 text-sm text-white/70"
                       }`}

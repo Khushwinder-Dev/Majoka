@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -527,10 +527,10 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.fullName || focusedField === "fullName"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -552,10 +552,10 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.email || focusedField === "email"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -577,10 +577,10 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.phone || focusedField === "phone"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -602,10 +602,10 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.experience || focusedField === "experience"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
@@ -621,7 +621,7 @@ const JobApplicationPage = () => {
                       Upload CV/Resume *
                     </label>
                     {!formData.cv ? (
-                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#01a9a0] transition-colors bg-white hover:bg-gray-50">
+                      <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-2xl cursor-pointer hover:border-[#01a9a0] transition-colors bg-white hover:bg-gray-50">
                         <div className="flex flex-col items-center justify-center pt-5 pb-6">
                           <Upload className="w-8 h-8 text-gray-400 mb-2" />
                           <p className="text-sm text-gray-600 text-center">
@@ -644,7 +644,7 @@ const JobApplicationPage = () => {
                         />
                       </label>
                     ) : (
-                      <div className="flex items-center justify-between p-4 bg-white border border-gray-300 rounded-lg">
+                      <div className="flex items-center justify-between p-4 bg-white border border-gray-300 rounded-2xl">
                         <div className="flex items-center gap-3">
                           <FileText className="w-5 h-5 text-[#01a9a0]" />
                           <div>
@@ -679,10 +679,10 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       rows={4}
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 text-gray-900 text-base font-normal font-['Anek_Malayalam'] focus:outline-none rounded-xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 py-3.5 bg-white border border-stone-300 text-stone-800 text-sm sm:text-[15px] font-normal font-['Anek_Malayalam'] focus:outline-none rounded-2xl focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
-                      className={`absolute left-3 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
                         formData.coverLetter || focusedField === "coverLetter"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
