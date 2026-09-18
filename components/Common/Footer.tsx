@@ -313,27 +313,27 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar ──────────────────────────────────────────────── */}
-          <div className="py-5 sm:py-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="relative border-t border-stone-300/40 pt-8 pb-5 sm:pb-6">
 
+            {/* Scroll-to-top — sits centered ON the divider line */}
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+              <button
+                onClick={scrollToTop}
+                aria-label={t.footer.scrollToTop}
+                className="w-10 h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
+              >
+                <ChevronUp className="w-5 h-5 stroke-[2.5]" />
+              </button>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               {/* Copyright */}
-              <p className="text-sm text-stone-600 text-center sm:text-start order-2 sm:order-1">
+              <p className="text-sm text-stone-600 text-center sm:text-start">
                 {t.footer.copyright}
               </p>
 
-              {/* Scroll to top */}
-              <div className="flex justify-center order-1 sm:order-2">
-                <button
-                  onClick={scrollToTop}
-                  aria-label={t.footer.scrollToTop}
-                  className="w-10 h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
-                >
-                  <ChevronUp className="w-5 h-5 stroke-[2.5]" />
-                </button>
-              </div>
-
               {/* Legal links */}
-              <div className="flex items-center justify-center sm:justify-end gap-4 sm:gap-5 order-3 text-sm text-stone-600">
+              <div className="flex items-center justify-center sm:justify-end gap-4 sm:gap-5 text-sm text-stone-600">
                 <Link href="/terms" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "شروط الاستخدام" : "Terms of Use"}
                 </Link>
@@ -344,7 +344,6 @@ export default function Footer() {
                   {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
                 </Link>
               </div>
-
             </div>
           </div>
         </div>
