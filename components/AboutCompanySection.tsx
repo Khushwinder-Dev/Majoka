@@ -35,7 +35,7 @@ function StatCard({
   return (
     <div className="flex items-center gap-4 bg-[#01a9a0] rounded-2xl px-5 py-5 sm:px-6 sm:py-6 flex-1 min-w-0">
       {/* Icon circle */}
-      <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/20 flex items-center justify-center">
+      <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center">
         {icon}
       </div>
       {/* Text */}
@@ -55,28 +55,28 @@ function StatCard({
 const statsData = [
   { value: 17,  suffix: "+", labelEn: "Years Of Experience",    labelAr: "سنة خبرة",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="#01a9a0" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0 1 12 0v1"/><path d="M12 12v2m0 4h.01"/>
       </svg>
     ),
   },
   { value: 820, suffix: "+", labelEn: "Project Completed",      labelAr: "مشروع منجز",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="#01a9a0" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12l2 2 4-4"/>
       </svg>
     ),
   },
   { value: 500, suffix: "+", labelEn: "Satisfied Clients",      labelAr: "عميل راضٍ",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="#01a9a0" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
       </svg>
     ),
   },
   { value: 120, suffix: "+", labelEn: "Skilled Professionals",  labelAr: "محترف ماهر",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 sm:w-7 sm:h-7" stroke="#01a9a0" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
         <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
       </svg>
     ),
