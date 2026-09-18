@@ -194,12 +194,12 @@ export default function AboutCompanySection() {
             {/* CTA button */}
             <Link
               href="/about-us"
-              className="inline-flex items-center gap-4 self-start pl-6 pr-2 py-2 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase shadow-[0_4px_18px_rgba(1,169,160,0.35)] hover:shadow-[0_6px_22px_rgba(1,169,160,0.5)] hover:-translate-y-0.5 transition-all duration-300 group"
+              className="inline-flex items-center self-start rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-bold text-sm tracking-wide shadow-[0_4px_18px_rgba(1,169,160,0.35)] hover:shadow-[0_6px_22px_rgba(1,169,160,0.45)] hover:-translate-y-0.5 transition-all duration-300 group overflow-hidden"
             >
-              <span>{isArabic ? "من نحن" : "ABOUT MORE"}</span>
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center group-hover:translate-x-0.5 transition-transform duration-300">
+              <span className="pl-6 pr-4 py-3">{isArabic ? "معرفة المزيد" : "ABOUT MORE"}</span>
+              <span className="flex-shrink-0 w-10 h-10 m-1 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform duration-300">
                 <ArrowRight className={`w-4 h-4 text-[#01a9a0] stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
-              </div>
+              </span>
             </Link>
           </div>
 
@@ -229,14 +229,18 @@ export default function AboutCompanySection() {
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent pointer-events-none" />
 
-              {/* Play button */}
+              {/* Play button — centered with pulse ring */}
               <button
                 onClick={() => setIsVideoOpen(true)}
                 aria-label={isArabic ? "تشغيل الفيديو" : "Play Company Video"}
-                className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 hover:bg-white flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer z-10"
-                style={{ width: 72, height: 72, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group/play"
               >
-                <Play className="w-7 h-7 fill-[#01a9a0] text-[#01a9a0] ml-1" />
+                {/* Pulse ring */}
+                <span className="absolute inset-0 rounded-full bg-white/40 animate-ping" />
+                {/* Button circle */}
+                <span className="relative flex items-center justify-center w-[72px] h-[72px] rounded-full bg-white shadow-[0_8px_32px_rgba(0,0,0,0.28)] group-hover/play:scale-110 active:scale-95 transition-transform duration-300">
+                  <Play className="w-7 h-7 fill-[#01a9a0] text-[#01a9a0] translate-x-0.5" />
+                </span>
               </button>
             </div>
           </div>
