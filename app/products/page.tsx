@@ -18,6 +18,7 @@ import {
   Link2,
   Send,
   Check,
+  Search,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { allProductsData, ProductDetailItem } from "@/data/productsData";
@@ -28,6 +29,7 @@ const categoryList: { name: string; count: number }[] = [];
 export default function ProductsPage() {
   const router = useRouter();
   // Filter States
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedRating, setSelectedRating] = useState<number | "any">("any");
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
@@ -69,12 +71,17 @@ export default function ProductsPage() {
   const handleResetAll = () => {
     setSelectedCategories([]);
     setSelectedRating("any");
+    setSearchQuery("");
     toast.success("Filters reset to default");
   };
 
   // Filtered Products
   const filteredProducts = useMemo(() => {
     return allProductsData.filter((product) => {
+      const matchSearch =
+        searchQuery.trim() === "" ||
+        product.name.toLowerCase().includes(searchQuery.toLowerCase());
+
       const matchCategory =
         selectedCategories.length === 0 ||
         selectedCategories.includes(product.category);
@@ -82,9 +89,9 @@ export default function ProductsPage() {
       const matchRating =
         selectedRating === "any" || product.rating >= selectedRating;
 
-      return matchCategory && matchRating;
+      return matchSearch && matchCategory && matchRating;
     });
-  }, [selectedCategories, selectedRating]);
+  }, [searchQuery, selectedCategories, selectedRating]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
   const paginatedProducts = useMemo(() => {
@@ -156,7 +163,7 @@ export default function ProductsPage() {
     <div className="min-h-screen bg-[#fafbfc] text-gray-900 pb-20">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-16">
         {/* Mobile Filter Toggle */}
-        <div className="lg:hidden flex items-center justify-between mb-6">
+        <div className="lg:hidden flex items-center justify-between mb-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">All products</h1>
             <p className="text-xs text-gray-500 mt-0.5">
@@ -170,6 +177,28 @@ export default function ProductsPage() {
             <SlidersHorizontal className="w-4 h-4 text-[#01a9a0]" />
             Filters
           </button>
+        </div>
+
+        {/* Mobile search bar */}
+        <div className="lg:hidden mb-6">
+          <div className="relative">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+              placeholder="Search products…"
+              className="w-full h-11 pl-9 pr-9 rounded-xl bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Main 2-Column: Left Filters + Right Products Grid */}
@@ -449,8 +478,8 @@ export default function ProductsPage() {
           {/* ===================== RIGHT CONTENT ===================== */}
           <main className="flex-1 w-full min-w-0">
             {/* Top Toolbar */}
-            <div className="hidden lg:flex items-center justify-between mb-6 pb-1">
-              <div>
+            <div className="hidden lg:flex items-center justify-between mb-6 pb-1 gap-4">
+              <div className="shrink-0">
                 <h1 className="text-2xl font-bold font-anek text-gray-900 tracking-tight">
                   All products
                 </h1>
@@ -459,7 +488,29 @@ export default function ProductsPage() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4">
+              {/* Search bar — centred in toolbar */}
+              <div className="flex-1 max-w-md">
+                <div className="relative">
+                  <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                    placeholder="Search products…"
+                    className="w-full h-10 pl-9 pr-9 rounded-xl bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 shrink-0">
                 {/* View Mode Switcher */}
                 <div className="hidden flex items-center gap-1.5 bg-gray-100/80 p-1 rounded-xl">
                   <button
@@ -525,10 +576,12 @@ export default function ProductsPage() {
             {filteredProducts.length === 0 ? (
               <div className="bg-white rounded-2xl p-12 text-center border border-gray-200">
                 <h3 className="text-lg font-bold text-gray-800 mb-1">
-                  No products match your filters
+                  No products found
                 </h3>
                 <p className="text-xs text-gray-500 mb-4">
-                  Try clearing some categories or selecting &quot;Any rating&quot;.
+                  {searchQuery
+                    ? `No results for "${searchQuery}". Try a different search term.`
+                    : "Try clearing some categories or selecting \"Any rating\"."}
                 </p>
                 <button
                   onClick={handleResetAll}
