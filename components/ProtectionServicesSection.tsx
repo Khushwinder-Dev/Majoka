@@ -22,7 +22,7 @@ export default function ProtectionServicesSection() {
     },
     {
       id: 2,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/thumbnail.png",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/combo-system/thumbnail/ree.jpeg",
       icon: "/media/protection/fi_11495742.svg",
       title: isArabic ? "نظام الكومبو للأسطح" : "Combo System Roof Waterproofing",
       description: isArabic
@@ -123,11 +123,11 @@ export default function ProtectionServicesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-14 gap-x-6 lg:gap-x-8">
           {services.map((service, index) => (
             <Link
-            key={service.id}
+              key={service.id}
               href={service.link}
               className=""
             >
-              <div                
+              <div
                 data-aos="fade-up"
                 data-aos-delay={100 + index * 50}
                 className="group flex flex-col cursor-pointer"
