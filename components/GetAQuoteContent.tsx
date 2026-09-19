@@ -168,7 +168,7 @@ export default function GetAQuoteContent() {
         const data = await res.json().catch(() => ({}));
         toast.error(
           data.error ||
-            (isArabic ? "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى." : "Submission failed. Please try again.")
+          (isArabic ? "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى." : "Submission failed. Please try again.")
         );
       }
     } catch {
@@ -194,7 +194,7 @@ export default function GetAQuoteContent() {
           fill
           priority
           unoptimized
-          className="object-cover object-left sm:object-center"
+          className="object-left sm:object-center"
         />
 
         {/* Top gradient for transparent navbar readability */}
@@ -218,7 +218,7 @@ export default function GetAQuoteContent() {
           2. MAIN SECTION: TERRACE BACKGROUND + FLOATING FORM CARD
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full min-h-[920px] lg:min-h-[1020px] py-12 sm:py-16 lg:py-20 overflow-hidden flex items-center">
-        
+
         {/* Full Terrace Building Background Image spanning the entire section with clean full visibility */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -237,7 +237,7 @@ export default function GetAQuoteContent() {
 
             {/* ── LEFT COLUMN: Text + 3 Badges sitting over top-left ── */}
             <div className="lg:col-span-5 flex flex-col pt-2 lg:pt-4">
-              
+
               {/* Tagline */}
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-5 h-[2px] bg-[#01a9a0]" />
@@ -273,11 +273,14 @@ export default function GetAQuoteContent() {
               <div className="flex flex-wrap items-center gap-4 sm:gap-6 bg-white/70 backdrop-blur-xs p-3 sm:p-4 rounded-2xl w-fit border border-white/80 shadow-xs">
                 {/* 1. Reliable Solutions */}
                 <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-full border border-[#01a9a0]/40 bg-white flex items-center justify-center text-[#01a9a0] flex-shrink-0 shadow-xs">
-                    <svg className="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2l2.4 2.4 3.4-.4 1 3.2 3 1.6-.8 3.3 2 2.8-2 2.8.8 3.3-3 1.6-1 3.2-3.4-.4L12 22l-2.4-2.4-3.4.4-1-3.2-3-1.6.8-3.3-2-2.8 2-2.8-.8-3.3 3-1.6 1-3.2 3.4.4L12 2z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
+                  <div className="w-10 h-10 rounded-full border border-[#01a9a0]/40 bg-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                    <Image
+                      src="/get-a-quote/new/sdfdsf.svg"
+                      alt="Reliable Solutions"
+                      width={22}
+                      height={22}
+                      className="w-[22px] h-[22px]"
+                    />
                   </div>
                   <div>
                     <h4 className="text-[13px] font-bold text-stone-900 leading-tight">
@@ -331,7 +334,7 @@ export default function GetAQuoteContent() {
             {/* ── RIGHT COLUMN: Floating White Card "Tell Us About Your Project" ── */}
             <div className="lg:col-span-7">
               <div className="bg-white rounded-[32px] p-6 sm:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14)] border border-stone-200/90">
-                
+
                 {/* Card Tagline */}
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-4 h-[2px] bg-[#01a9a0]" />
@@ -354,7 +357,7 @@ export default function GetAQuoteContent() {
 
                 {/* Form matching website input field standard */}
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                  
+
                   {/* Row 1: Full Name & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Full Name */}
@@ -367,16 +370,13 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                          }`}
                       />
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                        }`}
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                          }`}
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
@@ -392,16 +392,13 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                          }`}
                       />
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          formData.phoneNumber ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                        }`}
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phoneNumber ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                          }`}
                       >
                         {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                       </label>
@@ -420,16 +417,13 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                          }`}
                       />
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          formData.emailAddress ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                        }`}
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.emailAddress ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                          }`}
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                       </label>
@@ -444,16 +438,13 @@ export default function GetAQuoteContent() {
                         onChange={handleInputChange}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                          }`}
                       />
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          formData.companyName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                        }`}
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.companyName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                          }`}
                       >
                         {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                       </label>
@@ -470,9 +461,8 @@ export default function GetAQuoteContent() {
                         onChange={handleInputChange}
                         required
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right" : "text-left"
+                          }`}
                       >
                         <option value="" disabled hidden></option>
                         <option value="Combo Waterproofing">{isArabic ? "عزل الأسطح والمباني (Combo Waterproofing)" : "Combo Waterproofing"}</option>
@@ -485,13 +475,11 @@ export default function GetAQuoteContent() {
                         <option value="Other Specialist Services">{isArabic ? "خدمات فنية متخصصة أخرى" : "Other Specialist Services"}</option>
                       </select>
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } ${
-                          formData.projectType
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } ${formData.projectType
                             ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
-                        }`}
+                          }`}
                       >
                         {isArabic ? "نوع المشروع / الخدمة" : "Project Type"} <span className="text-red-500">*</span>
                       </label>
@@ -510,16 +498,13 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
-                        }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                          }`}
                       />
                       <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          formData.projectLocation ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                        }`}
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.projectLocation ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                          }`}
                       >
                         {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
                       </label>
@@ -536,16 +521,13 @@ export default function GetAQuoteContent() {
                       required
                       placeholder=" "
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
-                      }`}
+                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                        }`}
                     />
                     <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-5" : "left-5"
-                      } peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        formData.projectDetails ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""
-                      }`}
+                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.projectDetails ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
                     >
                       {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
                     </label>
@@ -645,7 +627,7 @@ export default function GetAQuoteContent() {
           3. SECTION: FREQUENTLY ASKED QUESTIONS (Matching Mockup)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#f3fcf9] overflow-hidden">
-        
+
         {/* Decorative Fluid Ribbons from user resources at bottom corners */}
         <div className="absolute left-0 bottom-0 pointer-events-none select-none z-0">
           <Image
@@ -667,7 +649,7 @@ export default function GetAQuoteContent() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">
             <div className="flex items-center justify-center gap-2 mb-2.5">
@@ -706,11 +688,10 @@ export default function GetAQuoteContent() {
               return (
                 <div
                   key={faq.id}
-                  className={`bg-white border transition-all duration-300 overflow-hidden ${
-                    isOpen
-                      ? "rounded-2xl sm:rounded-3xl border-[#1cd2ad]/40 shadow-[0_8px_24px_rgba(28,210,173,0.09)]"
-                      : "rounded-full border-stone-200/90 hover:border-[#1cd2ad]/40 shadow-xs hover:shadow-sm"
-                  }`}
+                  className={`bg-white border transition-all duration-300 overflow-hidden ${isOpen
+                    ? "rounded-2xl sm:rounded-3xl border-[#1cd2ad]/40 shadow-[0_8px_24px_rgba(28,210,173,0.09)]"
+                    : "rounded-full border-stone-200/90 hover:border-[#1cd2ad]/40 shadow-xs hover:shadow-sm"
+                    }`}
                 >
                   <button
                     type="button"
@@ -723,20 +704,18 @@ export default function GetAQuoteContent() {
                       </div>
 
                       <span
-                        className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${
-                          isOpen ? "text-[#1cd2ad]" : "text-stone-800 group-hover:text-[#1cd2ad]"
-                        }`}
+                        className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${isOpen ? "text-[#1cd2ad]" : "text-stone-800 group-hover:text-[#1cd2ad]"
+                          }`}
                       >
                         {isArabic ? faq.questionAr : faq.questionEn}
                       </span>
                     </div>
 
                     <div
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
-                        isOpen
-                          ? "bg-[#ddf8f3] text-[#1cd2ad]"
-                          : "bg-[#ddf8f3] text-[#1cd2ad] group-hover:bg-[#1cd2ad] group-hover:text-white"
-                      }`}
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
+                        ? "bg-[#ddf8f3] text-[#1cd2ad]"
+                        : "bg-[#ddf8f3] text-[#1cd2ad] group-hover:bg-[#1cd2ad] group-hover:text-white"
+                        }`}
                     >
                       {isOpen ? (
                         <Minus className="w-4 h-4 stroke-[2.5]" />
@@ -766,9 +745,9 @@ export default function GetAQuoteContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="relative w-full rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl border border-stone-100 bg-[#082b35]">
-            
+
             {/* Background Graphic: User's pristine Footer - BottomExpertsCalloutSection.png */}
             <div className="relative w-full min-h-[280px] sm:min-h-[280px] lg:min-h-[280px]">
               <Image
@@ -783,7 +762,7 @@ export default function GetAQuoteContent() {
               {/* Overlay with interactive content */}
               <div className="relative md:absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-8 md:py-0 z-10">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  
+
                   {/* Left Column: Heading + Subtitle + Contact Button */}
                   <div className="md:col-span-5 text-white">
                     <div className="flex items-center gap-2 mb-2">
