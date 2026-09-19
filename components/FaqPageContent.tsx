@@ -268,9 +268,9 @@ export default function FaqPageContent() {
     <div className="w-full bg-white overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (Laptop on desk with helmet & FAQ —)
+          1. HERO BANNER SECTION (As per Design Reference)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] lg:h-[480px] flex items-center bg-[#071d34] overflow-hidden">
+      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[460px] xl:h-[490px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image */}
         <Image
           src="/faqPage/Dubai modern skyline at twilight.png"
@@ -278,11 +278,24 @@ export default function FaqPageContent() {
           fill
           priority
           unoptimized
-          className="object-cover object-center"
+          className="object-cover object-left sm:object-center"
         />
 
-        {/* Subtle vignette overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20 pointer-events-none" />
+        {/* Top gradient for navbar clarity */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/25 to-transparent pointer-events-none" />
+
+        {/* Left deep dark/teal gradient overlay as per design ref */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/95 via-[#021822]/75 via-35% md:via-30% to-transparent pointer-events-none" />
+
+        {/* Heading: FAQ — positioned on left as in design reference */}
+        <div className="relative z-10 max-w-8xl mx-auto px-6 sm:px-10 md:px-16 lg:px-24 w-full">
+          <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-14">
+            <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
+              {isArabic ? "الأسئلة الشائعة" : "FAQ"}
+            </h1>
+            <span className="inline-block w-10 sm:w-14 md:w-16 h-[3px] sm:h-[4px] bg-white rounded-full drop-shadow" />
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
