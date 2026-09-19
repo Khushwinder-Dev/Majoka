@@ -150,7 +150,7 @@ export default function GetAQuoteContent() {
             : "Thank you! Your quote request has been submitted successfully. Our engineers will get back to you shortly.",
           {
             duration: 6000,
-            style: { background: "#1cd2ad", color: "#fff", padding: "16px", borderRadius: "10px" },
+            style: { background: "#01a9a0", color: "#fff", padding: "16px", borderRadius: "10px" },
           }
         );
         setFormData({
@@ -168,7 +168,7 @@ export default function GetAQuoteContent() {
         const data = await res.json().catch(() => ({}));
         toast.error(
           data.error ||
-          (isArabic ? "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى." : "Submission failed. Please try again.")
+            (isArabic ? "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى." : "Submission failed. Please try again.")
         );
       }
     } catch {
@@ -218,8 +218,8 @@ export default function GetAQuoteContent() {
           2. MAIN SECTION: TERRACE BACKGROUND + FLOATING FORM CARD
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full min-h-[920px] lg:min-h-[1020px] py-12 sm:py-16 lg:py-20 overflow-hidden flex items-center">
-
-        {/* Full Terrace Building Background Image spanning the entire section */}
+        
+        {/* Full Terrace Building Background Image spanning the entire section with clean full visibility */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
             src="/get-a-quote/terrace-building.png"
@@ -229,10 +229,6 @@ export default function GetAQuoteContent() {
             unoptimized
             className="object-cover object-bottom"
           />
-          {/* Top smooth white fade so the top-left text and badges sit on pure white */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/85 via-25% md:via-30% to-transparent" />
-          {/* Subtle horizontal gradient to ensure perfect legibility on the left column */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 via-40% to-transparent" />
         </div>
 
         {/* Content Container */}
@@ -241,43 +237,43 @@ export default function GetAQuoteContent() {
 
             {/* ── LEFT COLUMN: Text + 3 Badges sitting over top-left ── */}
             <div className="lg:col-span-5 flex flex-col pt-2 lg:pt-4">
-
+              
               {/* Tagline */}
               <div className="flex items-center gap-2 mb-3">
-                <span className="w-5 h-[2px] bg-[#1cd2ad]" />
-                <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#1cd2ad] uppercase">
+                <span className="w-5 h-[2px] bg-[#01a9a0]" />
+                <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#01a9a0] uppercase">
                   {isArabic ? "طلب عرض سعر" : "GET A QUOTE"}
                 </span>
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0d2438] leading-[1.18] tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0d2438] leading-[1.18] tracking-tight mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                 {isArabic ? (
                   <>
                     مشروعك يبدأ <br />
-                    <span className="text-[#1cd2ad]">بمحادثة معنا</span>
+                    <span className="text-[#01a9a0]">بمحادثة معنا</span>
                   </>
                 ) : (
                   <>
                     Your Project <br />
                     Starts with <br />
-                    <span className="text-[#1cd2ad]">a Conversation</span>
+                    <span className="text-[#01a9a0]">a Conversation</span>
                   </>
                 )}
               </h2>
 
               {/* Subtitle */}
-              <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-8 max-w-md">
+              <p className="text-stone-700 text-xs sm:text-sm font-medium leading-relaxed mb-8 max-w-md drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)]">
                 {isArabic
                   ? "سواء كان مشروعاً جديداً أو صيانة أو معالجة، فريقنا الهندسي جاهز لتقديم حلول العزل المتكاملة الأنسب لاحتياجاتك. شاركنا التفاصيل واحصل على عرض سعر مخصص."
                   : "Whether it's a new project, repair, or maintenance, our team is here to provide the right waterproofing solution for your needs. Share your details and get a tailored quote."}
               </p>
 
               {/* 3 Feature Badges in a Row */}
-              <div className="flex flex-wrap items-center gap-5 sm:gap-6">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 bg-white/70 backdrop-blur-xs p-3 sm:p-4 rounded-2xl w-fit border border-white/80 shadow-xs">
                 {/* 1. Reliable Solutions */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full border border-[#1cd2ad]/40 bg-[#eafbf7] flex items-center justify-center text-[#1cd2ad] flex-shrink-0 shadow-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-full border border-[#01a9a0]/40 bg-white flex items-center justify-center text-[#01a9a0] flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2l2.4 2.4 3.4-.4 1 3.2 3 1.6-.8 3.3 2 2.8-2 2.8.8 3.3-3 1.6-1 3.2-3.4-.4L12 22l-2.4-2.4-3.4.4-1-3.2-3-1.6.8-3.3-2-2.8 2-2.8-.8-3.3 3-1.6 1-3.2 3.4.4L12 2z" />
                       <circle cx="12" cy="12" r="3" />
@@ -287,15 +283,15 @@ export default function GetAQuoteContent() {
                     <h4 className="text-[13px] font-bold text-stone-900 leading-tight">
                       {isArabic ? "حلول موثوقة" : "Reliable"}
                     </h4>
-                    <span className="text-[11px] text-stone-500 font-medium">
+                    <span className="text-[11px] text-stone-600 font-medium">
                       {isArabic ? "وضمانات معتمدة" : "Solutions"}
                     </span>
                   </div>
                 </div>
 
                 {/* 2. Expert Support */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full border border-[#1cd2ad]/40 bg-[#eafbf7] flex items-center justify-center text-[#1cd2ad] flex-shrink-0 shadow-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-full border border-[#01a9a0]/40 bg-white flex items-center justify-center text-[#01a9a0] flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                       <circle cx="10" cy="7" r="4" />
@@ -305,15 +301,15 @@ export default function GetAQuoteContent() {
                     <h4 className="text-[13px] font-bold text-stone-900 leading-tight">
                       {isArabic ? "دعم هندسي" : "Expert"}
                     </h4>
-                    <span className="text-[11px] text-stone-500 font-medium">
+                    <span className="text-[11px] text-stone-600 font-medium">
                       {isArabic ? "واستشارات متخصصة" : "Support"}
                     </span>
                   </div>
                 </div>
 
                 {/* 3. Fast Response */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full border border-[#1cd2ad]/40 bg-[#eafbf7] flex items-center justify-center text-[#1cd2ad] flex-shrink-0 shadow-xs">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-full border border-[#01a9a0]/40 bg-white flex items-center justify-center text-[#01a9a0] flex-shrink-0 shadow-xs">
                     <svg className="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="12" cy="12" r="9" />
                       <polyline points="12 7 12 12 15 15" />
@@ -323,7 +319,7 @@ export default function GetAQuoteContent() {
                     <h4 className="text-[13px] font-bold text-stone-900 leading-tight">
                       {isArabic ? "استجابة سريعة" : "Fast"}
                     </h4>
-                    <span className="text-[11px] text-stone-500 font-medium">
+                    <span className="text-[11px] text-stone-600 font-medium">
                       {isArabic ? "خلال 24 ساعة" : "Response"}
                     </span>
                   </div>
@@ -335,11 +331,11 @@ export default function GetAQuoteContent() {
             {/* ── RIGHT COLUMN: Floating White Card "Tell Us About Your Project" ── */}
             <div className="lg:col-span-7">
               <div className="bg-white rounded-[32px] p-6 sm:p-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.14)] border border-stone-200/90">
-
+                
                 {/* Card Tagline */}
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="w-4 h-[2px] bg-[#1cd2ad]" />
-                  <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#1cd2ad] uppercase">
+                  <span className="w-4 h-[2px] bg-[#01a9a0]" />
+                  <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#01a9a0] uppercase">
                     {isArabic ? "طلب عرض سعر" : "REQUEST A QUOTE"}
                   </span>
                 </div>
@@ -356,138 +352,203 @@ export default function GetAQuoteContent() {
                     : "Fill in the details below and our experts will get back to you with the best solution and a competitive quote."}
                 </p>
 
-                {/* Form */}
+                {/* Form matching website input field standard */}
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-
+                  
                   {/* Row 1: Full Name & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                      </label>
+                    {/* Full Name */}
+                    <div className="relative">
                       <input
                         type="text"
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
                         required
-                        placeholder={isArabic ? "أدخل اسمك الكامل" : "e.g. John Doe"}
-                        className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200"
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
                       />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                      </label>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                        {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
-                      </label>
+                    {/* Phone Number */}
+                    <div className="relative">
                       <input
                         type="tel"
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
                         required
-                        placeholder={isArabic ? "+971 50 000 0000" : "+971 50 000 0000"}
-                        className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200"
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
                       />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          formData.phoneNumber ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                      </label>
                     </div>
                   </div>
 
                   {/* Row 2: Email Address & Company Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                        {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
-                      </label>
+                    {/* Email Address */}
+                    <div className="relative">
                       <input
                         type="email"
                         name="emailAddress"
                         value={formData.emailAddress}
                         onChange={handleInputChange}
                         required
-                        placeholder={isArabic ? "name@company.com" : "name@company.com"}
-                        className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200"
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
                       />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          formData.emailAddress ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                      </label>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                        {isArabic ? "اسم الشركة" : "Company Name"} <span className="text-stone-400 text-[11px]">({isArabic ? "اختياري" : "Optional"})</span>
-                      </label>
+                    {/* Company Name */}
+                    <div className="relative">
                       <input
                         type="text"
                         name="companyName"
                         value={formData.companyName}
                         onChange={handleInputChange}
-                        placeholder={isArabic ? "اسم الشركة أو المؤسسة" : "Your Company Ltd."}
-                        className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200"
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
                       />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          formData.companyName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
+                      </label>
                     </div>
                   </div>
 
                   {/* Row 3: Project Type & Project Location */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
+                    {/* Project Type Dropdown */}
+                    <div className="relative">
+                      <select
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleInputChange}
+                        required
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
+                      >
+                        <option value="" disabled hidden></option>
+                        <option value="Combo Waterproofing">{isArabic ? "عزل الأسطح والمباني (Combo Waterproofing)" : "Combo Waterproofing"}</option>
+                        <option value="Sub-Structure Waterproofing">{isArabic ? "عزل الأساسات والهياكل تحت الأرض" : "Sub-Structure Waterproofing"}</option>
+                        <option value="Wet Area Waterproofing">{isArabic ? "عزل المناطق الرطبة (حمامات ومطابخ)" : "Wet Area Waterproofing"}</option>
+                        <option value="Thermal & Sound Insulation">{isArabic ? "العزل الحراري والصوتي" : "Thermal & Sound Insulation"}</option>
+                        <option value="Industrial Flooring & Coating">{isArabic ? "أرضيات الإيبوكسي والطلاء الصناعي" : "Industrial Flooring & Coating"}</option>
+                        <option value="Concrete Repair & Injection">{isArabic ? "إصلاح الخرسانة وحقن الشروخ" : "Concrete Repair & Injection"}</option>
+                        <option value="Expansion Joint Treatment">{isArabic ? "معالجة فواصل التمدد" : "Expansion Joint Treatment"}</option>
+                        <option value="Other Specialist Services">{isArabic ? "خدمات فنية متخصصة أخرى" : "Other Specialist Services"}</option>
+                      </select>
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } ${
+                          formData.projectType
+                            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
+                        }`}
+                      >
                         {isArabic ? "نوع المشروع / الخدمة" : "Project Type"} <span className="text-red-500">*</span>
                       </label>
-                      <div className="relative">
-                        <select
-                          name="projectType"
-                          value={formData.projectType}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200 appearance-none cursor-pointer"
-                        >
-                          <option value="">{isArabic ? "اختر نوع الخدمة" : "Select project type"}</option>
-                          <option value="Combo Waterproofing">{isArabic ? "عزل الأسطح والمباني (Combo Waterproofing)" : "Combo Waterproofing"}</option>
-                          <option value="Sub-Structure Waterproofing">{isArabic ? "عزل الأساسات والهياكل تحت الأرض" : "Sub-Structure Waterproofing"}</option>
-                          <option value="Wet Area Waterproofing">{isArabic ? "عزل المناطق الرطبة (حمامات ومطابخ)" : "Wet Area Waterproofing"}</option>
-                          <option value="Thermal & Sound Insulation">{isArabic ? "العزل الحراري والصوتي" : "Thermal & Sound Insulation"}</option>
-                          <option value="Industrial Flooring & Coating">{isArabic ? "أرضيات الإيبوكسي والطلاء الصناعي" : "Industrial Flooring & Coating"}</option>
-                          <option value="Concrete Repair & Injection">{isArabic ? "إصلاح الخرسانة وحقن الشروخ" : "Concrete Repair & Injection"}</option>
-                          <option value="Expansion Joint Treatment">{isArabic ? "معالجة فواصل التمدد" : "Expansion Joint Treatment"}</option>
-                          <option value="Other Specialist Services">{isArabic ? "خدمات فنية متخصصة أخرى" : "Other Specialist Services"}</option>
-                        </select>
-                        <div className="absolute ltr:right-3.5 rtl:left-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400 text-xs">
-                          ▼
-                        </div>
+                      <div className={`absolute ${isArabic ? "left-5" : "right-5"} top-1/2 -translate-y-1/2 pointer-events-none text-stone-400 text-xs`}>
+                        ▼
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                        {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
-                      </label>
+                    {/* Project Location */}
+                    <div className="relative">
                       <input
                         type="text"
                         name="projectLocation"
                         value={formData.projectLocation}
                         onChange={handleInputChange}
                         required
-                        placeholder={isArabic ? "مثال: دبي، أبوظبي، الشارقة" : "e.g. Dubai, Abu Dhabi, Sharjah"}
-                        className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200"
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        }`}
                       />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-5" : "left-5"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          formData.projectLocation ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
+                      </label>
                     </div>
                   </div>
 
-                  {/* Project Details */}
-                  <div>
-                    <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                      {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
-                    </label>
+                  {/* Project Details (Textarea matching website standard) */}
+                  <div className="relative">
                     <textarea
                       rows={4}
                       name="projectDetails"
                       value={formData.projectDetails}
                       onChange={handleInputChange}
                       required
-                      placeholder={
-                        isArabic
-                          ? "يرجى توضيح مساحة المشروع، نوع المنشأة، التحديات أو المتطلبات المحددة..."
-                          : "Describe your project requirements, approximate area (sqm), building type, timelines..."
-                      }
-                      className="w-full px-4 py-3 bg-[#fafafa] text-stone-900 placeholder:text-stone-400 text-xs sm:text-sm rounded-xl border border-stone-200 focus:border-[#1cd2ad] focus:bg-white focus:outline-none transition-all duration-200 resize-none"
+                      placeholder=" "
+                      dir={isArabic ? "rtl" : "ltr"}
+                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none placeholder-transparent ${
+                        isArabic ? "text-right" : "text-left"
+                      }`}
                     />
+                    <label
+                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                        isArabic ? "right-5" : "left-5"
+                      } peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                        formData.projectDetails ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""
+                      }`}
+                    >
+                      {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
+                    </label>
                   </div>
 
                   {/* File Upload Zone */}
@@ -497,14 +558,14 @@ export default function GetAQuoteContent() {
                     </label>
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="w-full border-2 border-dashed border-stone-200 hover:border-[#1cd2ad] rounded-2xl p-6 sm:p-7 text-center bg-[#fafcfc] hover:bg-[#f2faf8] transition-all cursor-pointer group"
+                      className="w-full border-2 border-dashed border-stone-200 hover:border-[#01a9a0] rounded-2xl p-6 sm:p-7 text-center bg-[#fafcfc] hover:bg-[#f2faf8] transition-all cursor-pointer group"
                     >
-                      <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-stone-100 group-hover:bg-[#e0fbf6] flex items-center justify-center text-stone-500 group-hover:text-[#1cd2ad] transition-colors">
+                      <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-stone-100 group-hover:bg-[#e0fbf6] flex items-center justify-center text-stone-500 group-hover:text-[#01a9a0] transition-colors">
                         <Upload className="w-5 h-5" />
                       </div>
                       <p className="text-xs sm:text-sm font-semibold text-stone-700">
                         {isArabic ? "اسحب الملفات وأفلتها هنا أو " : "Drag & drop files here or "}
-                        <span className="text-[#1cd2ad] underline">{isArabic ? "تصفح" : "browse"}</span>
+                        <span className="text-[#01a9a0] underline">{isArabic ? "تصفح" : "browse"}</span>
                       </p>
                       <p className="text-[11px] text-stone-400 mt-1">
                         {isArabic ? "الملفات المدعومة: PDF, JPG, PNG (بحد أقصى 10 ميجابايت)" : "Supports PDF, JPG, PNG (Max 10MB)"}
@@ -519,7 +580,7 @@ export default function GetAQuoteContent() {
                       />
                     </div>
                     {files.length > 0 && (
-                      <div className="mt-2 text-xs text-[#1cd2ad] font-medium flex items-center gap-1.5">
+                      <div className="mt-2 text-xs text-[#01a9a0] font-medium flex items-center gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>{files.map((f) => f.name).join(", ")}</span>
                       </div>
@@ -535,7 +596,7 @@ export default function GetAQuoteContent() {
                       checked={formData.agreed}
                       onChange={handleInputChange}
                       required
-                      className="w-4 h-4 mt-0.5 accent-[#1cd2ad] rounded cursor-pointer"
+                      className="w-4 h-4 mt-0.5 accent-[#01a9a0] rounded cursor-pointer"
                     />
                     <label htmlFor="agreed" className="text-xs text-stone-600 leading-snug cursor-pointer">
                       {isArabic ? (
@@ -584,7 +645,7 @@ export default function GetAQuoteContent() {
           3. SECTION: FREQUENTLY ASKED QUESTIONS (Matching Mockup)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#f3fcf9] overflow-hidden">
-
+        
         {/* Decorative Fluid Ribbons from user resources at bottom corners */}
         <div className="absolute left-0 bottom-0 pointer-events-none select-none z-0">
           <Image
@@ -606,7 +667,7 @@ export default function GetAQuoteContent() {
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
+          
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">
             <div className="flex items-center justify-center gap-2 mb-2.5">
@@ -645,10 +706,11 @@ export default function GetAQuoteContent() {
               return (
                 <div
                   key={faq.id}
-                  className={`bg-white border transition-all duration-300 overflow-hidden ${isOpen
-                    ? "rounded-2xl sm:rounded-3xl border-[#1cd2ad]/40 shadow-[0_8px_24px_rgba(28,210,173,0.09)]"
-                    : "rounded-full border-stone-200/90 hover:border-[#1cd2ad]/40 shadow-xs hover:shadow-sm"
-                    }`}
+                  className={`bg-white border transition-all duration-300 overflow-hidden ${
+                    isOpen
+                      ? "rounded-2xl sm:rounded-3xl border-[#1cd2ad]/40 shadow-[0_8px_24px_rgba(28,210,173,0.09)]"
+                      : "rounded-full border-stone-200/90 hover:border-[#1cd2ad]/40 shadow-xs hover:shadow-sm"
+                  }`}
                 >
                   <button
                     type="button"
@@ -661,18 +723,20 @@ export default function GetAQuoteContent() {
                       </div>
 
                       <span
-                        className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${isOpen ? "text-[#1cd2ad]" : "text-stone-800 group-hover:text-[#1cd2ad]"
-                          }`}
+                        className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${
+                          isOpen ? "text-[#1cd2ad]" : "text-stone-800 group-hover:text-[#1cd2ad]"
+                        }`}
                       >
                         {isArabic ? faq.questionAr : faq.questionEn}
                       </span>
                     </div>
 
                     <div
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
-                        ? "bg-[#ddf8f3] text-[#1cd2ad]"
-                        : "bg-[#ddf8f3] text-[#1cd2ad] group-hover:bg-[#1cd2ad] group-hover:text-white"
-                        }`}
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                        isOpen
+                          ? "bg-[#ddf8f3] text-[#1cd2ad]"
+                          : "bg-[#ddf8f3] text-[#1cd2ad] group-hover:bg-[#1cd2ad] group-hover:text-white"
+                      }`}
                     >
                       {isOpen ? (
                         <Minus className="w-4 h-4 stroke-[2.5]" />
@@ -702,9 +766,9 @@ export default function GetAQuoteContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+          
           <div className="relative w-full rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl border border-stone-100 bg-[#082b35]">
-
+            
             {/* Background Graphic: User's pristine Footer - BottomExpertsCalloutSection.png */}
             <div className="relative w-full min-h-[280px] sm:min-h-[280px] lg:min-h-[280px]">
               <Image
@@ -719,7 +783,7 @@ export default function GetAQuoteContent() {
               {/* Overlay with interactive content */}
               <div className="relative md:absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:px-14 py-8 md:py-0 z-10">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-
+                  
                   {/* Left Column: Heading + Subtitle + Contact Button */}
                   <div className="md:col-span-5 text-white">
                     <div className="flex items-center gap-2 mb-2">
