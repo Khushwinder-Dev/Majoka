@@ -1,9 +1,16 @@
-import CommonHeader from "@/components/Common/CommonHeader";
+import { Metadata } from "next";
+import OurExpertiseContent from "@/components/OurExpertiseContent";
+
+export const metadata: Metadata = {
+  title: "Our Expertise | Taj Al Rahmah Technical Services",
+  description:
+    "Explore our specialized expertise in waterproofing systems, building protection, structural repair, and durable commercial & industrial solutions across the UAE.",
+};
 
 export default function ExpertisePage() {
   return (
-    <div className="min-h-screen bg-white">
-      <CommonHeader title="Our Expertise" breadcrumb="Expertise" imagePath="/banners/Home__.png" />
-    </div>
+    <main className="min-h-screen bg-white">
+      <OurExpertiseContent />
+    </main>
   );
 }
