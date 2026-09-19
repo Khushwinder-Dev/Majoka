@@ -5,22 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Search,
-  ChevronDown,
-  ChevronRight,
+  Plus,
+  Minus,
   ArrowRight,
   ArrowLeft,
-  LayoutGrid,
-  HelpCircle,
-  Layers,
-  ShieldCheck,
-  Compass,
   X,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface FaqItem {
   id: number;
-  category: "general" | "solutions" | "trust" | "started";
+  category: "general" | "services" | "solutions" | "projects";
   questionEn: string;
   questionAr: string;
   answerEn: string;
@@ -41,7 +36,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     id: 2,
     category: "general",
-    questionEn: "Will I be charged for access or using UAE PASS app?",
+    questionEn: "Will I be charged for accessing or using UAE PASS app?",
     questionAr: "هل يتم فرض أي رسوم على الوصول أو استخدام تطبيق UAE PASS؟",
     answerEn:
       "No, accessing and utilizing the official UAE PASS application and verification services is completely free of charge for all UAE citizens and residents.",
@@ -80,9 +75,9 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 6,
-    category: "solutions",
-    questionEn: "What types of waterproofing systems does Taj Al Rahmah provide?",
-    questionAr: "ما هي أنواع أنظمة العزل المائي التي توفرها شركة تاج الرحمة؟",
+    category: "services",
+    questionEn: "What types of waterproofing services does Taj Al Rahmah provide?",
+    questionAr: "ما هي خدمات العزل المائي التي توفرها شركة تاج الرحمة؟",
     answerEn:
       "We provide complete structural protection including GRP & fiberglass lining, Combo roofing insulation, torch-applied bitumen membranes, fast-curing polyurea spray coatings, epoxy flooring, and concrete injection grouting.",
     answerAr:
@@ -90,7 +85,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 7,
-    category: "solutions",
+    category: "services",
     questionEn: "How does the Combo Waterproofing & Thermal Insulation System work?",
     questionAr: "كيف يعمل نظام الكومبو للعزل المائي والحراري للأسطح؟",
     answerEn:
@@ -100,7 +95,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 8,
-    category: "solutions",
+    category: "services",
     questionEn: "Are your tank lining materials safe for drinking water storage?",
     questionAr: "هل مواد تبطين الخزانات لديكم آمنة لتخزين مياه الشرب؟",
     answerEn:
@@ -110,7 +105,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 9,
-    category: "solutions",
+    category: "services",
     questionEn: "Can epoxy floor coatings withstand heavy industrial traffic and chemicals?",
     questionAr: "هل تتحمل أرضيات الإيبوكسي الحركة الصناعية الثقيلة والمواد الكيميائية؟",
     answerEn:
@@ -120,7 +115,7 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 10,
-    category: "solutions",
+    category: "services",
     questionEn: "What is crack injection waterproofing and when is it recommended?",
     questionAr: "ما هو عزل حقن الشقوق ومتى يوصى باستخدامه؟",
     answerEn:
@@ -130,7 +125,57 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     id: 11,
-    category: "trust",
+    category: "solutions",
+    questionEn: "What thermal and acoustic insulation solutions do you engineer?",
+    questionAr: "ما هي حلول العزل الحراري والصوتي التي تقدمونها؟",
+    answerEn:
+      "We install high-density polyurethane spray foam, rockwool slabs, polystyrene boards, and acoustic dampening underlays designed to optimize UAE energy efficiency and interior comfort.",
+    answerAr:
+      "نقوم بتركيب رغوة البولي يوريثان عالية الكثافة وألواح الصوف الصخري والبوليسترين وطبقات امتصاص الصوت المصممة لرفع كفاءة استهلاك الطاقة والراحة الداخلية في الإمارات.",
+  },
+  {
+    id: 12,
+    category: "solutions",
+    questionEn: "Why is polyurea spray coating superior for exposed decks and substructures?",
+    questionAr: "لماذا يعتبر طلاء البولي يوريا الأفضل للأسطح المكشوفة والهياكل السفلية؟",
+    answerEn:
+      "Polyurea cures within seconds, provides over 300% tensile elongation to bridge hairline structural cracks, and offers extreme resistance to standing water, roots, and temperature extremes.",
+    answerAr:
+      "يجف طلاء البولي يوريا في غضون ثوانٍ، ويمتلك مرونة استطالة تتجاوز 300% لتجسير الشقوق الإنشائية الدقيقة، ويوفر مقاومة قصوى لتجمع المياه والجذور وتقلبات درجات الحرارة.",
+  },
+  {
+    id: 13,
+    category: "solutions",
+    questionEn: "How do torch-applied bitumen membranes protect foundations and wet areas?",
+    questionAr: "كيف تحمي الأغشية البيتومينية المسلحة الأساسات والمناطق الرطبة؟",
+    answerEn:
+      "Modified APP and SBS bitumen rolls provide a heavy-duty, puncture-resistant hydrostatic barrier specifically suited for high groundwater tables, substructures, retaining walls, and wet areas.",
+    answerAr:
+      "توفر لفائف البيتومين المعدلة بـ APP و SBS حاجزاً قوياً مقاوماً للثقب وضغط المياه الجوفية، ومثالياً للأساسات والجدران الاستنادية والمناطق الرطبة.",
+  },
+  {
+    id: 14,
+    category: "solutions",
+    questionEn: "Do you provide swimming pool and water feature waterproofing?",
+    questionAr: "هل تقدمون خدمات عزل المسابح والنوافير والمسطحات المائية؟",
+    answerEn:
+      "Yes, we apply specialized cementitious, polyurea, and epoxy waterproofing solutions built to resist continuous hydrostatic pressure, chlorine, and chemical pool treatments.",
+    answerAr:
+      "نعم، نقوم بتطبيق أنظمة عزل إسمنتية وبولي يوريا وإيبوكسي متخصصة ومصممة لمقاومة الضغط الهيدروستاتيكي المستمر والكلور والمواد الكيميائية لمعالجة المسابح.",
+  },
+  {
+    id: 15,
+    category: "solutions",
+    questionEn: "Can waterproofing be applied on existing roofs without removing existing tiles?",
+    questionAr: "هل يمكن تطبيق العزل المائي على الأسطح القديمة دون إزالة البلاط؟",
+    answerEn:
+      "In many cases, yes. We utilize transparent or pigmented elastomeric polyurethane and polyurea membrane systems that bond directly over existing tiles following specialized surface priming.",
+    answerAr:
+      "في كثير من الحالات نعم. نستخدم أغشية البولي يوريثان والبولي يوريا المرنة الشفافة أو الملونة التي تلتصق مباشرة فوق البلاط بعد تجهيز السطح بطبقات تأسيس خاصة.",
+  },
+  {
+    id: 16,
+    category: "projects",
     questionEn: "What warranty duration is provided on completed waterproofing projects?",
     questionAr: "ما هي مدة الضمان المقدمة على مشاريع العزل المائي المنفذة؟",
     answerEn:
@@ -139,8 +184,8 @@ const FAQ_ITEMS: FaqItem[] = [
       "نقدم ضمانات معتمدة تصل من 10 إلى 25 عاماً حسب نوع نظام العزل المنفذ، مدعومة بضمانات المصنعين وشهادات التسليم الرسمية الموثقة.",
   },
   {
-    id: 12,
-    category: "trust",
+    id: 17,
+    category: "projects",
     questionEn: "Are your materials and execution approved by UAE Municipalities and Civil Defence?",
     questionAr: "هل المواد وطرق التنفيذ معتمدة من بلديات دولة الإمارات والدفاع المدني؟",
     answerEn:
@@ -149,8 +194,8 @@ const FAQ_ITEMS: FaqItem[] = [
       "نعم، جميع المواد الفنية وبروتوكولات التنفيذ معتمدة ومطابقة لمواصفات بلديات دبي وأبوظبي والشارقة وتلبي اشتراطات الدفاع المدني للسلامة ومقاومة الحريق.",
   },
   {
-    id: 13,
-    category: "trust",
+    id: 18,
+    category: "projects",
     questionEn: "How do you conduct flood leak testing before project handover?",
     questionAr: "كيف يتم إجراء اختبارات فحص التسرب بالغمر المائي قبل تسليم المشروع؟",
     answerEn:
@@ -159,8 +204,8 @@ const FAQ_ITEMS: FaqItem[] = [
       "نجري اختبار غمر بالماء إلزامي لمدة 48 ساعة متواصلة على جميع الأسطح والخزانات والمناطق المعالجة، مع توثيق الفحص من قبل مهندسي ضبط الجودة قبل إصدار شهادة الضمان.",
   },
   {
-    id: 14,
-    category: "trust",
+    id: 19,
+    category: "projects",
     questionEn: "What health and safety standards do your field technicians adhere to?",
     questionAr: "ما هي معايير الصحة والسلامة المهنية التي تلتزم بها فرقكم الفنية؟",
     answerEn:
@@ -169,72 +214,23 @@ const FAQ_ITEMS: FaqItem[] = [
       "تخضع جميع فرق العمل لتدريب مكثف، مع الالتزام الكامل بمعدات الوقاية المعتمدة وتصاريح العمل على المرتفعات ومعايير السلامة المهنية والبيئية المعتمدة في الدولة.",
   },
   {
-    id: 15,
-    category: "trust",
-    questionEn: "Can Taj Al Rahmah provide municipality inspection certificates?",
-    questionAr: "هل يمكن لشركة تاج الرحمة استخراج شهادات فحص واعتماد البلدية؟",
+    id: 20,
+    category: "projects",
+    questionEn: "Can Taj Al Rahmah provide municipality inspection and completion certificates?",
+    questionAr: "هل يمكن لشركة تاج الرحمة استخراج شهادات فحص واعتماد البلدية الرسمية؟",
     answerEn:
-      "Yes, we coordinate directly with consultant engineering firms, third-party laboratories, and local municipality inspectors to secure official stage completion and compliance approvals.",
+      "Yes, we coordinate directly with consultant engineering firms, third-party testing laboratories, and local municipality inspectors to secure official stage completion and compliance approvals.",
     answerAr:
       "نعم، ننسق مباشرة مع المكاتب الهندسية الاستشارية والمختبرات المعتمدة ومفتشي البلديات لاستكمال تقارير الفحص وإصدار الموافقات الرسمية للمبنى.",
-  },
-  {
-    id: 16,
-    category: "started",
-    questionEn: "How can I book an initial engineering site survey?",
-    questionAr: "كيف يمكنني حجز موعد للمعاينة الهندسية الميدانية الأولية؟",
-    answerEn:
-      "You can effortlessly book a survey through our online portal, connect with us instantly via WhatsApp at +971 52 749 2002, or call our direct engineering advisory desk.",
-    answerAr:
-      "يمكنك حجز المعاينة بسهولة عبر النموذج الإلكتروني، أو التواصل المباشر عبر واتساب على الرقم 2002 749 52 971+، أو الاتصال بفريق الاستشارات الهندسية.",
-  },
-  {
-    id: 17,
-    category: "started",
-    questionEn: "Is the initial inspection and quotation free of charge?",
-    questionAr: "هل المعاينة الميدانية الأولية وعرض السعر مجانيان؟",
-    answerEn:
-      "Yes, we provide complimentary on-site engineering assessments and detailed, itemized technical quotations with zero obligation for all commercial and residential inquiries.",
-    answerAr:
-      "نعم، نقدم تقييماً هندسياً ميدانياً مجانياً مع عرض أسعار تفصيلي وشفاف دون أي التزام لجميع الاستفسارات السكنية والتجارية والصناعية.",
-  },
-  {
-    id: 18,
-    category: "started",
-    questionEn: "How quickly can work commence after quotation approval?",
-    questionAr: "ما مدى سرعة بدء العمل بالموقع بعد اعتماد عرض السعر؟",
-    answerEn:
-      "Following formal contract sign-off and permit clearances, our specialized technical teams can mobilize to site within 24 to 48 hours to initiate surface preparation.",
-    answerAr:
-      "بمجرد توقيع العقد واستكمال تصاريح العمل اللازمة، يمكن لفرقنا المتخصصة التواجد في الموقع لبدء أعمال التجهيز خلال 24 إلى 48 ساعة.",
-  },
-  {
-    id: 19,
-    category: "started",
-    questionEn: "What payment milestones and options are available?",
-    questionAr: "ما هي مراحل وخيارات الدفع المتاحة للمشاريع؟",
-    answerEn:
-      "We offer transparent, milestone-based payment schedules tied to certified inspection milestones, accepting direct bank transfers, corporate cheques, and major digital payments.",
-    answerAr:
-      "نوفر جداول سداد مرنة وشفافة مرتبطة بمراحل الإنجاز المعتمدة، مع قبول التحويلات البنكية والشيكات المعتمدة والمدفوعات الإلكترونية.",
-  },
-  {
-    id: 20,
-    category: "started",
-    questionEn: "Do you handle maintenance contracts for residential towers and facilities?",
-    questionAr: "هل توفرون عقود صيانة دورية للمباني السكنية والمنشآت التجارية؟",
-    answerEn:
-      "Yes, we provide comprehensive Annual Maintenance Contracts (AMC) that include scheduled preventive inspections, emergency leak remediation response, and proactive waterproofing upkeep.",
-    answerAr:
-      "نعم، نقدم عقود صيانة سنوية شاملة (AMC) تتضمن فحوصات دورية وقائية، واستجابة طارئة لمعالجة أي تسربات، وصيانة وقائية متكاملة لجميع أنظمة العزل.",
   },
 ];
 
 export default function FaqPageContent() {
   const { isArabic } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<"all" | "general" | "solutions" | "trust" | "started">("all");
-  const [openIds, setOpenIds] = useState<number[]>([1]);
+  const [activeCategory, setActiveCategory] = useState<"all" | "services" | "solutions" | "projects" | "general">("all");
+  // Default open card #2 as seen in the new design mockup
+  const [openIds, setOpenIds] = useState<number[]>([2]);
 
   const toggleAccordion = (id: number) => {
     setOpenIds((prev) =>
@@ -242,37 +238,13 @@ export default function FaqPageContent() {
     );
   };
 
+  // 5 category tabs as shown in the new design: All, Services, Solutions, Projects, General
   const categories = [
-    {
-      key: "all" as const,
-      labelEn: "All",
-      labelAr: "الكل",
-      icon: LayoutGrid,
-    },
-    {
-      key: "general" as const,
-      labelEn: "General",
-      labelAr: "عام",
-      icon: HelpCircle,
-    },
-    {
-      key: "solutions" as const,
-      labelEn: "Solutions",
-      labelAr: "الحلول",
-      icon: Layers,
-    },
-    {
-      key: "trust" as const,
-      labelEn: "Technology & Trust",
-      labelAr: "التكنولوجيا والموثوقية",
-      icon: ShieldCheck,
-    },
-    {
-      key: "started" as const,
-      labelEn: "Getting Started",
-      labelAr: "البدء معنا",
-      icon: Compass,
-    },
+    { key: "all" as const, labelEn: "All", labelAr: "الكل" },
+    { key: "services" as const, labelEn: "Services", labelAr: "الخدمات" },
+    { key: "solutions" as const, labelEn: "Solutions", labelAr: "الحلول" },
+    { key: "projects" as const, labelEn: "Projects", labelAr: "المشاريع" },
+    { key: "general" as const, labelEn: "General", labelAr: "عام" },
   ];
 
   const filteredItems = useMemo(() => {
@@ -296,68 +268,28 @@ export default function FaqPageContent() {
     <div className="w-full bg-white overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (Matches Attached Mockup)
+          1. HERO BANNER SECTION (Laptop on desk with helmet & FAQ —)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[460px] flex items-center bg-[#071d34] overflow-hidden">
+      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[440px] lg:h-[480px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image */}
         <Image
           src="/faqPage/Dubai modern skyline at twilight.png"
-          alt="Dubai modern skyline at twilight"
+          alt="Frequently Asked Questions Hero"
           fill
           priority
           unoptimized
           className="object-cover object-center"
         />
 
-        {/* Dark Vignette Overlay for legible text */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
-
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-2xl text-left rtl:text-right">
-            {/* Top dash label */}
-            <div className="flex items-center gap-2.5 mb-3.5">
-              <span className="w-6 h-[2px] bg-[#3CD3C1]" />
-              <span className="text-[11px] sm:text-[12px] font-bold tracking-[0.25em] text-[#3CD3C1] uppercase">
-                {isArabic ? "الأسئلة الشائعة والمشاريع" : "FEATURED PROJECTS"}
-              </span>
-            </div>
-
-            {/* Main Title */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.15] tracking-tight">
-              {isArabic ? (
-                <>
-                  الأسئلة <span className="text-[#3CD3C1]">الشائعة</span>
-                </>
-              ) : (
-                <>
-                  Frequently Asked <span className="text-[#3CD3C1]">Questions</span>
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="mt-4 text-xs sm:text-sm md:text-[15px] text-stone-200/90 leading-relaxed font-normal max-w-xl">
-              {isArabic
-                ? "غالباً ما يتواصل معنا عملاؤنا لطرح استفسارات حول منهجية عملنا، وموثوقيتنا، وحلول العزل والبناء عالية الجودة التي نقدمها."
-                : "Our clients often come to us with questions regarding our process, reliability, and high-quality roofing & construction solutions."}
-            </p>
-          </div>
-        </div>
-
-        {/* Carousel indicator button (as seen on far right in mockup) */}
-        <div className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-10 hidden sm:flex items-center justify-center">
-          <div className="w-10 h-10 rounded-full bg-black/40 border border-white/20 hover:bg-[#009e90] text-white flex items-center justify-center transition-all cursor-pointer backdrop-blur-xs">
-            <ChevronRight className={`w-5 h-5 ${isArabic ? "rotate-180" : ""}`} />
-          </div>
-        </div>
+        {/* Subtle vignette overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20 pointer-events-none" />
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          2. MAIN CONTENT AREA (Find Answers Quickly + Filter + List)
+          2. MAIN CONTENT AREA (Frequently Asked Questions + Search + Filter + List)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#eef9f7] via-[#e5f5f3] to-[#f4faf9] overflow-hidden">
-        
+      <section className="relative w-full py-14 sm:py-18 lg:py-22 bg-gradient-to-b from-[#edf8f6] via-[#e5f5f3] to-[#f4faf9] overflow-hidden">
+
         {/* Left Decorative Vector Curve (Vector (1).svg) */}
         <div className="absolute left-0 top-12 sm:top-20 pointer-events-none select-none opacity-80 z-0">
           <Image
@@ -381,27 +313,27 @@ export default function FaqPageContent() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10">
             {/* Tagline dash */}
             <div className="flex items-center justify-center gap-2 mb-2.5">
-              <span className="w-6 h-[1.5px] bg-[#009e90]" />
+              <span className="w-5 h-[1.5px] bg-[#009e90]" />
               <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#009e90] uppercase">
                 {isArabic ? "الأسئلة الشائعة" : "FAQS"}
               </span>
-              <span className="w-6 h-[1.5px] bg-[#009e90]" />
+              <span className="w-5 h-[1.5px] bg-[#009e90]" />
             </div>
 
-            {/* Section Title */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-[#0d2438] tracking-tight mb-3">
+            {/* Section Title: Frequently Asked Questions (Questions in Teal) */}
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold text-[#0d2438] tracking-tight mb-3">
               {isArabic ? (
                 <>
-                  اعثر على إجاباتك <span className="text-[#009e90]">بسرعة</span>
+                  الأسئلة <span className="text-[#3CD3C1]">الشائعة</span>
                 </>
               ) : (
                 <>
-                  Find Answers <span className="text-[#009e90]">Quickly</span>
+                  Frequently Asked <span className="text-[#3CD3C1]">Questions</span>
                 </>
               )}
             </h2>
@@ -414,7 +346,7 @@ export default function FaqPageContent() {
             </p>
           </div>
 
-          {/* Search Input Bar (Pill shape) */}
+          {/* Search Input Bar (Pill shape with right circular arrow button) */}
           <div className="max-w-2xl mx-auto mb-7 sm:mb-9">
             <div className="relative flex items-center bg-white rounded-full shadow-[0_6px_24px_rgba(0,158,144,0.08)] border border-stone-200/90 focus-within:border-[#009e90] focus-within:ring-2 focus-within:ring-[#009e90]/15 transition-all p-1.5 sm:p-2">
               <div className="pl-4 pr-2 rtl:pr-4 rtl:pl-2 text-stone-400 flex items-center">
@@ -424,7 +356,7 @@ export default function FaqPageContent() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={isArabic ? "ابحث في الأسئلة الشائعة..." : "Search FAQs..."}
+                placeholder={isArabic ? "ابحث هنا..." : "Search..."}
                 className="w-full bg-transparent text-stone-800 text-xs sm:text-sm font-medium focus:outline-none placeholder-stone-400 px-2 py-2"
               />
               {searchQuery && (
@@ -437,34 +369,36 @@ export default function FaqPageContent() {
                   <X className="w-4 h-4" />
                 </button>
               )}
+              {/* Circular teal button with arrow right */}
               <button
                 type="button"
                 className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#009e90] hover:bg-[#00867a] active:scale-95 text-white flex items-center justify-center flex-shrink-0 shadow-md shadow-[#009e90]/25 transition-all cursor-pointer"
-                aria-label="Search"
+                aria-label="Submit Search"
               >
-                <Search className="w-4 h-4" />
+                {isArabic ? (
+                  <ArrowLeft className="w-4 h-4" />
+                ) : (
+                  <ArrowRight className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>
 
-          {/* Category Filter Tabs (Pill Buttons) */}
+          {/* Category Filter Tabs (Pill Buttons: All, Services, Solutions, Projects, General) */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-12">
             {categories.map((cat) => {
-              const Icon = cat.icon;
               const isActive = activeCategory === cat.key;
               return (
                 <button
                   key={cat.key}
                   type="button"
                   onClick={() => setActiveCategory(cat.key)}
-                  className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
-                    isActive
-                      ? "bg-[#009e90] text-white shadow-md shadow-[#009e90]/30 scale-[1.02]"
-                      : "bg-white text-stone-600 border border-stone-200/90 hover:border-[#009e90]/40 hover:text-[#009e90] hover:bg-stone-50/80 shadow-xs"
-                  }`}
+                  className={`px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${isActive
+                    ? "bg-[#009e90] text-white shadow-md shadow-[#009e90]/30 scale-[1.02]"
+                    : "bg-[#e0f7f4] text-[#00897b] hover:bg-[#cbf1ec] border border-transparent shadow-xs"
+                    }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? "text-white" : "text-[#009e90]"}`} />
-                  <span>{isArabic ? cat.labelAr : cat.labelEn}</span>
+                  {isArabic ? cat.labelAr : cat.labelEn}
                 </button>
               );
             })}
@@ -474,7 +408,6 @@ export default function FaqPageContent() {
           <div className="max-w-4xl mx-auto space-y-3 sm:space-y-3.5">
             {filteredItems.length === 0 ? (
               <div className="bg-white rounded-2xl p-8 sm:p-12 text-center border border-stone-200/80 shadow-sm">
-                <HelpCircle className="w-12 h-12 text-stone-300 mx-auto mb-3" />
                 <h3 className="text-base sm:text-lg font-bold text-stone-800 mb-1">
                   {isArabic ? "لم يتم العثور على نتائج" : "No FAQs Found"}
                 </h3>
@@ -502,48 +435,51 @@ export default function FaqPageContent() {
                 return (
                   <div
                     key={item.id}
-                    className={`bg-white border transition-all duration-300 overflow-hidden ${
-                      isOpen
-                        ? "rounded-2xl sm:rounded-3xl border-[#009e90]/40 shadow-[0_8px_24px_rgba(0,158,144,0.09)]"
-                        : "rounded-full border-stone-200/90 hover:border-[#009e90]/40 shadow-xs hover:shadow-sm"
-                    }`}
+                    className={`bg-white border transition-all duration-300 overflow-hidden ${isOpen
+                      ? "rounded-2xl sm:rounded-3xl border-[#009e90]/40 shadow-[0_8px_24px_rgba(0,158,144,0.09)]"
+                      : "rounded-full border-stone-200/90 hover:border-[#009e90]/40 shadow-xs hover:shadow-sm"
+                      }`}
                   >
                     {/* Accordion Toggle Header */}
                     <button
                       type="button"
                       onClick={() => toggleAccordion(item.id)}
-                      className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-4.5 text-left rtl:text-right cursor-pointer group"
+                      className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-3.5 sm:py-4 text-left rtl:text-right cursor-pointer group"
                     >
                       <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
                         {/* Number Badge (e.g. 01, 02) */}
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#e8f7f5] text-[#009e90] text-xs sm:text-[13px] font-bold flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[#009e90] group-hover:text-white">
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#e0f7f4] text-[#009e90] text-xs sm:text-[13px] font-bold flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[#009e90] group-hover:text-white">
                           {formattedNum}
                         </div>
 
                         {/* Question Text */}
                         <span
-                          className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${
-                            isOpen ? "text-[#009e90]" : "text-stone-800 group-hover:text-[#009e90]"
-                          }`}
+                          className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${isOpen ? "text-[#009e90]" : "text-stone-800 group-hover:text-[#009e90]"
+                            }`}
                         >
                           {isArabic ? item.questionAr : item.questionEn}
                         </span>
                       </div>
 
-                      {/* Circle Chevron Button */}
+                      {/* Circle Plus / Minus Button */}
                       <div
-                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#e8f7f5] text-[#009e90] flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
-                          isOpen ? "rotate-180 bg-[#009e90] text-white" : "group-hover:bg-[#009e90]/15"
-                        }`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
+                          ? "bg-[#e0f7f4] text-[#009e90]"
+                          : "bg-[#e0f7f4] text-[#009e90] group-hover:bg-[#009e90] group-hover:text-white"
+                          }`}
                       >
-                        <ChevronDown className="w-4 h-4" />
+                        {isOpen ? (
+                          <Minus className="w-4 h-4 stroke-[2.5]" />
+                        ) : (
+                          <Plus className="w-4 h-4 stroke-[2.5]" />
+                        )}
                       </div>
                     </button>
 
                     {/* Accordion Content */}
                     {isOpen && (
-                      <div className="px-4 sm:px-6 pb-5 pt-1 text-xs sm:text-[14px] text-stone-600 leading-relaxed border-t border-stone-100">
-                        <div className="ltr:pl-11 rtl:pr-11 pt-2">
+                      <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-0 text-xs sm:text-[14px] text-[#009e90] font-medium leading-relaxed">
+                        <div className="ltr:pl-11 rtl:pr-11">
                           {isArabic ? item.answerAr : item.answerEn}
                         </div>
                       </div>
@@ -591,22 +527,24 @@ export default function FaqPageContent() {
           <p className="text-xs sm:text-sm md:text-[15px] text-stone-300 max-w-lg mx-auto leading-relaxed mb-7 sm:mb-8">
             {isArabic
               ? "لم تجد الإجابة التي تبحث عنها؟ فريقنا المتخصص جاهز للإجابة على كافة استفساراتك ومساعدتك في اختيار أفضل الحلول لمشروعك."
-              : "Can't find the answer you're looking for? Our team is here to help you understand how our services work for your business."}
+              : "Can't find the answer you're looking for? Our team is here to help you understand how our services can work for your business."}
           </p>
 
-          {/* Contact Support Pill Button */}
+          {/* Contact Support Pill Button with new SVG - Support Headset Icon.svg */}
           <div className="flex justify-center">
-            <Link
-              href="/contact"
+            <a
+              href="https://wa.me/971527492002"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 bg-[#009e90] hover:bg-[#00867a] active:scale-95 text-white font-bold text-xs sm:text-sm md:text-[15px] px-8 py-3.5 sm:px-9 sm:py-4 rounded-full shadow-lg shadow-[#009e90]/40 transition-all duration-200 group cursor-pointer"
             >
-              {/* Headset Icon */}
+              {/* WhatsApp Support Icon (SVG - Support Headset Icon.svg) */}
               <Image
                 src="/faqPage/SVG - Support Headset Icon.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="w-4 h-4 sm:w-5 sm:h-5 brightness-0 invert"
+                alt="WhatsApp Support"
+                width={26}
+                height={26}
+                className="w-5 h-5 sm:w-6 sm:h-6 object-contain"
               />
               <span>{isArabic ? "تواصل مع الدعم الفني" : "Contact Support"}</span>
               {isArabic ? (
@@ -614,7 +552,7 @@ export default function FaqPageContent() {
               ) : (
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               )}
-            </Link>
+            </a>
           </div>
         </div>
       </section>
