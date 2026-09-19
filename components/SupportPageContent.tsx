@@ -164,49 +164,72 @@ export default function SupportPageContent() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          2. INTRO HEADING: "Our Support"
+          MIDDLE SECTION WRAPPER WITH ORGANIC VECTOR CURVES (Left & Right)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full pt-14 sm:pt-16 pb-6 bg-white text-center">
-        {/* Subtle background ambient glow */}
-        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-[#f0fbf8] to-transparent pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Tag */}
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="w-5 h-[1.5px] bg-[#00A896]" />
-            <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#00A896] uppercase">
-              {isArabic ? "مركز المساعدة" : "SUPPORT"}
-            </span>
-            <span className="w-5 h-[1.5px] bg-[#00A896]" />
-          </div>
-
-          {/* Heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#0d2438] tracking-tight mb-3">
-            {isArabic ? (
-              <>
-                خدمات <span className="text-[#00A896]">الدعم</span>
-              </>
-            ) : (
-              <>
-                Our <span className="text-[#00A896]">Support</span>
-              </>
-            )}
-          </h2>
-
-          {/* Description */}
-          <p className="text-stone-600 text-xs sm:text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto">
-            {isArabic
-              ? "ابحث في الأسئلة الشائعة أو تصفح الأقسام للعثور على المعلومات والإرشادات التي تحتاجها لحلول العزل المائي عالية الجودة."
-              : "Search our frequently asked questions or browse by category to get the information you need. high-quality waterproofing solutions."}
-          </p>
+      <div className="relative w-full overflow-hidden">
+        {/* Left Decorative Organic Vector Curve */}
+        <div className="absolute left-0 top-0 pointer-events-none select-none z-0">
+          <Image
+            src="/support/SVG - Decorative Organic Vector Curves (Left).svg"
+            alt=""
+            width={419}
+            height={1266}
+            className="w-[180px] sm:w-[260px] md:w-[340px] lg:w-[419px] h-auto object-contain object-left-top"
+          />
         </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════════════
-          3. SUPPORT TOPICS: "How Can We Help You?" (4 Cards Grid)
-      ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-10 sm:py-14 bg-[#f4fcf9]/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Right Decorative Organic Vector Curve */}
+        <div className="absolute right-0 top-0 pointer-events-none select-none z-0">
+          <Image
+            src="/support/SVG - Decorative Organic Vector Curves (Right).svg"
+            alt=""
+            width={427}
+            height={1266}
+            className="w-[180px] sm:w-[260px] md:w-[340px] lg:w-[427px] h-auto object-contain object-right-top"
+          />
+        </div>
+
+        {/* ══════════════════════════════════════════════════════════════
+            2. INTRO HEADING: "Our Support"
+        ══════════════════════════════════════════════════════════════ */}
+        <section className="relative z-10 w-full pt-14 sm:pt-16 pb-6 text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Tag */}
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <span className="w-5 h-[1.5px] bg-[#00A896]" />
+              <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#00A896] uppercase">
+                {isArabic ? "مركز المساعدة" : "SUPPORT"}
+              </span>
+              <span className="w-5 h-[1.5px] bg-[#00A896]" />
+            </div>
+
+            {/* Heading */}
+            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-[#0d2438] tracking-tight mb-3">
+              {isArabic ? (
+                <>
+                  خدمات <span className="text-[#00A896]">الدعم</span>
+                </>
+              ) : (
+                <>
+                  Our <span className="text-[#00A896]">Support</span>
+                </>
+              )}
+            </h2>
+
+            {/* Description */}
+            <p className="text-stone-600 text-xs sm:text-sm md:text-[15px] leading-relaxed max-w-2xl mx-auto">
+              {isArabic
+                ? "ابحث في الأسئلة الشائعة أو تصفح الأقسام للعثور على المعلومات والإرشادات التي تحتاجها لحلول العزل المائي عالية الجودة."
+                : "Search our frequently asked questions or browse by category to get the information you need. high-quality waterproofing solutions."}
+            </p>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════════════════
+            3. SUPPORT TOPICS: "How Can We Help You?" (4 Cards Grid)
+        ══════════════════════════════════════════════════════════════ */}
+        <section className="relative z-10 w-full py-10 sm:py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Subheader: Tag + Title on Left, View All Topics on Right */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
@@ -282,6 +305,7 @@ export default function SupportPageContent() {
 
         </div>
       </section>
+      </div>
 
       {/* ══════════════════════════════════════════════════════════════
           4. SECTION: STILL NEED HELP? (Contact Support Panel)
