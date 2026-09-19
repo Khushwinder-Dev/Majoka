@@ -502,10 +502,10 @@ export default function FaqPageContent() {
                 return (
                   <div
                     key={item.id}
-                    className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden ${
+                    className={`bg-white border transition-all duration-300 overflow-hidden ${
                       isOpen
-                        ? "border-[#009e90]/40 shadow-[0_6px_20px_rgba(0,158,144,0.08)]"
-                        : "border-stone-200/90 hover:border-[#009e90]/30 shadow-xs"
+                        ? "rounded-2xl sm:rounded-3xl border-[#009e90]/40 shadow-[0_8px_24px_rgba(0,158,144,0.09)]"
+                        : "rounded-full border-stone-200/90 hover:border-[#009e90]/40 shadow-xs hover:shadow-sm"
                     }`}
                   >
                     {/* Accordion Toggle Header */}
