@@ -278,7 +278,7 @@ export default function FaqPageContent() {
           fill
           priority
           unoptimized
-          className="object-cover object-left sm:object-center"
+          className="object-left sm:object-center"
         />
 
         {/* Top gradient for navbar clarity */}

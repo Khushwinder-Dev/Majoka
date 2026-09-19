@@ -64,7 +64,7 @@ export default function ProjectsCTA() {
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0">
               <Link
-                href="/contact"
+                href="/get-a-quote"
                 className="inline-flex items-center justify-center gap-3 pl-5 sm:pl-6 pr-1.5 py-1.5 rounded-full bg-[#01a9a0] hover:bg-[#00b3a4] text-white font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(1,169,160,0.35)] group"
               >
                 <span className="whitespace-nowrap">
