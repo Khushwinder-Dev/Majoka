@@ -288,7 +288,7 @@ export default function FaqPageContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/95 via-[#021822]/75 via-35% md:via-30% to-transparent pointer-events-none" />
 
         {/* Heading: FAQ — positioned on left as in design reference */}
-        <div className="relative z-10 max-w-8xl mx-auto px-6 sm:px-10 md:px-16 lg:px-24 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-14">
             <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
               {isArabic ? "الأسئلة الشائعة" : "FAQ"}

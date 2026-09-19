@@ -153,7 +153,7 @@ export default function SupportPageContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
 
         {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
             <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
               {isArabic ? "الدعم الفني" : "SUPPORT"}
@@ -229,7 +229,7 @@ export default function SupportPageContent() {
             3. SUPPORT TOPICS: "How Can We Help You?" (4 Cards Grid)
         ══════════════════════════════════════════════════════════════ */}
         <section className="relative z-10 w-full py-10 sm:py-14">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Section Subheader: Tag + Title on Left, View All Topics on Right */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
@@ -311,7 +311,7 @@ export default function SupportPageContent() {
           4. SECTION: STILL NEED HELP? (Contact Support Panel)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           <div className="relative w-full rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl border border-stone-100 bg-[#ebfaf6]">
 
@@ -476,7 +476,7 @@ export default function SupportPageContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">

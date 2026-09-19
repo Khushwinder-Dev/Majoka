@@ -204,7 +204,7 @@ export default function GetAQuoteContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/70 via-35% md:via-30% to-transparent pointer-events-none" />
 
         {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
             <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
               {isArabic ? "طلب عرض سعر" : "GET A QUOTE"}
@@ -232,7 +232,7 @@ export default function GetAQuoteContent() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
             {/* ── LEFT COLUMN: Text + 3 Badges sitting over top-left ── */}
@@ -648,7 +648,7 @@ export default function GetAQuoteContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">
@@ -744,7 +744,7 @@ export default function GetAQuoteContent() {
           4. SECTION: TALK TO OUR EXPERTS BANNER (Matching Mockup)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           <div className="relative w-full rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl border border-stone-100 bg-[#082b35]">
 

@@ -153,7 +153,7 @@ export default function WarrantyPageContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
 
         {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
             <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
               {isArabic ? "الضمان المعتمد" : "WARRANTY"}
@@ -203,7 +203,7 @@ export default function WarrantyPageContent() {
           3. WARRANTY CARDS: 3 Detailed Coverage Cards
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full pb-16 sm:pb-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             {WARRANTY_CARDS.map((card) => (
@@ -292,7 +292,7 @@ export default function WarrantyPageContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">

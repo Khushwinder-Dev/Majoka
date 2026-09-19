@@ -235,7 +235,7 @@ export default function OurExpertiseContent() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
 
         {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
             <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
               {isArabic ? "خبراتنا" : "EXPERTISE"}
@@ -285,7 +285,7 @@ export default function OurExpertiseContent() {
           3. OUR AREAS OF EXPERTISE (8 Cards Grid)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-10 sm:py-14 bg-[#f4fcf9]/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Section Subheader: Tag + Title on Left, Description on Right */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
@@ -368,7 +368,7 @@ export default function OurExpertiseContent() {
           4. SECTION: A PARTNER YOU CAN RELY ON (Banner with 3 Stats)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           <div className="relative w-full rounded-[28px] lg:rounded-[36px] overflow-hidden shadow-2xl border border-stone-100 bg-[#082b35]">
 
@@ -491,7 +491,7 @@ export default function OurExpertiseContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12">
@@ -587,7 +587,7 @@ export default function OurExpertiseContent() {
           6. SECTION: EXPERTISE ACROSS EVERY SECTOR (5 Sector Cards)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-14 sm:py-18 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Section Header: Tag + Title on Left, Subtitle on Right */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
