@@ -6,7 +6,7 @@ import { X, CheckCircle2, ArrowRight, ArrowLeft, Sparkles, Tag, ChevronDown, Loa
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
-// Set to false after the client demo to restore once-per-session behavior.
+// Set to false after client demo to restore once-per-session behavior.
 const SHOW_ON_EVERY_RELOAD = true;
 const DISMISS_KEY = "taj_welcome_modal_dismissed";
 
@@ -167,7 +167,7 @@ export default function WelcomeOfferModal() {
             type="button"
             onClick={handleClose}
             aria-label={isArabic ? "إغلاق" : "Close"}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#00A79D]"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
           >
             <X className="w-5 h-5 stroke-[2.5]" />
           </button>
@@ -186,7 +186,7 @@ export default function WelcomeOfferModal() {
         {/* ========================================================= */}
         <div className="relative md:col-span-5 h-44 sm:h-52 md:h-auto min-h-[190px] md:min-h-[480px] overflow-hidden bg-slate-900 flex flex-col justify-end p-5 sm:p-7">
           <Image
-            src="/qwertyu.jpg"
+            src="/qwertyu.png"
             alt={isArabic ? "تاج الرحمة للمقاولات والعزل" : "Taj Al Rahmah Contracting & Waterproofing"}
             fill
             priority
@@ -194,11 +194,11 @@ export default function WelcomeOfferModal() {
             className="object-cover object-center"
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/85 via-slate-900/50 to-transparent" />
+          {/* <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/85 via-slate-900/50 to-transparent" /> */}
 
           {/* Floating discount badge on image */}
           <div className="relative z-10 hidden sm:flex flex-col gap-2 text-white">
-            <div className="inline-flex items-center gap-2 bg-[#00A79D] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg w-fit backdrop-blur-xs">
+            <div className="inline-flex items-center gap-2 bg-[#01a9a0] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg w-fit backdrop-blur-xs">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isArabic ? "خصم ترحيبي حصري 10%" : "Exclusive 10% Welcome Discount"}</span>
             </div>
@@ -216,8 +216,8 @@ export default function WelcomeOfferModal() {
         <div className="md:col-span-7 p-6 sm:p-8 md:p-9 lg:p-10 flex flex-col justify-center bg-white overflow-y-auto max-h-[calc(92vh-100px)] md:max-h-none">
           {/* Eyebrow */}
           <div className="flex items-center gap-2 mb-2">
-            <span className="w-5 sm:w-6 h-[2.5px] bg-[#00A79D] rounded-full" />
-            <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-[#00A79D]">
+            <span className="w-5 sm:w-6 h-[2.5px] bg-[#01a9a0] rounded-full" />
+            <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider text-[#01a9a0]">
               {isArabic ? "مرحباً بكم" : "WELCOME"}
             </span>
           </div>
@@ -237,8 +237,8 @@ export default function WelcomeOfferModal() {
           </p>
 
           {/* Offer Highlight Box */}
-          <div className="mb-5 p-3 sm:p-3.5 rounded-xl bg-gradient-to-r from-[#00A79D]/10 via-[#00A79D]/5 to-transparent border border-[#00A79D]/20 flex items-start gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#00A79D] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+          <div className="mb-5 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#01a9a0]/10 via-[#01a9a0]/5 to-transparent border border-[#01a9a0]/20 flex items-start gap-2.5">
+            <div className="w-7 h-7 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
               <Tag className="w-4 h-4" />
             </div>
             <div>
@@ -272,97 +272,116 @@ export default function WelcomeOfferModal() {
               <button
                 type="button"
                 onClick={handleClose}
-                className="mt-2 text-xs font-semibold text-[#00A79D] hover:underline cursor-pointer"
+                className="mt-2 text-xs font-semibold text-[#01a9a0] hover:underline cursor-pointer"
               >
                 {isArabic ? "إغلاق النافذة" : "Close window"}
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              {/* 4 Fields Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-3.5">
+              {/* 4 Fields Grid Matching Website Floating-Label Standard */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
                 {/* Field 1: Name * */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-[11px] font-bold text-stone-700">
-                    {isArabic ? "الاسم *" : "Name *"}
-                  </label>
+                <div className="relative">
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder={isArabic ? "الاسم الكامل" : "Your full name"}
                     required
+                    placeholder=" "
                     disabled={isSubmitting}
-                    className="w-full bg-stone-50 hover:bg-stone-100/70 focus:bg-white text-stone-900 placeholder-stone-400 px-3.5 py-2.5 rounded-xl text-xs font-medium border border-stone-200 focus:border-[#00A79D] focus:ring-2 focus:ring-[#00A79D]/20 outline-none transition-all"
+                    dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                      }`}
                   />
+                  <label
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.name ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                      }`}
+                  >
+                    {isArabic ? "الاسم" : "Name"} <span className="text-red-500">*</span>
+                  </label>
                 </div>
 
                 {/* Field 2: Phone * */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-[11px] font-bold text-stone-700">
-                    {isArabic ? "رقم الهاتف *" : "Phone *"}
-                  </label>
+                <div className="relative">
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder={isArabic ? "05xxxxxxxx" : "+966 50 000 0000"}
                     required
+                    placeholder=" "
                     disabled={isSubmitting}
-                    className="w-full bg-stone-50 hover:bg-stone-100/70 focus:bg-white text-stone-900 placeholder-stone-400 px-3.5 py-2.5 rounded-xl text-xs font-medium border border-stone-200 focus:border-[#00A79D] focus:ring-2 focus:ring-[#00A79D]/20 outline-none transition-all"
+                    dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                      }`}
                   />
+                  <label
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                      }`}
+                  >
+                    {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
+                  </label>
                 </div>
 
                 {/* Field 3: Email * */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-[11px] font-bold text-stone-700">
-                    {isArabic ? "البريد الإلكتروني *" : "Email *"}
-                  </label>
+                <div className="relative">
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder={isArabic ? "name@example.com" : "name@example.com"}
                     required
+                    placeholder=" "
                     disabled={isSubmitting}
-                    className="w-full bg-stone-50 hover:bg-stone-100/70 focus:bg-white text-stone-900 placeholder-stone-400 px-3.5 py-2.5 rounded-xl text-xs font-medium border border-stone-200 focus:border-[#00A79D] focus:ring-2 focus:ring-[#00A79D]/20 outline-none transition-all"
+                    dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                      }`}
                   />
+                  <label
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                      }`}
+                  >
+                    {isArabic ? "البريد الإلكتروني" : "Email"} <span className="text-red-500">*</span>
+                  </label>
                 </div>
 
                 {/* Field 4: Project Type * */}
-                <div className="flex flex-col gap-1">
-                  <label className="text-[11px] font-bold text-stone-700">
-                    {isArabic ? "نوع المشروع *" : "Project Type *"}
-                  </label>
-                  <div className="relative">
-                    <select
-                      name="projectType"
-                      value={formData.projectType}
-                      onChange={handleChange}
-                      required
-                      disabled={isSubmitting}
-                      className={`w-full appearance-none bg-stone-50 hover:bg-stone-100/70 focus:bg-white text-stone-900 py-2.5 rounded-xl text-xs font-medium border border-stone-200 focus:border-[#00A79D] focus:ring-2 focus:ring-[#00A79D]/20 outline-none transition-all cursor-pointer ${
-                        isArabic ? "pl-8 pr-3.5" : "pr-8 pl-3.5"
+                <div className="relative">
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                    dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right pl-10 pr-5" : "text-left pr-10 pl-5"
                       }`}
-                    >
-                      <option value="" disabled>
-                        {isArabic ? "اختر نوع المشروع..." : "Select Project Type..."}
+                  >
+                    <option value="" disabled hidden></option>
+                    {projectTypeOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {isArabic ? opt.labelAr : opt.labelEn}
                       </option>
-                      {projectTypeOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {isArabic ? opt.labelAr : opt.labelEn}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown
-                      className={`w-4 h-4 text-stone-400 pointer-events-none absolute top-1/2 -translate-y-1/2 ${
-                        isArabic ? "left-2.5" : "right-2.5"
+                    ))}
+                  </select>
+                  <label
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                      } ${formData.projectType
+                        ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400"
                       }`}
-                    />
-                  </div>
+                  >
+                    {isArabic ? "نوع المشروع" : "Project Type"} <span className="text-red-500">*</span>
+                  </label>
+                  <ChevronDown
+                    className={`w-4 h-4 text-stone-400 pointer-events-none absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-5" : "right-5"
+                      }`}
+                  />
                 </div>
               </div>
 
@@ -370,7 +389,7 @@ export default function WelcomeOfferModal() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-2 w-full bg-[#00A79D] hover:bg-[#008f86] text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
+                className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold py-3.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <>
