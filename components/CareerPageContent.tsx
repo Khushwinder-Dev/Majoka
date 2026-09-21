@@ -364,14 +364,14 @@ export default function CareerPageContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             
-            {/* Left: Images with Ribbon and Floating 4-Pillar Card (6 cols) */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative w-full max-w-[540px] mx-auto">
+            {/* Left: Main Large Image with Swallowtail Ribbon Badge (5 cols on lg) */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative w-full max-w-[520px] mx-auto lg:mx-0">
                 
                 {/* Main Large Image: 3 Colleagues in Modern Office */}
-                <div className="relative w-full h-[340px] sm:h-[400px] lg:h-[440px] rounded-3xl overflow-hidden shadow-xl bg-slate-100">
+                <div className="relative w-full h-[360px] sm:h-[430px] lg:h-[490px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-xl bg-slate-100">
                   <Image
                     src="/career/Rectangle 34625030.png"
                     alt={
@@ -381,155 +381,196 @@ export default function CareerPageContent() {
                     }
                     fill
                     unoptimized
+                    priority
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* Left Teal Ribbon Badge: "70+ Active Jobs" */}
-                <div className="absolute -top-3 left-4 sm:left-6 z-20">
-                  <div className="relative bg-[#00DDCF] text-[#0B1C24] font-extrabold text-xs sm:text-sm tracking-wider uppercase px-4 py-3 shadow-lg rounded-t-md flex items-center justify-center writing-mode-vertical">
-                    <span className="font-extrabold whitespace-nowrap">
-                      {isArabic ? "+70 وظيفة نشطة" : "70+ Active Jobs"}
+                {/* Left Teal Swallowtail Ribbon Badge: "70+ Active Job" */}
+                <div
+                  className={`absolute top-[28%] -left-5 sm:-left-6 z-30 w-11 sm:w-12 h-44 sm:h-48 drop-shadow-[0_8px_18px_rgba(0,0,0,0.18)] flex items-center justify-center transition-transform hover:scale-105 duration-300 ${
+                    isArabic ? "left-auto -right-5 sm:-right-6" : ""
+                  }`}
+                >
+                  <div
+                    className="w-full h-full bg-[#00DDCF] flex items-center justify-center relative"
+                    style={{
+                      clipPath:
+                        "polygon(0% 0%, 50% 12px, 100% 0%, 100% 100%, 50% calc(100% - 12px), 0% 100%)",
+                    }}
+                  >
+                    <span
+                      className="text-white font-black text-[12px] sm:text-[13px] tracking-[0.14em] uppercase whitespace-nowrap select-none"
+                      style={{
+                        transform: isArabic ? "rotate(90deg)" : "rotate(-90deg)",
+                      }}
+                    >
+                      {isArabic ? "+70 وظيفة نشطة" : "70+ Active Job"}
                     </span>
-                    {/* Ribbon Notch Bottom */}
-                    <div className="absolute -bottom-2 left-0 right-0 h-2 bg-[#00DDCF] [clip-path:polygon(0_0,50%_100%,100%_0)]" />
-                  </div>
-                </div>
-
-                {/* Overlapping Floating Card with Small Image & 4-Pillars */}
-                <div className="relative sm:absolute sm:-bottom-8 sm:-right-6 mt-6 sm:mt-0 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 shadow-[0_12px_36px_rgba(0,196,180,0.18)] border border-[#00DDCF]/30 max-w-full sm:max-w-[460px]">
-                  <div className="flex flex-col sm:flex-row gap-4 items-center">
-                    {/* Small Image: 2 Smiling Colleagues */}
-                    <div className="relative w-full sm:w-[130px] h-[110px] sm:h-[130px] rounded-xl overflow-hidden shrink-0 shadow-sm bg-slate-100">
-                      <Image
-                        src="/career/Rectangle 34625032.png"
-                        alt="Taj Al Rahmah Colleagues"
-                        fill
-                        unoptimized
-                        className="object-cover"
-                      />
-                    </div>
-
-                    {/* 4 Trade Pillars 2x2 Grid */}
-                    <div className="grid grid-cols-2 gap-x-3 gap-y-2.5 text-left rtl:text-right flex-1 w-full">
-                      {/* 1 */}
-                      <div>
-                        <h4 className="text-[12px] sm:text-[13px] font-extrabold text-[#0B1C24] leading-tight">
-                          {isArabic ? "توظيف مباشر:" : "Direct Employment:"}
-                        </h4>
-                        <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-0.5">
-                          {isArabic
-                            ? "أمان وظيفي كامل وعقود رسمية دائمة."
-                            : "Full-time job security, contracts & benefits."}
-                        </p>
-                      </div>
-
-                      {/* 2 */}
-                      <div>
-                        <h4 className="text-[12px] sm:text-[13px] font-extrabold text-[#0B1C24] leading-tight">
-                          {isArabic ? "تنوع المسارات:" : "Six Trades Move Between:"}
-                        </h4>
-                        <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-0.5">
-                          {isArabic
-                            ? "تدريب شامل بين العزل والطلاء والإنشاء."
-                            : "Cross-train across waterproofing & coatings."}
-                        </p>
-                      </div>
-
-                      {/* 3 */}
-                      <div>
-                        <h4 className="text-[12px] sm:text-[13px] font-extrabold text-[#0B1C24] leading-tight">
-                          {isArabic ? "مسار إشرافي:" : "Supervisor Track:"}
-                        </h4>
-                        <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-0.5">
-                          {isArabic
-                            ? "فرص ترقية واضحة لإدارة المواقع."
-                            : "Clear career steps to site management."}
-                        </p>
-                      </div>
-
-                      {/* 4 */}
-                      <div>
-                        <h4 className="text-[12px] sm:text-[13px] font-extrabold text-[#0B1C24] leading-tight">
-                          {isArabic ? "استثمار مستمر:" : "Heavy Investment:"}
-                        </h4>
-                        <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-0.5">
-                          {isArabic
-                            ? "تدريب تقني مستمر وشهادات معتمدة."
-                            : "Safety certifications & trade training."}
-                        </p>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
               </div>
             </div>
 
-            {/* Right: Copy & Action Buttons (6 cols) */}
-            <div className="lg:col-span-6 max-w-xl">
+            {/* Right: Copy, Floating 4-Pillars Card & Action Buttons (7 cols on lg) */}
+            <div className="lg:col-span-7 relative z-10">
               {/* Eyebrow */}
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="inline-block h-[2px] w-7 sm:w-9 bg-[#00DDCF] rounded-full shrink-0" />
-                <span className="text-[11px] sm:text-xs font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
-                  {isArabic ? "انضم إلينا وانمُ معنا" : "GROW WITH US"}
+              <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+                <span className="inline-block h-[2.5px] w-6 sm:w-8 bg-[#00DDCF] rounded-full shrink-0" />
+                <span className="text-xs sm:text-[13px] font-extrabold tracking-[0.18em] uppercase text-[#00DDCF]">
+                  {isArabic ? "وظائف معنا" : "CAREER WITH US"}
                 </span>
               </div>
 
               {/* Heading */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.18]">
+              <h2 className="text-3xl sm:text-4xl md:text-[42px] lg:text-[46px] font-black text-[#0B1C24] tracking-tight leading-[1.14]">
                 {isArabic ? (
                   <>
                     مهنة حقيقية يمكنك{" "}
-                    <span className="text-[#00DDCF]">بناء عقد من الزمن عليها.</span>
+                    <span className="text-[#00DDCF]">بناء عقد</span>
+                    <br />
+                    <span className="text-[#00DDCF]">من الزمن عليها.</span>
                   </>
                 ) : (
                   <>
                     A Trade Job You{" "}
-                    <span className="text-[#00DDCF]">Can Build A Decade On.</span>
+                    <span className="text-[#00DDCF]">Can Build A</span>
+                    <br />
+                    <span className="text-[#00DDCF]">Decade On.</span>
                   </>
                 )}
               </h2>
 
               {/* Paragraph 1 */}
-              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              <p className="mt-4 sm:mt-5 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed font-normal max-w-2xl">
                 {isArabic
-                  ? "في شركة تاج الرحمة، التوظيف ليس مجرد عقد مؤقت أو عمالة يومية متفرقة، بل هو علاقة شراكة واستقرار طويل الأمد يضمن لك ولعائلتك راحة البال ومساراً تصاعدياً حقيقياً."
-                  : "Most of all, a career here is a connection. Not the rush-and-run approach where you're tossed into temporary teams on a daily or hourly basis, with constant uncertainty around when the next project might come."}
+                  ? "يعتمد معظم سوق الصيانة في دولة الإمارات على العمالة من الباطن والفرق المؤقتة والعمل باليومية. وفي حين قد يفضل هذا النموذج السرعة والحجم، فإنه غالباً ما يفتقر إلى الاستمرارية،"
+                  : "Most of the maintenance market in the Emirates relies on subcontracted labour, temporary teams, and daily-rate work. While this model may prioritize speed and volume, it often makes consistency,"}
               </p>
 
+              {/* Overlapping Floating Card with Small Image & 4-Pillars */}
+              <div
+                className={`relative z-20 mt-6 sm:mt-7 bg-[#E8FAF7] rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 shadow-[0_12px_36px_rgba(0,196,180,0.14)] border border-[#00DDCF]/25 overflow-hidden transition-all duration-300 ${
+                  isArabic
+                    ? "lg:-mr-32 xl:-mr-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
+                    : "lg:-ml-32 xl:-ml-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center">
+                  {/* Small Image: 2 Smiling Colleagues */}
+                  <div className="relative w-full sm:w-[150px] md:w-[165px] lg:w-[165px] xl:w-[180px] h-[120px] sm:h-[130px] xl:h-[135px] rounded-2xl overflow-hidden shrink-0 shadow-sm bg-slate-100">
+                    <Image
+                      src="/career/Rectangle 34625032.png"
+                      alt={
+                        isArabic
+                          ? "زملاء العمل في شركة تاج الرحمة"
+                          : "Taj Al Rahmah Colleagues"
+                      }
+                      fill
+                      unoptimized
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* 4 Trade Pillars 2x2 Grid */}
+                  <div className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-3 flex-1 w-full text-left rtl:text-right">
+                    {/* 1 */}
+                    <div>
+                      <h4 className="text-[12.5px] sm:text-[13.5px] font-extrabold text-[#0B1C24] leading-tight tracking-tight">
+                        {isArabic ? "توظيف مباشر" : "Direct Employment"}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-1">
+                        {isArabic
+                          ? "عقود وتأشيرة وتأمين باسمك الخاص."
+                          : "Contract, visa and insurance in your own name."}
+                      </p>
+                    </div>
+
+                    {/* 2 */}
+                    <div>
+                      <h4 className="text-[12.5px] sm:text-[13.5px] font-extrabold text-[#0B1C24] leading-tight tracking-tight">
+                        {isArabic
+                          ? "ستة مجالات مهنية للتنقل"
+                          : "Six Trades Move Between"}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-1">
+                        {isArabic
+                          ? "تدريب شامل فور اعتماد تخصصك الميداني."
+                          : "Cross-train once you signed off on your own."}
+                      </p>
+                    </div>
+
+                    {/* 3 */}
+                    <div>
+                      <h4 className="text-[12.5px] sm:text-[13.5px] font-extrabold text-[#0B1C24] leading-tight tracking-tight">
+                        {isArabic ? "مسار إشرافي" : "Supervisor Track"}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-1">
+                        {isArabic
+                          ? "قائد فريق خلال ثلاث سنوات، مشرف خلال خمس."
+                          : "Team lead at three years, supervisor at five."}
+                      </p>
+                    </div>
+
+                    {/* 4 */}
+                    <div>
+                      <h4 className="text-[12.5px] sm:text-[13.5px] font-extrabold text-[#0B1C24] leading-tight tracking-tight">
+                        {isArabic ? "ساعات عمل ثابتة" : "Fixed Hours"}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-slate-500 leading-snug mt-1">
+                        {isArabic
+                          ? "السبت – الخميس، مع احتساب الساعات الإضافية."
+                          : "Sat – Thu, with paid overtime on call-outs."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Signature Teal Accent in the Corner */}
+                <div
+                  className={`absolute bottom-0 w-5 h-5 bg-[#00DDCF] pointer-events-none ${
+                    isArabic
+                      ? "left-0 rounded-tr-xl rounded-bl-[24px] sm:rounded-bl-[28px]"
+                      : "right-0 rounded-tl-xl rounded-br-[24px] sm:rounded-br-[28px]"
+                  }`}
+                />
+              </div>
+
               {/* Paragraph 2 */}
-              <p className="mt-3.5 sm:mt-4 text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              <p className="mt-5 sm:mt-6 text-[14px] sm:text-[15px] text-slate-600 leading-relaxed font-normal max-w-2xl">
                 {isArabic
-                  ? "العمل معنا لا يتعلق فقط بالمهارات الحرفية؛ بل يقوم على الاحترام، وروح الفريق المتماسك، والدعم المتواصل في بيئة تقدر إسهاماتك وتكافئ التميز."
-                  : "Most of all, the work isn't just about technical trade skills; it's about stability, pride, and reliable teamwork with dedicated professionals in a company that truly values you."}
+                  ? "يعتمد قطاع الصيانة في الإمارات بشكل رئيسي على فرق العمل المؤقتة. ورغم أن هذا النمط يركز على الإنجاز السريع، إلا أنه قد يؤثر على الجودة والاستقرار المهني."
+                  : "Most of the Emirates' maintenance market relies on subcontracted labour and daily-rate work. While this approach may prioritize speed, it can make"}
               </p>
 
               {/* Action Buttons */}
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                {/* Watch Video Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsVideoModalOpen(true)}
-                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00DDCF] hover:bg-[#00c4b4] active:scale-95 text-[#0B1C24] font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 shadow-[0_8px_24px_rgba(0,221,207,0.35)] group cursor-pointer"
-                >
-                  <span>{isArabic ? "مشاهدة الفيديو" : "WATCH VIDEO"}</span>
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#0B1C24] flex items-center justify-center transition-transform group-hover:scale-110">
-                    <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current ml-0.5" />
-                  </span>
-                </button>
-
-                {/* Explore Opportunities Button */}
+              <div className="mt-7 flex flex-wrap items-center gap-4">
+                {/* Search Job Button (Solid Teal with White Icon Circle) */}
                 <a
                   href="#all-jobs"
-                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white border border-[#00DDCF] hover:bg-[#EBF7F9] active:scale-95 text-[#0B1C24] font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 shadow-xs group cursor-pointer"
+                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00DDCF] hover:bg-[#00c9bd] active:scale-95 text-white font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 shadow-[0_6px_20px_rgba(0,221,207,0.3)] group cursor-pointer"
                 >
-                  <span>{isArabic ? "استكشف الفرص المتاحة" : "EXPLORE OPPORTUNITIES"}</span>
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00DDCF] text-[#0B1C24] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                    <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
+                  <span>{isArabic ? "البحث عن وظيفة" : "SEARCH JOB"}</span>
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#00DDCF] flex items-center justify-center transition-transform group-hover:scale-110 shrink-0">
+                    <Search className="w-4 h-4 stroke-[2.5]" />
                   </span>
                 </a>
+
+                {/* Create Portfolio Button (Outline with Teal Icon Circle) */}
+                <Link
+                  href="/contact"
+                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white border-2 border-[#00DDCF] hover:bg-[#00DDCF]/5 active:scale-95 text-[#00DDCF] font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 group cursor-pointer"
+                >
+                  <span>{isArabic ? "إنشاء ملف مهني" : "CREATE PORTFOLIO"}</span>
+                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 shrink-0">
+                    <ArrowRight
+                      className={`w-4 h-4 stroke-[2.5] ${
+                        isArabic ? "rotate-180" : ""
+                      }`}
+                    />
+                  </span>
+                </Link>
               </div>
 
             </div>
