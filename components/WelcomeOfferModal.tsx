@@ -155,7 +155,7 @@ export default function WelcomeOfferModal() {
     >
       {/* Modal Card */}
       <div
-        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[92vh] flex flex-col md:grid animate-in zoom-in-95 duration-300 border border-stone-100"
+        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[92vh] flex flex-col md:grid animate-in zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
         style={{ direction: isArabic ? "rtl" : "ltr" }}
       >
@@ -197,7 +197,7 @@ export default function WelcomeOfferModal() {
           {/* <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/85 via-slate-900/50 to-transparent" /> */}
 
           {/* Floating discount badge on image */}
-          <div className="relative z-10 hidden sm:flex flex-col gap-2 text-white">
+          {/* <div className="relative z-10 hidden sm:flex flex-col gap-2 text-white">
             <div className="inline-flex items-center gap-2 bg-[#01a9a0] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg w-fit backdrop-blur-xs">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isArabic ? "خصم ترحيبي حصري 10%" : "Exclusive 10% Welcome Discount"}</span>
@@ -207,7 +207,7 @@ export default function WelcomeOfferModal() {
                 ? "حلول هندسية متكاملة تضمن أعلى معايير الجودة والاستدامة لمشروعك."
                 : "Engineered solutions delivering uncompromising quality and protection for your property."}
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* ========================================================= */}
@@ -280,7 +280,7 @@ export default function WelcomeOfferModal() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:gap-3.5">
               {/* 4 Fields Grid Matching Website Floating-Label Standard */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {/* Field 1: Name * */}
                 <div className="relative">
                   <input
@@ -292,12 +292,12 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
                       }`}
                   />
                   <label
-                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.name ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.name ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
                       }`}
                   >
                     {isArabic ? "الاسم" : "Name"} <span className="text-red-500">*</span>
@@ -315,12 +315,12 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
                       }`}
                   />
                   <label
-                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
                       }`}
                   >
                     {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
@@ -338,12 +338,12 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
                       }`}
                   />
                   <label
-                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs sm:peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
+                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
                       }`}
                   >
                     {isArabic ? "البريد الإلكتروني" : "Email"} <span className="text-red-500">*</span>
@@ -359,7 +359,7 @@ export default function WelcomeOfferModal() {
                     required
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-xs sm:text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right pl-10 pr-5" : "text-left pr-10 pl-5"
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right pl-9 pr-4" : "text-left pr-9 pl-4"
                       }`}
                   >
                     <option value="" disabled hidden></option>
@@ -370,16 +370,16 @@ export default function WelcomeOfferModal() {
                     ))}
                   </select>
                   <label
-                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
+                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
                       } ${formData.projectType
-                        ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                        : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400"
+                        ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-xs text-stone-400"
                       }`}
                   >
                     {isArabic ? "نوع المشروع" : "Project Type"} <span className="text-red-500">*</span>
                   </label>
                   <ChevronDown
-                    className={`w-4 h-4 text-stone-400 pointer-events-none absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-5" : "right-5"
+                    className={`w-4 h-4 text-stone-400 pointer-events-none absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-4" : "right-4"
                       }`}
                   />
                 </div>
@@ -389,7 +389,7 @@ export default function WelcomeOfferModal() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold py-3.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
+                className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold h-10 sm:h-10.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
               >
                 {isSubmitting ? (
                   <>
@@ -417,7 +417,7 @@ export default function WelcomeOfferModal() {
                 <button
                   type="button"
                   onClick={handleClose}
-                  className="text-xs text-stone-500 hover:text-stone-800 transition-colors py-1 px-3 cursor-pointer"
+                  className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold h-10 sm:h-10.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
                 >
                   {isArabic ? "ربما لاحقاً" : "Maybe Later"}
                 </button>
