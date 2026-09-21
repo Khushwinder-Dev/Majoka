@@ -296,7 +296,7 @@ export default function ProductDetailsPage() {
             </h1>
 
             {/* Rating Stars & Count */}
-            <div className="flex items-center gap-2.5 mb-5">
+            <div className="flex items-center gap-2.5 mb-5 hidden">
               <div className="flex items-center gap-0.5 text-amber-500">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />

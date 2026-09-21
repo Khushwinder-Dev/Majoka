@@ -17,6 +17,7 @@ import {
   getTemplateKey,
 } from "@/components/service-templates";
 import { BannerSlider } from "@/components/ServiceBanners";
+import ServiceProductsSection from "@/components/ServiceProductsSection";
 
 /* ─── ASSETS ──────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/banners/Services_.png";
@@ -460,6 +461,9 @@ function ServicesContent() {
                     />
                   ))}
                 </div>
+
+                {/* ══ PRODUCTS SECTION UNDER THE LISTING ══ */}
+                <ServiceProductsSection isArabic={isArabic} />
               </>
             )}
 
@@ -498,6 +502,9 @@ function ServicesContent() {
                   if (key === "C") return <TemplateC service={activeService} sub={activeSub} isArabic={isArabic} />;
                   return <TemplateDefault service={activeService} sub={activeSub} isArabic={isArabic} />;
                 })()}
+
+                {/* ══ PRODUCTS SECTION UNDER SUB-SERVICE DETAIL VIEW ══ */}
+                <ServiceProductsSection isArabic={isArabic} />
               </>
             )}
 

@@ -28,6 +28,7 @@ import {
   getTemplateKey,
 } from "@/components/service-templates";
 import { BannerSlider } from "@/components/ServiceBanners";
+import ServiceProductsSection from "@/components/ServiceProductsSection";
 
 /* ─── FALLBACKS ────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -560,6 +561,9 @@ function ServiceDetailsContent() {
             {activeSub && templateKey === "C" && (
               <TemplateC service={service} sub={activeSub} isArabic={isArabic} />
             )}
+
+            {/* ══ PRODUCTS SECTION UNDER SERVICE DETAILS ══ */}
+            <ServiceProductsSection isArabic={isArabic} />
 
           </main>
         </div>
