@@ -280,7 +280,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] flex items-center bg-[#ebf7f9] overflow-hidden">
+      <section className="relative w-full min-h-[400px] sm:min-h-[400px] lg:min-h-[400px] flex items-center bg-[#ebf7f9] overflow-hidden">
         {/* Designer Banner Background */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -299,9 +299,9 @@ export default function CareerPageContent() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full py-16 sm:py-20 lg:py-24">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             {/* Left Content (7 cols on lg) */}
             <div className="lg:col-span-7 max-w-2xl">
               {/* Breadcrumb */}
@@ -365,11 +365,11 @@ export default function CareerPageContent() {
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            
+
             {/* Left: Main Large Image with Swallowtail Ribbon Badge (5 cols on lg) */}
             <div className="lg:col-span-5 relative">
               <div className="relative w-full max-w-[520px] mx-auto lg:mx-0">
-                
+
                 {/* Main Large Image: 3 Colleagues in Modern Office */}
                 <div className="relative w-full h-[360px] sm:h-[430px] lg:h-[490px] rounded-[28px] sm:rounded-[32px] overflow-hidden shadow-xl bg-slate-100">
                   <Image
@@ -388,9 +388,8 @@ export default function CareerPageContent() {
 
                 {/* Left Teal Swallowtail Ribbon Badge: "70+ Active Job" */}
                 <div
-                  className={`absolute top-[28%] -left-5 sm:-left-6 z-30 w-11 sm:w-12 h-44 sm:h-48 drop-shadow-[0_8px_18px_rgba(0,0,0,0.18)] flex items-center justify-center transition-transform hover:scale-105 duration-300 ${
-                    isArabic ? "left-auto -right-5 sm:-right-6" : ""
-                  }`}
+                  className={`absolute top-[28%] -left-5 sm:-left-6 z-30 w-11 sm:w-12 h-44 sm:h-48 drop-shadow-[0_8px_18px_rgba(0,0,0,0.18)] flex items-center justify-center transition-transform hover:scale-105 duration-300 ${isArabic ? "left-auto -right-5 sm:-right-6" : ""
+                    }`}
                 >
                   <div
                     className="w-full h-full bg-[#00DDCF] flex items-center justify-center relative"
@@ -451,11 +450,10 @@ export default function CareerPageContent() {
 
               {/* Overlapping Floating Card with Small Image & 4-Pillars */}
               <div
-                className={`relative z-20 mt-6 sm:mt-7 bg-[#E8FAF7] rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 shadow-[0_12px_36px_rgba(0,196,180,0.14)] border border-[#00DDCF]/25 overflow-hidden transition-all duration-300 ${
-                  isArabic
-                    ? "lg:-mr-32 xl:-mr-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
-                    : "lg:-ml-32 xl:-ml-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
-                }`}
+                className={`relative z-20 mt-6 sm:mt-7 bg-[#E8FAF7] rounded-[24px] sm:rounded-[28px] p-4 sm:p-5 shadow-[0_12px_36px_rgba(0,196,180,0.14)] border border-[#00DDCF]/25 overflow-hidden transition-all duration-300 ${isArabic
+                  ? "lg:-mr-32 xl:-mr-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
+                  : "lg:-ml-32 xl:-ml-40 lg:w-[calc(100%+8rem)] xl:w-[calc(100%+10rem)] max-w-none"
+                  }`}
               >
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-center">
                   {/* Small Image: 2 Smiling Colleagues */}
@@ -529,11 +527,10 @@ export default function CareerPageContent() {
 
                 {/* Signature Teal Accent in the Corner */}
                 <div
-                  className={`absolute bottom-0 w-5 h-5 bg-[#00DDCF] pointer-events-none ${
-                    isArabic
-                      ? "left-0 rounded-tr-xl rounded-bl-[24px] sm:rounded-bl-[28px]"
-                      : "right-0 rounded-tl-xl rounded-br-[24px] sm:rounded-br-[28px]"
-                  }`}
+                  className={`absolute bottom-0 w-5 h-5 bg-[#00DDCF] pointer-events-none ${isArabic
+                    ? "left-0 rounded-tr-xl rounded-bl-[24px] sm:rounded-bl-[28px]"
+                    : "right-0 rounded-tl-xl rounded-br-[24px] sm:rounded-br-[28px]"
+                    }`}
                 />
               </div>
 
@@ -565,9 +562,8 @@ export default function CareerPageContent() {
                   <span>{isArabic ? "إنشاء ملف مهني" : "CREATE PORTFOLIO"}</span>
                   <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 shrink-0">
                     <ArrowRight
-                      className={`w-4 h-4 stroke-[2.5] ${
-                        isArabic ? "rotate-180" : ""
-                      }`}
+                      className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""
+                        }`}
                     />
                   </span>
                 </Link>
@@ -584,7 +580,7 @@ export default function CareerPageContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section id="all-jobs" className="relative w-full py-16 sm:py-20 bg-white">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          
+
           {/* Header Row: Title on Left, Filter Pills on Right */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 mb-8 sm:mb-10 pb-4 border-b border-slate-100">
             {/* Title with teal bar */}
@@ -610,11 +606,10 @@ export default function CareerPageContent() {
                 <button
                   key={cat.id}
                   onClick={() => handleCategoryChange(cat.id)}
-                  className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                    selectedCategory === cat.id
-                      ? "bg-[#00DDCF] text-[#0B1C24] shadow-xs"
-                      : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                  }`}
+                  className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${selectedCategory === cat.id
+                    ? "bg-[#00DDCF] text-[#0B1C24] shadow-xs"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    }`}
                 >
                   {isArabic ? cat.ar : cat.en}
                 </button>
@@ -634,7 +629,7 @@ export default function CareerPageContent() {
                   <h3 className="text-base sm:text-lg font-extrabold text-[#0B1C24] group-hover:text-[#00c4b4] transition-colors">
                     {isArabic ? job.titleAr : job.titleEn}
                   </h3>
-                  
+
                   {/* Meta tags */}
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1 text-xs sm:text-[13px] text-slate-600">
                     <span className="font-semibold text-slate-800">
@@ -679,11 +674,10 @@ export default function CareerPageContent() {
                 <button
                   key={num}
                   onClick={() => setCurrentPage(num)}
-                  className={`w-9 h-9 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                    currentPage === num
-                      ? "bg-[#00DDCF] text-[#0B1C24] shadow-xs"
-                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  }`}
+                  className={`w-9 h-9 rounded-full text-xs font-bold transition-all cursor-pointer ${currentPage === num
+                    ? "bg-[#00DDCF] text-[#0B1C24] shadow-xs"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    }`}
                 >
                   {num}
                 </button>
@@ -709,7 +703,7 @@ export default function CareerPageContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F2FBF9] overflow-hidden">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-          
+
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center justify-center gap-3 mb-3">
@@ -743,7 +737,7 @@ export default function CareerPageContent() {
                 <div key={step.step} className="relative flex flex-col">
                   {/* Card Container */}
                   <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-100 shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_36px_rgba(0,221,207,0.12)] hover:-translate-y-1 transition-all duration-300 flex-1 flex flex-col relative overflow-hidden group">
-                    
+
                     {/* Top Row: Circular Icon Badge + Step Ghost Number */}
                     <div className="flex items-center justify-between mb-5">
                       {/* Icon Circle */}
@@ -787,7 +781,7 @@ export default function CareerPageContent() {
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center justify-center gap-3 mb-3">
