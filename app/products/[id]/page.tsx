@@ -394,7 +394,7 @@ export default function ProductDetailsPage() {
             </button>
             <button
               onClick={() => scrollToSection("reviews")}
-              className={`pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${activeTab === "reviews"
+              className={`hidden pb-3 text-xs sm:text-sm font-semibold transition-colors cursor-pointer relative ${activeTab === "reviews"
                 ? "text-[#01a9a0] border-b-2 border-[#01a9a0]"
                 : "text-gray-500 hover:text-gray-800"
                 }`}
@@ -455,7 +455,7 @@ export default function ProductDetailsPage() {
         </section>
 
         {/* ===================== RATINGS & REVIEWS SECTION ===================== */}
-        <section id="reviews" className="pt-10 pb-6">
+        <section id="reviews" className="pt-10 pb-6 hidden">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl sm:text-2xl font-bold font-anek text-gray-900 tracking-tight">
               Ratings
