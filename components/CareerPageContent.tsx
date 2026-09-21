@@ -246,7 +246,7 @@ export default function CareerPageContent() {
   const { isArabic } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [openFaqId, setOpenFaqId] = useState<number | null>(4); // Default 4th open as in mockup
+  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
 
   const itemsPerPage = 5;
@@ -781,18 +781,17 @@ export default function CareerPageContent() {
             </h2>
           </div>
 
-          {/* Unified Accordion Items */}
-          <div className="space-y-4">
+          {/* Site-Standard Consistent FAQ Accordion */}
+          <div className="space-y-3">
             {CAREER_FAQS.map((faq) => (
               <FaqAccordionItem
                 key={faq.id}
-                number={undefined}
+                number={faq.id}
                 question={isArabic ? faq.questionAr : faq.questionEn}
                 answer={isArabic ? faq.answerAr : faq.answerEn}
                 isOpen={openFaqId === faq.id}
                 onToggle={() => toggleFaq(faq.id)}
                 isArabic={isArabic}
-                className="rounded-full! overflow-hidden shadow-xs hover:border-[#00DDCF]/40"
               />
             ))}
           </div>
