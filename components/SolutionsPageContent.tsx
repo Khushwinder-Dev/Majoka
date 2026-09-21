@@ -341,10 +341,10 @@ export default function SolutionsPageContent() {
             {TAILORED_SOLUTIONS.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_36px_rgba(0,196,180,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+                className="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_rgba(0,196,180,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
               >
-                {/* Image Container with Floating Icon Badge */}
-                <div className="relative w-full h-[180px] overflow-hidden bg-slate-100">
+                {/* Top Image Container */}
+                <div className="relative w-full h-[190px] sm:h-[205px] overflow-hidden bg-slate-100">
                   <Image
                     src={item.image}
                     alt={isArabic ? item.titleAr : item.titleEn}
@@ -354,37 +354,37 @@ export default function SolutionsPageContent() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Subtle Image Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
+                </div>
 
-                  {/* Circular Teal Floating Icon Badge */}
-                  <div className="absolute bottom-3.5 left-4 rtl:left-auto rtl:right-4 w-10 h-10 rounded-full bg-white/95 backdrop-blur-xs shadow-md flex items-center justify-center p-2 border border-slate-200/70 group-hover:border-[#00c4b4] group-hover:scale-110 transition-all duration-300 z-10">
-                    <Image
-                      src={item.icon}
-                      alt=""
-                      width={22}
-                      height={22}
-                      className="w-5 h-5 object-contain"
-                    />
-                  </div>
+                {/* Circular White Floating Icon Badge Bridging Image & Content */}
+                <div className="relative -mt-7 ml-6 rtl:ml-auto rtl:mr-6 z-10 w-14 h-14 rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] flex items-center justify-center p-3 border border-slate-100/90 group-hover:scale-105 transition-all duration-300">
+                  <Image
+                    src={item.icon}
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 object-contain"
+                  />
                 </div>
 
                 {/* Card Text Content */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1">
-                  <h3 className="text-base sm:text-[17px] font-extrabold text-[#0B1C24] group-hover:text-[#00c4b4] transition-colors leading-snug mb-2.5">
+                <div className="px-6 pt-2.5 pb-6 flex flex-col flex-1">
+                  <h3 className="text-lg sm:text-[19px] font-bold text-[#0B1C24] group-hover:text-[#00c4b4] transition-colors leading-snug mb-2.5">
                     {isArabic ? item.titleAr : item.titleEn}
                   </h3>
 
-                  <p className="text-xs sm:text-[13px] text-stone-500 leading-relaxed flex-1 mb-5">
+                  <p className="text-[13.5px] sm:text-[14px] text-slate-600 leading-relaxed flex-1 mb-5">
                     {isArabic ? item.descAr : item.descEn}
                   </p>
 
                   {/* Explore Link */}
                   <Link
                     href={item.href}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-[#00c4b4] group-hover:gap-2.5 transition-all self-start mt-auto"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#00DDCF] hover:text-[#00c4b4] group-hover:gap-2.5 transition-all self-start mt-auto"
                   >
                     <span>{isArabic ? "استكشف الحل" : "Explore Solution"}</span>
-                    <ArrowRight className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
+                    <ArrowRight className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
                   </Link>
                 </div>
               </div>
@@ -430,10 +430,10 @@ export default function SolutionsPageContent() {
             {PROJECT_TYPE_SOLUTIONS.map((card) => (
               <div
                 key={card.id}
-                className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-[0_8px_24px_rgba(15,23,42,0.05)] hover:shadow-[0_16px_36px_rgba(0,196,180,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
+                className="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_rgba(0,196,180,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col group"
               >
-                {/* Image Container with Floating Solid Teal Badge */}
-                <div className="relative w-full h-[190px] overflow-hidden bg-slate-100">
+                {/* Image Container */}
+                <div className="relative w-full h-[190px] sm:h-[205px] overflow-hidden bg-slate-100">
                   <Image
                     src={card.image}
                     alt={isArabic ? card.titleAr : card.titleEn}
@@ -442,36 +442,36 @@ export default function SolutionsPageContent() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
+                </div>
 
-                  {/* Circular Solid Teal Icon Badge */}
-                  <div className="absolute bottom-3.5 left-4 rtl:left-auto rtl:right-4 w-11 h-11 rounded-full bg-[#00c4b4] text-white shadow-lg flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300 z-10">
-                    <Image
-                      src={card.icon}
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="w-5 h-5 object-contain brightness-0 invert"
-                    />
-                  </div>
+                {/* Circular White Floating Icon Badge */}
+                <div className="relative -mt-7 ml-6 rtl:ml-auto rtl:mr-6 z-10 w-14 h-14 rounded-full bg-white shadow-[0_4px_16px_rgba(0,0,0,0.08)] flex items-center justify-center p-3 border border-slate-100/90 group-hover:scale-105 transition-all duration-300">
+                  <Image
+                    src={card.icon}
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="w-7 h-7 object-contain"
+                  />
                 </div>
 
                 {/* Card Text Content */}
-                <div className="p-5 sm:p-6 flex flex-col flex-1">
-                  <h3 className="text-lg sm:text-[19px] font-extrabold text-[#0B1C24] group-hover:text-[#00c4b4] transition-colors leading-snug mb-2.5">
+                <div className="px-6 pt-2.5 pb-6 flex flex-col flex-1">
+                  <h3 className="text-lg sm:text-[19px] font-bold text-[#0B1C24] group-hover:text-[#00c4b4] transition-colors leading-snug mb-2.5">
                     {isArabic ? card.titleAr : card.titleEn}
                   </h3>
 
-                  <p className="text-xs sm:text-[13px] text-stone-500 leading-relaxed flex-1 mb-5">
+                  <p className="text-[13.5px] sm:text-[14px] text-slate-600 leading-relaxed flex-1 mb-5">
                     {isArabic ? card.descAr : card.descEn}
                   </p>
 
                   <Link
                     href={card.href}
-                    className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-[#00c4b4] group-hover:gap-2.5 transition-all self-start mt-auto"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#00DDCF] hover:text-[#00c4b4] group-hover:gap-2.5 transition-all self-start mt-auto"
                   >
                     <span>{isArabic ? "عرض الحلول" : "View Solutions"}</span>
-                    <ArrowRight className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`} />
+                    <ArrowRight className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
                   </Link>
                 </div>
               </div>

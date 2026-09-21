@@ -280,7 +280,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[400px] sm:min-h-[400px] lg:min-h-[400px] flex items-center bg-[#ebf7f9] overflow-hidden">
+      <section className="relative w-full min-h-[420px] sm:min-h-[460px] lg:min-h-[480px] xl:min-h-[510px] flex items-center bg-[#ebf7f9] overflow-hidden">
         {/* Designer Banner Background */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -299,27 +299,29 @@ export default function CareerPageContent() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full pt-12 pb-0 sm:pt-16 sm:pb-0 lg:py-0">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
             {/* Left Content (7 cols on lg) */}
-            <div className="lg:col-span-7 max-w-2xl">
-              {/* Breadcrumb */}
-              <div className="flex items-center gap-2 text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase text-slate-700 mb-4 sm:mb-5">
+            <div className="lg:col-span-7 max-w-2xl py-6 lg:py-16">
+              {/* Breadcrumb matching design: HOME // CAREER */}
+              <div className="flex items-center gap-2.5 text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase text-slate-800 mb-4 sm:mb-5">
                 <Link
                   href="/"
                   className="hover:text-[#00c4b4] transition-colors"
                 >
                   {isArabic ? "الرئيسية" : "HOME"}
                 </Link>
-                <span className="text-[#00DDCF] font-bold">/</span>
-                <span className="text-[#00DDCF] font-bold">
+                <span className="text-[#00DDCF] font-black tracking-wider">
+                  //
+                </span>
+                <span className="text-[#00DDCF] font-black">
                   {isArabic ? "الوظائف" : "CAREER"}
                 </span>
               </div>
 
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-extrabold text-[#0B1C24] leading-[1.12] tracking-tight">
+              {/* Main Headline: Build Your Career With Us */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-[#0B1C24] leading-[1.12] tracking-tight">
                 {isArabic ? (
                   <>
                     ابنِ مستقبلك{" "}
@@ -333,24 +335,24 @@ export default function CareerPageContent() {
                 )}
               </h1>
 
-              {/* Subtitle */}
-              <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-normal max-w-xl">
+              {/* Subtitle matching design */}
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-[16px] text-slate-600 leading-relaxed font-normal max-w-xl">
                 {isArabic
-                  ? "اكتشف فرصاً وظيفية مجزية وانضم إلى فريقنا المتميز في مجالات العزل المائي، الحماية الإنشائية، وحلول البناء المتطورة بدولة الإمارات."
-                  : "Explore rewarding career opportunities and grow with our expert team in civil construction, insulation, and protective systems across the UAE."}
+                  ? "اكتشف فرصاً وظيفية مجزية وانضم إلى شركة ملتزمة بالابتكار والتميز ونجاحك المهني."
+                  : "Explore rewarding career opportunities and grow with a company committed to innovation, excellence, and your success."}
               </p>
             </div>
 
-            {/* Right Illustration: Two Businessmen with Tablets (5 cols on lg) */}
-            <div className="lg:col-span-5 relative flex justify-center lg:justify-end">
-              <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[500px] h-[300px] sm:h-[360px] lg:h-[440px]">
+            {/* Right Illustration: Two Businessmen grounded to bottom of banner (5 cols on lg) */}
+            <div className="lg:col-span-5 relative flex justify-center lg:justify-end self-end">
+              <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[520px] xl:max-w-[560px] h-[320px] sm:h-[380px] lg:h-[450px] xl:h-[480px]">
                 <Image
                   src="/career/two-businessmen-with-virtual-tablets-isolated 1.png"
                   alt={isArabic ? "فريق عمل تاج الرحمة" : "Taj Al Rahmah Career Team"}
                   fill
                   priority
                   unoptimized
-                  className="object-contain object-bottom drop-shadow-lg"
+                  className={`object-contain object-bottom drop-shadow-md ${isArabic ? "scale-x-[-1]" : ""}`}
                 />
               </div>
             </div>
