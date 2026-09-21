@@ -167,7 +167,7 @@ export default function WelcomeOfferModal() {
             type="button"
             onClick={handleClose}
             aria-label={isArabic ? "إغلاق" : "Close"}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/95 hover:bg-white text-stone-700 hover:text-stone-950 border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#008f86] text-white hover:text-white border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
           >
             <X className="w-5 h-5 stroke-[2.5]" />
           </button>
@@ -186,7 +186,7 @@ export default function WelcomeOfferModal() {
         {/* ========================================================= */}
         <div className="relative md:col-span-5 h-44 sm:h-52 md:h-auto min-h-[190px] md:min-h-[480px] overflow-hidden bg-slate-900 flex flex-col justify-end p-5 sm:p-7">
           <Image
-            src="/qwertyu.png"
+            src="/qwertyu.jpg"
             alt={isArabic ? "تاج الرحمة للمقاولات والعزل" : "Taj Al Rahmah Contracting & Waterproofing"}
             fill
             priority
@@ -385,42 +385,43 @@ export default function WelcomeOfferModal() {
                 </div>
               </div>
 
-              {/* Primary Action Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold h-10 sm:h-10.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>{isArabic ? "جاري المعالجة..." : "Submitting..."}</span>
-                  </>
-                ) : (
-                  <>
-                    <span>
-                      {isArabic
-                        ? "احصل على استشارتك المجانية"
-                        : "Get Your Free Consultation"}
-                    </span>
-                    {isArabic ? (
-                      <ArrowLeft className="w-4 h-4" />
-                    ) : (
-                      <ArrowRight className="w-4 h-4" />
-                    )}
-                  </>
-                )}
-              </button>
-
-              {/* Secondary Dismiss Action: Maybe Later */}
-              <div className="flex justify-center mt-0.5">
+              {/* Action Buttons: Managed Primary CTA & Secondary Dismiss */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5 mt-2">
+                {/* Primary Action Button */}
                 <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold h-10 sm:h-10.5 px-5 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>{isArabic ? "جاري المعالجة..." : "Submitting..."}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        {isArabic
+                          ? "احصل على استشارتك المجانية"
+                          : "Get Your Free Consultation"}
+                      </span>
+                      {isArabic ? (
+                        <ArrowLeft className="w-4 h-4" />
+                      ) : (
+                        <ArrowRight className="w-4 h-4" />
+                      )}
+                    </>
+                  )}
+                </button>
+
+                {/* Secondary Dismiss Action: Maybe Later */}
+                {/* <button
                   type="button"
                   onClick={handleClose}
-                  className="mt-2 w-full bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold h-10 sm:h-10.5 px-6 rounded-full text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:shadow-[#01a9a0]/20 transition-all duration-200 flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer disabled:opacity-70"
+                  className="h-10 sm:h-10.5 px-5 rounded-full border border-stone-300 hover:border-stone-400 bg-stone-50 hover:bg-stone-100 text-stone-600 hover:text-stone-900 font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center active:scale-[0.99] cursor-pointer shrink-0"
                 >
                   {isArabic ? "ربما لاحقاً" : "Maybe Later"}
-                </button>
+                </button> */}
               </div>
             </form>
           )}
