@@ -1,20 +1,20 @@
 import React from "react";
-import CommonHeader from "../../components/Common/CommonHeader";
-import JoinTeam from "../../components/Career/JoinTeam";
-import Position from "../../components/Career/Position";
-import MeetOurTeam from "@/components/Common/MeetOurTeam";
+import type { Metadata } from "next";
+import CareerPageContent from "@/components/CareerPageContent";
 
-export default function ContactPage() {
-  return (
-    <div>
-      <CommonHeader
-        title="Career"
-        breadcrumb="Career"
-        imagePath="/banners/Careers_.png"
-      />
-      <JoinTeam />
-      <Position />
-      {/* <MeetOurTeam /> */}
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Careers & Job Opportunities | Taj Al Rahmah Contracting UAE",
+  description:
+    "Join the expert team at Taj Al Rahmah. Explore rewarding career opportunities in civil construction, insulation, structural waterproofing, and project engineering in the UAE.",
+  keywords: [
+    "Taj Al Rahmah careers",
+    "construction jobs UAE",
+    "waterproofing engineer jobs Dubai",
+    "civil engineering jobs Abu Dhabi",
+    "site supervisor jobs UAE",
+  ],
+};
+
+export default function CareerPage() {
+  return <CareerPageContent />;
 }
