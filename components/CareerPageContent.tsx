@@ -280,31 +280,22 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[420px] sm:min-h-[460px] lg:min-h-[500px] flex items-center bg-gradient-to-r from-[#ebf7f9] via-[#e2f4f7] to-[#d6eff4] overflow-hidden">
-        {/* Soft Background Shapes / Rings */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#00DDCF]/10 blur-3xl" />
-          <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full bg-white/40 blur-2xl" />
-          <div className="absolute -bottom-20 right-10 w-80 h-80 rounded-full bg-[#00DDCF]/15 blur-3xl" />
-          {/* Subtle curved background lines */}
-          <svg
-            className="absolute inset-0 w-full h-full opacity-25"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 600"
-            fill="none"
-          >
-            <path
-              d="M-100 200 C 300 100, 600 450, 1540 250"
-              stroke="#00DDCF"
-              strokeWidth="2"
-              strokeDasharray="8 8"
-            />
-            <path
-              d="M-50 400 C 450 300, 800 650, 1600 350"
-              stroke="#00c4b4"
-              strokeWidth="1.5"
-            />
-          </svg>
+      <section className="relative w-full min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] flex items-center bg-[#ebf7f9] overflow-hidden">
+        {/* Designer Banner Background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/career/Banner.png"
+            alt={
+              isArabic
+                ? "خلفية وظائف تاج الرحمة"
+                : "Taj Al Rahmah Career Banner Background"
+            }
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className={`object-cover object-center ${isArabic ? "scale-x-[-1]" : ""}`}
+          />
         </div>
 
         {/* Content Container */}
