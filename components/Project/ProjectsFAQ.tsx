@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Minus, Plus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
 
 const FAQS = [
@@ -112,56 +113,17 @@ export default function ProjectsFAQ() {
         </div>
 
         <div className="lg:col-span-7 w-full space-y-3">
-          {FAQS.map((item) => {
-            const open = openId === item.id;
-            const number = String(item.id).padStart(2, "0");
-
-            return (
-              <div
-                key={item.id}
-                className="rounded-2xl bg-white shadow-[0_8px_24px_rgba(15,23,42,0.05)] overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenId(open ? null : item.id)}
-                  aria-expanded={open}
-                  className="w-full flex items-start gap-3 sm:gap-4 px-4 sm:px-5 py-4 sm:py-[18px] text-left"
-                >
-                  <span className="text-sm sm:text-base font-semibold text-stone-300 tabular-nums pt-0.5 shrink-0">
-                    {number}
-                  </span>
-                  <span className="flex-1 text-[15px] sm:text-base font-extrabold text-[#0B1C24] leading-snug">
-                    {isArabic ? item.questionAr : item.question}
-                  </span>
-                  <span
-                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 transition-colors ${
-                      open
-                        ? "bg-[#01a9a0] text-white"
-                        : "border border-[#01a9a0]/40 text-[#01a9a0]"
-                    }`}
-                  >
-                    {open ? (
-                      <Minus className="w-4 h-4" />
-                    ) : (
-                      <Plus className="w-4 h-4" />
-                    )}
-                  </span>
-                </button>
-
-                <div
-                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
-                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="px-4 sm:px-5 pb-4 sm:pb-5 ps-10 sm:ps-[3.25rem] pe-12 text-sm text-stone-500 leading-relaxed">
-                      {isArabic ? item.answerAr : item.answer}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {FAQS.map((item) => (
+            <FaqAccordionItem
+              key={item.id}
+              number={item.id}
+              question={isArabic ? item.questionAr : item.question}
+              answer={isArabic ? item.answerAr : item.answer}
+              isOpen={openId === item.id}
+              onToggle={() => setOpenId(openId === item.id ? null : item.id)}
+              isArabic={isArabic}
+            />
+          ))}
         </div>
       </div>
     </section>

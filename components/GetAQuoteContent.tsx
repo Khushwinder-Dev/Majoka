@@ -5,12 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Upload,
-  Plus,
-  Minus,
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
 } from "lucide-react";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 
@@ -681,60 +680,17 @@ export default function GetAQuoteContent() {
 
           {/* 5 Accordion FAQ Cards */}
           <div className="space-y-3 sm:space-y-3.5">
-            {QUOTE_FAQS.map((faq) => {
-              const isOpen = openFaqIds.includes(faq.id);
-              const formattedNum = String(faq.id).padStart(2, "0");
-
-              return (
-                <div
-                  key={faq.id}
-                  className={`bg-white border transition-all duration-300 overflow-hidden ${isOpen
-                    ? "rounded-2xl sm:rounded-3xl border-[#1cd2ad]/40 shadow-[0_8px_24px_rgba(28,210,173,0.09)]"
-                    : "rounded-full border-stone-200/90 hover:border-[#1cd2ad]/40 shadow-xs hover:shadow-sm"
-                    }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleFaq(faq.id)}
-                    className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-3.5 sm:py-4 text-left rtl:text-right cursor-pointer group"
-                  >
-                    <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#ddf8f3] text-[#1cd2ad] text-xs sm:text-[13px] font-bold flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[#1cd2ad] group-hover:text-white">
-                        {formattedNum}
-                      </div>
-
-                      <span
-                        className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${isOpen ? "text-[#1cd2ad]" : "text-stone-800 group-hover:text-[#1cd2ad]"
-                          }`}
-                      >
-                        {isArabic ? faq.questionAr : faq.questionEn}
-                      </span>
-                    </div>
-
-                    <div
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
-                        ? "bg-[#ddf8f3] text-[#1cd2ad]"
-                        : "bg-[#ddf8f3] text-[#1cd2ad] group-hover:bg-[#1cd2ad] group-hover:text-white"
-                        }`}
-                    >
-                      {isOpen ? (
-                        <Minus className="w-4 h-4 stroke-[2.5]" />
-                      ) : (
-                        <Plus className="w-4 h-4 stroke-[2.5]" />
-                      )}
-                    </div>
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-0 text-xs sm:text-[14px] text-stone-600 font-normal leading-relaxed">
-                      <div className="ltr:pl-11 rtl:pr-11">
-                        {isArabic ? faq.answerAr : faq.answerEn}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+            {QUOTE_FAQS.map((faq) => (
+              <FaqAccordionItem
+                key={faq.id}
+                number={faq.id}
+                question={isArabic ? faq.questionAr : faq.questionEn}
+                answer={isArabic ? faq.answerAr : faq.answerEn}
+                isOpen={openFaqIds.includes(faq.id)}
+                onToggle={() => toggleFaq(faq.id)}
+                isArabic={isArabic}
+              />
+            ))}
           </div>
 
         </div>

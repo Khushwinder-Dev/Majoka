@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
 interface FAQ {
   id: number;
@@ -92,60 +93,16 @@ const Question = () => {
           </div>
 
           {/* Right Side - FAQ Questions */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-4">
+          <div className="w-full lg:w-1/2 flex flex-col gap-3">
             {faqs.map((faq) => (
-              <div
+              <FaqAccordionItem
                 key={faq.id}
-                className="bg-indigo-50/40 rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
-              >
-                {/* Question Header */}
-                <button
-                  onClick={() => toggleFAQ(faq.id)}
-                  className="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-gray-50 transition-colors duration-200 cursor-pointer"
-                >
-                  <h3 className="text-lg font-semibold text-pink-950 pr-4">
-                    {faq.question}
-                  </h3>
-                  <div className="flex-shrink-0">
-                    <div
-                      className={`w-8 h-8 rounded-full border border-pink-950 flex items-center justify-center transition-transform duration-200 ${
-                        openFAQ === faq.id ? "rotate-180" : ""
-                      }`}
-                    >
-                      <svg
-                        className="w-4 h-4 text-gray-600"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </button>
-
-                {/* Answer Content */}
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openFAQ === faq.id
-                      ? "max-h-96 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="px-6 pb-5">
-                    <div className="border-t border-gray-100 pt-4">
-                      <p className="text-stone-900/60 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                number={faq.id}
+                question={faq.question}
+                answer={faq.answer}
+                isOpen={openFAQ === faq.id}
+                onToggle={() => toggleFAQ(faq.id)}
+              />
             ))}
           </div>
         </div>

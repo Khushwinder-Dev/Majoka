@@ -11,6 +11,7 @@ import {
   ArrowLeft,
   X,
 } from "lucide-react";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
 
 interface FaqItem {
@@ -441,65 +442,17 @@ export default function FaqPageContent() {
                 </button>
               </div>
             ) : (
-              filteredItems.map((item) => {
-                const isOpen = openIds.includes(item.id);
-                const formattedNum = String(item.id).padStart(2, "0");
-
-                return (
-                  <div
-                    key={item.id}
-                    className={`bg-white border transition-all duration-300 overflow-hidden ${isOpen
-                      ? "rounded-2xl sm:rounded-3xl border-[#009e90]/40 shadow-[0_8px_24px_rgba(0,158,144,0.09)]"
-                      : "rounded-full border-stone-200/90 hover:border-[#009e90]/40 shadow-xs hover:shadow-sm"
-                      }`}
-                  >
-                    {/* Accordion Toggle Header */}
-                    <button
-                      type="button"
-                      onClick={() => toggleAccordion(item.id)}
-                      className="w-full flex items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-3.5 sm:py-4 text-left rtl:text-right cursor-pointer group"
-                    >
-                      <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
-                        {/* Number Badge (e.g. 01, 02) */}
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#e0f7f4] text-[#009e90] text-xs sm:text-[13px] font-bold flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[#009e90] group-hover:text-white">
-                          {formattedNum}
-                        </div>
-
-                        {/* Question Text */}
-                        <span
-                          className={`text-[13px] sm:text-[15px] font-semibold leading-snug transition-colors ${isOpen ? "text-[#009e90]" : "text-stone-800 group-hover:text-[#009e90]"
-                            }`}
-                        >
-                          {isArabic ? item.questionAr : item.questionEn}
-                        </span>
-                      </div>
-
-                      {/* Circle Plus / Minus Button */}
-                      <div
-                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isOpen
-                          ? "bg-[#e0f7f4] text-[#009e90]"
-                          : "bg-[#e0f7f4] text-[#009e90] group-hover:bg-[#009e90] group-hover:text-white"
-                          }`}
-                      >
-                        {isOpen ? (
-                          <Minus className="w-4 h-4 stroke-[2.5]" />
-                        ) : (
-                          <Plus className="w-4 h-4 stroke-[2.5]" />
-                        )}
-                      </div>
-                    </button>
-
-                    {/* Accordion Content */}
-                    {isOpen && (
-                      <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-0 text-xs sm:text-[14px] text-[#009e90] font-medium leading-relaxed">
-                        <div className="ltr:pl-11 rtl:pr-11">
-                          {isArabic ? item.answerAr : item.answerEn}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })
+              filteredItems.map((item) => (
+                <FaqAccordionItem
+                  key={item.id}
+                  number={item.id}
+                  question={isArabic ? item.questionAr : item.questionEn}
+                  answer={isArabic ? item.answerAr : item.answerEn}
+                  isOpen={openIds.includes(item.id)}
+                  onToggle={() => toggleAccordion(item.id)}
+                  isArabic={isArabic}
+                />
+              ))
             )}
           </div>
 
