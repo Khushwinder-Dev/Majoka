@@ -167,7 +167,7 @@ export default function WelcomeOfferModal() {
             type="button"
             onClick={handleClose}
             aria-label={isArabic ? "إغلاق" : "Close"}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#008f86] text-white hover:text-white border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0]/10 hover:bg-[#008f86]/10 text-black hover:text-black border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
           >
             <X className="w-5 h-5 stroke-[2.5]" />
           </button>
@@ -400,10 +400,10 @@ export default function WelcomeOfferModal() {
                     </>
                   ) : (
                     <>
-                      <span>
+                      <span className="uppercase">
                         {isArabic
                           ? "احصل على استشارتك المجانية"
-                          : "Get Your Free Consultation"}
+                          : "Get Free Consultation"}
                       </span>
                       {isArabic ? (
                         <ArrowLeft className="w-4 h-4" />
