@@ -47,9 +47,8 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       className="flex items-center gap-2 text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${
-          isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-        }`}
+        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+          }`}
         strokeWidth={2.5}
       />
       <span>{label}</span>
@@ -117,7 +116,7 @@ export default function Footer() {
   // Company labels
   const companyLabels = isArabic
     ? ["عن الشركة", "الخبرة", "الشهادات", "وظائف", "اتصل بنا", "المقاولون من الباطن"]
-    : ["About Us", "Expertise", "Certifications", "Careers", "Contact", "Subcontract"];
+    : ["About Us", "Our Expertise", "Certifications", "Careers", "Contact", "Subcontract"];
 
   // Company hrefs — all correct
   const companyHrefs = [
