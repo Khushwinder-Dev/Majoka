@@ -5,10 +5,12 @@ import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
 export interface FaqItem {
   id: number;
-  question: string;
-  answer: string;
+  question?: string;
+  answer?: string;
   questionAr?: string;
   answerAr?: string;
+  questionEn?: string;
+  answerEn?: string;
 }
 
 export const DEFAULT_WATERPROOFING_FAQS: FaqItem[] = [
@@ -144,9 +146,15 @@ export default function FaqSection({
               key={faq.id}
               number={faq.id}
               question={
-                isArabic && faq.questionAr ? faq.questionAr : faq.question
+                (isArabic && faq.questionAr
+                  ? faq.questionAr
+                  : faq.questionEn || faq.question) || ""
               }
-              answer={isArabic && faq.answerAr ? faq.answerAr : faq.answerEn || faq.answer}
+              answer={
+                (isArabic && faq.answerAr
+                  ? faq.answerAr
+                  : faq.answerEn || faq.answer) || ""
+              }
               isOpen={openId === faq.id}
               onToggle={() => toggleFaq(faq.id)}
               isArabic={isArabic}
