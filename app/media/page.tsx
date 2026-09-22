@@ -60,10 +60,11 @@ const PHOTO_CATEGORIES = [
 
 const VIDEO_CATEGORIES = [
   { id: "all", labelEn: "ALL", labelAr: "الكل" },
-  { id: "site", labelEn: "SITE APPLICATION", labelAr: "تنفيذ ميداني" },
-  { id: "flood", labelEn: "WATER FLOOD TEST", labelAr: "اختبار الغمر" },
-  { id: "inspection", labelEn: "QUALITY INSPECTION", labelAr: "فحص الجودة" },
-  { id: "tanking", labelEn: "BASEMENT TANKING", labelAr: "عزل الأساسات" },
+  { id: "construction", labelEn: "CONSTRUCTION", labelAr: "الإنشاءات" },
+  { id: "industrial", labelEn: "INDUSTRIAL", labelAr: "الصناعي" },
+  { id: "hospitality", labelEn: "HOSPITALITY", labelAr: "الضيافة" },
+  { id: "commercial", labelEn: "COMMERCIAL", labelAr: "التجاري" },
+  { id: "infrastructure", labelEn: "INFRASTRUCTURE", labelAr: "البنية التحتية" },
 ];
 
 const PHOTO_CAT_MAP = [
@@ -75,10 +76,11 @@ const PHOTO_CAT_MAP = [
 ];
 
 const VIDEO_CAT_MAP = [
-  { key: "site", labelEn: "Site Application", labelAr: "تنفيذ ميداني" },
-  { key: "flood", labelEn: "Water Flood Test", labelAr: "اختبار الغمر المائي" },
-  { key: "inspection", labelEn: "Quality Inspection", labelAr: "فحص الجودة" },
-  { key: "tanking", labelEn: "Basement Tanking", labelAr: "عزل الأساسات" },
+  { key: "construction", labelEn: "Construction", labelAr: "الإنشاءات" },
+  { key: "industrial", labelEn: "Industrial", labelAr: "الصناعي" },
+  { key: "hospitality", labelEn: "Hospitality", labelAr: "الضيافة" },
+  { key: "commercial", labelEn: "Commercial", labelAr: "التجاري" },
+  { key: "infrastructure", labelEn: "Infrastructure", labelAr: "البنية التحتية" },
 ];
 
 const LOCATIONS = [
@@ -91,7 +93,7 @@ const LOCATIONS = [
 ];
 
 const PHOTOS_PER_PAGE = 12;
-const VIDEOS_PER_PAGE = 8;
+const VIDEOS_PER_PAGE = 12;
 
 export default function MediaPage() {
   const { isArabic } = useLanguage();
@@ -105,7 +107,7 @@ export default function MediaPage() {
   const [visiblePhotoCount, setVisiblePhotoCount] = useState<number>(12);
 
   const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>("all");
-  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(8);
+  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(12);
   const [currentVideoPage, setCurrentVideoPage] = useState<number>(1);
 
   // Modals
@@ -135,7 +137,7 @@ export default function MediaPage() {
         });
 
         const mappedVideos: VideoItem[] = videos.map((src, i) => {
-          const cat = VIDEO_CAT_MAP[i % VIDEO_CAT_MAP.length];
+          const cat = PHOTO_CAT_MAP[i % PHOTO_CAT_MAP.length];
           return {
             id: 1 + i,
             type: "video",
@@ -147,8 +149,8 @@ export default function MediaPage() {
             titleEn: "Project Name",
             titleAr: "اسم المشروع",
             duration: "0:45",
-            locationEn: "Dubai, UAE",
-            locationAr: "دبي، الإمارات",
+            locationEn: "Commercial",
+            locationAr: "تجاري",
           };
         });
 
@@ -174,14 +176,9 @@ export default function MediaPage() {
     return videoItems.filter((v) => v.category === selectedVideoCategory);
   }, [videoItems, selectedVideoCategory]);
 
-  const totalVideoPages = useMemo(() => {
-    return Math.max(1, Math.ceil(filteredVideos.length / VIDEOS_PER_PAGE));
-  }, [filteredVideos]);
-
-  const paginatedVideos = useMemo(() => {
-    const start = (currentVideoPage - 1) * VIDEOS_PER_PAGE;
-    return filteredVideos.slice(start, start + VIDEOS_PER_PAGE);
-  }, [filteredVideos, currentVideoPage]);
+  const displayedVideos = useMemo(() => {
+    return filteredVideos.slice(0, visibleVideoCount);
+  }, [filteredVideos, visibleVideoCount]);
 
   // ── Lightbox Navigation ──────────────────────────────────────
   const handleOpenPhoto = (photo: PhotoItem) => {
@@ -451,71 +448,84 @@ export default function MediaPage() {
 
       {/* ══════════════════════════════════════════════════════════════
           3. SECTION: PROJECT STORIES IN MOTION (VIDEO GALLERY)
+          (Exact match to design screenshot)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white border-t border-slate-100">
+      <section className="relative w-full py-14 sm:py-16 md:py-20 bg-white border-t border-slate-100">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <div className="inline-flex items-center justify-center gap-3 mb-2.5">
-              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
-              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
-                {isArabic ? "فيديوهات المشاريع" : "PROJECT STORIES"}
+          {/* Section Header (Left-Aligned as per design) */}
+          <div className="max-w-3xl mb-8 sm:mb-10 text-left rtl:text-right">
+            {/* Tagline: — VIDEO GALLERY */}
+            <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+              <span className="text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#00c4b4]">
+                {isArabic ? "معرض الفيديو" : "VIDEO GALLERY"}
               </span>
-              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
+            {/* Title: Project Stories In Motion */}
+            <h2 className="text-3xl sm:text-4xl md:text-[46px] font-black text-[#0B1C24] tracking-tight leading-[1.14]">
               {isArabic ? (
                 <>
                   قصص المشاريع <span className="text-[#00c4b4]">بالفيديو</span>
                 </>
               ) : (
                 <>
-                  Project Stories in <span className="text-[#00c4b4]">Motion</span>
+                  Project Stories In <span className="text-[#00c4b4]">Motion</span>
                 </>
               )}
             </h2>
 
-            <p className="mt-3 text-stone-600 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+            {/* Subtitle exact text from design */}
+            <p className="mt-3 text-xs sm:text-sm md:text-[15px] text-stone-600 max-w-2xl leading-relaxed">
               {isArabic
-                ? "شاهد فرق العمل الهندسية أثناء تطبيق أنظمة العزل المعتمدة، اختبارات الغمر بالمياه، والفحص الدقيق في المواقع."
-                : "Watch our site engineering teams apply certified systems and conduct quality water flood tests in real-time."}
+                ? "استكشف مشاريعنا المكتملة واكتشف جودة التنفيذ والخبرة الهندسية وحلول العزل المائي المتميزة التي يقدمها فريقنا."
+                : "Explore our completed projects and discover the quality workmanship, expertise, and waterproofing solutions delivered by our team."}
             </p>
           </div>
 
-          {/* Video Category Filter Pills */}
-          <div className="flex items-center justify-center mb-10 overflow-x-auto pb-2 no-scrollbar">
-            <div className="inline-flex items-center gap-2 sm:gap-2.5 p-1.5 rounded-full bg-white border border-slate-200/90 shadow-sm">
-              {VIDEO_CATEGORIES.map((cat) => {
-                const isActive = selectedVideoCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => {
-                      setSelectedVideoCategory(cat.id);
-                      setCurrentVideoPage(1);
-                    }}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/30 scale-100"
-                        : "text-slate-700 hover:text-[#00c4b4] hover:bg-slate-50"
-                    }`}
-                  >
-                    {isArabic ? cat.labelAr : cat.labelEn}
-                  </button>
-                );
-              })}
-            </div>
+          {/* Category Filter Pills (Left-Aligned as per design) */}
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
+            {VIDEO_CATEGORIES.map((cat) => {
+              const isActive = selectedVideoCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    setSelectedVideoCategory(cat.id);
+                    setVisibleVideoCount(12);
+                  }}
+                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                      : "bg-[#EEF8F8] text-[#1E3A47] hover:text-[#00a89a] border border-[#d6eeee]/70 shadow-xs hover:border-[#00a89a]"
+                  }`}
+                >
+                  {isArabic ? cat.labelAr : cat.labelEn}
+                </button>
+              );
+            })}
           </div>
 
-          {/* 4-Column Video Grid with Centered Play Buttons */}
-          {!loading && paginatedVideos.length > 0 && (
+          {/* Loading Skeleton */}
+          {loading && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {paginatedVideos.map((video) => (
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-[4/3] rounded-2xl bg-slate-100 animate-pulse border border-slate-200/60"
+                />
+              ))}
+            </div>
+          )}
+
+          {/* 4-Column Video Grid (Matching Reference Card Layout Exactly) */}
+          {!loading && displayedVideos.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+              {displayedVideos.map((video) => (
                 <div
                   key={video.id}
                   onClick={() => setActiveVideo(video)}
-                  className="group relative rounded-2xl overflow-hidden aspect-[16/10] bg-black border border-slate-200/70 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   {/* HTML5 video frame preview */}
                   <video
@@ -526,30 +536,30 @@ export default function MediaPage() {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
 
-                  {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20 group-hover:via-black/25 transition-all" />
+                  {/* Gradient Overlay for bottom text visibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Centered Glowing Teal Play Button */}
+                  {/* Center Sleek Circular Play Button (Matching Reference Card #2 & #7) */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#00c4b4] text-white flex items-center justify-center shadow-[0_4px_24px_rgba(0,196,180,0.6)] group-hover:scale-115 group-hover:bg-[#00DDCF] transition-all duration-300 ring-4 ring-white/30">
-                      <Play className="w-5 h-5 fill-white ml-0.5" />
+                    <div className="w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#00a89a] group-hover:border-[#00a89a] transition-all duration-300">
+                      <Play className="w-4 h-4 fill-white ml-0.5" />
                     </div>
                   </div>
 
-                  {/* Bottom Video Meta Bar */}
-                  <div className="absolute bottom-0 inset-x-0 p-4 z-10 text-white">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <Film className="w-3 h-3 text-[#00DDCF]" />
-                      <span className="text-[11px] font-bold text-[#00DDCF] tracking-wide uppercase">
-                        {isArabic ? video.categoryLabelAr : video.categoryLabelEn}
-                      </span>
+                  {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Commercial) */}
+                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-10 flex items-center gap-2.5 text-white">
+                    {/* Translucent Square Icon Box */}
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
+                      <Film className="w-3.5 h-3.5" />
                     </div>
-                    <h3 className="text-sm font-bold text-white line-clamp-1 group-hover:text-[#00DDCF] transition-colors">
-                      {isArabic ? video.titleAr : video.titleEn}
-                    </h3>
-                    <div className="flex items-center gap-1 text-[11px] text-white/70 mt-0.5 line-clamp-1">
-                      <MapPin className="w-3 h-3 text-white/50 shrink-0" />
-                      <span>{isArabic ? video.locationAr : video.locationEn}</span>
+                    {/* Project Title & Location */}
+                    <div className="leading-tight min-w-0">
+                      <h4 className="text-xs sm:text-[13px] font-bold text-white truncate group-hover:text-[#00DDCF] transition-colors">
+                        {isArabic ? video.titleAr : video.titleEn}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
+                        {isArabic ? video.locationAr : video.locationEn}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -558,7 +568,7 @@ export default function MediaPage() {
           )}
 
           {/* Empty State */}
-          {!loading && paginatedVideos.length === 0 && (
+          {!loading && displayedVideos.length === 0 && (
             <div className="text-center py-16 bg-slate-50 rounded-3xl border border-slate-200/60 max-w-md mx-auto">
               <Film className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <p className="text-base font-bold text-slate-700">
@@ -567,43 +577,15 @@ export default function MediaPage() {
             </div>
           )}
 
-          {/* Video Pagination Controls */}
-          {totalVideoPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-10 sm:mt-12">
+          {/* Load More Button (Matching Reference Design: Load More ↓) */}
+          {!loading && visibleVideoCount < filteredVideos.length && (
+            <div className="flex items-center justify-center mt-12 sm:mt-14">
               <button
-                onClick={() => setCurrentVideoPage((p) => Math.max(1, p - 1))}
-                disabled={currentVideoPage === 1}
-                className="w-9 h-9 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4] flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
-                aria-label="Previous Page"
+                onClick={() => setVisibleVideoCount((prev) => prev + 8)}
+                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2 px-5 rounded-full hover:bg-slate-100 shadow-xs"
               >
-                <ChevronLeft className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
-              </button>
-
-              {Array.from({ length: totalVideoPages }).map((_, i) => {
-                const pageNum = i + 1;
-                const isCurrent = pageNum === currentVideoPage;
-                return (
-                  <button
-                    key={pageNum}
-                    onClick={() => setCurrentVideoPage(pageNum)}
-                    className={`w-9 h-9 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      isCurrent
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/30"
-                        : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
-                    }`}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
-
-              <button
-                onClick={() => setCurrentVideoPage((p) => Math.min(totalVideoPages, p + 1))}
-                disabled={currentVideoPage === totalVideoPages}
-                className="w-9 h-9 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4] flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
-                aria-label="Next Page"
-              >
-                <ChevronRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+                <span>{isArabic ? "تحميل المزيد" : "Load More"}</span>
+                <span className="text-base transition-transform group-hover:translate-y-0.5">↓</span>
               </button>
             </div>
           )}
