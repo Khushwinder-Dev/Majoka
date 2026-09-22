@@ -69,50 +69,43 @@ export default function ProjectsFAQ() {
 
   return (
     <section
-      className="relative w-full bg-[#F2F9F7] py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative w-full bg-[#F8FAFC] py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
       dir={isArabic ? "rtl" : "ltr"}
     >
-      <div className="max-w-8xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-start">
-        <div className="lg:col-span-5 lg:sticky lg:top-28">
-          <div className="flex items-center gap-2.5 mb-4">
-            <span className="inline-block h-[2px] w-8 bg-[#01a9a0] rounded-full shrink-0" />
-            <span className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-[#5B6B73]">
-              FAQ
+      <div className="max-w-4xl mx-auto">
+        {/* Section Header (Matching Design Reference media_1790098744511.png) */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-3">
+            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
+            <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
+              {isArabic ? "الأسئلة الشائعة" : "FAQ"}
             </span>
+            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-[42px] lg:text-[46px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.15]">
+          <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
             {isArabic ? (
               <>
                 الأسئلة{" "}
-                <span className="text-[#01a9a0]">الشائعة</span>
+                <span className="text-[#00c4b4]">الشائعة</span>
               </>
             ) : (
               <>
                 Frequently Asked{" "}
-                <span className="text-[#01a9a0]">Questions</span>
+                <span className="text-[#00c4b4]">Questions</span>
               </>
             )}
           </h2>
 
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base text-stone-500 leading-relaxed max-w-md">
+          <p className="mt-3.5 text-stone-500 text-xs sm:text-sm md:text-[14.5px] max-w-xl mx-auto leading-relaxed">
             {isArabic
-              ? "اعثر على إجابات للأسئلة الشائعة حول حلولنا الصناعية والمواد والخدمات. ما زلت بحاجة إلى مساعدة؟ فريقنا جاهز لدعمك."
-              : "Find answers to common questions about our industry solutions, materials, and services. Still need help? Our team is here for you."}
+              ? "اعثر على إجابات للأسئلة الشائعة حول حلولنا الصناعية والمواد والخدمات."
+              : "Find clear answers to common questions about our engineered waterproofing systems, application methods, and warranties."}
           </p>
-
-          <Link
-            href="/contact"
-            className="mt-7 sm:mt-8 inline-flex items-center gap-3 pl-5 sm:pl-6 pr-1.5 py-1.5 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(1,169,160,0.28)] group"
-          >
-            <span>{isArabic ? "تواصل مع خبرائنا" : "Contact Our Experts"}</span>
-            <span className="w-9 h-9 rounded-full bg-white text-[#01a9a0] flex items-center justify-center">
-              <ArrowRight className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
-            </span>
-          </Link>
         </div>
 
-        <div className="lg:col-span-7 w-full space-y-3">
+        {/* Single Column Accordion List */}
+        <div className="space-y-3.5 sm:space-y-4">
           {FAQS.map((item) => (
             <FaqAccordionItem
               key={item.id}

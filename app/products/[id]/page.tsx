@@ -24,8 +24,50 @@ import {
 import toast from "react-hot-toast";
 import { getProductById, ProductReview } from "@/data/productsData";
 import CommonHeader from "@/components/Common/CommonHeader";
+import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
+import { useLanguage } from "@/context/LanguageContext";
+
+const PRODUCT_FAQS: FaqItem[] = [
+  {
+    id: 1,
+    question: "How do I choose the right product specifications and dimensions for my site?",
+    questionAr: "كيف أختار المواصفات والأبعاد المناسبة للمنتج لموقعي؟",
+    answer:
+      "Our certified engineering team reviews your site drawings and structural requirements to recommend custom dimensions, grade 304 or 316 stainless steel, GRP fiberglass thicknesses, or heavy-duty load ratings.",
+    answerAr:
+      "يقوم فريقنا الهندسي المعتمد بمراجعة مخططات الموقع والمتطلبات الإنشائية لاقتراح الأبعاد المخصصة، ودرجات الفولاذ المقاوم للصدأ 304 أو 316، وسماكات الفيبرجلاس GRP، أو تصنيفات التحمل العالي.",
+  },
+  {
+    id: 2,
+    question: "Are all products compliant with UAE Municipality and Civil Defense safety codes?",
+    questionAr: "هل جميع المنتجات متوافقة مع اشتراطات بلديات الإمارات والدفاع المدني؟",
+    answer:
+      "Yes. All fabricated access ladders, safety cage systems, storage tanks, and drainage covers are manufactured in full compliance with Dubai Municipality, Civil Defense, and BS EN / OSHA safety guidelines.",
+    answerAr:
+      "نعم. يتم تصنيع جميع سلالم الوصول، وأنظمة أقفاص الأمان، وخزانات التخزين، وأغطية الصرف وفقاً لمتطلبات بلدية دبي، والدفاع المدني، ومعايير السلامة البريطانية والأمريكية BS EN / OSHA.",
+  },
+  {
+    id: 3,
+    question: "Do you provide turnkey on-site delivery and professional installation services?",
+    questionAr: "هل تقدمون خدمات التوصيل والتركيب الهندسي المباشر في الموقع؟",
+    answer:
+      "Yes, we handle site delivery, anchor testing, professional rigging, precision alignment, and final commissioning with certified civil and mechanical crews across Dubai and all UAE Emirates.",
+    answerAr:
+      "نعم، نتولى التوصيل إلى الموقع، واختبار نقاط التثبيت، والتركيب الهندسي الدقيق، والمطابقة النهائية مع كوادر مدربة في دبي وكافة إمارات الدولة.",
+  },
+  {
+    id: 4,
+    question: "What warranty and after-sales maintenance support is included with purchases?",
+    questionAr: "ما هو الضمان ودعم الصيانة بعد البيع المقدم مع المنتجات؟",
+    answer:
+      "We offer comprehensive 5 to 15-year structural warranties covering material defects, corrosion resistance, and joint seals, accompanied by routine preventative inspection support.",
+    answerAr:
+      "نقدم ضماناً شاملاً يمتد من 5 إلى 15 عاماً ضد عيوب التصنيع ومقاومة التآكل وسلامة الفواصل، إلى جانب خدمات الفحص الوقائي الدورية.",
+  },
+];
 
 export default function ProductDetailsPage() {
+  const { isArabic } = useLanguage();
   const params = useParams();
   const rawId = params?.id ? (Array.isArray(params.id) ? params.id[0] : params.id) : "1";
 
@@ -577,6 +619,14 @@ export default function ProductDetailsPage() {
         </section>
 
       </div>
+
+      {/* ══ FAQ SECTION (Single Column Matching Reference media_1790098744511.png) ══ */}
+      <FaqSection
+        faqs={PRODUCT_FAQS}
+        isArabic={isArabic}
+        subtitle="Find clear answers to common questions about product specifications, custom fabrication, and delivery."
+        subtitleAr="إجابات واضحة وشاملة حول مواصفات المنتجات والتصنيع الهندسي والتوصيل في الإمارات."
+      />
 
       {/* ===================== WRITE REVIEW MODAL ===================== */}
       {isWriteReviewOpen && (

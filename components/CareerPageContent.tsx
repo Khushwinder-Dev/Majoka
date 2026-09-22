@@ -735,16 +735,20 @@ export default function CareerPageContent() {
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.18]">
               {isArabic ? (
                 <>
-                  الأسئلة{" "}
-                  <span className="text-[#00DDCF]">الأكثر شيوعاً</span>
+                  الأسئلة <span className="text-[#00c4b4]">الشائعة</span>
                 </>
               ) : (
                 <>
-                  Frequently{" "}
-                  <span className="text-[#00DDCF]">Asked Questions</span>
+                  Frequently Asked <span className="text-[#00c4b4]">Questions</span>
                 </>
               )}
             </h2>
+
+            <p className="mt-3 text-stone-500 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+              {isArabic
+                ? "إجابات واضحة على الأسئلة الشائعة حول بيئة العمل، إجراءات التوظيف والفرص المهنية."
+                : "Find clear answers to common questions about our work culture, hiring process, and career opportunities."}
+            </p>
           </div>
 
           {/* Site-Standard Consistent FAQ Accordion */}

@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import CommonHeader from "@/components/Common/CommonHeader";
 import ClientTestimonials from "@/components/ClientTestimonials";
+import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   Flame,
   Building2,
@@ -207,7 +209,56 @@ const industriesData: Industry[] = [
   },
 ];
 
+const INDUSTRIES_FAQS: FaqItem[] = [
+  {
+    id: 1,
+    question: "Which industrial sectors does Taj Al Rahmah service across the UAE?",
+    questionAr: "ما هي القطاعات الصناعية التي تخدمها تاج الرحمة في الإمارات؟",
+    answer:
+      "We support major industrial facilities across Oil & Gas, Civil & Infrastructure Construction, Power Generation & Utilities, Manufacturing & Industrial Plants, Marine & Offshore, and Heavy Mining & Mineral Processing.",
+    answerAr:
+      "ندعم المنشآت الصناعية الكبرى في مجالات النفط والغاز، الإنشاءات والبنية التحتية، توليد الطاقة والمرافق، المصانع والمنشآت الصناعية، القطاع البحري والمنصات، والتعدين ومعالجة المعادن.",
+  },
+  {
+    id: 2,
+    question: "Are your site engineering teams and methods accredited for industrial safety standards?",
+    questionAr: "هل فرقكم الهندسية وأساليب عملكم معتمدة لمعايير السلامة الصناعية؟",
+    answer:
+      "Yes. Our operations comply strictly with ISO 9001, ISO 14001, ISO 45001, and regional Civil Defense standards. All personnel are trained for high-risk industrial environments, enclosed spaces, and active plant turnarounds.",
+    answerAr:
+      "نعم. تتوافق عملياتنا بدقة مع معايير الآيزو 9001 و14001 و45001 والدفاع المدني. جميع كوادرنا مدربة للعمل في البيئات الصناعية عالية الخطورة والمساحات المغلقة وأعمال الصيانة الشاملة.",
+  },
+  {
+    id: 3,
+    question: "Can specialized industrial protective coatings resist chemical exposure and extreme heat?",
+    questionAr: "هل تقاوم الطلاءات الوقائية الصناعية المتخصصة المواد الكيميائية والحرارة العالية؟",
+    answer:
+      "Yes, we formulate and apply heavy-duty vinyl ester, novolac epoxy, and pure polyurea lining systems engineered specifically to withstand concentrated acid, caustic chemicals, hydrocarbon fuels, and temperatures up to 180°C.",
+    answerAr:
+      "نعم، نطبق أنظمة فينيل إستر وإيبوكسي نوفولاك وبولي يوريا نقية مصممة خصيصاً لمقاومة الأحماض المركزة، والمواد الكيميائية المسببة للتآكل، والوقود الهيدروكربوني، ودرجات حرارة تصل إلى 180 درجة مئوية.",
+  },
+  {
+    id: 4,
+    question: "How do you handle emergency leak repairs and shutdowns without halting production?",
+    questionAr: "كيف تتعاملون مع إصلاحات التسرب الطارئة وأعمال الإغلاق دون إيقاف الإنتاج؟",
+    answer:
+      "We maintain rapid mobilization response teams equipped with fast-curing polyurethane grouts, negative-side crystalline crystallization, and rapid polyurea systems that achieve full cure within minutes, minimizing plant downtime.",
+    answerAr:
+      "نوفر فرق استجابة سريعة مجهزة بحقن البولي يوريثان سريع التصلب، وتقنيات العزل البلوري من الجانب السلبي، وأنظمة بولي يوريا تتصلب خلال دقائق لتقليل توقف المنشآت الصناعية إلى أدنى حد.",
+  },
+  {
+    id: 5,
+    question: "What warranties and testing certifications accompany industrial waterproofing installations?",
+    questionAr: "ما هي الضمانات وشهادات الفحص المقدمة مع أعمال العزل الصناعي؟",
+    answer:
+      "Every installation includes comprehensive quality inspection documentation (holiday spark testing, adhesion pull-off testing, dry film thickness measurements) and certified manufacturer warranties ranging up to 25 years.",
+    answerAr:
+      "يشمل كل مشروع توثيقاً شاملاً لفحص الجودة (اختبار الشرر الكهربائي، واختبار قوة الالتصاق، وقياس سماكة الطبقة الجافة) مع ضمانات معتمدة من المصنعين تصل إلى 25 عاماً.",
+  },
+];
+
 export default function IndustriesPage() {
+  const { isArabic } = useLanguage();
   const [activeTab, setActiveTab] = useState<string>("oil-gas");
 
   const selectedIndustry =
@@ -474,6 +525,14 @@ export default function IndustriesPage() {
           </Link>
         </div>
       </div>
+
+      {/* ══ FAQ SECTION (Single Column Matching Reference media_1790098744511.png) ══ */}
+      <FaqSection
+        faqs={INDUSTRIES_FAQS}
+        isArabic={isArabic}
+        subtitle="Find clear answers to common questions about our industrial waterproofing, protective coatings, and turnkey turnaround services."
+        subtitleAr="إجابات واضحة وشاملة حول حلول العزل الصناعي والطلاءات الواقية وخدمات الصيانة الشاملة للمنشآت."
+      />
 
       {/* Testimonials */}
       <ClientTestimonials />

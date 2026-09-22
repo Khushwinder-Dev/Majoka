@@ -50,61 +50,39 @@ const Question = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-white">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-        {/* Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800">FAQs</h2>
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC]">
+      <div className="max-w-4xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-3">
+            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
+            <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
+              FAQ
+            </span>
+            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
+            Frequently Asked <span className="text-[#00c4b4]">Questions</span>
+          </h2>
+
+          <p className="mt-3.5 text-stone-500 text-xs sm:text-sm md:text-[14.5px] max-w-xl mx-auto leading-relaxed">
+            Find clear answers to common questions about our engineered waterproofing systems, application methods, and warranties.
+          </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-          {/* Left Side - Images Grid with Stats Badge */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-4">
-            {/* Top Row - Construction Site + Stats Badge */}
-            <div className="flex gap-4 items-end">
-              {/* Construction Site with Cranes */}
-              <div className="w-auto h-auto overflow-hidden relative flex-shrink-0">
-                <Image
-                  src="/faq/1.png"
-                  alt="Construction site with cranes"
-                  height={400}
-                  width={500}
-                  className="object-cover h-40 w-auto"
-                />
-              </div>
-
-              {/* Stats Badge with curved edge */}
-              <div className="w-1/2 h-60 bg-pink-950 text-white flex flex-col items-center justify-center shadow-lg relative overflow-hidden rounded-tr-[100px]">
-                <p className="text-xl font-semibold mb-2">Project Done</p>
-                <p className="text-6xl font-bold">200+</p>
-              </div>
-            </div>
-
-            {/* Bottom - Worker with Plans Full Width */}
-            <div className="w-full h-full overflow-hidden relative rounded-tl-3xl">
-              <Image
-                src="/faq/2.png"
-                alt="Construction worker reviewing plans"
-                width={500}
-                height={400}
-                className="object-cover rounded-tl-3xl"
-              />
-            </div>
-          </div>
-
-          {/* Right Side - FAQ Questions */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-3">
-            {faqs.map((faq) => (
-              <FaqAccordionItem
-                key={faq.id}
-                number={faq.id}
-                question={faq.question}
-                answer={faq.answer}
-                isOpen={openFAQ === faq.id}
-                onToggle={() => toggleFAQ(faq.id)}
-              />
-            ))}
-          </div>
+        {/* Single Column Accordion List */}
+        <div className="space-y-3.5 sm:space-y-4">
+          {faqs.map((faq) => (
+            <FaqAccordionItem
+              key={faq.id}
+              number={faq.id}
+              question={faq.question}
+              answer={faq.answer}
+              isOpen={openFAQ === faq.id}
+              onToggle={() => toggleFAQ(faq.id)}
+            />
+          ))}
         </div>
       </div>
     </section>
