@@ -581,7 +581,7 @@ export default function SolutionsPageContent() {
 
         <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-12">
-            
+
             {/* Left Content */}
             <div className="max-w-2xl">
               <div className="flex items-center gap-2.5 mb-3">
@@ -755,28 +755,6 @@ export default function SolutionsPageContent() {
               />
             ))}
           </div>
-
-          {/* Bottom Help / Consultation Bar */}
-          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-left rtl:text-right">
-              <h4 className="text-base sm:text-lg font-bold text-[#0B1C24]">
-                {isArabic ? "هل لديك متطلبات خاصة لمشروعك؟" : "Have specific technical requirements for your project?"}
-              </h4>
-              <p className="text-xs sm:text-sm text-stone-500 mt-1">
-                {isArabic
-                  ? "فريقنا الهندسي جاهز لتقديم استشارة فنية مخصصة ومعاينة ميدانية مجانية."
-                  : "Our engineering specialists are ready to provide technical advisory and free on-site survey."}
-              </p>
-            </div>
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-full bg-[#00c4b4] hover:bg-[#00b0a2] active:scale-95 text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-2 transition-all duration-200 shrink-0 shadow-sm"
-            >
-              <span>{isArabic ? "تواصل مع مهندسينا" : "Talk to an Engineer"}</span>
-              <ArrowRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
-            </Link>
-          </div>
-
         </div>
       </section>
 
