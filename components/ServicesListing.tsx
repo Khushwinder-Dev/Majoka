@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
-import { ChevronRight, ChevronDown, ChevronLeft, MessageCircle, Phone, ArrowLeft } from "lucide-react";
+import { ChevronRight, ChevronDown, ChevronLeft, MessageCircle, Phone, ArrowLeft, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
 import { ServiceIcon } from "@/components/ServiceIcon";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import {
   TemplateDefault,
   TemplateA,
@@ -101,45 +102,57 @@ function ServiceCard({
 const SERVICES_FAQS = [
   {
     id: 1,
-    question: "Can I try a free consultation?",
-    questionAr: "هل يمكنني الحصول على استشارة مجانية؟",
-    answer: "Yes. We offer a free initial site visit and assessment for all new project inquiries across our service categories.",
-    answerAr: "نعم. نقدم زيارة موقعية ومعاينة أولية مجانية لجميع الاستفسارات المتعلقة بالمشاريع الجديدة عبر فئات خدماتنا.",
+    question: "What industries do you specialize in?",
+    questionAr: "ما القطاعات التي تتخصصون فيها؟",
+    answer:
+      "We provide waterproofing and protective solutions for commercial, industrial, residential, hospitality, infrastructure, and oil & gas sectors across the UAE and the wider region.",
+    answerAr:
+      "نقدم حلول العزل والحماية للقطاعات التجارية والصناعية والسكنية والضيافة والبنية التحتية والنفط والغاز في الإمارات والمنطقة.",
   },
   {
     id: 2,
-    question: "What's the pricing model?",
-    questionAr: "ما هو نموذج التسعير؟",
-    answer: "Pricing is project-based. After a site survey we provide a detailed, itemised quotation with no hidden fees.",
-    answerAr: "التسعير يعتمد على المشروع. بعد معاينة الموقع نقدم عرض سعر مفصّل وشفاف بدون رسوم مخفية.",
+    question: "What type of materials do you use?",
+    questionAr: "ما نوع المواد التي تستخدمونها؟",
+    answer:
+      "We use certified, high-performance materials selected for durability, climate resistance, and project conditions, including membranes, coatings, and structural protection systems.",
+    answerAr:
+      "نستخدم مواد معتمدة عالية الأداء مختارة للمتانة ومقاومة المناخ وظروف المشروع، بما في ذلك الأغشية والطلاءات وأنظمة الحماية الإنشائية.",
   },
   {
     id: 3,
-    question: "Is there a workmanship warranty?",
-    questionAr: "هل هناك ضمان على جودة التنفيذ؟",
-    answer: "Yes. We provide a workmanship warranty on all completed works, with the duration varying by service type and scope.",
-    answerAr: "نعم. نقدم ضمان على جودة التنفيذ لجميع الأعمال المنجزة، وتتفاوت المدة حسب نوع الخدمة ونطاقها.",
+    question: "Can you provide customized solutions?",
+    questionAr: "هل يمكنكم تقديم حلول مخصصة؟",
+    answer:
+      "Yes. Every project is assessed on site, then we design a tailored system based on structure type, exposure, timeline, and performance requirements.",
+    answerAr:
+      "نعم. يتم تقييم كل مشروع في الموقع، ثم نصمم نظاماً مخصصاً حسب نوع الهيكل والتعرض والجدول الزمني ومتطلبات الأداء.",
   },
   {
     id: 4,
-    question: "How do I get support after completion?",
-    questionAr: "كيف أحصل على الدعم بعد الانتهاء؟",
-    answer: "Our after-sales team is reachable via phone, WhatsApp, and email. We also offer scheduled maintenance contracts for ongoing support.",
-    answerAr: "يمكن التواصل مع فريق خدمة ما بعد البيع عبر الهاتف أو واتساب أو البريد الإلكتروني. كما نوفر عقود صيانة دورية للدعم المستمر.",
+    question: "How do you ensure quality and compliance?",
+    questionAr: "كيف تضمنون الجودة والامتثال؟",
+    answer:
+      "Our teams follow documented method statements, manufacturer specifications, and UAE quality standards, with inspections at each stage before handover.",
+    answerAr:
+      "يتبع فريقنا بيانات طريقة موثقة ومواصفات المصنعين ومعايير الجودة في الإمارات، مع عمليات فحص في كل مرحلة قبل التسليم.",
   },
   {
     id: 5,
-    question: "Can I request a demo or site visit?",
-    questionAr: "هل يمكنني طلب زيارة ميدانية؟",
-    answer: "Absolutely. Contact us to schedule a site visit at a time that suits you — available 7 days a week.",
-    answerAr: "بالتأكيد. تواصل معنا لتحديد موعد الزيارة الميدانية في الوقت المناسب — متاح 7 أيام في الأسبوع.",
+    question: "Do you work on large-scale projects?",
+    questionAr: "هل تعملون على المشاريع الكبيرة؟",
+    answer:
+      "Yes. We deliver both focused specialist works and large-scale commercial, industrial, and infrastructure projects with dedicated site supervision.",
+    answerAr:
+      "نعم. ننفذ أعمالاً تخصصية مركزة ومشاريع تجارية وصناعية وبنية تحتية واسعة النطاق مع إشراف ميداني مخصص.",
   },
   {
     id: 6,
-    question: "Where can I leave feedback?",
-    questionAr: "أين يمكنني إبداء ملاحظاتي؟",
-    answer: "We welcome feedback via our contact form, Google reviews, or directly through our project manager assigned to your job.",
-    answerAr: "نرحب بملاحظاتكم عبر نموذج الاتصال أو تقييمات Google أو مباشرةً عبر مدير المشروع المعين لعملكم.",
+    question: "How long does a typical project take?",
+    questionAr: "كم يستغرق المشروع عادة؟",
+    answer:
+      "Timelines depend on scope, access, and surface conditions. After a site survey we provide a clear programme covering preparation, application, and curing.",
+    answerAr:
+      "تعتمد المدة على نطاق العمل وإمكانية الوصول وحالة الأسطح. بعد معاينة الموقع نقدم برنامجاً واضحاً يشمل التحضير والتنفيذ والمعالجة.",
   },
 ];
 
@@ -190,6 +203,7 @@ function ServicesContent() {
   const [openServiceSlug, setOpenServiceSlug] = useState<string | null>(null);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
   const [otherExpandedSlug, setOtherExpandedSlug] = useState<string | null>(null);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
 
   useEffect(() => {
     if (activeService?.serviceSlug) {
@@ -594,47 +608,64 @@ function ServicesContent() {
       }
 
       {/* ══ FAQ SECTION ══════════════════════════════════════════ */}
-      <section className="w-full bg-[#f4f6f8] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-[#0b2447] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl">
-            <div className="text-center mb-8 sm:mb-10">
-              <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-extrabold text-white leading-tight mb-3">
-                {isArabic ? "الأسئلة " : "Frequently Asked "}
-                <span className="text-[#009e90]">{isArabic ? "الشائعة" : "Questions"}</span>
-              </h2>
-              <p className="text-sm sm:text-[15px] text-white/60 max-w-xl mx-auto leading-relaxed">
-                {isArabic
-                  ? "إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا."
-                  : "Answers to the most common questions about our services. Can't find what you're looking for? Reach out to our team directly."}
-              </p>
+      <section
+        className="relative w-full bg-[#F2F9F7] py-14 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        dir={isArabic ? "rtl" : "ltr"}
+      >
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 xl:gap-16 items-start">
+          {/* Left Column: Eyebrow, Title, Subtitle, Contact Button */}
+          <div className="lg:col-span-5 lg:sticky lg:top-28">
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full shrink-0" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-[#01a9a0]">
+                FAQ
+              </span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 mb-8 sm:mb-10">
-              {SERVICES_FAQS.map((item) => (
-                <div key={item.id}>
-                  <h4 className="text-[14px] sm:text-[15px] font-bold text-white mb-1.5 leading-snug">
-                    {isArabic ? item.questionAr : item.question}
-                  </h4>
-                  <p className="text-[13px] text-white/55 leading-relaxed">
-                    {isArabic ? item.answerAr : item.answer}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white/8 border border-white/10 rounded-2xl px-5 sm:px-7 py-4 sm:py-5">
-              <div>
-                <p className="text-[15px] sm:text-[16px] font-bold text-white leading-snug">
-                  {isArabic ? "لا تزال لديك أسئلة؟" : "Still have questions?"}
-                </p>
-                <p className="text-[12px] sm:text-[13px] text-white/55 mt-0.5">
-                  {isArabic ? "نحن نفهم. دعنا نتواصل مع فريقنا مباشرةً." : "We understand. Let's get in touch directly with our team, then."}
-                </p>
-              </div>
-              <Link href="/contact"
-                className="inline-flex items-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] px-5 py-2.5 rounded-full whitespace-nowrap transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] self-start sm:self-auto flex-shrink-0">
-                {isArabic ? "تواصل معنا" : "Contact Us"}
-                <ChevronRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
-              </Link>
-            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] lg:text-[44px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.15]">
+              {isArabic ? (
+                <>
+                  الأسئلة{" "}
+                  <span className="text-[#01a9a0]">الشائعة</span>
+                </>
+              ) : (
+                <>
+                  Frequently Asked{" "}
+                  <span className="text-[#01a9a0]">Questions</span>
+                </>
+              )}
+            </h2>
+
+            <p className="mt-4 sm:mt-5 text-sm sm:text-base text-stone-500 leading-relaxed max-w-md">
+              {isArabic
+                ? "اعثر على إجابات للأسئلة الشائعة حول حلولنا الصناعية والمواد والخدمات. ما زلت بحاجة إلى مساعدة؟ فريقنا جاهز لدعمك."
+                : "Find answers to common questions about our industry solutions, materials, and services. Still need help? Our team is here for you."}
+            </p>
+
+            <Link
+              href="/contact"
+              className="mt-6 sm:mt-8 inline-flex items-center gap-3.5 pl-6 pr-2 py-2 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(1,169,160,0.28)] group hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>{isArabic ? "تواصل مع خبرائنا" : "Contact Our Experts"}</span>
+              <span className="w-8 h-8 rounded-full bg-white text-[#01a9a0] flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5">
+                <ArrowRight className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
+              </span>
+            </Link>
+          </div>
+
+          {/* Right Column: FAQ Accordions */}
+          <div className="lg:col-span-7 w-full space-y-3 sm:space-y-3.5">
+            {SERVICES_FAQS.map((item) => (
+              <FaqAccordionItem
+                key={item.id}
+                number={item.id}
+                question={isArabic ? item.questionAr : item.question}
+                answer={isArabic ? item.answerAr : item.answer}
+                isOpen={openFaqId === item.id}
+                onToggle={() => setOpenFaqId(openFaqId === item.id ? null : item.id)}
+                isArabic={isArabic}
+              />
+            ))}
           </div>
         </div>
       </section>
