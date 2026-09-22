@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { getProductById, ProductReview } from "@/data/productsData";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 export default function ProductDetailsPage() {
   const params = useParams();
@@ -138,8 +139,15 @@ export default function ProductDetailsPage() {
   const displayedReviews = showAllReviews ? reviewsList : reviewsList.slice(0, 2);
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 pt-28 pb-24 selection:bg-[#01a9a0]/15 selection:text-[#01a9a0]">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white text-gray-900 pb-24 selection:bg-[#01a9a0]/15 selection:text-[#01a9a0]">
+      {/* ── Top Hero Banner ────────────────────────────────── */}
+      <CommonHeader
+        title={product.name || "Product Details"}
+        breadcrumb="Products"
+        imagePath="/banners/Product_.png"
+      />
+
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12">
 
         {/* ===================== BREADCRUMBS ===================== */}
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 mb-8 sm:mb-12">
