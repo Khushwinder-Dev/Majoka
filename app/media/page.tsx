@@ -225,7 +225,7 @@ export default function MediaPage() {
 
   return (
     <div
-      className="min-h-screen bg-white text-[#0B1C24] overflow-x-hidden selection:bg-[#00c4b4]/20 selection:text-[#00c4b4]"
+      className="hidden min-h-screen bg-white text-[#0B1C24] overflow-x-hidden selection:bg-[#00c4b4]/20 selection:text-[#00c4b4]"
       dir={isArabic ? "rtl" : "ltr"}
     >
 
@@ -245,11 +245,10 @@ export default function MediaPage() {
           />
           {/* Subtle Dark Vignette & Gradient for Text Contrast */}
           <div
-            className={`absolute inset-0 pointer-events-none ${
-              isArabic
-                ? "bg-gradient-to-l from-[#041620]/95 via-[#041620]/80 sm:via-[#041620]/60 to-transparent"
-                : "bg-gradient-to-r from-[#041620]/95 via-[#041620]/80 sm:via-[#041620]/60 to-transparent"
-            }`}
+            className={`absolute inset-0 pointer-events-none ${isArabic
+              ? "bg-gradient-to-l from-[#041620]/95 via-[#041620]/80 sm:via-[#041620]/60 to-transparent"
+              : "bg-gradient-to-r from-[#041620]/95 via-[#041620]/80 sm:via-[#041620]/60 to-transparent"
+              }`}
           />
         </div>
 
@@ -365,11 +364,10 @@ export default function MediaPage() {
                       setSelectedPhotoCategory(cat.id);
                       setCurrentPhotoPage(1);
                     }}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25 scale-100"
-                        : "text-slate-600 hover:text-[#00c4b4] hover:bg-slate-100/70"
-                    }`}
+                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${isActive
+                      ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25 scale-100"
+                      : "text-slate-600 hover:text-[#00c4b4] hover:bg-slate-100/70"
+                      }`}
                   >
                     {isArabic ? cat.labelAr : cat.labelEn}
                   </button>
@@ -462,11 +460,10 @@ export default function MediaPage() {
                   <button
                     key={pageNum}
                     onClick={() => setCurrentPhotoPage(pageNum)}
-                    className={`w-10 h-10 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      isCurrent
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25"
-                        : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
-                    }`}
+                    className={`w-10 h-10 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${isCurrent
+                      ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25"
+                      : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
+                      }`}
                   >
                     {pageNum}
                   </button>
@@ -532,11 +529,10 @@ export default function MediaPage() {
                       setSelectedVideoCategory(cat.id);
                       setCurrentVideoPage(1);
                     }}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25 scale-100"
-                        : "text-slate-600 hover:text-[#00c4b4] hover:bg-slate-100/70"
-                    }`}
+                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${isActive
+                      ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25 scale-100"
+                      : "text-slate-600 hover:text-[#00c4b4] hover:bg-slate-100/70"
+                      }`}
                   >
                     {isArabic ? cat.labelAr : cat.labelEn}
                   </button>
@@ -616,11 +612,10 @@ export default function MediaPage() {
                   <button
                     key={pageNum}
                     onClick={() => setCurrentVideoPage(pageNum)}
-                    className={`w-10 h-10 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      isCurrent
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25"
-                        : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
-                    }`}
+                    className={`w-10 h-10 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${isCurrent
+                      ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/25"
+                      : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
+                      }`}
                   >
                     {pageNum}
                   </button>
@@ -658,11 +653,10 @@ export default function MediaPage() {
               />
               {/* Soft overlay on text side for crisp mobile readability */}
               <div
-                className={`absolute inset-0 sm:max-w-xl ${
-                  isArabic
-                    ? "bg-gradient-to-l from-white/95 via-white/85 to-transparent"
-                    : "bg-gradient-to-r from-white/95 via-white/85 to-transparent"
-                }`}
+                className={`absolute inset-0 sm:max-w-xl ${isArabic
+                  ? "bg-gradient-to-l from-white/95 via-white/85 to-transparent"
+                  : "bg-gradient-to-r from-white/95 via-white/85 to-transparent"
+                  }`}
               />
             </div>
 
@@ -730,11 +724,10 @@ export default function MediaPage() {
           />
           {/* Dark Overlay on Text Side */}
           <div
-            className={`absolute inset-0 ${
-              isArabic
-                ? "bg-gradient-to-l from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/50 to-transparent"
-                : "bg-gradient-to-r from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/50 to-transparent"
-            }`}
+            className={`absolute inset-0 ${isArabic
+              ? "bg-gradient-to-l from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/50 to-transparent"
+              : "bg-gradient-to-r from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/50 to-transparent"
+              }`}
           />
         </div>
 
