@@ -13,7 +13,7 @@ import {
   Film,
   ArrowRight,
   Phone,
-  Maximize2,
+  Eye,
   MapPin,
   ArrowDown,
 } from "lucide-react";
@@ -393,10 +393,10 @@ export default function MediaPage() {
                   {/* Gradient Overlay for bottom text visibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Hover Center Focus Ring (Matching Card #3 in Screenshot) */}
+                  {/* Hover Center Focus Ring with Eye Icon */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/35 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
-                      <Maximize2 className="w-4 h-4" />
+                    <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 shadow-xl">
+                      <Eye className="w-5 h-5 text-white stroke-[2.2]" />
                     </div>
                   </div>
 
