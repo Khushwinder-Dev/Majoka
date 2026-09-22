@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  Image as ImageIcon,
   Play,
   X,
   ChevronLeft,
@@ -14,7 +15,7 @@ import {
   Phone,
   Maximize2,
   MapPin,
-  CheckCircle2,
+  ArrowDown,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -49,28 +50,28 @@ interface VideoItem {
 
 /* ─── CATEGORY & METADATA DEFINITIONS ────────────────────────────────── */
 const PHOTO_CATEGORIES = [
-  { id: "all", labelEn: "All", labelAr: "الكل" },
-  { id: "combo", labelEn: "Combo System", labelAr: "نظام الكومبو" },
-  { id: "membrane", labelEn: "Bitumen Membrane", labelAr: "غشاء بيتوميني" },
-  { id: "grp", labelEn: "GRP Lining", labelAr: "تبطين GRP" },
-  { id: "polyurea", labelEn: "Polyurea Coating", labelAr: "طلاء بولي يوريا" },
-  { id: "injection", labelEn: "Crack Injection", labelAr: "حقن الشقوق" },
+  { id: "all", labelEn: "ALL", labelAr: "الكل" },
+  { id: "construction", labelEn: "CONSTRUCTION", labelAr: "الإنشاءات" },
+  { id: "industrial", labelEn: "INDUSTRIAL", labelAr: "الصناعي" },
+  { id: "hospitality", labelEn: "HOSPITALITY", labelAr: "الضيافة" },
+  { id: "commercial", labelEn: "COMMERCIAL", labelAr: "التجاري" },
+  { id: "infrastructure", labelEn: "INFRASTRUCTURE", labelAr: "البنية التحتية" },
 ];
 
 const VIDEO_CATEGORIES = [
-  { id: "all", labelEn: "All", labelAr: "الكل" },
-  { id: "site", labelEn: "Site Application", labelAr: "تنفيذ ميداني" },
-  { id: "flood", labelEn: "Water Flood Test", labelAr: "اختبار الغمر" },
-  { id: "inspection", labelEn: "Quality Inspection", labelAr: "فحص الجودة" },
-  { id: "tanking", labelEn: "Basement Tanking", labelAr: "عزل الأساسات" },
+  { id: "all", labelEn: "ALL", labelAr: "الكل" },
+  { id: "site", labelEn: "SITE APPLICATION", labelAr: "تنفيذ ميداني" },
+  { id: "flood", labelEn: "WATER FLOOD TEST", labelAr: "اختبار الغمر" },
+  { id: "inspection", labelEn: "QUALITY INSPECTION", labelAr: "فحص الجودة" },
+  { id: "tanking", labelEn: "BASEMENT TANKING", labelAr: "عزل الأساسات" },
 ];
 
 const PHOTO_CAT_MAP = [
-  { key: "combo", labelEn: "Combo System", labelAr: "نظام الكومبو" },
-  { key: "membrane", labelEn: "Bitumen Membrane", labelAr: "غشاء بيتوميني" },
-  { key: "grp", labelEn: "GRP Lining", labelAr: "تبطين GRP" },
-  { key: "polyurea", labelEn: "Polyurea Coating", labelAr: "طلاء بولي يوريا" },
-  { key: "injection", labelEn: "Crack Injection", labelAr: "حقن الشقوق" },
+  { key: "construction", labelEn: "Construction", labelAr: "الإنشاءات" },
+  { key: "industrial", labelEn: "Industrial", labelAr: "الصناعي" },
+  { key: "hospitality", labelEn: "Hospitality", labelAr: "الضيافة" },
+  { key: "commercial", labelEn: "Commercial", labelAr: "التجاري" },
+  { key: "infrastructure", labelEn: "Infrastructure", labelAr: "البنية التحتية" },
 ];
 
 const VIDEO_CAT_MAP = [
@@ -101,9 +102,10 @@ export default function MediaPage() {
 
   // Filter & Pagination States
   const [selectedPhotoCategory, setSelectedPhotoCategory] = useState<string>("all");
-  const [currentPhotoPage, setCurrentPhotoPage] = useState<number>(1);
+  const [visiblePhotoCount, setVisiblePhotoCount] = useState<number>(12);
 
   const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>("all");
+  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(8);
   const [currentVideoPage, setCurrentVideoPage] = useState<number>(1);
 
   // Modals
@@ -118,7 +120,6 @@ export default function MediaPage() {
       .then(({ images, videos }: { images: string[]; videos: string[] }) => {
         const mappedPhotos: PhotoItem[] = images.map((src, i) => {
           const cat = PHOTO_CAT_MAP[i % PHOTO_CAT_MAP.length];
-          const loc = LOCATIONS[i % LOCATIONS.length];
           return {
             id: 101 + i,
             type: "photo",
@@ -126,16 +127,15 @@ export default function MediaPage() {
             category: cat.key,
             categoryLabelEn: cat.labelEn,
             categoryLabelAr: cat.labelAr,
-            titleEn: `${cat.labelEn} Milestone #${i + 1}`,
-            titleAr: `${cat.labelAr} - مشروع #${i + 1}`,
-            locationEn: loc.en,
-            locationAr: loc.ar,
+            titleEn: "Project Name",
+            titleAr: "اسم المشروع",
+            locationEn: "Dubai, UAE",
+            locationAr: "دبي، الإمارات",
           };
         });
 
         const mappedVideos: VideoItem[] = videos.map((src, i) => {
           const cat = VIDEO_CAT_MAP[i % VIDEO_CAT_MAP.length];
-          const loc = LOCATIONS[i % LOCATIONS.length];
           return {
             id: 1 + i,
             type: "video",
@@ -144,11 +144,11 @@ export default function MediaPage() {
             category: cat.key,
             categoryLabelEn: cat.labelEn,
             categoryLabelAr: cat.labelAr,
-            titleEn: `${cat.labelEn} Demonstration #${i + 1}`,
-            titleAr: `عرض ${cat.labelAr} #${i + 1}`,
+            titleEn: "Project Name",
+            titleAr: "اسم المشروع",
             duration: "0:45",
-            locationEn: loc.en,
-            locationAr: loc.ar,
+            locationEn: "Dubai, UAE",
+            locationAr: "دبي، الإمارات",
           };
         });
 
@@ -164,19 +164,20 @@ export default function MediaPage() {
     return photoItems.filter((p) => p.category === selectedPhotoCategory);
   }, [photoItems, selectedPhotoCategory]);
 
-  const totalPhotoPages = Math.ceil(filteredPhotos.length / PHOTOS_PER_PAGE) || 1;
-  const paginatedPhotos = useMemo(() => {
-    const start = (currentPhotoPage - 1) * PHOTOS_PER_PAGE;
-    return filteredPhotos.slice(start, start + PHOTOS_PER_PAGE);
-  }, [filteredPhotos, currentPhotoPage]);
+  const displayedPhotos = useMemo(() => {
+    return filteredPhotos.slice(0, visiblePhotoCount);
+  }, [filteredPhotos, visiblePhotoCount]);
 
-  // ── Filtered & Paginated Videos ──────────────────────────────
+  // ── Filtered & Displayed Videos ──────────────────────────────
   const filteredVideos = useMemo(() => {
     if (selectedVideoCategory === "all") return videoItems;
     return videoItems.filter((v) => v.category === selectedVideoCategory);
   }, [videoItems, selectedVideoCategory]);
 
-  const totalVideoPages = Math.ceil(filteredVideos.length / VIDEOS_PER_PAGE) || 1;
+  const totalVideoPages = useMemo(() => {
+    return Math.max(1, Math.ceil(filteredVideos.length / VIDEOS_PER_PAGE));
+  }, [filteredVideos]);
+
   const paginatedVideos = useMemo(() => {
     const start = (currentVideoPage - 1) * VIDEOS_PER_PAGE;
     return filteredVideos.slice(start, start + VIDEOS_PER_PAGE);
@@ -292,10 +293,10 @@ export default function MediaPage() {
 
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: A CLOSER LOOK AT OUR WORK (PHOTO GALLERY)
-          (Exact background: /mediaPageNew/ImageGallerySection.png)
+          (Exact match to design screenshot)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 overflow-hidden bg-gradient-to-b from-[#EBF8FA]/80 via-white to-white">
-        {/* Skyline, Mist & Trees Background Graphic */}
+      <section className="relative w-full py-14 sm:py-16 md:py-20 bg-[#EAF8FA] overflow-hidden">
+        {/* Skyline, Mist & Trees Background Graphic on Top Right */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
             src="/mediaPageNew/ImageGallerySection.png"
@@ -303,22 +304,23 @@ export default function MediaPage() {
             fill
             priority
             unoptimized
-            className={`object-cover object-top opacity-85 ${isArabic ? "scale-x-[-1]" : ""}`}
+            className={`object-cover ${isArabic ? "scale-x-[-1] object-left-top" : "object-right-top"}`}
           />
         </div>
 
         <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-            <div className="inline-flex items-center justify-center gap-3 mb-2.5">
-              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
-              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
-                {isArabic ? "معرض الصور" : "GALLERY"}
+          {/* Section Header (Left-Aligned as per design) */}
+          <div className="max-w-3xl mb-8 sm:mb-10 text-left rtl:text-right">
+            {/* Tagline: — IMAGE GALLERY */}
+            <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+              <span className="text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#00c4b4]">
+                {isArabic ? "معرض الصور" : "IMAGE GALLERY"}
               </span>
-              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
+            {/* Title: A Closer Look At Our Work */}
+            <h2 className="text-3xl sm:text-4xl md:text-[46px] font-black text-[#0B1C24] tracking-tight leading-[1.14]">
               {isArabic ? (
                 <>
                   نظرة عن قرب على <span className="text-[#00c4b4]">أعمالنا</span>
@@ -330,36 +332,35 @@ export default function MediaPage() {
               )}
             </h2>
 
-            <p className="mt-3 text-stone-600 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+            {/* Subtitle exact text from design */}
+            <p className="mt-3 text-xs sm:text-sm md:text-[15px] text-stone-600 max-w-2xl leading-relaxed">
               {isArabic
-                ? "تصفح مجموعتنا الواسعة من مشاريع العزل المائي والحراري للأسطح والأساسات والمباني التجارية في دولة الإمارات."
-                : "Explore our comprehensive portfolio of waterproofing and insulation projects across residential, commercial, and industrial sectors."}
+                ? "استكشف مشاريعنا المكتملة واكتشف جودة التنفيذ والخبرة الهندسية وحلول العزل المائي المتميزة التي يقدمها فريقنا."
+                : "Explore our completed projects and discover the quality workmanship, expertise, and waterproofing solutions delivered by our team."}
             </p>
           </div>
 
-          {/* Category Filter Pills (Exact Pill Design) */}
-          <div className="flex items-center justify-center mb-10 overflow-x-auto pb-2 no-scrollbar">
-            <div className="inline-flex items-center gap-2 sm:gap-2.5 p-1.5 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-sm">
-              {PHOTO_CATEGORIES.map((cat) => {
-                const isActive = selectedPhotoCategory === cat.id;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => {
-                      setSelectedPhotoCategory(cat.id);
-                      setCurrentPhotoPage(1);
-                    }}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-300 cursor-pointer whitespace-nowrap ${
-                      isActive
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/30 scale-100"
-                        : "text-slate-700 hover:text-[#00c4b4] hover:bg-slate-50"
-                    }`}
-                  >
-                    {isArabic ? cat.labelAr : cat.labelEn}
-                  </button>
-                );
-              })}
-            </div>
+          {/* Category Filter Pills (Left-Aligned as per design) */}
+          <div className="flex items-center gap-2.5 sm:gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
+            {PHOTO_CATEGORIES.map((cat) => {
+              const isActive = selectedPhotoCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    setSelectedPhotoCategory(cat.id);
+                    setVisiblePhotoCount(12);
+                  }}
+                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                    isActive
+                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                      : "bg-white text-[#0B1C24] hover:text-[#00a89a] border border-slate-200/90 shadow-xs hover:border-[#00a89a]"
+                  }`}
+                >
+                  {isArabic ? cat.labelAr : cat.labelEn}
+                </button>
+              );
+            })}
           </div>
 
           {/* Loading Skeleton */}
@@ -368,20 +369,20 @@ export default function MediaPage() {
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[16/10] rounded-2xl bg-slate-200/60 animate-pulse border border-slate-200/60"
+                  className="aspect-[4/3] rounded-2xl bg-white/70 animate-pulse border border-slate-200/60"
                 />
               ))}
             </div>
           )}
 
-          {/* 4-Column Photo Grid (Matching Reference Card Layout) */}
-          {!loading && paginatedPhotos.length > 0 && (
+          {/* 4-Column Photo Grid (Matching Reference Card Layout Exactly) */}
+          {!loading && displayedPhotos.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {paginatedPhotos.map((photo) => (
+              {displayedPhotos.map((photo) => (
                 <div
                   key={photo.id}
                   onClick={() => handleOpenPhoto(photo)}
-                  className="group relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-900 border border-slate-200/70 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   <Image
                     src={photo.thumbnail}
@@ -395,25 +396,27 @@ export default function MediaPage() {
                   {/* Gradient Overlay for bottom text visibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Zoom Badge Top Right */}
-                  <div className="absolute top-3.5 right-3.5 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur-md text-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:scale-110 border border-white/20">
-                    <Maximize2 className="w-3.5 h-3.5" />
+                  {/* Hover Center Focus Ring (Matching Card #3 in Screenshot) */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/35 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                      <Maximize2 className="w-4 h-4" />
+                    </div>
                   </div>
 
-                  {/* Card Bottom Meta */}
-                  <div className="absolute bottom-0 inset-x-0 p-4 z-10 text-white">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <Camera className="w-3 h-3 text-[#00DDCF]" />
-                      <span className="text-[11px] font-bold text-[#00DDCF] tracking-wide uppercase">
-                        {isArabic ? photo.categoryLabelAr : photo.categoryLabelEn}
-                      </span>
+                  {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Dubai, UAE) */}
+                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-10 flex items-center gap-2.5 text-white">
+                    {/* Translucent Square Icon Box */}
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
+                      <ImageIcon className="w-3.5 h-3.5" />
                     </div>
-                    <h3 className="text-sm font-bold text-white line-clamp-1 group-hover:text-[#00DDCF] transition-colors">
-                      {isArabic ? photo.titleAr : photo.titleEn}
-                    </h3>
-                    <div className="flex items-center gap-1 text-[11px] text-white/70 mt-0.5 line-clamp-1">
-                      <MapPin className="w-3 h-3 text-white/50 shrink-0" />
-                      <span>{isArabic ? photo.locationAr : photo.locationEn}</span>
+                    {/* Project Title & Location */}
+                    <div className="leading-tight min-w-0">
+                      <h4 className="text-xs sm:text-[13px] font-bold text-white truncate group-hover:text-[#00DDCF] transition-colors">
+                        {isArabic ? photo.titleAr : photo.titleEn}
+                      </h4>
+                      <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
+                        {isArabic ? photo.locationAr : photo.locationEn}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -422,52 +425,24 @@ export default function MediaPage() {
           )}
 
           {/* Empty State */}
-          {!loading && paginatedPhotos.length === 0 && (
+          {!loading && displayedPhotos.length === 0 && (
             <div className="text-center py-16 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/60 max-w-md mx-auto">
               <Camera className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <p className="text-base font-bold text-slate-700">
-                {isArabic ? "لا توجد صور في هذا القسم حالياً" : "No photos found in this category"}
+                {isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category"}
               </p>
             </div>
           )}
 
-          {/* Pagination Controls Matching Reference (< 1 2 3 >) */}
-          {totalPhotoPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-10 sm:mt-12">
+          {/* Load More Button (Matching Reference Design: Load More ↓) */}
+          {!loading && visiblePhotoCount < filteredPhotos.length && (
+            <div className="flex items-center justify-center mt-12 sm:mt-14">
               <button
-                onClick={() => setCurrentPhotoPage((p) => Math.max(1, p - 1))}
-                disabled={currentPhotoPage === 1}
-                className="w-9 h-9 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4] flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
-                aria-label="Previous Page"
+                onClick={() => setVisiblePhotoCount((prev) => prev + 8)}
+                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2 px-5 rounded-full hover:bg-white/80 shadow-xs"
               >
-                <ChevronLeft className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
-              </button>
-
-              {Array.from({ length: totalPhotoPages }).map((_, i) => {
-                const pageNum = i + 1;
-                const isCurrent = pageNum === currentPhotoPage;
-                return (
-                  <button
-                    key={pageNum}
-                    onClick={() => setCurrentPhotoPage(pageNum)}
-                    className={`w-9 h-9 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-                      isCurrent
-                        ? "bg-[#00c4b4] text-white shadow-md shadow-[#00c4b4]/30"
-                        : "bg-white border border-slate-200 text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4]"
-                    }`}
-                  >
-                    {pageNum}
-                  </button>
-                );
-              })}
-
-              <button
-                onClick={() => setCurrentPhotoPage((p) => Math.min(totalPhotoPages, p + 1))}
-                disabled={currentPhotoPage === totalPhotoPages}
-                className="w-9 h-9 rounded-full border border-slate-200 bg-white text-slate-600 hover:border-[#00c4b4] hover:text-[#00c4b4] flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs"
-                aria-label="Next Page"
-              >
-                <ChevronRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+                <span>{isArabic ? "تحميل المزيد" : "Load More"}</span>
+                <span className="text-base transition-transform group-hover:translate-y-0.5">↓</span>
               </button>
             </div>
           )}
