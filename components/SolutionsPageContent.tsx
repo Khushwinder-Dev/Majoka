@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
 /* ─── DATA FOR SECTION 2: COMPLETE PROTECTION TAILORED SOLUTIONS ─────── */
 interface TailoredSolution {
@@ -226,8 +227,79 @@ const WHY_CHOOSE_FEATURES: FeatureItem[] = [
   },
 ];
 
+/* ─── DATA FOR SECTION 6: SOLUTIONS FAQS ────────────────────────────── */
+interface SolutionFaqItem {
+  id: number;
+  questionEn: string;
+  questionAr: string;
+  answerEn: string;
+  answerAr: string;
+}
+
+const SOLUTIONS_FAQS: SolutionFaqItem[] = [
+  {
+    id: 1,
+    questionEn: "How do you determine the best waterproofing solution for a specific project?",
+    questionAr: "كيف يتم تحديد أفضل حل عزل مائي لمشروع معين؟",
+    answerEn:
+      "We conduct a thorough technical site assessment analyzing structural blueprints, groundwater table levels, thermal exposure, slab slopes, and substrate conditions before recommending a tailored system that meets UAE Municipality and Civil Defense standards.",
+    answerAr:
+      "نقوم بإجراء مسح فني ومعاينة ميدانية دقيقة لتحليل المخططات الإنشائية، منسوب المياه الجوفية، درجات الحرارة وميول الأسطح قبل اقتراح النظام الأمثل المتوافق مع متطلبات البلديات والدفاع المدني في الإمارات.",
+  },
+  {
+    id: 2,
+    questionEn: "How does the Combo Waterproofing & Thermal Insulation System perform in UAE climate?",
+    questionAr: "كيف يعمل نظام الكومبو للعزل المائي والحراري في مناخ الإمارات؟",
+    answerEn:
+      "The Combo Roofing System combines seamless rigid polyurethane foam for superior thermal insulation (compliant with UAE Green Building Regulations) and elastomeric waterproof coating in a single monolithic barrier, dramatically lowering AC energy consumption and eliminating leak points.",
+    answerAr:
+      "يجمع نظام الكومبو للأسطح بين رغوة البولي يوريثان الصلبة للعزل الحراري الفائق (المتوافق مع مواصفات المباني الخضراء) والطلاء المرن المانع للماء في طبقة واحدة غير ملحومة، مما يقلل استهلاك الكهرباء ويمنع التسرب نهائياً.",
+  },
+  {
+    id: 3,
+    questionEn: "Why is polyurea spray coating superior for heavy-traffic and exposed surfaces?",
+    questionAr: "لماذا يعد طلاء البولي يوريا الأفضل للأسطح المكشوفة والمناطق عالية الحركة؟",
+    answerEn:
+      "Polyurea cures within seconds, features over 300% tensile elongation to bridge active structural micro-cracks, and delivers unbeatable resistance against chemical spillage, abrasion, standing water, and UV radiation.",
+    answerAr:
+      "يجف طلاء البولي يوريا في غضون ثوانٍ قليلة، ويتميز بمرونة استطالة تتجاوز 300% لتحمل وتجسير الشقوق الإنشائية، ويوفر مقاومة استثنائية للمواد الكيميائية والاحتكاك وتجمع المياه والأشعة فوق البنفسجية.",
+  },
+  {
+    id: 4,
+    questionEn: "Can waterproofing be applied over existing roofs without removing old tiles?",
+    questionAr: "هل يمكن تنفيذ العزل المائي فوق الأسطح القديمة دون تكسير البلاط؟",
+    answerEn:
+      "Yes. For many roof refurbishments, we utilize advanced liquid-applied polyurethane or polyurea membrane systems that bond directly over cleaned and primed tiles or existing screeds, saving substantial demolition costs and time.",
+    answerAr:
+      "نعم. في العديد من مشاريع التجديد، نستخدم أنظمة البولي يوريثان والبولي يوريا السائلة المتطورة التي تلتصق بقوة فوق البلاط أو الخرسانة بعد المعالجة، مما يوفر تكاليف ووقت التكسير والإزالة.",
+  },
+  {
+    id: 5,
+    questionEn: "How do you protect basements and substructures from high groundwater pressure?",
+    questionAr: "كيف تحمون الأقبية والأساسات من ضغط المياه الجوفية المرتفع؟",
+    answerEn:
+      "We install multi-layered SBS and APP modified bitumen tanking membranes reinforced with non-woven polyester, coupled with PVC/hydrophilic waterstops at construction joints and drainage protection boards to withstand continuous hydrostatic head pressure.",
+    answerAr:
+      "نقوم بتركيب لفائف بيتومين مسلحة بالبوليستر ومعدلة بـ SBS و APP متعددة الطبقات، مع موانع تسرب المياه (Waterstops) عند الفواصل الإنشائية وألواح حماية التصريف لمقاومة الضغط الهيدروستاتيكي المستمر.",
+  },
+  {
+    id: 6,
+    questionEn: "What warranty duration and municipality certifications are provided?",
+    questionAr: "ما هي مدة الضمان والاعتمادات الرسمية التي تقدمونها للحلول المنفذة؟",
+    answerEn:
+      "We provide comprehensive warranties ranging from 10 to 25 years depending on the selected system. All materials and application procedures are fully approved by Dubai Municipality, Abu Dhabi authorities, and international ISO quality standards.",
+    answerAr:
+      "نقدم ضمانات شاملة تتراوح بين 10 إلى 25 عاماً حسب نوع النظام المختار. جميع المواد وإجراءات التنفيذ معتمدة رسمياً من بلدية دبي والجهات المختصة في أبوظبي وتخضع لمعايير الجودة العالمية ISO.",
+  },
+];
+
 export default function SolutionsPageContent() {
   const { isArabic } = useLanguage();
+  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
+
+  const toggleFaq = (id: number) => {
+    setOpenFaqId(openFaqId === id ? null : id);
+  };
 
   return (
     <div className="w-full bg-white text-[#0B1C24] overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
@@ -629,6 +701,80 @@ export default function SolutionsPageContent() {
                 </p>
               </div>
             ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          6. SECTION: FREQUENTLY ASKED QUESTIONS (FAQ)
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F8FAFC]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+            <div className="inline-flex items-center justify-center gap-3 mb-3">
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
+                {isArabic ? "الأسئلة الشائعة" : "FAQ"}
+              </span>
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.18]">
+              {isArabic ? (
+                <>
+                  الأسئلة <span className="text-[#00c4b4]">الشائعة</span>
+                </>
+              ) : (
+                <>
+                  Frequently Asked <span className="text-[#00c4b4]">Questions</span>
+                </>
+              )}
+            </h2>
+
+            <p className="mt-3 text-stone-500 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+              {isArabic
+                ? "إجابات واضحة وشاملة حول حلول العزل المتكاملة، أساليب التطبيق، والضمانات المعتمدة في الإمارات."
+                : "Find clear answers to common questions about our engineered waterproofing systems, application methods, and warranties."}
+            </p>
+          </div>
+
+          {/* Site-Standard Accordion FAQ Cards */}
+          <div className="space-y-3 sm:space-y-3.5">
+            {SOLUTIONS_FAQS.map((faq) => (
+              <FaqAccordionItem
+                key={faq.id}
+                number={faq.id}
+                question={isArabic ? faq.questionAr : faq.questionEn}
+                answer={isArabic ? faq.answerAr : faq.answerEn}
+                isOpen={openFaqId === faq.id}
+                onToggle={() => toggleFaq(faq.id)}
+                isArabic={isArabic}
+              />
+            ))}
+          </div>
+
+          {/* Bottom Help / Consultation Bar */}
+          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-left rtl:text-right">
+              <h4 className="text-base sm:text-lg font-bold text-[#0B1C24]">
+                {isArabic ? "هل لديك متطلبات خاصة لمشروعك؟" : "Have specific technical requirements for your project?"}
+              </h4>
+              <p className="text-xs sm:text-sm text-stone-500 mt-1">
+                {isArabic
+                  ? "فريقنا الهندسي جاهز لتقديم استشارة فنية مخصصة ومعاينة ميدانية مجانية."
+                  : "Our engineering specialists are ready to provide technical advisory and free on-site survey."}
+              </p>
+            </div>
+            <Link
+              href="/contact"
+              className="px-6 py-3 rounded-full bg-[#00c4b4] hover:bg-[#00b0a2] active:scale-95 text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-2 transition-all duration-200 shrink-0 shadow-sm"
+            >
+              <span>{isArabic ? "تواصل مع مهندسينا" : "Talk to an Engineer"}</span>
+              <ArrowRight className={`w-4 h-4 ${isArabic ? "rotate-180" : ""}`} />
+            </Link>
           </div>
 
         </div>
