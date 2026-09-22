@@ -387,7 +387,7 @@ const JobApplicationPage = () => {
       <CommonHeader
         title="Career"
         breadcrumb="Career"
-        imagePath="/banners/Careers_.png"
+        imagePath="/career/Careers_.png"
       />
       <div className="w-full bg-gray-50 min-h-screen py-8 md:py-12">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
