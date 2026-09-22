@@ -593,73 +593,83 @@ export default function MediaPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          4. SECTION: FIRST LIGHT CTA CARD (CURVED SKYLINE CARD)
+          4. SECTION: COMPANY PROFILE DOWNLOAD BANNER
           (Exact background: /mediaPageNew/e500da08-f078-4dec-a716-760cf969e80b (1) 1.png)
       ══════════════════════════════════════════════════════════════ */}
       <section className="relative w-full py-12 sm:py-16 bg-white">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="relative w-full min-h-[240px] sm:min-h-[280px] md:min-h-[300px] rounded-3xl sm:rounded-[32px] overflow-hidden shadow-[0_12px_40px_rgba(0,196,180,0.12)] border border-[#00c4b4]/30 flex items-center">
+          <div className="relative w-full rounded-3xl sm:rounded-[36px] overflow-hidden shadow-[0_12px_40px_rgba(0,196,180,0.12)] border border-[#00c4b4]/30 flex items-center min-h-[170px] sm:min-h-[190px] md:min-h-[210px]">
             {/* Background Graphic */}
             <div className="absolute inset-0 z-0">
               <Image
                 src="/mediaPageNew/e500da08-f078-4dec-a716-760cf969e80b (1) 1.png"
-                alt="Waterproofing Consultation Banner"
+                alt="Company Profile Banner Background"
                 fill
                 unoptimized
                 className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right"}`}
               />
-              {/* Soft overlay on text side for crisp mobile readability */}
+              {/* Subtle gradient overlay to guarantee text legibility on small screens */}
               <div
-                className={`absolute inset-0 sm:max-w-xl ${
+                className={`absolute inset-0 sm:max-w-xl pointer-events-none ${
                   isArabic
-                    ? "bg-gradient-to-l from-white/95 via-white/85 to-transparent"
-                    : "bg-gradient-to-r from-white/95 via-white/85 to-transparent"
+                    ? "bg-gradient-to-l from-white/90 via-white/70 to-transparent"
+                    : "bg-gradient-to-r from-white/90 via-white/70 to-transparent"
                 }`}
               />
             </div>
 
             {/* Left Content */}
-            <div className="relative z-10 p-6 sm:p-10 md:p-12 max-w-lg lg:max-w-xl">
-              <span className="text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#00a89a] block mb-2">
-                {isArabic ? "استشارة فنية متخصصة" : "NEED EXPERT ADVICE?"}
-              </span>
+            <div className="relative z-10 p-6 sm:p-8 md:p-10 max-w-xl">
+              {/* Tagline: — COMPANY PROFILE */}
+              <div className="flex items-center gap-2 mb-2 sm:mb-2.5">
+                <span className="w-5 sm:w-6 h-[2px] bg-[#00a89a] inline-block" />
+                <span className="text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#0B1C24]">
+                  {isArabic ? "ملف الشركة" : "COMPANY PROFILE"}
+                </span>
+              </div>
 
-              <h3 className="text-2xl sm:text-3xl md:text-[34px] font-black text-[#0B1C24] leading-tight mb-2.5">
-                {isArabic ? (
-                  <>
-                    هل لديك <span className="text-[#00c4b4]">مشروع عزل مائي؟</span>
-                  </>
-                ) : (
-                  <>
-                    Have a <span className="text-[#00c4b4]">Waterproofing Project?</span>
-                  </>
-                )}
-              </h3>
-
-              <p className="text-xs sm:text-sm text-stone-600 mb-5 sm:mb-6 leading-relaxed">
+              {/* Subtitle exact text from design */}
+              <p className="text-xs sm:text-sm text-stone-700 max-w-md leading-relaxed mb-5 sm:mb-6 font-medium">
                 {isArabic
-                  ? "تواصل مع مهندسينا المعتمدين في دبي لمراجعة المخططات والحصول على مواصفات هندسية دقيقة."
-                  : "Consult our certified civil engineers for specifications and custom waterproofing plans."}
+                  ? "اكتشف خبرتنا وخدماتنا والتزامنا ببناء غدٍ أكثر أماناً وقوة."
+                  : "Discover our expertise, services and commitment to building a safer, stronger tomorrow."}
               </p>
 
+              {/* PDF Badge + Divider + Download Button */}
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                <a
-                  href="https://wa.me/971527492002"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                >
-                  <Phone className="w-4 h-4 fill-white" />
-                  <span>{isArabic ? "واتساب الآن" : "WhatsApp Us"}</span>
-                </a>
+                {/* PDF File Info Box */}
+                <div className="flex items-center gap-3 bg-white border border-slate-200/90 rounded-2xl px-3.5 sm:px-4 py-2 sm:py-2.5 shadow-sm">
+                  <Image
+                    src="/certifications/logos/Custom Teal PDF File Badge.svg"
+                    alt="PDF"
+                    width={34}
+                    height={34}
+                    className="w-8 h-8 sm:w-8.5 sm:h-8.5 object-contain shrink-0"
+                  />
+                  <div className="flex flex-col leading-tight pr-1">
+                    <span className="text-xs sm:text-[13px] font-bold text-[#0B1C24] whitespace-nowrap">
+                      {isArabic ? "ملف الشركة" : "Company Profile"}
+                    </span>
+                    <span className="text-[10px] text-stone-400 font-medium mt-0.5">11.4 MB</span>
+                  </div>
+                </div>
 
-                <Link
-                  href="/get-a-quote"
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#00c4b4] hover:bg-[#00b0a2] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-2 shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                {/* Subtle Divider Line */}
+                <div className="hidden sm:block w-[1px] h-8 bg-slate-300/60" />
+
+                {/* Download Profile Button */}
+                <a
+                  href="/contact"
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#00a89a] hover:bg-[#009386] text-white font-bold text-xs sm:text-sm tracking-wide inline-flex items-center gap-2.5 sm:gap-3 shadow-md shadow-[#00a89a]/25 hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap group"
                 >
-                  <span>{isArabic ? "طلب تسعير" : "Book a Call"}</span>
-                  <ArrowRight className={`w-3.5 h-3.5 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
-                </Link>
+                  <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span>{isArabic ? "تحميل الملف" : "Download Profile"}</span>
+                  <span className="w-6 h-6 rounded-full bg-white text-[#00a89a] flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
+                    <ArrowRight className={`w-3.5 h-3.5 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
+                  </span>
+                </a>
               </div>
             </div>
           </div>
