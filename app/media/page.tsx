@@ -680,7 +680,7 @@ export default function MediaPage() {
           5. SECTION: FULL-WIDTH BOTTOM CALL TO ACTION BANNER
           (Exact background: /mediaPageNew/CallToActionSection.png)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] flex items-center bg-[#052b36] overflow-hidden">
+      <section className="relative w-full min-h-[300px] sm:min-h-[340px] md:min-h-[380px] lg:min-h-[420px] flex items-center bg-[#052b36] overflow-hidden">
         {/* Background Image with Worker Coating Roof at Sunset */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -690,65 +690,57 @@ export default function MediaPage() {
             unoptimized
             className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right"}`}
           />
-          {/* Curved Dark Gradient Overlay on Text Side */}
+          {/* Gentle directional dark gradient overlay to ensure crisp readability */}
           <div
             className={`absolute inset-0 ${
               isArabic
-                ? "bg-gradient-to-l from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/45 to-transparent"
-                : "bg-gradient-to-r from-[#021820]/95 via-[#021820]/80 sm:via-[#021820]/45 to-transparent"
+                ? "bg-gradient-to-l from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
+                : "bg-gradient-to-r from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
             }`}
           />
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full py-16 sm:py-20">
-          <div className="max-w-xl">
-            {/* Tag */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#00DDCF] animate-pulse" />
-              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00DDCF]">
-                {isArabic ? "تواصل معنا" : "CONTACT US"}
+        <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full py-12 sm:py-16 md:py-20">
+          <div className="max-w-lg lg:max-w-xl">
+            {/* Tagline: — NEED EXPERT HELP? — */}
+            <div className="inline-flex items-center gap-2 sm:gap-2.5 mb-2.5 sm:mb-3">
+              <span className="w-5 sm:w-6 h-[2px] bg-white/70 inline-block" />
+              <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-white/90">
+                {isArabic ? "هل تحتاج مساعدة خبير؟" : "NEED EXPERT HELP?"}
               </span>
+              <span className="w-5 sm:w-6 h-[2px] bg-white/70 inline-block" />
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.15] mb-4">
-              {isArabic ? (
-                <>
-                  هل لديك <span className="text-[#00DDCF]">مشروع عزل مائي؟</span>
-                </>
-              ) : (
-                <>
-                  Have a <span className="text-[#00DDCF]">Waterproofing Project?</span>
-                </>
-              )}
+            <h2 className="text-2xl sm:text-3xl md:text-[38px] font-black text-white tracking-tight leading-[1.18] mb-3">
+              {isArabic ? "هل لديك مشروع عزل مائي؟" : "Have a Waterproofing Project?"}
             </h2>
 
             {/* Subtitle */}
-            <p className="text-sm sm:text-base text-white/85 leading-relaxed font-light mb-8 max-w-lg">
+            <p className="text-xs sm:text-sm md:text-[15px] text-white/85 leading-relaxed font-normal mb-6 sm:mb-8 max-w-md">
               {isArabic
-                ? "احمِ منشأتك وعقارك مع مقاولي العزل المعتمدين في دبي والإمارات. تواصل معنا اليوم للحصول على فحص ميداني مجاني وضمانات شاملة."
-                : "Protect your structural investment with Dubai's certified waterproofing and thermal insulation contractors. Get in touch today for a free technical site inspection."}
+                ? "من العزل المائي إلى الطلاءات الواقية، فريقنا ذو الخبرة مستعد لتقديم الحل المناسب لمشروعك."
+                : "From waterproofing to protective coatings, our experienced team is ready to provide the right solution for your project."}
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
               <Link
                 href="/get-a-quote"
-                className="pl-6 pr-2.5 py-2.5 sm:pl-7 sm:pr-3 sm:py-3 rounded-full bg-[#00DDCF] hover:bg-[#00c4b4] text-[#021820] font-black text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 shadow-xl shadow-[#00DDCF]/25 hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+                className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#00a89a] hover:bg-[#009386] text-white font-bold text-xs sm:text-sm tracking-wide inline-flex items-center gap-2.5 sm:gap-3 shadow-lg shadow-[#00a89a]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap group"
               >
                 <span>{isArabic ? "طلب عرض أسعار مجاني" : "Get a Free Quote"}</span>
-                <span className="w-8 h-8 rounded-full bg-[#021820] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                <span className="w-6 h-6 rounded-full bg-white text-[#00a89a] flex items-center justify-center shrink-0 transition-transform group-hover:translate-x-0.5">
                   <ArrowRight className={`w-3.5 h-3.5 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
                 </span>
               </Link>
 
               <Link
                 href="/contact"
-                className="px-6 py-3 sm:px-7 sm:py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-2.5 backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#032e36]/70 hover:bg-[#032e36]/90 text-white border border-[#00a89a]/70 font-bold text-xs sm:text-sm tracking-wide inline-flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
               >
-                <Phone className="w-4 h-4 text-[#00DDCF]" />
-                <span>{isArabic ? "تحدث مع مهندس" : "Talk to Engineer"}</span>
+                <span>{isArabic ? "تحدث مع خبرائنا" : "Talk to Our Experts"}</span>
               </Link>
             </div>
           </div>
