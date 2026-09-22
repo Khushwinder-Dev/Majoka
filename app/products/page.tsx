@@ -23,11 +23,71 @@ import {
 import toast from "react-hot-toast";
 import { allProductsData, ProductDetailItem } from "@/data/productsData";
 import CommonHeader from "@/components/Common/CommonHeader";
+import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
+import { useLanguage } from "@/context/LanguageContext";
+
+const PRODUCT_LISTING_FAQS: FaqItem[] = [
+  {
+    id: 1,
+    question: "Are all supplied materials accompanied by manufacturer TDS, MSDS, and approvals?",
+    questionAr: "هل تُرفق جميع المواد الموردة ببيانات السلامة والمواصفات الفنية والاعتمادات؟",
+    answer:
+      "Yes. Every waterproofing product, elastomeric coating, and chemical admixture is supplied with official technical data sheets (TDS), material safety data sheets (MSDS), and compliance certificates approved by Dubai Municipality and UAE Civil Defense.",
+    answerAr:
+      "نعم. يتم توريد كل منتج عزل مائي، أو طلاء مرن، أو مضاف كيميائي ببيانات المواصفات الفنية الرسمية (TDS)، وبيانات سلامة المواد (MSDS)، وشهادات المطابقة المعتمدة من بلدية دبي والدفاع المدني.",
+  },
+  {
+    id: 2,
+    question: "Do you offer contractor trade pricing and bulk project deliveries across the UAE?",
+    questionAr: "هل تقدمون أسعار تفضيلية للمقاولين وتوريدات ضخمة في جميع أنحاء الإمارات؟",
+    answer:
+      "Yes. We support main contractors, consultants, and specialized subcontractors with competitive commercial pricing, dedicated account managers, and fast on-site delivery throughout Dubai, Abu Dhabi, Sharjah, and the Northern Emirates.",
+    answerAr:
+      "نعم. ندعم المقاولين الرئيسيين والاستشاريين والمقاولين الفرعيين بأسعار تجارية تنافسية، ومديري حسابات مخصصين، وتوصيل سريع ومباشر للمواقع في دبي وأبوظبي والشارقة والإمارات الشمالية.",
+  },
+  {
+    id: 3,
+    question: "Which international chemical and waterproofing brands are available in your catalog?",
+    questionAr: "ما هي العلامات التجارية العالمية لمواد العزل المتوفرة لديكم؟",
+    answer:
+      "We source, distribute, and apply premium certified systems from top global manufacturers including BASF Master Builders, Sika, Fosroc, Henkel Polybit, GCP Applied Technologies, and Dow.",
+    answerAr:
+      "نوفر ونوزع ونطبق أنظمة معتمدة من كبرى الشركات العالمية الرائدة مثل باسف (BASF)، وسيكا (Sika)، وفوسروك (Fosroc)، وهنكل بوليبت، وGCP، وداو.",
+  },
+  {
+    id: 4,
+    question: "How do I choose the correct primer and membrane system for my substrate?",
+    questionAr: "كيف أختار البرايمر ونظام الغشاء المناسب لسطح مشروعي؟",
+    answer:
+      "Our technical specialists provide complimentary substrate compatibility assessments evaluating concrete moisture thresholds, surface porosity, chemical exposure, and temperature fluctuations to recommend the ideal priming and membrane schedule.",
+    answerAr:
+      "يقدم خبراؤنا الفنيون تقييماً مجانياً لتوافق الأسطح من خلال فحص نسبة الرطوبة في الخرسانة ومسامية السطح والتعرض الكيميائي لتحديد البرايمر ونظام العزل المثالي.",
+  },
+  {
+    id: 5,
+    question: "What storage conditions and shelf life are recommended for the UAE climate?",
+    questionAr: "ما هي شروط التخزين وفترة الصلاحية الموصى بها في مناخ الإمارات؟",
+    answer:
+      "Liquid-applied polyurethanes, epoxies, and bituminous primers should be stored in sheltered, climate-controlled environments between 10°C and 30°C away from direct sunlight. Most un-opened formulations retain peak performance for 12 months.",
+    answerAr:
+      "يجب تخزين طلاءات البولي يوريثان السائلة، والإيبوكسي، والبادئات البيتومينية في مستودعات مظللة ومكيفة بدرجات حرارة بين 10 إلى 30 درجة مئوية بعيداً عن أشعة الشمس المباشرة. تظل معظم العبوات المغلقة صالحة لمدة 12 شهراً.",
+  },
+  {
+    id: 6,
+    question: "Can Taj Al Rahmah provide certified installation alongside material supply?",
+    questionAr: "هل تقدم تاج الرحمة خدمات التطبيق والتركيب المعتمد بجانب توريد المواد؟",
+    answer:
+      "Yes. We offer fully integrated turnkey solutions combining certified product supply with trained application teams, backed by 10 to 25-year joint warranties covering both material and installation.",
+    answerAr:
+      "نعم. نقدم حلولاً متكاملة تجمع بين توريد المواد المعتمدة وفرق التركيب المؤهلة، مدعومة بضمانات مشتركة تتراوح بين 10 إلى 25 عاماً تغطي المواد ومصنعية التنفيذ معاً.",
+  },
+];
 
 const categoryList: { name: string; count: number }[] = [];
 
 export default function ProductsPage() {
   const router = useRouter();
+  const { isArabic } = useLanguage();
   // Filter States
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -849,6 +909,14 @@ export default function ProductsPage() {
           </main>
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <FaqSection
+        faqs={PRODUCT_LISTING_FAQS}
+        isArabic={isArabic}
+        subtitle="Find clear answers to common questions about product specifications, bulk trade supply, and applications."
+        subtitleAr="إجابات واضحة على الأسئلة الشائعة حول مواصفات المنتجات والتوريد التجاري بالجملة وطرق التطبيق."
+      />
 
       {/* ===================== EXPERT MODAL ===================== */}
       {isExpertModalOpen && (

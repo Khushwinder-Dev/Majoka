@@ -1,17 +1,22 @@
+"use client";
+
 import React from "react";
 import ProjectsHero from "../../components/Project/ProjectsHero";
 import ProjectsGallery from "../../components/Project/ProjectsGallery";
 import ProjectsClients from "../../components/Project/ProjectsClients";
-import ProjectsFAQ from "../../components/Project/ProjectsFAQ";
+import FaqSection from "@/components/Common/FaqSection";
 import ProjectsCTA from "../../components/Project/ProjectsCTA";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ProjectPage() {
+  const { isArabic } = useLanguage();
+
   return (
     <div>
       <ProjectsHero />
       <ProjectsGallery />
       <ProjectsClients />
-      <ProjectsFAQ />
+      <FaqSection isArabic={isArabic} />
       <ProjectsCTA />
     </div>
   );
