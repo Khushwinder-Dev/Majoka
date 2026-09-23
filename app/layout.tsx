@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anek_Malayalam } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -34,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/logo.png" sizes="any" />
         <link rel="icon" href="/logo.png" type="image/png" />
@@ -42,6 +42,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${anekMalayalam.variable} antialiased bg-white overflow-x-hidden!`}
+        suppressHydrationWarning
       >
         <LanguageProvider>
           {/* Global Toast Notifications */}
