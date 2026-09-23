@@ -190,8 +190,90 @@ const industriesMegaMenu = {
   },
 };
 
+const resourcesMegaMenu = {
+  en: {
+    label: "RESOURCES",
+    tagline: "Knowledge, Media & Client Support",
+    bottomNote: "Have questions? Our support desk is available 24/7.",
+    cardTag: "RESOURCES",
+    cardTitle: "Knowledge & Media",
+    cardDesc: "Explore company media, technical blogs, FAQs, and certified warranty policies.",
+    cardImage: "/media/media-hero.jpg",
+    cta: "All Resources",
+    ctaHref: "/resources",
+    items: [
+      { icon: "arrow", title: "Media", sub: "Project showcases, events & video gallery", href: "/media" },
+      { icon: "arrow", title: "Get a Quote", sub: "Quick & free technical project estimation", href: "/get-a-quote" },
+      { icon: "arrow", title: "FAQs", sub: "Answers to common technical queries", href: "/faqs" },
+      { icon: "arrow", title: "Blog", sub: "Latest industry insights & waterproofing trends", href: "/blogs" },
+      { icon: "arrow", title: "Support", sub: "Technical assistance & customer care", href: "/support" },
+      { icon: "arrow", title: "Warranty", sub: "Coverage terms & municipal certifications", href: "/warranty" },
+    ],
+  },
+  ar: {
+    label: "المصادر",
+    tagline: "المعرفة والوسائط ودعم العملاء",
+    bottomNote: "لديك استفسار؟ فريق الدعم الفني متاح على مدار الساعة.",
+    cardTag: "المصادر",
+    cardTitle: "المعرفة والوسائط",
+    cardDesc: "استكشف وسائط الشركة والمدونة التقنية والأسئلة الشائعة ووثائق الضمان المعتمدة.",
+    cardImage: "/media/media-hero.jpg",
+    cta: "جميع المصادر",
+    ctaHref: "/resources",
+    items: [
+      { icon: "arrow", title: "الوسائط", sub: "معارض المشاريع والفعاليات ومقاطع الفيديو", href: "/media" },
+      { icon: "arrow", title: "احصل على عرض سعر", sub: "تقدير تكلفة فني سريع ومجاني للمشاريع", href: "/get-a-quote" },
+      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات شاملة عن الأسئلة الهندسية الشائعة", href: "/faqs" },
+      { icon: "arrow", title: "المدونة", sub: "أحدث المقالات وأخبار قطاع العزل والمقاولات", href: "/blogs" },
+      { icon: "arrow", title: "الدعم", sub: "المساعدة الفنية وخدمة العملاء المتميزة", href: "/support" },
+      { icon: "arrow", title: "الضمان", sub: "شروط التغطية والشهادات البلدية المعتمدة", href: "/warranty" },
+    ],
+  },
+};
+
+const companyMegaMenu = {
+  en: {
+    label: "COMPANY",
+    tagline: "Engineering Excellence Across the UAE",
+    bottomNote: "Trusted partner for leading developers and government projects.",
+    cardTag: "COMPANY",
+    cardTitle: "Leadership & Trust",
+    cardDesc: "Delivering certified technical contracting and specialist engineering solutions across the region.",
+    cardImage: "/media/Engineers working.png",
+    cta: "About Us",
+    ctaHref: "/about-us",
+    items: [
+      { icon: "arrow", title: "About Us", sub: "Our heritage, vision & leadership team", href: "/about-us" },
+      { icon: "arrow", title: "Our Expertise", sub: "Core specialized technical capabilities", href: "/expertise" },
+      { icon: "arrow", title: "Certifications", sub: "ISO, Dubai Municipality & Civil Defense", href: "/certifications" },
+      { icon: "arrow", title: "Careers", sub: "Explore open job positions & internships", href: "/career" },
+      { icon: "arrow", title: "Contact", sub: "Reach out to our offices in Dubai & Sharjah", href: "/contact" },
+      { icon: "arrow", title: "Subcontract", sub: "Certified subcontracting execution partner", href: "/subcontract" },
+    ],
+  },
+  ar: {
+    label: "الشركة",
+    tagline: "الريادة والتميز الهندسي في الإمارات",
+    bottomNote: "شريك موثوق لأكبر المطورين والمشاريع الحكومية.",
+    cardTag: "الشركة",
+    cardTitle: "الريادة والموثوقية",
+    cardDesc: "تقديم مقاولات فنية معتمدة وحلول هندسية تخصصية في كافة إمارات الدولة.",
+    cardImage: "/media/Engineers working.png",
+    cta: "عن تاج الرحمة",
+    ctaHref: "/about-us",
+    items: [
+      { icon: "arrow", title: "عن الشركة", sub: "مسيرتنا، رؤيتنا وفريق القيادة الهندسية", href: "/about-us" },
+      { icon: "arrow", title: "الخبرة الفنية", sub: "القدرات الهندسية والتنفيذية المتخصصة", href: "/expertise" },
+      { icon: "arrow", title: "الشهادات والاعتمادات", sub: "أيزو واعتمادات البلدية والدفاع المدني", href: "/certifications" },
+      { icon: "arrow", title: "وظائف", sub: "انضم إلى فريقنا الهندسي والفني المتميز", href: "/career" },
+      { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة", href: "/contact" },
+      { icon: "arrow", title: "المقاولون من الباطن", sub: "شريك مقاولات تخصصي موثوق للمشاريع", href: "/subcontract" },
+    ],
+  },
+};
+
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
-type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | null;
+type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | "resources" | "company" | null;
 
 type MegaItem = { icon: string; title: string; sub: string; href: string };
 
@@ -209,7 +291,10 @@ type MegaData = {
 };
 
 /* ─── ICON COMPONENT ─────────────────────────────────────────────────── */
-function NavIcon({ src, alt, size = 18 }: { src: string; alt: string; size?: number }) {
+function NavIcon({ src, alt, size = 18 }: { src?: string; alt: string; size?: number }) {
+  if (!src || src === "arrow") {
+    return <ArrowRight className="w-4 h-4 text-[#009e90] rtl:rotate-180 group-hover:translate-x-0.5 transition-transform" />;
+  }
   return (
     <Image
       src={src}
@@ -245,12 +330,11 @@ const Navbar = () => {
   const isLinkActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "/project") return pathname === "/project" || pathname.startsWith("/project") || pathname === "/projects";
-    if (href === "/career") return pathname === "/career" || pathname.startsWith("/career");
     if (href === "/services") return pathname === "/services" || pathname.startsWith("/services");
-    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about";
-    if (href === "/resources") return pathname === "/resources" || pathname === "/blogs" || pathname === "/media";
-    if (href === "/products") return pathname === "/products" || pathname.startsWith("/products");
+    // if (href === "/products") return pathname === "/products" || pathname.startsWith("/products");
     if (href === "/industries") return pathname === "/industries" || pathname.startsWith("/industries");
+    if (href === "/resources") return pathname === "/resources" || pathname.startsWith("/blogs") || pathname.startsWith("/media") || pathname.startsWith("/faqs") || pathname.startsWith("/support") || pathname.startsWith("/warranty");
+    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about" || pathname.startsWith("/expertise") || pathname.startsWith("/certifications") || pathname.startsWith("/subcontract") || pathname.startsWith("/career") || pathname.startsWith("/contact");
     return pathname === href || pathname.startsWith(href);
   };
 
@@ -454,12 +538,10 @@ const Navbar = () => {
     { name: t.nav.services, href: "/services", megaKey: "services" },
     { name: t.nav.solutions, href: "/solutions", megaKey: "solutions" },
     { name: t.nav.projects, href: "/project", megaKey: "projects" },
-    { name: t.nav.products, href: "/products" },
+    // { name: t.nav.products, href: "/products" },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
-    { name: t.nav.resources, href: "/resources" },
-    { name: t.nav.careers, href: "/career" },
-    { name: t.nav.company, href: "/about-us" },
-    { name: t.nav.contact, href: "/contact" },
+    { name: t.nav.resources, href: "/resources", megaKey: "resources" },
+    { name: t.nav.company, href: "/about-us", megaKey: "company" },
   ];
 
   return (
@@ -497,12 +579,14 @@ const Navbar = () => {
                     item.megaKey === "services" ? servicesMegaMenu[lang] :
                       item.megaKey === "solutions" ? solutionsMegaMenu[lang] :
                         item.megaKey === "projects" ? projectsMegaMenu[lang] :
-                          item.megaKey === "industries" ? industriesMegaMenu[lang] : null;
+                          item.megaKey === "industries" ? industriesMegaMenu[lang] :
+                            item.megaKey === "resources" ? resourcesMegaMenu[lang] :
+                              item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
                   return (
                     <div
                       key={item.name}
-                      className={`relative ${item.href === "/resources" ? "hidden" : ""}`}
+                      className="relative"
                       onMouseEnter={() => hasMega ? openMega(item.megaKey!) : openMega(null)}
                       onMouseLeave={() => hasMega ? closeMega() : undefined}
                     >
@@ -513,9 +597,9 @@ const Navbar = () => {
                         onClick={() => setActiveMega(null)}
                       >
                         {item.name}
-                        {/* {hasMega && (
-                        <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
-                      )} */}
+                        {hasMega && (
+                          <ChevronDown className={`w-3 h-3 transition-transform duration-200 opacity-60 ${isOpen ? "rotate-180" : ""}`} />
+                        )}
                       </Link>
 
                       {/* Active underline */}
@@ -648,7 +732,9 @@ const Navbar = () => {
                 item.megaKey === "services" ? servicesMegaMenu[lang] :
                   item.megaKey === "solutions" ? solutionsMegaMenu[lang] :
                     item.megaKey === "projects" ? projectsMegaMenu[lang] :
-                      item.megaKey === "industries" ? industriesMegaMenu[lang] : null;
+                      item.megaKey === "industries" ? industriesMegaMenu[lang] :
+                        item.megaKey === "resources" ? resourcesMegaMenu[lang] :
+                          item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
               return (
                 <div key={item.name} className="border-b border-white/[0.06]">
@@ -657,7 +743,7 @@ const Navbar = () => {
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`flex-1 px-6 py-4 text-[14px] font-semibold uppercase tracking-wider font-anek transition-colors ${active ? "text-[#00c2b2]" : "text-white/80 hover:text-white"
-                        } ${item.href === "/resources" ? "hidden" : ""}`}
+                        }`}
                     >
                       {item.name}
                     </Link>
