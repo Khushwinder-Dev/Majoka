@@ -296,6 +296,9 @@ export default function CareerPageContent() {
             sizes="100vw"
             className={`object-cover object-center ${isArabic ? "scale-x-[-1]" : ""}`}
           />
+          {/* Dark overlay for navbar menu visibility and contrast */}
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent pointer-events-none" />
         </div>
       </section>
 
