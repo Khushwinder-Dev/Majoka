@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
 /* ─── DATA DEFINITIONS ─────────────────────────────────────────────────── */
 
@@ -218,9 +219,70 @@ const INDUSTRY_PARTNERS: IndustryPartner[] = [
   },
 ];
 
+interface SubcontractFaqItem {
+  id: number;
+  questionEn: string;
+  questionAr: string;
+  answerEn: string;
+  answerAr: string;
+}
+
+const SUBCONTRACT_FAQS: SubcontractFaqItem[] = [
+  {
+    id: 1,
+    questionEn: "What specialized subcontracting services do you provide?",
+    questionAr: "ما هي خدمات المقاولات من الباطن التخصصية التي تقدمونها؟",
+    answerEn:
+      "We provide end-to-end subcontracting solutions across waterproofing (combo system, GRP, bitumen membrane, polyurea), high-performance protective and anti-corrosion coatings, concrete repair and crack injection, and heavy-duty industrial flooring systems.",
+    answerAr:
+      "نقدم حلولاً متكاملة في المقاولات من الباطن تشمل أعمال العزل المائي (نظام الكومبو، GRP، الأغشية البيتومينية، والبولي يوريا)، الطلاءات الواقية ومكافحة التآكل، إصلاح الشروخ وحقن الخرسانة، وأنظمة الأرضيات الصناعية فائقة التحمل.",
+  },
+  {
+    id: 2,
+    questionEn: "Are your works certified and compliant with UAE municipal standards?",
+    questionAr: "هل أعمالكم معتمدة ومتوافقة مع المعايير البلدية في دولة الإمارات؟",
+    answerEn:
+      "Yes. Our engineering processes and application teams comply strictly with Dubai Municipality, Civil Defense, Estidama, and ISO 9001/14001/45001 standards. We provide complete submittals, method statements, and inspection test plans (ITP).",
+    answerAr:
+      "نعم، تلتزم منهجياتنا الهندسية وفرق التطبيق باشتراطات بلدية دبي، الدفاع المدني، برنامج استدامة، ومعايير الآيزو (9001، 14001، 45001). ونوفر اعتمادات المواد، بيانات طرق العمل (Method Statements)، وخطط الفحص والاختبار (ITP).",
+  },
+  {
+    id: 3,
+    questionEn: "How quickly can you provide site assessments and commercial proposals?",
+    questionAr: "كم يستغرق إجراء المعاينة الميدانية وتقديم العرض الفني والمالي؟",
+    answerEn:
+      "Upon receiving your project drawings, BOQ, or specifications, our technical team conducts a complimentary site inspection and issues a detailed technical proposal and competitive quotation within 24 to 48 hours.",
+    answerAr:
+      "بمجرد تزويدنا بمخططات المشروع أو جدول الكميات (BOQ)، يقوم فريقنا الفني بزيارة ميدانية وإعداد مقترح فني تفصيلي مع عرض أسعار تنافسي خلال 24 إلى 48 ساعة فقط.",
+  },
+  {
+    id: 4,
+    questionEn: "What warranties and guarantees are issued upon project handover?",
+    questionAr: "ما هي الضمانات التي يتم تسليمها عند إنجاز المشروع؟",
+    answerEn:
+      "We issue comprehensive, certified material and workmanship warranties ranging from 10 to 25 years depending on the approved system. All warranties are backed by mandatory on-site ponding, thickness, and holiday spark testing prior to handover.",
+    answerAr:
+      "نمنح ضمانات خطية شاملة على المواد والتنفيذ تتراوح بين 10 إلى 25 عاماً وفقاً للنظام المعتمد. وتكون كافة الضمانات مدعومة باختبارات غمر المياه والفحص الفني الشامل قبل التسليم النهائي.",
+  },
+  {
+    id: 5,
+    questionEn: "Can you mobilize teams for fast-track or high-volume construction schedules?",
+    questionAr: "هل يمكنكم حشد وتوفير الفرق الفنية للمشاريع العاجلة والمضغوطة زمنياً؟",
+    answerEn:
+      "Yes. With our dedicated full-time workforce of certified engineers, QA/QC inspectors, site supervisors, and trained technicians, we have the logistical capacity to deploy immediately and scale up for fast-track milestones across Dubai and the Northern Emirates.",
+    answerAr:
+      "نعم، نمتلك كادراً دائماً ومؤهلاً من المهندسين، ومفتشي ضبط الجودة، والمشرفين، والفنيين المدربين، مما يتيح لنا الحشد الفوري والتوسع اللوجستي للالتزام بالجداول الزمنية المضغوطة في دبي وكافة إمارات الدولة.",
+  },
+];
+
 export default function SubcontractContent() {
   const { isArabic, direction } = useLanguage();
   const isAr = isArabic;
+  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
+
+  const toggleFaq = (id: number) => {
+    setOpenFaqId(openFaqId === id ? null : id);
+  };
 
   return (
     <div className="w-full bg-white selection:bg-[#01a9a0] selection:text-white" dir={direction}>
@@ -583,6 +645,55 @@ export default function SubcontractContent() {
                   {isAr ? partner.titleAr : partner.titleEn}
                 </span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 7: SUBCONTRACT FAQS ───────────────────────────────── */}
+      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F8FAFC] border-t border-slate-200/60">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+            <div className="inline-flex items-center justify-center gap-3 mb-3">
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
+                {isAr ? "الأسئلة الشائعة" : "FAQ"}
+              </span>
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#111827] tracking-tight leading-[1.2]">
+              {isAr ? (
+                <>
+                  الأسئلة الشائعة حول <span className="text-[#01a9a0]">المقاولات من الباطن</span>
+                </>
+              ) : (
+                <>
+                  Subcontracting <span className="text-[#01a9a0]">Frequently Asked Questions</span>
+                </>
+              )}
+            </h2>
+
+            <p className="mt-3 text-stone-500 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+              {isAr
+                ? "إجابات واضحة ومباشرة عن نطاق خدماتنا، معايير الامتثال، الضمانات، وإجراءات التعاقد والتنفيذ."
+                : "Find clear answers to common questions about our subcontracting capabilities, compliance standards, warranty terms, and execution process."}
+            </p>
+          </div>
+
+          {/* Accordion FAQ Cards */}
+          <div className="space-y-3 sm:space-y-3.5">
+            {SUBCONTRACT_FAQS.map((faq) => (
+              <FaqAccordionItem
+                key={faq.id}
+                number={faq.id}
+                question={isAr ? faq.questionAr : faq.questionEn}
+                answer={isAr ? faq.answerAr : faq.answerEn}
+                isOpen={openFaqId === faq.id}
+                onToggle={() => toggleFaq(faq.id)}
+                isArabic={isAr}
+              />
             ))}
           </div>
         </div>
