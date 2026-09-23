@@ -31,7 +31,11 @@ const CLIENT_LOGOS = [
 // Triple for seamless continuous infinite loop
 const trackLogos = [...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
-export default function ProjectsClients() {
+interface ProjectsClientsProps {
+  themeBg?: boolean;
+}
+
+export default function ProjectsClients({ themeBg = false }: ProjectsClientsProps) {
   const { isArabic } = useLanguage();
   const trackRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<number | null>(null);
@@ -81,7 +85,9 @@ export default function ProjectsClients() {
 
   return (
     <section
-      className="relative w-full bg-[#F4FAF9] py-14 sm:py-16 lg:py-20 overflow-hidden"
+      className={`relative w-full py-14 sm:py-16 lg:py-20 overflow-hidden transition-colors duration-300 ${
+        themeBg ? "bg-[#01a9a0] text-white" : "bg-[#F4FAF9]"
+      }`}
       dir={isArabic ? "rtl" : "ltr"}
     >
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -91,18 +97,34 @@ export default function ProjectsClients() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-10 mb-10 sm:mb-12">
           <div className="max-w-xl">
             <div className="flex items-center gap-2.5 mb-3">
-              <span className="inline-block h-[2px] w-8 sm:w-10 bg-[#01a9a0] rounded-full shrink-0" />
-              <span className="text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase text-[#01a9a0]">
+              <span
+                className={`inline-block h-[2px] w-8 sm:w-10 rounded-full shrink-0 ${
+                  themeBg ? "bg-white" : "bg-[#01a9a0]"
+                }`}
+              />
+              <span
+                className={`text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase ${
+                  themeBg ? "text-white/90" : "text-[#01a9a0]"
+                }`}
+              >
                 {isArabic ? "موثوقون من قادة الصناعة" : "TRUSTED BY INDUSTRY LEADERS"}
               </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-[42px] font-extrabold text-[#0B1C24] tracking-tight leading-[1.15]">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-[42px] font-extrabold tracking-tight leading-[1.15] ${
+                themeBg ? "text-white" : "text-[#0B1C24]"
+              }`}
+            >
               {isArabic ? "عملاؤنا الكرام" : "Our Valuable Clients"}
             </h2>
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center gap-4 lg:max-w-xl">
-            <p className="text-sm sm:text-base text-stone-500 leading-relaxed flex-1">
+            <p
+              className={`text-sm sm:text-base leading-relaxed flex-1 ${
+                themeBg ? "text-white/90" : "text-stone-500"
+              }`}
+            >
               {isArabic
                 ? "شركاء نجاحنا، الذين تحولت أحلامهم إلى واقع ملموس."
                 : "The partners of our success, whose dreams have become a reality."}
@@ -112,7 +134,11 @@ export default function ProjectsClients() {
                 type="button"
                 onClick={() => nudge("prev")}
                 aria-label={isArabic ? "السابق" : "Previous clients"}
-                className="w-11 h-11 rounded-full border border-[#01a9a0] text-[#01a9a0] flex items-center justify-center hover:bg-[#01a9a0] hover:text-white transition-colors cursor-pointer active:scale-95"
+                className={`w-11 h-11 rounded-full flex items-center justify-center transition-colors cursor-pointer active:scale-95 ${
+                  themeBg
+                    ? "border border-white/60 text-white hover:bg-white hover:text-[#01a9a0]"
+                    : "border border-[#01a9a0] text-[#01a9a0] hover:bg-[#01a9a0] hover:text-white"
+                }`}
               >
                 {isArabic ? (
                   <ChevronRight className="w-5 h-5" />
@@ -124,7 +150,11 @@ export default function ProjectsClients() {
                 type="button"
                 onClick={() => nudge("next")}
                 aria-label={isArabic ? "التالي" : "Next clients"}
-                className="w-11 h-11 rounded-full border border-[#01a9a0] text-[#01a9a0] flex items-center justify-center hover:bg-[#01a9a0] hover:text-white transition-colors cursor-pointer active:scale-95"
+                className={`w-11 h-11 rounded-full flex items-center justify-center transition-colors cursor-pointer active:scale-95 ${
+                  themeBg
+                    ? "border border-white/60 text-white hover:bg-white hover:text-[#01a9a0]"
+                    : "border border-[#01a9a0] text-[#01a9a0] hover:bg-[#01a9a0] hover:text-white"
+                }`}
               >
                 {isArabic ? (
                   <ChevronLeft className="w-5 h-5" />
@@ -157,8 +187,20 @@ export default function ProjectsClients() {
         aria-label="Client logos"
       >
         {/* Soft edge fade masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-[#F4FAF9] to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-[#F4FAF9] to-transparent" />
+        <div
+          className={`absolute left-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none ${
+            themeBg
+              ? "bg-gradient-to-r from-[#01a9a0] to-transparent"
+              : "bg-gradient-to-r from-[#F4FAF9] to-transparent"
+          }`}
+        />
+        <div
+          className={`absolute right-0 top-0 bottom-0 w-20 sm:w-32 z-10 pointer-events-none ${
+            themeBg
+              ? "bg-gradient-to-l from-[#01a9a0] to-transparent"
+              : "bg-gradient-to-l from-[#F4FAF9] to-transparent"
+          }`}
+        />
 
         {/* Scrolling track */}
         <div
@@ -169,17 +211,20 @@ export default function ProjectsClients() {
           {trackLogos.map((logo, idx) => (
             <div
               key={`${logo.name}-${idx}`}
-              className="
+              className={`
                 flex-shrink-0 relative
                 h-[84px] sm:h-[90px] lg:h-[96px]
                 w-[148px] sm:w-[160px] lg:w-[172px]
                 bg-white hover:bg-white
-                border border-slate-200/70 hover:border-[#009e90]/40
                 rounded-2xl
-                shadow-[0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_8px_24px_rgba(0,158,144,0.12)]
                 transition-all duration-300 overflow-hidden group
                 flex items-center justify-center
-              "
+                ${
+                  themeBg
+                    ? "border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.18)] hover:border-white/50"
+                    : "border border-slate-200/70 hover:border-[#009e90]/40 shadow-[0_4px_16px_rgba(15,23,42,0.04)] hover:shadow-[0_8px_24px_rgba(0,158,144,0.12)]"
+                }
+              `}
             >
               <Image
                 src={logo.src}
