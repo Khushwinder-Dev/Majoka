@@ -846,18 +846,19 @@ export default function SubcontractContent() {
       </section>
 
       {/* ─── SECTION 9: BOTTOM CTA — LOOKING FOR A RELIABLE SUBCONTRACTOR? ─── */}
-      <section className="relative w-full overflow-hidden min-h-[150px] sm:min-h-[170px] lg:min-h-[190px] flex items-center">
+      <section className="relative w-full overflow-hidden min-h-[160px] sm:min-h-[180px] lg:min-h-[200px] flex items-center">
         {/* Background Image: Engineers at construction site sunset */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/subcontract/hero.png"
+            src="/subcontract/cta-bg.jpg"
             alt="Looking for a Reliable Subcontractor?"
             fill
-            unoptimized
+            priority
+            sizes="100vw"
             className="object-cover object-[center_35%]"
           />
-          {/* Deep Navy/Blue gradient overlay: dark solid on left, translucent on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#031d33]/95 via-[#062c4a]/90 to-[#073050]/65 rtl:bg-gradient-to-l" />
+          {/* Deep Navy/Blue gradient overlay: dark solid on left for crisp contrast, fading to transparent on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#031d33] via-[#052642]/85 to-transparent/15 rtl:bg-gradient-to-l rtl:from-[#031d33] rtl:via-[#052642]/85 rtl:to-transparent/15" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-9 sm:py-11">
@@ -884,7 +885,7 @@ export default function SubcontractContent() {
             <div className="flex items-center flex-wrap sm:flex-nowrap gap-3.5 sm:gap-4 shrink-0">
               <Link
                 href="/get-a-quote"
-                className="inline-flex items-center justify-center gap-2 bg-[#00c569] hover:bg-[#00b05e] active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-[#00c569]/30 transition-all duration-200 group"
+                className="inline-flex items-center justify-center gap-2 bg-[#01a9a0] hover:bg-[#00968e] active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-[#01a9a0]/30 transition-all duration-200 group"
               >
                 <span>{isAr ? "طلب عرض سعر" : "Request a Quote"}</span>
                 <ArrowRight className="w-4 h-4 rtl:rotate-180 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-transform" />
