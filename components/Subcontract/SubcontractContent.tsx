@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Handshake } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
@@ -841,6 +841,62 @@ export default function SubcontractContent() {
                 isArabic={isAr}
               />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── SECTION 9: BOTTOM CTA — LOOKING FOR A RELIABLE SUBCONTRACTOR? ─── */}
+      <section className="relative w-full overflow-hidden min-h-[150px] sm:min-h-[170px] lg:min-h-[190px] flex items-center">
+        {/* Background Image: Engineers at construction site sunset */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/subcontract/hero.png"
+            alt="Looking for a Reliable Subcontractor?"
+            fill
+            unoptimized
+            className="object-cover object-[center_35%]"
+          />
+          {/* Deep Navy/Blue gradient overlay: dark solid on left, translucent on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#031d33]/95 via-[#062c4a]/90 to-[#073050]/65 rtl:bg-gradient-to-l" />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-9 sm:py-11">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 sm:gap-8">
+            {/* Left: Handshake icon + Heading & Subtext */}
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 flex items-center justify-center text-white">
+                <Handshake className="w-12 h-12 sm:w-14 sm:h-14 text-white shrink-0 stroke-[2] drop-shadow-md" />
+              </div>
+
+              <div>
+                <h3 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-white tracking-tight leading-snug">
+                  {isAr ? "هل تبحث عن مقاول باطن موثوق؟" : "Looking for a Reliable Subcontractor?"}
+                </h3>
+                <p className="text-white/85 text-xs sm:text-sm lg:text-[14.5px] mt-1 leading-relaxed max-w-xl">
+                  {isAr
+                    ? "دعنا نناقش متطلبات مشروعكم وكيف يمكننا دعم فريقكم الهندسي والتنفيذي."
+                    : "Let's discuss your project requirements and how we can support your team."}
+                </p>
+              </div>
+            </div>
+
+            {/* Right: CTA Action Buttons */}
+            <div className="flex items-center flex-wrap sm:flex-nowrap gap-3.5 sm:gap-4 shrink-0">
+              <Link
+                href="/get-a-quote"
+                className="inline-flex items-center justify-center gap-2 bg-[#00c569] hover:bg-[#00b05e] active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-[#00c569]/30 transition-all duration-200 group"
+              >
+                <span>{isAr ? "طلب عرض سعر" : "Request a Quote"}</span>
+                <ArrowRight className="w-4 h-4 rtl:rotate-180 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-transform" />
+              </Link>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/40 hover:border-white/70 font-semibold text-xs sm:text-sm px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl backdrop-blur-xs transition-all duration-200"
+              >
+                <span>{isAr ? "تواصل مع فريقنا" : "Contact Our Team"}</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
