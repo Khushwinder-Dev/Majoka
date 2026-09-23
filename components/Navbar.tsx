@@ -2,8 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { usePathname } from "next/navigation";
-import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight, Search } from "lucide-react";
 import ExpandableSearchBar from "./Common/ExpandableSearchBar";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -224,7 +224,39 @@ const Navbar = () => {
     return pathname === href || pathname.startsWith(href);
   };
 
-  const handleSearch = (query: string) => { console.log("Searching for:", query); };
+  const router = useRouter();
+
+  const handleSearch = (query: string, href?: string) => {
+    if (href) {
+      router.push(href);
+      return;
+    }
+    const q = query.trim();
+    if (!q) return;
+
+    const lower = q.toLowerCase();
+    if (lower.includes("subcontract") || lower.includes("مقاولة")) {
+      router.push("/subcontract");
+    } else if (lower.includes("quote") || lower.includes("price") || lower.includes("cost") || lower.includes("تسعير")) {
+      router.push("/get-a-quote");
+    } else if (lower.includes("career") || lower.includes("job") || lower.includes("وظائف")) {
+      router.push("/career");
+    } else if (lower.includes("project") || lower.includes("مشاريع")) {
+      router.push("/project");
+    } else if (lower.includes("product") || lower.includes("chemical") || lower.includes("membrane") || lower.includes("منتجات")) {
+      router.push(`/products?search=${encodeURIComponent(q)}`);
+    } else if (lower.includes("industry") || lower.includes("قطاعات")) {
+      router.push("/industries");
+    } else if (lower.includes("contact") || lower.includes("اتصل")) {
+      router.push("/contact");
+    } else if (lower.includes("about") || lower.includes("company") || lower.includes("من نحن")) {
+      router.push("/about-us");
+    } else if (lower.includes("faq") || lower.includes("أسئلة")) {
+      router.push("/faqs");
+    } else {
+      router.push(`/services?search=${encodeURIComponent(q)}`);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -540,8 +572,38 @@ const Navbar = () => {
           <Image src="/logo.png" alt="Logo" width={80} height={64} className="w-auto h-auto max-h-11 object-contain" />
         </div>
 
+        {/* Mobile Search Input */}
+        <div className="px-5 py-3 border-b border-white/10">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const input = (form.elements.namedItem("mobileSearch") as HTMLInputElement)?.value;
+              if (input && input.trim()) {
+                setIsMobileMenuOpen(false);
+                handleSearch(input.trim());
+              }
+            }}
+            className="relative flex items-center"
+          >
+            <input
+              type="text"
+              name="mobileSearch"
+              placeholder={t.nav.searchPlaceholder || "Search..."}
+              className="w-full bg-white/10 border border-white/20 rounded-full px-4 py-2 pl-9 pr-4 text-xs sm:text-sm text-white placeholder-white/50 outline-none focus:border-[#00c2b2] transition-colors"
+            />
+            <button
+              type="submit"
+              className="absolute left-3 text-white/60 hover:text-[#00c2b2] transition-colors cursor-pointer"
+              aria-label="Submit search"
+            >
+              <Search className="w-3.5 h-3.5 stroke-[2.5]" />
+            </button>
+          </form>
+        </div>
+
         {/* Nav list */}
-        <div className="overflow-y-auto h-[calc(100%-120px)] pb-8">
+        <div className="overflow-y-auto h-[calc(100%-170px)] pb-8">
           <nav className="flex flex-col">
             {navItems.map((item) => {
               const active = isLinkActive(item.href);

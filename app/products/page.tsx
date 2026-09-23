@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
@@ -94,6 +94,17 @@ export default function ProductsPage() {
   const [selectedRating, setSelectedRating] = useState<number | "any">("any");
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   const [isRatingOpen, setIsRatingOpen] = useState(true);
+
+  // Sync search param from URL if present
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const s = params.get("search");
+      if (s) {
+        setSearchQuery(s);
+      }
+    }
+  }, []);
 
   // View & Pagination States
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");

@@ -219,11 +219,11 @@ const INDUSTRY_PARTNERS: IndustryPartner[] = [
 ];
 
 export default function SubcontractContent() {
-  const { lang, dir } = useLanguage();
-  const isAr = lang === "ar";
+  const { isArabic, direction } = useLanguage();
+  const isAr = isArabic;
 
   return (
-    <div className="w-full bg-white selection:bg-[#01a9a0] selection:text-white" dir={dir}>
+    <div className="w-full bg-white selection:bg-[#01a9a0] selection:text-white" dir={direction}>
       {/* ─── SECTION 1: HERO SECTION ───────────────────────────────────── */}
       <section className="relative w-full min-h-[580px] lg:min-h-[660px] flex items-center pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         {/* Background Image with Dark Tinted Gradient */}
