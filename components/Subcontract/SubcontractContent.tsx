@@ -305,19 +305,6 @@ export default function SubcontractContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             {/* Left Column: Image with rounded corners */}
-            <div className="lg:col-span-6">
-              <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-[28px] overflow-hidden shadow-xl shadow-gray-200/70 border border-gray-100">
-                <Image
-                  src="/subcontract/intro-handshake.png"
-                  alt="Subcontracting Services Collaboration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            {/* Right Column: Heading & Copy */}
             <div className="lg:col-span-6 flex flex-col justify-center">
               {/* Eyebrow / Tagline */}
               <div className="flex items-center gap-2.5 mb-3.5">
@@ -355,6 +342,20 @@ export default function SubcontractContent() {
                   : "Professional waterproofing and specialized contracting services delivered with quality, safety, and reliable project coordination."}
               </p>
             </div>
+
+            {/* Right Column: Heading & Copy */}
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-[28px] overflow-hidden shadow-xl shadow-gray-200/70 border border-gray-100">
+                <Image
+                  src="/subcontract/intro-handshake.png"
+                  alt="Subcontracting Services Collaboration"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
