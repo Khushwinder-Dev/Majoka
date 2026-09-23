@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { Search, ChevronRight, Mic, MicOff, ArrowRight, X } from "lucide-react";
+import { Search, Mic, MicOff, ArrowRight, X, ExternalLink, Wrench, Package, Layers } from "lucide-react";
 import { SITE_SEARCH_INDEX, SearchResultItem } from "@/data/searchIndex";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -51,17 +51,18 @@ interface ExpandableSearchBarProps {
 
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   Service: { bg: "bg-teal-50", text: "text-[#009e90]", border: "border-teal-200" },
+  Product: { bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200" },
   Subcontract: { bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
   Solution: { bg: "bg-cyan-50", text: "text-cyan-700", border: "border-cyan-200" },
-  Product: { bg: "bg-amber-50", text: "text-amber-700", border: "border-amber-200" },
   Project: { bg: "bg-sky-50", text: "text-sky-700", border: "border-sky-200" },
   Page: { bg: "bg-slate-100", text: "text-slate-700", border: "border-slate-200" },
 };
 
+type FilterCategory = "all" | "Service" | "Product" | "other";
+
 export default function ExpandableSearchBar({
   onSearch,
   placeholder,
-  suggestions,
   className = "",
   iconColor = "text-white",
   hoverIconColor = "group-hover:text-[var(--primary)]",
@@ -73,6 +74,7 @@ export default function ExpandableSearchBar({
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<FilterCategory>("all");
   const [isListening, setIsListening] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
 
@@ -117,24 +119,80 @@ export default function ExpandableSearchBar({
   const handleCollapse = () => {
     setIsExpanded(false);
     setSearchQuery("");
+    setActiveTab("all");
   };
 
-  // Filter search results dynamically
-  const searchResults = useMemo(() => {
+  // Filter & Rank search results dynamically
+  const { filteredResults, counts } = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    if (!query) return [];
+    if (!query) {
+      return {
+        filteredResults: [],
+        counts: { all: 0, Service: 0, Product: 0, other: 0 },
+      };
+    }
 
-    return SITE_SEARCH_INDEX.filter((item) => {
-      const nameMatch = item.name.toLowerCase().includes(query);
-      const nameArMatch = item.nameAr?.toLowerCase().includes(query);
-      const descMatch = item.desc.toLowerCase().includes(query);
-      const descArMatch = item.descAr?.toLowerCase().includes(query);
-      const categoryMatch = item.category.toLowerCase().includes(query);
-      const keywordMatch = item.keywords.some((k) => k.toLowerCase().includes(query));
+    const scored: { item: SearchResultItem; score: number }[] = [];
+    let countService = 0;
+    let countProduct = 0;
+    let countOther = 0;
 
-      return nameMatch || nameArMatch || descMatch || descArMatch || categoryMatch || keywordMatch;
-    }).slice(0, 6);
-  }, [searchQuery]);
+    SITE_SEARCH_INDEX.forEach((item) => {
+      const name = item.name.toLowerCase();
+      const nameAr = item.nameAr ? item.nameAr.toLowerCase() : "";
+      const desc = item.desc ? item.desc.toLowerCase() : "";
+      const descAr = item.descAr ? item.descAr.toLowerCase() : "";
+      const cat = item.category.toLowerCase();
+      const kwMatch = item.keywords.some((k) => k.toLowerCase().includes(query));
+
+      let score = 0;
+      if (name === query || nameAr === query) {
+        score += 150;
+      } else if (name.startsWith(query) || nameAr.startsWith(query)) {
+        score += 90;
+      } else if (name.includes(query) || nameAr.includes(query)) {
+        score += 60;
+      } else if (kwMatch) {
+        score += 35;
+      } else if (desc.includes(query) || descAr.includes(query)) {
+        score += 20;
+      } else if (cat.includes(query)) {
+        score += 15;
+      }
+
+      if (score > 0) {
+        if (item.category === "Service") countService++;
+        else if (item.category === "Product") countProduct++;
+        else countOther++;
+
+        scored.push({ item, score });
+      }
+    });
+
+    // Sort by score descending
+    scored.sort((a, b) => b.score - a.score);
+
+    const allMatched = scored.map((s) => s.item);
+
+    const filtered =
+      activeTab === "all"
+        ? allMatched
+        : activeTab === "Service"
+        ? allMatched.filter((it) => it.category === "Service")
+        : activeTab === "Product"
+        ? allMatched.filter((it) => it.category === "Product")
+        : allMatched.filter((it) => it.category !== "Service" && it.category !== "Product");
+
+    return {
+      filteredResults: filtered.slice(0, 8),
+      counts: {
+        all: allMatched.length,
+        Service: countService,
+        Product: countProduct,
+        other: countOther,
+      },
+    };
+  }, [searchQuery, activeTab]);
 
   const handleSelectResult = (item: SearchResultItem) => {
     if (onSearch) {
@@ -148,19 +206,19 @@ export default function ExpandableSearchBar({
     const query = q.trim();
     if (!query) return;
 
-    if (searchResults.length > 0) {
-      handleSelectResult(searchResults[0]);
+    if (filteredResults.length > 0) {
+      handleSelectResult(filteredResults[0]);
       return;
     }
 
     // Default route to relevant page
     const lower = query.toLowerCase();
     let target = `/products?search=${encodeURIComponent(query)}`;
-    if (lower.includes("subcontract")) target = "/subcontract";
-    else if (lower.includes("career") || lower.includes("job")) target = "/career";
-    else if (lower.includes("service")) target = "/services";
-    else if (lower.includes("quote")) target = "/get-a-quote";
-    else if (lower.includes("project")) target = "/project";
+    if (lower.includes("subcontract") || lower.includes("مقاولة")) target = "/subcontract";
+    else if (lower.includes("career") || lower.includes("job") || lower.includes("وظائف")) target = "/career";
+    else if (lower.includes("service") || lower.includes("خدمة")) target = "/services";
+    else if (lower.includes("quote") || lower.includes("price") || lower.includes("تسعير")) target = "/get-a-quote";
+    else if (lower.includes("project") || lower.includes("مشروع")) target = "/project";
 
     if (onSearch) {
       onSearch(query, target);
@@ -219,7 +277,7 @@ export default function ExpandableSearchBar({
     );
   };
 
-  const defaultPlaceholder = isAr ? "ابحث في الخدمات والمشاريع والمنتجات..." : "Search services, projects, products...";
+  const defaultPlaceholder = isAr ? "ابحث بالمنتج أو الخدمة..." : "Search products & services...";
 
   return (
     <div className={`relative ${className}`} ref={containerRef}>
@@ -252,7 +310,7 @@ export default function ExpandableSearchBar({
         <div
           className={`flex items-center bg-white transition-all duration-300 ease-out ${
             isExpanded
-              ? "w-72 sm:w-80 md:w-96 px-3.5 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl"
+              ? "w-72 sm:w-84 md:w-96 px-3.5 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl"
               : "w-0 overflow-hidden p-0 border-0"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -316,25 +374,78 @@ export default function ExpandableSearchBar({
       {/* ─── LIVE SEARCH DROPDOWN ───────────────────────────────────── */}
       {isExpanded && searchQuery.trim() && (
         <div
-          className="absolute top-full mt-2.5 right-0 w-[320px] sm:w-[380px] md:w-[440px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 text-left animate-in fade-in slide-in-from-top-2 duration-200"
+          className="absolute top-full mt-2.5 right-0 w-[330px] sm:w-[400px] md:w-[480px] bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50 text-left animate-in fade-in slide-in-from-top-2 duration-200"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header count */}
-          <div className="px-4 py-2.5 bg-gray-50/80 border-b border-gray-100 flex items-center justify-between text-xs text-gray-500 font-medium">
-            <span>
-              {searchResults.length > 0
-                ? `${searchResults.length} ${isAr ? "نتائج مطابقة" : "results found"}`
-                : isAr ? "لا توجد نتائج مطابقة" : "No exact matches"}
-            </span>
-            <span className="text-[11px] text-gray-400">
-              {isAr ? "اضغط Enter للتنقل" : "Press Enter to visit"}
+          {/* Category Filter Tabs */}
+          <div className="px-3 pt-3 pb-2 bg-gray-50/90 border-b border-gray-100 flex items-center justify-between gap-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              <button
+                type="button"
+                onClick={() => setActiveTab("all")}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  activeTab === "all"
+                    ? "bg-[#009e90] text-white shadow-xs"
+                    : "bg-white text-gray-600 hover:bg-gray-200/70 border border-gray-200/80"
+                }`}
+              >
+                {isAr ? "الكل" : "All"} ({counts.all})
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab("Service")}
+                className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                  activeTab === "Service"
+                    ? "bg-[#009e90] text-white shadow-xs"
+                    : "bg-white text-gray-600 hover:bg-gray-200/70 border border-gray-200/80"
+                }`}
+              >
+                <Wrench className="w-3 h-3" />
+                <span>{isAr ? "الخدمات" : "Services"}</span>
+                <span className="text-[10px] opacity-80">({counts.Service})</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setActiveTab("Product")}
+                className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                  activeTab === "Product"
+                    ? "bg-amber-600 text-white shadow-xs"
+                    : "bg-white text-gray-600 hover:bg-gray-200/70 border border-gray-200/80"
+                }`}
+              >
+                <Package className="w-3 h-3" />
+                <span>{isAr ? "المنتجات" : "Products"}</span>
+                <span className="text-[10px] opacity-80">({counts.Product})</span>
+              </button>
+
+              {counts.other > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("other")}
+                  className={`px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                    activeTab === "other"
+                      ? "bg-slate-700 text-white shadow-xs"
+                      : "bg-white text-gray-600 hover:bg-gray-200/70 border border-gray-200/80"
+                  }`}
+                >
+                  <Layers className="w-3 h-3" />
+                  <span>{isAr ? "أخرى" : "Other"}</span>
+                  <span className="text-[10px] opacity-80">({counts.other})</span>
+                </button>
+              )}
+            </div>
+
+            <span className="hidden sm:inline-block text-[11px] text-gray-400 font-normal flex-shrink-0">
+              {isAr ? "اضغط Enter" : "Press Enter"}
             </span>
           </div>
 
           {/* Results list */}
-          <div className="max-h-[340px] overflow-y-auto divide-y divide-gray-100">
-            {searchResults.length > 0 ? (
-              searchResults.map((item) => {
+          <div className="max-h-[350px] overflow-y-auto divide-y divide-gray-100">
+            {filteredResults.length > 0 ? (
+              filteredResults.map((item) => {
                 const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
                 const displayName = isAr && item.nameAr ? item.nameAr : item.name;
                 const displayDesc = isAr && item.descAr ? item.descAr : item.desc;
@@ -349,8 +460,10 @@ export default function ExpandableSearchBar({
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
                         <span
-                          className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}
+                          className={`text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border flex items-center gap-1 ${badge.bg} ${badge.text} ${badge.border}`}
                         >
+                          {item.category === "Product" && <Package className="w-2.5 h-2.5" />}
+                          {item.category === "Service" && <Wrench className="w-2.5 h-2.5" />}
                           {displayCategory}
                         </span>
                         <h4 className="text-sm font-bold text-gray-900 group-hover:text-[#009e90] transition-colors truncate">
@@ -375,19 +488,61 @@ export default function ExpandableSearchBar({
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
                   {isAr
-                    ? "جرّب البحث بكلمة مثل: عزل، مقاولات، إيبوكسي، مشاريع"
-                    : "Try searching for: waterproofing, subcontract, epoxy, projects, careers"}
+                    ? "جرّب البحث باسم منتج (سلم، خزان) أو خدمة (عزل، إيبوكسي، تمديدات)"
+                    : "Try searching for product names (ladder, tank) or service names (epoxy, combo, waterproofing)"}
                 </p>
-                <button
-                  type="button"
-                  onClick={() => handleExecuteSearch(searchQuery)}
-                  className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-2 bg-[#00b3a4] hover:bg-[#009e90] text-white text-xs font-bold rounded-full transition-colors"
-                >
-                  <span>{isAr ? "بحث عام في الموقع" : "Search full site"}</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+                      handleCollapse();
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-bold rounded-full transition-colors border border-amber-200 cursor-pointer"
+                  >
+                    <Package className="w-3 h-3" />
+                    <span>Search Products</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      router.push(`/services?search=${encodeURIComponent(searchQuery)}`);
+                      handleCollapse();
+                    }}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-[#009e90] text-xs font-bold rounded-full transition-colors border border-teal-200 cursor-pointer"
+                  >
+                    <Wrench className="w-3 h-3" />
+                    <span>Search Services</span>
+                  </button>
+                </div>
               </div>
             )}
+          </div>
+
+          {/* Quick links footer */}
+          <div className="px-4 py-2 bg-gray-50 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+            <button
+              type="button"
+              onClick={() => {
+                router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+                handleCollapse();
+              }}
+              className="text-amber-700 hover:text-amber-800 font-semibold flex items-center gap-1 hover:underline cursor-pointer"
+            >
+              <span>{isAr ? "عرض كل المنتجات المطابقة" : "Browse all matching products"}</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                router.push(`/services`);
+                handleCollapse();
+              }}
+              className="text-[#009e90] hover:text-[#008277] font-semibold flex items-center gap-1 hover:underline cursor-pointer"
+            >
+              <span>{isAr ? "تصفح كل الخدمات" : "View all services"}</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </button>
           </div>
         </div>
       )}

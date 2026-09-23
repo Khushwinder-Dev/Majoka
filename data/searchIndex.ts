@@ -1,8 +1,12 @@
+import { allProductsData } from "./productsData";
+import servicesJsonEn from "./services_en.json";
+import servicesJsonAr from "./services_ar.json";
+
 export interface SearchResultItem {
   id: string;
   name: string;
   nameAr?: string;
-  category: "Service" | "Subcontract" | "Solution" | "Product" | "Project" | "Page";
+  category: "Service" | "Product" | "Subcontract" | "Solution" | "Project" | "Page";
   categoryAr?: string;
   href: string;
   desc: string;
@@ -10,7 +14,107 @@ export interface SearchResultItem {
   keywords: string[];
 }
 
-export const SITE_SEARCH_INDEX: SearchResultItem[] = [
+/* ─── DYNAMICALLY GENERATED PRODUCTS SEARCH ITEMS ─────────────────────── */
+const productSearchItems: SearchResultItem[] = allProductsData.map((p) => ({
+  id: `product-${p.id}`,
+  name: p.name,
+  nameAr: p.longName || p.name,
+  category: "Product",
+  categoryAr: "منتج",
+  href: `/products/${p.id}`,
+  desc: p.description || p.longName,
+  descAr: p.description || p.longName,
+  keywords: [
+    p.name,
+    p.longName,
+    p.category,
+    p.subcategory || "",
+    "product",
+    "frp",
+    "fiberglass",
+    "stainless steel",
+    "ladder",
+    "tank",
+    "bucket",
+    "cover",
+    "tray",
+    "grating",
+    "manhole",
+    "منتج",
+    "فيبرجلاس",
+    "خزان",
+    "سلم",
+  ].filter(Boolean),
+}));
+
+/* ─── DYNAMICALLY GENERATED SERVICES SEARCH ITEMS ─────────────────────── */
+const arServicesMap = new Map<number, any>();
+if (Array.isArray(servicesJsonAr)) {
+  servicesJsonAr.forEach((s: any) => {
+    arServicesMap.set(s.serviceNumber, s);
+  });
+}
+
+const serviceSearchItems: SearchResultItem[] = [];
+
+if (Array.isArray(servicesJsonEn)) {
+  servicesJsonEn.forEach((s: any) => {
+    const arService = arServicesMap.get(s.serviceNumber);
+
+    // Main service
+    serviceSearchItems.push({
+      id: `service-${s.serviceNumber}`,
+      name: s.serviceTitle,
+      nameAr: arService?.serviceTitle || s.serviceTitle,
+      category: "Service",
+      categoryAr: "خدمة",
+      href: `/services?service=${s.serviceNumber}`,
+      desc: s.shortDescription || s.tagline || `${s.serviceTitle} specialized contracting services.`,
+      descAr: arService?.shortDescription || arService?.tagline || "",
+      keywords: [
+        s.serviceTitle,
+        s.serviceSlug || "",
+        s.category || "",
+        "service",
+        "contracting",
+        "division",
+        ...(s.seoKeywords || []),
+      ].filter(Boolean),
+    });
+
+    // Subservices
+    if (Array.isArray(s.subservices)) {
+      s.subservices.forEach((sub: any, idx: number) => {
+        const arSub = arService?.subservices?.[idx];
+
+        serviceSearchItems.push({
+          id: `subservice-${s.serviceNumber}-${sub.serviceSlug || idx}`,
+          name: sub.serviceTitle,
+          nameAr: arSub?.serviceTitle || sub.serviceTitle,
+          category: "Service",
+          categoryAr: "خدمة فرعية",
+          href: `/services?service=${s.serviceNumber}&sub=${sub.serviceSlug}`,
+          desc:
+            sub.shortDescription ||
+            `${sub.serviceTitle} specialized application under ${s.serviceTitle}.`,
+          descAr: arSub?.shortDescription || "",
+          keywords: [
+            sub.serviceTitle,
+            sub.serviceSlug || "",
+            s.serviceTitle,
+            "service",
+            "subservice",
+            "application",
+            "waterproofing",
+          ].filter(Boolean),
+        });
+      });
+    }
+  });
+}
+
+/* ─── STATIC CORE PAGES, SUBCONTRACT & SOLUTIONS ──────────────────────── */
+const coreSearchItems: SearchResultItem[] = [
   // ─── SUBCONTRACTING ──────────────────────────────────────────────
   {
     id: "subcontract-main",
@@ -35,85 +139,6 @@ export const SITE_SEARCH_INDEX: SearchResultItem[] = [
     keywords: ["capabilities", "concrete repair", "restoration", "maintenance", "industrial flooring", "قدرات", "ترميم", "إصلاح خرسانة"],
   },
 
-  // ─── SERVICES ────────────────────────────────────────────────────
-  {
-    id: "service-all",
-    name: "All Waterproofing & Contracting Services",
-    nameAr: "جميع خدمات العزل المائي والمقاولات",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services",
-    desc: "Explore our full range of six specialized civil contracting and waterproofing divisions.",
-    descAr: "استكشف مجموعتنا الكاملة من أقسام العزل المائي والمقاولات المدنية المتخصصة.",
-    keywords: ["services", "waterproofing", "civil contracting", "divisions", "خدمات", "عزل مائي", "مقاولات"],
-  },
-  {
-    id: "service-grp",
-    name: "GRP & Fiberglass Waterproofing",
-    nameAr: "عزل GRP والألياف الزجاجية",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=grp-fiberglass-waterproofing",
-    desc: "Seamless food-grade lining for water tanks, reservoirs, wet areas, and flat roofs.",
-    descAr: "تبطين متصل ومعتمد غذائياً لخزانات المياه، الأسطح، والمسطحات الرطبة.",
-    keywords: ["grp", "fiberglass", "tanks", "lining", "potable water", "glass fiber", "ألياف زجاجية", "خزانات", "تبطين"],
-  },
-  {
-    id: "service-combo",
-    name: "Combo System Roof Waterproofing",
-    nameAr: "نظام الكومبو لعزل الأسطح مائياً وحرارياً",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=combo-system-roof-waterproofing",
-    desc: "Dual-action polyurethane thermal insulation and seamless waterproofing in a single monolithic barrier.",
-    descAr: "نظام عزل مزدوج مائي وحراري من رغوة البولي يوريثان بطبقة واحدة متكاملة.",
-    keywords: ["combo", "combo system", "roof", "thermal insulation", "polyurethane foam", "كومبو", "عزل حراري", "أسطح"],
-  },
-  {
-    id: "service-epoxy",
-    name: "Epoxy Floor Coating",
-    nameAr: "طلاء أرضيات الإيبوكسي",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=epoxy-floor-coating",
-    desc: "Durable, chemical-resistant, seamless high-performance flooring for warehouses, factories, and car parks.",
-    descAr: "أرضيات إيبوكسي عالية المتانة ومقاومة للمواد الكيميائية للمستودعات والمصانع ومواقف السيارات.",
-    keywords: ["epoxy", "flooring", "coatings", "car park", "industrial floor", "warehouse", "إيبوكسي", "أرضيات", "مستودعات"],
-  },
-  {
-    id: "service-bitumen",
-    name: "Bitumen Membrane Waterproofing",
-    nameAr: "عزل الغشاء البيتوميني",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=bitumen-membrane-waterproofing",
-    desc: "Reinforced torch-applied and self-adhesive bituminous rolls for foundations, basements, and retaining walls.",
-    descAr: "لفائف بيتومينية مسلحة ملحومة باللهب وذاتية الالتصاق للأساسات والأقبية والجدران الاستنادية.",
-    keywords: ["bitumen", "membrane", "torch-applied", "foundation", "basement", "tanking", "rolls", "بيتومين", "أساسات", "رولات"],
-  },
-  {
-    id: "service-polyurea",
-    name: "Polyurea Waterproofing Coating",
-    nameAr: "عزل البولي يوريا فائق السرعة",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=polyurea-coating-waterproofing",
-    desc: "Ultra-fast curing spray elastomer with extreme tensile strength and UV durability for heavy-traffic zones.",
-    descAr: "غشاء إيلاستومري سريع الجفاف بالرش يتميز بمرونة ومقاومة فائقة للمرور الكثيف والأشعة فوق البنفسجية.",
-    keywords: ["polyurea", "spray elastomer", "fast cure", "traffic", "podium", "uv", "بولي يوريا", "رش"],
-  },
-  {
-    id: "service-injection",
-    name: "Injection Waterproofing",
-    nameAr: "عزل الحقن المائي للخرسانة",
-    category: "Service",
-    categoryAr: "خدمة",
-    href: "/services?service=1&sub=injection-waterproofing",
-    desc: "Precision polyurethane and acrylate resin injection for sealing concrete cracks, joints, and active water leaks.",
-    descAr: "حقن راتنجات البولي يوريثان والأكريلات الدقيقة لسد شروخ الخرسانة ووقف تسربات المياه النشطة.",
-    keywords: ["injection", "crack repair", "leak sealing", "resin", "polyurethane resin", "حقن", "تسربات", "شروخ"],
-  },
-
   // ─── SOLUTIONS ───────────────────────────────────────────────────
   {
     id: "solutions-overview",
@@ -125,19 +150,6 @@ export const SITE_SEARCH_INDEX: SearchResultItem[] = [
     desc: "Targeted protection systems engineered for roofs, foundations, basements, and water retention facilities.",
     descAr: "أنظمة حماية متقدمة ومصممة للأسطح والأساسات والأقبية ومنشآت حجز المياه.",
     keywords: ["solutions", "protection", "engineering", "waterproofing systems", "حلول", "حماية"],
-  },
-
-  // ─── PRODUCTS ────────────────────────────────────────────────────
-  {
-    id: "products-all",
-    name: "Construction Chemicals & Waterproofing Products",
-    nameAr: "الكيماويات الإنشائية ومنتجات العزل",
-    category: "Product",
-    categoryAr: "منتجات",
-    href: "/products",
-    desc: "Certified waterproofing membranes, sealants, repair mortars, and industrial coatings.",
-    descAr: "أغشية عزل معتمدة، ومواد مانعة للتسرب، ومونات إصلاح، وطلاءات صناعية.",
-    keywords: ["products", "chemicals", "membranes", "coatings", "materials", "sealants", "منتجات", "كيماويات", "مواد"],
   },
 
   // ─── PROJECTS ────────────────────────────────────────────────────
@@ -246,4 +258,11 @@ export const SITE_SEARCH_INDEX: SearchResultItem[] = [
     descAr: "مواصفات فنية، وأدلة تطبيق، ومستندات أفضل الممارسات لمهندسي البناء.",
     keywords: ["resources", "guides", "specifications", "standards", "blogs", "articles", "مصادر", "أدلة"],
   },
+];
+
+/* ─── UNIFIED COMPLETE SITE SEARCH INDEX ──────────────────────────────── */
+export const SITE_SEARCH_INDEX: SearchResultItem[] = [
+  ...serviceSearchItems,
+  ...productSearchItems,
+  ...coreSearchItems,
 ];
