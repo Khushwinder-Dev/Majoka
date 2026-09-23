@@ -233,7 +233,7 @@ const SUBCONTRACT_CERTIFICATIONS: SubcontractCertification[] = [
   {
     id: 1,
     logo: "/certifications/logos/cert-logo-1.png",
-    icon: "/certifications/logos/SVG - Global Icon.svg",
+    icon: "/certifications/logos/SVG - Globe Icon.svg",
     titleEn: "Dubai Municipality DM Approved",
     titleAr: "معتمد من بلدية دبي (DM)",
     descriptionEn:
@@ -419,7 +419,96 @@ export default function SubcontractContent() {
         </div>
       </section>
 
-      {/* ─── SECTION 2: INTRO / ABOUT SUBCONTRACTING ────────────────────── */}
+      {/* ─── SECTION 2: CERTIFICATION — OUR COMMITMENT TO QUALITY (SINGLE ROW AT TOP) ─── */}
+      <section className="w-full relative py-14 sm:py-16 lg:py-18 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-100">
+        {/* Section background image */}
+        <Image
+          src="/certifications/logos/sectionBg.png"
+          alt=""
+          fill
+          unoptimized
+          className="object-cover object-center"
+        />
+        {/* Light overlay so text stays readable */}
+        <div className="absolute inset-0 bg-white/60 pointer-events-none" />
+        <div className="max-w-7xl mx-auto relative z-10">
+
+          {/* Eyebrow */}
+          <div className="flex items-center gap-2.5 mb-2.5">
+            <span className="inline-block h-[2px] w-8 bg-[#01a9a0] rounded-full" />
+            <span className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-[#01a9a0]">
+              {isAr ? "الشهادات والاعتمادات" : "CERTIFICATION"}
+            </span>
+          </div>
+
+          {/* Heading */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 sm:mb-12">
+            <div>
+              <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-stone-900 tracking-tight leading-[1.16]">
+                {isAr ? "التزامنا " : "Our Commitment "}
+                <span className="text-[#01a9a0]">
+                  {isAr ? "بالجودة" : "To Quality"}
+                </span>
+              </h2>
+              <p className="text-xs sm:text-sm text-stone-500 leading-relaxed mt-2 max-w-2xl">
+                {isAr
+                  ? "شهاداتنا تعكس التزامنا بتقديم حلول عزل مائي موثوقة وآمنة وعالية الجودة لكافة مشاريع المقاولات."
+                  : "Our certifications demonstrate our commitment to delivering reliable, safe, and high-quality waterproofing solutions."}
+              </p>
+            </div>
+          </div>
+
+          {/* ── 4 Certification Cards in a SINGLE ROW ───────────────────────── */}
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
+            dir={direction}
+          >
+            {SUBCONTRACT_CERTIFICATIONS.map((cert) => (
+              <div
+                key={cert.id}
+                className="group bg-white border border-stone-200/90 rounded-2xl p-5 hover:border-[#01a9a0]/40 hover:shadow-[0_8px_28px_rgba(1,169,160,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  {/* Top: Icon + Logo Badge */}
+                  <div className="flex items-center justify-between gap-3 mb-3.5">
+                    <div className="w-10 h-10 rounded-full bg-[#e6f7f6] flex items-center justify-center shrink-0">
+                      <Image
+                        src={cert.icon}
+                        alt="icon"
+                        width={20}
+                        height={20}
+                        className="w-5 h-5 object-contain"
+                      />
+                    </div>
+                    <div className="relative w-20 h-14 rounded-lg overflow-hidden bg-stone-50 border border-stone-100 shadow-xs shrink-0 flex items-center justify-center p-1">
+                      <Image
+                        src={cert.logo}
+                        alt={isAr ? cert.titleAr : cert.titleEn}
+                        fill
+                        unoptimized
+                        className="object-contain p-1.5"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-[14.5px] font-bold text-stone-900 leading-snug group-hover:text-[#01a9a0] transition-colors mb-2">
+                    {isAr ? cert.titleAr : cert.titleEn}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-[12px] text-stone-500 leading-relaxed">
+                    {isAr ? cert.descriptionAr : cert.descriptionEn}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── SECTION 3: INTRO / ABOUT SUBCONTRACTING ────────────────────── */}
       <section className="w-full py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
@@ -704,96 +793,6 @@ export default function SubcontractContent() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 7: OUR COMMITMENT TO QUALITY (CERTIFICATIONS) ─────── */}
-      <section className="w-full relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-100">
-        {/* Section background image */}
-        <Image
-          src="/certifications/logos/sectionBg.png"
-          alt=""
-          fill
-          unoptimized
-          className="object-cover object-center"
-        />
-        {/* Light overlay so text stays readable */}
-        <div className="absolute inset-0 bg-white/60 pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative z-10">
-
-          {/* Eyebrow */}
-          <div className="flex items-center gap-2.5 mb-3">
-            <span className="inline-block h-[2px] w-8 bg-[#01a9a0] rounded-full" />
-            <span className="text-xs sm:text-sm font-extrabold tracking-[0.18em] uppercase text-[#01a9a0]">
-              {isAr ? "الشهادات والاعتمادات" : "CERTIFICATION"}
-            </span>
-          </div>
-
-          {/* Heading */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 sm:mb-16">
-            <div>
-              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-stone-900 tracking-tight leading-[1.14]">
-                {isAr ? "التزامنا " : "Our Commitment "}
-                <span className="text-[#01a9a0]">
-                  {isAr ? "بالجودة" : "To Quality"}
-                </span>
-              </h2>
-              <p className="text-sm sm:text-base text-stone-500 leading-relaxed mt-3 max-w-2xl">
-                {isAr
-                  ? "شهاداتنا تعكس التزامنا بتقديم حلول عزل مائي موثوقة وآمنة وعالية الجودة لكافة مشاريع المقاولات."
-                  : "Our certifications demonstrate our commitment to delivering reliable, safe, and high-quality waterproofing solutions."}
-              </p>
-            </div>
-          </div>
-
-          {/* 4 Certification Cards */}
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8"
-            dir={direction}
-          >
-            {SUBCONTRACT_CERTIFICATIONS.map((cert) => (
-              <div
-                key={cert.id}
-                className="group bg-white border border-stone-200/80 rounded-2xl p-6 sm:p-7 hover:border-[#01a9a0]/40 hover:shadow-[0_8px_32px_rgba(1,169,160,0.1)] transition-all duration-300 flex flex-row items-start gap-4"
-              >
-                {/* LEFT: icon + title + description */}
-                <div className="flex-1 min-w-0 flex flex-col gap-2.5">
-                  {/* SVG icon */}
-                  <div className="w-9 h-9 rounded-full bg-[#e6f7f6] flex items-center justify-center flex-shrink-0 mb-1">
-                    <Image
-                      src={cert.icon}
-                      alt="icon"
-                      width={20}
-                      height={20}
-                      className="w-5 h-5 object-contain"
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-[15px] sm:text-base font-bold text-stone-900 leading-snug group-hover:text-[#01a9a0] transition-colors duration-200">
-                    {isAr ? cert.titleAr : cert.titleEn}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-stone-500 leading-relaxed">
-                    {isAr ? cert.descriptionAr : cert.descriptionEn}
-                  </p>
-                </div>
-
-                {/* RIGHT: logo badge */}
-                <div className="relative w-24 h-20 flex-shrink-0 rounded-xl overflow-hidden bg-stone-50 border border-stone-100 shadow-sm self-start">
-                  <Image
-                    src={cert.logo}
-                    alt={isAr ? cert.titleAr : cert.titleEn}
-                    fill
-                    unoptimized
-                    className="object-contain p-2"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
         </div>
       </section>
 
