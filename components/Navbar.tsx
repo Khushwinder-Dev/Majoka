@@ -32,12 +32,8 @@ const servicesMegaMenu = {
   en: {
     label: "OUR SERVICES",
     tagline: "Six specialist divisions — one guarantee",
-    bottomNote: "Not sure which service you need? We'll survey the site first.",
-    cardTag: "SERVICES",
-    cardTitle: "Engineered Contracting",
-    cardDesc: "Certified waterproofing, protective coatings, flooring, and specialized contracting services delivered across the UAE.",
     cardImage: "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
-    cta: "All Services",
+    cta: "Explore More",
     ctaHref: "/services",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "GRP & Fiberglass Waterproofing", sub: "Seamless Food-Grade Lining for Water Tanks", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
@@ -51,12 +47,8 @@ const servicesMegaMenu = {
   ar: {
     label: "خدماتنا",
     tagline: "ستة أقسام متخصصة — ضمان واحد",
-    bottomNote: "غير متأكد من الخدمة التي تحتاجها؟ سنجري مسح الموقع أولاً.",
-    cardTag: "خدماتنا",
-    cardTitle: "مقاولات هندسية متخصصة",
-    cardDesc: "عزل مائي معتمد وطلاءات واقية وأرضيات ومقاولات تخصصية تسلّم بأعلى معايير الجودة في الإمارات.",
     cardImage: "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
-    cta: "جميع الخدمات",
+    cta: "استكشف المزيد",
     ctaHref: "/services",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "عزل GRP والألياف الزجاجية", sub: "تبطين سلس وصحي لخزانات المياه والأسطح", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
@@ -73,12 +65,8 @@ const solutionsMegaMenu = {
   en: {
     label: "OUR SOLUTIONS",
     tagline: "End-to-end protection — built to last",
-    bottomNote: "Every solution is backed by a site survey and quality-tested before handover.",
-    cardTag: "SOLUTIONS",
-    cardTitle: "End-to-End Protection",
-    cardDesc: "Targeted systems engineered for roofs, foundations, basements, and critical water-retaining structures.",
     cardImage: "/solutions/Img (1).png",
-    cta: "All Solutions",
+    cta: "Explore More",
     ctaHref: "/solutions",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "Waterproofing Solutions", sub: "Complete leak-free protection for roofs, tanks & slabs", href: "/services?service=1" },
@@ -92,12 +80,8 @@ const solutionsMegaMenu = {
   ar: {
     label: "حلولنا",
     tagline: "حماية شاملة من البداية للنهاية — مصممة للديمومة",
-    bottomNote: "كل حل مدعوم بمعاينة ميدانية واختبار جودة قبل التسليم.",
-    cardTag: "حلولنا",
-    cardTitle: "حماية متكاملة ومستدامة",
-    cardDesc: "أنظمة حماية مصممة خصيصاً للأسطح والأساسات والسراديب وخزانات المياه لضمان الديمومة والاستدامة.",
     cardImage: "/solutions/Img (1).png",
-    cta: "جميع الحلول",
+    cta: "استكشف المزيد",
     ctaHref: "/solutions",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "حلول العزل المائي", sub: "حماية شاملة من التسرب للأسطح والخزانات", href: "/services?service=1" },
@@ -114,12 +98,8 @@ const projectsMegaMenu = {
   en: {
     label: "OUR PROJECTS",
     tagline: "Landmark developments across the UAE",
-    bottomNote: "Over 400 completed projects delivered on time and within budget.",
-    cardTag: "PROJECTS",
-    cardTitle: "Landmark Portfolio",
-    cardDesc: "Over 400+ commercial, residential, and infrastructure projects delivered with precision across the UAE.",
     cardImage: "/project-page/Contemporary commercial office center.png",
-    cta: "All Projects",
+    cta: "Explore More",
     ctaHref: "/project",
     items: [
       { icon: "/headerIcon/SVG (1).svg", title: "Miami-1 @ JVC", sub: "Samana Developers · Luxury Mixed-Use, Dubai", href: "/project" },
@@ -133,12 +113,8 @@ const projectsMegaMenu = {
   ar: {
     label: "مشاريعنا",
     tagline: "مشاريع رائدة ومعالم منجزة في كافة أنحاء الإمارات",
-    bottomNote: "أكثر من 400 مشروع منجز بدقة عالية وضمن الجدول الزمني.",
-    cardTag: "مشاريعنا",
-    cardTitle: "معالم ومشاريع رائدة",
-    cardDesc: "أكثر من 400 مشروع تجاري وسكني وبنية تحتية منجز في مختلف إمارات الدولة بأعلى معايير الجودة.",
     cardImage: "/project-page/Contemporary commercial office center.png",
-    cta: "جميع المشاريع",
+    cta: "استكشف المزيد",
     ctaHref: "/project",
     items: [
       { icon: "/headerIcon/SVG (1).svg", title: "ميامي 1 في قرية جميرا", sub: "تطوير سمانا العقارية · مشروع متعدد الاستخدامات، دبي", href: "/project" },
@@ -155,11 +131,8 @@ const industriesMegaMenu = {
   en: {
     label: "INDUSTRIES WE SERVE",
     tagline: "Engineering & Technical Services Across Core Sectors",
-    cardTag: "INDUSTRIES",
-    cardTitle: "Industries We Empower",
-    cardDesc: "Explore our certified technical expertise, rigorous safety standards, and specialized solutions tailored to mission-critical facilities across the region.",
     cardImage: "/ourExpertise/Industrial factory plant.png",
-    cta: "All Industries",
+    cta: "Explore More",
     ctaHref: "/industries",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "Oil, Gas & Petrochemical", sub: "Plant Turnarounds, NDT Testing, Calibration & Audits", href: "/industries#oil-gas" },
@@ -173,11 +146,8 @@ const industriesMegaMenu = {
   ar: {
     label: "القطاعات التي نخدمها",
     tagline: "خدمات هندسية وفنية متخصصة عبر القطاعات الحيوية",
-    cardTag: "القطاعات",
-    cardTitle: "القطاعات التي نخدمها",
-    cardDesc: "استكشف خبراتنا الفنية المعتمدة ومعايير السلامة الصارمة والحلول التخصصية المصممة للمنشآت الحيوية في كافة أنحاء المنطقة.",
     cardImage: "/ourExpertise/Industrial factory plant.png",
-    cta: "جميع القطاعات",
+    cta: "استكشف المزيد",
     ctaHref: "/industries",
     items: [
       { icon: "/headerIcon/SVG (6).svg", title: "النفط والغاز والبتروكيماويات", sub: "صيانة المصافي، الفحص الهدام والاختبارات التخصصية", href: "/industries#oil-gas" },
@@ -194,12 +164,8 @@ const resourcesMegaMenu = {
   en: {
     label: "RESOURCES",
     tagline: "Knowledge, Media & Client Support",
-    bottomNote: "Have questions? Our support desk is available 24/7.",
-    cardTag: "RESOURCES",
-    cardTitle: "Knowledge & Media",
-    cardDesc: "Explore company media, technical blogs, FAQs, and certified warranty policies.",
     cardImage: "/media/media-hero.jpg",
-    cta: "All Resources",
+    cta: "Explore More",
     ctaHref: "/resources",
     items: [
       { icon: "arrow", title: "Media", sub: "Project showcases, events & video gallery", href: "/media" },
@@ -213,12 +179,8 @@ const resourcesMegaMenu = {
   ar: {
     label: "المصادر",
     tagline: "المعرفة والوسائط ودعم العملاء",
-    bottomNote: "لديك استفسار؟ فريق الدعم الفني متاح على مدار الساعة.",
-    cardTag: "المصادر",
-    cardTitle: "المعرفة والوسائط",
-    cardDesc: "استكشف وسائط الشركة والمدونة التقنية والأسئلة الشائعة ووثائق الضمان المعتمدة.",
     cardImage: "/media/media-hero.jpg",
-    cta: "جميع المصادر",
+    cta: "استكشف المزيد",
     ctaHref: "/resources",
     items: [
       { icon: "arrow", title: "الوسائط", sub: "معارض المشاريع والفعاليات ومقاطع الفيديو", href: "/media" },
@@ -235,12 +197,8 @@ const companyMegaMenu = {
   en: {
     label: "COMPANY",
     tagline: "Engineering Excellence Across the UAE",
-    bottomNote: "Trusted partner for leading developers and government projects.",
-    cardTag: "COMPANY",
-    cardTitle: "Leadership & Trust",
-    cardDesc: "Delivering certified technical contracting and specialist engineering solutions across the region.",
     cardImage: "/media/Engineers working.png",
-    cta: "About Us",
+    cta: "Explore More",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "About Us", sub: "Our heritage, vision & leadership team", href: "/about-us" },
@@ -254,12 +212,8 @@ const companyMegaMenu = {
   ar: {
     label: "الشركة",
     tagline: "الريادة والتميز الهندسي في الإمارات",
-    bottomNote: "شريك موثوق لأكبر المطورين والمشاريع الحكومية.",
-    cardTag: "الشركة",
-    cardTitle: "الريادة والموثوقية",
-    cardDesc: "تقديم مقاولات فنية معتمدة وحلول هندسية تخصصية في كافة إمارات الدولة.",
     cardImage: "/media/Engineers working.png",
-    cta: "عن تاج الرحمة",
+    cta: "استكشف المزيد",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "عن الشركة", sub: "مسيرتنا، رؤيتنا وفريق القيادة الهندسية", href: "/about-us" },
@@ -283,10 +237,6 @@ type MegaData = {
   cta: string;
   ctaHref: string;
   items: MegaItem[];
-  bottomNote?: string;
-  cardTag?: string;
-  cardTitle?: string;
-  cardDesc?: string;
   cardImage?: string;
 };
 
@@ -445,7 +395,7 @@ const Navbar = () => {
 
       <div className="flex">
         {/* ── Left: items grid ── */}
-        <div className="flex flex-col p-4 flex-1">
+        <div className="flex flex-col p-4 flex-1 justify-center">
           <div className="grid grid-cols-2 gap-1.5">
             {data.items.map((item, i) => (
               <Link
@@ -476,58 +426,34 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-
-          {/* ── Bottom note ── */}
-          {data.bottomNote && (
-            <div className="mt-3 pt-2.5 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-[11px] text-stone-400 italic">{data.bottomNote}</span>
-            </div>
-          )}
         </div>
 
-        {/* ── Right: featured card with image (Applied across ALL mega menus) ── */}
+        {/* ── Right: featured card with image ── */}
         <div className="w-[245px] xl:w-[265px] flex-shrink-0 bg-gradient-to-br from-[#f8fdfc] to-[#eef9f7] border-l rtl:border-l-0 rtl:border-r border-stone-100 p-4.5 flex flex-col justify-between group/card">
-          <div>
-            {/* Image Banner */}
-            {data.cardImage && (
-              <div className="relative w-full h-[120px] xl:h-[130px] rounded-xl overflow-hidden mb-3 border border-stone-200/60 shadow-xs bg-stone-100">
-                <Image
-                  src={data.cardImage}
-                  alt={data.cardTitle || data.label}
-                  fill
-                  className="object-cover group-hover/card:scale-105 transition-transform duration-300"
-                  sizes="265px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                {data.cardTag && (
-                  <span className="absolute bottom-2.5 left-2.5 rtl:left-auto rtl:right-2.5 text-[9px] font-extrabold tracking-[0.2em] uppercase text-white bg-[#009e90]/90 backdrop-blur-xs px-2.5 py-0.5 rounded-full shadow-xs">
-                    {data.cardTag}
-                  </span>
-                )}
-              </div>
-            )}
-
-            {!data.cardImage && data.cardTag && (
-              <p className="text-[9.5px] font-extrabold tracking-[0.22em] uppercase text-[#009e90] mb-1.5">
-                {data.cardTag}
-              </p>
-            )}
-
-            <h4 className="text-[15px] xl:text-[16px] font-extrabold text-stone-900 leading-snug mb-1.5">
-              {data.cardTitle}
-            </h4>
-
-            <p className="text-[11px] xl:text-[11.5px] text-stone-500 leading-relaxed line-clamp-3">
-              {data.cardDesc}
-            </p>
-          </div>
+          {/* Image Banner */}
+          {data.cardImage && (
+            <Link
+              href={data.ctaHref}
+              onClick={() => setActiveMega(null)}
+              className="relative w-full h-[125px] xl:h-[135px] rounded-xl overflow-hidden border border-stone-200/60 shadow-xs bg-stone-100 block group/img mb-3"
+            >
+              <Image
+                src={data.cardImage}
+                alt={data.label}
+                fill
+                className="object-cover group-hover/img:scale-105 transition-transform duration-300"
+                sizes="265px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
+            </Link>
+          )}
 
           <Link
             href={data.ctaHref}
             onClick={() => setActiveMega(null)}
-            className="inline-flex items-center gap-1.5 bg-[#009e90] hover:bg-[#01887e] text-white text-[12px] font-bold px-4 py-2 rounded-full transition-all self-start shadow-sm mt-3 hover:gap-2"
+            className="inline-flex items-center gap-1.5 bg-[#009e90] hover:bg-[#01887e] text-white text-[12px] font-bold px-4 py-2 rounded-full transition-all self-start shadow-sm hover:gap-2"
           >
-            <span>{data.cta}</span>
+            <span>{data.cta || (isArabic ? "استكشف المزيد" : "Explore More")}</span>
             <span className="rtl:rotate-180">→</span>
           </Link>
         </div>
