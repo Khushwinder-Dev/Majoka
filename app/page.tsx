@@ -16,6 +16,7 @@ import BlogSection from "@/components/BlogSection";
 import WhyChooseUs2 from "@/components/WhyCooseUs2";
 import AboutCompanySection from "@/components/AboutCompanySection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
+import ServiceProductsSection from "@/components/ServiceProductsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import OurProjectsSection from "@/components/OurProjectsSection";
 import IndustriesSection from "@/components/IndustriesSection";
@@ -43,6 +44,9 @@ export default function Home() {
         </div>
         <div data-aos="fade-up" data-aos-delay="150">
           <ProtectionServicesSection />
+        </div>
+        <div data-aos="fade-up" data-aos-delay="175">
+          <ServiceProductsSection />
         </div>
         <div data-aos="fade-up" data-aos-delay="200">
           <ExperienceSection />

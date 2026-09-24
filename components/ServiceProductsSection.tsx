@@ -90,11 +90,16 @@ const curatedProducts: ProductItem[] = [
   },
 ];
 
+import { useLanguage } from "@/context/LanguageContext";
+
 interface ServiceProductsSectionProps {
-  isArabic: boolean;
+  isArabic?: boolean;
 }
 
-export default function ServiceProductsSection({ isArabic }: ServiceProductsSectionProps) {
+export default function ServiceProductsSection({ isArabic: propIsArabic }: ServiceProductsSectionProps = {}) {
+  const { isArabic: ctxIsArabic } = useLanguage();
+  const isArabic = propIsArabic ?? ctxIsArabic;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(3);
   const touchStartX = useRef<number | null>(null);
@@ -148,17 +153,25 @@ export default function ServiceProductsSection({ isArabic }: ServiceProductsSect
   };
 
   return (
-    <div className="w-full mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-stone-200/80">
-      <div className="w-full">
+    <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden border-t border-stone-200/60">
+      <div className="max-w-8xl mx-auto">
         {/* ========================================================= */}
         {/* HEADER (matching reference image top-left title)          */}
         {/* ========================================================= */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8 sm:mb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 sm:mb-12">
           <div>
-            <h2 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-stone-900 tracking-tight leading-tight">
-              {isArabic ? "منتجاتنا المميزة" : "Our Products"}
+            {/* Eyebrow / Category Tag */}
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+              <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.16em] uppercase text-[#01a9a0]">
+                {isArabic ? "منتجاتنا" : "OUR PRODUCTS"}
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-black text-stone-900 tracking-tight leading-tight">
+              {isArabic ? "منتجاتنا المتخصصة" : "Our Products"}
             </h2>
-            <p className="text-xs sm:text-sm text-stone-500 mt-1.5 max-w-lg">
+            <p className="text-xs sm:text-sm md:text-base text-stone-500 mt-2 max-w-2xl leading-relaxed">
               {isArabic
                 ? "مجموعة متطورة من منتجات العزل والألياف الزجاجية وFRP المصنعة بأعلى معايير الجودة."
                 : "Explore our premium range of specialized FRP and fiberglass products engineered for maximum durability."}
@@ -287,6 +300,6 @@ export default function ServiceProductsSection({ isArabic }: ServiceProductsSect
           </Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
