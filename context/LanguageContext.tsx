@@ -12,6 +12,7 @@ export interface Translations {
     projects: string;
     products: string;
     industries: string;
+    subcontractors: string;
     resources: string;
     company: string;
     careers: string;
@@ -161,6 +162,7 @@ const translations: Record<Language, Translations> = {
       projects: "Projects",
       products: "Products",
       industries: "Industries",
+      subcontractors: "Subcontractors",
       resources: "Resources",
       company: "Company",
       careers: "Careers",
@@ -492,6 +494,7 @@ const translations: Record<Language, Translations> = {
       projects: "المشاريع",
       products: "المنتجات",
       industries: "القطاعات",
+      subcontractors: "المقاولون من الباطن",
       resources: "الموارد",
       company: "عن الشركة",
       careers: "الوظائف",

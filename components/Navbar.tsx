@@ -322,19 +322,21 @@ const Navbar = () => {
   const lang = language === "ar" ? "ar" : "en";
 
   const searchSuggestions = [
-    t.nav.products, t.nav.services, t.nav.projects,
-    t.nav.industries, t.nav.resources, t.nav.careers,
-    t.nav.company, t.nav.contact, "Waterproofing", "Contracting",
+    t.nav.services, t.nav.solutions, t.nav.projects,
+    t.nav.industries, t.nav.subcontractors, t.nav.resources,
+    t.nav.careers, t.nav.company, t.nav.contact, "Waterproofing", "Contracting",
   ];
 
   const isLinkActive = (href: string) => {
     if (href === "/") return pathname === "/";
     if (href === "/project") return pathname === "/project" || pathname.startsWith("/project") || pathname === "/projects";
     if (href === "/services") return pathname === "/services" || pathname.startsWith("/services");
-    // if (href === "/products") return pathname === "/products" || pathname.startsWith("/products");
+    if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions");
     if (href === "/industries") return pathname === "/industries" || pathname.startsWith("/industries");
+    if (href === "/subcontract") return pathname === "/subcontract" || pathname.startsWith("/subcontract");
     if (href === "/resources") return pathname === "/resources" || pathname.startsWith("/blogs") || pathname.startsWith("/media") || pathname.startsWith("/faqs") || pathname.startsWith("/support") || pathname.startsWith("/warranty");
-    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about" || pathname.startsWith("/expertise") || pathname.startsWith("/certifications") || pathname.startsWith("/subcontract") || pathname.startsWith("/career") || pathname.startsWith("/contact");
+    if (href === "/career") return pathname === "/career" || pathname.startsWith("/career") || pathname === "/careers" || pathname.startsWith("/careers");
+    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about" || pathname.startsWith("/expertise") || pathname.startsWith("/certifications") || pathname.startsWith("/contact");
     return pathname === href || pathname.startsWith(href);
   };
 
@@ -538,9 +540,10 @@ const Navbar = () => {
     { name: t.nav.services, href: "/services", megaKey: "services" },
     { name: t.nav.solutions, href: "/solutions", megaKey: "solutions" },
     { name: t.nav.projects, href: "/project", megaKey: "projects" },
-    // { name: t.nav.products, href: "/products" },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
+    { name: t.nav.subcontractors, href: "/subcontract" },
     { name: t.nav.resources, href: "/resources", megaKey: "resources" },
+    { name: t.nav.careers, href: "/career" },
     { name: t.nav.company, href: "/about-us", megaKey: "company" },
   ];
 
@@ -569,10 +572,10 @@ const Navbar = () => {
 
             {/* ── DESKTOP NAV ─────────────────────────────────────── */}
             <div className="hidden lg:block">
-              <div className="flex items-center gap-3 lg:gap-3 xl:gap-5 2xl:gap-6">
+              <div className="flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 2xl:gap-5">
                 {navItems.map((item) => {
                   const active = isLinkActive(item.href);
-                  const hasMega = !!item.megaKey;
+                  const hasMega = Boolean(item.megaKey);
                   const isOpen = activeMega === item.megaKey;
 
                   const megaData: MegaData | null =
@@ -592,7 +595,7 @@ const Navbar = () => {
                     >
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center gap-1 font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${active ? "text-[#00c2b2] font-bold" : "text-white"
+                        className={`inline-flex items-center gap-0.5 xl:gap-1 font-semibold uppercase transition-colors text-xs lg:text-[11px] xl:text-[12.5px] 2xl:text-[13.5px] font-anek tracking-wider whitespace-nowrap ${active ? "text-[#00c2b2] font-bold" : "text-white"
                           } hover:text-[#00c2b2]`}
                         onClick={() => setActiveMega(null)}
                       >
@@ -616,7 +619,7 @@ const Navbar = () => {
             </div>
 
             {/* ── RIGHT CONTROLS ──────────────────────────────────── */}
-            <div className="hidden lg:flex items-center space-x-3 xl:space-x-5 flex-shrink-0">
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 flex-shrink-0">
               <ExpandableSearchBar
                 onSearch={handleSearch}
                 placeholder={t.nav.searchPlaceholder}
@@ -627,11 +630,11 @@ const Navbar = () => {
               />
               <Link
                 href="/get-a-quote"
-                className="pl-5 pr-2 py-2 sm:pl-6 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-3 transition-all duration-300 shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)] hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group"
+                className="pl-4 pr-1.5 py-1.5 sm:pl-5 sm:pr-2 sm:py-2 xl:pl-6 xl:pr-2.5 xl:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-2 xl:gap-3 transition-all duration-300 shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)] hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group"
               >
                 <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
-                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+                <span className="w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 xl:w-4 xl:h-4 stroke-[2.5]" />
                 </span>
               </Link>
             </div>
