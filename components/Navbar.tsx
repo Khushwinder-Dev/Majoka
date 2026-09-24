@@ -28,6 +28,7 @@ import { useLanguage } from "@/context/LanguageContext";
 ─────────────────────────────────────────────────────────────────────── */
 
 /* ─── MEGA MENU DATA ─────────────────────────────────────────────────── */
+/* TASK-1: SERVICES */
 const servicesMegaMenu = {
   en: {
     label: "OUR SERVICES",
@@ -36,12 +37,12 @@ const servicesMegaMenu = {
     cta: "Explore More",
     ctaHref: "/services",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "GRP & Fiberglass Waterproofing", sub: "Seamless Food-Grade Lining for Water Tanks", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
-      { icon: "/headerIcon/SVG (7).svg", title: "Combo System Roof Waterproofing", sub: "Dual Water & Thermal Insulation System", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
-      { icon: "/headerIcon/SVG (11).svg", title: "Epoxy Floor Coating", sub: "Durable Seamless High-Performance Flooring", href: "/services?service=1&sub=epoxy-floor-coating" },
-      { icon: "/headerIcon/SVG (12).svg", title: "Bitumen Membrane Waterproofing", sub: "Reinforced Torch-Applied Rolls for Foundations", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
-      { icon: "/headerIcon/SVG (8).svg", title: "Polyurea Waterproofing", sub: "Advanced Fast-Cure Heavy-Duty Protection", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
-      { icon: "/headerIcon/SVG (15).svg", title: "Injection Waterproofing", sub: "Precision Sealing for Lasting Water Protection", href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (6).svg", title: "GRP & Fiberglass Waterproofing", sub: "Durable protection for roofs, tanks, and exposed surfaces.", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
+      { icon: "/headerIcon/SVG (7).svg", title: "Combo System Roof Waterproofing", sub: "Multi-layer protection for long-lasting roof performance.", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "Epoxy Floor Coating", sub: "Tough, seamless coating for durable and easy-clean floors.", href: "/services?service=1&sub=epoxy-floor-coating" },
+      { icon: "/headerIcon/SVG (12).svg", title: "Bitumen Membrane Waterproofing", sub: "Reliable moisture protection for roofs and foundations.", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
+      { icon: "/headerIcon/SVG (8).svg", title: "Polyurea Waterproofing", sub: "Fast-curing, flexible protection for demanding surfaces.", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (15).svg", title: "Injection Waterproofing", sub: "Targeted sealing of cracks, joints, and water leaks.", href: "/services?service=1&sub=injection-waterproofing" },
     ],
   },
   ar: {
@@ -51,16 +52,17 @@ const servicesMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/services",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "عزل GRP والألياف الزجاجية", sub: "تبطين سلس وصحي لخزانات المياه والأسطح", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
-      { icon: "/headerIcon/SVG (7).svg", title: "نظام الكومبو للأسطح", sub: "عزل مزدوج مائي وحراري في طبقة واحدة", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
-      { icon: "/headerIcon/SVG (11).svg", title: "طلاء أرضيات الإيبوكسي", sub: "أرضيات متينة وسلسة وعالية الأداء", href: "/services?service=1&sub=epoxy-floor-coating" },
-      { icon: "/headerIcon/SVG (12).svg", title: "عزل الغشاء البيتوميني", sub: "لفائح بيتومينية مسلحة للأسطح والأساسات", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
-      { icon: "/headerIcon/SVG (8).svg", title: "عزل البولي يوريا", sub: "حماية متقدمة سريعة الجفاف للمتانة طويلة الأمد", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
-      { icon: "/headerIcon/SVG (15).svg", title: "عزل الحقن المائي", sub: "حقن وسد دقيق للشقوق الخرسانية", href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (6).svg", title: "عزل GRP والألياف الزجاجية", sub: "حماية متينة للأسطح والخزانات والمناطق المكشوفة.", href: "/services?service=1&sub=grp-fiberglass-waterproofing" },
+      { icon: "/headerIcon/SVG (7).svg", title: "نظام الكومبو للأسطح", sub: "حماية متعددة الطبقات لأداء يدوم طويلاً للأسطح.", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "طلاء أرضيات الإيبوكسي", sub: "طلاء سلس وقوي لأرضيات متينة وسهلة التنظيف.", href: "/services?service=1&sub=epoxy-floor-coating" },
+      { icon: "/headerIcon/SVG (12).svg", title: "عزل الغشاء البيتوميني", sub: "حماية موثوقة من الرطوبة للأسطح والأساسات.", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
+      { icon: "/headerIcon/SVG (8).svg", title: "عزل البولي يوريا", sub: "حماية سريعة الجفاف ومرنة للأسطح ذات المتطلبات العالية.", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (15).svg", title: "عزل الحقن المائي", sub: "سد مستهدف للشقوق والفواصل وتسربات المياه.", href: "/services?service=1&sub=injection-waterproofing" },
     ],
   },
 };
 
+/* TASK-2: SOLUTIONS */
 const solutionsMegaMenu = {
   en: {
     label: "OUR SOLUTIONS",
@@ -69,12 +71,12 @@ const solutionsMegaMenu = {
     cta: "Explore More",
     ctaHref: "/solutions",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "Waterproofing Solutions", sub: "Complete leak-free protection for roofs, tanks & slabs", href: "/services?service=1" },
-      { icon: "/headerIcon/SVG (8).svg", title: "Protective Coatings", sub: "Polyurea, epoxy & anti-corrosion coatings for any surface", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
-      { icon: "/headerIcon/SVG (11).svg", title: "Flooring Systems", sub: "Industrial & commercial epoxy floor solutions", href: "/services?service=1&sub=epoxy-floor-coating" },
-      { icon: "/headerIcon/SVG (7).svg", title: "Thermal Insulation", sub: "Combo roof systems for heat & moisture control", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
-      { icon: "/headerIcon/SVG (9).svg", title: "Structural Repair", sub: "Crack injection & concrete rehabilitation works", href: "/services?service=1&sub=injection-waterproofing" },
-      { icon: "/headerIcon/SVG (5).svg", title: "Swimming Pool Solutions", sub: "Full-cycle pool construction, tiling & waterproofing", href: "/services" },
+      { icon: "/headerIcon/SVG (6).svg", title: "Waterproofing Solutions", sub: "Protection against water and moisture.", href: "/services?service=1" },
+      { icon: "/headerIcon/SVG (9).svg", title: "Concrete Repair & Protection", sub: "Restore and protect concrete structures.", href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (7).svg", title: "Roofing Solutions", sub: "Durable protection for roofs and structures.", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (12).svg", title: "Basement & Below-Ground Solutions", sub: "Protection for foundations and underground areas.", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
+      { icon: "/headerIcon/SVG (8).svg", title: "Joint Sealing Solutions", sub: "Reliable sealing for joints and movement areas.", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "Specialized Construction Solutions", sub: "Tailored solutions for complex requirements.", href: "/solutions" },
     ],
   },
   ar: {
@@ -84,16 +86,17 @@ const solutionsMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/solutions",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "حلول العزل المائي", sub: "حماية شاملة من التسرب للأسطح والخزانات", href: "/services?service=1" },
-      { icon: "/headerIcon/SVG (8).svg", title: "الطلاءات الواقية", sub: "طلاءات بولي يوريا وإيبوكسي ومضادة للتآكل", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
-      { icon: "/headerIcon/SVG (11).svg", title: "أنظمة الأرضيات", sub: "حلول أرضيات إيبوكسي للمنشآت الصناعية", href: "/services?service=1&sub=epoxy-floor-coating" },
-      { icon: "/headerIcon/SVG (7).svg", title: "العزل الحراري", sub: "أنظمة كومبو للتحكم في الحرارة والرطوبة", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
-      { icon: "/headerIcon/SVG (9).svg", title: "الإصلاح الإنشائي", sub: "حقن الشقوق وأعمال تأهيل الخرسانة", href: "/services?service=1&sub=injection-waterproofing" },
-      { icon: "/headerIcon/SVG (5).svg", title: "حلول المسابح", sub: "إنشاء المسابح والتبليط والعزل المائي", href: "/services" },
+      { icon: "/headerIcon/SVG (6).svg", title: "حلول العزل المائي", sub: "حماية متكاملة ضد المياه والرطوبة.", href: "/services?service=1" },
+      { icon: "/headerIcon/SVG (9).svg", title: "إصلاح وحماية الخرسانة", sub: "ترميم وحماية المنشآت الخرسانية.", href: "/services?service=1&sub=injection-waterproofing" },
+      { icon: "/headerIcon/SVG (7).svg", title: "حلول الأسطح", sub: "حماية متينة للأسطح والمنشآت.", href: "/services?service=1&sub=combo-system-roof-waterproofing" },
+      { icon: "/headerIcon/SVG (12).svg", title: "حلول السراديب وتحت الأرض", sub: "حماية للأساسات والمناطق تحت الأرض.", href: "/services?service=1&sub=bitumen-membrane-waterproofing" },
+      { icon: "/headerIcon/SVG (8).svg", title: "حلول سد الفواصل", sub: "سد موثوق للفواصل ومناطق الحركة.", href: "/services?service=1&sub=polyurea-coating-waterproofing" },
+      { icon: "/headerIcon/SVG (11).svg", title: "حلول إنشائية متخصصة", sub: "حلول مصممة للمتطلبات المعقدة.", href: "/solutions" },
     ],
   },
 };
 
+/* TASK-3: PROJECTS */
 const projectsMegaMenu = {
   en: {
     label: "OUR PROJECTS",
@@ -102,12 +105,12 @@ const projectsMegaMenu = {
     cta: "Explore More",
     ctaHref: "/project",
     items: [
-      { icon: "/headerIcon/SVG (1).svg", title: "Miami-1 @ JVC", sub: "Samana Developers · Luxury Mixed-Use, Dubai", href: "/project" },
-      { icon: "/headerIcon/SVG (13).svg", title: "Miami Phase 2 @ JVT", sub: "Samana Developers · Residential Triangle, Dubai", href: "/project" },
-      { icon: "/headerIcon/SVG (7).svg", title: "City Premiere Marina Hotel", sub: "Luxury Hotel Apartments & Suites · Dubai Marina", href: "/project" },
-      { icon: "/headerIcon/SVG (4).svg", title: "NED® Al Ghurair Villas", sub: "Private Luxury Villas · Al Furjan South, Dubai", href: "/project" },
-      { icon: "/headerIcon/SVG (9).svg", title: "Dubai Hills Estate", sub: "Emaar Community Infrastructure · Dubai", href: "/project" },
-      { icon: "/headerIcon/SVG (16).svg", title: "Tilal Al Furjan Phase 1", sub: "Master-Planned Community Development · Dubai", href: "/project" },
+      { icon: "/headerIcon/SVG (1).svg", title: "Miami 1", sub: "Jumeirah Village Circle (JVC), Samana Developers", href: "/project" },
+      { icon: "/headerIcon/SVG (13).svg", title: "Miami Phase 2", sub: "Jumeirah Village Triangle (JVT), Samana Developers", href: "/project" },
+      { icon: "/headerIcon/SVG (7).svg", title: "City Premiere Marina Hotel Apartments", sub: "Dubai Marina, Dubai", href: "/project" },
+      { icon: "/headerIcon/SVG (4).svg", title: "NED Al Ghurair – Al Furjan South Villas", sub: "Al Furjan, Dubai", href: "/project" },
+      { icon: "/headerIcon/SVG (9).svg", title: "Dubai Hills Estate", sub: "Dubai, Emaar", href: "/project" },
+      { icon: "/headerIcon/SVG (16).svg", title: "Arabian Ranches", sub: "Dubai, Emaar", href: "/project" },
     ],
   },
   ar: {
@@ -117,16 +120,17 @@ const projectsMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/project",
     items: [
-      { icon: "/headerIcon/SVG (1).svg", title: "ميامي 1 في قرية جميرا", sub: "تطوير سمانا العقارية · مشروع متعدد الاستخدامات، دبي", href: "/project" },
-      { icon: "/headerIcon/SVG (13).svg", title: "ميامي المرحلة 2 في مثلث جميرا", sub: "تطوير سمانا العقارية · مثلث قرية جميرا، دبي", href: "/project" },
-      { icon: "/headerIcon/SVG (7).svg", title: "شقق سيتي بريمير مارينا", sub: "أبراج شقق فندقية وضيافة فاخرة · دبي مارينا", href: "/project" },
-      { icon: "/headerIcon/SVG (4).svg", title: "فلل الغرير | الفرجان", sub: "مجمع فلل سكنية فاخرة · الفرجان جنوب، دبي", href: "/project" },
-      { icon: "/headerIcon/SVG (9).svg", title: "دبي هيلز استيت", sub: "بنية تحتية لمجتمع إعمار السكني الراقي · دبي", href: "/project" },
-      { icon: "/headerIcon/SVG (16).svg", title: "تلال الفرجان - المرحلة الأولى", sub: "مجمع وتطوير سكني متكامل وحديث · دبي", href: "/project" },
+      { icon: "/headerIcon/SVG (1).svg", title: "ميامي 1", sub: "قرية جميرا الدائرية (JVC)، سمانا العقارية", href: "/project" },
+      { icon: "/headerIcon/SVG (13).svg", title: "ميامي المرحلة 2", sub: "مثلث قرية جميرا (JVT)، سمانا العقارية", href: "/project" },
+      { icon: "/headerIcon/SVG (7).svg", title: "شقق سيتي بريمير مارينا الفندقية", sub: "دبي مارينا، دبي", href: "/project" },
+      { icon: "/headerIcon/SVG (4).svg", title: "فلل الغرير | الفرجان جنوب", sub: "الفرجان، دبي", href: "/project" },
+      { icon: "/headerIcon/SVG (9).svg", title: "دبي هيلز استيت", sub: "دبي، إعمار", href: "/project" },
+      { icon: "/headerIcon/SVG (16).svg", title: "المرابع العربية", sub: "دبي، إعمار", href: "/project" },
     ],
   },
 };
 
+/* TASK-4: INDUSTRIES */
 const industriesMegaMenu = {
   en: {
     label: "INDUSTRIES WE SERVE",
@@ -135,12 +139,12 @@ const industriesMegaMenu = {
     cta: "Explore More",
     ctaHref: "/industries",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "Oil, Gas & Petrochemical", sub: "Plant Turnarounds, NDT Testing, Calibration & Audits", href: "/industries#oil-gas" },
-      { icon: "/headerIcon/SVG (1).svg", title: "Civil & Infrastructure", sub: "Laboratory Soil Testing, Scaffolding Engineering & MEP", href: "/industries#construction" },
-      { icon: "/headerIcon/SVG (8).svg", title: "Power & Utilities", sub: "High-Voltage Testing, Relay Calibration & Substations", href: "/industries#power-energy" },
-      { icon: "/headerIcon/SVG (2).svg", title: "Manufacturing & Industry", sub: "QA/QC Inspection, Continuous Calibration & Maintenance", href: "/industries#manufacturing" },
-      { icon: "/headerIcon/SVG (7).svg", title: "Water & Desalination", sub: "SWRO Facilities, Anti-Corrosion NDT & Pumping Stations", href: "/industries#water-environment" },
-      { icon: "/headerIcon/SVG (3).svg", title: "Marine & Offshore", sub: "Hull Ultrasonic Gauging, Proof Load Testing & Ports", href: "/industries#marine-offshore" },
+      { icon: "/headerIcon/SVG (1).svg", title: "Commercial & Residential", sub: "Offices, retail, villas, apartments, and mixed-use developments.", href: "/industries#construction" },
+      { icon: "/headerIcon/SVG (7).svg", title: "Hospitality & Tourism", sub: "Hotels, resorts, leisure facilities, and tourism developments.", href: "/industries#hospitality" },
+      { icon: "/headerIcon/SVG (2).svg", title: "Industrial & Warehousing", sub: "Factories, industrial plants, warehouses, and logistics facilities.", href: "/industries#manufacturing" },
+      { icon: "/headerIcon/SVG (6).svg", title: "Energy, Oil & Gas", sub: "Energy facilities, oil and gas projects, and supporting infrastructure.", href: "/industries#oil-gas" },
+      { icon: "/headerIcon/SVG (8).svg", title: "Infrastructure & Transportation", sub: "Roads, utilities, airports, and transport infrastructure.", href: "/industries#power-energy" },
+      { icon: "/headerIcon/SVG (3).svg", title: "Government & Public Sector", sub: "Government buildings, public facilities, and institutional projects.", href: "/industries#marine-offshore" },
     ],
   },
   ar: {
@@ -150,16 +154,51 @@ const industriesMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/industries",
     items: [
-      { icon: "/headerIcon/SVG (6).svg", title: "النفط والغاز والبتروكيماويات", sub: "صيانة المصافي، الفحص الهدام والاختبارات التخصصية", href: "/industries#oil-gas" },
-      { icon: "/headerIcon/SVG (1).svg", title: "البناء والتشييد والبنية التحتية", sub: "اختبارات التربة والخرسانة، السقالات وأعمال MEP", href: "/industries#construction" },
-      { icon: "/headerIcon/SVG (8).svg", title: "توليد الطاقة والمرافق العامة", sub: "اختبارات الجهد العالي، المحطات الفرعية والشبكات", href: "/industries#power-energy" },
-      { icon: "/headerIcon/SVG (2).svg", title: "التصنيع والصناعات الثقيلة", sub: "مراقبة الجودة، المعايرة المعتمدة وعقود الصيانة الوقائية", href: "/industries#manufacturing" },
-      { icon: "/headerIcon/SVG (7).svg", title: "تحلية ومعالجة المياه", sub: "محطات التناضح العكسي، مراقبة التآكل ومحطات الضخ", href: "/industries#water-environment" },
-      { icon: "/headerIcon/SVG (3).svg", title: "الموانئ والعمليات البحرية والأوفشور", sub: "فحص السفن، اختبارات الأحمال وعمليات الموانئ البحرية", href: "/industries#marine-offshore" },
+      { icon: "/headerIcon/SVG (1).svg", title: "التجاري والسكني", sub: "مكاتب، تجزئة، فلل، شقق ومشاريع متعددة الاستخدامات.", href: "/industries#construction" },
+      { icon: "/headerIcon/SVG (7).svg", title: "الضيافة والسياحة", sub: "فنادق، منتجعات، مرافق ترفيهية ومشاريع سياحية.", href: "/industries#hospitality" },
+      { icon: "/headerIcon/SVG (2).svg", title: "الصناعي والمستودعات", sub: "مصانع، منشآت صناعية، مستودعات ومرافق لوجستية.", href: "/industries#manufacturing" },
+      { icon: "/headerIcon/SVG (6).svg", title: "الطاقة والنفط والغاز", sub: "منشآت طاقة، مشاريع نفط وغاز وبنية تحتية مساندة.", href: "/industries#oil-gas" },
+      { icon: "/headerIcon/SVG (8).svg", title: "البنية التحتية والنقل", sub: "طرق، مرافق عامة، مطارات وبنية تحتية للمواصلات.", href: "/industries#power-energy" },
+      { icon: "/headerIcon/SVG (3).svg", title: "القطاع الحكومي والعام", sub: "مبانٍ حكومية، مرافق عامة ومشاريع مؤسسية.", href: "/industries#marine-offshore" },
     ],
   },
 };
 
+/* TASK-5: SUBCONTRACTORS */
+const subcontractorsMegaMenu = {
+  en: {
+    label: "SUBCONTRACTORS",
+    tagline: "Certified Subcontracting Execution Partner",
+    cardImage: "/subcontract/hero.png",
+    cta: "Explore More",
+    ctaHref: "/subcontract",
+    items: [
+      { icon: "/headerIcon/SVG (1).svg", title: "Subcontracting Capabilities", sub: "Explore our expertise and capabilities as a subcontracting partner.", href: "/subcontract#capabilities" },
+      { icon: "/headerIcon/SVG (6).svg", title: "Our Services", sub: "Discover the services we provide to main contractors and project partners.", href: "/subcontract#services" },
+      { icon: "/headerIcon/SVG (13).svg", title: "Project Experience", sub: "View our relevant project experience and completed works.", href: "/subcontract#projects" },
+      { icon: "/headerIcon/SVG (8).svg", title: "Technical Expertise", sub: "Learn about our technical resources, skills, and capabilities.", href: "/subcontract#expertise" },
+      { icon: "/headerIcon/SVG (15).svg", title: "Certifications & Compliance", sub: "Review our certifications, approvals, and compliance standards.", href: "/subcontract#certifications" },
+      { icon: "/headerIcon/SVG (11).svg", title: "Partner With Us", sub: "Connect with our team for subcontracting opportunities and collaboration.", href: "/subcontract#partner" },
+    ],
+  },
+  ar: {
+    label: "المقاولون من الباطن",
+    tagline: "شريك مقاولات باطن معتمد وموثوق للمشاريع",
+    cardImage: "/subcontract/hero.png",
+    cta: "استكشف المزيد",
+    ctaHref: "/subcontract",
+    items: [
+      { icon: "/headerIcon/SVG (1).svg", title: "قدرات المقاولة من الباطن", sub: "استكشف خبراتنا وإمكانياتنا كشريك مقاولات تخصصي.", href: "/subcontract#capabilities" },
+      { icon: "/headerIcon/SVG (6).svg", title: "خدماتنا", sub: "تعرف على الخدمات التي نقدمها للمقاولين الرئيسيين وشركاء المشاريع.", href: "/subcontract#services" },
+      { icon: "/headerIcon/SVG (13).svg", title: "خبرة المشاريع", sub: "استعرض خبراتنا في المشاريع السابقة والأعمال المنجزة.", href: "/subcontract#projects" },
+      { icon: "/headerIcon/SVG (8).svg", title: "الخبرة الفنية", sub: "تعرّف على مواردنا الفنية ومهاراتنا وقدراتنا الهندسية.", href: "/subcontract#expertise" },
+      { icon: "/headerIcon/SVG (15).svg", title: "الشهادات والامتثال", sub: "اطلع على شهاداتنا واعتماداتنا ومعايير الامتثال المعتمدة.", href: "/subcontract#certifications" },
+      { icon: "/headerIcon/SVG (11).svg", title: "شاركنا النجاح", sub: "تواصل مع فريقنا لفرص المقاولات والشراكات المستقبلية.", href: "/subcontract#partner" },
+    ],
+  },
+};
+
+/* TASK-6: RESOURCES */
 const resourcesMegaMenu = {
   en: {
     label: "RESOURCES",
@@ -168,12 +207,12 @@ const resourcesMegaMenu = {
     cta: "Explore More",
     ctaHref: "/resources",
     items: [
-      { icon: "arrow", title: "Media", sub: "Project showcases, events & video gallery", href: "/media" },
-      { icon: "arrow", title: "Get a Quote", sub: "Quick & free technical project estimation", href: "/get-a-quote" },
-      { icon: "arrow", title: "FAQs", sub: "Answers to common technical queries", href: "/faqs" },
-      { icon: "arrow", title: "Blog", sub: "Latest industry insights & waterproofing trends", href: "/blogs" },
-      { icon: "arrow", title: "Support", sub: "Technical assistance & customer care", href: "/support" },
-      { icon: "arrow", title: "Warranty", sub: "Coverage terms & municipal certifications", href: "/warranty" },
+      { icon: "arrow", title: "Blogs", sub: "Industry insights, trends, and company updates.", href: "/blogs" },
+      { icon: "arrow", title: "Support", sub: "Get assistance and support from our team.", href: "/support" },
+      { icon: "arrow", title: "Media", sub: "Explore our latest news, stories, and media highlights.", href: "/media" },
+      { icon: "arrow", title: "FAQs", sub: "Find quick answers to frequently asked questions.", href: "/faqs" },
+      { icon: "arrow", title: "Warranty", sub: "Learn about our warranty coverage and terms.", href: "/warranty" },
+      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/resources" },
     ],
   },
   ar: {
@@ -183,16 +222,51 @@ const resourcesMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/resources",
     items: [
-      { icon: "arrow", title: "الوسائط", sub: "معارض المشاريع والفعاليات ومقاطع الفيديو", href: "/media" },
-      { icon: "arrow", title: "احصل على عرض سعر", sub: "تقدير تكلفة فني سريع ومجاني للمشاريع", href: "/get-a-quote" },
-      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات شاملة عن الأسئلة الهندسية الشائعة", href: "/faqs" },
-      { icon: "arrow", title: "المدونة", sub: "أحدث المقالات وأخبار قطاع العزل والمقاولات", href: "/blogs" },
-      { icon: "arrow", title: "الدعم", sub: "المساعدة الفنية وخدمة العملاء المتميزة", href: "/support" },
-      { icon: "arrow", title: "الضمان", sub: "شروط التغطية والشهادات البلدية المعتمدة", href: "/warranty" },
+      { icon: "arrow", title: "المدونة", sub: "رؤى الصناعة، الاتجاهات وأحدث أخبار الشركة.", href: "/blogs" },
+      { icon: "arrow", title: "الدعم", sub: "احصل على المساعدة والدعم الفني من فريقنا.", href: "/support" },
+      { icon: "arrow", title: "الوسائط", sub: "استكشف آخر الأخبار والقصص والتغطيات الإعلامية.", href: "/media" },
+      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات سريعة وشاملة عن الأسئلة المتكررة.", href: "/faqs" },
+      { icon: "arrow", title: "الضمان", sub: "تعرف على شروط تغطية الضمان وسياساتنا المعتمدة.", href: "/warranty" },
+      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/resources" },
     ],
   },
 };
 
+/* TASK-7: CAREERS */
+const careersMegaMenu = {
+  en: {
+    label: "CAREERS",
+    tagline: "Build Your Career With Engineering Excellence",
+    cardImage: "/media/Engineers working.png",
+    cta: "Explore More",
+    ctaHref: "/career",
+    items: [
+      { icon: "arrow", title: "Why Join Us", sub: "What makes us a great place to build your career.", href: "/career" },
+      { icon: "arrow", title: "Current Openings", sub: "Explore our latest career opportunities.", href: "/career" },
+      { icon: "arrow", title: "Life at Our Company", sub: "Discover our workplace and culture.", href: "/career" },
+      { icon: "arrow", title: "Submit Your CV", sub: "Share your CV for current or future opportunities.", href: "/career" },
+      { icon: "arrow", title: "Recruitment Process", sub: "Learn about our hiring process.", href: "/career" },
+      { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career" },
+    ],
+  },
+  ar: {
+    label: "الوظائف",
+    tagline: "ابنِ مسيرتك المهنية مع رواد التميز الهندسي",
+    cardImage: "/media/Engineers working.png",
+    cta: "استكشف المزيد",
+    ctaHref: "/career",
+    items: [
+      { icon: "arrow", title: "لماذا تنضم إلينا", sub: "ما يجعل شركتنا المكان المثالي لبناء مسيرتك المهنية.", href: "/career" },
+      { icon: "arrow", title: "الوظائف الشاغرة", sub: "استكشف أحدث الفرص الوظيفية المتاحة لدينا.", href: "/career" },
+      { icon: "arrow", title: "بيئة العمل وثقافتنا", sub: "اكتشف ثقافة العمل وبيئتنا المهنية المتميزة.", href: "/career" },
+      { icon: "arrow", title: "أرسل سيرتك الذاتية", sub: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.", href: "/career" },
+      { icon: "arrow", title: "آلية التوظيف", sub: "تعرف على مراحل التوظيف والاختيار في شركتنا.", href: "/career" },
+      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career" },
+    ],
+  },
+};
+
+/* TASK-8: COMPANY */
 const companyMegaMenu = {
   en: {
     label: "COMPANY",
@@ -201,12 +275,12 @@ const companyMegaMenu = {
     cta: "Explore More",
     ctaHref: "/about-us",
     items: [
-      { icon: "arrow", title: "About Us", sub: "Our heritage, vision & leadership team", href: "/about-us" },
-      { icon: "arrow", title: "Our Expertise", sub: "Core specialized technical capabilities", href: "/expertise" },
-      { icon: "arrow", title: "Certifications", sub: "ISO, Dubai Municipality & Civil Defense", href: "/certifications" },
-      { icon: "arrow", title: "Careers", sub: "Explore open job positions & internships", href: "/career" },
-      { icon: "arrow", title: "Contact", sub: "Reach out to our offices in Dubai & Sharjah", href: "/contact" },
-      { icon: "arrow", title: "Subcontract", sub: "Certified subcontracting execution partner", href: "/subcontract" },
+      { icon: "arrow", title: "About Us", sub: "Who we are and what we do.", href: "/about-us" },
+      { icon: "arrow", title: "Our Expertise", sub: "Our skills and capabilities.", href: "/expertise" },
+      { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/about-us" },
+      { icon: "arrow", title: "Certifications", sub: "Our credentials and approvals.", href: "/certifications" },
+      { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us" },
+      { icon: "arrow", title: "Contact Us", sub: "Connect with our team.", href: "/contact" },
     ],
   },
   ar: {
@@ -216,18 +290,18 @@ const companyMegaMenu = {
     cta: "استكشف المزيد",
     ctaHref: "/about-us",
     items: [
-      { icon: "arrow", title: "عن الشركة", sub: "مسيرتنا، رؤيتنا وفريق القيادة الهندسية", href: "/about-us" },
-      { icon: "arrow", title: "الخبرة الفنية", sub: "القدرات الهندسية والتنفيذية المتخصصة", href: "/expertise" },
-      { icon: "arrow", title: "الشهادات والاعتمادات", sub: "أيزو واعتمادات البلدية والدفاع المدني", href: "/certifications" },
-      { icon: "arrow", title: "وظائف", sub: "انضم إلى فريقنا الهندسي والفني المتميز", href: "/career" },
-      { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة", href: "/contact" },
-      { icon: "arrow", title: "المقاولون من الباطن", sub: "شريك مقاولات تخصصي موثوق للمشاريع", href: "/subcontract" },
+      { icon: "arrow", title: "من نحن", sub: "من نحن ورؤيتنا وما نقوم به.", href: "/about-us" },
+      { icon: "arrow", title: "خبراتنا", sub: "مهاراتنا الفنية وقدراتنا المتخصصة.", href: "/expertise" },
+      { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/about-us" },
+      { icon: "arrow", title: "الشهادات والاعتمادات", sub: "شهاداتنا واعتماداتنا الرسمية.", href: "/certifications" },
+      { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us" },
+      { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة.", href: "/contact" },
     ],
   },
 };
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
-type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | "resources" | "company" | null;
+type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | "subcontractors" | "resources" | "careers" | "company" | null;
 
 type MegaItem = { icon: string; title: string; sub: string; href: string };
 
@@ -484,9 +558,9 @@ const Navbar = () => {
     { name: t.nav.solutions, href: "/solutions", megaKey: "solutions" },
     { name: t.nav.projects, href: "/project", megaKey: "projects" },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
-    { name: t.nav.subcontractors, href: "/subcontract" },
+    { name: t.nav.subcontractors, href: "/subcontract", megaKey: "subcontractors" },
     { name: t.nav.resources, href: "/resources", megaKey: "resources" },
-    { name: t.nav.careers, href: "/career" },
+    { name: t.nav.careers, href: "/career", megaKey: "careers" },
     { name: t.nav.company, href: "/about-us", megaKey: "company" },
   ];
 
@@ -526,8 +600,10 @@ const Navbar = () => {
                       item.megaKey === "solutions" ? solutionsMegaMenu[lang] :
                         item.megaKey === "projects" ? projectsMegaMenu[lang] :
                           item.megaKey === "industries" ? industriesMegaMenu[lang] :
-                            item.megaKey === "resources" ? resourcesMegaMenu[lang] :
-                              item.megaKey === "company" ? companyMegaMenu[lang] : null;
+                            item.megaKey === "subcontractors" ? subcontractorsMegaMenu[lang] :
+                              item.megaKey === "resources" ? resourcesMegaMenu[lang] :
+                                item.megaKey === "careers" ? careersMegaMenu[lang] :
+                                  item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
                   return (
                     <div
@@ -676,8 +752,10 @@ const Navbar = () => {
                   item.megaKey === "solutions" ? solutionsMegaMenu[lang] :
                     item.megaKey === "projects" ? projectsMegaMenu[lang] :
                       item.megaKey === "industries" ? industriesMegaMenu[lang] :
-                        item.megaKey === "resources" ? resourcesMegaMenu[lang] :
-                          item.megaKey === "company" ? companyMegaMenu[lang] : null;
+                        item.megaKey === "subcontractors" ? subcontractorsMegaMenu[lang] :
+                          item.megaKey === "resources" ? resourcesMegaMenu[lang] :
+                            item.megaKey === "careers" ? careersMegaMenu[lang] :
+                              item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
               return (
                 <div key={item.name} className="border-b border-white/[0.06]">

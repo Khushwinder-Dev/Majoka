@@ -238,9 +238,8 @@ const HeroSection = () => {
 
       {/* 5. Left Vertical Slider / Pill Indicators */}
       <div
-        className={`flex flex-col items-center gap-2.5 absolute top-1/2 -translate-y-1/2 z-30 ${
-          isArabic ? "right-3 sm:right-5 xl:right-7" : "left-3 sm:left-5 xl:left-7"
-        }`}
+        className={`flex flex-col items-center gap-2.5 absolute top-1/2 -translate-y-1/2 z-30 ${isArabic ? "right-3 sm:right-5 xl:right-7" : "left-3 sm:left-5 xl:left-7"
+          }`}
       >
         {slides.map((_, index) => {
           const active = index === slideIndex;
@@ -251,11 +250,10 @@ const HeroSection = () => {
               onClick={() => goToSlide(index)}
               aria-label={`${isArabic ? "الشريحة" : "Go to slide"} ${index + 1}`}
               aria-current={active}
-              className={`rounded-full transition-all duration-300 cursor-pointer ${
-                active
-                  ? "w-1.5 h-7 bg-[#00c2b2] shadow-[0_0_14px_#00c2b2]"
-                  : "w-1.5 h-7 border border-white/40 bg-white/5 hover:border-[#00c2b2] hover:bg-[#00c2b2]/20"
-              }`}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${active
+                ? "w-1.5 h-7 bg-[#00c2b2] shadow-[0_0_14px_#00c2b2]"
+                : "w-1.5 h-7 border border-white/40 bg-white/5 hover:border-[#00c2b2] hover:bg-[#00c2b2]/20"
+                }`}
             />
           );
         })}
@@ -295,9 +293,8 @@ const HeroSection = () => {
       )}
 
       {/* 7. Main Hero Content Container */}
-      <div className={`relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center ${
-        isArabic ? "pr-10 sm:pr-12" : "pl-10 sm:pl-12"
-      }`}>
+      <div className={`relative z-20 w-full max-w-8xl mx-auto px-5 sm:px-8 lg:px-12 pt-28 sm:pt-36 lg:pt-40 flex-1 flex flex-col justify-center ${isArabic ? "pr-10 sm:pr-12" : "pl-10 sm:pl-12"
+        }`}>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Left Text & CTAs (Columns 1-8) */}
           <div className="lg:col-span-8 flex flex-col items-start text-start min-h-[280px] sm:min-h-[320px] lg:min-h-[340px]">
@@ -337,6 +334,17 @@ const HeroSection = () => {
             <div className="flex flex-wrap items-center gap-4 sm:gap-5">
               {/* Button 1: EXPLORE SERVICES */}
               <Link
+                href="/project"
+                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>{t.hero.exploreProject}</span>
+                <span className="w-8 h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                </span>
+              </Link>
+
+              {/* Button 2: EXPLORE PROJECT */}
+              <Link
                 href="/services"
                 className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00c2b2] hover:bg-[#00d6c4] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-[0_4px_22px_rgba(0,194,178,0.45)] hover:shadow-[0_6px_28px_rgba(0,194,178,0.65)] hover:scale-105 active:scale-95 cursor-pointer"
               >
@@ -346,16 +354,6 @@ const HeroSection = () => {
                 </span>
               </Link>
 
-              {/* Button 2: EXPLORE PROJECT */}
-              <Link
-                href="/project"
-                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <span>{t.hero.exploreProject}</span>
-                <span className="w-8 h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                </span>
-              </Link>
             </div>
           </div>
 
