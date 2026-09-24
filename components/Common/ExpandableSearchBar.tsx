@@ -684,88 +684,93 @@ export default function ExpandableSearchBar({
 
         {/* Expanded Search Bar Container */}
         {isExpanded && (
-          <div className="flex items-center animate-in fade-in zoom-in-95 duration-200">
-            {/* Back / Close button `<` beside search icon (Task-9 user marked: "beside search icon keep like this if user click on it then close search bar") */}
-            <button
-              type="button"
-              onClick={handleCollapse}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/20 hover:bg-white/35 text-white flex items-center justify-center transition-all cursor-pointer mr-2 rtl:mr-0 rtl:ml-2 flex-shrink-0 shadow-sm"
-              title={isAr ? "إغلاق البحث" : "Close search"}
-              aria-label="Close search"
-            >
-              <ChevronLeft className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
-            </button>
+          <>
+            {/* Placeholder in normal flow so the flex header never changes width or shifts */}
+            <div className="hidden lg:block w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 opacity-0 pointer-events-none" />
 
-            {/* Search Input Pill */}
-            <div
-              className="flex items-center bg-white w-64 sm:w-80 md:w-96 px-3.5 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl transition-all"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Search Icon */}
+            <div className="lg:absolute lg:right-0 lg:rtl:right-auto lg:rtl:left-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center z-40 animate-in fade-in zoom-in-95 duration-200 w-full lg:w-auto">
+              {/* Back / Close button `<` beside search icon (Task-9 user marked: "beside search icon keep like this if user click on it then close search bar") */}
               <button
                 type="button"
-                onClick={() => handleExecuteSearch(searchQuery)}
-                className="p-1 text-[#00b3a4] hover:text-[#008f83] transition-colors cursor-pointer flex-shrink-0"
-                title={isAr ? "بحث" : "Search"}
+                onClick={handleCollapse}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#011c20]/90 hover:bg-[#009e90] text-white flex items-center justify-center transition-all cursor-pointer mr-2 rtl:mr-0 rtl:ml-2 flex-shrink-0 shadow-lg border border-white/20 hover:scale-105 active:scale-95"
+                title={isAr ? "إغلاق البحث" : "Close search"}
+                aria-label="Close search"
               >
-                <Search className="h-4 w-4 stroke-[2.5]" />
+                <ChevronLeft className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
               </button>
 
-              {/* Text Input */}
-              <input
-                ref={inputRef}
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleExecuteSearch(searchQuery);
-                  } else if (e.key === "Escape") {
-                    handleCollapse();
-                  }
-                }}
-                placeholder={placeholder || defaultPlaceholder}
-                className="flex-1 outline-none text-gray-800 bg-transparent text-xs sm:text-sm px-2 placeholder-gray-400 font-sans min-w-0"
-              />
-
-              {/* Voice Search (if supported and query empty) */}
-              {speechSupported && !searchQuery && (
+              {/* Search Input Pill */}
+              <div
+                className="flex items-center bg-white flex-1 lg:flex-initial lg:w-72 xl:w-80 2xl:w-96 px-3.5 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl transition-all"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Search Icon */}
                 <button
                   type="button"
-                  onClick={handleVoiceSearch}
-                  className={`p-1.5 rounded-full transition-all flex-shrink-0 ${
-                    isListening
-                      ? "bg-red-500 text-white animate-pulse"
-                      : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                  }`}
-                  title={isListening ? "Listening..." : "Voice search"}
+                  onClick={() => handleExecuteSearch(searchQuery)}
+                  className="p-1 text-[#00b3a4] hover:text-[#008f83] transition-colors cursor-pointer flex-shrink-0"
+                  title={isAr ? "بحث" : "Search"}
                 >
-                  {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
+                  <Search className="h-4 w-4 stroke-[2.5]" />
                 </button>
-              )}
 
-              {/* Keyboard Shortcut Badge (Ctrl K) when empty */}
-              {!searchQuery && (
-                <span className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 flex-shrink-0 ml-1">
-                  <span>Ctrl</span>
-                  <span>K</span>
-                </span>
-              )}
+                {/* Text Input */}
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleExecuteSearch(searchQuery);
+                    } else if (e.key === "Escape") {
+                      handleCollapse();
+                    }
+                  }}
+                  placeholder={placeholder || defaultPlaceholder}
+                  className="flex-1 outline-none text-gray-800 bg-transparent text-xs sm:text-sm px-2 placeholder-gray-400 font-sans min-w-0"
+                />
 
-              {/* Clear Text X button (Task-9 user marked: "if user click on x icon then clear text but not close search bar") */}
-              {searchQuery.length > 0 && (
-                <button
-                  type="button"
-                  onClick={handleClearQuery}
-                  className="p-1 text-gray-400 hover:text-gray-700 transition-colors flex-shrink-0 cursor-pointer ml-1 rtl:ml-0 rtl:mr-1 rounded-full hover:bg-gray-100"
-                  title={isAr ? "مسح النص" : "Clear text"}
-                >
-                  <X className="h-3.5 w-3.5" />
-                </button>
-              )}
+                {/* Voice Search (if supported and query empty) */}
+                {speechSupported && !searchQuery && (
+                  <button
+                    type="button"
+                    onClick={handleVoiceSearch}
+                    className={`p-1.5 rounded-full transition-all flex-shrink-0 ${
+                      isListening
+                        ? "bg-red-500 text-white animate-pulse"
+                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                    }`}
+                    title={isListening ? "Listening..." : "Voice search"}
+                  >
+                    {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
+                  </button>
+                )}
+
+                {/* Keyboard Shortcut Badge (Ctrl K) when empty */}
+                {!searchQuery && (
+                  <span className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 flex-shrink-0 ml-1">
+                    <span>Ctrl</span>
+                    <span>K</span>
+                  </span>
+                )}
+
+                {/* Clear Text X button (Task-9 user marked: "if user click on x icon then clear text but not close search bar") */}
+                {searchQuery.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearQuery}
+                    className="p-1 text-gray-400 hover:text-gray-700 transition-colors flex-shrink-0 cursor-pointer ml-1 rtl:ml-0 rtl:mr-1 rounded-full hover:bg-gray-100"
+                    title={isAr ? "مسح النص" : "Clear text"}
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
 
