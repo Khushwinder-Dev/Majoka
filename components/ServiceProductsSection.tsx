@@ -226,7 +226,7 @@ export default function ServiceProductsSection({ isArabic }: ServiceProductsSect
                   className="min-w-0"
                 >
                   <Link
-                    href={`/products/${product.id}`}
+                    href="/products"
                     className="group bg-white rounded-2xl sm:rounded-3xl border border-stone-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_32px_rgba(0,167,157,0.14)] transition-all duration-300 flex flex-col p-3.5 sm:p-4 h-full"
                   >
                     {/* Top Image with Rounded Corners (matching ref image 1) */}

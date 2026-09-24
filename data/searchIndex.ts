@@ -21,7 +21,7 @@ const productSearchItems: SearchResultItem[] = allProductsData.map((p) => ({
   nameAr: p.longName || p.name,
   category: "Product",
   categoryAr: "منتج",
-  href: `/products/${p.id}`,
+  href: `/products?search=${encodeURIComponent(p.name)}`,
   desc: p.description || p.longName,
   descAr: p.description || p.longName,
   keywords: [

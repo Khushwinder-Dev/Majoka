@@ -678,9 +678,8 @@ export default function ProductsPage() {
                       key={product.id}
                       onClick={() => {
                         setSelectedCardId(product.id);
-                        router.push(`/products/${product.id}`);
                       }}
-                      className={`relative rounded-2xl transition-all duration-200 cursor-pointer p-3 sm:p-3.5 flex flex-col group ${isShareOpen ? "z-30" : isSelected ? "z-20" : "z-10 hover:z-20"
+                      className={`relative rounded-2xl transition-all duration-200 p-3 sm:p-3.5 flex flex-col group ${isShareOpen ? "z-30" : isSelected ? "z-20" : "z-10 hover:z-20"
                         } ${isSelected
                           ? "bg-[#f0fdfa]/50 border-2 border-[#01a9a0] shadow-[0_4px_16px_rgba(1,169,160,0.12)]"
                           : "bg-white border border-gray-200/90 hover:border-gray-300 shadow-[0_2px_6px_rgba(0,0,0,0.02)] hover:shadow-md"

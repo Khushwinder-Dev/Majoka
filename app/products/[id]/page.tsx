@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   Star,
   Share2,
@@ -67,9 +67,15 @@ const PRODUCT_FAQS: FaqItem[] = [
 ];
 
 export default function ProductDetailsPage() {
+  const router = useRouter();
   const { isArabic } = useLanguage();
   const params = useParams();
   const rawId = params?.id ? (Array.isArray(params.id) ? params.id[0] : params.id) : "1";
+
+  // Temporarily redirect direct visitors to the products listing page
+  useEffect(() => {
+    router.replace("/products");
+  }, [router]);
 
   const product = useMemo(() => {
     return getProductById(rawId);
