@@ -454,25 +454,11 @@ const Navbar = () => {
   const renderMegaMenu = (data: MegaData) => (
     <div
       className="absolute top-full pt-2 left-1/2 -translate-x-1/2 w-[760px] xl:w-[820px] transition-all"
-      style={{ zIndex: 9999 }}
+      style={{ zIndex: 10 }}
       onMouseEnter={cancelClose}
       onMouseLeave={closeMega}
       dir={isArabic ? "rtl" : "ltr"}
     >
-      {/* ── Top triangle arrow pointing up to menu item ── */}
-      <div className="absolute top-[0px] left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-center justify-center">
-        <svg
-          width="18"
-          height="9"
-          viewBox="0 0 18 9"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-white"
-        >
-          <path d="M0 9L9 0L18 9H0Z" fill="currentColor" />
-        </svg>
-      </div>
-
       {/* ── Dropdown panel ── */}
       <div className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-100 border-t-2 border-t-white overflow-hidden">
         {/* ── Top strip ── */}
@@ -564,6 +550,17 @@ const Navbar = () => {
     { name: t.nav.company, href: "/about-us", megaKey: "company" },
   ];
 
+  /* ─── ACTIVE MEGA DATA ──────────────────────────────────────────────── */
+  const activeMegaData: MegaData | null =
+    activeMega === "services" ? servicesMegaMenu[lang] :
+      activeMega === "solutions" ? solutionsMegaMenu[lang] :
+        activeMega === "projects" ? projectsMegaMenu[lang] :
+          activeMega === "industries" ? industriesMegaMenu[lang] :
+            activeMega === "subcontractors" ? subcontractorsMegaMenu[lang] :
+              activeMega === "resources" ? resourcesMegaMenu[lang] :
+                activeMega === "careers" ? careersMegaMenu[lang] :
+                  activeMega === "company" ? companyMegaMenu[lang] : null;
+
   return (
     <>
       <nav
@@ -588,22 +585,12 @@ const Navbar = () => {
             </div>
 
             {/* ── DESKTOP NAV ─────────────────────────────────────── */}
-            <div className="hidden lg:block">
-              <div className="flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 2xl:gap-5">
+            <div className="hidden lg:block relative" onMouseLeave={closeMega}>
+              <div className="flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 2xl:gap-5 relative z-20">
                 {navItems.map((item) => {
                   const active = isLinkActive(item.href);
                   const hasMega = Boolean(item.megaKey);
                   const isOpen = activeMega === item.megaKey;
-
-                  const megaData: MegaData | null =
-                    item.megaKey === "services" ? servicesMegaMenu[lang] :
-                      item.megaKey === "solutions" ? solutionsMegaMenu[lang] :
-                        item.megaKey === "projects" ? projectsMegaMenu[lang] :
-                          item.megaKey === "industries" ? industriesMegaMenu[lang] :
-                            item.megaKey === "subcontractors" ? subcontractorsMegaMenu[lang] :
-                              item.megaKey === "resources" ? resourcesMegaMenu[lang] :
-                                item.megaKey === "careers" ? careersMegaMenu[lang] :
-                                  item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
                   return (
                     <div
@@ -626,12 +613,28 @@ const Navbar = () => {
                         <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#00c2b2] rounded-full" />
                       )}
 
-                      {/* Mega dropdown */}
-                      {hasMega && isOpen && megaData && renderMegaMenu(megaData)}
+                      {/* Top triangle pointer for hovered menu */}
+                      {hasMega && isOpen && (
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 z-30 pointer-events-none flex items-center justify-center">
+                          <svg
+                            width="18"
+                            height="9"
+                            viewBox="0 0 18 9"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-white"
+                          >
+                            <path d="M0 9L9 0L18 9H0Z" fill="currentColor" />
+                          </svg>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
               </div>
+
+              {/* Mega dropdown */}
+              {activeMega && activeMegaData && renderMegaMenu(activeMegaData)}
             </div>
 
             {/* ── RIGHT CONTROLS ──────────────────────────────────── */}
