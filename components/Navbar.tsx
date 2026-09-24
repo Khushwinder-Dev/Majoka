@@ -521,14 +521,11 @@ const Navbar = () => {
                     >
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center gap-0.5 xl:gap-1 font-semibold uppercase transition-colors text-xs lg:text-[11px] xl:text-[12.5px] 2xl:text-[13.5px] font-anek tracking-wider whitespace-nowrap ${active ? "text-[#00c2b2] font-bold" : "text-white"
+                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${active ? "text-[#00c2b2] font-bold" : "text-white"
                           } hover:text-[#00c2b2]`}
                         onClick={() => setActiveMega(null)}
                       >
                         {item.name}
-                        {hasMega && (
-                          <ChevronDown className={`w-3 h-3 transition-transform duration-200 opacity-60 ${isOpen ? "rotate-180" : ""}`} />
-                        )}
                       </Link>
 
                       {/* Active underline */}
