@@ -40,7 +40,7 @@ interface SpeechRecognitionEvent {
 }
 
 interface SpeechRecognitionConstructor {
-  new (): SpeechRecognitionInstance;
+  new(): SpeechRecognitionInstance;
 }
 
 interface SpeechRecognitionInstance {
@@ -623,21 +623,21 @@ export default function ExpandableSearchBar({
     const matched = AI_PRESET_QUESTIONS.find(
       (item) =>
         lower.includes("roof") ||
-        lower.includes("combo") ||
-        lower.includes("سطح") ||
-        lower.includes("كومبو")
-        ? item.en.includes("roof")
-        : lower.includes("epoxy") ||
-          lower.includes("floor") ||
-          lower.includes("إيبوكسي") ||
-          lower.includes("أرضيات")
-        ? item.en.includes("epoxy")
-        : lower.includes("leak") ||
-          lower.includes("injection") ||
-          lower.includes("تسرب") ||
-          lower.includes("حقن")
-        ? item.en.includes("leak")
-        : false
+          lower.includes("combo") ||
+          lower.includes("سطح") ||
+          lower.includes("كومبو")
+          ? item.en.includes("roof")
+          : lower.includes("epoxy") ||
+            lower.includes("floor") ||
+            lower.includes("إيبوكسي") ||
+            lower.includes("أرضيات")
+            ? item.en.includes("epoxy")
+            : lower.includes("leak") ||
+              lower.includes("injection") ||
+              lower.includes("تسرب") ||
+              lower.includes("حقن")
+              ? item.en.includes("leak")
+              : false
     );
 
     if (matched) {
@@ -738,11 +738,10 @@ export default function ExpandableSearchBar({
                   <button
                     type="button"
                     onClick={handleVoiceSearch}
-                    className={`p-1.5 rounded-full transition-all flex-shrink-0 ${
-                      isListening
-                        ? "bg-red-500 text-white animate-pulse"
-                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                    }`}
+                    className={`p-1.5 rounded-full transition-all flex-shrink-0 ${isListening
+                      ? "bg-red-500 text-white animate-pulse"
+                      : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                      }`}
                     title={isListening ? "Listening..." : "Voice search"}
                   >
                     {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
@@ -790,11 +789,10 @@ export default function ExpandableSearchBar({
                     key={tab.key}
                     type="button"
                     onClick={() => setActiveTab(tab.key)}
-                    className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                      isSelected
-                        ? "bg-[#009e90] text-white shadow-xs"
-                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200/80"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${isSelected
+                      ? "bg-[#009e90] text-white shadow-xs"
+                      : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200/80"
+                      }`}
                   >
                     {isAr ? tab.labelAr : tab.labelEn}
                   </button>
@@ -944,7 +942,7 @@ export default function ExpandableSearchBar({
                 }
                 setShowAiModal(true);
               }}
-              className="px-3.5 py-1.5 rounded-lg bg-[#009e90] hover:bg-[#008277] text-white font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-lg bg-[#009e90] hover:bg-[#008277] text-white font-extrabold text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer pointer-events-none"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>{isAr ? "اسأل الذكاء الاصطناعي" : "ASK AI"}</span>
