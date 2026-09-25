@@ -343,22 +343,22 @@ const HeroSection = () => {
               {/* Button 1: EXPLORE SERVICES */}
               <Link
                 href="/contact"
-                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+                className="group pl-4 sm:pl-7 pr-1.5 sm:pr-2.5 py-1.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-[11px] sm:text-sm tracking-wider uppercase inline-flex items-center gap-2.5 sm:gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <span>{t.hero.exploreProject}</span>
-                <span className="w-8 h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </span>
               </Link>
 
               {/* Button 2: EXPLORE PROJECT */}
               <Link
                 href="/services"
-                className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00c2b2] hover:bg-[#00d6c4] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-[0_4px_22px_rgba(0,194,178,0.45)] hover:shadow-[0_6px_28px_rgba(0,194,178,0.65)] hover:scale-105 active:scale-95 cursor-pointer"
+                className="group pl-4 sm:pl-7 pr-1.5 sm:pr-2.5 py-1.5 sm:py-2.5 rounded-full bg-[#00c2b2] hover:bg-[#00d6c4] text-white font-bold text-[11px] sm:text-sm tracking-wider uppercase inline-flex items-center gap-2.5 sm:gap-3.5 transition-all duration-300 shadow-[0_4px_22px_rgba(0,194,178,0.45)] hover:shadow-[0_6px_28px_rgba(0,194,178,0.65)] hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <span>{t.hero.exploreServices}</span>
-                <span className="w-8 h-8 rounded-full bg-white text-[#00c2b2] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00c2b2] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                 </span>
               </Link>
 

@@ -838,11 +838,11 @@ const Navbar = () => {
             <Link
               href="/get-a-quote"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full pl-6 pr-2 py-3 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-sm tracking-wider uppercase inline-flex items-center justify-center gap-3 shadow-lg group transition-colors"
+              className="w-full pl-5 pr-1.5 py-2 sm:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center justify-center gap-2.5 shadow-lg group transition-colors"
             >
               <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
-              <span className="w-8 h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center">
-                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center">
+                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
               </span>
             </Link>
           </div>

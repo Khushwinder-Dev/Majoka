@@ -511,23 +511,23 @@ export default function CareerPageContent() {
                 {/* Search Job Button (Solid Teal with White Icon Circle) */}
                 <a
                   href="#all-jobs"
-                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-[#00DDCF] hover:bg-[#00c9bd] active:scale-95 text-white font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 shadow-[0_6px_20px_rgba(0,221,207,0.3)] group cursor-pointer"
+                  className="pl-4 sm:pl-7 pr-1.5 sm:pr-2.5 py-1.5 sm:py-2.5 rounded-full bg-[#00DDCF] hover:bg-[#00c9bd] active:scale-95 text-white font-extrabold text-[11px] sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-2.5 sm:gap-4 transition-all duration-300 shadow-[0_6px_20px_rgba(0,221,207,0.3)] group cursor-pointer"
                 >
                   <span>{isArabic ? "البحث عن وظيفة" : "SEARCH JOB"}</span>
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white text-[#00DDCF] flex items-center justify-center transition-transform group-hover:scale-110 shrink-0">
-                    <Search className="w-4 h-4 stroke-[2.5]" />
+                  <span className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white text-[#00DDCF] flex items-center justify-center transition-transform group-hover:scale-110 shrink-0">
+                    <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
                   </span>
                 </a>
 
                 {/* Create Portfolio Button (Outline with Teal Icon Circle) */}
                 <Link
                   href="/contact"
-                  className="pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white border-2 border-[#00DDCF] hover:bg-[#00DDCF]/5 active:scale-95 text-[#00DDCF] font-extrabold text-xs sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-3 sm:gap-4 transition-all duration-300 group cursor-pointer"
+                  className="pl-4 sm:pl-7 pr-1.5 sm:pr-2.5 py-1.5 sm:py-2.5 rounded-full bg-white border-2 border-[#00DDCF] hover:bg-[#00DDCF]/5 active:scale-95 text-[#00DDCF] font-extrabold text-[11px] sm:text-sm tracking-[0.08em] uppercase inline-flex items-center justify-between gap-2.5 sm:gap-4 transition-all duration-300 group cursor-pointer"
                 >
                   <span>{isArabic ? "إنشاء ملف مهني" : "CREATE PORTFOLIO"}</span>
-                  <span className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 shrink-0">
+                  <span className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 shrink-0">
                     <ArrowRight
-                      className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""
+                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""
                         }`}
                     />
                   </span>

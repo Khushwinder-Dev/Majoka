@@ -225,10 +225,10 @@ export default function LifeAtOurCompanySection() {
 
               <a
                 href="#current-openings"
-                className="inline-flex items-center gap-2.5 bg-[#4ec59b] hover:bg-[#3db88c] active:scale-95 text-[#062c25] font-black text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all duration-200 shadow-md cursor-pointer group"
+                className="inline-flex items-center gap-2 bg-[#4ec59b] hover:bg-[#3db88c] active:scale-95 text-[#062c25] font-black text-[11px] sm:text-sm px-4 sm:px-6 py-2 sm:py-2.5 rounded-full transition-all duration-200 shadow-md cursor-pointer group"
               >
                 <span>{isArabic ? "استكشف الفرص الوظيفية" : "View Career Opportunities"}</span>
-                <ArrowRight className="w-4 h-4 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
               </a>
             </div>
 
