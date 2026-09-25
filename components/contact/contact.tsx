@@ -24,7 +24,7 @@ interface ContactCard {
   id: number;
   icon: React.ElementType;
   title: string;
-  items?: { text: string; link?: string; isAlert?: boolean }[];
+  items?: { text: string; link?: string; isAlert?: boolean; isTeal?: boolean }[];
   content?: string;
   link?: string;
 }
@@ -50,8 +50,8 @@ export default function ContactPage() {
       icon: Phone,
       title: "Phone",
       items: [
-        { text: "+971 55 617 3300", link: "tel:+971556173300" },
-        { text: "+971 52 749 2002", link: "tel:+971527492002" },
+        { text: "+971 55 617 3300" },
+        { text: "+971 52 749 2002" },
       ],
     },
     {
@@ -59,8 +59,8 @@ export default function ContactPage() {
       icon: Mail,
       title: "Email",
       items: [
-        { text: "info@tajalrahmah.com", link: "mailto:info@tajalrahmah.com" },
-        { text: "tajalrahmah@gmail.com", link: "mailto:tajalrahmah@gmail.com" },
+        { text: "info@tajalrahmah.com", isTeal: true },
+        { text: "tajalrahmah@gmail.com" },
       ],
     },
     {
@@ -70,7 +70,6 @@ export default function ContactPage() {
       items: [
         {
           text: "Office G-01-691, Al Khabaisi, Dubai, 00000 Dubai",
-          link: "https://www.google.com/maps/place/TAJ+AL+RAHMAH/@25.3223595,55.3930895,17z/data=!4m6!3m5!1s0x3e5f5bfe0755486f:0xb4a012d339c9440!8m2!3d25.3223595!4d55.3930895!16s%2Fg%2F11ywc1qtc4?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D",
         },
       ],
     },
@@ -260,53 +259,21 @@ export default function ContactPage() {
                       </h3>
                     </div>
 
-                    {/* Content */}
-                    <div className="flex-1 flex flex-col justify-center gap-1">
+                    {/* Content (Static, non-clickable) */}
+                    <div className="flex-1 flex flex-col justify-center gap-1 select-text">
                       {info.items ? (
-                        info.items.map((item, idx) =>
-                          item.link ? (
-                            <a
-                              key={idx}
-                              href={item.link}
-                              target={
-                                info.title === "Location" ? "_blank" : undefined
-                              }
-                              rel={
-                                info.title === "Location"
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                              className="text-lg sm:text-xl font-bold text-gray-700 hover:text-[#01a9a0] transition-colors duration-300 block"
-                            >
-                              {item.text}
-                            </a>
-                          ) : (
-                            <p
-                              key={idx}
-                              className={`text-lg sm:text-xl font-bold leading-relaxed ${item.isAlert ? "text-gray-700" : "text-gray-700"
-                                }`}
-                            >
-                              {item.text}
-                            </p>
-                          )
-                        )
-                      ) : info.link ? (
-                        <a
-                          href={info.link}
-                          target={
-                            info.title === "Location" ? "_blank" : undefined
-                          }
-                          rel={
-                            info.title === "Location"
-                              ? "noopener noreferrer"
-                              : undefined
-                          }
-                          className="text-lg sm:text-xl font-bold text-gray-700 transition-colors duration-300 block"
-                        >
-                          {info.content}
-                        </a>
+                        info.items.map((item, idx) => (
+                          <p
+                            key={idx}
+                            className={`text-lg sm:text-xl font-bold leading-relaxed cursor-default select-text ${
+                              item.isTeal ? "text-[#01a9a0]" : "text-gray-700"
+                            }`}
+                          >
+                            {item.text}
+                          </p>
+                        ))
                       ) : (
-                        <p className="text-lg sm:text-xl font-bold text-gray-700 leading-relaxed">
+                        <p className="text-lg sm:text-xl font-bold text-gray-700 leading-relaxed cursor-default select-text">
                           {info.content}
                         </p>
                       )}
