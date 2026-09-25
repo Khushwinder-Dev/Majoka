@@ -20,7 +20,7 @@ const Certifications = () => {
 
     return (
         <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto" dir={isArabic ? "rtl" : "ltr"}>
+            <div className="max-w-8xl mx-auto" dir={isArabic ? "rtl" : "ltr"}>
 
                 {/* Company Profile Banner */}
                 <div className="relative rounded-2xl overflow-hidden min-h-[160px] sm:min-h-[180px]">
@@ -37,8 +37,8 @@ const Certifications = () => {
                     {/* Overlay */}
                     <div
                         className={`absolute inset-0 pointer-events-none ${isArabic
-                                ? "bg-gradient-to-l from-white/90 via-white/60 to-transparent"
-                                : "bg-gradient-to-r from-white/90 via-white/60 to-transparent"
+                            ? "bg-gradient-to-l from-white/90 via-white/60 to-transparent"
+                            : "bg-gradient-to-r from-white/90 via-white/60 to-transparent"
                             }`}
                     />
 
