@@ -169,8 +169,11 @@ const HeroSection = () => {
     >
       {/* 1. Background Image Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo && !isVideoPaused
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100"
+        }`}
       >
         <Image
           src="/banners/Home__.png"
@@ -185,8 +188,11 @@ const HeroSection = () => {
 
       {/* 2. Background Video Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo && !isVideoPaused
+            ? "opacity-100"
+            : "opacity-0 pointer-events-none"
+        }`}
       >
         <video
           ref={videoRef}
@@ -360,8 +366,8 @@ const HeroSection = () => {
           {/* Right Column: Circular Play Button (Columns 9-12) */}
           <div className="lg:col-span-4 flex items-center justify-center lg:justify-start lg:pl-6 pt-4 lg:pt-0">
             <div className="relative group">
-              {/* Ambient Pulsing Halo when in photo mode */}
-              {!isPlayingVideo && (
+              {/* Ambient Pulsing Halo when in photo mode or paused */}
+              {(!isPlayingVideo || isVideoPaused) && (
                 <span className="absolute inset-0 rounded-full bg-[#00c2b2]/25 animate-ping duration-1000 pointer-events-none" />
               )}
 
