@@ -243,7 +243,7 @@ const careersMegaMenu = {
     items: [
       { icon: "arrow", title: "Why Join Us", sub: "What makes us a great place to build your career.", href: "/career#why-join-us" },
       { icon: "arrow", title: "Current Openings", sub: "Explore our latest career opportunities.", href: "/career#current-openings" },
-      { icon: "arrow", title: "Life at Our Company", sub: "Discover our workplace and culture.", href: "/career" },
+      { icon: "arrow", title: "Life at Our Company", sub: "Discover our workplace and culture.", href: "/career#life-at-our-company" },
       { icon: "arrow", title: "Submit Your CV", sub: "Share your CV for current or future opportunities.", href: "/career/1#apply" },
       { icon: "arrow", title: "Recruitment Process", sub: "Learn about our hiring process.", href: "/career#recruitment-process" },
       { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career#faqs" },
@@ -258,7 +258,7 @@ const careersMegaMenu = {
     items: [
       { icon: "arrow", title: "لماذا تنضم إلينا", sub: "ما يجعل شركتنا المكان المثالي لبناء مسيرتك المهنية.", href: "/career#why-join-us" },
       { icon: "arrow", title: "الوظائف الشاغرة", sub: "استكشف أحدث الفرص الوظيفية المتاحة لدينا.", href: "/career#current-openings" },
-      { icon: "arrow", title: "بيئة العمل وثقافتنا", sub: "اكتشف ثقافة العمل وبيئتنا المهنية المتميزة.", href: "/career" },
+      { icon: "arrow", title: "بيئة العمل وثقافتنا", sub: "اكتشف ثقافة العمل وبيئتنا المهنية المتميزة.", href: "/career#life-at-our-company" },
       { icon: "arrow", title: "أرسل سيرتك الذاتية", sub: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.", href: "/career/1#apply" },
       { icon: "arrow", title: "آلية التوظيف", sub: "تعرف على مراحل التوظيف والاختيار في شركتنا.", href: "/career#recruitment-process" },
       { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career#faqs" },

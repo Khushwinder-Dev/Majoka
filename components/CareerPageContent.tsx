@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
+import LifeAtOurCompanySection from "@/components/LifeAtOurCompanySection";
 
 /* ─── DATA FOR JOBS ─────────────────────────────────────────────────── */
 interface JobItem {
@@ -538,6 +539,11 @@ export default function CareerPageContent() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          LIFE AT OUR COMPANY SECTION (Great People Build Great Projects)
+      ══════════════════════════════════════════════════════════════ */}
+      <LifeAtOurCompanySection />
 
       {/* ══════════════════════════════════════════════════════════════
           3. SECTION: ALL JOBS LISTINGS & PAGINATION
