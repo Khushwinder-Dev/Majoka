@@ -164,7 +164,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24] select-none"
+      className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden bg-[#021f24]"
       dir={isArabic ? "rtl" : "ltr"}
     >
       {/* 1. Background Image Banner */}

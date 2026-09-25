@@ -342,7 +342,7 @@ export default function CareerPageContent() {
                     }}
                   >
                     <span
-                      className="text-white font-black text-[12px] sm:text-[13px] tracking-[0.14em] uppercase whitespace-nowrap select-none"
+                      className="text-white font-black text-[12px] sm:text-[13px] tracking-[0.14em] uppercase whitespace-nowrap"
                       style={{
                         transform: isArabic ? "rotate(90deg)" : "rotate(-90deg)",
                       }}

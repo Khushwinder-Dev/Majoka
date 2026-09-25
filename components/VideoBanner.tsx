@@ -67,7 +67,7 @@ const VideoBanner = () => {
         id="video-banner-mute-toggle"
         onClick={toggleMute}
         aria-label={isMuted ? "Unmute video" : "Mute video"}
-        className="absolute bottom-6 right-6 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full text-white text-sm font-semibold cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+        className="absolute bottom-6 right-6 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full text-white text-sm font-semibold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
         style={{
           background: "rgba(255,255,255,0.12)",
           backdropFilter: "blur(10px)",

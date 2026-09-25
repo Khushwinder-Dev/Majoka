@@ -52,3 +52,37 @@ input[type="number"],
 input:not([type]) {
   border-radius: 9999px;
 }
+
+/* Enable text selection and copy across the entire site */
+html,
+body,
+div,
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+a,
+blockquote,
+article,
+section,
+td,
+th {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Branded text selection highlight */
+::selection {
+  background-color: #00c2b2;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #00c2b2;
+  color: #ffffff;
+}

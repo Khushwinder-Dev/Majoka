@@ -351,7 +351,7 @@ export default function ProductsPage() {
                                 {isChecked && <Check className="w-3 h-3 stroke-[3]" />}
                               </div>
                               <span
-                                className={`transition-colors select-none ${isChecked
+                                className={`transition-colors ${isChecked
                                   ? "font-semibold text-gray-900"
                                   : "text-gray-600 group-hover:text-gray-900"
                                   }`}
