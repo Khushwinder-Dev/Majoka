@@ -212,7 +212,7 @@ const resourcesMegaMenu = {
       { icon: "arrow", title: "Media", sub: "Explore our latest news, stories, and media highlights.", href: "/media" },
       { icon: "arrow", title: "FAQs", sub: "Find quick answers to frequently asked questions.", href: "/faqs" },
       { icon: "arrow", title: "Warranty", sub: "Learn about our warranty coverage and terms.", href: "/warranty" },
-      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/resources" },
+      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/download" },
     ],
   },
   ar: {
@@ -227,7 +227,7 @@ const resourcesMegaMenu = {
       { icon: "arrow", title: "الوسائط", sub: "استكشف آخر الأخبار والقصص والتغطيات الإعلامية.", href: "/media" },
       { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات سريعة وشاملة عن الأسئلة المتكررة.", href: "/faqs" },
       { icon: "arrow", title: "الضمان", sub: "تعرف على شروط تغطية الضمان وسياساتنا المعتمدة.", href: "/warranty" },
-      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/resources" },
+      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/download" },
     ],
   },
 };
