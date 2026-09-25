@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, CheckCircle2, ArrowRight, ArrowLeft, Sparkles, Tag, ChevronDown, Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 
 // Set to false after client demo to restore once-per-session behavior.
 const SHOW_ON_EVERY_RELOAD = true;
@@ -140,12 +141,12 @@ export default function WelcomeOfferModal() {
   if (!isOpen) return null;
 
   const projectTypeOptions = [
-    { value: "Waterproofing", labelEn: "Waterproofing", labelAr: "العزل المائي" },
-    { value: "Roofing", labelEn: "Roofing", labelAr: "الأسقف والأسطح" },
-    { value: "Repair", labelEn: "Repair", labelAr: "الإصلاح والترميم" },
-    { value: "Insulation", labelEn: "Insulation", labelAr: "العزل الحراري" },
-    { value: "Flooring", labelEn: "Flooring", labelAr: "حلول الأرضيات" },
-    { value: "Other", labelEn: "Other", labelAr: "أخرى" },
+    { value: "Waterproofing", label: "Waterproofing", labelAr: "العزل المائي" },
+    { value: "Roofing", label: "Roofing", labelAr: "الأسقف والأسطح" },
+    { value: "Repair", label: "Repair", labelAr: "الإصلاح والترميم" },
+    { value: "Insulation", label: "Insulation", labelAr: "العزل الحراري" },
+    { value: "Flooring", label: "Flooring", labelAr: "حلول الأرضيات" },
+    { value: "Other", label: "Other", labelAr: "أخرى" },
   ];
 
   return (
@@ -351,38 +352,19 @@ export default function WelcomeOfferModal() {
                 </div>
 
                 {/* Field 4: Project Type * */}
-                <div className="relative">
-                  <select
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    required
-                    disabled={isSubmitting}
-                    dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right pl-9 pr-4" : "text-left pr-9 pl-4"
-                      }`}
-                  >
-                    <option value="" disabled hidden></option>
-                    {projectTypeOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {isArabic ? opt.labelAr : opt.labelEn}
-                      </option>
-                    ))}
-                  </select>
-                  <label
-                    className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
-                      } ${formData.projectType
-                        ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
-                        : "top-1/2 -translate-y-1/2 text-xs text-stone-400"
-                      }`}
-                  >
-                    {isArabic ? "نوع المشروع" : "Project Type"} <span className="text-red-500">*</span>
-                  </label>
-                  <ChevronDown
-                    className={`w-4 h-4 text-stone-400 pointer-events-none absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-4" : "right-4"
-                      }`}
-                  />
-                </div>
+                <SearchableSelect
+                  name="projectType"
+                  value={formData.projectType}
+                  options={projectTypeOptions}
+                  label={isArabic ? "نوع المشروع" : "Project Type"}
+                  required
+                  disabled={isSubmitting}
+                  isArabic={isArabic}
+                  size="sm"
+                  onChange={(val) =>
+                    setFormData((prev) => ({ ...prev, projectType: val }))
+                  }
+                />
               </div>
 
               {/* Action Buttons: Managed Primary CTA & Secondary Dismiss */}

@@ -12,6 +12,7 @@ import {
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
 
 interface QuoteFaqItem {
   id: number;
@@ -20,6 +21,17 @@ interface QuoteFaqItem {
   answerEn: string;
   answerAr: string;
 }
+
+const PROJECT_TYPE_OPTIONS: SearchableSelectOption[] = [
+  { value: "Combo Waterproofing", label: "Combo Waterproofing", labelAr: "عزل الأسطح والمباني (Combo Waterproofing)" },
+  { value: "Sub-Structure Waterproofing", label: "Sub-Structure Waterproofing", labelAr: "عزل الأساسات والهياكل تحت الأرض" },
+  { value: "Wet Area Waterproofing", label: "Wet Area Waterproofing", labelAr: "عزل المناطق الرطبة (حمامات ومطابخ)" },
+  { value: "Thermal & Sound Insulation", label: "Thermal & Sound Insulation", labelAr: "العزل الحراري والصوتي" },
+  { value: "Industrial Flooring & Coating", label: "Industrial Flooring & Coating", labelAr: "أرضيات الإيبوكسي والطلاء الصناعي" },
+  { value: "Concrete Repair & Injection", label: "Concrete Repair & Injection", labelAr: "إصلاح الخرسانة وحقن الشروخ" },
+  { value: "Expansion Joint Treatment", label: "Expansion Joint Treatment", labelAr: "معالجة فواصل التمدد" },
+  { value: "Other Specialist Services", label: "Other Specialist Services", labelAr: "خدمات فنية متخصصة أخرى" },
+];
 
 const QUOTE_FAQS: QuoteFaqItem[] = [
   {
@@ -453,39 +465,18 @@ export default function GetAQuoteContent() {
                   {/* Row 3: Project Type & Project Location */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Project Type Dropdown */}
-                    <div className="relative">
-                      <select
-                        name="projectType"
-                        value={formData.projectType}
-                        onChange={handleInputChange}
-                        required
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all appearance-none cursor-pointer ${isArabic ? "text-right" : "text-left"
-                          }`}
-                      >
-                        <option value="" disabled hidden></option>
-                        <option value="Combo Waterproofing">{isArabic ? "عزل الأسطح والمباني (Combo Waterproofing)" : "Combo Waterproofing"}</option>
-                        <option value="Sub-Structure Waterproofing">{isArabic ? "عزل الأساسات والهياكل تحت الأرض" : "Sub-Structure Waterproofing"}</option>
-                        <option value="Wet Area Waterproofing">{isArabic ? "عزل المناطق الرطبة (حمامات ومطابخ)" : "Wet Area Waterproofing"}</option>
-                        <option value="Thermal & Sound Insulation">{isArabic ? "العزل الحراري والصوتي" : "Thermal & Sound Insulation"}</option>
-                        <option value="Industrial Flooring & Coating">{isArabic ? "أرضيات الإيبوكسي والطلاء الصناعي" : "Industrial Flooring & Coating"}</option>
-                        <option value="Concrete Repair & Injection">{isArabic ? "إصلاح الخرسانة وحقن الشروخ" : "Concrete Repair & Injection"}</option>
-                        <option value="Expansion Joint Treatment">{isArabic ? "معالجة فواصل التمدد" : "Expansion Joint Treatment"}</option>
-                        <option value="Other Specialist Services">{isArabic ? "خدمات فنية متخصصة أخرى" : "Other Specialist Services"}</option>
-                      </select>
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } ${formData.projectType
-                            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                            : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
-                          }`}
-                      >
-                        {isArabic ? "نوع المشروع / الخدمة" : "Project Type"} <span className="text-red-500">*</span>
-                      </label>
-                      <div className={`absolute ${isArabic ? "left-5" : "right-5"} top-1/2 -translate-y-1/2 pointer-events-none text-stone-400 text-xs`}>
-                        ▼
-                      </div>
-                    </div>
+                    <SearchableSelect
+                      name="projectType"
+                      value={formData.projectType}
+                      options={PROJECT_TYPE_OPTIONS}
+                      label={isArabic ? "نوع المشروع / الخدمة" : "Project Type"}
+                      placeholder=""
+                      required
+                      isArabic={isArabic}
+                      onChange={(val) =>
+                        setFormData((prev) => ({ ...prev, projectType: val }))
+                      }
+                    />
 
                     {/* Project Location */}
                     <div className="relative">

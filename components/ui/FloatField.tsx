@@ -140,3 +140,6 @@ export function FloatTextarea({
     </div>
   );
 }
+
+export { default as SearchableSelect } from "./SearchableSelect";
+export type { SearchableSelectOption, SearchableSelectProps } from "./SearchableSelect";
