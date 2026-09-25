@@ -237,7 +237,7 @@ const careersMegaMenu = {
   en: {
     label: "CAREERS",
     tagline: "Build Your Career With Engineering Excellence",
-    cardImage: "/career/Rectangle 34625030.png",
+    cardImage: "/career/a.png",
     cta: "Explore More",
     ctaHref: "/career",
     items: [
@@ -252,7 +252,7 @@ const careersMegaMenu = {
   ar: {
     label: "الوظائف",
     tagline: "ابنِ مسيرتك المهنية مع رواد التميز الهندسي",
-    cardImage: "/career/Rectangle 34625030.png",
+    cardImage: "/career/a.png",
     cta: "استكشف المزيد",
     ctaHref: "/career",
     items: [
@@ -279,7 +279,7 @@ const companyMegaMenu = {
       { icon: "arrow", title: "Our Expertise", sub: "Our skills and capabilities.", href: "/expertise" },
       { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/#why-choose-us" },
       { icon: "arrow", title: "Certifications", sub: "Our credentials and approvals.", href: "/certifications" },
-      { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us" },
+      { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us#company-profile" },
       { icon: "arrow", title: "Contact Us", sub: "Connect with our team.", href: "/contact" },
     ],
   },
@@ -294,7 +294,7 @@ const companyMegaMenu = {
       { icon: "arrow", title: "خبراتنا", sub: "مهاراتنا الفنية وقدراتنا المتخصصة.", href: "/expertise" },
       { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/#why-choose-us" },
       { icon: "arrow", title: "الشهادات والاعتمادات", sub: "شهاداتنا واعتماداتنا الرسمية.", href: "/certifications" },
-      { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us" },
+      { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us#company-profile" },
       { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة.", href: "/contact" },
     ],
   },
@@ -479,13 +479,16 @@ const Navbar = () => {
                   href={item.href}
                   onClick={(e) => {
                     setActiveMega(null);
-                    if (item.href.startsWith("/#") && pathname === "/") {
-                      e.preventDefault();
-                      const id = item.href.replace("/#", "");
-                      const el = document.getElementById(id);
-                      if (el) {
-                        el.scrollIntoView({ behavior: "smooth" });
-                        window.history.pushState(null, "", item.href);
+                    if (item.href.includes("#")) {
+                      const [targetPath, hash] = item.href.split("#");
+                      const isCurrent = (targetPath === "" && pathname === "/") || targetPath === pathname;
+                      if (isCurrent && hash) {
+                        e.preventDefault();
+                        const el = document.getElementById(hash);
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth" });
+                          window.history.pushState(null, "", item.href);
+                        }
                       }
                     }
                   }}
@@ -785,13 +788,16 @@ const Navbar = () => {
                             onClick={(e) => {
                               setIsMobileMenuOpen(false);
                               setMobileExpanded(null);
-                              if (sub.href.startsWith("/#") && pathname === "/") {
-                                e.preventDefault();
-                                const id = sub.href.replace("/#", "");
-                                const el = document.getElementById(id);
-                                if (el) {
-                                  el.scrollIntoView({ behavior: "smooth" });
-                                  window.history.pushState(null, "", sub.href);
+                              if (sub.href.includes("#")) {
+                                const [targetPath, hash] = sub.href.split("#");
+                                const isCurrent = (targetPath === "" && pathname === "/") || targetPath === pathname;
+                                if (isCurrent && hash) {
+                                  e.preventDefault();
+                                  const el = document.getElementById(hash);
+                                  if (el) {
+                                    el.scrollIntoView({ behavior: "smooth" });
+                                    window.history.pushState(null, "", sub.href);
+                                  }
                                 }
                               }
                             }}

@@ -16,10 +16,27 @@ const Certifications = () => {
             once: true,
             offset: 100,
         });
+
+        const scrollToSection = () => {
+            if (typeof window !== "undefined" && window.location.hash === "#company-profile") {
+                const el = document.getElementById("company-profile");
+                if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        };
+
+        scrollToSection();
+        const timer = setTimeout(scrollToSection, 300);
+        window.addEventListener("hashchange", scrollToSection);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener("hashchange", scrollToSection);
+        };
     }, []);
 
     return (
-        <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <section id="company-profile" className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8 scroll-mt-24">
             <div className="max-w-8xl mx-auto" dir={isArabic ? "rtl" : "ltr"}>
 
                 {/* Company Profile Banner */}
