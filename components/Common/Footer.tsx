@@ -44,7 +44,7 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="flex items-center gap-2 text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
+      className="flex items-center gap-2 text-xs sm:text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
     >
       <ArrowRight
         className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
@@ -58,11 +58,11 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 function ContactItem({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-3">
-      <div className="flex-shrink-0 w-11 h-11 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
+    <div className="flex items-start gap-2.5 sm:gap-3">
+      <div className="flex-shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
         {icon}
       </div>
-      <div className="flex flex-col gap-0.5 pt-2 text-sm text-stone-700 font-normal min-w-0">
+      <div className="flex flex-col gap-0.5 pt-1 sm:pt-2 text-xs sm:text-sm text-stone-700 font-normal min-w-0 flex-1 leading-snug">
         {children}
       </div>
     </div>
@@ -222,7 +222,7 @@ export default function Footer() {
 
           {/* ── 5-column grid ───────────────────────────────────────────── */}
           <div className="pt-12 sm:pt-14 lg:pt-16 pb-10 sm:pb-12">
-            <div className="grid grid-cols-12 gap-8 lg:gap-6 xl:gap-8">
+            <div className="grid grid-cols-12 gap-5 sm:gap-8 lg:gap-6 xl:gap-8">
 
               {/* COL 1 — Brand */}
               <div className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-4">
@@ -298,23 +298,23 @@ export default function Footer() {
               {/* COL 5 — Contact */}
               <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
                 <FooterHeading title={t.footer.contactTitle} />
-                <div className="flex flex-col gap-4">
-                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="phone" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
+                <div className="flex flex-col gap-3.5 sm:gap-4">
+                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="phone" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
                     <Link href={`tel:${t.footer.phone1.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone1}</Link>
                     <Link href={`tel:${t.footer.phone2.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="email" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
-                    <Link href={`mailto:${t.footer.email1}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email1}</Link>
-                    <Link href={`mailto:${t.footer.email2}`} className="hover:text-[#01a9a0] transition-colors break-all">{t.footer.email2}</Link>
+                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="email" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
+                    <Link href={`mailto:${t.footer.email1}`} className="hover:text-[#01a9a0] transition-colors break-words">{t.footer.email1}</Link>
+                    <Link href={`mailto:${t.footer.email2}`} className="hover:text-[#01a9a0] transition-colors break-words">{t.footer.email2}</Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="location" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="location" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
                     <span className="whitespace-pre-line leading-relaxed">{t.footer.location}</span>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="hours" width={24} height={24} unoptimized className="w-6 h-6 object-contain brightness-0 invert" />}>
-                    <span>{t.footer.workingHours}</span>
+                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="hours" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
+                    <span className="leading-snug">{t.footer.workingHours}</span>
                     <span className="text-stone-400 text-xs">{t.footer.closedDay}</span>
                   </ContactItem>
                 </div>
@@ -324,7 +324,7 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar ──────────────────────────────────────────────── */}
-          <div className="relative border-t border-stone-300/40 pt-9 pb-5 sm:pb-6">
+          <div className="relative border-t border-stone-300/40 pt-9 pb-20 sm:pb-6">
 
             {/* Scroll-to-top — sits centered ON the divider line */}
             <div className="absolute -top-6 left-1/2 -translate-x-1/2">
