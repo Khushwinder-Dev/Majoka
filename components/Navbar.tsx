@@ -271,13 +271,13 @@ const companyMegaMenu = {
   en: {
     label: "COMPANY",
     tagline: "Engineering Excellence Across the UAE",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/qw.jpeg",
     cta: "Explore More",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "About Us", sub: "Who we are and what we do.", href: "/about-us" },
       { icon: "arrow", title: "Our Expertise", sub: "Our skills and capabilities.", href: "/expertise" },
-      { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/about-us" },
+      { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/#why-choose-us" },
       { icon: "arrow", title: "Certifications", sub: "Our credentials and approvals.", href: "/certifications" },
       { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us" },
       { icon: "arrow", title: "Contact Us", sub: "Connect with our team.", href: "/contact" },
@@ -286,13 +286,13 @@ const companyMegaMenu = {
   ar: {
     label: "الشركة",
     tagline: "الريادة والتميز الهندسي في الإمارات",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/qw.jpeg",
     cta: "استكشف المزيد",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "من نحن", sub: "من نحن ورؤيتنا وما نقوم به.", href: "/about-us" },
       { icon: "arrow", title: "خبراتنا", sub: "مهاراتنا الفنية وقدراتنا المتخصصة.", href: "/expertise" },
-      { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/about-us" },
+      { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/#why-choose-us" },
       { icon: "arrow", title: "الشهادات والاعتمادات", sub: "شهاداتنا واعتماداتنا الرسمية.", href: "/certifications" },
       { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us" },
       { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة.", href: "/contact" },
@@ -477,7 +477,18 @@ const Navbar = () => {
                 <Link
                   key={i}
                   href={item.href}
-                  onClick={() => setActiveMega(null)}
+                  onClick={(e) => {
+                    setActiveMega(null);
+                    if (item.href.startsWith("/#") && pathname === "/") {
+                      e.preventDefault();
+                      const id = item.href.replace("/#", "");
+                      const el = document.getElementById(id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                        window.history.pushState(null, "", item.href);
+                      }
+                    }
+                  }}
                   className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
                 >
                   {/* Icon box */}
@@ -771,19 +782,24 @@ const Navbar = () => {
                           <Link
                             key={i}
                             href={sub.href}
-                            onClick={() => { setIsMobileMenuOpen(false); setMobileExpanded(null); }}
+                            onClick={(e) => {
+                              setIsMobileMenuOpen(false);
+                              setMobileExpanded(null);
+                              if (sub.href.startsWith("/#") && pathname === "/") {
+                                e.preventDefault();
+                                const id = sub.href.replace("/#", "");
+                                const el = document.getElementById(id);
+                                if (el) {
+                                  el.scrollIntoView({ behavior: "smooth" });
+                                  window.history.pushState(null, "", sub.href);
+                                }
+                              }
+                            }}
                             className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 transition-colors group"
                           >
                             {/* Icon */}
                             <div className="w-8 h-8 rounded-lg bg-[#009e90]/20 border border-[#009e90]/20 flex items-center justify-center flex-shrink-0">
-                              <Image
-                                src={sub.icon}
-                                alt={sub.title}
-                                width={16}
-                                height={16}
-                                className="object-contain"
-                                unoptimized
-                              />
+                              <NavIcon src={sub.icon} alt={sub.title} size={16} />
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-[12.5px] font-semibold text-white/90 group-hover:text-[#00c2b2] transition-colors truncate leading-snug">
