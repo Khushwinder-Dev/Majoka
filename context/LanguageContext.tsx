@@ -178,7 +178,7 @@ const translations: Record<Language, Translations> = {
       description:
         "Proven Expertise And Superior Craftsmanship, Delivering Durable Solutions That Protect And Last.",
       exploreServices: "EXPLORE SERVICES",
-      exploreProject: "EXPLORE PROJECT",
+      exploreProject: "BOOK A MEETING",
       stat1: "Year Of Experience",
       stat2: "Project Completed",
       stat3: "Satisfied Clients",

@@ -334,7 +334,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap items-center gap-4 sm:gap-5">
               {/* Button 1: EXPLORE SERVICES */}
               <Link
-                href="/project"
+                href="/contact"
                 className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <span>{t.hero.exploreProject}</span>
