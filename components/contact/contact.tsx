@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 
 interface FormData {
   fullName: string;
+  companyName: string;
   phone: string;
   email: string;
   message: string;
@@ -32,6 +33,7 @@ interface ContactCard {
 export default function ContactPage() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
+    companyName: "",
     phone: "",
     email: "",
     message: "",
@@ -104,7 +106,15 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          company: formData.companyName,
+          phone: formData.phone,
+          email: formData.email,
+          message: formData.companyName
+            ? `Company: ${formData.companyName}\n${formData.message}`
+            : formData.message,
+        }),
       });
 
       const data = await response.json();
@@ -129,6 +139,7 @@ export default function ContactPage() {
         // Reset form
         setFormData({
           fullName: "",
+          companyName: "",
           phone: "",
           email: "",
           message: "",
@@ -345,6 +356,29 @@ export default function ContactPage() {
                       }`}
                   >
                     Name
+                  </label>
+                </div>
+
+                {/* Company Name Field (Optional) */}
+                <div className="relative">
+                  <input
+                    type="text"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                    onFocus={() => setFocusedField("companyName")}
+                    onBlur={() => setFocusedField(null)}
+                    placeholder=" "
+                    disabled={isSubmitting}
+                    className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  <label
+                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.companyName || focusedField === "companyName"
+                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                      : "top-3.5 text-sm text-stone-400"
+                      }`}
+                  >
+                    Company Name (Optional)
                   </label>
                 </div>
 
