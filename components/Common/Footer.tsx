@@ -347,7 +347,10 @@ export default function Footer() {
               </p>
 
               {/* Legal links */}
-              <div className="flex items-center justify-center sm:justify-end gap-4 sm:gap-5 text-sm text-stone-600">
+              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-5 text-sm text-stone-600">
+                <Link href="/refund-policy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
+                  {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
+                </Link>
                 <Link href="/terms" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "شروط الاستخدام" : "Terms of Use"}
                 </Link>
