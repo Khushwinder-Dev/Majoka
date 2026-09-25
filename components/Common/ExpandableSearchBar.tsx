@@ -846,13 +846,6 @@ export default function ExpandableSearchBar({
                     </button>
                   )}
 
-                  {/* Keyboard Shortcut Badge (Ctrl K) when empty */}
-                  {!searchQuery && (
-                    <span className="hidden sm:inline-flex items-center gap-0.5 text-[10px] font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 flex-shrink-0 ml-1">
-                      <span>Ctrl</span>
-                      <span>K</span>
-                    </span>
-                  )}
 
                   {/* Clear Text X button */}
                   {searchQuery.length > 0 && (
