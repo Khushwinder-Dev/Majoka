@@ -537,7 +537,8 @@ const JobApplicationPage = () => {
 
             {/* Right Side - Application Form (1 column) */}
             <motion.div
-              className="lg:col-span-2"
+              id="apply"
+              className="lg:col-span-2 scroll-mt-24"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
