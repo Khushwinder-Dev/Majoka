@@ -542,7 +542,8 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           3. SECTION: ALL JOBS LISTINGS & PAGINATION
       ══════════════════════════════════════════════════════════════ */}
-      <section id="all-jobs" className="relative w-full py-16 sm:py-20 bg-white">
+      <section id="current-openings" className="relative w-full py-16 sm:py-20 bg-white scroll-mt-20">
+        <span id="all-jobs" className="scroll-mt-20" />
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Header Row: Title on Left, Filter Pills on Right */}
@@ -665,7 +666,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           4. SECTION: HOW IT WORKS SIMPLE EFFICIENT (HIRING PROCESS)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F2FBF9] overflow-hidden">
+      <section id="recruitment-process" className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F2FBF9] overflow-hidden scroll-mt-20">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Section Header */}
