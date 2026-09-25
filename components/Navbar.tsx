@@ -246,7 +246,7 @@ const careersMegaMenu = {
       { icon: "arrow", title: "Life at Our Company", sub: "Discover our workplace and culture.", href: "/career" },
       { icon: "arrow", title: "Submit Your CV", sub: "Share your CV for current or future opportunities.", href: "/career" },
       { icon: "arrow", title: "Recruitment Process", sub: "Learn about our hiring process.", href: "/career#recruitment-process" },
-      { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career" },
+      { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career#faqs" },
     ],
   },
   ar: {
@@ -261,7 +261,7 @@ const careersMegaMenu = {
       { icon: "arrow", title: "بيئة العمل وثقافتنا", sub: "اكتشف ثقافة العمل وبيئتنا المهنية المتميزة.", href: "/career" },
       { icon: "arrow", title: "أرسل سيرتك الذاتية", sub: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.", href: "/career" },
       { icon: "arrow", title: "آلية التوظيف", sub: "تعرف على مراحل التوظيف والاختيار في شركتنا.", href: "/career#recruitment-process" },
-      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career" },
+      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career#faqs" },
     ],
   },
 };
