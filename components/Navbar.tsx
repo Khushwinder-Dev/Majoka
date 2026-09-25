@@ -237,7 +237,7 @@ const careersMegaMenu = {
   en: {
     label: "CAREERS",
     tagline: "Build Your Career With Engineering Excellence",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/career/Rectangle 34625030.png",
     cta: "Explore More",
     ctaHref: "/career",
     items: [
@@ -252,7 +252,7 @@ const careersMegaMenu = {
   ar: {
     label: "الوظائف",
     tagline: "ابنِ مسيرتك المهنية مع رواد التميز الهندسي",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/career/Rectangle 34625030.png",
     cta: "استكشف المزيد",
     ctaHref: "/career",
     items: [
