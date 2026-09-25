@@ -100,13 +100,13 @@ export default function Footer() {
 
   // Resources labels from reference design
   const resourcesLabels = isArabic
-    ? ["الوسائط", "المنتجات", "احصل على عرض سعر", "الأسئلة الشائعة", "المدونة", "الدعم", "الضمان"]
-    : ["Media", "Products", "Get a Quote", "FAQs", "Blog", "Support", "Warranty"];
+    ? ["الوسائط", "التحميلات", "احصل على عرض سعر", "الأسئلة الشائعة", "المدونة", "الدعم", "الضمان"]
+    : ["Media", "Download", "Get a Quote", "FAQs", "Blog", "Support", "Warranty"];
 
   // Resources hrefs
   const resourcesHrefs = [
     "/media",
-    "/products",
+    "/download",
     "/get-a-quote",
     "/faqs",
     "/blogs",

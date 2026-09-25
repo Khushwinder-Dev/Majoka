@@ -102,13 +102,13 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
-    if (isPlayingVideo) return;
+    if (isPlayingVideo && !isVideoPaused) return;
     const timer = setInterval(() => {
       setDirection(1);
       setSlideIndex((current) => (current + 1) % slides.length);
     }, 7000);
     return () => clearInterval(timer);
-  }, [isPlayingVideo, slides.length, slideIndex]);
+  }, [isPlayingVideo, isVideoPaused, slides.length, slideIndex]);
 
   const statsData = [
     { value: 17, suffix: "+", label: t.hero.stat1 },
@@ -169,8 +169,11 @@ const HeroSection = () => {
     >
       {/* 1. Background Image Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo && !isVideoPaused
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100"
+        }`}
       >
         <Image
           src="/banners/Home__.png"
@@ -185,8 +188,11 @@ const HeroSection = () => {
 
       {/* 2. Background Video Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
+          isPlayingVideo && !isVideoPaused
+            ? "opacity-100"
+            : "opacity-0 pointer-events-none"
+        }`}
       >
         <video
           ref={videoRef}
@@ -298,7 +304,16 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Left Text & CTAs (Columns 1-8) */}
           <div className="lg:col-span-8 flex flex-col items-start text-start min-h-[280px] sm:min-h-[320px] lg:min-h-[340px]">
-            <div className="relative w-full overflow-hidden">
+            {/* Fixed Eyebrow - Fixed all the time */}
+            <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
+              <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
+              <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
+                {t.hero.eyebrow}
+              </span>
+            </div>
+
+            {/* Slider Content - Only animation change */}
+            <div className="relative w-full overflow-hidden min-h-[190px] sm:min-h-[230px] lg:min-h-[260px]">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.div
                   key={slideIndex}
@@ -309,13 +324,6 @@ const HeroSection = () => {
                   exit="exit"
                   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="flex items-center gap-2.5 mb-3 sm:mb-4">
-                    <span className="w-6 sm:w-8 h-[2px] bg-[#00c2b2]" />
-                    <span className="text-[#00c2b2] text-xs sm:text-sm font-bold tracking-[0.18em] uppercase font-anek">
-                      {t.hero.eyebrow}
-                    </span>
-                  </div>
-
                   <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-[66px] xl:text-[74px] font-bold leading-[1.08] tracking-tight font-anek">
                     {activeSlide.titlePart1} <br />
                     <span className="text-[#00c2b2] drop-shadow-[0_2px_20px_rgba(0,194,178,0.4)]">
@@ -334,7 +342,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap items-center gap-4 sm:gap-5">
               {/* Button 1: EXPLORE SERVICES */}
               <Link
-                href="/project"
+                href="/contact"
                 className="group pl-6 pr-2 py-2 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <span>{t.hero.exploreProject}</span>
@@ -360,8 +368,8 @@ const HeroSection = () => {
           {/* Right Column: Circular Play Button (Columns 9-12) */}
           <div className="lg:col-span-4 flex items-center justify-center lg:justify-start lg:pl-6 pt-4 lg:pt-0">
             <div className="relative group">
-              {/* Ambient Pulsing Halo when in photo mode */}
-              {!isPlayingVideo && (
+              {/* Ambient Pulsing Halo when in photo mode or paused */}
+              {(!isPlayingVideo || isVideoPaused) && (
                 <span className="absolute inset-0 rounded-full bg-[#00c2b2]/25 animate-ping duration-1000 pointer-events-none" />
               )}
 

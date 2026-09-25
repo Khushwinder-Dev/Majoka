@@ -212,7 +212,7 @@ const resourcesMegaMenu = {
       { icon: "arrow", title: "Media", sub: "Explore our latest news, stories, and media highlights.", href: "/media" },
       { icon: "arrow", title: "FAQs", sub: "Find quick answers to frequently asked questions.", href: "/faqs" },
       { icon: "arrow", title: "Warranty", sub: "Learn about our warranty coverage and terms.", href: "/warranty" },
-      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/resources" },
+      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/download" },
     ],
   },
   ar: {
@@ -227,7 +227,7 @@ const resourcesMegaMenu = {
       { icon: "arrow", title: "الوسائط", sub: "استكشف آخر الأخبار والقصص والتغطيات الإعلامية.", href: "/media" },
       { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات سريعة وشاملة عن الأسئلة المتكررة.", href: "/faqs" },
       { icon: "arrow", title: "الضمان", sub: "تعرف على شروط تغطية الضمان وسياساتنا المعتمدة.", href: "/warranty" },
-      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/resources" },
+      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/download" },
     ],
   },
 };
@@ -237,31 +237,31 @@ const careersMegaMenu = {
   en: {
     label: "CAREERS",
     tagline: "Build Your Career With Engineering Excellence",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/career/b.png",
     cta: "Explore More",
     ctaHref: "/career",
     items: [
-      { icon: "arrow", title: "Why Join Us", sub: "What makes us a great place to build your career.", href: "/career" },
-      { icon: "arrow", title: "Current Openings", sub: "Explore our latest career opportunities.", href: "/career" },
+      { icon: "arrow", title: "Why Join Us", sub: "What makes us a great place to build your career.", href: "/career#why-join-us" },
+      { icon: "arrow", title: "Current Openings", sub: "Explore our latest career opportunities.", href: "/career#current-openings" },
       { icon: "arrow", title: "Life at Our Company", sub: "Discover our workplace and culture.", href: "/career" },
-      { icon: "arrow", title: "Submit Your CV", sub: "Share your CV for current or future opportunities.", href: "/career" },
-      { icon: "arrow", title: "Recruitment Process", sub: "Learn about our hiring process.", href: "/career" },
-      { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career" },
+      { icon: "arrow", title: "Submit Your CV", sub: "Share your CV for current or future opportunities.", href: "/career/1#apply" },
+      { icon: "arrow", title: "Recruitment Process", sub: "Learn about our hiring process.", href: "/career#recruitment-process" },
+      { icon: "arrow", title: "FAQs", sub: "Answers to common career questions.", href: "/career#faqs" },
     ],
   },
   ar: {
     label: "الوظائف",
     tagline: "ابنِ مسيرتك المهنية مع رواد التميز الهندسي",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/career/b.png",
     cta: "استكشف المزيد",
     ctaHref: "/career",
     items: [
-      { icon: "arrow", title: "لماذا تنضم إلينا", sub: "ما يجعل شركتنا المكان المثالي لبناء مسيرتك المهنية.", href: "/career" },
-      { icon: "arrow", title: "الوظائف الشاغرة", sub: "استكشف أحدث الفرص الوظيفية المتاحة لدينا.", href: "/career" },
+      { icon: "arrow", title: "لماذا تنضم إلينا", sub: "ما يجعل شركتنا المكان المثالي لبناء مسيرتك المهنية.", href: "/career#why-join-us" },
+      { icon: "arrow", title: "الوظائف الشاغرة", sub: "استكشف أحدث الفرص الوظيفية المتاحة لدينا.", href: "/career#current-openings" },
       { icon: "arrow", title: "بيئة العمل وثقافتنا", sub: "اكتشف ثقافة العمل وبيئتنا المهنية المتميزة.", href: "/career" },
-      { icon: "arrow", title: "أرسل سيرتك الذاتية", sub: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.", href: "/career" },
-      { icon: "arrow", title: "آلية التوظيف", sub: "تعرف على مراحل التوظيف والاختيار في شركتنا.", href: "/career" },
-      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career" },
+      { icon: "arrow", title: "أرسل سيرتك الذاتية", sub: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.", href: "/career/1#apply" },
+      { icon: "arrow", title: "آلية التوظيف", sub: "تعرف على مراحل التوظيف والاختيار في شركتنا.", href: "/career#recruitment-process" },
+      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات عن أبرز الاستفسارات الوظيفية الشائعة.", href: "/career#faqs" },
     ],
   },
 };
@@ -271,30 +271,30 @@ const companyMegaMenu = {
   en: {
     label: "COMPANY",
     tagline: "Engineering Excellence Across the UAE",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/qw.jpeg",
     cta: "Explore More",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "About Us", sub: "Who we are and what we do.", href: "/about-us" },
       { icon: "arrow", title: "Our Expertise", sub: "Our skills and capabilities.", href: "/expertise" },
-      { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/about-us" },
+      { icon: "arrow", title: "Why Choose Us", sub: "What sets us apart.", href: "/#why-choose-us" },
       { icon: "arrow", title: "Certifications", sub: "Our credentials and approvals.", href: "/certifications" },
-      { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us" },
+      { icon: "arrow", title: "Company Profile", sub: "Get our company profile.", href: "/about-us#company-profile" },
       { icon: "arrow", title: "Contact Us", sub: "Connect with our team.", href: "/contact" },
     ],
   },
   ar: {
     label: "الشركة",
     tagline: "الريادة والتميز الهندسي في الإمارات",
-    cardImage: "/media/Engineers working.png",
+    cardImage: "/qw.jpeg",
     cta: "استكشف المزيد",
     ctaHref: "/about-us",
     items: [
       { icon: "arrow", title: "من نحن", sub: "من نحن ورؤيتنا وما نقوم به.", href: "/about-us" },
       { icon: "arrow", title: "خبراتنا", sub: "مهاراتنا الفنية وقدراتنا المتخصصة.", href: "/expertise" },
-      { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/about-us" },
+      { icon: "arrow", title: "لماذا تختارنا", sub: "ما يميزنا عن غيرنا في الجودة والتنفيذ.", href: "/#why-choose-us" },
       { icon: "arrow", title: "الشهادات والاعتمادات", sub: "شهاداتنا واعتماداتنا الرسمية.", href: "/certifications" },
-      { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us" },
+      { icon: "arrow", title: "الملف التعريفي للشركة", sub: "احصل على الملف التعريفي الكامل للشركة.", href: "/about-us#company-profile" },
       { icon: "arrow", title: "اتصل بنا", sub: "تواصل مع مكاتبنا في دبي والشارقة.", href: "/contact" },
     ],
   },
@@ -477,7 +477,21 @@ const Navbar = () => {
                 <Link
                   key={i}
                   href={item.href}
-                  onClick={() => setActiveMega(null)}
+                  onClick={(e) => {
+                    setActiveMega(null);
+                    if (item.href.includes("#")) {
+                      const [targetPath, hash] = item.href.split("#");
+                      const isCurrent = (targetPath === "" && pathname === "/") || targetPath === pathname;
+                      if (isCurrent && hash) {
+                        e.preventDefault();
+                        const el = document.getElementById(hash);
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth" });
+                          window.history.pushState(null, "", item.href);
+                        }
+                      }
+                    }
+                  }}
                   className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
                 >
                   {/* Icon box */}
@@ -771,19 +785,27 @@ const Navbar = () => {
                           <Link
                             key={i}
                             href={sub.href}
-                            onClick={() => { setIsMobileMenuOpen(false); setMobileExpanded(null); }}
+                            onClick={(e) => {
+                              setIsMobileMenuOpen(false);
+                              setMobileExpanded(null);
+                              if (sub.href.includes("#")) {
+                                const [targetPath, hash] = sub.href.split("#");
+                                const isCurrent = (targetPath === "" && pathname === "/") || targetPath === pathname;
+                                if (isCurrent && hash) {
+                                  e.preventDefault();
+                                  const el = document.getElementById(hash);
+                                  if (el) {
+                                    el.scrollIntoView({ behavior: "smooth" });
+                                    window.history.pushState(null, "", sub.href);
+                                  }
+                                }
+                              }
+                            }}
                             className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 transition-colors group"
                           >
                             {/* Icon */}
                             <div className="w-8 h-8 rounded-lg bg-[#009e90]/20 border border-[#009e90]/20 flex items-center justify-center flex-shrink-0">
-                              <Image
-                                src={sub.icon}
-                                alt={sub.title}
-                                width={16}
-                                height={16}
-                                className="object-contain"
-                                unoptimized
-                              />
+                              <NavIcon src={sub.icon} alt={sub.title} size={16} />
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-[12.5px] font-semibold text-white/90 group-hover:text-[#00c2b2] transition-colors truncate leading-snug">

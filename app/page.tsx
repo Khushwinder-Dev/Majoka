@@ -33,6 +33,27 @@ export default function Home() {
       once: true,
       offset: 100,
     });
+
+    const scrollToHash = () => {
+      if (typeof window !== "undefined" && window.location.hash) {
+        const id = window.location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    scrollToHash();
+    const t1 = setTimeout(scrollToHash, 250);
+    const t2 = setTimeout(scrollToHash, 700);
+
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
   }, []);
 
   return (

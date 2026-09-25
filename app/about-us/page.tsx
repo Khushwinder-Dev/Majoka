@@ -8,6 +8,7 @@ import MeetOurTeam from "../../components/Common/MeetOurTeam";
 import ClientTestimonials from "@/components/ClientTestimonials";
 import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
 import { useLanguage } from "@/context/LanguageContext";
+import Certifications from "./Certifications";
 
 const COMPANY_FAQS: FaqItem[] = [
   {
@@ -86,6 +87,7 @@ const AboutUs = () => {
         subtitleAr="تعرف أكثر على معايير تاج الرحمة الهندسية، واعتماداتها وخبراتها الفنية في دولة الإمارات."
       />
       <ClientTestimonials />
+      <Certifications />
     </div>
   );
 };

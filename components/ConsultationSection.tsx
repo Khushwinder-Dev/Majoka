@@ -113,8 +113,8 @@ export default function ConsultationSection() {
   const { isArabic } = useLanguage();
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    companyName: "",
     email: "",
     phone: "",
     message: "",
@@ -132,12 +132,12 @@ export default function ConsultationSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.email || !formData.phone) {
+    if (!formData.name || !formData.email || !formData.phone) {
       setStatus("error");
       setErrorMessage(
         isArabic
           ? "يرجى ملء جميع الحقول المطلوبة (الاسم، البريد الإلكتروني، ورقم الهاتف)."
-          : "Please fill in all required fields (First Name, Email, and Phone Number)."
+          : "Please fill in all required fields (Name, Email, and Phone Number)."
       );
       return;
     }
@@ -152,10 +152,13 @@ export default function ConsultationSection() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fullName: `${formData.firstName} ${formData.lastName}`.trim(),
+          fullName: formData.name.trim(),
+          company: formData.companyName.trim(),
           email: formData.email,
           phone: formData.phone,
-          message: formData.message || "Consultation Request",
+          message: formData.companyName
+            ? `Company: ${formData.companyName.trim()}\n${formData.message || "Consultation Request"}`
+            : formData.message || "Consultation Request",
           service: "Free Consultation",
         }),
       });
@@ -163,8 +166,8 @@ export default function ConsultationSection() {
       if (res.ok) {
         setStatus("success");
         setFormData({
-          firstName: "",
-          lastName: "",
+          name: "",
+          companyName: "",
           email: "",
           phone: "",
           message: "",
@@ -178,8 +181,8 @@ export default function ConsultationSection() {
       // Fallback for demo / offline
       setStatus("success");
       setFormData({
-        firstName: "",
-        lastName: "",
+        name: "",
+        companyName: "",
         email: "",
         phone: "",
         message: "",
@@ -306,23 +309,23 @@ export default function ConsultationSection() {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
-              {/* Row 1: First & Last Name */}
+              {/* Row 1: Name & Company Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FloatField
                   type="text"
-                  name="firstName"
-                  value={formData.firstName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
-                  label={isArabic ? "الاسم الأول *" : "First Name *"}
+                  label={isArabic ? "الاسم *" : "Name *"}
                   required
                   isArabic={isArabic}
                 />
                 <FloatField
                   type="text"
-                  name="lastName"
-                  value={formData.lastName}
+                  name="companyName"
+                  value={formData.companyName}
                   onChange={handleChange}
-                  label={isArabic ? "اسم العائلة" : "Last Name"}
+                  label={isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                   isArabic={isArabic}
                 />
               </div>

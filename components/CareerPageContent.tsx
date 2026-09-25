@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -249,6 +249,27 @@ export default function CareerPageContent() {
   const [openFaqId, setOpenFaqId] = useState<number | null>(1);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    };
+
+    scrollToHash();
+    const timer = setTimeout(scrollToHash, 300);
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
   const itemsPerPage = 5;
 
   // Filter jobs
@@ -305,7 +326,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: A TRADE JOB YOU CAN BUILD A DECADE ON
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
+      <section id="why-join-us" className="relative w-full py-16 sm:py-20 lg:py-24 bg-white overflow-hidden scroll-mt-20">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
@@ -521,7 +542,8 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           3. SECTION: ALL JOBS LISTINGS & PAGINATION
       ══════════════════════════════════════════════════════════════ */}
-      <section id="all-jobs" className="relative w-full py-16 sm:py-20 bg-white">
+      <section id="current-openings" className="relative w-full py-16 sm:py-20 bg-white scroll-mt-20">
+        <span id="all-jobs" className="scroll-mt-20" />
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Header Row: Title on Left, Filter Pills on Right */}
@@ -644,7 +666,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           4. SECTION: HOW IT WORKS SIMPLE EFFICIENT (HIRING PROCESS)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F2FBF9] overflow-hidden">
+      <section id="recruitment-process" className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#F2FBF9] overflow-hidden scroll-mt-20">
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
 
           {/* Section Header */}
@@ -722,7 +744,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           5. SECTION: FREQUENTLY ASKED QUESTIONS
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-white">
+      <section id="faqs" className="relative w-full py-16 sm:py-20 lg:py-24 bg-white scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Section Header */}
