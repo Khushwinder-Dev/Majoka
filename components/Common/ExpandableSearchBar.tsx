@@ -724,11 +724,10 @@ export default function ExpandableSearchBar({
               <button
                 type="button"
                 onClick={handleVoiceSearch}
-                className={`p-1.5 rounded-full transition-all flex-shrink-0 ${
-                  isListening
-                    ? "bg-red-500 text-white animate-pulse"
-                    : "text-white/60 hover:text-white hover:bg-white/10"
-                }`}
+                className={`p-1.5 rounded-full transition-all flex-shrink-0 ${isListening
+                  ? "bg-red-500 text-white animate-pulse"
+                  : "text-white/60 hover:text-white hover:bg-white/10"
+                  }`}
                 title={isListening ? "Listening..." : "Voice search"}
                 aria-label="Voice search"
               >
@@ -835,11 +834,10 @@ export default function ExpandableSearchBar({
                     <button
                       type="button"
                       onClick={handleVoiceSearch}
-                      className={`p-1.5 rounded-full transition-all flex-shrink-0 ${
-                        isListening
-                          ? "bg-red-500 text-white animate-pulse"
-                          : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                      }`}
+                      className={`p-1.5 rounded-full transition-all flex-shrink-0 ${isListening
+                        ? "bg-red-500 text-white animate-pulse"
+                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+                        }`}
                       title={isListening ? "Listening..." : "Voice search"}
                     >
                       {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
@@ -879,11 +877,10 @@ export default function ExpandableSearchBar({
       {/* ─── SEARCH DROPDOWN (OPENS ON CLICK / FOCUS) ───────────── */}
       {isExpanded && (
         <div
-          className={`${
-            isDrawer
-              ? "absolute top-full mt-2 left-0 right-0 w-full max-h-[60vh] flex flex-col"
-              : "absolute top-full mt-2.5 right-0 rtl:right-auto rtl:left-0 w-[330px] sm:w-[440px] md:w-[500px] lg:w-[540px]"
-          } bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.22)] border border-gray-100 overflow-hidden z-50 text-left rtl:text-right animate-in fade-in slide-in-from-top-2 duration-200`}
+          className={`${isDrawer
+            ? "absolute top-full mt-2 left-0 right-0 w-full max-h-[60vh] flex flex-col"
+            : "absolute top-full mt-2.5 right-0 rtl:right-auto rtl:left-0 w-[330px] sm:w-[440px] md:w-[500px] lg:w-[540px]"
+            } bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.22)] border border-gray-100 overflow-hidden z-50 text-left rtl:text-right animate-in fade-in slide-in-from-top-2 duration-200`}
           onClick={(e) => e.stopPropagation()}
         >
           {/* ── Filter By Tabs Row ── */}
@@ -896,11 +893,10 @@ export default function ExpandableSearchBar({
                     key={tab.key}
                     type="button"
                     onClick={() => setActiveTab(tab.key)}
-                    className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex-shrink-0 ${
-                      isSelected
-                        ? "bg-[#009e90] text-white shadow-xs"
-                        : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200/80"
-                    }`}
+                    className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex-shrink-0 ${isSelected
+                      ? "bg-[#009e90] text-white shadow-xs"
+                      : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200/80"
+                      }`}
                   >
                     {isAr ? tab.labelAr : tab.labelEn}
                   </button>
@@ -1058,7 +1054,7 @@ export default function ExpandableSearchBar({
                 }
                 setShowAiModal(true);
               }}
-              className="px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#009e90] hover:bg-[#008277] text-white font-extrabold text-[11px] sm:text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer flex-shrink-0"
+              className="px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#009e90] hover:bg-[#008277] text-white font-extrabold text-[11px] sm:text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer flex-shrink-0 pointer-events-none"
             >
               <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
               <span>{isAr ? "اسأل الذكاء الاصطناعي" : "ASK AI"}</span>
