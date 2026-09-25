@@ -675,22 +675,27 @@ export default function ExpandableSearchBar({
         /* ─── DRAWER MOBILE MODE: ALWAYS RENDERED AS A SEARCH INPUT PILL ─── */
         <div className="relative w-full">
           <div
-            className="flex items-center bg-white/10 hover:bg-white/15 focus-within:bg-white/15 border border-white/20 focus-within:border-[#00c2b2] rounded-full px-3.5 py-2 transition-all duration-200"
+            className="flex items-center bg-white/10 hover:bg-white/15 focus-within:bg-white/15 border border-white/20 focus-within:border-[#00c2b2] rounded-full px-3 py-2 transition-all duration-200"
             onClick={(e) => {
               e.stopPropagation();
               setIsExpanded(true);
             }}
           >
-            {/* Search Icon */}
-            <button
-              type="button"
-              onClick={() => handleExecuteSearch(searchQuery)}
-              className="p-1 text-white/60 hover:text-[#00c2b2] transition-colors cursor-pointer flex-shrink-0"
-              title={isAr ? "بحث" : "Search"}
-              aria-label="Submit search"
-            >
-              <Search className="h-4 w-4 stroke-[2.5]" />
-            </button>
+            {/* If expanded in drawer, show back/close button `<` on left */}
+            {isExpanded && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCollapse();
+                }}
+                className="p-1 text-white/70 hover:text-[#00c2b2] hover:bg-white/10 rounded-full transition-colors cursor-pointer flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1"
+                title={isAr ? "إغلاق البحث" : "Close search"}
+                aria-label="Close search"
+              >
+                <ChevronLeft className="h-4 w-4 stroke-[2.5] rtl:rotate-180" />
+              </button>
+            )}
 
             {/* Text Input */}
             <input
@@ -743,6 +748,17 @@ export default function ExpandableSearchBar({
                 <X className="h-3.5 w-3.5" />
               </button>
             )}
+
+            {/* Search Icon on Right */}
+            <button
+              type="button"
+              onClick={() => handleExecuteSearch(searchQuery)}
+              className="p-1 text-white/60 hover:text-[#00c2b2] transition-colors cursor-pointer flex-shrink-0 ml-1 rtl:ml-0 rtl:mr-1"
+              title={isAr ? "بحث" : "Search"}
+              aria-label="Submit search"
+            >
+              <Search className="h-4 w-4 stroke-[2.5]" />
+            </button>
           </div>
         </div>
       ) : (
@@ -780,30 +796,20 @@ export default function ExpandableSearchBar({
               <div className="hidden lg:block w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 opacity-0 pointer-events-none" />
 
               <div className="lg:absolute lg:right-0 lg:rtl:right-auto lg:rtl:left-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center z-40 animate-in fade-in zoom-in-95 duration-200 w-full lg:w-auto">
-                {/* Back / Close button `<` beside search icon */}
-                <button
-                  type="button"
-                  onClick={handleCollapse}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#011c20]/90 hover:bg-[#009e90] text-white flex items-center justify-center transition-all cursor-pointer mr-2 rtl:mr-0 rtl:ml-2 flex-shrink-0 shadow-lg border border-white/20 hover:scale-105 active:scale-95"
-                  title={isAr ? "إغلاق البحث" : "Close search"}
-                  aria-label="Close search"
-                >
-                  <ChevronLeft className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
-                </button>
-
                 {/* Search Input Pill */}
                 <div
-                  className="flex items-center bg-white flex-1 lg:flex-initial lg:w-72 xl:w-80 2xl:w-96 px-3.5 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl transition-all"
+                  className="flex items-center bg-white flex-1 lg:flex-initial lg:w-72 xl:w-80 2xl:w-96 px-3 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl transition-all"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {/* Search Icon */}
+                  {/* Back / Close button `<` on Left */}
                   <button
                     type="button"
-                    onClick={() => handleExecuteSearch(searchQuery)}
-                    className="p-1 text-[#00b3a4] hover:text-[#008f83] transition-colors cursor-pointer flex-shrink-0"
-                    title={isAr ? "بحث" : "Search"}
+                    onClick={handleCollapse}
+                    className="p-1 text-[#00b3a4] hover:text-[#008f83] hover:bg-teal-50 rounded-full transition-colors cursor-pointer flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1"
+                    title={isAr ? "إغلاق البحث" : "Close search"}
+                    aria-label="Close search"
                   >
-                    <Search className="h-4 w-4 stroke-[2.5]" />
+                    <ChevronLeft className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
                   </button>
 
                   {/* Text Input */}
@@ -821,7 +827,7 @@ export default function ExpandableSearchBar({
                       }
                     }}
                     placeholder={placeholder || defaultPlaceholder}
-                    className="flex-1 outline-none text-gray-800 bg-transparent text-xs sm:text-sm px-2 placeholder-gray-400 font-sans min-w-0"
+                    className="flex-1 outline-none text-gray-800 bg-transparent text-xs sm:text-sm px-1.5 placeholder-gray-400 font-sans min-w-0"
                   />
 
                   {/* Voice Search (if supported and query empty) */}
@@ -859,6 +865,17 @@ export default function ExpandableSearchBar({
                       <X className="h-3.5 w-3.5" />
                     </button>
                   )}
+
+                  {/* Search Icon on Right */}
+                  <button
+                    type="button"
+                    onClick={() => handleExecuteSearch(searchQuery)}
+                    className="p-1 text-[#00b3a4] hover:text-[#008f83] hover:bg-teal-50 rounded-full transition-colors cursor-pointer flex-shrink-0 ml-1 rtl:ml-0 rtl:mr-1"
+                    title={isAr ? "بحث" : "Search"}
+                    aria-label="Submit search"
+                  >
+                    <Search className="h-4 w-4 stroke-[2.5]" />
+                  </button>
                 </div>
               </div>
             </>
