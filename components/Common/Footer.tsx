@@ -130,11 +130,11 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { href: "https://www.facebook.com/profile.php?id=100081089335552", Icon: Facebook, label: "Facebook" },
-    { href: "https://www.instagram.com/tajalrahmahtechnicalservices", Icon: Instagram, label: "Instagram" },
-    { href: "https://x.com/tajalrahmah", Icon: Twitter, label: "X" },
+    { href: "https://www.facebook.com/tajalrahmahuae", Icon: Facebook, label: "Facebook" },
+    { href: "https://www.instagram.com/tajalrahmahuae", Icon: Instagram, label: "Instagram" },
+    { href: "https://x.com/tajalrahmahuae", Icon: Twitter, label: "X" },
     { href: "https://www.linkedin.com/company/tajalrahmah", Icon: Linkedin, label: "LinkedIn" },
-    { href: "https://www.youtube.com/@tajalrahmah", Icon: Youtube, label: "YouTube" },
+    { href: "https://youtube.com/@tajalrahmahuae", Icon: Youtube, label: "YouTube" },
   ];
 
   return (
