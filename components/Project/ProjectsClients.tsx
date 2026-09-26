@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 const CLIENT_LOGOS = [
@@ -33,13 +33,19 @@ const trackLogos = [...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
 interface ProjectsClientsProps {
   themeBg?: boolean;
+  showPauseButton?: boolean;
 }
 
-export default function ProjectsClients({ themeBg = false }: ProjectsClientsProps) {
+export default function ProjectsClients({
+  themeBg = false,
+  showPauseButton = false,
+}: ProjectsClientsProps) {
   const { isArabic } = useLanguage();
   const trackRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<number | null>(null);
-  const pauseRef = useRef(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const isPausedRef = useRef(false);
+  const isHoveredRef = useRef(false);
   const posRef = useRef(0);
 
   useEffect(() => {
@@ -49,7 +55,7 @@ export default function ProjectsClients({ themeBg = false }: ProjectsClientsProp
     const speed = 0.55; // px per frame
 
     const tick = () => {
-      if (!pauseRef.current && el) {
+      if (!isPausedRef.current && !isHoveredRef.current && el) {
         posRef.current += speed;
         const singleWidth = el.scrollWidth / 3;
         if (posRef.current >= singleWidth) {
@@ -67,6 +73,14 @@ export default function ProjectsClients({ themeBg = false }: ProjectsClientsProp
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
   }, []);
+
+  const togglePause = () => {
+    setIsPaused((prev) => {
+      const next = !prev;
+      isPausedRef.current = next;
+      return next;
+    });
+  };
 
   const nudge = (direction: "prev" | "next") => {
     const el = trackRef.current;
@@ -146,6 +160,47 @@ export default function ProjectsClients({ themeBg = false }: ProjectsClientsProp
                   <ChevronLeft className="w-5 h-5" />
                 )}
               </button>
+
+              {showPauseButton && (
+                <button
+                  type="button"
+                  onClick={togglePause}
+                  aria-label={
+                    isPaused
+                      ? isArabic
+                        ? "تشغيل شريط الشعارات"
+                        : "Play logo carousel"
+                      : isArabic
+                      ? "إيقاف شريط الشعارات مؤقتاً"
+                      : "Pause logo carousel"
+                  }
+                  title={
+                    isPaused
+                      ? isArabic
+                        ? "تشغيل"
+                        : "Play"
+                      : isArabic
+                      ? "إيقاف مؤقت"
+                      : "Pause"
+                  }
+                  className={`w-11 h-11 rounded-full flex items-center justify-center transition-all cursor-pointer active:scale-95 ${
+                    isPaused
+                      ? themeBg
+                        ? "bg-white text-[#01a9a0] border border-white shadow-sm"
+                        : "bg-[#01a9a0] text-white border border-[#01a9a0] shadow-sm"
+                      : themeBg
+                      ? "border border-white/60 text-white hover:bg-white hover:text-[#01a9a0]"
+                      : "border border-[#01a9a0] text-[#01a9a0] hover:bg-[#01a9a0] hover:text-white"
+                  }`}
+                >
+                  {isPaused ? (
+                    <Play className="w-5 h-5 fill-current ml-0.5" />
+                  ) : (
+                    <Pause className="w-5 h-5 fill-current" />
+                  )}
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={() => nudge("next")}
@@ -173,16 +228,16 @@ export default function ProjectsClients({ themeBg = false }: ProjectsClientsProp
       <div
         className="relative w-full overflow-hidden"
         onMouseEnter={() => {
-          pauseRef.current = true;
+          isHoveredRef.current = true;
         }}
         onMouseLeave={() => {
-          pauseRef.current = false;
+          isHoveredRef.current = false;
         }}
         onTouchStart={() => {
-          pauseRef.current = true;
+          isHoveredRef.current = true;
         }}
         onTouchEnd={() => {
-          pauseRef.current = false;
+          isHoveredRef.current = false;
         }}
         aria-label="Client logos"
       >
