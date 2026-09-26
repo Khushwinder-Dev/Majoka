@@ -67,7 +67,7 @@ export function BannerSlider({
   }
 
   return (
-    <div className="relative w-full h-[220px] sm:h-[280px] md:h-[420px] overflow-hidden bg-[#0b2447] group">
+    <div className="relative w-full h-[260px] sm:h-[340px] md:h-[460px] lg:h-[600px] overflow-hidden bg-[#0b2447] group">
       {/* Slides */}
       {slides.map((slide, i) => (
         <div

@@ -302,7 +302,7 @@ export default function CareerPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[400px] sm:min-h-[400px] lg:min-h-[400px] xl:min-h-[400px] flex items-center bg-[#ebf7f9] overflow-hidden">
+      <section className="relative w-full min-h-[400px] sm:min-h-[460px] lg:min-h-[600px] lg:h-[600px] flex items-center bg-[#ebf7f9] overflow-hidden">
         {/* Designer Banner Background */}
         <div className="absolute inset-0 z-0">
           <Image

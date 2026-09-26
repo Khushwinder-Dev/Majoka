@@ -307,7 +307,7 @@ export default function SolutionsPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[440px] sm:min-h-[480px] lg:min-h-[520px] flex items-center bg-[#011a24] overflow-hidden">
+      <section className="relative w-full min-h-[440px] sm:min-h-[480px] lg:min-h-[600px] lg:h-[600px] flex items-center bg-[#011a24] overflow-hidden">
         {/* Background Image: Worker with paint roller on blue waterproofed surface */}
         <div className="absolute inset-0 z-0">
           <Image

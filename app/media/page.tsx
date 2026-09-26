@@ -233,7 +233,7 @@ export default function MediaPage() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO HEADER SECTION (Exact Match to Design Screenshot)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[380px] sm:h-[420px] md:h-[460px] lg:h-[480px] xl:h-[500px] flex items-center bg-[#041620] overflow-hidden">
+      <section className="relative w-full h-[380px] sm:h-[440px] md:h-[500px] lg:h-[600px] xl:h-[600px] flex items-center bg-[#041620] overflow-hidden">
         {/* Background Image: Workstation, Camera, Laptop, Film Strips & Floating Cards */}
         <div className="absolute inset-0 z-0">
           <Image

@@ -134,7 +134,7 @@ export default function SupportPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION (SUPPORT — with Call Center Team)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[470px] flex items-center bg-[#071d34] overflow-hidden">
+      <section className="relative w-full h-[340px] sm:h-[420px] md:h-[500px] lg:h-[600px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image: Support Specialists in headsets */}
         <Image
           src="/support/Dubai modern skyline at twilight.png"
