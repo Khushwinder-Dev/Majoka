@@ -125,7 +125,7 @@ export default function RefundPolicyPage() {
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-stone-900 tracking-tight">
+                <h1 className="text-xl sm:text-2xl font-extrabold text-[#01a9a0] tracking-tight">
                   {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
                 </h1>
                 <p className="text-xs sm:text-sm text-stone-500 font-medium mt-0.5">
@@ -157,12 +157,12 @@ export default function RefundPolicyPage() {
                 className="group bg-white rounded-2xl p-6 sm:p-8 border border-stone-200/90 hover:border-[#01a9a0]/40 hover:shadow-md transition-all duration-200 relative overflow-hidden"
               >
                 <div className="flex items-start gap-4 sm:gap-5">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-stone-50 border border-stone-200/70 group-hover:bg-[#01a9a0]/10 group-hover:border-[#01a9a0]/20 text-stone-600 group-hover:text-[#01a9a0] flex items-center justify-center shrink-0 transition-colors duration-200 mt-0.5">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#01a9a0]/10 border border-[#01a9a0]/25 text-[#01a9a0] group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-colors duration-200 mt-0.5">
                     <Icon className="w-5 h-5" />
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h2 className="text-base sm:text-lg font-bold text-stone-900 group-hover:text-[#01a9a0] transition-colors duration-200 mb-2.5">
+                    <h2 className="text-base sm:text-lg font-bold text-[#01a9a0] transition-colors duration-200 mb-2.5">
                       {isArabic ? section.titleAr : section.titleEn}
                     </h2>
                     <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed font-normal">
@@ -179,7 +179,7 @@ export default function RefundPolicyPage() {
         <div className="bg-white rounded-3xl p-7 sm:p-10 border border-stone-200 shadow-xs mb-8">
           <div className="flex items-center gap-3 mb-4">
             <span className="w-2.5 h-7 bg-[#01a9a0] rounded-full shrink-0" />
-            <h2 className="text-xl sm:text-2xl font-bold text-stone-900">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#01a9a0]">
               {isArabic ? "8. اتصل بنا" : "8. Contact Us"}
             </h2>
           </div>
