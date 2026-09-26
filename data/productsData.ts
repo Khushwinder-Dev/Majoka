@@ -85,73 +85,73 @@ const defaultRatingBreakdown = [
 const rawProducts = [
   {
     id: 1,
-    name: "Steel stainless wall ladder",
+    name: "Stainless Steel Wall Ladder",
     longName: "Vertical Wall Mounted Access Ladder",
     description:
-      "Strong and corrosion-resistant FRP wall ladder designed for safe vertical access to elevated areas, walls, tanks and industrial structures.",
+      "Strong and corrosion-resistant stainless steel wall ladder designed for safe vertical access to elevated areas, walls, tanks and industrial structures.",
   },
   {
     id: 2,
-    name: "Steel stainless ladder swimming pools",
+    name: "Stainless Steel Swimming Pool Ladder",
     longName: "Stainless Style Swimming Pool Access Ladder",
     description:
-      "Durable corrosion-resistant FRP swimming pool ladder designed to provide safe and convenient entry and exit from swimming pools.",
+      "Durable and corrosion-resistant stainless steel swimming pool ladder designed to provide safe and convenient entry and exit from swimming pools. ",
   },
   {
     id: 3,
     name: "Safety Cage Ladder",
     longName: "Vertical Industrial Safety Cage Ladder",
     description:
-      "Heavy-duty FRP safety cage ladder designed for secure vertical access to industrial platforms, tanks, buildings and elevated structures.",
+      "Heavy-duty safety cage ladder designed for secure vertical access to industrial platforms, tanks, buildings and elevated structures.",
   },
   {
     id: 4,
     name: "Access Cover",
     longName: "Reinforced FRP Square Access Cover",
     description:
-      "Reinforced FRP access cover designed to protect utility openings, inspection points, drainage systems and underground access areas.",
+      "Reinforced access cover designed to protect utility openings, inspection points, drainage systems and underground access areas.",
   },
   {
     id: 5,
     name: "Grp/fiberglass catch basin bucket",
     longName: "Molded Drainage Pipe Fitting",
     description:
-      "Durable FRP drainage fitting designed for connecting drainage components and directing water or wastewater through piping systems.",
+      "Durable GRP/fiberglass catch basin bucket designed for drainage systems and effective collection and management of surface water and wastewater.",
   },
   {
     id: 6,
     name: "Rectangular Tank",
     longName: "Rectangular Industrial Storage Tank",
     description:
-      "Strong FRP rectangular storage tank suitable for water, chemical, wastewater and industrial liquid storage applications.",
+      "Strong and durable rectangular tank suitable for water, chemical, wastewater and industrial liquid storage applications.",
   },
   {
     id: 7,
     name: "Grp/fiberglass planter box",
     longName: "White FRP Rectangular Bathtub",
     description:
-      "Smooth and durable FRP bathtub designed for residential, hotel and commercial bathroom installations.",
+      "Smooth and durable GRP/fiberglass planter box suitable for indoor and outdoor plants, flowers, gardens, terraces and commercial landscaping.",
   },
   {
     id: 8,
     name: "Bathtub",
     longName: "Molded FRP Bathroom Bathtub",
     description:
-      "High-quality molded FRP bathtub offering a smooth, durable and easy-to-maintain surface for bathroom applications.",
+      "High-quality molded bathtub offering a smooth, durable and easy-to-maintain surface for residential, hotel and commercial bathroom applications.",
   },
   {
     id: 9,
     name: "Bathroom Tub",
     longName: "Freestanding FRP Bathroom Tub",
     description:
-      "Durable FRP bathroom tub designed for residential and commercial bathroom installations with a smooth molded finish.",
+      "Durable bathroom tub designed for residential and commercial bathroom installations with a smooth molded finish.",
   },
   {
     id: 10,
     name: "Wall Access Ladder",
     longName: "Wall Mounted Maintenance Access Ladder",
     description:
-      "Lightweight and corrosion-resistant FRP ladder designed for wall-mounted maintenance and access applications.",
+      "Lightweight and durable wall access ladder designed for safe vertical access and maintenance of walls, tanks and elevated areas.",
   },
   // {
   //   id: 11,
@@ -160,19 +160,19 @@ const rawProducts = [
   //   description:
   //     "Molded FRP drainage fitting designed for connecting and directing drainage pipelines with excellent corrosion resistance.",
   // },
-  {
-    id: 12,
-    name: "Steel stainless swimming pools ladder",
-    longName: "Swimming Pool Safety Access Ladder",
-    description:
-      "Durable swimming pool ladder designed to provide safe access in and out of residential and commercial swimming pools.",
-  },
+  // {
+  //   id: 12,
+  //   name: "Steel stainless swimming pools ladder",
+  //   longName: "Swimming Pool Safety Access Ladder",
+  //   description:
+  //     "Durable swimming pool ladder designed to provide safe access in and out of residential and commercial swimming pools.",
+  // },
   {
     id: 13,
     name: "Shower Tray",
     longName: "Molded Rectangular FRP Shower Tray",
     description:
-      "Molded FRP shower tray designed for bathroom floor installation with an integrated drainage area and easy-to-clean surface.",
+      "Molded shower tray designed for bathroom floor installation with an integrated drainage area and easy-to-clean surface.",
   },
   {
     id: 14,
@@ -186,78 +186,78 @@ const rawProducts = [
     name: "Boat",
     longName: "Fiberglass Reinforced Plastic Boat",
     description:
-      "Lightweight and strong FRP boat suitable for recreational boating, fishing, transportation and general marine applications.",
+      "Lightweight and strong boat suitable for recreational boating, fishing, transportation and general marine applications.",
   },
   {
     id: 16,
     name: "Playground Equipment",
     longName: "Outdoor Children's Playground Equipment",
     description:
-      "Colorful and durable playground equipment designed for children in parks, schools, residential communities and recreational areas.",
+      "Durable playground equipment designed for children in parks, schools, residential communities and recreational areas.",
   },
   {
     id: 17,
     name: "Grp/fiberglass sealing plate for manhole cover",
     longName: "Reinforced Molded FRP Access Cover",
     description:
-      "Strong molded FRP access cover designed for inspection openings, drainage systems, tanks and utility access points.",
+      "Strong GRP/fiberglass sealing plate designed to provide secure protection and sealing for manhole covers, inspection openings and utility access points.",
   },
   {
     id: 18,
     name: "Pipe Bend",
     longName: "Fiberglass Reinforced Pipe Bend",
     description:
-      "Corrosion-resistant FRP pipe bend designed to change pipeline direction while maintaining reliable fluid flow and structural strength.",
+      "Corrosion-resistant pipe bend designed to change pipeline direction while maintaining reliable fluid flow and structural strength.",
   },
   {
     id: 19,
     name: "Car Parking Canopy",
     longName: "Outdoor Vehicle Parking Shade Canopy",
     description:
-      "Outdoor FRP parking canopy designed to provide shade and protection for vehicles in residential, commercial and parking areas.",
+      "Durable car parking canopy designed to provide shade and weather protection for vehicles in residential, commercial and parking areas.",
   },
   {
     id: 20,
     name: "Parking shed",
     longName: "Residential Outdoor Carport Structure",
     description:
-      "Modern FRP carport structure designed to provide covered vehicle parking and protection from weather conditions.",
+      "Durable parking shed designed to provide covered vehicle parking and protection from sun and weather conditions.",
   },
   {
     id: 21,
     name: "Shower Tray Mold",
     longName: "Molded Shower Tray Manufacturing Mold",
     description:
-      "Specialized FRP mold used for manufacturing molded shower trays with consistent shape, strength and surface finish.",
+      "Specialized shower tray mold designed for manufacturing molded shower trays with consistent shape, dimensions and surface finish.",
   },
-  {
-    id: 22,
-    name: "Shower Tray Mold",
-    longName: "Custom FRP Shower Tray Mould",
-    description:
-      "Custom FRP shower tray mold designed for producing durable and accurately shaped FRP bathroom shower trays.",
-  },
+  // {
+  //   id: 22,
+  //   name: "Shower Tray Mold",
+  //   longName: "Custom FRP Shower Tray Mould",
+  //   description:
+  //     "Specialized shower tray mold designed for manufacturing molded shower trays with consistent shape, dimensions and surface finish.",
+  // },
   {
     id: 23,
     name: "Grating",
     longName: "Fiberglass Reinforced Industrial Grating",
     description:
-      "Lightweight and corrosion-resistant FRP grating suitable for industrial platforms, walkways, drainage areas and flooring applications.",
+      "Lightweight and corrosion-resistant grating suitable for industrial platforms, walkways, drainage areas, flooring and access applications.",
   },
   {
     id: 24,
     name: "Grp/fiberglass Shower Trey 1mx600",
     longName: "White Rectangular Shower Tray",
     description:
-      "White molded FRP shower tray designed for residential, hotel and commercial bathroom installations.",
+      "White GRP/fiberglass shower tray measuring 1m × 600mm, designed for residential, hotel and commercial bathroom installations.",
   },
-  {
-    id: 25,
-    name: "Grp/fiberglass ladder for water tank",
-    longName: "Multi Purpose Industrial Access Ladder",
-    description:
-      "Strong and lightweight FRP ladder suitable for industrial maintenance, construction, commercial and general access applications.",
-  },
+  // {
+  //   id: 25,
+  //   name: "Grp/fiberglass ladder for water tank",
+  //   longName: "Multi Purpose Industrial Access Ladder",
+  //   description:
+  //     "Heavy-duty GRP/fiberglass ladder designed for safe access to water tanks, maintenance areas, construction sites and industrial facilities.",
+  // },
   {
     id: 26,
     name: "Grp/fiberglass  ladder for water tank",
@@ -270,28 +270,28 @@ const rawProducts = [
     name: "Cylindrical Tank",
     longName: "Cylindrical FRP Industrial Storage Tank",
     description:
-      "Corrosion-resistant cylindrical FRP tank suitable for water, chemical and industrial liquid storage.",
+      "Corrosion-resistant cylindrical tank suitable for water, chemical, wastewater and industrial liquid storage applications.",
   },
   {
     id: 28,
     name: "Grp/fiberglass sheets",
     longName: "Corrugated FRP Roofing Sheet",
     description:
-      "Lightweight corrugated FRP roofing sheet designed for weather-resistant roofing and industrial construction applications.",
+      "Lightweight and durable GRP/fiberglass sheets suitable for roofing, cladding, construction and industrial applications.",
   },
   {
     id: 29,
     name: "Grp/fiberglass  Manhole cover",
     longName: "Reinforced Utility Access Cover",
     description:
-      "Reinforced FRP access cover designed to protect utility openings, inspection chambers, drainage systems and service areas.",
+      "Reinforced GRP/fiberglass manhole cover designed to protect inspection chambers, drainage systems, utility openings and service areas.",
   },
   {
     id: 30,
     name: "Grp/fiberglass baby slide ( playground )",
     longName: "Outdoor Children's Playground Set",
     description:
-      "Durable outdoor playground set designed for children with multiple play and recreational structures.",
+      "Durable GRP/fiberglass baby slide designed for children's playgrounds in parks, schools, residential communities and recreational areas.",
   },
   {
     id: 31,
@@ -305,140 +305,140 @@ const rawProducts = [
     name: "Water Tank",
     longName: "Large FRP Water Storage Tank",
     description:
-      "Large-capacity FRP water storage tank designed for residential, commercial and industrial water storage requirements.",
+      "Large-capacity water tank designed for residential, commercial and industrial water storage requirements.",
   },
   {
     id: 33,
     name: "Planter",
     longName: "Decorative FRP Planter Pot",
     description:
-      "Modern decorative FRP planter suitable for gardens, entrances, terraces, balconies and commercial landscaping.",
+      "Modern decorative planter suitable for gardens, entrances, terraces, balconies and commercial landscaping applications.",
   },
   {
     id: 34,
     name: "Profile Sheet",
     longName: "FRP Structural Roofing and Profile Sheet",
     description:
-      "Durable FRP profile sheet designed for roofing, cladding, construction and industrial structural applications.",
+      "Durable profile sheet designed for roofing, cladding, construction and industrial applications.",
   },
   {
     id: 35,
     name: "Grp/fiberglass Planter",
     longName: "Outdoor Decorative Planter Set",
     description:
-      "Stylish FRP planter suitable for indoor and outdoor decorative plants, flowers and landscaping applications.",
+      "Stylish and durable GRP/fiberglass planter suitable for indoor and outdoor plants, flowers, gardens and landscaping applications.",
   },
   {
     id: 36,
     name: "Grp/fiberglass Shower Trey 600x600 800x800",
     longName: "Molded FRP Shower Base",
     description:
-      "Molded FRP shower tray designed with a smooth surface and drainage opening for bathroom installations.",
+      "Molded GRP/fiberglass shower tray available in 600 × 600mm and 800 × 800mm sizes, designed for residential, hotel and commercial bathroom installations.",
   },
   {
     id: 37,
     name: "Translucent Sheet",
     longName: "Translucent FRP Roofing Sheet",
     description:
-      "Lightweight translucent FRP roofing sheet designed to allow natural light while providing durable weather protection.",
+      "Lightweight translucent sheet designed to allow natural light while providing durable weather protection for buildings and industrial structures.",
   },
-  {
-    id: 38,
-    name: "Car Parking Canopy",
-    longName: "Outdoor Car Parking Shade Structure",
-    description:
-      "Modern vehicle parking canopy designed to provide shade and weather protection for cars in residential and commercial areas.",
-  },
+  // {
+  //   id: 38,
+  //   name: "Car Parking Canopy",
+  //   longName: "Outdoor Car Parking Shade Structure",
+  //   description:
+  //     "Modern vehicle parking canopy designed to provide shade and weather protection for cars in residential and commercial areas.",
+  // },
   {
     id: 39,
     name: "Industrial Tank",
     longName: "Industrial FRP Storage Tank with Piping",
     description:
-      "Heavy-duty FRP industrial tank with piping arrangement designed for liquid storage and industrial processing applications.",
+      "Heavy-duty industrial tank with piping arrangement designed for liquid storage and industrial processing applications.",
   },
-  {
-    id: 40,
-    name: "Access Cover",
-    longName: "Molded Reinforced Access Cover",
-    description:
-      "Durable molded FRP access cover suitable for inspection openings, drainage systems, tanks and utility installations.",
-  },
+  // {
+  //   id: 40,
+  //   name: "Access Cover",
+  //   longName: "Molded Reinforced Access Cover",
+  //   description:
+  //     "Durable molded FRP access cover suitable for inspection openings, drainage systems, tanks and utility installations.",
+  // },
   {
     id: 41,
     name: "Structural Profile",
     longName: "FRP Structural U Channel Profile",
     description:
-      "Strong lightweight FRP U-channel profile suitable for construction, structural supports, framing and industrial fabrication.",
+      "Strong and lightweight U-channel structural profile suitable for construction, structural supports, framing and industrial fabrication.",
   },
   {
     id: 42,
     name: "Portable Toilet",
     longName: "Portable FRP Toilet Cabin",
     description:
-      "Durable FRP portable toilet cabin suitable for construction sites, events, temporary facilities and public areas.",
+      "Durable portable toilet cabin suitable for construction sites, events, temporary facilities, public areas and outdoor applications.",
   },
   {
     id: 43,
     name: "Cylindrical Water Tank",
     longName: "Horizontal Cylindrical FRP Storage Tank",
     description:
-      "Corrosion-resistant horizontal cylindrical FRP tank designed for water, chemical and industrial liquid storage.",
+      "Corrosion-resistant horizontal cylindrical water tank designed for water storage in residential, commercial and industrial applications.",
   },
   {
     id: 44,
     name: "Step Ladder",
     longName: "Heavy Duty Maintenance Step Ladder",
     description:
-      "Strong FRP step ladder designed for maintenance, construction, industrial access and general working-at-height applications.",
+      "Strong and lightweight step ladder designed for maintenance, construction, industrial access and general working-at-height applications.",
   },
   {
     id: 45,
     name: "Pergola",
     longName: "Modern FRP Outdoor Pergola Structure",
     description:
-      "Modern FRP pergola designed to provide shade and enhance gardens, patios, terraces and outdoor living spaces.",
+      "Modern outdoor pergola structure designed to provide shade and enhance gardens, patios, terraces and outdoor living spaces.",
   },
-  {
-    id: 46,
-    name: "Pergola",
-    longName: "Modern FRP Garden and Patio Pergola",
-    description:
-      "Contemporary FRP pergola structure suitable for residential gardens, patios, resorts and commercial outdoor areas.",
-  },
-  {
-    id: 47,
-    name: "Pergola",
-    longName: "Outdoor Architectural Canopy Structure",
-    description:
-      "Modern outdoor FRP canopy structure designed to provide shade while enhancing the architectural appearance of outdoor spaces.",
-  },
+  // {
+  //   id: 46,
+  //   name: "Pergola",
+  //   longName: "Modern FRP Garden and Patio Pergola",
+  //   description:
+  //     "Contemporary FRP pergola structure suitable for residential gardens, patios, resorts and commercial outdoor areas.",
+  // },
+  // {
+  //   id: 47,
+  //   name: "Pergola",
+  //   longName: "Outdoor Architectural Canopy Structure",
+  //   description:
+  //     "Modern outdoor FRP canopy structure designed to provide shade while enhancing the architectural appearance of outdoor spaces.",
+  // },
   {
     id: 48,
     name: "Outdoor Canopy",
     longName: "Modern FRP Outdoor Patio Shade Structure",
     description:
-      "Stylish FRP patio canopy designed to create a comfortable shaded outdoor area for residential and commercial applications.",
+      "Stylish outdoor canopy designed to create a comfortable shaded area for residential, commercial, hospitality and recreational applications.",
   },
-  {
-    id: 49,
-    name: "Steel stainless safety ladder",
-    longName: "Vertical Safety Access Ladder with Cage",
-    description:
-      "Corrosion-resistant FRP safety ladder with protective cage designed for secure vertical access to elevated structures.",
-  },
-  {
-    id: 50,
-    name: "Steel stainless ladder swimming pools",
-    longName: "Swimming Pool Entry and Exit Ladder",
-    description:
-      "Durable FRP swimming pool ladder designed for safe and convenient pool entry and exit in residential and commercial swimming facilities.",
-  },
+  // {
+  //   id: 49,
+  //   name: "Steel stainless safety ladder",
+  //   longName: "Vertical Safety Access Ladder with Cage",
+  //   description:
+  //     "Corrosion-resistant stainless steel safety ladder with protective cage designed for secure vertical access to tanks, buildings, platforms and elevated structures.",
+  // },
+  // {
+  //   id: 50,
+  //   name: "Steel stainless ladder swimming pools",
+  //   longName: "Swimming Pool Entry and Exit Ladder",
+  //   description:
+  //     "Durable FRP swimming pool ladder designed for safe and convenient pool entry and exit in residential and commercial swimming facilities.",
+  // },
   {
     id: 51,
-    name: "Grp/fiberglass Shower Trey 1mx80",
+    name: "Grp/fiberglass Shower Trey 1mx800",
     longName: "White Rectangular Shower Tray",
     description:
-      "White molded FRP shower tray designed for residential, hotel and commercial bathroom installations.",
+      "White GRP/fiberglass shower tray measuring 1m × 800mm, designed for residential, hotel and commercial bathroom installations.",
   }
 ];
 
