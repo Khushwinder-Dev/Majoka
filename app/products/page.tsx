@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   LayoutGrid,
@@ -687,45 +688,51 @@ export default function ProductsPage() {
                     >
                       {/* Top Product Image Container */}
                       <div className="relative w-full aspect-square bg-[#f6f7f9] rounded-xl overflow-hidden flex items-center justify-center p-3 mb-3">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          width={200}
-                          height={200}
-                          className="max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                        />
+                        <Link
+                          href={`/products/${product.id}`}
+                          className="w-full h-full flex items-center justify-center cursor-pointer"
+                        >
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            width={200}
+                            height={200}
+                            className="max-h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </Link>
 
-                        {/* Top-Right Controls: Rating Pill & Share Button (Visible on Hover or when Selected) */}
+                        {/* Top-Right Controls: Share Button (Rating Removed) */}
                         <div
-                          className={`absolute top-2.5 right-2.5 flex items-center gap-1.5 z-10 transition-opacity duration-200 ${isSelected || isShareOpen
+                          className={`absolute top-2.5 right-2.5 flex items-center z-10 transition-opacity duration-200 ${isSelected || isShareOpen
                             ? "opacity-100"
                             : "opacity-0 group-hover:opacity-100"
                             }`}
                         >
-                          {/* Rating Pill */}
-                          <div className="flex items-center gap-1 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-full border border-gray-100 shadow-xs text-[10px] font-bold text-gray-700">
-                            <Star className="w-2.5 h-2.5 fill-[#01a9a0] text-[#01a9a0]" />
-                            <span>{product.rating}</span>
-                          </div>
-
-                          {/* Share Button (Toggles Share Tooltip Popover) */}
                           <button
+                            type="button"
                             onClick={(e) => handleOpenShare(e, product)}
-                            className="w-6 h-6 rounded-full bg-white/95 backdrop-blur-xs border border-gray-100 hover:border-[#01a9a0] flex items-center justify-center text-gray-500 hover:text-[#01a9a0] transition-transform hover:scale-110 shadow-xs cursor-pointer"
+                            className="w-7 h-7 rounded-full bg-white/95 backdrop-blur-xs border border-gray-100 hover:border-[#01a9a0] flex items-center justify-center text-gray-500 hover:text-[#01a9a0] transition-transform hover:scale-110 shadow-xs cursor-pointer"
                             title="Share product"
                           >
-                            <Share2 className="w-3 h-3" />
+                            <Share2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
 
                       {/* Product Details */}
-                      <div className="flex flex-col flex-1">
-                        <h3 className="text-sm font-bold font-anek text-gray-900 tracking-tight leading-snug group-hover:text-[#01a9a0] transition-colors truncate">
-                          {product.name}
-                        </h3>
+                      <div className="flex flex-col flex-1 pb-1">
+                        {/* Product Name */}
+                        <Link
+                          href={`/products/${product.id}`}
+                          className="group/title block"
+                        >
+                          <h3 className="text-sm sm:text-[15px] font-bold font-anek text-gray-900 tracking-tight leading-snug group-hover/title:text-[#01a9a0] transition-colors line-clamp-1">
+                            {product.name}
+                          </h3>
+                        </Link>
 
-                        <p className="text-[11px] text-gray-500 leading-relaxed mt-1 line-clamp-2 hidden">
+                        {/* Product Description */}
+                        <p className="text-xs text-gray-500 leading-relaxed mt-1.5 line-clamp-2">
                           {product.description}
                         </p>
                       </div>
