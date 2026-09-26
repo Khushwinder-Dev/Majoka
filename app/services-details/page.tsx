@@ -568,31 +568,35 @@ function ServiceDetailsContent() {
       {/* ══ BOOK A VISIT CTA BANNER ════════════════════════════ */}
       <section className="w-full bg-white py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-8xl mx-auto">
-          <div className="bg-[#0d2137] rounded-2xl border border-[#1a3a5c] px-6 sm:px-10 py-7 sm:py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+          <div className="relative overflow-hidden bg-gradient-to-r from-[#018b84] via-[#01a9a0] to-[#009e90] rounded-2xl sm:rounded-3xl border border-white/20 shadow-[0_15px_35px_rgba(1,169,160,0.25)] px-6 sm:px-10 py-7 sm:py-9 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+            {/* Subtle decorative glow */}
+            <div className="absolute -top-12 -right-12 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-black/10 rounded-full blur-2xl pointer-events-none" />
+
             {/* Left: text */}
-            <div className="flex-1 min-w-0">
-              <h3 className="text-[18px] sm:text-[22px] font-extrabold text-white leading-snug mb-1.5">
+            <div className="relative z-10 flex-1 min-w-0">
+              <h3 className="text-[19px] sm:text-[23px] lg:text-[25px] font-extrabold text-white leading-snug mb-1.5">
                 {isArabic ? "احجز زيارة هذا الأسبوع." : "Book a visit for this week."}
               </h3>
-              <p className="text-[13px] sm:text-[14px] text-white/60 leading-relaxed max-w-sm">
+              <p className="text-[13px] sm:text-[14.5px] text-white/90 leading-relaxed max-w-lg">
                 {isArabic
                   ? "أخبرنا بما يحتاج إلى تنفيذ. ستحصل على عرض سعر ثابت في نفس اليوم ونافذة وصول مدتها ساعتان."
                   : "Tell us what needs doing. You'll get a fixed quote the same day and a two-hour arrival window."}
               </p>
             </div>
             {/* Right: buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0">
+            <div className="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 flex-shrink-0">
               <Link
                 href="https://wa.me/971527492002"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 shadow-md shadow-[#009e90]/30 hover:scale-[1.02] active:scale-[0.98] whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-[#01a9a0] font-extrabold text-[13px] sm:text-[14px] px-6 sm:px-7 py-3 sm:py-3.5 rounded-full transition-all duration-200 shadow-md shadow-black/10 hover:shadow-lg hover:scale-[1.03] active:scale-[0.98] whitespace-nowrap cursor-pointer"
               >
                 {isArabic ? "احجز فنياً" : "Book a Technician"}
               </Link>
               <a
                 href="tel:+971556173300"
-                className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/10 border border-white/30 hover:border-white/50 text-white font-bold text-[13px] sm:text-[14px] px-6 py-3 rounded-full transition-all duration-200 whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white text-white hover:text-[#01a9a0] border border-white/40 hover:border-white font-bold text-[13px] sm:text-[14px] px-6 py-3 sm:py-3.5 rounded-full transition-all duration-200 backdrop-blur-xs hover:scale-[1.03] active:scale-[0.98] whitespace-nowrap cursor-pointer"
               >
                 <Phone className="w-4 h-4 flex-shrink-0" />
                 {isArabic ? "اتصل الآن" : "Call Now"}
