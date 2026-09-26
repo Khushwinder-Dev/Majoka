@@ -2,32 +2,18 @@
 
 import React, { useState } from "react";
 import {
-  Facebook, Instagram, Linkedin, Youtube, Twitter,
-  ArrowRight, ArrowLeft, ChevronUp,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Youtube,
+  Twitter,
+  ArrowRight,
+  ChevronUp,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "react-hot-toast";
-
-// ─── href maps ────────────────────────────────────────────────────────────────
-const servicesHrefs = [
-  "/services?service=1&sub=grp-fiberglass-waterproofing",
-  "/services?service=1&sub=combo-system-roof-waterproofing",
-  "/services?service=1&sub=epoxy-floor-coating",
-  "/services?service=1&sub=bitumen-membrane-waterproofing",
-  "/services?service=1&sub=polyurea-coating-waterproofing",
-  "/services",
-];
-
-const companyHrefs = [
-  "/about-us",
-  "/expertise",
-  "/certifications",
-  "/career",
-  "/contact",
-  "/subcontract",
-];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 function FooterHeading({ title }: { title: string }) {
@@ -47,8 +33,9 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       className="flex items-center gap-2 text-xs sm:text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-          }`}
+        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${
+          isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+        }`}
         strokeWidth={2.5}
       />
       <span>{label}</span>
@@ -59,10 +46,10 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 function ContactItem({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="flex items-start gap-2.5 sm:gap-3">
-      <div className="flex-shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
+      <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
         {icon}
       </div>
-      <div className="flex flex-col gap-0.5 pt-1 sm:pt-2 text-xs sm:text-sm text-stone-700 font-normal min-w-0 flex-1 leading-snug">
+      <div className="flex flex-col gap-0.5 pt-0.5 sm:pt-1 text-xs sm:text-sm text-stone-700 font-normal min-w-0 flex-1 leading-snug">
         {children}
       </div>
     </div>
@@ -89,7 +76,7 @@ export default function Footer() {
     setIsSubmitting(true);
     try {
       await new Promise((r) => setTimeout(r, 800));
-      toast.success(t.footer.newsletter.successMsg);
+      toast.success(isArabic ? "تم الاشتراك بنجاح في النشرة البريدية!" : "Subscribed successfully!");
       setEmail("");
     } catch {
       toast.error(t.footer.newsletter.errorMsg);
@@ -98,37 +85,130 @@ export default function Footer() {
     }
   };
 
-  // Resources labels from reference design
-  const resourcesLabels = isArabic
-    ? ["الوسائط", "التحميلات", "احصل على عرض سعر", "الأسئلة الشائعة", "المدونة", "الدعم", "الضمان"]
-    : ["Media", "Download", "Get a Quote", "FAQs", "Blog", "Support", "Warranty"];
-
-  // Resources hrefs
-  const resourcesHrefs = [
-    "/media",
-    "/download",
-    "/get-a-quote",
-    "/faqs",
-    "/blogs",
-    "/support",
-    "/warranty",
+  // 1. Services
+  const servicesItems = [
+    {
+      labelEn: "GRP & Fiberglass",
+      labelAr: "عزل GRP والألياف الزجاجية",
+      href: "/services?service=1&sub=grp-fiberglass-waterproofing",
+    },
+    {
+      labelEn: "Combo Roof System",
+      labelAr: "نظام الكومبو للأسطح",
+      href: "/services?service=1&sub=combo-system-roof-waterproofing",
+    },
+    {
+      labelEn: "Epoxy Floor Coating",
+      labelAr: "طلاء أرضيات الإيبوكسي",
+      href: "/services?service=1&sub=epoxy-floor-coating",
+    },
+    {
+      labelEn: "Bitumen Membrane",
+      labelAr: "عزل الغشاء البيتوميني",
+      href: "/services?service=1&sub=bitumen-membrane-waterproofing",
+    },
+    {
+      labelEn: "Polyurea Waterproofing",
+      labelAr: "عزل البولي يوريا",
+      href: "/services?service=1&sub=polyurea-coating-waterproofing",
+    },
+    {
+      labelEn: "Injection Waterproofing",
+      labelAr: "عزل الحقن المائي",
+      href: "/services?service=1&sub=injection-waterproofing",
+    },
   ];
 
-  // Company labels
-  const companyLabels = isArabic
-    ? ["عن الشركة", "الخبرة", "الشهادات", "وظائف", "اتصل بنا", "المقاولون من الباطن"]
-    : ["About Us", "Our Expertise", "Certifications", "Careers", "Contact", "Subcontract"];
-
-  // Company hrefs — all correct
-  const companyHrefs = [
-    "/about-us",
-    "/expertise",
-    "/certifications",
-    "/career",
-    "/contact",
-    "/subcontract",
+  // 2. Solutions (6 items + View All)
+  const solutionsItems = [
+    {
+      labelEn: "Waterproofing Solutions",
+      labelAr: "حلول العزل المائي",
+      href: "/services?service=1",
+    },
+    {
+      labelEn: "Concrete Repair & Protection",
+      labelAr: "إصلاح وحماية الخرسانة",
+      href: "/services?service=1&sub=injection-waterproofing",
+    },
+    {
+      labelEn: "Roofing Solutions",
+      labelAr: "حلول الأسطح",
+      href: "/services?service=1&sub=combo-system-roof-waterproofing",
+    },
+    {
+      labelEn: "Basement & Below-Ground",
+      labelAr: "حلول السراديب وتحت الأرض",
+      href: "/services?service=1&sub=bitumen-membrane-waterproofing",
+    },
+    {
+      labelEn: "Joint Sealing Solutions",
+      labelAr: "حلول سد الفواصل",
+      href: "/services?service=1&sub=polyurea-coating-waterproofing",
+    },
+    {
+      labelEn: "Specialized Construction",
+      labelAr: "حلول إنشائية متخصصة",
+      href: "/solutions",
+    },
   ];
 
+  // 3. Projects (6 items + View All)
+  const projectsItems = [
+    {
+      labelEn: "Miami 1",
+      labelAr: "ميامي 1",
+      href: "/project",
+    },
+    {
+      labelEn: "Miami Phase 2",
+      labelAr: "ميامي المرحلة 2",
+      href: "/project",
+    },
+    {
+      labelEn: "City Premiere Marina Hotel",
+      labelAr: "شقق سيتي بريمير مارينا",
+      href: "/project",
+    },
+    {
+      labelEn: "NED Al Ghurair – Al Furjan",
+      labelAr: "فلل الغرير | الفرجان",
+      href: "/project",
+    },
+    {
+      labelEn: "Dubai Hills Estate",
+      labelAr: "دبي هيلز استيت",
+      href: "/project",
+    },
+    {
+      labelEn: "Arabian Ranches",
+      labelAr: "المرابع العربية",
+      href: "/project",
+    },
+  ];
+
+  // 4. Resources
+  const resourcesItems = [
+    { labelEn: "Media", labelAr: "الوسائط", href: "/media" },
+    { labelEn: "Download", labelAr: "التحميلات", href: "/download" },
+    { labelEn: "Get a Quote", labelAr: "احصل على عرض سعر", href: "/get-a-quote" },
+    { labelEn: "FAQs", labelAr: "الأسئلة الشائعة", href: "/faqs" },
+    { labelEn: "Blog", labelAr: "المدونة", href: "/blogs" },
+    { labelEn: "Support", labelAr: "الدعم", href: "/support" },
+    { labelEn: "Warranty", labelAr: "الضمان", href: "/warranty" },
+  ];
+
+  // 5. Company
+  const companyItems = [
+    { labelEn: "About Us", labelAr: "عن الشركة", href: "/about-us" },
+    { labelEn: "Our Expertise", labelAr: "الخبرة", href: "/expertise" },
+    { labelEn: "Certifications", labelAr: "الشهادات", href: "/certifications" },
+    { labelEn: "Careers", labelAr: "وظائف", href: "/career" },
+    { labelEn: "Contact", labelAr: "اتصل بنا", href: "/contact" },
+    { labelEn: "Subcontract", labelAr: "المقاولون من الباطن", href: "/subcontract" },
+  ];
+
+  // Social Links
   const socialLinks = [
     { href: "https://www.facebook.com/tajalrahmahuae", Icon: Facebook, label: "Facebook" },
     { href: "https://www.instagram.com/tajalrahmahuae", Icon: Instagram, label: "Instagram" },
@@ -139,71 +219,6 @@ export default function Footer() {
 
   return (
     <footer className="relative w-full overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
-
-      {/* ══════════════════════════════════════════════
-          NEWSLETTER STRIP — newsletterbg.jpg
-          ══════════════════════════════════════════════ */}
-      <div
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage: "url('/newsletterbg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Light overlay to keep text readable */}
-        <div className="absolute inset-0 bg-white/55 pointer-events-none" />
-
-        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-12">
-
-            {/* Left: icon + text */}
-            <div className="flex items-start gap-4 flex-1 max-w-xl">
-              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center">
-                <Image
-                  src="/footerIcon/newsletterEmailIcon.svg"
-                  alt="Newsletter"
-                  width={32}
-                  height={32}
-                  unoptimized
-                  className="w-8 h-8 object-contain"
-                />
-              </div>
-              <div>
-                <h3 className="text-lg sm:text-xl font-extrabold text-stone-900 leading-tight mb-1">
-                  {t.footer.newsletter.title}
-                </h3>
-                <p className="text-sm text-stone-600 leading-relaxed">
-                  {t.footer.newsletter.description}
-                </p>
-              </div>
-            </div>
-
-            {/* Right: email input */}
-            <form onSubmit={handleSubscribe} className="w-full lg:w-auto lg:min-w-[380px]">
-              <div className="relative">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={t.footer.newsletter.placeholder}
-                  disabled={isSubmitting}
-                  className="w-full h-12 rounded-full bg-white border border-stone-200 pl-5 pr-14 text-stone-800 text-sm placeholder:text-stone-400 focus:border-[#01a9a0]/50 focus:outline-none shadow-sm transition-all duration-300"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-1.5" : "right-1.5"} w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white flex items-center justify-center transition-all duration-300 disabled:opacity-60 cursor-pointer`}
-                  aria-label={t.footer.newsletter.subscribe}
-                >
-                  <ArrowRight className={`w-4 h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""} ${isSubmitting ? "animate-pulse" : ""}`} />
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
       {/* ══════════════════════════════════════════════
           MAIN FOOTER BODY — footerBg.jpg
           ══════════════════════════════════════════════ */}
@@ -215,120 +230,228 @@ export default function Footer() {
           backgroundPosition: "center",
         }}
       >
-        {/* Dark overlay so text is readable */}
-        <div className="absolute inset-0 bg-[#021f1e]/30 pointer-events-none hidden" />
-
-        <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* ── 5-column grid ───────────────────────────────────────────── */}
-          <div className="pt-12 sm:pt-14 lg:pt-16 pb-10 sm:pb-12">
-            <div className="grid grid-cols-12 gap-5 sm:gap-8 lg:gap-6 xl:gap-8">
-
-              {/* COL 1 — Brand */}
-              <div className="col-span-12 md:col-span-6 lg:col-span-4 flex flex-col gap-4">
-                <Link href="/" className="flex items-center gap-3 w-fit">
-                  <div className="relative w-12 h-12 flex-shrink-0">
-                    <Image src="/logo.png" alt="Taj Al Rahmah Logo" fill className="object-contain" />
-                  </div>
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-base sm:text-lg font-extrabold text-stone-900">{t.footer.tagline1}</span>
-                    <span className="text-sm sm:text-base font-bold text-[#01a9a0]">{t.footer.tagline2}</span>
-                  </div>
-                </Link>
-
-                <p className="text-sm text-stone-600 leading-relaxed max-w-sm">
-                  {t.footer.companyDescription}
-                  {" "}
-                  <Link href="/about-us" className="inline-flex items-center gap-1 text-[#01a9a0] font-semibold hover:underline">
-                    {isArabic ? "اقرأ المزيد" : "Read More"}
-                    {isArabic
-                      ? <ArrowLeft className="w-3 h-3" />
-                      : <ArrowRight className="w-3 h-3" />}
-                  </Link>
-                </p>
-
-                {/* Social icons */}
-                <div className="flex items-center gap-2.5 flex-wrap pt-1">
-                  {socialLinks.map(({ href, Icon, label }) => (
-                    <Link
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-sm hover:-translate-y-0.5 transition-all duration-300"
-                    >
-                      <Icon className="w-4 h-4" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* COL 2 — Services */}
-              <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* ── 6-Column Navigation Grid ─────────────────────────────────── */}
+          <div className="pt-14 sm:pt-16 lg:pt-18 pb-10 sm:pb-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-8 lg:gap-5 xl:gap-7">
+              {/* COL 1 — Services */}
+              <div className="flex flex-col gap-4">
                 <FooterHeading title={t.footer.servicesTitle} />
                 <ul className="flex flex-col gap-2.5">
-                  {t.footer.servicesLinks.map((label, i) => (
-                    <li key={i}><FooterLink href={servicesHrefs[i] ?? "/services"} label={label} /></li>
+                  {servicesItems.map((item, i) => (
+                    <li key={i}>
+                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
+                    </li>
                   ))}
-                  <li><FooterLink href="/services" label={isArabic ? "عرض جميع الخدمات" : "View All Services"} /></li>
+                  <li>
+                    <FooterLink
+                      href="/services"
+                      label={isArabic ? "عرض جميع الخدمات" : "View All Services"}
+                    />
+                  </li>
                 </ul>
               </div>
 
-              {/* COL 3 — Resources */}
-              <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
+              {/* COL 2 — Solutions */}
+              <div className="flex flex-col gap-4">
+                <FooterHeading title={isArabic ? "حلولنا" : "Solutions"} />
+                <ul className="flex flex-col gap-2.5">
+                  {solutionsItems.map((item, i) => (
+                    <li key={i}>
+                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
+                    </li>
+                  ))}
+                  <li>
+                    <FooterLink
+                      href="/solutions"
+                      label={isArabic ? "عرض جميع الحلول" : "View All Solutions"}
+                    />
+                  </li>
+                </ul>
+              </div>
+
+              {/* COL 3 — Projects */}
+              <div className="flex flex-col gap-4">
+                <FooterHeading title={isArabic ? "مشاريعنا" : "Projects"} />
+                <ul className="flex flex-col gap-2.5">
+                  {projectsItems.map((item, i) => (
+                    <li key={i}>
+                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
+                    </li>
+                  ))}
+                  <li>
+                    <FooterLink
+                      href="/project"
+                      label={isArabic ? "عرض جميع المشاريع" : "View All Projects"}
+                    />
+                  </li>
+                </ul>
+              </div>
+
+              {/* COL 4 — Resources */}
+              <div className="flex flex-col gap-4">
                 <FooterHeading title={t.footer.resourcesTitle} />
                 <ul className="flex flex-col gap-2.5">
-                  {resourcesLabels.map((label, i) => (
-                    <li key={i}><FooterLink href={resourcesHrefs[i] ?? "/resources"} label={label} /></li>
+                  {resourcesItems.map((item, i) => (
+                    <li key={i}>
+                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              {/* COL 4 — Company */}
-              <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
+              {/* COL 5 — Company */}
+              <div className="flex flex-col gap-4">
                 <FooterHeading title={t.footer.companyTitle} />
                 <ul className="flex flex-col gap-2.5">
-                  {companyLabels.map((label, i) => (
-                    <li key={i}><FooterLink href={companyHrefs[i] ?? "/about-us"} label={label} /></li>
+                  {companyItems.map((item, i) => (
+                    <li key={i}>
+                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              {/* COL 5 — Contact */}
-              <div className="col-span-6 md:col-span-3 lg:col-span-2 flex flex-col gap-4">
+              {/* COL 6 — Contact */}
+              <div className="flex flex-col gap-4">
                 <FooterHeading title={t.footer.contactTitle} />
-                <div className="flex flex-col gap-3.5 sm:gap-4">
-                  <ContactItem icon={<Image src="/footerIcon/Group.svg" alt="phone" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
-                    <Link href={`tel:${t.footer.phone1.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone1}</Link>
-                    <Link href={`tel:${t.footer.phone2.replace(/\s/g, "")}`} className="hover:text-[#01a9a0] transition-colors">{t.footer.phone2}</Link>
+                <div className="flex flex-col gap-3 sm:gap-3.5">
+                  <ContactItem
+                    icon={
+                      <Image
+                        src="/footerIcon/Group.svg"
+                        alt="phone"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                      />
+                    }
+                  >
+                    <Link
+                      href={`tel:${t.footer.phone1.replace(/\s/g, "")}`}
+                      className="hover:text-[#01a9a0] transition-colors"
+                    >
+                      {t.footer.phone1}
+                    </Link>
+                    <Link
+                      href={`tel:${t.footer.phone2.replace(/\s/g, "")}`}
+                      className="hover:text-[#01a9a0] transition-colors"
+                    >
+                      {t.footer.phone2}
+                    </Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG.svg" alt="email" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
-                    <Link href={`mailto:${t.footer.email1}`} className="hover:text-[#01a9a0] transition-colors break-words">{t.footer.email1}</Link>
-                    <Link href={`mailto:${t.footer.email2}`} className="hover:text-[#01a9a0] transition-colors break-words">{t.footer.email2}</Link>
+                  <ContactItem
+                    icon={
+                      <Image
+                        src="/footerIcon/SVG.svg"
+                        alt="email"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                      />
+                    }
+                  >
+                    <Link
+                      href={`mailto:${t.footer.email1}`}
+                      className="hover:text-[#01a9a0] transition-colors break-words"
+                    >
+                      {t.footer.email1}
+                    </Link>
+                    <Link
+                      href={`mailto:${t.footer.email2}`}
+                      className="hover:text-[#01a9a0] transition-colors break-words"
+                    >
+                      {t.footer.email2}
+                    </Link>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (1).svg" alt="location" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
+                  <ContactItem
+                    icon={
+                      <Image
+                        src="/footerIcon/SVG (1).svg"
+                        alt="location"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                      />
+                    }
+                  >
                     <span className="whitespace-pre-line leading-relaxed">{t.footer.location}</span>
                   </ContactItem>
 
-                  <ContactItem icon={<Image src="/footerIcon/SVG (2).svg" alt="hours" width={24} height={24} unoptimized className="w-5 h-5 sm:w-6 sm:h-6 object-contain brightness-0 invert" />}>
+                  <ContactItem
+                    icon={
+                      <Image
+                        src="/footerIcon/SVG (2).svg"
+                        alt="hours"
+                        width={20}
+                        height={20}
+                        unoptimized
+                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                      />
+                    }
+                  >
                     <span className="leading-snug">{t.footer.workingHours}</span>
                     <span className="text-stone-400 text-xs">{t.footer.closedDay}</span>
                   </ContactItem>
                 </div>
               </div>
-
             </div>
+          </div>
+
+          {/* ── Middle Action Strip: Follow Us (Left) + Newsletter Subscribe (Right) ── */}
+          <div className="pb-10 pt-6 border-t border-stone-300/40 flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Follow Us */}
+            <div className="flex items-center gap-3.5 flex-wrap">
+              <span className="text-sm font-extrabold text-stone-900 uppercase tracking-wider">
+                {isArabic ? "تابعنا" : "Follow Us"}
+              </span>
+              <div className="flex items-center gap-2">
+                {socialLinks.map(({ href, Icon, label }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Newsletter Subscription Input */}
+            <form onSubmit={handleSubscribe} className="w-full md:w-auto">
+              <div className="flex items-center bg-white rounded-full border border-stone-200 shadow-sm p-1 sm:min-w-[340px] md:min-w-[380px] focus-within:border-[#01a9a0] transition-colors">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={isArabic ? "أدخل بريدك الإلكتروني" : "Enter Your Email"}
+                  disabled={isSubmitting}
+                  className="w-full px-4 text-xs sm:text-sm text-stone-800 bg-transparent placeholder:text-stone-400 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-5 py-2 sm:py-2.5 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer disabled:opacity-60 shadow-xs"
+                >
+                  {isSubmitting ? "..." : isArabic ? "اشتراك" : "Subscribe"}
+                </button>
+              </div>
+            </form>
           </div>
 
           {/* ── Bottom bar ──────────────────────────────────────────────── */}
           <div className="relative border-t border-stone-300/40 pt-9 pb-20 sm:pb-6">
-
             {/* Scroll-to-top — sits centered ON the divider line */}
             <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-              {/* White halo ring */}
               <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center shadow-sm">
                 <button
                   onClick={scrollToTop}
