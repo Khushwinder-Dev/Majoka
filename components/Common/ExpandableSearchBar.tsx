@@ -671,42 +671,97 @@ export default function ExpandableSearchBar({
 
   return (
     <div className={`relative ${className}`} ref={containerRef}>
-      {isDrawer ? (
-        /* ─── DRAWER MOBILE MODE: ALWAYS RENDERED AS A SEARCH INPUT PILL ─── */
-        <div className="relative w-full">
-          <div
-            className="flex items-center bg-white/10 hover:bg-white/15 focus-within:bg-white/15 border border-white/20 focus-within:border-[#00c2b2] rounded-full px-3 py-2 transition-all duration-200"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsExpanded(true);
-            }}
-          >
-            {/* If expanded in drawer, show back/close button `<` on left */}
-            {isExpanded && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
+      {/* ─── DESKTOP & DRAWER TRIGGER BUTTON ─── */}
+      {!isDrawer ? (
+        <div className="flex items-center">
+          {dashedButton ? (
+            <button
+              type="button"
+              onClick={() => {
+                if (isExpanded) {
                   handleCollapse();
-                }}
-                className="p-1 text-white/70 hover:text-[#00c2b2] hover:bg-white/10 rounded-full transition-colors cursor-pointer flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1"
-                title={isAr ? "إغلاق البحث" : "Close search"}
-                aria-label="Close search"
-              >
-                <ChevronLeft className="h-4 w-4 stroke-[2.5] rtl:rotate-180" />
-              </button>
-            )}
+                } else {
+                  handleExpand();
+                }
+              }}
+              className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${isExpanded
+                ? "border-white bg-white/15"
+                : "border-white/60 hover:border-white"
+                }`}
+              aria-label={isExpanded ? "Close search" : "Open search"}
+              title="Search (Ctrl + K)"
+            >
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] flex items-center justify-center text-white transition-colors shadow-sm">
+                {isExpanded ? (
+                  <X className="h-4 w-4 stroke-[2.5]" />
+                ) : (
+                  <Search className="h-4 w-4 stroke-[2.5]" />
+                )}
+              </div>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                if (isExpanded) {
+                  handleCollapse();
+                } else {
+                  handleExpand();
+                }
+              }}
+              className={`${iconColor} ${hoverIconColor} p-2 transition-all cursor-pointer hover:bg-white/10 rounded-full`}
+              aria-label={isExpanded ? "Close search" : "Open search"}
+              title="Search (Ctrl + K)"
+            >
+              {isExpanded ? (
+                <X className="h-6 w-6 stroke-2" />
+              ) : (
+                <Search className="h-6 w-6 stroke-2" />
+              )}
+            </button>
+          )}
+        </div>
+      ) : (
+        /* Mobile Drawer Trigger Pill */
+        <div className="relative w-full">
+          <button
+            type="button"
+            onClick={() => {
+              if (isExpanded) {
+                handleCollapse();
+              } else {
+                handleExpand();
+              }
+            }}
+            className="w-full flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 py-2.5 text-white/80 transition-all cursor-pointer text-xs"
+          >
+            <div className="flex items-center gap-2">
+              <Search className="w-4 h-4 text-[#00c2b2]" />
+              <span>{placeholder || defaultPlaceholder}</span>
+            </div>
+            <span className="text-[10px] text-white/40 uppercase font-mono">Search</span>
+          </button>
+        </div>
+      )}
 
-            {/* Text Input */}
+      {/* ─── UNIFIED SEARCH CARD (SINGLE CONTAINER) ───────────── */}
+      {isExpanded && (
+        <div
+          className={`${isDrawer
+            ? "relative w-full mt-3"
+            : "absolute top-full mt-3 right-0 rtl:right-auto rtl:left-0 w-[92vw] sm:w-[500px] md:w-[540px] lg:w-[580px] max-w-[580px]"
+            } bg-white rounded-3xl shadow-[0_25px_70px_rgba(1,169,160,0.15),0_15px_35px_rgba(0,0,0,0.08)] border border-[#01a9a0]/25 p-5 sm:p-6 z-50 text-left rtl:text-right animate-in fade-in zoom-in-95 duration-200`}
+          onClick={(e) => e.stopPropagation()}
+          dir={isAr ? "rtl" : "ltr"}
+        >
+          {/* 1. Integrated Search Input Box with Website Primary Theme */}
+          <div className="relative flex items-center bg-white border-2 border-[#01a9a0] focus-within:ring-4 focus-within:ring-[#01a9a0]/15 rounded-2xl px-4 py-3 transition-all shadow-xs gap-3">
+            <Search className="w-5 h-5 text-[#01a9a0] shrink-0 stroke-[2.2]" />
             <input
               ref={inputRef}
               type="text"
               value={searchQuery}
-              onFocus={() => setIsExpanded(true)}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if (!isExpanded) setIsExpanded(true);
-              }}
+              onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
@@ -715,246 +770,142 @@ export default function ExpandableSearchBar({
                   handleCollapse();
                 }
               }}
-              placeholder={placeholder || defaultPlaceholder}
-              className="flex-1 outline-none text-white placeholder-white/50 bg-transparent text-xs sm:text-sm px-2 font-sans min-w-0"
+              placeholder={placeholder || (isAr ? "ابحث عن الخدمات، المشاريع، الحلول..." : "Search services, projects, solutions...")}
+              className="flex-1 bg-transparent text-sm sm:text-base text-slate-900 placeholder-slate-400 outline-none min-w-0 font-medium"
             />
 
-            {/* Voice Search (if supported and query empty) */}
+            {/* Voice Search */}
             {speechSupported && !searchQuery && (
               <button
                 type="button"
                 onClick={handleVoiceSearch}
-                className={`p-1.5 rounded-full transition-all flex-shrink-0 ${isListening
+                className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${isListening
                   ? "bg-red-500 text-white animate-pulse"
-                  : "text-white/60 hover:text-white hover:bg-white/10"
+                  : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
                   }`}
                 title={isListening ? "Listening..." : "Voice search"}
-                aria-label="Voice search"
               >
-                {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
+                {isListening ? (
+                  <MicOff className="w-4 h-4" />
+                ) : (
+                  <Mic className="w-4 h-4" />
+                )}
               </button>
             )}
 
-            {/* Clear Text X button */}
+            {/* Clear Query X */}
             {searchQuery.length > 0 && (
               <button
                 type="button"
                 onClick={handleClearQuery}
-                className="p-1 text-white/60 hover:text-white transition-colors flex-shrink-0 cursor-pointer rounded-full hover:bg-white/10"
+                className="p-1 text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9] rounded-full transition-colors shrink-0 cursor-pointer"
                 title={isAr ? "مسح النص" : "Clear text"}
-                aria-label="Clear text"
               >
-                <X className="h-3.5 w-3.5" />
+                <X className="w-4 h-4" />
               </button>
             )}
 
-            {/* Search Icon on Right */}
+            {/* Shortcut badges */}
+            {/* <div className="hidden sm:flex items-center gap-1 shrink-0 select-none">
+              <kbd className="px-2 py-0.5 text-[11px] font-mono font-bold text-slate-500 bg-slate-100 rounded-md border border-slate-200">
+                Ctrl
+              </kbd>
+              <kbd className="px-2 py-0.5 text-[11px] font-mono font-bold text-slate-500 bg-slate-100 rounded-md border border-slate-200">
+                K
+              </kbd>
+            </div> */}
+
+            {/* Close button */}
             <button
               type="button"
-              onClick={() => handleExecuteSearch(searchQuery)}
-              className="p-1 text-white/60 hover:text-[#00c2b2] transition-colors cursor-pointer flex-shrink-0 ml-1 rtl:ml-0 rtl:mr-1"
-              title={isAr ? "بحث" : "Search"}
-              aria-label="Submit search"
+              onClick={handleCollapse}
+              className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-full transition-colors shrink-0 cursor-pointer"
+              title={isAr ? "إغلاق" : "Close"}
+              aria-label="Close search"
             >
-              <Search className="h-4 w-4 stroke-[2.5]" />
+              <X className="w-4 h-4 stroke-[2.2]" />
             </button>
           </div>
-        </div>
-      ) : (
-        /* ─── DESKTOP HEADER MODE ─── */
-        <div className="flex items-center">
-          {/* Closed Search Trigger Button */}
-          {!isExpanded && (
-            dashedButton ? (
-              <button
-                type="button"
-                onClick={handleExpand}
-                className="relative p-0.5 rounded-full border border-dashed border-white/60 hover:border-white transition-all cursor-pointer hover:scale-105"
-                aria-label="Open search bar"
-              >
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] flex items-center justify-center text-white transition-colors shadow-sm">
-                  <Search className="h-4 w-4 stroke-[2.5]" />
-                </div>
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={handleExpand}
-                className={`${iconColor} ${hoverIconColor} p-2 transition-all cursor-pointer hover:bg-white/10 rounded-full`}
-                aria-label="Open search bar"
-              >
-                <Search className="h-6 w-6 stroke-2" />
-              </button>
-            )
-          )}
 
-          {/* Expanded Search Bar Container */}
-          {isExpanded && (
-            <>
-              {/* Placeholder in normal flow so the flex header never changes width or shifts */}
-              <div className="hidden lg:block w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 opacity-0 pointer-events-none" />
-
-              <div className="lg:absolute lg:right-0 lg:rtl:right-auto lg:rtl:left-0 lg:top-1/2 lg:-translate-y-1/2 flex items-center z-40 animate-in fade-in zoom-in-95 duration-200 w-full lg:w-auto">
-                {/* Search Input Pill */}
-                <div
-                  className="flex items-center bg-white flex-1 lg:flex-initial lg:w-72 xl:w-80 2xl:w-96 px-3 py-1.5 rounded-full border-2 border-[#00b3a4] shadow-2xl transition-all"
-                  onClick={(e) => e.stopPropagation()}
+          {/* 2. Filter Category Pills with Website Primary Theme */}
+          <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+            {FILTER_TABS.map((tab) => {
+              const isSelected = activeTab === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  type="button"
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${isSelected
+                    ? "bg-[#01a9a0] text-white shadow-sm shadow-[#01a9a0]/30"
+                    : "bg-slate-100 hover:bg-[#f0faf9] text-slate-700 hover:text-[#01a9a0] border border-transparent hover:border-[#01a9a0]/25"
+                    }`}
                 >
-                  {/* Back / Close button `<` on Left */}
-                  <button
-                    type="button"
-                    onClick={handleCollapse}
-                    className="p-1 text-[#00b3a4] hover:text-[#008f83] hover:bg-teal-50 rounded-full transition-colors cursor-pointer flex-shrink-0 mr-1 rtl:mr-0 rtl:ml-1"
-                    title={isAr ? "إغلاق البحث" : "Close search"}
-                    aria-label="Close search"
-                  >
-                    <ChevronLeft className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
-                  </button>
-
-                  {/* Text Input */}
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleExecuteSearch(searchQuery);
-                      } else if (e.key === "Escape") {
-                        handleCollapse();
-                      }
-                    }}
-                    placeholder={placeholder || defaultPlaceholder}
-                    className="flex-1 outline-none text-gray-800 bg-transparent text-xs sm:text-sm px-1.5 placeholder-gray-400 font-sans min-w-0"
-                  />
-
-                  {/* Voice Search (if supported and query empty) */}
-                  {speechSupported && !searchQuery && (
-                    <button
-                      type="button"
-                      onClick={handleVoiceSearch}
-                      className={`p-1.5 rounded-full transition-all flex-shrink-0 ${isListening
-                        ? "bg-red-500 text-white animate-pulse"
-                        : "text-gray-400 hover:text-gray-600 hover:bg-gray-100"
-                        }`}
-                      title={isListening ? "Listening..." : "Voice search"}
-                    >
-                      {isListening ? <MicOff className="h-3.5 w-3.5" /> : <Mic className="h-3.5 w-3.5" />}
-                    </button>
-                  )}
-
-
-                  {/* Clear Text X button */}
-                  {searchQuery.length > 0 && (
-                    <button
-                      type="button"
-                      onClick={handleClearQuery}
-                      className="p-1 text-gray-400 hover:text-gray-700 transition-colors flex-shrink-0 cursor-pointer ml-1 rtl:ml-0 rtl:mr-1 rounded-full hover:bg-gray-100"
-                      title={isAr ? "مسح النص" : "Clear text"}
-                    >
-                      <X className="h-3.5 w-3.5" />
-                    </button>
-                  )}
-
-                  {/* Search Icon on Right */}
-                  <button
-                    type="button"
-                    onClick={() => handleExecuteSearch(searchQuery)}
-                    className="p-1 text-[#00b3a4] hover:text-[#008f83] hover:bg-teal-50 rounded-full transition-colors cursor-pointer flex-shrink-0 ml-1 rtl:ml-0 rtl:mr-1"
-                    title={isAr ? "بحث" : "Search"}
-                    aria-label="Submit search"
-                  >
-                    <Search className="h-4 w-4 stroke-[2.5]" />
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
-      {/* ─── SEARCH DROPDOWN (OPENS ON CLICK / FOCUS) ───────────── */}
-      {isExpanded && (
-        <div
-          className={`${isDrawer
-            ? "absolute top-full mt-2 left-0 right-0 w-full max-h-[60vh] flex flex-col"
-            : "absolute top-full mt-2.5 right-0 rtl:right-auto rtl:left-0 w-[330px] sm:w-[440px] md:w-[500px] lg:w-[540px]"
-            } bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.22)] border border-gray-100 overflow-hidden z-50 text-left rtl:text-right animate-in fade-in slide-in-from-top-2 duration-200`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* ── Filter By Tabs Row ── */}
-          <div className="px-3 sm:px-3.5 pt-3 pb-2.5 bg-gray-50/90 border-b border-gray-100 flex items-center justify-between gap-1 flex-shrink-0">
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1">
-              {FILTER_TABS.map((tab) => {
-                const isSelected = activeTab === tab.key;
-                return (
-                  <button
-                    key={tab.key}
-                    type="button"
-                    onClick={() => setActiveTab(tab.key)}
-                    className={`px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex-shrink-0 ${isSelected
-                      ? "bg-[#009e90] text-white shadow-xs"
-                      : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200/80"
-                      }`}
-                  >
-                    {isAr ? tab.labelAr : tab.labelEn}
-                  </button>
-                );
-              })}
-            </div>
-
-            <span className="hidden md:inline-block text-[10px] text-gray-400 font-medium flex-shrink-0">
-              {isAr ? "اضغط Enter" : "Press Enter"}
-            </span>
+                  {isAr ? tab.labelAr : tab.labelEn}
+                </button>
+              );
+            })}
           </div>
 
-          {/* ── Main Content Area ── */}
-          <div className="flex-1 overflow-y-auto min-h-0">
+          {/* 3. Section Header */}
+          <div className="mt-5 mb-2.5 flex items-center justify-between">
+            <p className="text-xs font-extrabold tracking-wider uppercase text-slate-800">
+              {searchQuery.trim() === ""
+                ? isAr
+                  ? "الأكثر استخداماً"
+                  : "Most used"
+                : isAr
+                  ? "نتائج البحث"
+                  : "Search results"}
+            </p>
+            {searchQuery.trim() !== "" && (
+              <span className="text-xs text-[#01a9a0] font-bold">
+                {filteredResults.length} {isAr ? "نتيجة" : "results"}
+              </span>
+            )}
+          </div>
+
+          {/* 4. Results List / Most Used */}
+          <div className="flex-1 overflow-y-auto min-h-0 max-h-[300px] sm:max-h-[340px] pr-1">
             {searchQuery.trim() === "" ? (
-              /* ── Default / "Most used" list view ── */
-              <div className="p-2.5 sm:p-3">
-                <p className="px-2 py-1 text-[11px] sm:text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  {isAr ? "الأكثر استخداماً" : "Most used"}
-                </p>
-                <div className="mt-1 space-y-0.5">
-                  {mostUsedItems.map((item, idx) => {
-                    const Icon = item.icon;
-                    return (
-                      <div
-                        key={idx}
-                        onClick={() => {
-                          if (onSearch) {
-                            onSearch(isAr ? item.titleAr : item.titleEn, item.href);
-                          }
-                          router.push(item.href);
-                          handleCollapse();
-                          onCloseMenu?.();
-                        }}
-                        className="flex items-center justify-between p-2 sm:p-2.5 rounded-xl hover:bg-teal-50/60 transition-all cursor-pointer group"
-                      >
-                        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
-                          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gray-100 text-gray-600 group-hover:bg-[#009e90]/15 group-hover:text-[#009e90] flex items-center justify-center flex-shrink-0 transition-colors">
-                            <Icon className="w-4 h-4" />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <h5 className="text-xs sm:text-[13px] font-bold text-gray-900 group-hover:text-[#009e90] transition-colors truncate">
-                              {isAr ? item.titleAr : item.titleEn}
-                            </h5>
-                            <p className="text-[10px] sm:text-[11px] text-gray-500 truncate mt-0.5">
-                              {isAr ? item.categoryAr : item.categoryEn}
-                            </p>
-                          </div>
+              /* Most used items */
+              <div className="space-y-1">
+                {mostUsedItems.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => {
+                        if (onSearch) {
+                          onSearch(isAr ? item.titleAr : item.titleEn, item.href);
+                        }
+                        router.push(item.href);
+                        handleCollapse();
+                        onCloseMenu?.();
+                      }}
+                      className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#f0faf9] transition-all cursor-pointer group"
+                    >
+                      <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                        <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
+                          <Icon className="w-5 h-5 stroke-[2]" />
                         </div>
-                        <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#009e90] group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 rtl:rotate-180 transition-all flex-shrink-0" />
+                        <div className="min-w-0 flex-1">
+                          <h5 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
+                            {isAr ? item.titleAr : item.titleEn}
+                          </h5>
+                          <p className="text-xs text-slate-500 font-medium truncate mt-0.5">
+                            {isAr ? item.categoryAr : item.categoryEn}
+                          </p>
+                        </div>
                       </div>
-                    );
-                  })}
-                </div>
+                      <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
+                    </div>
+                  );
+                })}
               </div>
             ) : (
-              /* ── Filtered Search Results ── */
-              <div className="divide-y divide-gray-100">
+              /* Filtered Search Results */
+              <div className="space-y-1 divide-y divide-slate-100">
                 {filteredResults.length > 0 ? (
                   filteredResults.map((item) => {
                     const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
@@ -966,47 +917,50 @@ export default function ExpandableSearchBar({
                       <div
                         key={item.id}
                         onClick={() => handleSelectResult(item)}
-                        className="p-2.5 sm:p-3 hover:bg-[#f2faf9] cursor-pointer transition-colors flex items-start justify-between gap-2.5 group"
+                        className="p-3 rounded-2xl hover:bg-[#f0faf9] cursor-pointer transition-colors flex items-center justify-between gap-3 group"
                       >
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 sm:gap-2 mb-1 flex-wrap">
-                            <span
-                              className={`text-[9.5px] sm:text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full border flex items-center gap-1 ${badge.bg} ${badge.text} ${badge.border}`}
-                            >
-                              {item.category === "Product" && <Package className="w-2.5 h-2.5" />}
-                              {item.category === "Service" && <Wrench className="w-2.5 h-2.5" />}
-                              {item.category === "Solution" && <ShieldCheck className="w-2.5 h-2.5" />}
-                              {item.category === "Project" && <Building2 className="w-2.5 h-2.5" />}
-                              {item.category === "Industry" && <HardHat className="w-2.5 h-2.5" />}
-                              {item.category === "Resource" && <FileText className="w-2.5 h-2.5" />}
-                              {displayCategory}
-                            </span>
-                            <h4 className="text-xs sm:text-sm font-bold text-gray-900 group-hover:text-[#009e90] transition-colors truncate">
-                              {highlightMatch(displayName, searchQuery)}
-                            </h4>
+                        <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                          <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
+                            {item.category === "Product" && <Package className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Service" && <Wrench className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Solution" && <ShieldCheck className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Project" && <Building2 className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Industry" && <HardHat className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Resource" && <FileText className="w-5 h-5 stroke-[2]" />}
+                            {item.category === "Page" && <ExternalLink className="w-5 h-5 stroke-[2]" />}
                           </div>
-                          <p className="text-[11px] sm:text-xs text-gray-500 line-clamp-1 leading-relaxed">
-                            {displayDesc}
-                          </p>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-0.5">
+                              <span
+                                className={`text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}
+                              >
+                                {displayCategory}
+                              </span>
+                              <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
+                                {highlightMatch(displayName, searchQuery)}
+                              </h4>
+                            </div>
+                            <p className="text-xs text-slate-500 line-clamp-1 leading-relaxed">
+                              {displayDesc}
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-[#009e90] group-hover:text-white text-gray-400 flex items-center justify-center flex-shrink-0 transition-colors mt-0.5">
-                          <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                        </div>
+                        <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
                       </div>
                     );
                   })
                 ) : (
-                  <div className="py-6 sm:py-8 px-4 text-center">
-                    <p className="text-xs sm:text-sm font-semibold text-gray-700">
+                  <div className="py-8 px-4 text-center">
+                    <p className="text-sm font-bold text-slate-800">
                       {isAr ? "لم نجد نتائج لـ" : "No results for"} "{searchQuery}"
                     </p>
-                    <p className="text-[11px] sm:text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-slate-400 mt-1">
                       {isAr
                         ? "جرّب البحث باسم خدمة (عزل، إيبوكسي، كومبو) أو حل أو مشروع"
                         : "Try searching for service names (epoxy, combo, waterproofing) or solutions"}
                     </p>
-                    <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2">
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                       <button
                         type="button"
                         onClick={() => {
@@ -1014,9 +968,9 @@ export default function ExpandableSearchBar({
                           handleCollapse();
                           onCloseMenu?.();
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-[#009e90] text-xs font-bold rounded-full transition-colors border border-teal-200 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
                       >
-                        <Wrench className="w-3 h-3" />
+                        <Wrench className="w-3.5 h-3.5" />
                         <span>{isAr ? "تصفح الخدمات" : "Browse Services"}</span>
                       </button>
                       <button
@@ -1026,9 +980,9 @@ export default function ExpandableSearchBar({
                           handleCollapse();
                           onCloseMenu?.();
                         }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-xs font-bold rounded-full transition-colors border border-cyan-200 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
                       >
-                        <ShieldCheck className="w-3 h-3" />
+                        <ShieldCheck className="w-3.5 h-3.5" />
                         <span>{isAr ? "تصفح الحلول" : "Browse Solutions"}</span>
                       </button>
                     </div>
@@ -1038,13 +992,13 @@ export default function ExpandableSearchBar({
             )}
           </div>
 
-          {/* ── Bottom Bar with ASK AI ── */}
-          <div className="px-3.5 sm:px-4 py-2.5 sm:py-3 bg-gray-50/90 border-t border-gray-100 flex items-center justify-between gap-2 flex-shrink-0">
-            <span className="text-[11px] sm:text-xs text-gray-600 font-medium truncate">
+          {/* 5. Bottom Footer Bar with Website Primary Button */}
+          <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3 shrink-0">
+            <span className="text-xs sm:text-sm text-slate-600 font-medium">
               {isAr ? "هل تحتاج مساعدة في البحث؟" : "Need help finding something?"}
             </span>
 
-            {/* ASK AI Button */}
+            {/* ASK AI Agent Button */}
             <button
               type="button"
               onClick={() => {
@@ -1054,10 +1008,10 @@ export default function ExpandableSearchBar({
                 }
                 setShowAiModal(true);
               }}
-              className="px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#009e90] hover:bg-[#008277] text-white font-extrabold text-[11px] sm:text-xs tracking-wider uppercase flex items-center gap-1.5 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer flex-shrink-0 pointer-events-none"
+              className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-[#01a9a0]/25 hover:shadow-lg hover:shadow-[#01a9a0]/40 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shrink-0"
             >
-              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300" />
-              <span>{isAr ? "اسأل الذكاء الاصطناعي" : "ASK AI"}</span>
+              <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300/30" />
+              <span>{isAr ? "اسأل المساعد الذكي" : "Ask AI Agent"}</span>
             </button>
           </div>
         </div>

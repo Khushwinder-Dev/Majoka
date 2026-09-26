@@ -460,7 +460,7 @@ const Navbar = () => {
       dir={isArabic ? "rtl" : "ltr"}
     >
       {/* ── Dropdown panel ── */}
-      <div className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-100 border-t-2 border-t-white overflow-hidden">
+      <div className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-100 border-t-2 border-t-white overflow-hidden">
         {/* ── Top strip ── */}
         <div className="flex items-center justify-between px-6 py-3.5 border-b border-stone-100 bg-stone-50/70">
           <span className="text-[11px] font-extrabold tracking-[0.22em] uppercase text-[#009e90]">
