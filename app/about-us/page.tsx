@@ -86,7 +86,7 @@ const AboutUs = () => {
         subtitle="Learn more about Taj Al Rahmah's engineering standards, certifications, and technical capabilities."
         subtitleAr="تعرف أكثر على معايير تاج الرحمة الهندسية، واعتماداتها وخبراتها الفنية في دولة الإمارات."
       />
-      <ClientTestimonials />
+      {/* <ClientTestimonials /> */}
       <Certifications />
     </div>
   );
