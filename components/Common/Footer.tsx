@@ -230,7 +230,7 @@ export default function Footer() {
           backgroundPosition: "center",
         }}
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
           {/* ── 6-Column Navigation Grid ─────────────────────────────────── */}
           <div className="pt-14 sm:pt-16 lg:pt-18 pb-10 sm:pb-12">
             <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-6 sm:gap-8 lg:gap-5 xl:gap-7">
