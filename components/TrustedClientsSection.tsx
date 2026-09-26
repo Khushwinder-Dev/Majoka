@@ -198,14 +198,14 @@ export default function TrustedClientsSection() {
         {/* ── Testimonial card ───────────────────────────────────────────── */}
         <div
           data-aos="fade-up"
-          className="relative max-w-7xl mx-auto bg-gradient-to-br from-[#02131F] via-[#041D2E] to-[#02101B] border border-[#009e90]/30 rounded-[32px] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.25)] overflow-hidden"
+          className="relative max-w-7xl mx-auto bg-gradient-to-br from-white via-[#f4faf9] to-[#e8f6f5] border border-[#01a9a0]/25 rounded-[32px] p-8 sm:p-12 lg:p-14 shadow-[0_20px_50px_rgba(1,169,160,0.1)] overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(#009e90_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#01a9a0_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left: Quote */}
             <div className="lg:col-span-7 flex flex-col min-h-[220px] sm:min-h-[240px]">
-              <div className="w-14 h-14 rounded-full bg-[#009e90] text-white flex items-center justify-center mb-6 shadow-md border-2 border-dashed border-teal-200/40">
+              <div className="w-14 h-14 rounded-full bg-[#01a9a0] text-white flex items-center justify-center mb-6 shadow-lg shadow-[#01a9a0]/25 border-2 border-dashed border-teal-100">
                 <Quote className="w-6 h-6 fill-current" />
               </div>
 
@@ -220,14 +220,14 @@ export default function TrustedClientsSection() {
                     exit="exit"
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <p className="text-sm sm:text-base lg:text-[17px] text-white/95 font-normal leading-[1.7] italic">
+                    <p className="text-base sm:text-lg lg:text-[19px] text-stone-800 font-normal leading-[1.75] italic">
                       &ldquo;{current.quote}&rdquo;
                     </p>
                     <div className="mt-8 pt-2">
-                      <p className="text-base sm:text-lg font-bold text-white tracking-wide">
+                      <p className="text-lg sm:text-xl font-bold text-stone-900 tracking-wide">
                         — {current.author}
                       </p>
-                      <p className="text-xs sm:text-sm font-semibold text-[#01a9a0] mt-0.5">
+                      <p className="text-xs sm:text-sm font-bold text-[#01a9a0] mt-0.5">
                         {current.role}
                       </p>
                     </div>
@@ -236,60 +236,40 @@ export default function TrustedClientsSection() {
               </div>
             </div>
 
-            {/* Right: Photo + navigation dots */}
-            <div className="lg:col-span-5 flex items-center justify-center lg:justify-end gap-6 sm:gap-8">
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-[#003833] flex items-center justify-center p-3 sm:p-3.5 shadow-2xl flex-shrink-0">
-                <div className="relative w-full h-full rounded-full bg-[#009e90] overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={current.image}
-                      variants={IMAGE_VARIANTS}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute inset-0"
-                    >
-                      <Image
-                        src={current.image}
-                        alt={current.author}
-                        fill
-                        unoptimized
-                        className="object-cover object-top scale-105"
-                        priority
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-
-                  {/* <button
-                    onClick={() => setIsVideoOpen(true)}
-                    aria-label={isArabic ? "تشغيل قصة العميل" : "Play Client Story"}
-                    className="absolute inset-0 m-auto z-20 w-12 h-12 rounded-full bg-white text-[#009e90] flex items-center justify-center shadow-lg hover:scale-110 hover:bg-teal-50 transition-all duration-300 cursor-pointer"
-                  >
-                    <Play className="w-5 h-5 fill-current ml-0.5" />
-                  </button> */}
-                </div>
-              </div>
-
-              {/* Vertical dot nav */}
-              <div className="flex flex-col gap-2.5 items-center">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => goToSlide(idx)}
-                    aria-label={`${isArabic ? "الشهادة" : "Go to testimonial"} ${idx + 1}`}
-                    aria-current={activeTestimonial === idx}
-                    className={`rounded-full transition-all duration-300 cursor-pointer ${
-                      activeTestimonial === idx
-                        ? "w-1.5 h-8 bg-[#009e90] shadow-[0_0_8px_rgba(0,158,144,0.6)]"
-                        : "w-1.5 h-5 bg-white/20 hover:bg-white/40"
-                    }`}
+            {/* Right: Photo (No animation on change) */}
+            <div className="lg:col-span-5 flex items-center justify-center lg:justify-end">
+              <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-gradient-to-br from-[#01a9a0]/20 to-[#01a9a0]/40 p-3 sm:p-3.5 shadow-xl flex-shrink-0 border-4 border-white ring-8 ring-[#01a9a0]/10">
+                <div className="relative w-full h-full rounded-full bg-[#01a9a0] overflow-hidden shadow-inner">
+                  <Image
+                    src={current.image}
+                    alt={current.author}
+                    fill
+                    unoptimized
+                    className="object-cover object-top scale-105"
+                    priority
                   />
-                ))}
+                </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* ── Slider Navigation Dots (Horizontal below the card) ── */}
+        <div className="flex items-center justify-center gap-2.5 mt-8 sm:mt-10">
+          {testimonials.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => goToSlide(idx)}
+              aria-label={`${isArabic ? "الشهادة" : "Go to testimonial"} ${idx + 1}`}
+              aria-current={activeTestimonial === idx}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                activeTestimonial === idx
+                  ? "w-8 h-2.5 bg-[#01a9a0] shadow-[0_2px_8px_rgba(1,169,160,0.4)]"
+                  : "w-2.5 h-2.5 bg-stone-300 hover:bg-[#01a9a0]/50"
+              }`}
+            />
+          ))}
         </div>
 
         {/* ── Auto-scroll logo strip ─────────────────────────────────────── */}
