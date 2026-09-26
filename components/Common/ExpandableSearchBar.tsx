@@ -74,6 +74,7 @@ interface ExpandableSearchBarProps {
   dashedButton?: boolean;
   isDrawer?: boolean;
   onCloseMenu?: () => void;
+  isScrolled?: boolean;
 }
 
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; border: string }> = {
@@ -390,6 +391,7 @@ export default function ExpandableSearchBar({
   dashedButton = false,
   isDrawer = false,
   onCloseMenu,
+  isScrolled = false,
 }: ExpandableSearchBarProps) {
   const router = useRouter();
   const { isArabic } = useLanguage();
@@ -684,14 +686,25 @@ export default function ExpandableSearchBar({
                   handleExpand();
                 }
               }}
-              className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${isExpanded
-                ? "border-white bg-white/15"
-                : "border-white/60 hover:border-white"
-                }`}
+              className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${
+                isExpanded
+                  ? isScrolled
+                    ? "border-white bg-white/20"
+                    : "border-white bg-white/15"
+                  : isScrolled
+                  ? "border-white/80 hover:border-white"
+                  : "border-white/60 hover:border-white"
+              }`}
               aria-label={isExpanded ? "Close search" : "Open search"}
               title="Search (Ctrl + K)"
             >
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] flex items-center justify-center text-white transition-colors shadow-sm">
+              <div
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors shadow-sm ${
+                  isScrolled
+                    ? "bg-white hover:bg-slate-50 text-[#01a9a0]"
+                    : "bg-[#00b3a4] hover:bg-[#00c2b2] text-white"
+                }`}
+              >
                 {isExpanded ? (
                   <X className="h-4 w-4 stroke-[2.5]" />
                 ) : (

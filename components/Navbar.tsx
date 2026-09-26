@@ -447,7 +447,7 @@ const Navbar = () => {
   }, []);
 
   const navBg = isScrolled
-    ? "bg-[#011c20]/95 backdrop-blur-md border-b border-white/10 shadow-lg"
+    ? "bg-[#01a9a0]/95 backdrop-blur-md border-b border-white/20 shadow-lg shadow-[#01a9a0]/25"
     : "bg-transparent";
 
   /* ─── MEGA MENU DROPDOWN RENDERER ──────────────────────────────────── */
@@ -615,8 +615,15 @@ const Navbar = () => {
                     >
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${active ? "text-[#00c2b2] font-bold" : "text-white"
-                          } hover:text-[#00c2b2]`}
+                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${
+                          active
+                            ? isScrolled
+                              ? "text-white font-extrabold"
+                              : "text-[#00c2b2] font-bold"
+                            : isScrolled
+                              ? "text-white/90 hover:text-white"
+                              : "text-white hover:text-[#00c2b2]"
+                        }`}
                         onClick={() => setActiveMega(null)}
                       >
                         {item.name}
@@ -624,7 +631,11 @@ const Navbar = () => {
 
                       {/* Active underline */}
                       {active && (
-                        <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#00c2b2] rounded-full" />
+                        <span
+                          className={`absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full ${
+                            isScrolled ? "bg-white shadow-[0_1px_4px_rgba(255,255,255,0.6)]" : "bg-[#00c2b2]"
+                          }`}
+                        />
                       )}
 
                       {/* Top triangle pointer for hovered menu */}
@@ -636,7 +647,7 @@ const Navbar = () => {
                             viewBox="0 0 18 9"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="text-primary text-[#01a9a0]"
+                            className={isScrolled ? "text-white" : "text-[#01a9a0]"}
                           >
                             <path d="M0 9L9 0L18 9H0Z" fill="currentColor" />
                           </svg>
@@ -658,15 +669,26 @@ const Navbar = () => {
                 placeholder={t.nav.searchPlaceholder}
                 suggestions={searchSuggestions}
                 dashedButton={true}
-                iconColor="text-[#01a9a0]"
+                isScrolled={isScrolled}
+                iconColor={isScrolled ? "text-[#01a9a0]" : "text-white"}
                 hoverIconColor="hover:text-[#00c2b2]"
               />
               <Link
                 href="/get-a-quote"
-                className="pl-4 pr-1.5 py-1.5 sm:pl-5 sm:pr-2 sm:py-2 xl:pl-6 xl:pr-2.5 xl:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-2 xl:gap-3 transition-all duration-300 shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)] hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group"
+                className={`pl-4 pr-1.5 py-1.5 sm:pl-5 sm:pr-2 sm:py-2 xl:pl-6 xl:pr-2.5 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-2 xl:gap-3 transition-all duration-300 hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group ${
+                  isScrolled
+                    ? "bg-white hover:bg-slate-50 text-[#01a9a0] shadow-[0_4px_18px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.25)]"
+                    : "bg-[#00b3a4] hover:bg-[#00c2b2] text-white shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)]"
+                }`}
               >
                 <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
-                <span className="w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+                <span
+                  className={`w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-0.5 ${
+                    isScrolled
+                      ? "bg-[#01a9a0] text-white shadow-sm"
+                      : "bg-white text-[#00b3a4]"
+                  }`}
+                >
                   <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 xl:w-4 xl:h-4 stroke-[2.5]" />
                 </span>
               </Link>
@@ -676,7 +698,11 @@ const Navbar = () => {
             <div className="lg:hidden" style={{ zIndex: 100000, position: "relative" }}>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="relative w-11 h-11 text-[#01a9a0] hover:opacity-60 transition-opacity flex items-center justify-center cursor-pointer"
+                className={`relative w-11 h-11 transition-all flex items-center justify-center cursor-pointer rounded-full ${
+                  isScrolled
+                    ? "text-white hover:bg-white/20"
+                    : "text-[#01a9a0] hover:opacity-80"
+                }`}
                 aria-expanded={isMobileMenuOpen}
                 aria-label="Toggle mobile menu"
               >
