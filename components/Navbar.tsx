@@ -33,7 +33,7 @@ const servicesMegaMenu = {
   en: {
     label: "OUR SERVICES",
     tagline: "Six specialist divisions — one guarantee",
-    cardImage: "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
+    cardImage: "/grpnb.jpg",
     cta: "Explore More",
     ctaHref: "/services",
     items: [
@@ -48,7 +48,7 @@ const servicesMegaMenu = {
   ar: {
     label: "خدماتنا",
     tagline: "ستة أقسام متخصصة — ضمان واحد",
-    cardImage: "/news/Industrial Coatings Durable Protection For Demanding Environments.jpg",
+    cardImage: "/grpnb.jpg",
     cta: "استكشف المزيد",
     ctaHref: "/services",
     items: [
@@ -67,7 +67,7 @@ const solutionsMegaMenu = {
   en: {
     label: "OUR SOLUTIONS",
     tagline: "End-to-end protection — built to last",
-    cardImage: "/solutions/Img (1).png",
+    cardImage: "/solnb.png",
     cta: "Explore More",
     ctaHref: "/solutions",
     items: [
@@ -82,7 +82,7 @@ const solutionsMegaMenu = {
   ar: {
     label: "حلولنا",
     tagline: "حماية شاملة من البداية للنهاية — مصممة للديمومة",
-    cardImage: "/solutions/Img (1).png",
+    cardImage: "/solnb.png",
     cta: "استكشف المزيد",
     ctaHref: "/solutions",
     items: [
@@ -101,7 +101,7 @@ const projectsMegaMenu = {
   en: {
     label: "OUR PROJECTS",
     tagline: "Landmark developments across the UAE",
-    cardImage: "/project-page/Contemporary commercial office center.png",
+    cardImage: "/projnb.jpeg",
     cta: "Explore More",
     ctaHref: "/project",
     items: [
@@ -116,7 +116,7 @@ const projectsMegaMenu = {
   ar: {
     label: "مشاريعنا",
     tagline: "مشاريع رائدة ومعالم منجزة في كافة أنحاء الإمارات",
-    cardImage: "/project-page/Contemporary commercial office center.png",
+    cardImage: "/projnb.jpeg",
     cta: "استكشف المزيد",
     ctaHref: "/project",
     items: [
@@ -203,7 +203,7 @@ const resourcesMegaMenu = {
   en: {
     label: "RESOURCES",
     tagline: "Knowledge, Media & Client Support",
-    cardImage: "/media/media-hero.jpg",
+    cardImage: "/resnb.jpeg",
     cta: "Explore More",
     ctaHref: "/resources",
     items: [
@@ -218,7 +218,7 @@ const resourcesMegaMenu = {
   ar: {
     label: "المصادر",
     tagline: "المعرفة والوسائط ودعم العملاء",
-    cardImage: "/media/media-hero.jpg",
+    cardImage: "/resnb.jpeg",
     cta: "استكشف المزيد",
     ctaHref: "/resources",
     items: [
