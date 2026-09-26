@@ -85,7 +85,7 @@ export default function Home() {
           <TrustedClientsSection />
         </div>
         <div data-aos="fade-up" data-aos-delay="450">
-          <ProjectsClients themeBg={true} />
+          <ProjectsClients themeBg={false} />
         </div>
         {/* <div data-aos="fade-up" data-aos-delay="100">
           <WhyChooseUs2 />
