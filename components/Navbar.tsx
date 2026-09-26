@@ -636,7 +636,7 @@ const Navbar = () => {
                             viewBox="0 0 18 9"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            className="text-white"
+                            className="text-primary text-[#01a9a0]"
                           >
                             <path d="M0 9L9 0L18 9H0Z" fill="currentColor" />
                           </svg>
