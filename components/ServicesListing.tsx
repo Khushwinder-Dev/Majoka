@@ -604,13 +604,13 @@ function ServicesContent() {
 
       {/* ══ FAQ SECTION (Single Column Matching Reference media_1790098744511.png) ══ */}
       <section
-        className="relative w-full bg-[#F8FAFC] py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative w-full bg-[#F8FAFC] py-10 sm:py-20 lg:py-24 px-3 sm:px-6 lg:px-8 overflow-hidden"
         dir={isArabic ? "rtl" : "ltr"}
       >
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
-            <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-3">
+          <div className="text-center max-w-2xl mx-auto mb-7 sm:mb-14">
+            <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
               <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
               <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
                 {isArabic ? "الأسئلة الشائعة" : "FAQ"}
@@ -618,7 +618,7 @@ function ServicesContent() {
               <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#00c4b4] rounded-full" />
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
+            <h2 className="text-2xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] tracking-tight leading-[1.15]">
               {isArabic ? (
                 <>
                   الأسئلة{" "}
@@ -632,7 +632,7 @@ function ServicesContent() {
               )}
             </h2>
 
-            <p className="mt-3.5 text-stone-500 text-xs sm:text-sm md:text-[14.5px] max-w-xl mx-auto leading-relaxed">
+            <p className="mt-2.5 sm:mt-3.5 text-stone-500 text-xs sm:text-sm md:text-[14.5px] max-w-xl mx-auto leading-relaxed">
               {isArabic
                 ? "اعثر على إجابات للأسئلة الشائعة حول خدمات العزل المائي وحلول حماية المباني في الإمارات."
                 : "Find clear answers to common questions about our engineered waterproofing systems, application methods, and warranties."}
@@ -640,7 +640,7 @@ function ServicesContent() {
           </div>
 
           {/* Single Column Accordion List */}
-          <div className="space-y-3.5 sm:space-y-4">
+          <div className="space-y-2.5 sm:space-y-4">
             {SERVICES_FAQS.map((item) => (
               <FaqAccordionItem
                 key={item.id}

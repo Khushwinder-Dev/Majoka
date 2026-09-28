@@ -616,7 +616,7 @@ export default function GetAQuoteContent() {
       {/* ══════════════════════════════════════════════════════════════
           3. SECTION: FREQUENTLY ASKED QUESTIONS (Matching Mockup)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#f3fcf9] overflow-hidden">
+      <section className="relative w-full py-10 sm:py-20 lg:py-24 bg-[#f3fcf9] overflow-hidden">
 
         {/* Decorative Fluid Ribbons from user resources at bottom corners */}
         <div className="absolute left-0 bottom-0 pointer-events-none select-none z-0">
@@ -638,11 +638,11 @@ export default function GetAQuoteContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
 
           {/* Section Header */}
-          <div className="text-center mb-10 sm:mb-12">
-            <div className="flex items-center justify-center gap-2 mb-2.5">
+          <div className="text-center mb-7 sm:mb-12">
+            <div className="flex items-center justify-center gap-2 mb-2 sm:mb-2.5">
               <span className="w-5 h-[1.5px] bg-[#1cd2ad]" />
               <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#1cd2ad] uppercase">
                 {isArabic ? "الأسئلة الشائعة" : "FAQ"}
@@ -650,7 +650,7 @@ export default function GetAQuoteContent() {
               <span className="w-5 h-[1.5px] bg-[#1cd2ad]" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0d2438] tracking-tight mb-3">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0d2438] tracking-tight mb-2.5 sm:mb-3">
               {isArabic ? (
                 <>
                   الأسئلة <span className="text-[#1cd2ad]">الشائعة</span>
@@ -670,7 +670,7 @@ export default function GetAQuoteContent() {
           </div>
 
           {/* 5 Accordion FAQ Cards */}
-          <div className="space-y-3 sm:space-y-3.5">
+          <div className="space-y-2.5 sm:space-y-3.5">
             {QUOTE_FAQS.map((faq) => (
               <FaqAccordionItem
                 key={faq.id}

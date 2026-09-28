@@ -302,7 +302,7 @@ export default function FaqPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           2. MAIN CONTENT AREA (Frequently Asked Questions + Search + Filter + List)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full py-14 sm:py-18 lg:py-22 bg-gradient-to-b from-[#edf8f6] via-[#e5f5f3] to-[#f4faf9] overflow-hidden">
+      <section className="relative w-full py-10 sm:py-18 lg:py-22 bg-gradient-to-b from-[#edf8f6] via-[#e5f5f3] to-[#f4faf9] overflow-hidden">
 
         {/* Left Decorative Vector Curve (Vector (1).svg) */}
         <div className="absolute left-0 top-12 sm:top-20 pointer-events-none select-none opacity-80 z-0">
@@ -326,7 +326,7 @@ export default function FaqPageContent() {
           />
         </div>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-5xl mx-auto px-3 sm:px-6 lg:px-8">
 
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10">
@@ -419,7 +419,7 @@ export default function FaqPageContent() {
           </div>
 
           {/* Accordion FAQ List */}
-          <div className="max-w-4xl mx-auto space-y-3 sm:space-y-3.5">
+          <div className="max-w-4xl mx-auto space-y-2.5 sm:space-y-3.5">
             {filteredItems.length === 0 ? (
               <div className="bg-white rounded-2xl p-8 sm:p-12 text-center border border-stone-200/80 shadow-sm">
                 <h3 className="text-base sm:text-lg font-bold text-stone-800 mb-1">
