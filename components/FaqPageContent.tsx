@@ -230,8 +230,8 @@ export default function FaqPageContent() {
   const { isArabic } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<"all" | "services" | "solutions" | "projects" | "general">("all");
-  // Default open card #2 as seen in the new design mockup
-  const [openIds, setOpenIds] = useState<number[]>([2]);
+  // All FAQs collapsed by default
+  const [openIds, setOpenIds] = useState<number[]>([]);
 
   const toggleAccordion = (id: number) => {
     setOpenIds((prev) =>

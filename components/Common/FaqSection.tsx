@@ -95,7 +95,7 @@ export default function FaqSection({
   className = "",
   bgClassName = "bg-[#F8FAFC]",
 }: FaqSectionProps) {
-  const [openId, setOpenId] = useState<number | null>(1);
+  const [openId, setOpenId] = useState<number | null>(null);
 
   const toggleFaq = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));

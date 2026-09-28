@@ -10,7 +10,7 @@ interface FAQ {
 }
 
 const Question = () => {
-  const [openFAQ, setOpenFAQ] = useState<number | null>(1);
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const faqs: FAQ[] = [
     {

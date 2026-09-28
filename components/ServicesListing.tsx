@@ -202,7 +202,7 @@ function ServicesContent() {
   const [openServiceSlug, setOpenServiceSlug] = useState<string | null>(null);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
   const [otherExpandedSlug, setOtherExpandedSlug] = useState<string | null>(null);
-  const [openFaqId, setOpenFaqId] = useState<number | null>(1);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
 
   useEffect(() => {
     if (activeService?.serviceSlug) {
