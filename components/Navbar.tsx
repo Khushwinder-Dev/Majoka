@@ -453,7 +453,7 @@ const Navbar = () => {
   /* ─── MEGA MENU DROPDOWN RENDERER ──────────────────────────────────── */
   const renderMegaMenu = (data: MegaData) => (
     <div
-      className="absolute top-full pt-2 left-1/2 -translate-x-1/2 w-[760px] xl:w-[820px] transition-all"
+      className="absolute top-full pt-2 left-1/2 -translate-x-1/2 w-[920px] xl:w-[1020px] 2xl:w-[1100px] max-w-[95vw] transition-all"
       style={{ zIndex: 10 }}
       onMouseEnter={cancelClose}
       onMouseLeave={closeMega}
@@ -462,7 +462,7 @@ const Navbar = () => {
       {/* ── Dropdown panel ── */}
       <div className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-100 border-t-2 border-t-white overflow-hidden">
         {/* ── Top strip ── */}
-        <div className="flex items-center justify-between px-6 py-3.5 border-b border-stone-100 bg-stone-50/70">
+        <div className="flex items-center justify-between px-6 py-3 border-b border-stone-100 bg-stone-50/70">
           <span className="text-[11px] font-extrabold tracking-[0.22em] uppercase text-[#009e90]">
             {data.label}
           </span>
@@ -470,9 +470,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex">
-          {/* ── Left: items grid ── */}
-          <div className="flex flex-col p-4 flex-1 justify-center">
-            <div className="grid grid-cols-2 gap-1.5">
+          {/* ── Left: items grid (3 columns x 2 rows) ── */}
+          <div className="flex flex-col p-3.5 xl:p-4 flex-1 justify-center">
+            <div className="grid grid-cols-3 gap-2 xl:gap-2.5">
               {data.items.map((item, i) => (
                 <Link
                   key={i}
@@ -492,25 +492,25 @@ const Navbar = () => {
                       }
                     }
                   }}
-                  className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
+                  className="group flex items-start gap-2.5 p-2 xl:p-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
                 >
                   {/* Icon box */}
-                  <div className="w-9 h-9 rounded-lg bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all">
-                    <NavIcon src={item.icon} alt={item.title} size={18} />
+                  <div className="w-8 h-8 xl:w-9 xl:h-9 rounded-lg bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all mt-0.5">
+                    <NavIcon src={item.icon} alt={item.title} size={17} />
                   </div>
 
                   {/* Text */}
                   <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-bold text-stone-900 group-hover:text-[#009e90] transition-colors leading-snug truncate">
+                    <p className="text-[12px] xl:text-[13px] font-bold text-stone-900 group-hover:text-[#009e90] transition-colors leading-snug line-clamp-1">
                       {item.title}
                     </p>
-                    <p className="text-[11px] text-stone-400 truncate leading-relaxed mt-0.5">
+                    <p className="text-[10.5px] xl:text-[11px] text-stone-400 line-clamp-2 leading-relaxed mt-0.5">
                       {item.sub}
                     </p>
                   </div>
 
                   {/* Arrow */}
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                  <span className="flex-shrink-0 w-4.5 h-4.5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 self-center">
                     <ArrowRight className="w-2.5 h-2.5 text-[#009e90] rtl:rotate-180" />
                   </span>
                 </Link>
@@ -519,20 +519,20 @@ const Navbar = () => {
           </div>
 
           {/* ── Right: featured card with image ── */}
-          <div className="w-[245px] xl:w-[265px] flex-shrink-0 bg-gradient-to-br from-[#f8fdfc] to-[#eef9f7] border-l rtl:border-l-0 rtl:border-r border-stone-100 p-4.5 flex flex-col justify-between group/card">
+          <div className="w-[220px] xl:w-[245px] flex-shrink-0 bg-gradient-to-br from-[#f8fdfc] to-[#eef9f7] border-l rtl:border-l-0 rtl:border-r border-stone-100 p-4 flex flex-col justify-between group/card">
             {/* Image Banner */}
             {data.cardImage && (
               <Link
                 href={data.ctaHref}
                 onClick={() => setActiveMega(null)}
-                className="relative w-full h-[125px] xl:h-[135px] rounded-xl overflow-hidden border border-stone-200/60 shadow-xs bg-stone-100 block group/img mb-3"
+                className="relative w-full h-[120px] xl:h-[130px] rounded-xl overflow-hidden border border-stone-200/60 shadow-xs bg-stone-100 block group/img mb-3"
               >
                 <Image
                   src={data.cardImage}
                   alt={data.label}
                   fill
                   className="object-cover group-hover/img:scale-105 transition-transform duration-300"
-                  sizes="265px"
+                  sizes="245px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
               </Link>
