@@ -474,11 +474,11 @@ export default function Footer() {
                 <Link href="/refund-policy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
                 </Link>
-                <Link href="/terms" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "شروط الاستخدام" : "Terms of Use"}
-                </Link>
                 <Link href="/privacy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "سياسة الخصوصية" : "Privacy Policy"}
+                </Link>
+                <Link href="/terms" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
+                  {isArabic ? "شروط الاستخدام" : "Terms of Use"}
                 </Link>
                 <Link href="/cookies" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
