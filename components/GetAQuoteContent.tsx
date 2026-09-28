@@ -13,6 +13,7 @@ import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 interface QuoteFaqItem {
   id: number;
@@ -381,8 +382,9 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                          }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                        }`}
                       />
                       <label
                         className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
@@ -391,6 +393,7 @@ export default function GetAQuoteContent() {
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidText(formData.fullName)} isArabic={isArabic} />
                     </div>
 
                     {/* Phone Number */}
@@ -403,8 +406,9 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                          }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                        }`}
                       />
                       <label
                         className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
@@ -413,6 +417,7 @@ export default function GetAQuoteContent() {
                       >
                         {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidPhone(formData.phoneNumber)} isArabic={isArabic} />
                     </div>
                   </div>
 
@@ -428,8 +433,9 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                          }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                        }`}
                       />
                       <label
                         className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
@@ -438,6 +444,7 @@ export default function GetAQuoteContent() {
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidEmail(formData.emailAddress)} isArabic={isArabic} />
                     </div>
 
                     {/* Company Name */}
@@ -449,8 +456,9 @@ export default function GetAQuoteContent() {
                         onChange={handleInputChange}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                          }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                        }`}
                       />
                       <label
                         className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
@@ -459,6 +467,7 @@ export default function GetAQuoteContent() {
                       >
                         {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                       </label>
+                      <InputValidationTick isValid={isValidText(formData.companyName)} isArabic={isArabic} />
                     </div>
                   </div>
 
@@ -488,8 +497,9 @@ export default function GetAQuoteContent() {
                         required
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                          }`}
+                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                        }`}
                       />
                       <label
                         className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
@@ -498,6 +508,7 @@ export default function GetAQuoteContent() {
                       >
                         {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidText(formData.projectLocation)} isArabic={isArabic} />
                     </div>
                   </div>
 

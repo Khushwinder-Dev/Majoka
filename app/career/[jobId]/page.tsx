@@ -19,6 +19,7 @@ import { useRouter, useParams } from "next/navigation";
 import Image from "next/image";
 import CommonHeader from "@/components/Common/CommonHeader";
 import { toast } from "react-hot-toast";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 interface Job {
   id: number;
@@ -584,7 +585,7 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
@@ -595,6 +596,7 @@ const JobApplicationPage = () => {
                     >
                       Full Name
                     </label>
+                    <InputValidationTick isValid={isValidText(formData.fullName)} />
                   </div>
 
                   {/* Email */}
@@ -609,7 +611,7 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
@@ -620,6 +622,7 @@ const JobApplicationPage = () => {
                     >
                       Email Address
                     </label>
+                    <InputValidationTick isValid={isValidEmail(formData.email)} />
                   </div>
 
                   {/* Phone */}
@@ -634,7 +637,7 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
@@ -645,6 +648,7 @@ const JobApplicationPage = () => {
                     >
                       Phone Number
                     </label>
+                    <InputValidationTick isValid={isValidPhone(formData.phone)} />
                   </div>
 
                   {/* Years of Experience */}
@@ -659,7 +663,7 @@ const JobApplicationPage = () => {
                       placeholder=" "
                       required
                       disabled={isSubmitting}
-                      className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <label
                       className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
@@ -670,6 +674,7 @@ const JobApplicationPage = () => {
                     >
                       Years of Experience
                     </label>
+                    <InputValidationTick isValid={isValidText(formData.experience, 1)} />
                   </div>
 
                   {/* CV Upload */}

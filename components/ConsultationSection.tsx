@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Phone, Users, MapPin, ArrowRight, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+
 // ── Floating-label input ──────────────────────────────────────────────────────
 interface FloatFieldProps {
   type?: string;
@@ -18,6 +20,13 @@ interface FloatFieldProps {
 function FloatField({ type = "text", name, value, label, required, isArabic, onChange }: FloatFieldProps) {
   const [focused, setFocused] = useState(false);
   const lifted = focused || value.length > 0;
+
+  const isValid =
+    type === "email"
+      ? isValidEmail(value)
+      : type === "tel"
+      ? isValidPhone(value)
+      : isValidText(value);
 
   return (
     <div className="relative w-full">
@@ -34,11 +43,11 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
         className={`
           peer w-full rounded-full border bg-white
           px-5 pt-5 pb-2
+          ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}
           text-sm sm:text-[15px] text-stone-800
           focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
           transition-all duration-200
           ${lifted ? "border-[#01a9a0]" : "border-stone-300"}
-          ${isArabic ? "text-right" : "text-left"}
         `}
       />
       <label
@@ -54,6 +63,7 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
       >
         {label}
       </label>
+      <InputValidationTick isValid={isValid} isArabic={isArabic} />
     </div>
   );
 }

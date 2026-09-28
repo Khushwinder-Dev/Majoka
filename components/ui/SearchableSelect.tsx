@@ -168,12 +168,17 @@ export default function SearchableSelect({
           {displaySelectedText || placeholder || "Select"}
         </span>
 
-        {/* Chevron Icon */}
-        <ChevronDown
-          className={`w-4 h-4 text-stone-400 shrink-0 transition-transform duration-200 ${
-            isOpen ? "rotate-180 text-[#01a9a0]" : ""
-          } ${isArabic ? "mr-2" : "ml-2"}`}
-        />
+        {/* Right side icons: Green checkmark if selected + Chevron */}
+        <div className={`flex items-center gap-1.5 shrink-0 ${isArabic ? "mr-2" : "ml-2"}`}>
+          {Boolean(selectedOption) && (
+            <Check className="w-3.5 h-3.5 text-emerald-500 stroke-[2.5] animate-in fade-in zoom-in-75 duration-150" />
+          )}
+          <ChevronDown
+            className={`w-4 h-4 text-stone-400 shrink-0 transition-transform duration-200 ${
+              isOpen ? "rotate-180 text-[#01a9a0]" : ""
+            }`}
+          />
+        </div>
       </button>
 
       {/* Floating Label */}

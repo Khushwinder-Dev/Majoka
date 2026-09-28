@@ -5,6 +5,7 @@ import { X, Loader2, CheckCircle2, UserCheck, Mail, PhoneCall, Truck } from "luc
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 export type ContactModalType = "expert" | "enquiry" | "callback" | "supplier" | null;
 
@@ -395,7 +396,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -407,6 +408,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(expertForm.fullName)} isArabic={isArabic} />
                   </div>
 
                   {/* Company Name */}
@@ -420,7 +422,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -432,6 +434,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                     </label>
+                    <InputValidationTick isValid={isValidText(expertForm.companyName)} isArabic={isArabic} />
                   </div>
 
                   {/* Phone & Email */}
@@ -447,7 +450,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -459,6 +462,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidPhone(expertForm.phone)} isArabic={isArabic} />
                     </div>
 
                     <div className="relative">
@@ -471,7 +475,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -483,6 +487,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"}
                       </label>
+                      <InputValidationTick isValid={isValidEmail(expertForm.email)} isArabic={isArabic} />
                     </div>
                   </div>
 
@@ -589,7 +594,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -601,6 +606,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(enquiryForm.fullName)} isArabic={isArabic} />
                   </div>
 
                   {/* Company Name */}
@@ -614,7 +620,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -626,6 +632,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                     </label>
+                    <InputValidationTick isValid={isValidText(enquiryForm.companyName)} isArabic={isArabic} />
                   </div>
 
                   {/* Phone & Email */}
@@ -641,7 +648,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -653,6 +660,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidPhone(enquiryForm.phone)} isArabic={isArabic} />
                     </div>
 
                     <div className="relative">
@@ -665,7 +673,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -677,6 +685,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"}
                       </label>
+                      <InputValidationTick isValid={isValidEmail(enquiryForm.email)} isArabic={isArabic} />
                     </div>
                   </div>
 
@@ -692,7 +701,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -704,7 +713,9 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "الموضوع" : "Subject"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(enquiryForm.subject)} isArabic={isArabic} />
                   </div>
+
 
                   {/* Enquiry Textarea */}
                   <div className="relative">
@@ -792,7 +803,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -804,6 +815,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(callbackForm.fullName)} isArabic={isArabic} />
                   </div>
 
                   {/* Company Name */}
@@ -817,7 +829,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -829,6 +841,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                     </label>
+                    <InputValidationTick isValid={isValidText(callbackForm.companyName)} isArabic={isArabic} />
                   </div>
 
                   {/* Phone */}
@@ -843,7 +856,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -855,6 +868,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidPhone(callbackForm.phone)} isArabic={isArabic} />
                   </div>
 
                   {/* Preferred Time */}
@@ -953,7 +967,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -965,6 +979,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "اسم الشركة" : "Company Name"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(supplierForm.companyName)} isArabic={isArabic} />
                   </div>
 
                   {/* Contact Person */}
@@ -979,7 +994,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -991,6 +1006,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "اسم الشخص المسؤول" : "Contact Person"} <span className="text-red-500">*</span>
                     </label>
+                    <InputValidationTick isValid={isValidText(supplierForm.contactPerson)} isArabic={isArabic} />
                   </div>
 
                   {/* Phone & Email */}
@@ -1006,7 +1022,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -1018,6 +1034,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidPhone(supplierForm.phone)} isArabic={isArabic} />
                     </div>
 
                     <div className="relative">
@@ -1031,7 +1048,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
                         }`}
                       />
                       <label
@@ -1043,6 +1060,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                       </label>
+                      <InputValidationTick isValid={isValidEmail(supplierForm.email)} isArabic={isArabic} />
                     </div>
                   </div>
 
@@ -1075,7 +1093,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "text-right" : "text-left"
+                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
                       }`}
                     />
                     <label
@@ -1087,6 +1105,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     >
                       {isArabic ? "موقع الشركة الإلكتروني (اختياري)" : "Company Website (Optional)"}
                     </label>
+                    <InputValidationTick isValid={isValidText(supplierForm.website, 3)} isArabic={isArabic} />
                   </div>
 
                   {/* Enquiry Details Textarea */}

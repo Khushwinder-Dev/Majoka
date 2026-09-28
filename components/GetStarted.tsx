@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 interface FormData {
   fullName: string;
@@ -279,7 +280,7 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
@@ -289,6 +290,7 @@ const GetStarted = () => {
                   >
                     Name
                   </label>
+                  <InputValidationTick isValid={isValidText(formData.fullName)} />
                 </div>
 
                 {/* Phone Input */}
@@ -303,7 +305,7 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
@@ -313,6 +315,7 @@ const GetStarted = () => {
                   >
                     Phone Number
                   </label>
+                  <InputValidationTick isValid={isValidPhone(formData.phone)} />
                 </div>
 
                 {/* Email Input */}
@@ -327,7 +330,7 @@ const GetStarted = () => {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
@@ -337,6 +340,7 @@ const GetStarted = () => {
                   >
                     Email Address
                   </label>
+                  <InputValidationTick isValid={isValidEmail(formData.email)} />
                 </div>
 
                 {/* Services Dropdown */}

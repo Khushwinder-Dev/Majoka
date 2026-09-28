@@ -6,6 +6,7 @@ import { X, CheckCircle2, ArrowRight, ArrowLeft, Sparkles, Tag, ChevronDown, Loa
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect from "@/components/ui/SearchableSelect";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 // Set to false after client demo to restore once-per-session behavior.
 const SHOW_ON_EVERY_RELOAD = true;
@@ -293,8 +294,9 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                      }`}
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                      isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                    }`}
                   />
                   <label
                     className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
@@ -303,6 +305,7 @@ export default function WelcomeOfferModal() {
                   >
                     {isArabic ? "الاسم" : "Name"} <span className="text-red-500">*</span>
                   </label>
+                  <InputValidationTick isValid={isValidText(formData.name)} isArabic={isArabic} />
                 </div>
 
                 {/* Field 2: Phone * */}
@@ -316,8 +319,9 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                      }`}
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                      isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                    }`}
                   />
                   <label
                     className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
@@ -326,6 +330,7 @@ export default function WelcomeOfferModal() {
                   >
                     {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                   </label>
+                  <InputValidationTick isValid={isValidPhone(formData.phone)} isArabic={isArabic} />
                 </div>
 
                 {/* Field 3: Email * */}
@@ -339,8 +344,9 @@ export default function WelcomeOfferModal() {
                     placeholder=" "
                     disabled={isSubmitting}
                     dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "text-right" : "text-left"
-                      }`}
+                    className={`peer h-10 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                      isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                    }`}
                   />
                   <label
                     className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-4" : "left-4"
@@ -349,6 +355,7 @@ export default function WelcomeOfferModal() {
                   >
                     {isArabic ? "البريد الإلكتروني" : "Email"} <span className="text-red-500">*</span>
                   </label>
+                  <InputValidationTick isValid={isValidEmail(formData.email)} isArabic={isArabic} />
                 </div>
 
                 {/* Field 4: Project Type * */}

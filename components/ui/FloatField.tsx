@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const inputBase = `
@@ -41,6 +42,13 @@ export function FloatInput({
   const [focused, setFocused] = useState(false);
   const lifted = focused || value.length > 0;
 
+  const isValid =
+    type === "email"
+      ? isValidEmail(value)
+      : type === "tel"
+      ? isValidPhone(value)
+      : isValidText(value);
+
   return (
     <div className="relative w-full">
       <input
@@ -55,8 +63,10 @@ export function FloatInput({
         dir={isArabic ? "rtl" : "ltr"}
         placeholder=" "
         className={`${inputBase} ${
+          isArabic ? "pl-11 text-right" : "pr-11 text-left"
+        } ${
           lifted ? "border-[#01a9a0]" : "border-stone-300"
-        } ${isArabic ? "text-right" : "text-left"}`}
+        }`}
       />
       <label
         className={`
@@ -71,6 +81,7 @@ export function FloatInput({
       >
         {label}
       </label>
+      <InputValidationTick isValid={isValid} isArabic={isArabic} />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import toast from "react-hot-toast";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 interface FormData {
   fullName: string;
@@ -347,7 +348,7 @@ export default function ContactPage() {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
@@ -357,6 +358,7 @@ export default function ContactPage() {
                   >
                     Name
                   </label>
+                  <InputValidationTick isValid={isValidText(formData.fullName)} />
                 </div>
 
                 {/* Company Name Field (Optional) */}
@@ -370,7 +372,7 @@ export default function ContactPage() {
                     onBlur={() => setFocusedField(null)}
                     placeholder=" "
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.companyName || focusedField === "companyName"
@@ -380,6 +382,7 @@ export default function ContactPage() {
                   >
                     Company Name (Optional)
                   </label>
+                  <InputValidationTick isValid={isValidText(formData.companyName)} />
                 </div>
 
                 {/* Phone Field */}
@@ -394,7 +397,7 @@ export default function ContactPage() {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
@@ -404,6 +407,7 @@ export default function ContactPage() {
                   >
                     Phone Number
                   </label>
+                  <InputValidationTick isValid={isValidPhone(formData.phone)} />
                 </div>
 
                 {/* Email Field */}
@@ -418,7 +422,7 @@ export default function ContactPage() {
                     placeholder=" "
                     required
                     disabled={isSubmitting}
-                    className="w-full px-5 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <label
                     className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
@@ -428,6 +432,7 @@ export default function ContactPage() {
                   >
                     Email Address
                   </label>
+                  <InputValidationTick isValid={isValidEmail(formData.email)} />
                 </div>
 
                 {/* Message Textarea */}
