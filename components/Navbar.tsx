@@ -542,14 +542,14 @@ const Navbar = () => {
   /* ─── MEGA MENU DROPDOWN RENDERER ──────────────────────────────────── */
   const renderMegaMenu = (data: MegaData) => (
     <div
-      className="absolute top-full pt-2 left-1/2 -translate-x-1/2 w-[920px] xl:w-[1020px] 2xl:w-[1100px] max-w-[95vw] transition-all"
+      className="absolute top-full pt-2 left-1/2 -translate-x-1/2 w-[760px] xl:w-[820px] transition-all"
       style={{ zIndex: 10 }}
       onMouseEnter={cancelClose}
       onMouseLeave={closeMega}
       dir={isArabic ? "rtl" : "ltr"}
     >
       {/* ── Dropdown panel ── */}
-      <div className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-100 border-t-2 border-t-white overflow-hidden">
+      <div className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.18)] border border-stone-200/80 overflow-hidden">
         {/* ── Top strip ── */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-stone-100 bg-stone-50/70">
           <span className="text-[11px] font-extrabold tracking-[0.22em] uppercase text-[#009e90]">
@@ -559,9 +559,9 @@ const Navbar = () => {
         </div>
 
         <div className="flex">
-          {/* ── Left: items grid (3 columns x 2 rows) ── */}
-          <div className="flex flex-col p-3.5 xl:p-4 flex-1 justify-center">
-            <div className="grid grid-cols-3 gap-2 xl:gap-2.5">
+          {/* ── Left: items grid (2 columns x 3 rows) ── */}
+          <div className="flex flex-col p-4 flex-1 justify-center">
+            <div className="grid grid-cols-2 gap-2">
               {data.items.map((item, i) => (
                 <Link
                   key={i}
@@ -587,25 +587,25 @@ const Navbar = () => {
                       }
                     }
                   }}
-                  className="group flex items-start gap-2.5 p-2 xl:p-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
+                  className="group flex items-center gap-4 px-1 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
                 >
                   {/* Icon box */}
-                  <div className="w-8 h-8 xl:w-9 xl:h-9 rounded-lg bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all mt-0.5">
-                    <NavIcon src={item.icon} alt={item.title} size={17} />
+                  <div className="w-9 h-9 rounded-lg bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all">
+                    <NavIcon src={item.icon} alt={item.title} size={18} />
                   </div>
 
                   {/* Text */}
                   <div className="min-w-0 flex-1">
-                    <p className="text-[12px] xl:text-[13px] font-bold text-stone-900 group-hover:text-[#009e90] transition-colors leading-snug line-clamp-1">
+                    <p className="text-[13px] font-bold text-stone-900 group-hover:text-[#009e90] transition-colors leading-snug truncate">
                       {item.title}
                     </p>
-                    <p className="text-[10.5px] xl:text-[11px] text-stone-400 line-clamp-2 leading-relaxed mt-0.5">
+                    <p className="text-[11px] text-stone-400 truncate leading-tight mt-0.5">
                       {item.sub}
                     </p>
                   </div>
 
                   {/* Arrow */}
-                  <span className="flex-shrink-0 w-4.5 h-4.5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 self-center">
+                  <span className="hidden flex-shrink-0 w-5 h-5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
                     <ArrowRight className="w-2.5 h-2.5 text-[#009e90] rtl:rotate-180" />
                   </span>
                 </Link>
@@ -614,20 +614,20 @@ const Navbar = () => {
           </div>
 
           {/* ── Right: featured card with image ── */}
-          <div className="w-[220px] xl:w-[245px] flex-shrink-0 bg-gradient-to-br from-[#f8fdfc] to-[#eef9f7] border-l rtl:border-l-0 rtl:border-r border-stone-100 p-4 flex flex-col justify-between group/card">
+          <div className="w-[245px] xl:w-[265px] flex-shrink-0 bg-gradient-to-br from-[#f8fdfc] to-[#eef9f7] border-l rtl:border-l-0 rtl:border-r border-stone-100 p-5 flex flex-col justify-between group/card">
             {/* Image Banner */}
             {data.cardImage && (
               <Link
                 href={data.ctaHref}
                 onClick={() => setActiveMega(null)}
-                className="relative w-full h-[120px] xl:h-[130px] rounded-xl overflow-hidden border border-stone-200/60 shadow-xs bg-stone-100 block group/img mb-3"
+                className="relative w-full h-[140px] xl:h-[155px] rounded-xl overflow-hidden border border-stone-200/60 shadow-xs bg-stone-100 block group/img mb-4"
               >
                 <Image
                   src={data.cardImage}
                   alt={data.label}
                   fill
                   className="object-cover group-hover/img:scale-105 transition-transform duration-300"
-                  sizes="245px"
+                  sizes="265px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity" />
               </Link>
@@ -654,9 +654,9 @@ const Navbar = () => {
     { name: t.nav.projects, href: "/project", megaKey: "projects" },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
     { name: t.nav.subcontractors, href: "/subcontract", megaKey: "subcontractors" },
-    { name: t.nav.contact, href: "/contact", megaKey: "contact" },
-    { name: t.nav.careers, href: "/career", megaKey: "careers" },
     { name: t.nav.company, href: "/about-us", megaKey: "company" },
+    { name: t.nav.careers, href: "/career", megaKey: "careers" },
+    { name: t.nav.contact, href: "/contact", megaKey: "contact" },
   ];
 
   /* ─── ACTIVE MEGA DATA ──────────────────────────────────────────────── */
@@ -710,19 +710,26 @@ const Navbar = () => {
                     >
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${
-                          active
-                            ? isScrolled
-                              ? "text-white font-extrabold"
-                              : "text-[#00c2b2] font-bold"
-                            : isScrolled
-                              ? "text-white/90 hover:text-white"
-                              : "text-white hover:text-[#00c2b2]"
-                        }`}
+                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${active
+                          ? isScrolled
+                            ? "text-white font-extrabold"
+                            : "text-[#00c2b2] font-bold"
+                          : isScrolled
+                            ? "text-white/90 hover:text-white"
+                            : "text-white hover:text-[#00c2b2]"
+                          }`}
                         onClick={() => setActiveMega(null)}
                       >
                         {item.name}
                       </Link>
+
+                      {/* Active underline */}
+                      {active && (
+                        <span
+                          className={`hidden absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full ${isScrolled ? "bg-white shadow-[0_1px_4px_rgba(255,255,255,0.6)]" : "bg-[#00c2b2]"
+                            }`}
+                        />
+                      )}
 
                       {/* Top triangle pointer for hovered menu */}
                       {hasMega && isOpen && (
@@ -761,19 +768,17 @@ const Navbar = () => {
               />
               <Link
                 href="/get-a-quote"
-                className={`pl-4 pr-1.5 py-1.5 sm:pl-5 sm:pr-2 sm:py-2 xl:pl-6 xl:pr-2.5 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-2 xl:gap-3 transition-all duration-300 hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group ${
-                  isScrolled
-                    ? "bg-white hover:bg-slate-50 text-[#01a9a0] shadow-[0_4px_18px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.25)]"
-                    : "bg-[#00b3a4] hover:bg-[#00c2b2] text-white shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)]"
-                }`}
+                className={`pl-4 pr-1.5 py-1.5 sm:pl-5 sm:pr-2 sm:py-2 xl:pl-6 xl:pr-2.5 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase inline-flex items-center gap-2 xl:gap-3 transition-all duration-300 hover:scale-105 active:scale-95 flex-shrink-0 cursor-pointer group ${isScrolled
+                  ? "bg-white hover:bg-slate-50 text-[#01a9a0] shadow-[0_4px_18px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_24px_rgba(0,0,0,0.25)]"
+                  : "bg-[#00b3a4] hover:bg-[#00c2b2] text-white shadow-[0_4px_18px_rgba(0,179,164,0.4)] hover:shadow-[0_6px_24px_rgba(0,194,178,0.6)]"
+                  }`}
               >
                 <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
                 <span
-                  className={`w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-0.5 ${
-                    isScrolled
-                      ? "bg-[#01a9a0] text-white shadow-sm"
-                      : "bg-white text-[#00b3a4]"
-                  }`}
+                  className={`w-6 h-6 sm:w-7 sm:h-7 xl:w-8 xl:h-8 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-0.5 ${isScrolled
+                    ? "bg-[#01a9a0] text-white shadow-sm"
+                    : "bg-white text-[#00b3a4]"
+                    }`}
                 >
                   <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 xl:w-4 xl:h-4 stroke-[2.5]" />
                 </span>
@@ -784,11 +789,10 @@ const Navbar = () => {
             <div className="lg:hidden" style={{ zIndex: 100000, position: "relative" }}>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`relative w-11 h-11 transition-all flex items-center justify-center cursor-pointer rounded-full ${
-                  isScrolled
-                    ? "text-white hover:bg-white/20"
-                    : "text-[#01a9a0] hover:opacity-80"
-                }`}
+                className={`relative w-11 h-11 transition-all flex items-center justify-center cursor-pointer rounded-full ${isScrolled
+                  ? "text-white hover:bg-white/20"
+                  : "text-[#01a9a0] hover:opacity-80"
+                  }`}
                 aria-expanded={isMobileMenuOpen}
                 aria-label="Toggle mobile menu"
               >
