@@ -561,7 +561,7 @@ const Navbar = () => {
         <div className="flex">
           {/* ── Left: items grid (2 columns x 3 rows) ── */}
           <div className="flex flex-col p-4 flex-1 justify-center">
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-2 gap-2">
               {data.items.map((item, i) => (
                 <Link
                   key={i}
@@ -587,7 +587,7 @@ const Navbar = () => {
                       }
                     }
                   }}
-                  className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
+                  className="group flex items-center gap-4 px-1 py-2.5 rounded-xl hover:bg-[#f0faf9] transition-all duration-150"
                 >
                   {/* Icon box */}
                   <div className="w-9 h-9 rounded-lg bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center flex-shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all">
@@ -605,7 +605,7 @@ const Navbar = () => {
                   </div>
 
                   {/* Arrow */}
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
+                  <span className="hidden flex-shrink-0 w-5 h-5 rounded-full border border-stone-200 group-hover:border-[#009e90]/40 group-hover:bg-[#009e90]/10 flex items-center justify-center transition-all opacity-0 group-hover:opacity-100">
                     <ArrowRight className="w-2.5 h-2.5 text-[#009e90] rtl:rotate-180" />
                   </span>
                 </Link>
