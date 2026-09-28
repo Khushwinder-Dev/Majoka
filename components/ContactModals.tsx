@@ -4,8 +4,19 @@ import React, { useState, useEffect } from "react";
 import { X, Loader2, CheckCircle2, ChevronDown, UserCheck, Mail, PhoneCall, Truck } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
+import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
 
 export type ContactModalType = "expert" | "enquiry" | "callback" | "supplier" | null;
+
+const serviceTypeOptions: SearchableSelectOption[] = [
+  { value: "Waterproofing", label: "Waterproofing", labelAr: "العزل المائي" },
+  { value: "Roofing", label: "Roofing", labelAr: "الأسقف والأسطح" },
+  { value: "Epoxy & Protective Coatings", label: "Epoxy & Protective Coatings", labelAr: "طلاء الإيبوكسي والطلاء الواقي" },
+  { value: "Polyurea", label: "Polyurea", labelAr: "عزل البولي يوريا" },
+  { value: "Injection Works", label: "Injection Works", labelAr: "أعمال الحقن المائي" },
+  { value: "GRP / Fiberglass", label: "GRP / Fiberglass", labelAr: "عزل GRP والألياف الزجاجية" },
+  { value: "Other", label: "Other", labelAr: "أخرى" },
+];
 
 interface ContactModalsProps {
   activeModal: ContactModalType;
@@ -391,26 +402,21 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-[12px] font-bold text-stone-700 mb-1">
-                      {isArabic ? "نوع الخدمة *" : "Service Type *"}
-                    </label>
-                    <div className="relative">
-                      <select
-                        value={expertForm.serviceType}
-                        onChange={(e) => setExpertForm({ ...expertForm, serviceType: e.target.value })}
-                        className="w-full appearance-none px-3.5 py-2.5 rounded-xl border border-stone-200 bg-stone-50/50 text-[13px] text-stone-900 focus:outline-none focus:ring-2 focus:ring-[#009e90]/30 focus:border-[#009e90] focus:bg-white transition-all pr-9 cursor-pointer"
-                      >
-                        <option value="Waterproofing">{isArabic ? "العزل المائي" : "Waterproofing"}</option>
-                        <option value="Roofing">{isArabic ? "الأسقف والأسطح" : "Roofing"}</option>
-                        <option value="Epoxy & Protective Coatings">{isArabic ? "طلاء الإيبوكسي والطلاء الواقي" : "Epoxy & Protective Coatings"}</option>
-                        <option value="Polyurea">{isArabic ? "عزل البولي يوريا" : "Polyurea"}</option>
-                        <option value="Injection Works">{isArabic ? "أعمال الحقن المائي" : "Injection Works"}</option>
-                        <option value="GRP / Fiberglass">{isArabic ? "عزل GRP والألياف الزجاجية" : "GRP / Fiberglass"}</option>
-                        <option value="Other">{isArabic ? "أخرى" : "Other"}</option>
-                      </select>
-                      <ChevronDown className={`w-4 h-4 text-stone-400 absolute top-1/2 -translate-y-1/2 pointer-events-none ${isArabic ? "left-3" : "right-3"}`} />
-                    </div>
+                  <div className="pt-1">
+                    <SearchableSelect
+                      name="serviceType"
+                      value={expertForm.serviceType}
+                      options={serviceTypeOptions}
+                      label={isArabic ? "نوع الخدمة" : "Service Type"}
+                      placeholder={isArabic ? "اختر نوع الخدمة" : "Select service type"}
+                      searchPlaceholder={isArabic ? "بحث في الخدمات..." : "Search services..."}
+                      required
+                      disabled={isSubmitting}
+                      isArabic={isArabic}
+                      variant="rounded-xl"
+                      size="sm"
+                      onChange={(val) => setExpertForm((prev) => ({ ...prev, serviceType: val }))}
+                    />
                   </div>
 
                   <div>
