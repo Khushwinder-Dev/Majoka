@@ -24,11 +24,11 @@ interface ResourceItem {
   title: string;
   category: "Technical Guides" | "Standards & Compliance" | "Case Studies" | "Company Brochures";
   format:
-    | "PDF Document"
-    | "Interactive Article"
-    | "Whitepaper"
-    | "Datasheet"
-    | "Company Brochure";
+  | "PDF Document"
+  | "Interactive Article"
+  | "Whitepaper"
+  | "Datasheet"
+  | "Company Brochure";
   fileSize?: string;
   description: string;
   date: string;
@@ -272,11 +272,10 @@ export default function ResourcesPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                  activeCategory === cat
-                    ? "theme-bg-main text-white shadow-md shadow-[#01a9a0]/20"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap cursor-pointer ${activeCategory === cat
+                  ? "theme-bg-main text-white shadow-md shadow-[#01a9a0]/20"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
               >
                 {cat}
               </button>
@@ -474,7 +473,7 @@ export default function ResourcesPage() {
       </div>
 
       {/* Testimonials */}
-      <ClientTestimonials />
+      {/* <ClientTestimonials /> */}
     </div>
   );
 }

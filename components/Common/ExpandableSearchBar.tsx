@@ -620,7 +620,7 @@ export default function ExpandableSearchBar({
       <>
         {parts.map((part, i) =>
           part.toLowerCase() === query.toLowerCase() ? (
-            <mark key={i} className="bg-[#00c2b2]/20 text-[#008f83] font-bold rounded-sm px-0.5">
+            <mark key={i} className="bg-[#00c2b2ba]/20 text-[#008f83] font-bold rounded-sm px-0.5">
               {part}
             </mark>
           ) : (
@@ -686,24 +686,22 @@ export default function ExpandableSearchBar({
                   handleExpand();
                 }
               }}
-              className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${
-                isExpanded
-                  ? isScrolled
-                    ? "border-white bg-white/20"
-                    : "border-white bg-white/15"
-                  : isScrolled
+              className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${isExpanded
+                ? isScrolled
+                  ? "border-white bg-white/20"
+                  : "border-white bg-white/15"
+                : isScrolled
                   ? "border-white/80 hover:border-white"
                   : "border-white/60 hover:border-white"
-              }`}
+                }`}
               aria-label={isExpanded ? "Close search" : "Open search"}
               title="Search (Ctrl + K)"
             >
               <div
-                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors shadow-sm ${
-                  isScrolled
-                    ? "bg-white hover:bg-slate-50 text-[#01a9a0]"
-                    : "bg-[#00b3a4] hover:bg-[#00c2b2] text-white"
-                }`}
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors shadow-sm ${isScrolled
+                  ? "bg-white hover:bg-slate-50 text-[#01a9a0]"
+                  : "bg-[#00b3a4] hover:bg-[#00c2b2ba] text-white"
+                  }`}
               >
                 {isExpanded ? (
                   <X className="h-4 w-4 stroke-[2.5]" />
@@ -749,7 +747,7 @@ export default function ExpandableSearchBar({
             className="w-full flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 py-2.5 text-white/80 transition-all cursor-pointer text-xs"
           >
             <div className="flex items-center gap-2">
-              <Search className="w-4 h-4 text-[#00c2b2]" />
+              <Search className="w-4 h-4 text-[#00c2b2ba]" />
               <span>{placeholder || defaultPlaceholder}</span>
             </div>
             <span className="text-[10px] text-white/40 uppercase font-mono">Search</span>
@@ -768,8 +766,8 @@ export default function ExpandableSearchBar({
           dir={isAr ? "rtl" : "ltr"}
         >
           {/* 1. Integrated Search Input Box with Website Primary Theme */}
-          <div className="relative flex items-center bg-white border-2 border-[#01a9a0] focus-within:ring-4 focus-within:ring-[#01a9a0]/15 rounded-2xl px-4 py-3 transition-all shadow-xs gap-3">
-            <Search className="w-5 h-5 text-[#01a9a0] shrink-0 stroke-[2.2]" />
+          <div className="relative flex items-center bg-white border-2 border-[#00c2b2ba] focus-within:ring-4 focus-within:ring-[#00c2b2ba]/20 rounded-2xl px-4 py-3 transition-all shadow-xs gap-3">
+            <Search className="w-5 h-5 text-[#00c2b2ba] shrink-0 stroke-[2.2]" />
             <input
               ref={inputRef}
               type="text"
@@ -850,8 +848,8 @@ export default function ExpandableSearchBar({
                   type="button"
                   onClick={() => setActiveTab(tab.key)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${isSelected
-                    ? "bg-[#01a9a0] text-white shadow-sm shadow-[#01a9a0]/30"
-                    : "bg-slate-100 hover:bg-[#f0faf9] text-slate-700 hover:text-[#01a9a0] border border-transparent hover:border-[#01a9a0]/25"
+                    ? "bg-[#00c2b2ba] text-white shadow-sm shadow-[#00c2b2ba]/35"
+                    : "bg-slate-100 hover:bg-[#f0faf9] text-slate-700 hover:text-[#00c2b2ba] border border-transparent hover:border-[#00c2b2ba]/25"
                     }`}
                 >
                   {isAr ? tab.labelAr : tab.labelEn}
@@ -872,7 +870,7 @@ export default function ExpandableSearchBar({
                   : "Search results"}
             </p>
             {searchQuery.trim() !== "" && (
-              <span className="text-xs text-[#01a9a0] font-bold">
+              <span className="text-xs text-[#00c2b2ba] font-bold">
                 {filteredResults.length} {isAr ? "نتيجة" : "results"}
               </span>
             )}
@@ -1021,7 +1019,7 @@ export default function ExpandableSearchBar({
                 }
                 setShowAiModal(true);
               }}
-              className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#01a9a0] hover:bg-[#008f86] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-[#01a9a0]/25 hover:shadow-lg hover:shadow-[#01a9a0]/40 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shrink-0"
+              className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#00c2b2ba] hover:bg-[#00b0a2] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-[#00c2b2ba]/30 hover:shadow-lg hover:shadow-[#00c2b2ba]/50 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shrink-0"
             >
               <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300/30" />
               <span>{isAr ? "اسأل المساعد الذكي" : "Ask AI Agent"}</span>
