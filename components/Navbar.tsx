@@ -724,15 +724,6 @@ const Navbar = () => {
                         {item.name}
                       </Link>
 
-                      {/* Active underline */}
-                      {active && (
-                        <span
-                          className={`absolute -bottom-1 left-0 right-0 h-[2.5px] rounded-full ${
-                            isScrolled ? "bg-white shadow-[0_1px_4px_rgba(255,255,255,0.6)]" : "bg-[#00c2b2]"
-                          }`}
-                        />
-                      )}
-
                       {/* Top triangle pointer for hovered menu */}
                       {hasMega && isOpen && (
                         <div className="absolute top-full left-1/2 -translate-x-1/2 z-30 pointer-events-none flex items-center justify-center">
