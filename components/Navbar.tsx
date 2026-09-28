@@ -3,9 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight, Search, UserCheck, MapPin, Mail, PhoneCall, Truck, LifeBuoy } from "lucide-react";
 import ExpandableSearchBar from "./Common/ExpandableSearchBar";
 import { useLanguage } from "@/context/LanguageContext";
+import ContactModals, { ContactModalType } from "./ContactModals";
 
 /* ─── SVG ICON PATHS (mapped by visual content) ───────────────────────
   SVG.svg      → house simple (home)
@@ -198,36 +199,104 @@ const subcontractorsMegaMenu = {
   },
 };
 
-/* TASK-6: RESOURCES */
-const resourcesMegaMenu = {
+/* TASK-6: CONTACT */
+const contactMegaMenu = {
   en: {
-    label: "RESOURCES",
-    tagline: "Knowledge, Media & Client Support",
-    cardImage: "/resnb.jpeg",
-    cta: "Explore More",
-    ctaHref: "/resources",
+    label: "CONTACT",
+    tagline: "Get in touch with our expert engineering team",
+    cardImage: "/contact.jpeg",
+    cta: "Explore Contact",
+    ctaHref: "/contact",
     items: [
-      { icon: "arrow", title: "Blogs", sub: "Industry insights, trends, and company updates.", href: "/blogs" },
-      { icon: "arrow", title: "Support", sub: "Get assistance and support from our team.", href: "/support" },
-      { icon: "arrow", title: "Media", sub: "Explore our latest news, stories, and media highlights.", href: "/media" },
-      { icon: "arrow", title: "FAQs", sub: "Find quick answers to frequently asked questions.", href: "/faqs" },
-      { icon: "arrow", title: "Warranty", sub: "Learn about our warranty coverage and terms.", href: "/warranty" },
-      { icon: "arrow", title: "Downloads", sub: "Access brochures, company profiles, and useful documents.", href: "/download" },
+      {
+        icon: "expert",
+        title: "Talk to an Expert",
+        sub: "Expert consultation",
+        href: "/contact#expert",
+        action: "expert" as ContactModalType,
+      },
+      {
+        icon: "location",
+        title: "Our Locations",
+        sub: "Offices & map",
+        href: "/contact#map",
+      },
+      {
+        icon: "enquiry",
+        title: "Send an Enquiry",
+        sub: "General enquiry",
+        href: "/contact#enquiry",
+        action: "enquiry" as ContactModalType,
+      },
+      {
+        icon: "callback",
+        title: "Request a Callback",
+        sub: "Request a call",
+        href: "/contact#callback",
+        action: "callback" as ContactModalType,
+      },
+      {
+        icon: "supplier",
+        title: "Supplier Enquiries",
+        sub: "Supplier enquiries",
+        href: "/contact#supplier",
+        action: "supplier" as ContactModalType,
+      },
+      {
+        icon: "support",
+        title: "Customer Support",
+        sub: "Project & service support",
+        href: "/support",
+      },
     ],
   },
   ar: {
-    label: "المصادر",
-    tagline: "المعرفة والوسائط ودعم العملاء",
-    cardImage: "/resnb.jpeg",
-    cta: "استكشف المزيد",
-    ctaHref: "/resources",
+    label: "اتصل بنا",
+    tagline: "تواصل مع فريق خبرائنا الهندسي المتميز",
+    cardImage: "/contact.jpeg",
+    cta: "صفحة الاتصال",
+    ctaHref: "/contact",
     items: [
-      { icon: "arrow", title: "المدونة", sub: "رؤى الصناعة، الاتجاهات وأحدث أخبار الشركة.", href: "/blogs" },
-      { icon: "arrow", title: "الدعم", sub: "احصل على المساعدة والدعم الفني من فريقنا.", href: "/support" },
-      { icon: "arrow", title: "الوسائط", sub: "استكشف آخر الأخبار والقصص والتغطيات الإعلامية.", href: "/media" },
-      { icon: "arrow", title: "الأسئلة الشائعة", sub: "إجابات سريعة وشاملة عن الأسئلة المتكررة.", href: "/faqs" },
-      { icon: "arrow", title: "الضمان", sub: "تعرف على شروط تغطية الضمان وسياساتنا المعتمدة.", href: "/warranty" },
-      { icon: "arrow", title: "التحميلات", sub: "كتيبات وملفات الشركة والمستندات الفنية المفيدة.", href: "/download" },
+      {
+        icon: "expert",
+        title: "تحدث مع خبير",
+        sub: "استشارة فنية متخصصة",
+        href: "/contact#expert",
+        action: "expert" as ContactModalType,
+      },
+      {
+        icon: "location",
+        title: "مواقعنا ومكاتبنا",
+        sub: "المكاتب والخريطة",
+        href: "/contact#map",
+      },
+      {
+        icon: "enquiry",
+        title: "إرسال استفسار",
+        sub: "استفسار عام",
+        href: "/contact#enquiry",
+        action: "enquiry" as ContactModalType,
+      },
+      {
+        icon: "callback",
+        title: "طلب معاودة الاتصال",
+        sub: "طلب اتصال هاتفي",
+        href: "/contact#callback",
+        action: "callback" as ContactModalType,
+      },
+      {
+        icon: "supplier",
+        title: "استفسارات الموردين",
+        sub: "توريد المواد والمعدات",
+        href: "/contact#supplier",
+        action: "supplier" as ContactModalType,
+      },
+      {
+        icon: "support",
+        title: "خدمة العملاء والدعم",
+        sub: "دعم المشاريع والخدمات",
+        href: "/support",
+      },
     ],
   },
 };
@@ -301,9 +370,9 @@ const companyMegaMenu = {
 };
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
-type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | "subcontractors" | "resources" | "careers" | "company" | null;
+type MegaMenuKey = "services" | "solutions" | "projects" | "industries" | "subcontractors" | "contact" | "careers" | "company" | null;
 
-type MegaItem = { icon: string; title: string; sub: string; href: string };
+type MegaItem = { icon: string; title: string; sub: string; href: string; action?: ContactModalType };
 
 type MegaData = {
   label: string;
@@ -316,6 +385,24 @@ type MegaData = {
 
 /* ─── ICON COMPONENT ─────────────────────────────────────────────────── */
 function NavIcon({ src, alt, size = 18 }: { src?: string; alt: string; size?: number }) {
+  if (src === "expert") {
+    return <UserCheck className="w-4 h-4 text-[#009e90]" />;
+  }
+  if (src === "location") {
+    return <MapPin className="w-4 h-4 text-[#009e90]" />;
+  }
+  if (src === "enquiry") {
+    return <Mail className="w-4 h-4 text-[#009e90]" />;
+  }
+  if (src === "callback") {
+    return <PhoneCall className="w-4 h-4 text-[#009e90]" />;
+  }
+  if (src === "supplier") {
+    return <Truck className="w-4 h-4 text-[#009e90]" />;
+  }
+  if (src === "support") {
+    return <LifeBuoy className="w-4 h-4 text-[#009e90]" />;
+  }
   if (!src || src === "arrow") {
     return <ArrowRight className="w-4 h-4 text-[#009e90] rtl:rotate-180 group-hover:translate-x-0.5 transition-transform" />;
   }
@@ -338,6 +425,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMega, setActiveMega] = useState<MegaMenuKey>(null);
   const [mobileExpanded, setMobileExpanded] = useState<MegaMenuKey>(null);
+  const [activeContactModal, setActiveContactModal] = useState<ContactModalType>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -347,8 +435,8 @@ const Navbar = () => {
 
   const searchSuggestions = [
     t.nav.services, t.nav.solutions, t.nav.projects,
-    t.nav.industries, t.nav.subcontractors, t.nav.resources,
-    t.nav.careers, t.nav.company, t.nav.contact, "Waterproofing", "Contracting",
+    t.nav.industries, t.nav.subcontractors, t.nav.contact,
+    t.nav.careers, t.nav.company, "Waterproofing", "Contracting",
   ];
 
   const isLinkActive = (href: string) => {
@@ -358,9 +446,10 @@ const Navbar = () => {
     if (href === "/solutions") return pathname === "/solutions" || pathname.startsWith("/solutions");
     if (href === "/industries") return pathname === "/industries" || pathname.startsWith("/industries");
     if (href === "/subcontract") return pathname === "/subcontract" || pathname.startsWith("/subcontract");
+    if (href === "/contact") return pathname === "/contact" || pathname.startsWith("/contact");
     if (href === "/resources") return pathname === "/resources" || pathname.startsWith("/blogs") || pathname.startsWith("/media") || pathname.startsWith("/faqs") || pathname.startsWith("/support") || pathname.startsWith("/warranty");
     if (href === "/career") return pathname === "/career" || pathname.startsWith("/career") || pathname === "/careers" || pathname.startsWith("/careers");
-    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about" || pathname.startsWith("/expertise") || pathname.startsWith("/certifications") || pathname.startsWith("/contact");
+    if (href === "/about-us") return pathname === "/about-us" || pathname === "/about" || pathname.startsWith("/expertise") || pathname.startsWith("/certifications");
     return pathname === href || pathname.startsWith(href);
   };
 
@@ -478,6 +567,12 @@ const Navbar = () => {
                   key={i}
                   href={item.href}
                   onClick={(e) => {
+                    if (item.action) {
+                      e.preventDefault();
+                      setActiveMega(null);
+                      setActiveContactModal(item.action);
+                      return;
+                    }
                     setActiveMega(null);
                     if (item.href.includes("#")) {
                       const [targetPath, hash] = item.href.split("#");
@@ -559,7 +654,7 @@ const Navbar = () => {
     { name: t.nav.projects, href: "/project", megaKey: "projects" },
     { name: t.nav.industries, href: "/industries", megaKey: "industries" },
     { name: t.nav.subcontractors, href: "/subcontract", megaKey: "subcontractors" },
-    { name: t.nav.resources, href: "/resources", megaKey: "resources" },
+    { name: t.nav.contact, href: "/contact", megaKey: "contact" },
     { name: t.nav.careers, href: "/career", megaKey: "careers" },
     { name: t.nav.company, href: "/about-us", megaKey: "company" },
   ];
@@ -571,7 +666,7 @@ const Navbar = () => {
         activeMega === "projects" ? projectsMegaMenu[lang] :
           activeMega === "industries" ? industriesMegaMenu[lang] :
             activeMega === "subcontractors" ? subcontractorsMegaMenu[lang] :
-              activeMega === "resources" ? resourcesMegaMenu[lang] :
+              activeMega === "contact" ? contactMegaMenu[lang] :
                 activeMega === "careers" ? careersMegaMenu[lang] :
                   activeMega === "company" ? companyMegaMenu[lang] : null;
 
@@ -777,7 +872,7 @@ const Navbar = () => {
                     item.megaKey === "projects" ? projectsMegaMenu[lang] :
                       item.megaKey === "industries" ? industriesMegaMenu[lang] :
                         item.megaKey === "subcontractors" ? subcontractorsMegaMenu[lang] :
-                          item.megaKey === "resources" ? resourcesMegaMenu[lang] :
+                          item.megaKey === "contact" ? contactMegaMenu[lang] :
                             item.megaKey === "careers" ? careersMegaMenu[lang] :
                               item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
@@ -812,6 +907,13 @@ const Navbar = () => {
                             key={i}
                             href={sub.href}
                             onClick={(e) => {
+                              if (sub.action) {
+                                e.preventDefault();
+                                setIsMobileMenuOpen(false);
+                                setMobileExpanded(null);
+                                setActiveContactModal(sub.action);
+                                return;
+                              }
                               setIsMobileMenuOpen(false);
                               setMobileExpanded(null);
                               if (sub.href.includes("#")) {
@@ -874,6 +976,12 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* ── Contact Modals (Talk to an Expert, Send an Enquiry, Request Callback, Supplier) ── */}
+      <ContactModals
+        activeModal={activeContactModal}
+        onClose={() => setActiveContactModal(null)}
+      />
     </>
   );
 };
