@@ -378,23 +378,26 @@ export default function Footer() {
           </div>
 
           {/* ── Bottom bar: 3 Columns (Social Icons | Copyright | Legal & Policy Links) ── */}
-          <div className="relative border-t border-stone-300/40 pt-10 pb-20 sm:pb-8">
+          <div className="relative border-t border-stone-300/40 pt-7 pb-20 sm:pb-8 lg:pb-7">
             {/* Scroll-to-top — sits centered ON the divider line */}
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-              <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center shadow-sm">
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2">
+              <div className="w-11 h-11 rounded-full bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xs">
                 <button
                   onClick={scrollToTop}
                   aria-label={t.footer.scrollToTop}
-                  className="w-10 h-10 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
+                  className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer shadow-xs"
                 >
-                  <ChevronUp className="w-5 h-5 stroke-[2.5]" />
+                  <ChevronUp className="w-4 h-4 stroke-[2.5]" />
                 </button>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6">
+            <div
+              className={`flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-6 ${isArabic ? "pl-0" : "pr-0"
+                }`}
+            >
               {/* Column 1: Social Icons */}
-              <div className="lg:col-span-3 flex items-center justify-center lg:justify-start gap-2.5">
+              <div className="flex items-center justify-center lg:justify-start gap-2 shrink-0">
                 {socialLinks.map(({ href, Icon, label }) => (
                   <Link
                     key={label}
@@ -402,38 +405,59 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
+                    className="w-8 h-8 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-3.5 h-3.5" />
                   </Link>
                 ))}
               </div>
 
+              {/* Column 3: Refund & Legal Policy Links */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-sm text-stone-600">
+                <Link
+                  href="/refund-policy"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
+                </Link>
+                <span className="text-stone-300 select-none">•</span>
+                <Link
+                  href="/privacy"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "سياسة الخصوصية" : "Privacy Policy"}
+                </Link>
+                <span className="text-stone-300 select-none">•</span>
+                <Link
+                  href="/terms"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "شروط الاستخدام" : "Terms of Use"}
+                </Link>
+                <span className="text-stone-300 select-none">•</span>
+                <Link
+                  href="/cookies"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
+                </Link>
+                <span className="text-stone-300 select-none">•</span>
+                <Link
+                  href="/subscribe"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "الاشتراك" : "Subscribe to emails"}
+                </Link>
+              </div>
+
               {/* Column 2: Copyright Text */}
-              <div className="lg:col-span-4 text-center">
-                <p className="text-xs sm:text-sm text-stone-600 leading-normal">
+              <div className="text-center px-2 shrink-0">
+                <p className="text-sm text-stone-600 leading-normal">
                   {t.footer.copyright}
                 </p>
               </div>
 
-              {/* Column 3: Refund & Legal Policy Links */}
-              <div className="lg:col-span-5 flex flex-wrap items-center justify-center lg:justify-end gap-x-4 gap-y-2 text-xs sm:text-sm text-stone-600">
-                <Link href="/refund-policy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
-                </Link>
-                <Link href="/privacy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "سياسة الخصوصية" : "Privacy Policy"}
-                </Link>
-                <Link href="/terms" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "شروط الاستخدام" : "Terms of Use"}
-                </Link>
-                <Link href="/cookies" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
-                </Link>
-                <Link href="/subscribe" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
-                  {isArabic ? "الاشتراك" : "Subscribe to emails"}
-                </Link>
-              </div>
+
             </div>
           </div>
         </div>
