@@ -22,6 +22,8 @@ export interface SearchableSelectProps {
   className?: string;
   variant?: "rounded-full" | "rounded-xl";
   size?: "default" | "sm";
+  error?: string;
+  hasError?: boolean;
   onChange: (value: string) => void;
 }
 
@@ -38,8 +40,11 @@ export default function SearchableSelect({
   className = "",
   variant = "rounded-full",
   size = "default",
+  error,
+  hasError,
   onChange,
 }: SearchableSelectProps) {
+  const isInvalid = Boolean(error || hasError);
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -152,7 +157,11 @@ export default function SearchableSelect({
         aria-expanded={isOpen}
         className={`w-full bg-white border ${roundedClass} ${heightPadding} text-stone-800 transition-all duration-200 cursor-pointer text-left flex items-center justify-between ${
           isOpen
-            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/20 shadow-xs"
+            ? isInvalid
+              ? "border-red-500 ring-2 ring-red-500/20 shadow-xs"
+              : "border-[#01a9a0] ring-2 ring-[#01a9a0]/20 shadow-xs"
+            : isInvalid
+            ? "border-red-500 ring-2 ring-red-500/15"
             : isLifted
             ? "border-stone-300"
             : "border-stone-300 hover:border-stone-400"
@@ -192,9 +201,9 @@ export default function SearchableSelect({
         } ${
           isLifted
             ? size === "sm"
-              ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
-              : "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-            : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
+              ? `-top-2 text-[10.5px] font-semibold ${isInvalid ? "text-red-500" : "text-[#01a9a0]"}`
+              : `-top-2.5 text-[11px] font-semibold ${isInvalid ? "text-red-500" : "text-[#01a9a0]"}`
+            : `top-1/2 -translate-y-1/2 text-sm ${isInvalid ? "text-red-500 font-medium" : "text-stone-400"}`
         }`}
       >
         {label} {required && <span className="text-red-500">*</span>}
@@ -273,6 +282,13 @@ export default function SearchableSelect({
             )}
           </ul>
         </div>
+      )}
+
+      {/* Inline Error Message */}
+      {error && (
+        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+          {error}
+        </p>
       )}
     </div>
   );

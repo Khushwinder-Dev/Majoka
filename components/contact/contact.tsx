@@ -46,6 +46,7 @@ export default function ContactPage() {
     message: string;
   }>({ type: null, message: "" });
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const contactInfo: ContactCard[] = [
     {
@@ -87,17 +88,57 @@ export default function ContactPage() {
     },
   ];
 
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case "fullName":
+        return !value.trim() ? "Your name is incomplete." : "";
+      case "phone": {
+        const trimmed = value.trim();
+        if (!trimmed) return "Your phone number is incomplete.";
+        if (!isValidPhone(trimmed)) return "Your phone number is invalid.";
+        return "";
+      }
+      case "email": {
+        const trimmed = value.trim();
+        if (!trimmed) return "Your email address is incomplete.";
+        if (!isValidEmail(trimmed)) return "Your email address is invalid.";
+        return "";
+      }
+      case "message":
+        return !value.trim() ? "Your message is incomplete." : "";
+      default:
+        return "";
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {
+      fullName: validateField("fullName", formData.fullName),
+      phone: validateField("phone", formData.phone),
+      email: validateField("email", formData.email),
+      message: validateField("message", formData.message),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
@@ -304,7 +345,7 @@ export default function ContactPage() {
             viewport={{ once: true, margin: "-100px" }}
             variants={formVariants}
           >
-            <form onSubmit={handleSubmit} className="flex flex-col h-full">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col h-full">
               {/* Title */}
               <h2 className="text-3xl sm:text-4xl font-bold theme-text-main mb-6">
                 Send us a Message
@@ -337,28 +378,41 @@ export default function ContactPage() {
               {/* Form Fields Container */}
               <div className="space-y-5 flex-1">
                 {/* Name Field */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("fullName")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
-                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                      : "top-3.5 text-sm text-stone-400"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("fullName")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.fullName
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
-                  >
-                    Name
-                  </label>
-                  <InputValidationTick isValid={isValidText(formData.fullName)} />
+                    />
+                    <label
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        errors.fullName
+                          ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                          : formData.fullName || focusedField === "fullName"
+                          ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                          : "top-3.5 text-sm text-stone-400"
+                      }`}
+                    >
+                      Name
+                    </label>
+                    <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} />
+                  </div>
+                  {errors.fullName && (
+                    <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                      {errors.fullName}
+                    </p>
+                  )}
                 </div>
 
                 {/* Company Name Field (Optional) */}
@@ -386,76 +440,115 @@ export default function ContactPage() {
                 </div>
 
                 {/* Phone Field */}
-                <div className="relative">
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("phone")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
-                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                      : "top-3.5 text-sm text-stone-400"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("phone")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.phone
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
-                  >
-                    Phone Number
-                  </label>
-                  <InputValidationTick isValid={isValidPhone(formData.phone)} />
+                    />
+                    <label
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        errors.phone
+                          ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                          : formData.phone || focusedField === "phone"
+                          ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                          : "top-3.5 text-sm text-stone-400"
+                      }`}
+                    >
+                      Phone Number
+                    </label>
+                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} />
+                  </div>
+                  {errors.phone && (
+                    <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
 
                 {/* Email Field */}
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
-                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                      : "top-3.5 text-sm text-stone-400"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.email
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
-                  >
-                    Email Address
-                  </label>
-                  <InputValidationTick isValid={isValidEmail(formData.email)} />
+                    />
+                    <label
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        errors.email
+                          ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                          : formData.email || focusedField === "email"
+                          ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                          : "top-3.5 text-sm text-stone-400"
+                      }`}
+                    >
+                      Email Address
+                    </label>
+                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} />
+                  </div>
+                  {errors.email && (
+                    <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 {/* Message Textarea */}
-                <div className="relative flex-1">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full h-full min-h-[120px] px-5 py-3.5 bg-white rounded-2xl border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
-                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                      : "top-3.5 text-sm text-stone-400"
+                <div className="flex-1">
+                  <div className="relative h-full">
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      onFocus={() => setFocusedField("message")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full h-full min-h-[120px] px-5 py-3.5 bg-white rounded-2xl border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.message
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
-                  >
-                    Message
-                  </label>
+                    />
+                    <label
+                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        errors.message
+                          ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                          : formData.message || focusedField === "message"
+                          ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                          : "top-3.5 text-sm text-stone-400"
+                      }`}
+                    >
+                      Message
+                    </label>
+                  </div>
+                  {errors.message && (
+                    <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                      {errors.message}
+                    </p>
+                  )}
                 </div>
               </div>
 

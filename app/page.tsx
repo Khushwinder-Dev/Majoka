@@ -66,9 +66,9 @@ export default function Home() {
         <div data-aos="fade-up" data-aos-delay="150">
           <ProtectionServicesSection />
         </div>
-        <div data-aos="fade-up" data-aos-delay="175">
+        {/* <div data-aos="fade-up" data-aos-delay="175">
           <ServiceProductsSection />
-        </div>
+        </div> */}
         <div data-aos="fade-up" data-aos-delay="200">
           <ExperienceSection />
         </div>

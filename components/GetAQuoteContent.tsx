@@ -99,6 +99,7 @@ export default function GetAQuoteContent() {
 
   const [files, setFiles] = useState<File[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // FAQ Accordion State
@@ -110,6 +111,61 @@ export default function GetAQuoteContent() {
     );
   };
 
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case "fullName":
+        return !value.trim()
+          ? isArabic
+            ? "الاسم الكامل غير مكتمل."
+            : "Your name is incomplete."
+          : "";
+      case "phoneNumber": {
+        const trimmed = value.trim();
+        if (!trimmed)
+          return isArabic
+            ? "رقم الهاتف غير مكتمل."
+            : "Your phone number is incomplete.";
+        if (!isValidPhone(trimmed))
+          return isArabic
+            ? "رقم الهاتف غير صالح."
+            : "Your phone number is invalid.";
+        return "";
+      }
+      case "emailAddress": {
+        const trimmed = value.trim();
+        if (!trimmed)
+          return isArabic
+            ? "البريد الإلكتروني غير مكتمل."
+            : "Your email address is incomplete.";
+        if (!isValidEmail(trimmed))
+          return isArabic
+            ? "البريد الإلكتروني غير صالح."
+            : "Your email address is invalid.";
+        return "";
+      }
+      case "projectType":
+        return !value.trim()
+          ? isArabic
+            ? "يرجى اختيار نوع الخدمة."
+            : "Your project type is incomplete."
+          : "";
+      case "projectLocation":
+        return !value.trim()
+          ? isArabic
+            ? "موقع المشروع غير مكتمل."
+            : "Your project location is incomplete."
+          : "";
+      case "projectDetails":
+        return !value.trim()
+          ? isArabic
+            ? "تفاصيل المشروع غير مكتملة."
+            : "Your project details are incomplete."
+          : "";
+      default:
+        return "";
+    }
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -119,6 +175,9 @@ export default function GetAQuoteContent() {
       setFormData((prev) => ({ ...prev, [name]: checked }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
+      if (errors[name]) {
+        setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
+      }
     }
   };
 
@@ -130,6 +189,20 @@ export default function GetAQuoteContent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors: Record<string, string> = {
+      fullName: validateField("fullName", formData.fullName),
+      phoneNumber: validateField("phoneNumber", formData.phoneNumber),
+      emailAddress: validateField("emailAddress", formData.emailAddress),
+      projectType: validateField("projectType", formData.projectType),
+      projectLocation: validateField("projectLocation", formData.projectLocation),
+      projectDetails: validateField("projectDetails", formData.projectDetails),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
+      return;
+    }
 
     if (!formData.agreed) {
       toast.error(
@@ -368,83 +441,131 @@ export default function GetAQuoteContent() {
                 </p>
 
                 {/* Form matching website input field standard */}
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
 
                   {/* Row 1: Full Name & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Full Name */}
-                    <div className="relative">
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        required
-                        placeholder=" "
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleInputChange}
+                          placeholder=" "
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                          } ${
+                            errors.fullName
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
-                      >
-                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidText(formData.fullName)} isArabic={isArabic} />
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-5" : "left-5"
+                          } ${
+                            errors.fullName
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                              : formData.fullName
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} />
+                      </div>
+                      {errors.fullName && (
+                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                          {errors.fullName}
+                        </p>
+                      )}
                     </div>
 
                     {/* Phone Number */}
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleInputChange}
-                        required
-                        placeholder=" "
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phoneNumber ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          name="phoneNumber"
+                          value={formData.phoneNumber}
+                          onChange={handleInputChange}
+                          placeholder=" "
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                          } ${
+                            errors.phoneNumber
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
-                      >
-                        {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidPhone(formData.phoneNumber)} isArabic={isArabic} />
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-5" : "left-5"
+                          } ${
+                            errors.phoneNumber
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                              : formData.phoneNumber
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidPhone(formData.phoneNumber) && !errors.phoneNumber} isArabic={isArabic} />
+                      </div>
+                      {errors.phoneNumber && (
+                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                          {errors.phoneNumber}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   {/* Row 2: Email Address & Company Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Email Address */}
-                    <div className="relative">
-                      <input
-                        type="email"
-                        name="emailAddress"
-                        value={formData.emailAddress}
-                        onChange={handleInputChange}
-                        required
-                        placeholder=" "
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.emailAddress ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="emailAddress"
+                          value={formData.emailAddress}
+                          onChange={handleInputChange}
+                          placeholder=" "
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                          } ${
+                            errors.emailAddress
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
-                      >
-                        {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidEmail(formData.emailAddress)} isArabic={isArabic} />
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-5" : "left-5"
+                          } ${
+                            errors.emailAddress
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                              : formData.emailAddress
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidEmail(formData.emailAddress) && !errors.emailAddress} isArabic={isArabic} />
+                      </div>
+                      {errors.emailAddress && (
+                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                          {errors.emailAddress}
+                        </p>
+                      )}
                     </div>
 
                     {/* Company Name */}
@@ -482,56 +603,93 @@ export default function GetAQuoteContent() {
                       placeholder=""
                       required
                       isArabic={isArabic}
-                      onChange={(val) =>
-                        setFormData((prev) => ({ ...prev, projectType: val }))
-                      }
+                      error={errors.projectType}
+                      onChange={(val) => {
+                        setFormData((prev) => ({ ...prev, projectType: val }));
+                        if (errors.projectType) {
+                          setErrors((prev) => ({ ...prev, projectType: val ? "" : (isArabic ? "يرجى اختيار نوع الخدمة." : "Your project type is incomplete.") }));
+                        }
+                      }}
                     />
 
                     {/* Project Location */}
-                    <div className="relative">
-                      <input
-                        type="text"
-                        name="projectLocation"
-                        value={formData.projectLocation}
-                        onChange={handleInputChange}
-                        required
-                        placeholder=" "
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.projectLocation ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name="projectLocation"
+                          value={formData.projectLocation}
+                          onChange={handleInputChange}
+                          placeholder=" "
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                          } ${
+                            errors.projectLocation
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
-                      >
-                        {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidText(formData.projectLocation)} isArabic={isArabic} />
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-5" : "left-5"
+                          } ${
+                            errors.projectLocation
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                              : formData.projectLocation
+                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidText(formData.projectLocation) && !errors.projectLocation} isArabic={isArabic} />
+                      </div>
+                      {errors.projectLocation && (
+                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                          {errors.projectLocation}
+                        </p>
+                      )}
                     </div>
                   </div>
 
                   {/* Project Details (Textarea matching website standard) */}
-                  <div className="relative">
-                    <textarea
-                      rows={4}
-                      name="projectDetails"
-                      value={formData.projectDetails}
-                      onChange={handleInputChange}
-                      required
-                      placeholder=" "
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-none placeholder-transparent ${isArabic ? "text-right" : "text-left"
+                  <div>
+                    <div className="relative">
+                      <textarea
+                        rows={4}
+                        name="projectDetails"
+                        value={formData.projectDetails}
+                        onChange={handleInputChange}
+                        placeholder=" "
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none placeholder-transparent ${
+                          isArabic ? "text-right" : "text-left"
+                        } ${
+                          errors.projectDetails
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                        } peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.projectDetails ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-5" : "left-5"
+                        } ${
+                          errors.projectDetails
+                            ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                            : formData.projectDetails
+                            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                            : "top-4 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
-                    >
-                      {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
-                    </label>
+                      >
+                        {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                    {errors.projectDetails && (
+                      <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                        {errors.projectDetails}
+                      </p>
+                    )}
                   </div>
 
                   {/* File Upload Zone */}
