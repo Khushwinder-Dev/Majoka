@@ -22,6 +22,7 @@ import OurProjectsSection from "@/components/OurProjectsSection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
 import SolutionsListingSection from "@/components/SolutionsListingSection";
 import WelcomeOfferModal from "@/components/WelcomeOfferModal";
+import MediaLatestNewsSection from "@/components/MediaLatestNewsSection";
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
 interface PhotoItem {
@@ -611,6 +612,11 @@ export default function MediaPage() {
           )}
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          LATEST NEWS SECTION (Layout Reference)
+      ══════════════════════════════════════════════════════════════ */}
+      <MediaLatestNewsSection />
 
       {/* ══════════════════════════════════════════════════════════════
           4. SECTION: COMPANY PROFILE DOWNLOAD BANNER
