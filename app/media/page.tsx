@@ -20,6 +20,7 @@ import {
 import { useLanguage } from "@/context/LanguageContext";
 import OurProjectsSection from "@/components/OurProjectsSection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
+import SolutionsListingSection from "@/components/SolutionsListingSection";
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
 interface PhotoItem {
@@ -299,6 +300,11 @@ export default function MediaPage() {
           SERVICES SECTION (Custom Media Order: GRP, Epoxy, Bitumen, Polyurea, Injection, Combo)
       ══════════════════════════════════════════════════════════════ */}
       <ProtectionServicesSection servicesOrder={[1, 3, 4, 5, 6, 2]} />
+
+      {/* ══════════════════════════════════════════════════════════════
+          SOLUTIONS LISTING SECTION (6 Specific Solutions from Solutions Page)
+      ══════════════════════════════════════════════════════════════ */}
+      <SolutionsListingSection />
 
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: A CLOSER LOOK AT OUR WORK (PHOTO GALLERY)
