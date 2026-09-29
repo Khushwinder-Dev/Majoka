@@ -18,6 +18,8 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import OurProjectsSection from "@/components/OurProjectsSection";
+import ProtectionServicesSection from "@/components/ProtectionServicesSection";
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
 interface PhotoItem {
@@ -287,6 +289,16 @@ export default function MediaPage() {
           </div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          OUR PROJECTS SECTION (From Landing Page)
+      ══════════════════════════════════════════════════════════════ */}
+      <OurProjectsSection />
+
+      {/* ══════════════════════════════════════════════════════════════
+          SERVICES SECTION (Custom Media Order: GRP, Epoxy, Bitumen, Polyurea, Injection, Combo)
+      ══════════════════════════════════════════════════════════════ */}
+      <ProtectionServicesSection servicesOrder={[1, 3, 4, 5, 6, 2]} />
 
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: A CLOSER LOOK AT OUR WORK (PHOTO GALLERY)

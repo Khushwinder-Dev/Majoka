@@ -6,7 +6,13 @@ import Link from "next/link";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-export default function ProtectionServicesSection() {
+interface ProtectionServicesSectionProps {
+  servicesOrder?: number[];
+}
+
+export default function ProtectionServicesSection({
+  servicesOrder,
+}: ProtectionServicesSectionProps = {}) {
   const { isArabic } = useLanguage();
 
   const services = [
@@ -72,6 +78,12 @@ export default function ProtectionServicesSection() {
     },
   ];
 
+  const orderedServices = servicesOrder
+    ? servicesOrder
+        .map((id) => services.find((s) => s.id === id))
+        .filter((s): s is (typeof services)[number] => Boolean(s))
+    : services;
+
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#E6F7F6] overflow-hidden">
       <div className="max-w-8xl mx-auto">
@@ -121,7 +133,7 @@ export default function ProtectionServicesSection() {
             SERVICES 6-CARD GRID
             ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-14 gap-x-6 lg:gap-x-8">
-          {services.map((service, index) => (
+          {orderedServices.map((service, index) => (
             <Link
               key={service.id}
               href={service.link}
