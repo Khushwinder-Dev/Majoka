@@ -379,16 +379,31 @@ export default function Footer() {
 
           {/* ── Bottom bar: 3 Columns (Social Icons | Copyright | Legal & Policy Links) ── */}
           <div className="relative border-t border-stone-300/40 pt-7 pb-20 sm:pb-8 lg:pb-7">
-            {/* Scroll-to-top — sits centered ON the divider line */}
-            <div className="absolute -top-5 left-1/2 -translate-x-1/2">
-              <div className="w-11 h-11 rounded-full bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xs">
-                <button
-                  onClick={scrollToTop}
-                  aria-label={t.footer.scrollToTop}
-                  className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer shadow-xs"
+            {/* Scroll-to-top — sits centered ON the divider line with hover tooltip */}
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-20">
+              <div className="group relative flex flex-col items-center">
+                {/* Tooltip */}
+                <div
+                  role="tooltip"
+                  className="absolute bottom-full mb-2 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200 pointer-events-none z-30"
                 >
-                  <ChevronUp className="w-4 h-4 stroke-[2.5]" />
-                </button>
+                  <div className="relative bg-stone-900/90 backdrop-blur-sm text-white text-[11px] sm:text-xs font-medium px-2.5 py-1 rounded-md shadow-md whitespace-nowrap">
+                    <span>{isArabic ? "العودة إلى الأعلى" : "Back to top"}</span>
+                    {/* Tooltip arrow pointing down */}
+                    <div className="absolute left-1/2 -bottom-1 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-stone-900/90" />
+                  </div>
+                </div>
+
+                {/* Button Outer Ring */}
+                <div className="w-11 h-11 rounded-full bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xs">
+                  <button
+                    onClick={scrollToTop}
+                    aria-label={isArabic ? "العودة إلى الأعلى" : "Back to top"}
+                    className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer shadow-xs"
+                  >
+                    <ChevronUp className="w-4 h-4 stroke-[2.5]" />
+                  </button>
+                </div>
               </div>
             </div>
 
