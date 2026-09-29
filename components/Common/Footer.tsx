@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   Facebook,
   Instagram,
@@ -13,7 +13,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { toast } from "react-hot-toast";
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 function FooterHeading({ title }: { title: string }) {
@@ -33,9 +32,8 @@ function FooterLink({ href, label }: { href: string; label: string }) {
       className="flex items-center gap-2 text-xs sm:text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${
-          isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
-        }`}
+        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+          }`}
         strokeWidth={2.5}
       />
       <span>{label}</span>
@@ -59,31 +57,7 @@ function ContactItem({ icon, children }: { icon: React.ReactNode; children: Reac
 // ─── Main Footer ──────────────────────────────────────────────────────────────
 export default function Footer() {
   const { t, isArabic } = useLanguage();
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
-  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed || !isValidEmail(trimmed)) {
-      toast.error(t.footer.newsletter.invalidMsg);
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      await new Promise((r) => setTimeout(r, 800));
-      toast.success(isArabic ? "تم الاشتراك بنجاح في النشرة البريدية!" : "Subscribed successfully!");
-      setEmail("");
-    } catch {
-      toast.error(t.footer.newsletter.errorMsg);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   // 1. Services
   const servicesItems = [
@@ -403,53 +377,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Middle Action Strip: Follow Us (Left) + Newsletter Subscribe (Right) ── */}
-          <div className="pb-10 pt-6 border-t border-stone-300/40 flex flex-col md:flex-row items-center justify-between gap-6">
-            {/* Follow Us */}
-            <div className="flex items-center gap-3.5 flex-wrap">
-              <span className="text-sm font-extrabold text-stone-900 uppercase tracking-wider">
-                {isArabic ? "تابعنا" : "Follow Us"}
-              </span>
-              <div className="flex items-center gap-2">
-                {socialLinks.map(({ href, Icon, label }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Newsletter Subscription Input */}
-            <form onSubmit={handleSubscribe} className="w-full md:w-auto">
-              <div className="flex items-center bg-white rounded-full border border-stone-200 shadow-sm p-1 sm:min-w-[340px] md:min-w-[380px] focus-within:border-[#01a9a0] transition-colors">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={isArabic ? "أدخل بريدك الإلكتروني" : "Enter Your Email"}
-                  disabled={isSubmitting}
-                  className="w-full px-4 text-xs sm:text-sm text-stone-800 bg-transparent placeholder:text-stone-400 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-5 py-2 sm:py-2.5 rounded-full bg-[#01a9a0] hover:bg-[#00968e] text-white text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer disabled:opacity-60 shadow-xs"
-                >
-                  {isSubmitting ? "..." : isArabic ? "اشتراك" : "Subscribe"}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* ── Bottom bar ──────────────────────────────────────────────── */}
-          <div className="relative border-t border-stone-300/40 pt-9 pb-20 sm:pb-6">
+          {/* ── Bottom bar: 3 Columns (Social Icons | Copyright | Legal & Policy Links) ── */}
+          <div className="relative border-t border-stone-300/40 pt-10 pb-20 sm:pb-8">
             {/* Scroll-to-top — sits centered ON the divider line */}
             <div className="absolute -top-6 left-1/2 -translate-x-1/2">
               <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center shadow-sm">
@@ -463,14 +392,32 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              {/* Copyright */}
-              <p className="text-sm text-stone-600 text-center sm:text-start">
-                {t.footer.copyright}
-              </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6">
+              {/* Column 1: Social Icons */}
+              <div className="lg:col-span-3 flex items-center justify-center lg:justify-start gap-2.5">
+                {socialLinks.map(({ href, Icon, label }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </Link>
+                ))}
+              </div>
 
-              {/* Legal links */}
-              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-5 text-sm text-stone-600">
+              {/* Column 2: Copyright Text */}
+              <div className="lg:col-span-4 text-center">
+                <p className="text-xs sm:text-sm text-stone-600 leading-normal">
+                  {t.footer.copyright}
+                </p>
+              </div>
+
+              {/* Column 3: Refund & Legal Policy Links */}
+              <div className="lg:col-span-5 flex flex-wrap items-center justify-center lg:justify-end gap-x-4 gap-y-2 text-xs sm:text-sm text-stone-600">
                 <Link href="/refund-policy" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
                 </Link>
@@ -482,6 +429,9 @@ export default function Footer() {
                 </Link>
                 <Link href="/cookies" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
                   {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
+                </Link>
+                <Link href="/subscribe" className="hover:text-[#01a9a0] transition-colors whitespace-nowrap">
+                  {isArabic ? "الاشتراك" : "Subscribe to emails"}
                 </Link>
               </div>
             </div>
