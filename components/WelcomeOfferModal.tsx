@@ -19,9 +19,21 @@ interface FormData {
   projectType: string;
 }
 
-export default function WelcomeOfferModal() {
+export interface WelcomeOfferModalProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+  autoShow?: boolean;
+}
+
+export default function WelcomeOfferModal({
+  isOpen: controlledIsOpen,
+  onClose: controlledOnClose,
+  autoShow = true,
+}: WelcomeOfferModalProps = {}) {
   const { isArabic } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
@@ -32,18 +44,30 @@ export default function WelcomeOfferModal() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    if (!autoShow) return;
     const isDismissed =
       !SHOW_ON_EVERY_RELOAD && sessionStorage.getItem(DISMISS_KEY);
     if (!isDismissed) {
       const timer = setTimeout(() => {
-        setIsOpen(true);
+        setInternalIsOpen(true);
       }, 1500);
       return () => clearTimeout(timer);
     }
+  }, [autoShow]);
+
+  // Support window event "open-welcome-modal" so any component can trigger it easily too
+  useEffect(() => {
+    const handleOpen = () => {
+      setInternalIsOpen(true);
+      setIsSubmitted(false);
+    };
+    window.addEventListener("open-welcome-modal", handleOpen);
+    return () => window.removeEventListener("open-welcome-modal", handleOpen);
   }, []);
 
   const handleClose = () => {
-    setIsOpen(false);
+    setInternalIsOpen(false);
+    controlledOnClose?.();
     if (!SHOW_ON_EVERY_RELOAD) {
       sessionStorage.setItem(DISMISS_KEY, "true");
     }

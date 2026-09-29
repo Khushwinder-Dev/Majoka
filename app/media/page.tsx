@@ -21,6 +21,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import OurProjectsSection from "@/components/OurProjectsSection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
 import SolutionsListingSection from "@/components/SolutionsListingSection";
+import WelcomeOfferModal from "@/components/WelcomeOfferModal";
 
 /* ─── TYPES ──────────────────────────────────────────────────────────── */
 interface PhotoItem {
@@ -117,6 +118,7 @@ export default function MediaPage() {
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
   const [activePhoto, setActivePhoto] = useState<PhotoItem | null>(null);
   const [activePhotoIndex, setActivePhotoIndex] = useState<number>(0);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState<boolean>(false);
 
   // ── Auto-load from API ─────────────────────────────────────────
   useEffect(() => {
@@ -754,12 +756,13 @@ export default function MediaPage() {
                 </span>
               </Link>
 
-              <Link
-                href="/contact"
+              <button
+                type="button"
+                onClick={() => setIsWelcomeModalOpen(true)}
                 className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#032e36]/70 hover:bg-[#032e36]/90 text-white border border-[#00a89a]/70 font-bold text-xs sm:text-sm tracking-wide inline-flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
               >
                 <span>{isArabic ? "تحدث مع خبرائنا" : "Talk to Our Experts"}</span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -883,6 +886,15 @@ export default function MediaPage() {
           </div>
         </div>
       )}
+
+      {/* ══════════════════════════════════════════════════════════════
+          WELCOME OFFER MODAL (Talk to Our Experts)
+      ══════════════════════════════════════════════════════════════ */}
+      <WelcomeOfferModal
+        isOpen={isWelcomeModalOpen}
+        onClose={() => setIsWelcomeModalOpen(false)}
+        autoShow={false}
+      />
 
     </div>
   );
