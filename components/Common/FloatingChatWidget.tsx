@@ -8,8 +8,6 @@ import {
   ArrowRightToLine,
   SquarePen,
   FileText,
-  Mic,
-  MicOff,
   Send,
   ArrowUpRight,
   X,
@@ -17,6 +15,11 @@ import {
   ChevronRight,
   Clock,
   Trash2,
+  User,
+  Mail,
+  AlertCircle,
+  CheckCircle2,
+  Edit3,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -36,11 +39,19 @@ interface ChatSession {
   messages: Message[];
 }
 
+export interface ChatUserInfo {
+  name: string;
+  email: string;
+  phone: string;
+}
+
 const STORAGE_KEY = "taj_chat_history_v1";
+const USER_INFO_KEY = "taj_chat_user_info_v1";
 
 // AI Knowledge Engine for Taj Al Rahmah
-function getAiResponse(userText: string, isArabic: boolean): { reply: string; quickActions: string[] } {
+function getAiResponse(userText: string, isArabic: boolean, userName?: string): { reply: string; quickActions: string[] } {
   const lower = userText.toLowerCase();
+  const nameGreeting = userName ? (isArabic ? `عزيزي ${userName}، ` : `Dear ${userName}, `) : "";
 
   if (
     lower.includes("quote") ||
@@ -53,8 +64,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   ) {
     return {
       reply: isArabic
-        ? "يسعدنا تقديم عرض سعر ومعاينة مجانية لمشروعك! فريقنا الهندسي متاح لزيارة موقعك في دبي والإمارات وإعداد تقرير فني شامل وضمان رسمي. يمكنك طلب عرض السعر مباشرة أو الاتصال بنا الآن."
-        : "We would be glad to provide a free inspection and quotation for your project! Our engineering team conducts on-site surveys across Dubai and the UAE with detailed technical reports and official warranties. You can submit a request on our Quote page or call us directly.",
+        ? `${nameGreeting}يسعدنا تقديم عرض سعر ومعاينة مجانية لمشروعك! فريقنا الهندسي متاح لزيارة موقعك في دبي والإمارات وإعداد تقرير فني شامل وضمان رسمي. يمكنك طلب عرض السعر مباشرة أو الاتصال بنا الآن.`
+        : `${nameGreeting}we would be glad to provide a free inspection and quotation for your project! Our engineering team conducts on-site surveys across Dubai and the UAE with detailed technical reports and official warranties. You can submit a request on our Quote page or call us directly.`,
       quickActions: isArabic
         ? ["احصل على عرض سعر فوري", "اتصل بمهندس الموقع", "ما هي أنظمة العزل المتوفرة؟"]
         : ["Request Free Inspection", "Call an Engineer Directly", "What waterproofing systems do you offer?"],
@@ -73,8 +84,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   ) {
     return {
       reply: isArabic
-        ? "تاج الرحمة متخصصة في حلول العزل المتطورة المعتمدة في الإمارات:\n• نظام الكومبو المتكامل للأسطح (Combo Roof System)\n• عزل GRP والألياف الزجاجية المقاومة للحرارة والكيماويات\n• عزل البولي يوريا فائق السرعة والمتانة\n• عزل الأغشية البيتومينية وحقن الشروخ المائية للسراديب\nجميع أعمالنا تأتي مع ضمان رسمي يصل حتى 25 عاماً."
-        : "Taj Al Rahmah specializes in advanced waterproofing certified by UAE authorities:\n• Combo Roof System (Thermal insulation & complete waterproofing)\n• GRP & Fiberglass for water tanks, roofs, and wet areas\n• Fast-curing Polyurea coatings\n• Bitumen Membrane & High-pressure Injection for basements & cracks\nAll our waterproofing systems come with up to 25 years official warranty.",
+        ? `${nameGreeting}تاج الرحمة متخصصة في حلول العزل المتطورة المعتمدة في الإمارات:\n• نظام الكومبو المتكامل للأسطح (Combo Roof System)\n• عزل GRP والألياف الزجاجية المقاومة للحرارة والكيماويات\n• عزل البولي يوريا فائق السرعة والمتانة\n• عزل الأغشية البيتومينية وحقن الشروخ المائية للسراديب\nجميع أعمالنا تأتي مع ضمان رسمي يصل حتى 25 عاماً.`
+        : `${nameGreeting}Taj Al Rahmah specializes in advanced waterproofing certified by UAE authorities:\n• Combo Roof System (Thermal insulation & complete waterproofing)\n• GRP & Fiberglass for water tanks, roofs, and wet areas\n• Fast-curing Polyurea coatings\n• Bitumen Membrane & High-pressure Injection for basements & cracks\nAll our waterproofing systems come with up to 25 years official warranty.`,
       quickActions: isArabic
         ? ["كم تبلغ مدة الضمان؟", "طلب معاينة للأسطح", "تواصل عبر واتساب"]
         : ["What is your warranty period?", "Book a Roof Inspection", "Chat on WhatsApp"],
@@ -89,8 +100,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   ) {
     return {
       reply: isArabic
-        ? "نوفر ضمانات رسمية معتمدة من بلدية دبي تتراوح بين 10 إلى 25 عاماً حسب نوع نظام العزل المستخدم (مثل نظام الكومبو وعزل GRP). الضمان يشمل صيانة دورية ومتابعة هندسية لضمان راحة بالك التامة."
-        : "We provide official warranties certified by Dubai Municipality ranging from 10 to 25 years depending on the chosen system (such as Combo Roofing and GRP Fiberglass). Our warranty includes periodic inspections and complete engineering support.",
+        ? `${nameGreeting}نوفر ضمانات رسمية معتمدة من بلدية دبي تتراوح بين 10 إلى 25 عاماً حسب نوع نظام العزل المستخدم (مثل نظام الكومبو وعزل GRP). الضمان يشمل صيانة دورية ومتابعة هندسية لضمان راحة بالك التامة.`
+        : `${nameGreeting}we provide official warranties certified by Dubai Municipality ranging from 10 to 25 years depending on the chosen system (such as Combo Roofing and GRP Fiberglass). Our warranty includes periodic inspections and complete engineering support.`,
       quickActions: isArabic
         ? ["كيف أحصل على شهادة الضمان؟", "احصل على عرض سعر", "اتصل بنا الآن"]
         : ["How do I receive warranty certificate?", "Get a Quotation", "Call Us Now"],
@@ -110,8 +121,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   ) {
     return {
       reply: isArabic
-        ? "يمكنك التواصل معنا مباشرة:\n📞 هاتف: +971 52 749 2002 / +971 4 234 5678\n📧 بريد: info@tajalrahmah.com\n📍 الموقع: مكتب G-01-691، الخبيصي، دبي، الإمارات\n⏰ مواعيد العمل: من الإثنين إلى السبت (9:00 ص - 6:00 م)."
-        : "You can reach us directly:\n📞 Phone: +971 52 749 2002 / +971 4 234 5678\n📧 Email: info@tajalrahmah.com\n📍 Office: G-01-691, Al Khabaisi, Dubai, UAE\n⏰ Working Hours: Monday - Saturday (9:00 AM - 6:00 PM).",
+        ? `${nameGreeting}يمكنك التواصل معنا مباشرة:\n📞 هاتف: +971 52 749 2002 / +971 4 234 5678\n📧 بريد: info@tajalrahmah.com\n📍 الموقع: مكتب G-01-691، الخبيصي، دبي، الإمارات\n⏰ مواعيد العمل: من الإثنين إلى السبت (9:00 ص - 6:00 م).`
+        : `${nameGreeting}you can reach us directly:\n📞 Phone: +971 52 749 2002 / +971 4 234 5678\n📧 Email: info@tajalrahmah.com\n📍 Office: G-01-691, Al Khabaisi, Dubai, UAE\n⏰ Working Hours: Monday - Saturday (9:00 AM - 6:00 PM).`,
       quickActions: isArabic
         ? ["اتصل الآن", "تحدث عبر واتساب", "عرض خريطة الموقع"]
         : ["Call Now", "Chat on WhatsApp", "View Location on Map"],
@@ -126,8 +137,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   ) {
     return {
       reply: isArabic
-        ? "نقدم حلول طلاء أرضيات الإيبوكسي عالية التحمل للمستودعات، مواقف السيارات، المستشفيات، والمصانع، بمقاومة فائقة للمواد الكيميائية وحركة الآليات الثقيلة، مع خيارات مقاومة للانزلاق وتشطيبات جمالية متعددة."
-        : "We offer heavy-duty epoxy floor coating solutions for industrial warehouses, commercial car parks, healthcare facilities, and factories. Designed for superior chemical resistance, mechanical durability, and seamless aesthetic finishes.",
+        ? `${nameGreeting}نقدم حلول طلاء أرضيات الإيبوكسي عالية التحمل للمستودعات، مواقف السيارات، المستشفيات، والمصانع، بمقاومة فائقة للمواد الكيميائية وحركة الآليات الثقيلة، مع خيارات مقاومة للانزلاق وتشطيبات جمالية متعددة.`
+        : `${nameGreeting}we offer heavy-duty epoxy floor coating solutions for industrial warehouses, commercial car parks, healthcare facilities, and factories. Designed for superior chemical resistance, mechanical durability, and seamless aesthetic finishes.`,
       quickActions: isArabic
         ? ["احصل على استشارة للأرضيات", "اتصل بالدعم الفني", "طلب عرض سعر"]
         : ["Consult Flooring Specialist", "Call Technical Support", "Get a Quote"],
@@ -137,8 +148,8 @@ function getAiResponse(userText: string, isArabic: boolean): { reply: string; qu
   // Default welcome response
   return {
     reply: isArabic
-      ? `أهلاً بك! أنا المساعد الذكي لشركة تاج الرحمة للعزل وصيانة المباني. كيف يمكنني مساعدتك اليوم؟ يمكنني تزويدك بمعلومات عن خدمات العزل، الضمانات، أو تنسيق زيارة ومعاينة مجانية لمشروعك.`
-      : `Hello! I am Taj Al Rahmah's AI assistant for waterproofing and building maintenance. How can I assist you today? I can help with waterproofing solutions, 10–25 year warranties, pricing, or scheduling a free site inspection.`,
+      ? `أهلاً بك${userName ? ` يا ${userName}` : ""}! أنا المساعد الذكي لشركة تاج الرحمة للعزل وصيانة المباني. كيف يمكنني مساعدتك اليوم؟ يمكنني تزويدك بمعلومات عن خدمات العزل، الضمانات، أو تنسيق زيارة ومعاينة مجانية لمشروعك.`
+      : `Hello${userName ? ` ${userName}` : ""}! I am Taj Al Rahmah's AI assistant for waterproofing and building maintenance. How can I assist you today? I can help with waterproofing solutions, 10–25 year warranties, pricing, or scheduling a free site inspection.`,
     quickActions: isArabic
       ? ["احصل على عرض سعر ومعاينة", "ما هي خدمات العزل لديكم؟", "اتصل بنا مباشرة"]
       : ["Get a Free Inspection & Quote", "What waterproofing services do you offer?", "Call Us Directly"],
@@ -156,15 +167,32 @@ export default function FloatingChatWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [chatHistory, setChatHistory] = useState<ChatSession[]>([]);
-  const [isRecording, setIsRecording] = useState(false);
   const [quickActions, setQuickActions] = useState<string[]>([]);
+
+  // User Lead Capture State
+  const [userInfo, setUserInfo] = useState<ChatUserInfo | null>(null);
+  const [showInfoForm, setShowInfoForm] = useState(false);
+  const [infoForm, setInfoForm] = useState({ name: "", email: "", phone: "" });
+  const [infoErrors, setInfoErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const recognitionRef = useRef<any>(null);
 
-  // Load history from localStorage
+  // Load user info and history from localStorage
   useEffect(() => {
+    try {
+      const savedUser = localStorage.getItem(USER_INFO_KEY);
+      if (savedUser) {
+        const parsed = JSON.parse(savedUser);
+        if (parsed && parsed.name && parsed.email && parsed.phone) {
+          setUserInfo(parsed);
+          setInfoForm(parsed);
+        }
+      }
+    } catch {
+      // Ignore
+    }
+
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
@@ -227,8 +255,91 @@ export default function FloatingChatWidget() {
     return d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
   };
 
+  // Submit User Info Lead Form
+  const handleUserInfoSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    const errors: { name?: string; email?: string; phone?: string } = {};
+
+    if (!infoForm.name.trim()) {
+      errors.name = isArabic ? "يرجى إدخال اسمك الكريم" : "Please enter your name";
+    }
+
+    if (!infoForm.email.trim()) {
+      errors.email = isArabic ? "يرجى إدخال البريد الإلكتروني" : "Please enter your email";
+    } else if (!/\S+@\S+\.\S+/.test(infoForm.email)) {
+      errors.email = isArabic ? "صيغة البريد الإلكتروني غير صحيحة" : "Please enter a valid email address";
+    }
+
+    if (!infoForm.phone.trim()) {
+      errors.phone = isArabic ? "يرجى إدخال رقم الهاتف للتواصل" : "Please enter your phone number";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setInfoErrors(errors);
+      return;
+    }
+
+    setInfoErrors({});
+    const newUserData = {
+      name: infoForm.name.trim(),
+      email: infoForm.email.trim(),
+      phone: infoForm.phone.trim(),
+    };
+
+    setUserInfo(newUserData);
+    setShowInfoForm(false);
+
+    try {
+      localStorage.setItem(USER_INFO_KEY, JSON.stringify(newUserData));
+    } catch {
+      // ignore
+    }
+
+    // Send lead to backend API in background
+    try {
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: newUserData.name,
+          email: newUserData.email,
+          phone: newUserData.phone,
+          message: `New Chatbot inquiry session started by ${newUserData.name}`,
+          service: "AI Chatbot Lead",
+        }),
+      }).catch(() => { });
+    } catch {
+      // ignore
+    }
+
+    // Start conversation with a friendly personalized AI greeting
+    if (messages.length === 0) {
+      const welcomeMsg: Message = {
+        id: `${Date.now()}-ai-welcome`,
+        sender: "ai",
+        text: isArabic
+          ? `أهلاً بك يا ${newUserData.name}! 👋 يسعدنا تواصلك مع شركة تاج الرحمة للعزل وصيانة المباني. كيف يمكننا مساعدتك اليوم في مشروعك؟`
+          : `Hello ${newUserData.name}! 👋 Welcome to Taj Al Rahmah Waterproofing & Building Maintenance. How can I assist you with your project today?`,
+        timestamp: getCurrentTime(),
+      };
+      setMessages([welcomeMsg]);
+      setQuickActions(
+        isArabic
+          ? ["طلب معاينة وعرض سعر فوري", "ما هي أنظمة العزل المتوفرة؟", "اتصل بمهندس الموقع"]
+          : ["Request Free Inspection & Quote", "What waterproofing systems do you offer?", "Call an Engineer Directly"]
+      );
+    }
+  };
+
   // Send message
   const handleSend = (textToSend?: string) => {
+    // If user info is not provided, trigger info form first
+    if (!userInfo) {
+      setShowInfoForm(true);
+      return;
+    }
+
     const query = (textToSend || inputValue).trim();
     if (!query) return;
 
@@ -256,7 +367,7 @@ export default function FloatingChatWidget() {
 
     // Simulate smart AI response delay
     setTimeout(() => {
-      const response = getAiResponse(query, isArabic);
+      const response = getAiResponse(query, isArabic, userInfo?.name);
       const aiMsg: Message = {
         id: `${Date.now()}-ai`,
         sender: "ai",
@@ -284,6 +395,7 @@ export default function FloatingChatWidget() {
   const handleLoadSession = (session: ChatSession) => {
     setMessages(session.messages);
     setActiveTab("chat");
+    setShowInfoForm(false);
   };
 
   // Clear all history
@@ -293,49 +405,6 @@ export default function FloatingChatWidget() {
       localStorage.removeItem(STORAGE_KEY);
     } catch {
       // ignore
-    }
-  };
-
-  // Web Speech API for Microphone input
-  const toggleRecording = () => {
-    if (isRecording) {
-      recognitionRef.current?.stop();
-      setIsRecording(false);
-      return;
-    }
-
-    const SpeechRecognition =
-      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-
-    if (!SpeechRecognition) {
-      alert(
-        isArabic
-          ? "خاصية التسجيل الصوتي غير مدعومة في هذا المتصفح."
-          : "Voice recognition is not supported in this browser."
-      );
-      return;
-    }
-
-    try {
-      const recognition = new SpeechRecognition();
-      recognition.lang = isArabic ? "ar-AE" : "en-US";
-      recognition.interimResults = false;
-      recognition.continuous = false;
-
-      recognition.onstart = () => setIsRecording(true);
-      recognition.onresult = (e: any) => {
-        const transcript = e.results[0][0].transcript;
-        if (transcript) {
-          setInputValue((prev) => (prev ? `${prev} ${transcript}` : transcript));
-        }
-      };
-      recognition.onerror = () => setIsRecording(false);
-      recognition.onend = () => setIsRecording(false);
-
-      recognitionRef.current = recognition;
-      recognition.start();
-    } catch {
-      setIsRecording(false);
     }
   };
 
@@ -387,7 +456,10 @@ export default function FloatingChatWidget() {
             <div className="flex items-center bg-stone-100 rounded-full p-1 gap-1">
               <button
                 type="button"
-                onClick={() => setActiveTab("chat")}
+                onClick={() => {
+                  setActiveTab("chat");
+                  setShowInfoForm(false);
+                }}
                 className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 cursor-pointer ${activeTab === "chat"
                   ? "bg-[#01a9a0] text-white shadow-xs"
                   : "text-stone-600 hover:text-stone-900"
@@ -407,8 +479,23 @@ export default function FloatingChatWidget() {
               </button>
             </div>
 
-            {/* Right Action Icons (Document, New Chat, Close) */}
+            {/* Right Action Icons (User Profile, Document, New Chat, Close) */}
             <div className="flex items-center gap-1.5 text-stone-600">
+              {/* User Profile / Edit Info Button */}
+              {userInfo && (
+                <button
+                  type="button"
+                  onClick={() => setShowInfoForm((prev) => !prev)}
+                  title={isArabic ? "تعديل البيانات" : "Edit details"}
+                  className={`p-1.5 rounded-lg transition-colors cursor-pointer ${showInfoForm
+                    ? "bg-[#01a9a0]/15 text-[#01a9a0]"
+                    : "hover:bg-stone-100 hover:text-stone-900 text-stone-500"
+                    }`}
+                >
+                  <User className="w-4 h-4" />
+                </button>
+              )}
+
               <button
                 type="button"
                 onClick={() => setActiveTab(activeTab === "chat" ? "history" : "chat")}
@@ -439,98 +526,276 @@ export default function FloatingChatWidget() {
           {/* ── TAB: CHAT ─────────────────────────────────────────────── */}
           {activeTab === "chat" && (
             <div className="flex-1 flex flex-col min-h-0 bg-white">
-              {/* Messages & Welcome Container */}
-              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-                {messages.length === 0 ? (
-                  /* ── Welcome Screen (Image 3) ── */
-                  <div className="flex flex-col items-center pt-3 pb-2 text-center">
-                    {/* Company Logo */}
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center p-2 mb-3">
-                      <Image
-                        src="/logo.png"
-                        alt="Taj Al Rahmah"
-                        width={60}
-                        height={60}
-                        className="w-auto h-auto max-h-12 object-contain"
-                      />
+              {/* ── FIRST-TIME USER INTAKE FORM (When no user info or user clicked edit) ── */}
+              {(!userInfo || showInfoForm) ? (
+                <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col justify-center">
+                  <div className="max-w-md mx-auto w-full">
+                    {/* Centered Logo */}
+                    <div className="flex justify-center mb-3">
+                      <div className="w-14 h-14 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center p-2 shadow-xs">
+                        <Image
+                          src="/logo.png"
+                          alt="Taj Al Rahmah"
+                          width={48}
+                          height={48}
+                          className="w-auto h-auto max-h-10 object-contain"
+                        />
+                      </div>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-stone-900 tracking-tight">
-                      {isArabic ? "مرحباً بك في تاج الرحمة 👋" : "Hello BD EXPERT 👋"}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-stone-500 mt-1 mb-5">
-                      {isArabic ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help you today?"}
-                    </p>
-
-                    {/* Quick suggestion prompt rows with ↗ icon */}
-                    <div className="w-full space-y-2 mb-4">
-                      {defaultPrompts.map((prompt, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => handleSend(prompt)}
-                          className="w-full flex items-center justify-between text-left rtl:text-right px-3.5 py-2.5 rounded-xl border border-stone-200/80 hover:border-[#01a9a0] hover:bg-stone-50/70 text-xs sm:text-sm text-stone-700 hover:text-stone-900 transition-all duration-200 group cursor-pointer"
-                        >
-                          <span className="flex items-center gap-2">
-                            <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                            <span>{prompt}</span>
-                          </span>
-                        </button>
-                      ))}
+                    <div className="text-center mb-5">
+                      <h3 className="text-lg font-bold text-stone-900 tracking-tight">
+                        {isArabic ? "أهلاً بك في تاج الرحمة 👋" : "Welcome to Taj Al Rahmah 👋"}
+                      </h3>
+                      <p className="text-xs text-stone-500 mt-1">
+                        {isArabic
+                          ? "يرجى إدخال بياناتك لبدء المحادثة الفورية مع المساعد الذكي"
+                          : "Please introduce yourself to start chatting with our AI assistant"}
+                      </p>
                     </div>
 
-                    {/* Category Filter Chips */}
-                    <div className="w-full flex items-center justify-start gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-                      {categories.map((cat) => (
+                    <form onSubmit={handleUserInfoSubmit} className="space-y-3.5" noValidate>
+                      {/* Name Field */}
+                      <div>
+                        <label className="block text-xs font-semibold text-stone-700 mb-1">
+                          {isArabic ? "الاسم الكامل *" : "Full Name *"}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-stone-400">
+                            <User className="w-4 h-4" />
+                          </div>
+                          <input
+                            type="text"
+                            value={infoForm.name}
+                            onChange={(e) => {
+                              setInfoForm((p) => ({ ...p, name: e.target.value }));
+                              if (infoErrors.name) setInfoErrors((p) => ({ ...p, name: undefined }));
+                            }}
+                            placeholder={isArabic ? "مثال: محمد أحمد" : "e.g. John Smith"}
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.name
+                              ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
+                              : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
+                              }`}
+                          />
+                        </div>
+                        {infoErrors.name && (
+                          <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                            <span>{infoErrors.name}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Email Field */}
+                      <div>
+                        <label className="block text-xs font-semibold text-stone-700 mb-1">
+                          {isArabic ? "البريد الإلكتروني *" : "Email Address *"}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-stone-400">
+                            <Mail className="w-4 h-4" />
+                          </div>
+                          <input
+                            type="email"
+                            value={infoForm.email}
+                            onChange={(e) => {
+                              setInfoForm((p) => ({ ...p, email: e.target.value }));
+                              if (infoErrors.email) setInfoErrors((p) => ({ ...p, email: undefined }));
+                            }}
+                            placeholder={isArabic ? "name@example.com" : "name@example.com"}
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.email
+                              ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
+                              : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
+                              }`}
+                          />
+                        </div>
+                        {infoErrors.email && (
+                          <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                            <span>{infoErrors.email}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Phone Number Field */}
+                      <div>
+                        <label className="block text-xs font-semibold text-stone-700 mb-1">
+                          {isArabic ? "رقم الهاتف *" : "Phone Number *"}
+                        </label>
+                        <div className="relative">
+                          <div className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-stone-400">
+                            <Phone className="w-4 h-4" />
+                          </div>
+                          <input
+                            type="tel"
+                            value={infoForm.phone}
+                            onChange={(e) => {
+                              setInfoForm((p) => ({ ...p, phone: e.target.value }));
+                              if (infoErrors.phone) setInfoErrors((p) => ({ ...p, phone: undefined }));
+                            }}
+                            placeholder={isArabic ? "+971 5X XXX XXXX" : "+971 5X XXX XXXX"}
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.phone
+                              ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
+                              : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
+                              }`}
+                          />
+                        </div>
+                        {infoErrors.phone && (
+                          <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                            <span>{infoErrors.phone}</span>
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Start Conversation Button */}
+                      <button
+                        type="submit"
+                        className="w-full mt-2 py-3 px-4 rounded-xl bg-[#01a9a0] hover:bg-[#00c2b2] text-white font-semibold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                      >
+                        <Sparkles className="w-4 h-4" />
+                        <span>{isArabic ? "ابدأ المحادثة الآن" : "Start Conversation"}</span>
+                      </button>
+
+                      {userInfo && showInfoForm && (
                         <button
-                          key={cat.value}
                           type="button"
-                          onClick={() => {
-                            setActiveCategory(cat.value);
-                            if (cat.value === "Contact") {
-                              handleSend(
-                                isArabic ? "ما هي طرق التواصل وأرقام الهواتف؟" : "What are your contact details?"
-                              );
-                            } else if (cat.value === "Waterproofing") {
-                              handleSend(
-                                isArabic ? "ما هي حلول وأنظمة العزل المتوفرة؟" : "Tell me about your waterproofing systems."
-                              );
-                            } else if (cat.value === "Roofing") {
-                              handleSend(
-                                isArabic ? "أريد معلومات عن نظام الكومبو لعزل الأسطح" : "Tell me about Combo Roofing systems."
-                              );
-                            } else if (cat.value === "Flooring") {
-                              handleSend(
-                                isArabic ? "ما هي حلول طلاء أرضيات الإيبوكسي؟" : "Tell me about epoxy flooring."
-                              );
-                            }
-                          }}
-                          className={`px-3 py-1 text-xs rounded-full whitespace-nowrap transition-all cursor-pointer ${activeCategory === cat.value
-                            ? "border border-[#01a9a0] text-[#01a9a0] bg-[#01a9a0]/5 font-medium"
-                            : "border border-stone-200 text-stone-600 hover:border-stone-300"
-                            }`}
+                          onClick={() => setShowInfoForm(false)}
+                          className="w-full text-center text-xs text-stone-500 hover:text-stone-800 transition-colors py-1 cursor-pointer"
                         >
-                          {cat.label}
+                          {isArabic ? "إلغاء والعودة للمحادثة" : "Cancel & Return to Chat"}
                         </button>
-                      ))}
+                      )}
+                    </form>
+
+                    <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-center gap-1.5 text-[10px] text-stone-400 text-center">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                      <span>
+                        {isArabic
+                          ? "بياناتك في أمان تام وتُستخدم فقط لخدمتكم والتواصل المهني."
+                          : "Your information is safe and used solely for service communication."}
+                      </span>
                     </div>
                   </div>
-                ) : (
-                  /* ── Active Conversation Stream (Image 4) ── */
-                  <div className="space-y-4">
-                    {messages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"
-                          }`}
-                      >
-                        {msg.sender === "user" ? (
-                          <div className="max-w-[85%] bg-[#e0f7f5] text-stone-900 rounded-2xl rounded-tr-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed">
-                            {msg.text}
+                </div>
+              ) : (
+                /* ── STANDARD CHAT & WELCOME STREAM (When user info is saved) ── */
+                <>
+                  {/* Messages & Welcome Container */}
+                  <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+                    {messages.length === 0 ? (
+                      /* ── Welcome Screen (Image 3) ── */
+                      <div className="flex flex-col items-center pt-3 pb-2 text-center">
+                        {/* Company Logo */}
+                        <div className="w-16 h-16 rounded-2xl flex items-center justify-center p-2 mb-3">
+                          <Image
+                            src="/logo.png"
+                            alt="Taj Al Rahmah"
+                            width={60}
+                            height={60}
+                            className="w-auto h-auto max-h-12 object-contain"
+                          />
+                        </div>
+
+                        <h3 className="text-lg sm:text-xl font-bold text-stone-900 tracking-tight">
+                          {isArabic ? `مرحباً بك يا ${userInfo.name} 👋` : `Hello ${userInfo.name} 👋`}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-stone-500 mt-1 mb-5">
+                          {isArabic ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help you today?"}
+                        </p>
+
+                        {/* Quick suggestion prompt rows with ↗ icon */}
+                        <div className="w-full space-y-2 mb-4">
+                          {defaultPrompts.map((prompt, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => handleSend(prompt)}
+                              className="w-full flex items-center justify-between text-left rtl:text-right px-3.5 py-2.5 rounded-xl border border-stone-200/80 hover:border-[#01a9a0] hover:bg-stone-50/70 text-xs sm:text-sm text-stone-700 hover:text-stone-900 transition-all duration-200 group cursor-pointer"
+                            >
+                              <span className="flex items-center gap-2">
+                                <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                <span>{prompt}</span>
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Category Filter Chips */}
+                        <div className="w-full flex items-center justify-start gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+                          {categories.map((cat) => (
+                            <button
+                              key={cat.value}
+                              type="button"
+                              onClick={() => {
+                                setActiveCategory(cat.value);
+                                if (cat.value === "Contact") {
+                                  handleSend(
+                                    isArabic ? "ما هي طرق التواصل وأرقام الهواتف؟" : "What are your contact details?"
+                                  );
+                                } else if (cat.value === "Waterproofing") {
+                                  handleSend(
+                                    isArabic ? "ما هي حلول وأنظمة العزل المتوفرة؟" : "Tell me about your waterproofing systems."
+                                  );
+                                } else if (cat.value === "Roofing") {
+                                  handleSend(
+                                    isArabic ? "أريد معلومات عن نظام الكومبو لعزل الأسطح" : "Tell me about Combo Roofing systems."
+                                  );
+                                } else if (cat.value === "Flooring") {
+                                  handleSend(
+                                    isArabic ? "ما هي حلول طلاء أرضيات الإيبوكسي؟" : "Tell me about epoxy flooring."
+                                  );
+                                }
+                              }}
+                              className={`px-3 py-1 text-xs rounded-full whitespace-nowrap transition-all cursor-pointer ${activeCategory === cat.value
+                                ? "border border-[#01a9a0] text-[#01a9a0] bg-[#01a9a0]/5 font-medium"
+                                : "border border-stone-200 text-stone-600 hover:border-stone-300"
+                                }`}
+                            >
+                              {cat.label}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      /* ── Active Conversation Stream (Image 4) ── */
+                      <div className="space-y-4">
+                        {messages.map((msg) => (
+                          <div
+                            key={msg.id}
+                            className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"
+                              }`}
+                          >
+                            {msg.sender === "user" ? (
+                              <div className="max-w-[85%] bg-[#e0f7f5] text-stone-900 rounded-2xl rounded-tr-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed">
+                                {msg.text}
+                              </div>
+                            ) : (
+                              <div className="flex items-start gap-2 max-w-[92%]">
+                                <div className="w-7 h-7 rounded-full bg-[#01a9a0]/10 flex items-center justify-center flex-shrink-0 mt-0.5 p-1 border border-[#01a9a0]/20">
+                                  <Image
+                                    src="/logo.png"
+                                    alt="AI"
+                                    width={20}
+                                    height={20}
+                                    className="w-auto h-auto max-h-5 object-contain"
+                                  />
+                                </div>
+                                <div className="bg-stone-50 border border-stone-200/70 text-stone-800 rounded-2xl rounded-tl-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed whitespace-pre-line">
+                                  {msg.text}
+                                </div>
+                              </div>
+                            )}
+                            <span className="text-[10px] text-stone-400 mt-1 px-1">
+                              {msg.timestamp}
+                            </span>
                           </div>
-                        ) : (
-                          <div className="flex items-start gap-2 max-w-[92%]">
-                            <div className="w-7 h-7 rounded-full bg-[#01a9a0]/10 flex items-center justify-center flex-shrink-0 mt-0.5 p-1 border border-[#01a9a0]/20">
+                        ))}
+
+                        {/* Typing Indicator */}
+                        {isTyping && (
+                          <div className="flex items-center gap-2 max-w-[80%]">
+                            <div className="w-7 h-7 rounded-full bg-[#01a9a0]/10 flex items-center justify-center flex-shrink-0 p-1">
                               <Image
                                 src="/logo.png"
                                 alt="AI"
@@ -539,119 +804,87 @@ export default function FloatingChatWidget() {
                                 className="w-auto h-auto max-h-5 object-contain"
                               />
                             </div>
-                            <div className="bg-stone-50 border border-stone-200/70 text-stone-800 rounded-2xl rounded-tl-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed whitespace-pre-line">
-                              {msg.text}
+                            <div className="bg-stone-100 rounded-2xl px-3.5 py-2 flex items-center gap-1.5">
+                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce" />
+                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.2s]" />
+                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.4s]" />
                             </div>
                           </div>
                         )}
-                        <span className="text-[10px] text-stone-400 mt-1 px-1">
-                          {msg.timestamp}
-                        </span>
+
+                        {/* Quick actions chips (Image 4) */}
+                        {quickActions.length > 0 && !isTyping && (
+                          <div className="pt-2">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
+                                {isArabic ? "إجراءات سريعة" : "Quick actions"}
+                              </span>
+                              <div className="h-px bg-stone-200 flex-1" />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                              {quickActions.map((action, i) => (
+                                <button
+                                  key={i}
+                                  type="button"
+                                  onClick={() => handleSend(action)}
+                                  className="text-left rtl:text-right px-3.5 py-2 rounded-xl bg-[#e6fbf9] hover:bg-[#d0f5f2] text-stone-800 text-xs sm:text-sm font-normal transition-colors cursor-pointer border border-[#01a9a0]/20"
+                                >
+                                  {action}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        <div ref={messagesEndRef} />
                       </div>
-                    ))}
-
-                    {/* Typing Indicator */}
-                    {isTyping && (
-                      <div className="flex items-center gap-2 max-w-[80%]">
-                        <div className="w-7 h-7 rounded-full bg-[#01a9a0]/10 flex items-center justify-center flex-shrink-0 p-1">
-                          <Image
-                            src="/logo.png"
-                            alt="AI"
-                            width={20}
-                            height={20}
-                            className="w-auto h-auto max-h-5 object-contain"
-                          />
-                        </div>
-                        <div className="bg-stone-100 rounded-2xl px-3.5 py-2 flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce" />
-                          <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.2s]" />
-                          <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.4s]" />
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Quick actions chips (Image 4) */}
-                    {quickActions.length > 0 && !isTyping && (
-                      <div className="pt-2">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider">
-                            {isArabic ? "إجراءات سريعة" : "Quick actions"}
-                          </span>
-                          <div className="h-px bg-stone-200 flex-1" />
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          {quickActions.map((action, i) => (
-                            <button
-                              key={i}
-                              type="button"
-                              onClick={() => handleSend(action)}
-                              className="text-left rtl:text-right px-3.5 py-2 rounded-xl bg-[#e6fbf9] hover:bg-[#d0f5f2] text-stone-800 text-xs sm:text-sm font-normal transition-colors cursor-pointer border border-[#01a9a0]/20"
-                            >
-                              {action}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div ref={messagesEndRef} />
-                  </div>
-                )}
-              </div>
-
-              {/* ── BOTTOM INPUT CARD (Image 3 & 4) ────────────────────────── */}
-              <div className="p-3 border-t border-stone-100 bg-white">
-                <div className="relative rounded-2xl border border-stone-200 bg-stone-50/70 p-2.5 focus-within:border-[#01a9a0] focus-within:bg-white focus-within:shadow-md transition-all">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleSend();
-                      }
-                    }}
-                    placeholder={isArabic ? "اسأل الذكاء الاصطناعي أي شيء..." : "Ask AI anything..."}
-                    className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-20 rtl:pr-0 rtl:pl-20"
-                  />
-
-                  {/* Right Input Actions: Mic + Send */}
-                  <div className="absolute right-2.5 rtl:right-auto rtl:left-2.5 bottom-2 flex items-center gap-1.5">
-                    {/* Microphone Button */}
-                    <button
-                      type="button"
-                      onClick={toggleRecording}
-                      title={isRecording ? "Listening..." : "Voice input"}
-                      className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer ${isRecording
-                        ? "bg-red-500 text-white animate-pulse"
-                        : "border border-[#01a9a0] text-[#01a9a0] hover:bg-[#01a9a0] hover:text-white"
-                        }`}
-                    >
-                      {isRecording ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
-                    </button>
-
-                    {/* Send Button */}
-                    {inputValue.trim() && (
-                      <button
-                        type="button"
-                        onClick={() => handleSend()}
-                        className="w-8 h-8 rounded-full bg-[#01a9a0] text-white flex items-center justify-center hover:bg-[#00c2b2] transition-colors shadow-xs cursor-pointer"
-                      >
-                        <Send className="w-3.5 h-3.5" />
-                      </button>
                     )}
                   </div>
-                </div>
 
-                {/* Footer disclaimer */}
-                <p className="text-[10px] text-stone-400 text-center mt-2 select-none">
-                  {isArabic
-                    ? "قد يخطئ الذكاء الاصطناعي. يرجى التحقق من المعلومات المهمة."
-                    : "AI can make mistakes. Double-check replies."}
-                </p>
-              </div>
+                  {/* ── BOTTOM INPUT CARD (Image 3 & 4) ────────────────────────── */}
+                  <div className="p-3 border-t border-stone-100 bg-white">
+                    <div className="relative rounded-2xl border border-stone-200 bg-stone-50/70 p-2.5 focus-within:border-[#01a9a0] focus-within:bg-white focus-within:shadow-md transition-all">
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            handleSend();
+                          }
+                        }}
+                        placeholder={isArabic ? "اسأل الذكاء الاصطناعي أي شيء..." : "Ask AI anything..."}
+                        className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-11 rtl:pr-0 rtl:pl-11"
+                      />
+
+                      {/* Right Input Action: Send Button */}
+                      <div className="absolute right-2 rtl:right-auto rtl:left-2 bottom-1.5 flex items-center">
+                        <button
+                          type="button"
+                          onClick={() => handleSend()}
+                          disabled={!inputValue.trim()}
+                          aria-label={isArabic ? "إرسال" : "Send message"}
+                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-xs ${inputValue.trim()
+                            ? "bg-[#01a9a0] text-white hover:bg-[#00c2b2] cursor-pointer active:scale-95"
+                            : "bg-stone-200 text-stone-400 cursor-not-allowed opacity-60"
+                            }`}
+                        >
+                          <Send className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Footer disclaimer */}
+                    <p className="text-[10px] text-stone-400 text-center mt-2 select-none">
+                      {isArabic
+                        ? "قد يخطئ الذكاء الاصطناعي. يرجى التحقق من المعلومات المهمة."
+                        : "AI can make mistakes. Double-check replies."}
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           )}
 
@@ -775,40 +1008,21 @@ export default function FloatingChatWidget() {
                 <span className="text-[10px] text-stone-500">+971 52 749 2002</span>
               </div>
             </a>
-
-            {/* 3. WhatsApp */}
-            {/* <a
-              href="https://wa.me/971527492002"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 text-stone-800 hover:text-[#25D366] font-medium text-xs sm:text-sm transition-all duration-200 text-left rtl:text-right cursor-pointer group"
-            >
-              <div className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                <svg viewBox="0 0 24 24" fill="white" className="w-4 h-4">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-                </svg>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-semibold text-stone-900 leading-tight">WhatsApp</span>
-                <span className="text-[10px] text-stone-500">+971 52 749 2002</span>
-              </div>
-            </a> */}
           </div>
         )}
 
-        {/* Floating Trigger Button (Image 2 style with chat bubble icon) */}
+        {/* Floating Trigger Button (Round shape with chat bubble icon) */}
         {!isOpen && (
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-label={isArabic ? "تواصل معنا" : "Contact options"}
-            className="group relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white border border-stone-200/90 shadow-xl hover:shadow-2xl hover:border-[#01a9a0] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-white border border-stone-200/90 shadow-xl hover:shadow-2xl hover:border-[#01a9a0] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
           >
             {/* Chat bubble icon with animated ping badge */}
             <div className="relative flex items-center justify-center">
               <MessageSquare className="w-6 h-6 text-[#01a9a0] stroke-[2.2] group-hover:scale-110 transition-transform duration-200" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#01a9a0] rounded-full ring-2 ring-white" />
+              <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-[#01a9a0] rounded-full ring-2 ring-white" />
             </div>
 
             {/* Hover Tooltip / Hint */}
