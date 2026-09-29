@@ -18,7 +18,7 @@ import { useLanguage } from "@/context/LanguageContext";
 function FooterHeading({ title }: { title: string }) {
   return (
     <div className="flex flex-col gap-2 mb-1">
-      <h4 className="text-base sm:text-[17px] font-bold text-stone-900 tracking-tight">{title}</h4>
+      <h4 className="text-base sm:text-[17px] lg:text-lg font-bold text-stone-900 tracking-tight">{title}</h4>
       <div className="w-10 h-[2px] bg-[#01a9a0] rounded-full" />
     </div>
   );
@@ -29,10 +29,10 @@ function FooterLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="flex items-center gap-2 text-xs sm:text-sm text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
+      className="flex items-center gap-2 text-xs sm:text-sm lg:text-base text-stone-600 hover:text-[#01a9a0] font-normal transition-colors duration-200 group leading-snug"
     >
       <ArrowRight
-        className={`w-3 h-3 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
+        className={`w-3 h-3 lg:w-3.5 lg:h-3.5 text-[#01a9a0] flex-shrink-0 transition-transform duration-200 ${isArabic ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"
           }`}
         strokeWidth={2.5}
       />
@@ -47,7 +47,7 @@ function ContactItem({ icon, children }: { icon: React.ReactNode; children: Reac
       <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
         {icon}
       </div>
-      <div className="flex flex-col gap-0.5 pt-0.5 sm:pt-1 text-xs sm:text-sm text-stone-700 font-normal min-w-0 flex-1 leading-snug">
+      <div className="flex flex-col gap-0.5 pt-0.5 sm:pt-1 text-xs sm:text-sm lg:text-base text-stone-700 font-normal min-w-0 flex-1 leading-snug">
         {children}
       </div>
     </div>
@@ -415,7 +415,7 @@ export default function Footer() {
 
               {/* Column 2: Copyright Text */}
               <div className="text-center px-2 shrink-0">
-                <p className="text-sm text-stone-600 leading-normal">
+                <p className="text-sm lg:text-base text-stone-600 leading-normal">
                   {t.footer.copyright}
                 </p>
               </div>
@@ -437,7 +437,7 @@ export default function Footer() {
               </div>
 
               {/* Column 3: Refund & Legal Policy Links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-sm text-stone-600">
+              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-sm lg:text-base text-stone-600">
                 <Link
                   href="/refund-policy"
                   className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
