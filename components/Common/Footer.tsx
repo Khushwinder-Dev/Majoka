@@ -121,9 +121,9 @@ export default function Footer() {
       href: "/services?service=1&sub=polyurea-coating-waterproofing",
     },
     {
-      labelEn: "Specialized Construction",
+      labelEn: "Custom Solutions",
       labelAr: "حلول إنشائية متخصصة",
-      href: "/solutions",
+      href: "/products",
     },
   ];
 
