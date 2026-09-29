@@ -396,6 +396,15 @@ export default function Footer() {
               className={`flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-6 ${isArabic ? "pl-0" : "pr-0"
                 }`}
             >
+
+
+              {/* Column 2: Copyright Text */}
+              <div className="text-center px-2 shrink-0">
+                <p className="text-sm text-stone-600 leading-normal">
+                  {t.footer.copyright}
+                </p>
+              </div>
+
               {/* Column 1: Social Icons */}
               <div className="flex items-center justify-center lg:justify-start gap-2 shrink-0">
                 {socialLinks.map(({ href, Icon, label }) => (
@@ -450,12 +459,7 @@ export default function Footer() {
                 </Link>
               </div>
 
-              {/* Column 2: Copyright Text */}
-              <div className="text-center px-2 shrink-0">
-                <p className="text-sm text-stone-600 leading-normal">
-                  {t.footer.copyright}
-                </p>
-              </div>
+
 
 
             </div>
