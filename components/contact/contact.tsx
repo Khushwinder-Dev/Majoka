@@ -121,35 +121,51 @@ export default function ContactPage() {
         const transcript = event.results?.[0]?.[0]?.transcript || "";
         if (!transcript) return;
 
+        let formattedText = transcript.trim();
+
+        if (fieldName === "email") {
+          formattedText = formattedText
+            .toLowerCase()
+            // Handle spoken "at the rate of", "at the rate", "at rate", "@therate"
+            .replace(/\s*(?:at\s+the\s+rate\s+(?:of\s+)?|at\s+the\s+rate|at\s+rate|@\s*the\s*rate\s*(?:of\s*)?|@\s*the\s*rate|@\s*rate|@therate)\s*/gi, "@")
+            .replace(/\s+at\s+/gi, "@")
+            // Handle spoken Arabic "@"
+            .replace(/\s*(?:آت|ات|علامة\s+آت)\s*/g, "@")
+            // Handle spoken "dot" / "point" / "period"
+            .replace(/\s*(?:dot|point|نقطة|دوت)\s*/gi, ".")
+            // Handle spoken "underscore"
+            .replace(/\s*(?:underscore|اندرسكور|شرطة\s*سفلية)\s*/gi, "_")
+            // Handle spoken "dash" / "hyphen"
+            .replace(/\s*(?:dash|hyphen)\s*/gi, "-")
+            // Cleanup any accidental remaining "@therate" or "@the rate"
+            .replace(/@(?:the\s*rate\s*(?:of\s*)?|rate\s*)/gi, "@")
+            // Remove all spaces
+            .replace(/\s+/g, "")
+            // Ensure single @
+            .replace(/@+/g, "@")
+            // Ensure single dots
+            .replace(/\.+/g, ".")
+            // Trim trailing dot
+            .replace(/\.+$/, "");
+        } else if (fieldName === "phone") {
+          formattedText = formattedText.replace(/[^\d+\s-]/g, "").trim();
+        }
+
         setFormData((prev) => {
-          let formattedText = transcript.trim();
-
-          if (fieldName === "email") {
-            formattedText = formattedText
-              .toLowerCase()
-              .replace(/\s+at\s+/g, "@")
-              .replace(/\s+dot\s+/g, ".")
-              .replace(/\s+/g, "");
-          } else if (fieldName === "phone") {
-            formattedText = formattedText.replace(/[^\d+\s-]/g, "").trim();
-          } else if (fieldName === "message") {
-            if (prev.message.trim()) {
-              formattedText = `${prev.message.trim()} ${formattedText}`;
-            }
+          let finalText = formattedText;
+          if (fieldName === "message" && prev.message.trim()) {
+            finalText = `${prev.message.trim()} ${formattedText}`;
           }
-
           return {
             ...prev,
-            [fieldName]: formattedText,
+            [fieldName]: finalText,
           };
         });
 
-        if (errors[fieldName]) {
-          setErrors((prev) => ({
-            ...prev,
-            [fieldName]: "",
-          }));
-        }
+        setErrors((prev) => ({
+          ...prev,
+          [fieldName]: validateField(fieldName, formattedText),
+        }));
 
         toast.success(
           isArabic ? "تم إدخال الصوت بنجاح!" : "Voice input captured!",
