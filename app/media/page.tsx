@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Image as ImageIcon,
   Play,
@@ -101,6 +102,7 @@ const PHOTOS_PER_PAGE = 12;
 const VIDEOS_PER_PAGE = 12;
 
 export default function MediaPage() {
+  const router = useRouter();
   const { isArabic } = useLanguage();
 
   const [photoItems, setPhotoItems] = useState<PhotoItem[]>([]);
@@ -385,7 +387,7 @@ export default function MediaPage() {
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-2xl bg-white/70 animate-pulse border border-slate-200/60"
+                  className="aspect-[4/3] bg-white/70 animate-pulse border border-slate-200/60"
                 />
               ))}
             </div>
@@ -397,7 +399,7 @@ export default function MediaPage() {
               {displayedPhotos.map((photo) => (
                 <div
                   key={photo.id}
-                  onClick={() => handleOpenPhoto(photo)}
+                  onClick={() => router.push("/services")}
                   className="group relative overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   <Image
@@ -412,23 +414,62 @@ export default function MediaPage() {
                   {/* Gradient Overlay for bottom text visibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Hover Center Focus Ring with Eye Icon */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-md border border-white/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 shadow-xl">
-                      <Eye className="w-5 h-5 text-white stroke-[2.2]" />
-                    </div>
+                  {/* Hover Center Action Buttons (Preview & View Details) */}
+                  <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                    {/* Preview Option */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenPhoto(photo);
+                      }}
+                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-black/65 hover:bg-[#00c4b4] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:border-[#00c4b4] hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      title={isArabic ? "معاينة" : "Preview"}
+                    >
+                      <Eye className="w-3.5 h-3.5 stroke-[2.2] shrink-0" />
+                      <span>{isArabic ? "معاينة" : "Preview"}</span>
+                    </button>
+
+                    {/* View Details Option (Takes to Services) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push("/services");
+                      }}
+                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-[#00a89a] hover:bg-[#008f83] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      title={isArabic ? "عرض التفاصيل" : "View Details"}
+                    >
+                      <span>{isArabic ? "عرض التفاصيل" : "View Details"}</span>
+                      <ArrowRight className="w-3.5 h-3.5 stroke-[2.2] rtl:rotate-180 shrink-0" />
+                    </button>
                   </div>
 
                   {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Dubai, UAE) */}
-                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-10 flex items-center gap-2.5 text-white">
+                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-30 flex items-center gap-2.5 text-white">
                     {/* Translucent Square Icon Box */}
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
                       <ImageIcon className="w-3.5 h-3.5" />
                     </div>
                     {/* Project Title & Location */}
                     <div className="leading-tight min-w-0">
-                      <h4 className="text-xs sm:text-[13px] font-bold text-white truncate group-hover:text-[#00DDCF] transition-colors">
-                        {isArabic ? photo.titleAr : photo.titleEn}
+                      <h4
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push("/project");
+                        }}
+                        className="text-xs sm:text-[13px] font-bold text-white truncate transition-colors cursor-pointer group/title"
+                      >
+                        <Link
+                          href="/project"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push("/project");
+                          }}
+                          className="hover:text-[#00DDCF] group-hover/title:text-[#00DDCF] hover:underline transition-colors cursor-pointer inline-block max-w-full truncate"
+                        >
+                          {isArabic ? photo.titleAr : photo.titleEn}
+                        </Link>
                       </h4>
                       <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
                         {isArabic ? photo.locationAr : photo.locationEn}
@@ -530,7 +571,7 @@ export default function MediaPage() {
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] rounded-2xl bg-slate-100 animate-pulse border border-slate-200/60"
+                  className="aspect-[4/3] bg-slate-100 animate-pulse border border-slate-200/60"
                 />
               ))}
             </div>
@@ -557,23 +598,69 @@ export default function MediaPage() {
                   {/* Gradient Overlay for bottom text visibility */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
 
-                  {/* Center Sleek Circular Play Button (Matching Reference Card #2 & #7) */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:bg-[#00a89a] group-hover:border-[#00a89a] transition-all duration-300">
+                  {/* Center Sleek Circular Play Button (Visible when idle, hides on hover) */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 group-hover:scale-90 transition-all duration-300">
+                    <div className="w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg">
                       <Play className="w-4 h-4 fill-white ml-0.5" />
                     </div>
                   </div>
 
+                  {/* Hover Center Action Buttons (Preview & View Details) */}
+                  <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                    {/* Preview Option (Opens Video Modal) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setActiveVideo(video);
+                      }}
+                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-black/65 hover:bg-[#00c4b4] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:border-[#00c4b4] hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      title={isArabic ? "معاينة" : "Preview"}
+                    >
+                      <Play className="w-3.5 h-3.5 fill-white shrink-0 ml-0.5" />
+                      <span>{isArabic ? "معاينة" : "Preview"}</span>
+                    </button>
+
+                    {/* View Details Option (Takes to Services) */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push("/services");
+                      }}
+                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-[#00a89a] hover:bg-[#008f83] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      title={isArabic ? "عرض التفاصيل" : "View Details"}
+                    >
+                      <span>{isArabic ? "عرض التفاصيل" : "View Details"}</span>
+                      <ArrowRight className="w-3.5 h-3.5 stroke-[2.2] rtl:rotate-180 shrink-0" />
+                    </button>
+                  </div>
+
                   {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Commercial) */}
-                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-10 flex items-center gap-2.5 text-white">
+                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-30 flex items-center gap-2.5 text-white">
                     {/* Translucent Square Icon Box */}
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
                       <Film className="w-3.5 h-3.5" />
                     </div>
                     {/* Project Title & Location */}
                     <div className="leading-tight min-w-0">
-                      <h4 className="text-xs sm:text-[13px] font-bold text-white truncate group-hover:text-[#00DDCF] transition-colors">
-                        {isArabic ? video.titleAr : video.titleEn}
+                      <h4
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          router.push("/project");
+                        }}
+                        className="text-xs sm:text-[13px] font-bold text-white truncate transition-colors cursor-pointer group/title"
+                      >
+                        <Link
+                          href="/project"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push("/project");
+                          }}
+                          className="hover:text-[#00DDCF] group-hover/title:text-[#00DDCF] hover:underline transition-colors cursor-pointer inline-block max-w-full truncate"
+                        >
+                          {isArabic ? video.titleAr : video.titleEn}
+                        </Link>
                       </h4>
                       <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
                         {isArabic ? video.locationAr : video.locationEn}
