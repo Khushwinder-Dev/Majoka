@@ -18,7 +18,7 @@ export default function ProtectionServicesSection({
   const services = [
     {
       id: 1,
-      image: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/thumbnail.png",
+      image: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/thumbnail.jpeg",
       icon: "/media/protection/fi_7368818.svg",
       title: isArabic ? "عزل GRP والألياف الزجاجية" : "GRP & Fiberglass Waterproofing",
       description: isArabic
@@ -80,8 +80,8 @@ export default function ProtectionServicesSection({
 
   const orderedServices = servicesOrder
     ? servicesOrder
-        .map((id) => services.find((s) => s.id === id))
-        .filter((s): s is (typeof services)[number] => Boolean(s))
+      .map((id) => services.find((s) => s.id === id))
+      .filter((s): s is (typeof services)[number] => Boolean(s))
     : services;
 
   return (

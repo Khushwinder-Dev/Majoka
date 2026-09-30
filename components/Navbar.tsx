@@ -34,7 +34,7 @@ const servicesMegaMenu = {
   en: {
     label: "OUR SERVICES",
     tagline: "Six specialist divisions — one guarantee",
-    cardImage: "/grpnb.jpg",
+    cardImage: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/thumbnail.jpeg",
     cta: "Explore More",
     ctaHref: "/services",
     items: [
@@ -49,7 +49,7 @@ const servicesMegaMenu = {
   ar: {
     label: "خدماتنا",
     tagline: "ستة أقسام متخصصة — ضمان واحد",
-    cardImage: "/grpnb.jpg",
+    cardImage: "/servicesSubServicesContent/services/waterproofing/subservices/grp-fiberglass/thumbnail/thumbnail.jpeg",
     cta: "استكشف المزيد",
     ctaHref: "/services",
     items: [
