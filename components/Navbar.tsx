@@ -695,7 +695,7 @@ const Navbar = () => {
 
             {/* ── DESKTOP NAV ─────────────────────────────────────── */}
             <div className="hidden lg:block relative" onMouseLeave={closeMega}>
-              <div className="flex items-center gap-1.5 lg:gap-2 xl:gap-3.5 2xl:gap-5 relative z-20">
+              <div className="flex items-center gap-1.5 lg:gap-2.5 xl:gap-4 2xl:gap-5 relative z-20">
                 {navItems.map((item) => {
                   const active = isLinkActive(item.href);
                   const hasMega = Boolean(item.megaKey);
@@ -710,7 +710,7 @@ const Navbar = () => {
                     >
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[11.5px] xl:text-[13px] 2xl:text-[14px] font-anek tracking-wider whitespace-nowrap ${active
+                        className={`inline-flex items-center font-semibold uppercase transition-colors text-xs lg:text-[13.5px] xl:text-[15px] 2xl:text-[16px] font-anek tracking-wide whitespace-nowrap ${active
                           ? isScrolled
                             ? "text-[#01a9a0] font-black"
                             : "text-[#00c2b2] font-bold"
@@ -874,7 +874,7 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex-1 px-6 py-4 text-[14px] font-semibold uppercase tracking-wider font-anek transition-colors ${active ? "text-[#00c2b2]" : "text-white/80 hover:text-white"
+                      className={`flex-1 px-6 py-4 text-[15px] sm:text-[16px] font-semibold uppercase tracking-wider font-anek transition-colors ${active ? "text-[#00c2b2]" : "text-white/80 hover:text-white"
                         }`}
                     >
                       {item.name}
