@@ -688,10 +688,10 @@ export default function ExpandableSearchBar({
               }}
               className={`relative p-0.5 rounded-full border border-dashed transition-all cursor-pointer hover:scale-105 ${isExpanded
                 ? isScrolled
-                  ? "border-white bg-white/20"
+                  ? "border-[#01a9a0] bg-[#01a9a0]/15"
                   : "border-white bg-white/15"
                 : isScrolled
-                  ? "border-white/80 hover:border-white"
+                  ? "border-[#01a9a0]/40 hover:border-[#01a9a0]"
                   : "border-white/60 hover:border-white"
                 }`}
               aria-label={isExpanded ? "Close search" : "Open search"}
@@ -699,7 +699,7 @@ export default function ExpandableSearchBar({
             >
               <div
                 className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors shadow-sm ${isScrolled
-                  ? "bg-white hover:bg-slate-50 text-[#01a9a0]"
+                  ? "bg-[#01a9a0] hover:bg-[#008f88] text-white"
                   : "bg-[#00b3a4] hover:bg-[#E6F7F6] text-white"
                   }`}
               >
