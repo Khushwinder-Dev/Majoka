@@ -252,11 +252,10 @@ export default function MediaPage() {
           />
           {/* Gentle Directional Dark Gradient Overlay for Crisp Text Legibility */}
           <div
-            className={`absolute inset-0 pointer-events-none ${
-              isArabic
-                ? "bg-gradient-to-l from-black/80 via-black/45 sm:via-black/30 to-transparent"
-                : "bg-gradient-to-r from-black/80 via-black/45 sm:via-black/30 to-transparent"
-            }`}
+            className={`absolute inset-0 pointer-events-none ${isArabic
+              ? "bg-gradient-to-l from-black/80 via-black/45 sm:via-black/30 to-transparent"
+              : "bg-gradient-to-r from-black/80 via-black/45 sm:via-black/30 to-transparent"
+              }`}
           />
         </div>
 
@@ -369,11 +368,10 @@ export default function MediaPage() {
                     setSelectedPhotoCategory(cat.id);
                     setVisiblePhotoCount(12);
                   }}
-                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                    isActive
-                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
-                      : "bg-white text-[#0B1C24] hover:text-[#00a89a] border border-slate-200/90 shadow-xs hover:border-[#00a89a]"
-                  }`}
+                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                    ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                    : "bg-white text-[#0B1C24] hover:text-[#00a89a] border border-slate-200/90 shadow-xs hover:border-[#00a89a]"
+                    }`}
                 >
                   {isArabic ? cat.labelAr : cat.labelEn}
                 </button>
@@ -400,7 +398,7 @@ export default function MediaPage() {
                 <div
                   key={photo.id}
                   onClick={() => handleOpenPhoto(photo)}
-                  className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  className="group relative overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   <Image
                     src={photo.thumbnail}
@@ -515,11 +513,10 @@ export default function MediaPage() {
                     setSelectedVideoCategory(cat.id);
                     setVisibleVideoCount(12);
                   }}
-                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                    isActive
-                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
-                      : "bg-[#EEF8F8] text-[#1E3A47] hover:text-[#00a89a] border border-[#d6eeee]/70 shadow-xs hover:border-[#00a89a]"
-                  }`}
+                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                    ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                    : "bg-[#EEF8F8] text-[#1E3A47] hover:text-[#00a89a] border border-[#d6eeee]/70 shadow-xs hover:border-[#00a89a]"
+                    }`}
                 >
                   {isArabic ? cat.labelAr : cat.labelEn}
                 </button>
@@ -546,7 +543,7 @@ export default function MediaPage() {
                 <div
                   key={video.id}
                   onClick={() => setActiveVideo(video)}
-                  className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                  className="group relative overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                 >
                   {/* HTML5 video frame preview */}
                   <video
@@ -636,11 +633,10 @@ export default function MediaPage() {
               />
               {/* Subtle gradient overlay to guarantee text legibility on small screens */}
               <div
-                className={`absolute inset-0 sm:max-w-xl pointer-events-none ${
-                  isArabic
-                    ? "bg-gradient-to-l from-white/90 via-white/70 to-transparent"
-                    : "bg-gradient-to-r from-white/90 via-white/70 to-transparent"
-                }`}
+                className={`absolute inset-0 sm:max-w-xl pointer-events-none ${isArabic
+                  ? "bg-gradient-to-l from-white/90 via-white/70 to-transparent"
+                  : "bg-gradient-to-r from-white/90 via-white/70 to-transparent"
+                  }`}
               />
             </div>
 
@@ -718,11 +714,10 @@ export default function MediaPage() {
           />
           {/* Gentle directional dark gradient overlay to ensure crisp readability */}
           <div
-            className={`absolute inset-0 ${
-              isArabic
-                ? "bg-gradient-to-l from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
-                : "bg-gradient-to-r from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
-            }`}
+            className={`absolute inset-0 ${isArabic
+              ? "bg-gradient-to-l from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
+              : "bg-gradient-to-r from-[#021820]/90 via-[#021820]/60 sm:via-transparent to-transparent"
+              }`}
           />
         </div>
 
