@@ -8,9 +8,9 @@ import toast from "react-hot-toast";
 import SearchableSelect from "@/components/ui/SearchableSelect";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
-// Set to false after client demo to restore once-per-session behavior.
-const SHOW_ON_EVERY_RELOAD = true;
-const DISMISS_KEY = "taj_welcome_modal_dismissed";
+// Cooldown period: Once shown, do not auto-open again for 10 minutes
+const COOLDOWN_DURATION_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
+const LAST_SHOWN_KEY = "taj_welcome_modal_last_shown";
 
 interface FormData {
   name: string;
@@ -45,14 +45,29 @@ export default function WelcomeOfferModal({
 
   useEffect(() => {
     if (!autoShow) return;
-    const isDismissed =
-      !SHOW_ON_EVERY_RELOAD && sessionStorage.getItem(DISMISS_KEY);
-    if (!isDismissed) {
-      const timer = setTimeout(() => {
-        setInternalIsOpen(true);
-      }, 1500);
-      return () => clearTimeout(timer);
+
+    try {
+      const lastShown = localStorage.getItem(LAST_SHOWN_KEY);
+      if (lastShown) {
+        const timeSinceLastShown = Date.now() - parseInt(lastShown, 10);
+        if (timeSinceLastShown < COOLDOWN_DURATION_MS) {
+          return;
+        }
+      }
+    } catch {
+      // Ignore storage access errors
     }
+
+    const timer = setTimeout(() => {
+      setInternalIsOpen(true);
+      try {
+        localStorage.setItem(LAST_SHOWN_KEY, Date.now().toString());
+      } catch {
+        // Ignore
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, [autoShow]);
 
   // Support window event "open-welcome-modal" so any component can trigger it easily too
@@ -68,8 +83,10 @@ export default function WelcomeOfferModal({
   const handleClose = () => {
     setInternalIsOpen(false);
     controlledOnClose?.();
-    if (!SHOW_ON_EVERY_RELOAD) {
-      sessionStorage.setItem(DISMISS_KEY, "true");
+    try {
+      localStorage.setItem(LAST_SHOWN_KEY, Date.now().toString());
+    } catch {
+      // Ignore
     }
   };
 
@@ -149,8 +166,10 @@ export default function WelcomeOfferModal({
           ? "تم إرسال طلبك بنجاح! تم حجز خصم 10% لمشروعك."
           : "Your request has been sent! Your 10% project discount has been applied."
       );
-      if (!SHOW_ON_EVERY_RELOAD) {
-        sessionStorage.setItem(DISMISS_KEY, "true");
+      try {
+        localStorage.setItem(LAST_SHOWN_KEY, Date.now().toString());
+      } catch {
+        // Ignore
       }
     } catch {
       toast.error(
