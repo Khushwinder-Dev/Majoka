@@ -4,9 +4,9 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Common/Footer";
 import FloatingChatWidget from "@/components/Common/FloatingChatWidget";
-import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 import { LanguageProvider } from "@/context/LanguageContext";
+import SubscribeModal from "@/components/SubscribeModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -103,6 +103,9 @@ export default function RootLayout({
 
           {/* Global Floating Chat & Call Widget */}
           <FloatingChatWidget />
+
+          {/* Global Subscribe Newsletter Modal */}
+          <SubscribeModal />
         </LanguageProvider>
       </body>
     </html>

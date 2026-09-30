@@ -475,12 +475,13 @@ export default function Footer() {
                   {isArabic ? "سياسة الكوكيز" : "Cookie Policy"}
                 </Link>
                 <span className="text-stone-300 select-none">•</span>
-                <Link
-                  href="/subscribe"
-                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-subscribe-modal"))}
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap cursor-pointer"
                 >
                   {isArabic ? "الاشتراك" : "Subscribe to emails"}
-                </Link>
+                </button>
               </div>
 
 
