@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Phone,
   Mail,
@@ -9,9 +9,11 @@ import {
   Send,
   CheckCircle,
   AlertCircle,
+  Mic,
 } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import toast from "react-hot-toast";
+import { useLanguage } from "@/context/LanguageContext";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
 
 interface FormData {
@@ -32,6 +34,8 @@ interface ContactCard {
 }
 
 export default function ContactPage() {
+  const { isArabic } = useLanguage();
+
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     companyName: "",
@@ -47,6 +51,145 @@ export default function ContactPage() {
   }>({ type: null, message: "" });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [listeningField, setListeningField] = useState<keyof FormData | null>(null);
+  const recognitionRef = useRef<any>(null);
+
+  // Cleanup speech recognition on unmount
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.abort();
+        } catch (e) {
+          // ignore
+        }
+      }
+    };
+  }, []);
+
+  const toggleListening = (fieldName: keyof FormData) => {
+    if (typeof window === "undefined") return;
+
+    const SpeechRecognition =
+      (window as any).SpeechRecognition ||
+      (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      toast.error(
+        isArabic
+          ? "خاصية الإدخال الصوتي غير مدعومة في متصفحك. يرجى استخدام متصفح Chrome أو Edge أو Safari."
+          : "Voice input is not supported in this browser. Please use Chrome, Edge, or Safari.",
+        { duration: 4000 }
+      );
+      return;
+    }
+
+    // If currently listening to this exact field, stop it
+    if (listeningField === fieldName) {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch (e) {
+          // ignore
+        }
+      }
+      setListeningField(null);
+      return;
+    }
+
+    // Stop any existing recognition instance
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognition.lang = isArabic ? "ar-AE" : "en-US";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        setListeningField(fieldName);
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results?.[0]?.[0]?.transcript || "";
+        if (!transcript) return;
+
+        setFormData((prev) => {
+          let formattedText = transcript.trim();
+
+          if (fieldName === "email") {
+            formattedText = formattedText
+              .toLowerCase()
+              .replace(/\s+at\s+/g, "@")
+              .replace(/\s+dot\s+/g, ".")
+              .replace(/\s+/g, "");
+          } else if (fieldName === "phone") {
+            formattedText = formattedText.replace(/[^\d+\s-]/g, "").trim();
+          } else if (fieldName === "message") {
+            if (prev.message.trim()) {
+              formattedText = `${prev.message.trim()} ${formattedText}`;
+            }
+          }
+
+          return {
+            ...prev,
+            [fieldName]: formattedText,
+          };
+        });
+
+        if (errors[fieldName]) {
+          setErrors((prev) => ({
+            ...prev,
+            [fieldName]: "",
+          }));
+        }
+
+        toast.success(
+          isArabic ? "تم إدخال الصوت بنجاح!" : "Voice input captured!",
+          {
+            duration: 2500,
+            iconTheme: { primary: "#01a9a0", secondary: "#fff" },
+          }
+        );
+      };
+
+      recognition.onerror = (event: any) => {
+        setListeningField(null);
+        if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+          toast.error(
+            isArabic
+              ? "يرجى السماح بالوصول إلى الميكروفون في إعدادات المتصفح."
+              : "Please allow microphone access in your browser settings.",
+            { duration: 4000 }
+          );
+        } else if (event.error !== "aborted" && event.error !== "no-speech") {
+          toast.error(
+            isArabic
+              ? "تعذر التعرف على الصوت. يرجى المحاولة مجدداً."
+              : "Speech recognition failed. Please try again.",
+            { duration: 3000 }
+          );
+        }
+      };
+
+      recognition.onend = () => {
+        setListeningField(null);
+      };
+
+      recognitionRef.current = recognition;
+      recognition.start();
+    } catch (err) {
+      console.error("Failed to start speech recognition:", err);
+      setListeningField(null);
+    }
+  };
 
   const contactInfo: ContactCard[] = [
     {
@@ -389,26 +532,55 @@ export default function ContactPage() {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
-                        errors.fullName
+                      className={`w-full px-5 ${isArabic ? "pl-20 pr-5" : "pr-20 pl-5"} py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        listeningField === "fullName"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.fullName
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} bg-white px-1 transition-all duration-200 pointer-events-none ${
                         errors.fullName
                           ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                          : formData.fullName || focusedField === "fullName"
+                          : formData.fullName || focusedField === "fullName" || listeningField === "fullName"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
                       }`}
                     >
-                      Name
+                      {isArabic ? "الاسم" : "Name"}
                     </label>
-                    <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                      <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      {(focusedField === "fullName" || listeningField === "fullName") && (
+                        <button
+                          type="button"
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => toggleListening("fullName")}
+                          disabled={isSubmitting}
+                          title={listeningField === "fullName" ? (isArabic ? "جارٍ الاستماع... انقر للإيقاف" : "Listening... Click to stop") : (isArabic ? "انقر للتحدث بالاسم" : "Click to speak your name")}
+                          className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
+                            listeningField === "fullName"
+                              ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"
+                              : "text-stone-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 active:scale-95"
+                          } disabled:opacity-40 disabled:cursor-not-allowed`}
+                        >
+                          {listeningField === "fullName" && (
+                            <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75 pointer-events-none" />
+                          )}
+                          <Mic className={`w-4 h-4 relative z-10 ${listeningField === "fullName" ? "animate-pulse" : ""}`} />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  {errors.fullName && (
+                  {listeningField === "fullName" && (
+                    <p className="text-xs text-[#01a9a0] mt-1.5 px-4 font-medium animate-pulse flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-ping" />
+                      <span>{isArabic ? "جارٍ الاستماع... اذكر اسمك الآن" : "Listening... speak your name now"}</span>
+                    </p>
+                  )}
+                  {errors.fullName && !listeningField && (
                     <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                       {errors.fullName}
                     </p>
@@ -426,17 +598,49 @@ export default function ContactPage() {
                     onBlur={() => setFocusedField(null)}
                     placeholder=" "
                     disabled={isSubmitting}
-                    className="w-full px-5 pr-11 py-3.5 bg-white rounded-full border border-stone-300 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                    className={`w-full px-5 ${isArabic ? "pl-20 pr-5" : "pr-20 pl-5"} py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                      listeningField === "companyName"
+                        ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                        : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                    }`}
                   />
                   <label
-                    className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${formData.companyName || focusedField === "companyName"
-                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-                      : "top-3.5 text-sm text-stone-400"
-                      }`}
+                    className={`absolute ${isArabic ? "right-5" : "left-5"} bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      formData.companyName || focusedField === "companyName" || listeningField === "companyName"
+                        ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-3.5 text-sm text-stone-400"
+                    }`}
                   >
-                    Company Name (Optional)
+                    {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                   </label>
-                  <InputValidationTick isValid={isValidText(formData.companyName)} />
+                  <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                    <InputValidationTick isValid={isValidText(formData.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                    {(focusedField === "companyName" || listeningField === "companyName") && (
+                      <button
+                        type="button"
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => toggleListening("companyName")}
+                        disabled={isSubmitting}
+                        title={listeningField === "companyName" ? (isArabic ? "جارٍ الاستماع... انقر للإيقاف" : "Listening... Click to stop") : (isArabic ? "انقر للتحدث باسم الشركة" : "Click to speak company name")}
+                        className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
+                          listeningField === "companyName"
+                            ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"
+                            : "text-stone-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 active:scale-95"
+                        } disabled:opacity-40 disabled:cursor-not-allowed`}
+                      >
+                        {listeningField === "companyName" && (
+                          <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75 pointer-events-none" />
+                        )}
+                        <Mic className={`w-4 h-4 relative z-10 ${listeningField === "companyName" ? "animate-pulse" : ""}`} />
+                      </button>
+                    )}
+                  </div>
+                  {listeningField === "companyName" && (
+                    <p className="text-xs text-[#01a9a0] mt-1.5 px-4 font-medium animate-pulse flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-ping" />
+                      <span>{isArabic ? "جارٍ الاستماع... اذكر اسم الشركة" : "Listening... speak company name"}</span>
+                    </p>
+                  )}
                 </div>
 
                 {/* Phone Field */}
@@ -451,26 +655,55 @@ export default function ContactPage() {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
-                        errors.phone
+                      className={`w-full px-5 ${isArabic ? "pl-20 pr-5" : "pr-20 pl-5"} py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        listeningField === "phone"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.phone
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} bg-white px-1 transition-all duration-200 pointer-events-none ${
                         errors.phone
                           ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                          : formData.phone || focusedField === "phone"
+                          : formData.phone || focusedField === "phone" || listeningField === "phone"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
                       }`}
                     >
-                      Phone Number
+                      {isArabic ? "رقم الهاتف" : "Phone Number"}
                     </label>
-                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                      <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      {(focusedField === "phone" || listeningField === "phone") && (
+                        <button
+                          type="button"
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => toggleListening("phone")}
+                          disabled={isSubmitting}
+                          title={listeningField === "phone" ? (isArabic ? "جارٍ الاستماع... انقر للإيقاف" : "Listening... Click to stop") : (isArabic ? "انقر للتحدث برقم الهاتف" : "Click to speak phone number")}
+                          className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
+                            listeningField === "phone"
+                              ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"
+                              : "text-stone-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 active:scale-95"
+                          } disabled:opacity-40 disabled:cursor-not-allowed`}
+                        >
+                          {listeningField === "phone" && (
+                            <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75 pointer-events-none" />
+                          )}
+                          <Mic className={`w-4 h-4 relative z-10 ${listeningField === "phone" ? "animate-pulse" : ""}`} />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  {errors.phone && (
+                  {listeningField === "phone" && (
+                    <p className="text-xs text-[#01a9a0] mt-1.5 px-4 font-medium animate-pulse flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-ping" />
+                      <span>{isArabic ? "جارٍ الاستماع... اذكر رقم الهاتف الآن" : "Listening... speak phone number now"}</span>
+                    </p>
+                  )}
+                  {errors.phone && !listeningField && (
                     <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                       {errors.phone}
                     </p>
@@ -489,26 +722,55 @@ export default function ContactPage() {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full px-5 pr-11 py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
-                        errors.email
+                      className={`w-full px-5 ${isArabic ? "pl-20 pr-5" : "pr-20 pl-5"} py-3.5 bg-white rounded-full border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        listeningField === "email"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.email
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} bg-white px-1 transition-all duration-200 pointer-events-none ${
                         errors.email
                           ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                          : formData.email || focusedField === "email"
+                          : formData.email || focusedField === "email" || listeningField === "email"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
                       }`}
                     >
-                      Email Address
+                      {isArabic ? "البريد الإلكتروني" : "Email Address"}
                     </label>
-                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                      <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      {(focusedField === "email" || listeningField === "email") && (
+                        <button
+                          type="button"
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => toggleListening("email")}
+                          disabled={isSubmitting}
+                          title={listeningField === "email" ? (isArabic ? "جارٍ الاستماع... انقر للإيقاف" : "Listening... Click to stop") : (isArabic ? "انقر للتحدث بالبريد الإلكتروني" : "Click to speak your email")}
+                          className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
+                            listeningField === "email"
+                              ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"
+                              : "text-stone-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 active:scale-95"
+                          } disabled:opacity-40 disabled:cursor-not-allowed`}
+                        >
+                          {listeningField === "email" && (
+                            <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75 pointer-events-none" />
+                          )}
+                          <Mic className={`w-4 h-4 relative z-10 ${listeningField === "email" ? "animate-pulse" : ""}`} />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  {errors.email && (
+                  {listeningField === "email" && (
+                    <p className="text-xs text-[#01a9a0] mt-1.5 px-4 font-medium animate-pulse flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-ping" />
+                      <span>{isArabic ? "جارٍ الاستماع... اذكر بريدك الإلكتروني" : "Listening... speak your email"}</span>
+                    </p>
+                  )}
+                  {errors.email && !listeningField && (
                     <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                       {errors.email}
                     </p>
@@ -526,25 +788,55 @@ export default function ContactPage() {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full h-full min-h-[120px] px-5 py-3.5 bg-white rounded-2xl border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
-                        errors.message
+                      className={`w-full h-full min-h-[120px] px-5 ${isArabic ? "pl-20 pr-5" : "pr-20 pl-5"} py-3.5 bg-white rounded-2xl border text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        listeningField === "message"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.message
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} bg-white px-1 transition-all duration-200 pointer-events-none ${
                         errors.message
                           ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                          : formData.message || focusedField === "message"
+                          : formData.message || focusedField === "message" || listeningField === "message"
                           ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-3.5 text-sm text-stone-400"
                       }`}
                     >
-                      Message
+                      {isArabic ? "الرسالة" : "Message"}
                     </label>
+                    <div className={`absolute top-3 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                      <InputValidationTick isValid={isValidText(formData.message) && !errors.message} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      {(focusedField === "message" || listeningField === "message") && (
+                        <button
+                          type="button"
+                          onMouseDown={(e) => e.preventDefault()}
+                          onClick={() => toggleListening("message")}
+                          disabled={isSubmitting}
+                          title={listeningField === "message" ? (isArabic ? "جارٍ الاستماع... انقر للإيقاف" : "Listening... Click to stop") : (isArabic ? "انقر للتحدث بالرسالة" : "Click to speak your message")}
+                          className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
+                            listeningField === "message"
+                              ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"
+                              : "text-stone-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 active:scale-95"
+                          } disabled:opacity-40 disabled:cursor-not-allowed`}
+                        >
+                          {listeningField === "message" && (
+                            <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75 pointer-events-none" />
+                          )}
+                          <Mic className={`w-4 h-4 relative z-10 ${listeningField === "message" ? "animate-pulse" : ""}`} />
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  {errors.message && (
+                  {listeningField === "message" && (
+                    <p className="text-xs text-[#01a9a0] mt-1.5 px-4 font-medium animate-pulse flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-ping" />
+                      <span>{isArabic ? "جارٍ الاستماع... تحدث لكتابة رسالتك" : "Listening... speak your message"}</span>
+                    </p>
+                  )}
+                  {errors.message && !listeningField && (
                     <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                       {errors.message}
                     </p>
