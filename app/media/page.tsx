@@ -17,6 +17,7 @@ import {
   Eye,
   MapPin,
   ArrowDown,
+  Search,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import OurProjectsSection from "@/components/OurProjectsSection";
@@ -112,9 +113,11 @@ export default function MediaPage() {
   // Filter & Pagination States
   const [selectedPhotoCategory, setSelectedPhotoCategory] = useState<string>("all");
   const [visiblePhotoCount, setVisiblePhotoCount] = useState<number>(12);
+  const [photoSearch, setPhotoSearch] = useState<string>("");
 
   const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>("all");
   const [visibleVideoCount, setVisibleVideoCount] = useState<number>(12);
+  const [videoSearch, setVideoSearch] = useState<string>("");
   const [currentVideoPage, setCurrentVideoPage] = useState<number>(1);
 
   // Modals
@@ -170,9 +173,24 @@ export default function MediaPage() {
 
   // ── Filtered & Paginated Photos ──────────────────────────────
   const filteredPhotos = useMemo(() => {
-    if (selectedPhotoCategory === "all") return photoItems;
-    return photoItems.filter((p) => p.category === selectedPhotoCategory);
-  }, [photoItems, selectedPhotoCategory]);
+    let result = photoItems;
+    if (selectedPhotoCategory !== "all") {
+      result = result.filter((p) => p.category === selectedPhotoCategory);
+    }
+    if (photoSearch.trim()) {
+      const q = photoSearch.toLowerCase().trim();
+      result = result.filter(
+        (p) =>
+          p.titleEn.toLowerCase().includes(q) ||
+          p.titleAr.includes(q) ||
+          p.categoryLabelEn.toLowerCase().includes(q) ||
+          p.categoryLabelAr.includes(q) ||
+          p.locationEn.toLowerCase().includes(q) ||
+          p.locationAr.includes(q)
+      );
+    }
+    return result;
+  }, [photoItems, selectedPhotoCategory, photoSearch]);
 
   const displayedPhotos = useMemo(() => {
     return filteredPhotos.slice(0, visiblePhotoCount);
@@ -180,9 +198,24 @@ export default function MediaPage() {
 
   // ── Filtered & Displayed Videos ──────────────────────────────
   const filteredVideos = useMemo(() => {
-    if (selectedVideoCategory === "all") return videoItems;
-    return videoItems.filter((v) => v.category === selectedVideoCategory);
-  }, [videoItems, selectedVideoCategory]);
+    let result = videoItems;
+    if (selectedVideoCategory !== "all") {
+      result = result.filter((v) => v.category === selectedVideoCategory);
+    }
+    if (videoSearch.trim()) {
+      const q = videoSearch.toLowerCase().trim();
+      result = result.filter(
+        (v) =>
+          v.titleEn.toLowerCase().includes(q) ||
+          v.titleAr.includes(q) ||
+          v.categoryLabelEn.toLowerCase().includes(q) ||
+          v.categoryLabelAr.includes(q) ||
+          v.locationEn.toLowerCase().includes(q) ||
+          v.locationAr.includes(q)
+      );
+    }
+    return result;
+  }, [videoItems, selectedVideoCategory, videoSearch]);
 
   const displayedVideos = useMemo(() => {
     return filteredVideos.slice(0, visibleVideoCount);
@@ -359,26 +392,54 @@ export default function MediaPage() {
             </p>
           </div>
 
-          {/* Category Filter Pills (Left-Aligned as per design) */}
-          <div className="flex items-center gap-2.5 sm:gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
-            {PHOTO_CATEGORIES.map((cat) => {
-              const isActive = selectedPhotoCategory === cat.id;
-              return (
+          {/* Filter & Search Bar */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 sm:mb-10">
+            {/* Category Filter Pills */}
+            <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
+              {PHOTO_CATEGORIES.map((cat) => {
+                const isActive = selectedPhotoCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => {
+                      setSelectedPhotoCategory(cat.id);
+                      setVisiblePhotoCount(12);
+                    }}
+                    className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                      : "bg-white text-[#0B1C24] hover:text-[#00a89a] border border-slate-200/90 shadow-xs hover:border-[#00a89a]"
+                      }`}
+                  >
+                    {isArabic ? cat.labelAr : cat.labelEn}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
+              <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
+              <input
+                type="text"
+                value={photoSearch}
+                onChange={(e) => {
+                  setPhotoSearch(e.target.value);
+                  setVisiblePhotoCount(12);
+                }}
+                placeholder={isArabic ? "البحث في معرض الصور..." : "Search photo gallery..."}
+                className="w-full pl-10 pr-9 rtl:pl-9 rtl:pr-10 py-2.5 rounded-full bg-white border border-slate-200/90 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 shadow-xs focus:outline-none focus:border-[#00a89a] focus:ring-2 focus:ring-[#00a89a]/20 transition-all"
+              />
+              {photoSearch && (
                 <button
-                  key={cat.id}
-                  onClick={() => {
-                    setSelectedPhotoCategory(cat.id);
-                    setVisiblePhotoCount(12);
-                  }}
-                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
-                    ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
-                    : "bg-white text-[#0B1C24] hover:text-[#00a89a] border border-slate-200/90 shadow-xs hover:border-[#00a89a]"
-                    }`}
+                  type="button"
+                  onClick={() => setPhotoSearch("")}
+                  className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
+                  title={isArabic ? "مسح البحث" : "Clear search"}
                 >
-                  {isArabic ? cat.labelAr : cat.labelEn}
+                  <X className="w-3 h-3" />
                 </button>
-              );
-            })}
+              )}
+            </div>
           </div>
 
           {/* Loading Skeleton */}
@@ -486,8 +547,20 @@ export default function MediaPage() {
             <div className="text-center py-16 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/60 max-w-md mx-auto">
               <Camera className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <p className="text-base font-bold text-slate-700">
-                {isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category"}
+                {photoSearch
+                  ? (isArabic ? `لا توجد نتائج بحث عن "${photoSearch}"` : `No projects found matching "${photoSearch}"`)
+                  : (isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category")}
               </p>
+              {photoSearch && (
+                <button
+                  type="button"
+                  onClick={() => setPhotoSearch("")}
+                  className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#00a89a] text-white text-xs font-bold hover:bg-[#008f83] transition-colors cursor-pointer"
+                >
+                  <X className="w-3 h-3" />
+                  <span>{isArabic ? "مسح البحث" : "Clear search"}</span>
+                </button>
+              )}
             </div>
           )}
 
@@ -543,26 +616,54 @@ export default function MediaPage() {
             </p>
           </div>
 
-          {/* Category Filter Pills (Left-Aligned as per design) */}
-          <div className="flex items-center gap-2.5 sm:gap-3 mb-10 overflow-x-auto pb-2 no-scrollbar">
-            {VIDEO_CATEGORIES.map((cat) => {
-              const isActive = selectedVideoCategory === cat.id;
-              return (
+          {/* Filter & Search Bar */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 sm:mb-10">
+            {/* Category Filter Pills */}
+            <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
+              {VIDEO_CATEGORIES.map((cat) => {
+                const isActive = selectedVideoCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => {
+                      setSelectedVideoCategory(cat.id);
+                      setVisibleVideoCount(12);
+                    }}
+                    className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                      ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
+                      : "bg-[#EEF8F8] text-[#1E3A47] hover:text-[#00a89a] border border-[#d6eeee]/70 shadow-xs hover:border-[#00a89a]"
+                      }`}
+                  >
+                    {isArabic ? cat.labelAr : cat.labelEn}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Search Input */}
+            <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
+              <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
+              <input
+                type="text"
+                value={videoSearch}
+                onChange={(e) => {
+                  setVideoSearch(e.target.value);
+                  setVisibleVideoCount(12);
+                }}
+                placeholder={isArabic ? "البحث في معرض الفيديو..." : "Search video gallery..."}
+                className="w-full pl-10 pr-9 rtl:pl-9 rtl:pr-10 py-2.5 rounded-full bg-[#EEF8F8]/60 border border-[#d6eeee] text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 shadow-xs focus:outline-none focus:border-[#00a89a] focus:ring-2 focus:ring-[#00a89a]/20 transition-all"
+              />
+              {videoSearch && (
                 <button
-                  key={cat.id}
-                  onClick={() => {
-                    setSelectedVideoCategory(cat.id);
-                    setVisibleVideoCount(12);
-                  }}
-                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
-                    ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
-                    : "bg-[#EEF8F8] text-[#1E3A47] hover:text-[#00a89a] border border-[#d6eeee]/70 shadow-xs hover:border-[#00a89a]"
-                    }`}
+                  type="button"
+                  onClick={() => setVideoSearch("")}
+                  className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
+                  title={isArabic ? "مسح البحث" : "Clear search"}
                 >
-                  {isArabic ? cat.labelAr : cat.labelEn}
+                  <X className="w-3 h-3" />
                 </button>
-              );
-            })}
+              )}
+            </div>
           </div>
 
           {/* Loading Skeleton */}
@@ -677,8 +778,20 @@ export default function MediaPage() {
             <div className="text-center py-16 bg-slate-50 rounded-3xl border border-slate-200/60 max-w-md mx-auto">
               <Film className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <p className="text-base font-bold text-slate-700">
-                {isArabic ? "لا توجد فيديوهات في هذا القسم حالياً" : "No videos found in this category"}
+                {videoSearch
+                  ? (isArabic ? `لا توجد نتائج بحث عن "${videoSearch}"` : `No videos found matching "${videoSearch}"`)
+                  : (isArabic ? "لا توجد فيديوهات في هذا القسم حالياً" : "No videos found in this category")}
               </p>
+              {videoSearch && (
+                <button
+                  type="button"
+                  onClick={() => setVideoSearch("")}
+                  className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#00a89a] text-white text-xs font-bold hover:bg-[#008f83] transition-colors cursor-pointer"
+                >
+                  <X className="w-3 h-3" />
+                  <span>{isArabic ? "مسح البحث" : "Clear search"}</span>
+                </button>
+              )}
             </div>
           )}
 
