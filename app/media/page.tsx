@@ -19,6 +19,15 @@ import {
   MapPin,
   ArrowDown,
   Search,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize2,
+  Minimize2,
+  Link2,
+  Settings,
+  Subtitles,
+  Check,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import OurProjectsSection from "@/components/OurProjectsSection";
@@ -131,6 +140,284 @@ const DEMO_SERVICES = [
 const PHOTOS_PER_PAGE = 12;
 const VIDEOS_PER_PAGE = 12;
 
+function VideoCard({
+  video,
+  isArabic,
+  onOpenModal,
+}: {
+  video: VideoItem;
+  isArabic: boolean;
+  onOpenModal: (video: VideoItem) => void;
+}) {
+  const router = useRouter();
+  const cardRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const togglePlay = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    setIsMuted(videoRef.current.muted);
+  };
+
+  const toggleFullscreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const elem = cardRef.current;
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if ((elem as any).webkitRequestFullscreen) {
+        (elem as any).webkitRequestFullscreen();
+      } else if ((videoRef.current as any)?.webkitEnterFullscreen) {
+        (videoRef.current as any).webkitEnterFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if ((document as any).webkitExitFullscreen) {
+        (document as any).webkitExitFullscreen();
+      }
+    }
+  };
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === cardRef.current);
+    };
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+    return () => {
+      document.removeEventListener("fullscreenchange", onFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", onFullscreenChange);
+    };
+  }, []);
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+    }
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      setDuration(videoRef.current.duration);
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (!videoRef.current || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+    videoRef.current.currentTime = percentage * duration;
+    setCurrentTime(percentage * duration);
+  };
+
+  const formatTime = (secs: number) => {
+    if (isNaN(secs) || secs < 0) return "0:00";
+    const m = Math.floor(secs / 60);
+    const s = Math.floor(secs % 60);
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
+  };
+
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  return (
+    <div
+      ref={cardRef}
+      className={`group relative overflow-hidden aspect-video bg-black rounded-2xl border border-slate-200/60 shadow-md hover:shadow-2xl transition-all duration-300 select-none ${
+        isFullscreen ? "w-full h-full rounded-none" : ""
+      }`}
+    >
+      {/* HTML5 video element */}
+      <video
+        ref={videoRef}
+        src={video.videoSrc}
+        poster={video.thumbnail}
+        preload="metadata"
+        playsInline
+        muted={isMuted}
+        onTimeUpdate={handleTimeUpdate}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={() => setIsPlaying(false)}
+        onClick={togglePlay}
+        className="w-full h-full object-cover cursor-pointer"
+      />
+
+      {/* Thumbnail Image Overlay (Shown when not playing) */}
+      {!isPlaying && video.thumbnail && (
+        <div
+          onClick={togglePlay}
+          className="absolute inset-0 z-10 cursor-pointer overflow-hidden"
+        >
+          <Image
+            src={video.thumbnail}
+            alt={isArabic ? video.titleAr : video.titleEn}
+            fill
+            unoptimized
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          {/* Subtle dark gradient overlay so text and play button stand out */}
+          <div className="absolute inset-0 bg-black/35 group-hover:bg-black/25 transition-colors duration-300" />
+        </div>
+      )}
+
+      {/* Top Header Overlay: Logo Badge + Title + Subtitle */}
+      <div className="absolute top-0 inset-x-0 p-3 sm:p-4 z-20 flex items-center justify-between pointer-events-none bg-gradient-to-b from-black/85 via-black/45 to-transparent">
+        {/* Left: Avatar/Logo + Heading & Subtitle on top */}
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2 rtl:pr-0 rtl:pl-2 pointer-events-auto">
+          {/* Circular Company Logo Badge */}
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              router.push("/");
+            }}
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white shadow-md flex items-center justify-center p-1 overflow-hidden shrink-0 border border-white/30 cursor-pointer hover:scale-105 transition-transform"
+            title={isArabic ? "الرئيسية" : "Home"}
+          >
+            <Image
+              src="/logo.png"
+              alt="Taj Al Rahmah"
+              width={26}
+              height={26}
+              className="object-contain"
+            />
+          </div>
+
+          {/* Heading & Subtitle On Top */}
+          <div className="leading-tight min-w-0">
+            {/* Project Title -> Navigates to /project on click */}
+            <h4
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push("/project");
+              }}
+              className="text-xs sm:text-sm font-bold text-white truncate drop-shadow-md cursor-pointer hover:text-[#00DDCF] hover:underline transition-colors block"
+              title={isArabic ? "عرض المشروع" : "View Project"}
+            >
+              {isArabic ? video.titleAr : video.titleEn}
+            </h4>
+
+            {/* Subtitle -> Navigates to /services on click */}
+            <p
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push("/services");
+              }}
+              className="text-[10px] sm:text-xs text-white/80 truncate mt-0.5 drop-shadow-sm font-normal cursor-pointer hover:text-[#00DDCF] hover:underline transition-colors block"
+              title={isArabic ? "عرض الخدمات" : "View Services"}
+            >
+              {isArabic ? (video.locationAr || "خدمات العزل المائي") : (video.locationEn || "Waterproofing Services")}
+            </p>
+          </div>
+        </div>
+
+        {/* Top-Right Control Icons: Only shown when playing */}
+        {isPlaying && (
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pointer-events-auto text-white/90">
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute" : "Mute"}
+              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-sm flex items-center justify-center transition-all cursor-pointer hover:scale-110 active:scale-95 text-white shadow-xs"
+              title={isMuted ? (isArabic ? "تشغيل الصوت" : "Unmute") : (isArabic ? "كتم الصوت" : "Mute")}
+            >
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Center Big Play Button (Translucent circle with white triangle, visible when idle/paused) */}
+      {!isPlaying && (
+        <div
+          onClick={togglePlay}
+          className="absolute inset-0 z-20 flex items-center justify-center cursor-pointer group-hover:scale-105 transition-transform duration-300"
+        >
+          <div className="w-13 h-13 sm:w-15 sm:h-15 rounded-full bg-black/55 backdrop-blur-md border border-white/35 text-white flex items-center justify-center shadow-2xl hover:bg-[#009e90] hover:border-[#009e90] transition-all duration-300">
+            <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white ml-0.5 rtl:ml-0 rtl:mr-0.5 text-white" />
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Controls Bar: Only shown when playing */}
+      {isPlaying && (
+        <div className="absolute bottom-0 inset-x-0 z-20 px-3.5 py-2.5 sm:px-4 sm:py-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 opacity-100 sm:opacity-0 group-hover:opacity-100">
+          {/* Red Scrubber / Progress Bar (Seekable timeline) */}
+          <div
+            onClick={handleSeek}
+            className="relative w-full h-1 sm:h-1.5 hover:h-2 rounded-full bg-white/30 cursor-pointer transition-all mb-2 group/scrub"
+          >
+            <div
+              className="absolute top-0 bottom-0 left-0 bg-[#ff0000] rounded-full"
+              style={{ width: `${progressPercentage}%` }}
+            >
+              {/* Red Scrub Dot Handle */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#ff0000] shadow-[0_0_8px_rgba(255,0,0,0.8)] scale-100 group-hover/scrub:scale-125 transition-transform" />
+            </div>
+          </div>
+
+          {/* Controls Row: Play/Pause + Time + Fullscreen Option */}
+          <div className="flex items-center justify-between text-white text-[11px] sm:text-xs">
+            {/* Left: Play/Pause button + Current / Total Duration */}
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-label={isPlaying ? "Pause" : "Play"}
+                className="hover:text-[#00c4b4] transition-colors cursor-pointer"
+              >
+                {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" />}
+              </button>
+              <span className="font-mono font-medium tracking-tight text-white/95 text-[11px] sm:text-xs">
+                {formatTime(currentTime)} / {formatTime(duration || 105)}
+              </span>
+            </div>
+
+            {/* Right: Fullscreen Button */}
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <button
+                type="button"
+                onClick={toggleFullscreen}
+                aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/50 hover:bg-[#009e90] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-110 active:scale-95 shadow-md"
+                title={isArabic ? "ملء الشاشة" : "Fullscreen"}
+              >
+                {isFullscreen ? (
+                  <Minimize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
+                ) : (
+                  <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function MediaPage() {
   const router = useRouter();
   const { isArabic } = useLanguage();
@@ -182,19 +469,21 @@ export default function MediaPage() {
 
         const mappedVideos: VideoItem[] = videos.map((src, i) => {
           const cat = PHOTO_CAT_MAP[i % PHOTO_CAT_MAP.length];
+          const proj = DEMO_PROJECTS[i % DEMO_PROJECTS.length];
+          const srv = DEMO_SERVICES[i % DEMO_SERVICES.length];
           return {
             id: 1 + i,
             type: "video",
-            thumbnail: src,
+            thumbnail: images.length > 0 ? images[i % images.length] : src,
             videoSrc: src,
             category: cat.key,
             categoryLabelEn: cat.labelEn,
             categoryLabelAr: cat.labelAr,
-            titleEn: "Project Name",
-            titleAr: "اسم المشروع",
-            duration: "0:45",
-            locationEn: "Commercial",
-            locationAr: "تجاري",
+            titleEn: proj.en,
+            titleAr: proj.ar,
+            duration: "1:45",
+            locationEn: srv.en,
+            locationAr: srv.ar,
           };
         });
 
@@ -622,9 +911,9 @@ export default function MediaPage() {
 
           {/* Empty State */}
           {!loading && filteredPhotos.length === 0 && (
-            <div className="text-center py-16 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 max-w-md mx-auto">
+            <div className="text-center py-16 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/80 max-w-md mx-auto">
               <Camera className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-              <p className="text-base font-bold text-white">
+              <p className="text-base font-bold text-[#0B1C24]">
                 {isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category"}
               </p>
             </div>
@@ -721,107 +1010,26 @@ export default function MediaPage() {
 
           {/* Loading Skeleton */}
           {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {Array.from({ length: 12 }).map((_, i) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] bg-slate-100 animate-pulse border border-slate-200/60"
+                  className="aspect-video bg-slate-100 animate-pulse border border-slate-200/60 rounded-2xl"
                 />
               ))}
             </div>
           )}
 
-          {/* 4-Column Video Grid (Matching Reference Card Layout Exactly) */}
+          {/* Video Grid (Matching Design: Heading & Subtitle on Top, Inline Playback & Fullscreen Option) */}
           {!loading && displayedVideos.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedVideos.map((video) => (
-                <div
+                <VideoCard
                   key={video.id}
-                  onClick={() => setActiveVideo(video)}
-                  className="group relative overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-                >
-                  {/* HTML5 video frame preview */}
-                  <video
-                    src={`${video.videoSrc}#t=0.001`}
-                    preload="metadata"
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                  />
-
-                  {/* Gradient Overlay for bottom text visibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
-
-                  {/* Center Sleek Circular Play Button (Visible when idle, hides on hover) */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:opacity-0 group-hover:scale-90 transition-all duration-300">
-                    <div className="w-11 h-11 rounded-full bg-black/45 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-lg">
-                      <Play className="w-4 h-4 fill-white ml-0.5" />
-                    </div>
-                  </div>
-
-                  {/* Hover Center Action Buttons (Preview & View Details) */}
-                  <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
-                    {/* Preview Option (Opens Video Modal) */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setActiveVideo(video);
-                      }}
-                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-black/65 hover:bg-[#00c4b4] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:border-[#00c4b4] hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
-                      title={isArabic ? "معاينة" : "Preview"}
-                    >
-                      <Play className="w-3.5 h-3.5 fill-white shrink-0 ml-0.5" />
-                      <span>{isArabic ? "معاينة" : "Preview"}</span>
-                    </button>
-
-                    {/* View Details Option (Takes to Services) */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push("/services");
-                      }}
-                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-[#00a89a] hover:bg-[#008f83] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
-                      title={isArabic ? "عرض التفاصيل" : "View Details"}
-                    >
-                      <span>{isArabic ? "عرض التفاصيل" : "View Details"}</span>
-                      <ArrowRight className="w-3.5 h-3.5 stroke-[2.2] rtl:rotate-180 shrink-0" />
-                    </button>
-                  </div>
-
-                  {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Commercial) */}
-                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-30 flex items-center gap-2.5 text-white">
-                    {/* Translucent Square Icon Box */}
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
-                      <Film className="w-3.5 h-3.5" />
-                    </div>
-                    {/* Project Title & Location */}
-                    <div className="leading-tight min-w-0">
-                      <h4
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          router.push("/project");
-                        }}
-                        className="text-xs sm:text-[13px] font-bold text-white truncate transition-colors cursor-pointer group/title"
-                      >
-                        <Link
-                          href="/project"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            router.push("/project");
-                          }}
-                          className="hover:text-[#00DDCF] group-hover/title:text-[#00DDCF] hover:underline transition-colors cursor-pointer inline-block max-w-full truncate"
-                        >
-                          {isArabic ? video.titleAr : video.titleEn}
-                        </Link>
-                      </h4>
-                      <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
-                        {isArabic ? video.locationAr : video.locationEn}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                  video={video}
+                  isArabic={isArabic}
+                  onOpenModal={(v) => setActiveVideo(v)}
+                />
               ))}
             </div>
           )}
