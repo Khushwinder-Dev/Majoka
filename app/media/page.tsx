@@ -715,7 +715,7 @@ export default function MediaPage() {
       {/* ══════════════════════════════════════════════════════════════
           OUR PROJECTS SECTION (From Landing Page)
       ══════════════════════════════════════════════════════════════ */}
-      {/* <OurProjectsSection /> */}
+      <OurProjectsSection />
 
       {/* ══════════════════════════════════════════════════════════════
           SERVICES SECTION (Custom Media Order: GRP, Epoxy, Bitumen, Polyurea, Injection, Combo)
