@@ -12,9 +12,11 @@ export interface BannerSlideItem {
 export function BannerSlider({
   slides,
   initialIndex = 0,
+  className,
 }: {
   slides: BannerSlideItem[];
   initialIndex?: number;
+  className?: string;
 }) {
   const [current, setCurrent] = useState(initialIndex);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -67,7 +69,11 @@ export function BannerSlider({
   }
 
   return (
-    <div className="relative w-full h-[260px] sm:h-[340px] md:h-[460px] lg:h-[550px] overflow-hidden bg-[#0b2447] group">
+    <div
+      className={`relative w-full overflow-hidden bg-[#0b2447] group ${
+        className || "h-[260px] sm:h-[340px] md:h-[460px] lg:h-[550px]"
+      }`}
+    >
       {/* Slides */}
       {slides.map((slide, i) => (
         <div

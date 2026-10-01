@@ -302,6 +302,7 @@ function ServicesContent() {
       <BannerSlider
         slides={bannerSlides}
         initialIndex={0}
+        className="h-[600px]"
       />
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}
