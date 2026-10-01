@@ -65,7 +65,7 @@ const FAQS = [
 
 export default function ProjectsFAQ() {
   const { isArabic } = useLanguage();
-  const [openId, setOpenId] = useState<number | null>(null);
+  const [openId, setOpenId] = useState<number | null>(FAQS[0]?.id ?? 1);
 
   return (
     <section

@@ -295,7 +295,7 @@ const SOLUTIONS_FAQS: SolutionFaqItem[] = [
 
 export default function SolutionsPageContent() {
   const { isArabic } = useLanguage();
-  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(SOLUTIONS_FAQS[0]?.id ?? 1);
 
   const toggleFaq = (id: number) => {
     setOpenFaqId(openFaqId === id ? null : id);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 
 export interface FaqItem {
@@ -95,7 +95,13 @@ export default function FaqSection({
   className = "",
   bgClassName = "bg-[#F8FAFC]",
 }: FaqSectionProps) {
-  const [openId, setOpenId] = useState<number | null>(null);
+  const [openId, setOpenId] = useState<number | null>(faqs[0]?.id ?? null);
+
+  useEffect(() => {
+    if (faqs && faqs.length > 0) {
+      setOpenId(faqs[0].id);
+    }
+  }, [faqs]);
 
   const toggleFaq = (id: number) => {
     setOpenId((prev) => (prev === id ? null : id));

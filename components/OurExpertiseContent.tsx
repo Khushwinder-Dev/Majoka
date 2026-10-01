@@ -202,7 +202,7 @@ const SECTOR_ITEMS: SectorItem[] = [
 
 export default function OurExpertiseContent() {
   const { isArabic } = useLanguage();
-  const [openFaqIds, setOpenFaqIds] = useState<number[]>([]);
+  const [openFaqIds, setOpenFaqIds] = useState<number[]>([EXPERTISE_FAQS[0]?.id ?? 1]);
 
   const toggleFaq = (id: number) => {
     setOpenFaqIds((prev) =>

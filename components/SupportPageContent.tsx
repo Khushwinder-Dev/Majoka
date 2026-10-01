@@ -120,7 +120,7 @@ const SUPPORT_FAQS: SupportFaqItem[] = [
 
 export default function SupportPageContent() {
   const { isArabic } = useLanguage();
-  const [openFaqIds, setOpenFaqIds] = useState<number[]>([]);
+  const [openFaqIds, setOpenFaqIds] = useState<number[]>([SUPPORT_FAQS[0]?.id ?? 1]);
 
   const toggleFaq = (id: number) => {
     setOpenFaqIds((prev) =>

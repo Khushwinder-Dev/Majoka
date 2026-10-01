@@ -120,7 +120,7 @@ const WARRANTY_FAQS: WarrantyFaqItem[] = [
 
 export default function WarrantyPageContent() {
   const { isArabic } = useLanguage();
-  const [openFaqIds, setOpenFaqIds] = useState<number[]>([]);
+  const [openFaqIds, setOpenFaqIds] = useState<number[]>([WARRANTY_FAQS[0]?.id ?? 1]);
 
   const toggleFaq = (id: number) => {
     setOpenFaqIds((prev) =>

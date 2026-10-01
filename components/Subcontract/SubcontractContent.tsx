@@ -335,7 +335,7 @@ const SUBCONTRACT_FAQS: SubcontractFaqItem[] = [
 export default function SubcontractContent() {
   const { isArabic, direction } = useLanguage();
   const isAr = isArabic;
-  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(SUBCONTRACT_FAQS[0]?.id ?? 1);
 
   const toggleFaq = (id: number) => {
     setOpenFaqId(openFaqId === id ? null : id);

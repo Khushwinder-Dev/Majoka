@@ -247,7 +247,7 @@ export default function CareerPageContent() {
   const { isArabic } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+  const [openFaqId, setOpenFaqId] = useState<number | null>(CAREER_FAQS[0]?.id ?? 1);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
 
   useEffect(() => {

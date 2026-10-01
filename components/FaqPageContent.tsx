@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -230,8 +230,17 @@ export default function FaqPageContent() {
   const { isArabic } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<"all" | "services" | "solutions" | "projects" | "general">("all");
-  // All FAQs collapsed by default
-  const [openIds, setOpenIds] = useState<number[]>([]);
+  // First FAQ uncollapsed by default
+  const [openIds, setOpenIds] = useState<number[]>([FAQ_ITEMS[0]?.id ?? 1]);
+
+  useEffect(() => {
+    const firstItem = FAQ_ITEMS.find(
+      (item) => activeCategory === "all" || item.category === activeCategory
+    );
+    if (firstItem) {
+      setOpenIds([firstItem.id]);
+    }
+  }, [activeCategory]);
 
   const toggleAccordion = (id: number) => {
     setOpenIds((prev) =>

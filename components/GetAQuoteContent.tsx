@@ -102,8 +102,8 @@ export default function GetAQuoteContent() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // FAQ Accordion State
-  const [openFaqIds, setOpenFaqIds] = useState<number[]>([]);
+  // FAQ Accordion State (first item uncollapsed by default)
+  const [openFaqIds, setOpenFaqIds] = useState<number[]>([QUOTE_FAQS[0]?.id ?? 1]);
 
   const toggleFaq = (id: number) => {
     setOpenFaqIds((prev) =>
