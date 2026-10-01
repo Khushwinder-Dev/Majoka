@@ -536,8 +536,8 @@ const Navbar = () => {
   }, []);
 
   const navBg = isScrolled
-    ? "bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
-    : "bg-transparent";
+    ? "bg-white/95 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-b-0 border-none"
+    : "bg-transparent border-b-0 border-none";
 
   /* ─── MEGA MENU DROPDOWN RENDERER ──────────────────────────────────── */
   const renderMegaMenu = (data: MegaData) => (
@@ -674,7 +674,7 @@ const Navbar = () => {
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 sm:py-4 ${navBg}`}
+        className={`fixed top-0 left-0 right-0 transition-all duration-300 py-3 sm:py-4 border-b-0 ${navBg}`}
         style={{ zIndex: 99999 }}
       >
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
