@@ -57,7 +57,7 @@ const AboutUsSection = () => {
           <div className="w-full flex justify-center" data-aos="fade-left">
             <div className="w-full max-w-[500px] aspect-square rounded-[20px] overflow-hidden relative">
               <Image
-                src="/ceo1.jpeg"
+                src="/ceo2.jpeg"
                 alt="CEO Message"
                 fill
                 className="object-cover"
