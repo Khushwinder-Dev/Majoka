@@ -178,7 +178,6 @@ export default function Footer() {
     { labelEn: "Blog", labelAr: "المدونة", href: "/blogs" },
     { labelEn: "Support", labelAr: "الدعم", href: "/support" },
     { labelEn: "Warranty", labelAr: "الضمان", href: "/warranty" },
-    { labelEn: "Site Map", labelAr: "خريطة الموقع", href: "/sitemap" },
   ];
 
   // 5. Company
