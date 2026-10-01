@@ -138,7 +138,7 @@ const DEMO_SERVICES = [
 ];
 
 const PHOTOS_PER_PAGE = 12;
-const VIDEOS_PER_PAGE = 12;
+const VIDEOS_PER_PAGE = 6;
 
 function VideoCard({
   video,
@@ -431,7 +431,7 @@ export default function MediaPage() {
   const [photoSearch, setPhotoSearch] = useState<string>("");
 
   const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>("all");
-  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(12);
+  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(6);
   const [videoSearch, setVideoSearch] = useState<string>("");
   const [currentVideoPage, setCurrentVideoPage] = useState<number>(1);
 
@@ -968,7 +968,7 @@ export default function MediaPage() {
                     key={cat.id}
                     onClick={() => {
                       setSelectedVideoCategory(cat.id);
-                      setVisibleVideoCount(12);
+                      setVisibleVideoCount(6);
                     }}
                     className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
                       ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
@@ -982,7 +982,7 @@ export default function MediaPage() {
             </div>
 
             {/* Search Input */}
-            <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
+            {/* <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
               <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
               <input
                 type="text"
@@ -1004,7 +1004,7 @@ export default function MediaPage() {
                   <X className="w-3 h-3" />
                 </button>
               )}
-            </div>
+            </div> */}
           </div>
 
           {/* Loading Skeleton */}
@@ -1055,12 +1055,13 @@ export default function MediaPage() {
             </div>
           )}
 
-          {/* Load More Button (Matching Reference Design: Load More ↓) */}
+          {/* Load More Button (Loads another 2 rows = +6 videos) */}
           {!loading && visibleVideoCount < filteredVideos.length && (
             <div className="flex items-center justify-center mt-12 sm:mt-14">
               <button
-                onClick={() => setVisibleVideoCount((prev) => prev + 8)}
-                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2 px-5 rounded-full hover:bg-slate-100 shadow-xs"
+                type="button"
+                onClick={() => setVisibleVideoCount((prev) => prev + 6)}
+                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2.5 px-6 rounded-full hover:bg-slate-100 shadow-xs border border-slate-200/60"
               >
                 <span>{isArabic ? "تحميل المزيد" : "Load More"}</span>
                 <span className="text-base transition-transform group-hover:translate-y-0.5">↓</span>
