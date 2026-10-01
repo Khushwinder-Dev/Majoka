@@ -1,27 +1,13 @@
 "use client";
 
 import React from "react";
-import CommonHeader from "@/components/Common/CommonHeader";
-import { useLanguage } from "@/context/LanguageContext";
-import {
-  ShieldCheck,
-  CreditCard,
-  FileText,
-  AlertTriangle,
-  RotateCcw,
-  CheckCircle2,
-  FileCheck,
-  RefreshCw,
-  Phone,
-  Mail,
-  MapPin,
-  Calendar,
-} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface PolicySection {
   number: string;
-  icon: React.ElementType;
   titleEn: string;
   titleAr: string;
   contentEn: string;
@@ -34,9 +20,8 @@ export default function RefundPolicyPage() {
   const policySections: PolicySection[] = [
     {
       number: "01",
-      icon: CreditCard,
-      titleEn: "1. Payments",
-      titleAr: "1. الدفعات المالية",
+      titleEn: "Payments",
+      titleAr: "الدفعات المالية",
       contentEn:
         "All payments for confirmed projects, services, materials, or work orders are subject to the terms agreed between the parties and specified in the applicable quotation, contract, or purchase order.",
       contentAr:
@@ -44,9 +29,8 @@ export default function RefundPolicyPage() {
     },
     {
       number: "02",
-      icon: FileText,
-      titleEn: "2. Cancellation Requests",
-      titleAr: "2. طلبات الإلغاء",
+      titleEn: "Cancellation Requests",
+      titleAr: "طلبات الإلغاء",
       contentEn:
         "Cancellation requests must be submitted to us in writing. Any applicable cancellation charges or deductions will depend on the project stage, work completed, materials ordered or supplied, and costs incurred prior to cancellation.",
       contentAr:
@@ -54,9 +38,8 @@ export default function RefundPolicyPage() {
     },
     {
       number: "03",
-      icon: AlertTriangle,
-      titleEn: "3. Non-Refundable Costs",
-      titleAr: "3. التكاليف غير القابلة للاسترداد",
+      titleEn: "Non-Refundable Costs",
+      titleAr: "التكاليف غير القابلة للاسترداد",
       contentEn:
         "Amounts relating to materials purchased or specially ordered, completed work, mobilization, transportation, site preparation, or other costs already incurred may not be refundable.",
       contentAr:
@@ -64,9 +47,8 @@ export default function RefundPolicyPage() {
     },
     {
       number: "04",
-      icon: RotateCcw,
-      titleEn: "4. Refunds",
-      titleAr: "4. المبالغ المستردة",
+      titleEn: "Refunds",
+      titleAr: "المبالغ المستردة",
       contentEn:
         "Where a refund is applicable under the agreed terms, the refund amount will be assessed based on the work completed and costs incurred. Approved refunds will be processed through the applicable payment method within a reasonable period.",
       contentAr:
@@ -74,9 +56,8 @@ export default function RefundPolicyPage() {
     },
     {
       number: "05",
-      icon: CheckCircle2,
-      titleEn: "5. Completed Services and Work",
-      titleAr: "5. الخدمات والأعمال المكتملة",
+      titleEn: "Completed Services And Work",
+      titleAr: "الخدمات والأعمال المكتملة",
       contentEn:
         "Payments relating to services or work that have already been completed, delivered, or accepted are generally non-refundable, subject to the applicable contract and agreed terms.",
       contentAr:
@@ -84,9 +65,8 @@ export default function RefundPolicyPage() {
     },
     {
       number: "06",
-      icon: FileCheck,
-      titleEn: "6. Project-Specific Terms",
-      titleAr: "6. الشروط الخاصة بالمشاريع",
+      titleEn: "Project-Specific Terms",
+      titleAr: "الشروط الخاصة بالمشاريع",
       contentEn:
         "Certain projects or services may have specific payment, cancellation, refund, warranty, or completion conditions. Where applicable, these conditions will be stated in the relevant quotation, contract, purchase order, or work order and will apply to the project.",
       contentAr:
@@ -94,194 +74,187 @@ export default function RefundPolicyPage() {
     },
     {
       number: "07",
-      icon: RefreshCw,
-      titleEn: "7. Changes to Services",
-      titleAr: "7. التعديلات على نطاق الخدمات",
+      titleEn: "Changes To Services",
+      titleAr: "التعديلات على نطاق الخدمات",
       contentEn:
         "Any changes, additions, or variations to the agreed scope of work may affect the project cost and payment terms. Such changes will be subject to the applicable approval and agreement between the parties.",
       contentAr:
-        "أي تغييرات أو إضافات أو تعديلات على نطاق العمل المتفق عليه قد تؤثر على التكلفة الإجمالية للمشروع وشروط السداد المقترنة به. وتخضع هذه التعديلات للموافقة والاتفاق المسبق والموثق بين الطرفين.",
+        "أي تعديلات أو إضافات أو تغييرات على نطاق العمل المتفق عليه قد تؤثر على التكلفة الإجمالية للمشروع وشروط السداد، وتخضع هذه التعديلات للموافقة والاتفاق الرسمي بين الطرفين.",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50/60" dir={isArabic ? "rtl" : "ltr"}>
-      {/* ── Page Header Banner ── */}
-      <CommonHeader
-        title={isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
-        breadcrumb={isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
-        imagePath="/banners/Home__.png"
-      />
-
-      {/* ── Main Policy Content ── */}
-      <main className="py-14 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-5xl mx-auto">
-        {/* Policy Introduction Card */}
-        <div className="bg-white rounded-3xl p-7 sm:p-10 border border-stone-200 shadow-xs mb-10 sm:mb-12 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-[#01a9a0]/5 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-stone-100">
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-[#01a9a0]/10 text-[#01a9a0] flex items-center justify-center shrink-0 shadow-inner">
-                <ShieldCheck className="w-6 h-6" />
-              </div>
-              <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-[#01a9a0] tracking-tight">
-                  {isArabic ? "سياسة الاسترداد والإلغاء" : "Refund & Cancellation Policy"}
-                </h1>
-                <p className="text-xs sm:text-sm text-stone-500 font-medium mt-0.5">
-                  Taj Al Rahmah Technical Services L.L.C • Dubai, UAE
-                </p>
-              </div>
-            </div>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold self-start sm:self-auto">
-              <Calendar className="w-3.5 h-3.5 text-[#01a9a0]" />
-              <span>{isArabic ? "آخر تحديث: 25 سبتمبر 2026" : "Last Updated: 25 September 2026"}</span>
-            </div>
-          </div>
-
-          <p className="text-sm sm:text-[15.5px] text-stone-700 leading-relaxed mt-6 font-medium">
-            {isArabic
-              ? "نحن ملتزمون بتقديم خدمات احترافية ومتخصصة في مجالات المقاولات الإنشائية، العزل المائي، الترميم، والصيانة. توضح سياسة الاسترداد والإلغاء هذه كيفية التعامل مع طلبات الإلغاء، واسترداد المبالغ المالية، والمدفوعات ذات الصلة. يرجى مراجعة هذه السياسة جنباً إلى جنب مع عرض الأسعار المعتمد، والعقد، وأمر الشراء، والشروط والأحكام المتفق عليها لكل مشروع."
-              : "We are committed to providing professional construction, waterproofing, repair, and maintenance services. This Refund & Cancellation Policy explains how cancellations, refunds, and related payments are handled. Please review this policy together with the applicable quotation, contract, purchase order, and agreed terms and conditions."}
-          </p>
+    <div className="w-full bg-white text-stone-800" dir={isArabic ? "rtl" : "ltr"}>
+      {/* ══════════════════════════════════════════════════════════════
+          1. HERO BANNER SECTION (Matching Reference Design)
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] overflow-hidden">
+        {/* Background Image: refundBanner.png */}
+        <div className="absolute inset-0">
+          <Image
+            src="/refundBanner.png"
+            alt="Refund & Cancellation Policy"
+            fill
+            priority
+            unoptimized
+            className={`object-cover ${
+              isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
+            }`}
+          />
+          {/* Dark gradient overlay on text side for crisp readability */}
+          <div
+            className={`absolute inset-0 ${
+              isArabic
+                ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
+                : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
+            }`}
+          />
         </div>
 
-        {/* ── Policy Sections (1 to 7) ── */}
-        <div className="space-y-5 sm:space-y-6 mb-12 sm:mb-16">
-          {policySections.map((section, idx) => {
-            const Icon = section.icon;
-            return (
-              <section
-                key={idx}
-                className="group bg-white rounded-2xl p-6 sm:p-8 border border-stone-200/90 hover:border-[#01a9a0]/40 hover:shadow-md transition-all duration-200 relative overflow-hidden"
-              >
-                <div className="flex items-start gap-4 sm:gap-5">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#01a9a0]/10 border border-[#01a9a0]/25 text-[#01a9a0] group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-colors duration-200 mt-0.5">
-                    <Icon className="w-5 h-5" />
-                  </div>
+        {/* Content Container (Left-aligned as per design) */}
+        <div className="relative z-10 h-full max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
+          <div className="max-w-xl text-left rtl:text-right">
+            {/* Breadcrumb: HOME // REFUND & CANCELLATION POLICY */}
+            <div className="flex items-center gap-2 text-xs sm:text-[13px] font-bold tracking-wider uppercase mb-2.5 sm:mb-3">
+              <Link href="/" className="text-white/90 hover:text-[#00DDCF] transition-colors">
+                {isArabic ? "الرئيسية" : "HOME"}
+              </Link>
+              <span className="text-[#00DDCF] font-black">//</span>
+              <span className="text-[#00DDCF]">
+                {isArabic ? "سياسة الاسترداد والإلغاء" : "REFUND & CANCELLATION POLICY"}
+              </span>
+            </div>
 
-                  <div className="flex-1 min-w-0">
-                    <h2 className="text-base sm:text-lg font-bold text-[#01a9a0] transition-colors duration-200 mb-2.5">
-                      {isArabic ? section.titleAr : section.titleEn}
-                    </h2>
-                    <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed font-normal">
-                      {isArabic ? section.contentAr : section.contentEn}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            );
-          })}
+            {/* Main Title: Refund & Cancellation Policy */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+              {isArabic ? (
+                <>
+                  سياسة الاسترداد و<span className="text-[#00DDCF]">الإلغاء</span>
+                </>
+              ) : (
+                <>
+                  Refund &amp; <span className="text-[#00DDCF]">Cancellation Policy</span>
+                </>
+              )}
+            </h1>
+
+            {/* Subtitle from Design */}
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-200/90 leading-relaxed font-normal">
+              {isArabic
+                ? "توضح هذه السياسة كيفية التعامل مع طلبات الإلغاء والمبالغ المستردة والدفعات المالية المرتبطة بخدماتنا واستشاراتنا الهندسية وأعمال الصيانة."
+                : "This policy explains how cancellations, refunds, and related payments are handled for our professional consultations, web profiling, and maintenance services."}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════
+          2. MAIN CONTENT BODY (Matching Reference Design Layout)
+      ══════════════════════════════════════════════════════════════ */}
+      <main className="max-w-[880px] mx-auto px-5 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Intro Paragraph */}
+        <p className="text-stone-600 text-xs sm:text-sm leading-relaxed mb-10 sm:mb-12">
+          {isArabic
+            ? "نحن ملتزمون بتقديم خدمات المقاولات الاحترافية والعزل المائي والإصلاح والصيانة بأعلى المعايير. توضح سياسة الاسترداد والإلغاء هذه آلية التعامل مع طلبات الإلغاء والمبالغ المستردة والدفعات المالية. يرجى مراجعة هذه السياسة بالاقتران مع عروض الأسعار والعقود وأوامر الشراء المعتمدة والشروط المتفق عليها."
+            : "We are committed to providing professional construction, waterproofing, repair, and maintenance services. This Refund & Cancellation Policy explains how cancellations, refunds, and related payments are handled. Please review this policy together with the applicable quotation, contract, purchase order, and agreed terms and conditions."}
+        </p>
+
+        {/* 7 Policy Points (01 to 07) */}
+        <div className="space-y-8 sm:space-y-9">
+          {policySections.map((sec) => (
+            <div key={sec.number} className="text-left rtl:text-right">
+              {/* Number Badge + Title */}
+              <div className="flex items-center gap-3.5 sm:gap-4">
+                <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E5FAF7] text-[#00DDCF] font-bold text-xs sm:text-sm flex items-center justify-center shrink-0">
+                  {sec.number}
+                </span>
+                <h2 className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
+                  {isArabic ? sec.titleAr : sec.titleEn}
+                </h2>
+              </div>
+
+              {/* Description Text */}
+              <p className="mt-2.5 sm:mt-3 text-xs sm:text-[13.5px] text-stone-600 leading-relaxed font-normal">
+                {isArabic ? sec.contentAr : sec.contentEn}
+              </p>
+            </div>
+          ))}
         </div>
 
-        {/* ── Section 8: Contact Us & Transparent Business Practice ── */}
-        <div className="bg-white rounded-3xl p-7 sm:p-10 border border-stone-200 shadow-xs mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-2.5 h-7 bg-[#01a9a0] rounded-full shrink-0" />
-            <h2 className="text-xl sm:text-2xl font-bold text-[#01a9a0]">
-              {isArabic ? "8. اتصل بنا" : "8. Contact Us"}
-            </h2>
-          </div>
-
-          <p className="text-sm sm:text-[15px] text-stone-600 leading-relaxed mb-6">
+        {/* ══════════════════════════════════════════════════════════════
+            3. CONTACT US CARD (Matching Reference Design)
+        ══════════════════════════════════════════════════════════════ */}
+        <div className="mt-12 sm:mt-14 bg-[#EEF5F8] rounded-2xl p-6 sm:p-7 text-left rtl:text-right border border-slate-100/80">
+          <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
+            {isArabic ? "تواصل معنا" : "Contact Us"}
+          </h3>
+          <p className="text-xs text-stone-500 leading-relaxed mb-6 max-w-2xl">
             {isArabic
-              ? "لأي استفسارات أو أسئلة تتعلق بسياسة الاسترداد والإلغاء هذه، أو لتقديم طلبات الإلغاء أو الاسترداد، يرجى التواصل مع فريقنا المختص قبل تأكيد أو إلغاء أي خدمة أو مشروع."
+              ? "لأية استفسارات تتعلق بسياسة الاسترداد والإلغاء هذه، أو طلبات الإلغاء والاسترداد، يرجى التواصل مع فريقنا قبل تأكيد أو إلغاء أي خدمة أو مشروع."
               : "For questions regarding this Refund & Cancellation Policy, cancellations, or refund requests, please contact our team before confirming or cancelling a service or project."}
           </p>
 
-          {/* Contact Details Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-8">
+          {/* 3 Contact Info Badges in a Row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {/* Email */}
             <a
               href="mailto:info@tajalrahmah.com"
-              className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-stone-50 border border-stone-200/80 hover:border-[#01a9a0] hover:bg-[#f0faf9] transition-all group"
+              className="flex items-center gap-3 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-white border border-stone-200 flex items-center justify-center text-[#01a9a0] shrink-0 group-hover:scale-105 transition-transform">
-                <Mail className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                <Mail className="w-4 h-4 stroke-[2.2]" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
+                <span className="block text-[10px] text-stone-400 font-medium">
                   {isArabic ? "البريد الإلكتروني" : "Email"}
-                </p>
-                <p className="text-sm font-bold text-stone-800 truncate group-hover:text-[#01a9a0] transition-colors">
-                  info@tajalrahmah.com
-                </p>
+                </span>
+                <span className="block text-xs font-bold text-slate-900 group-hover:text-[#00a89a] transition-colors break-all">
+                  Info@Tajalrahmah.Com
+                </span>
               </div>
             </a>
 
             {/* Phone */}
             <a
               href="tel:+971556173300"
-              className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-stone-50 border border-stone-200/80 hover:border-[#01a9a0] hover:bg-[#f0faf9] transition-all group"
+              className="flex items-center gap-3 group"
             >
-              <div className="w-10 h-10 rounded-xl bg-white border border-stone-200 flex items-center justify-center text-[#01a9a0] shrink-0 group-hover:scale-105 transition-transform">
-                <Phone className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                <Phone className="w-4 h-4 stroke-[2.2]" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
+                <span className="block text-[10px] text-stone-400 font-medium">
                   {isArabic ? "الهاتف" : "Phone"}
-                </p>
-                <p className="text-sm font-bold text-stone-800 truncate group-hover:text-[#01a9a0] transition-colors">
+                </span>
+                <span className="block text-xs font-bold text-slate-900 group-hover:text-[#00a89a] transition-colors">
                   +971 55 617 3300
-                </p>
+                </span>
               </div>
             </a>
 
             {/* Address */}
-            <div className="flex items-center gap-3.5 p-4 sm:p-5 rounded-2xl bg-stone-50 border border-stone-200/80">
-              <div className="w-10 h-10 rounded-xl bg-white border border-stone-200 flex items-center justify-center text-[#01a9a0] shrink-0">
-                <MapPin className="w-5 h-5" />
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-full bg-[#00DDCF] text-white flex items-center justify-center shrink-0 shadow-xs">
+                <MapPin className="w-4 h-4 stroke-[2.2]" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-stone-400 uppercase tracking-wider">
+                <span className="block text-[10px] text-stone-400 font-medium">
                   {isArabic ? "العنوان" : "Address"}
-                </p>
-                <p className="text-sm font-bold text-stone-800 truncate">
+                </span>
+                <span className="block text-xs font-bold text-slate-900">
                   G-01-691, Al Khabaisi, Dubai, UAE
-                </p>
+                </span>
               </div>
             </div>
           </div>
-
-          {/* Closing Trust Notice */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-[#e6f7f6] border border-[#01a9a0]/20 flex items-center gap-3 text-stone-800">
-            <CheckCircle2 className="w-5 h-5 text-[#01a9a0] shrink-0" />
-            <p className="text-xs sm:text-sm font-medium leading-relaxed">
-              {isArabic
-                ? "نحن نقدّر ثقتكم الغالية في خدماتنا ونلتزم دائماً بالحفاظ على ممارسات تجارية واضحة وشفافة مع جميع عملائنا."
-                : "We appreciate your trust in our services and remain committed to maintaining clear and transparent business practices."}
-            </p>
-          </div>
         </div>
 
-        {/* Quick Action Footer Strip */}
-        {/* <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0B1C24] to-[#122B37] text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
-          <div>
-            <h3 className="text-lg font-bold">
-              {isArabic ? "هل تحتاج إلى استشارة فنية أو تسعير مشروع؟" : "Need Technical Consultation or Project Quotation?"}
-            </h3>
-            <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-xl">
-              {isArabic
-                ? "فريق مهندسينا ومسؤولي العقود متاحون لمساعدتكم ومراجعة متطلبات مشاريعكم الهندسية."
-                : "Our engineering and contracts desk is ready to review your project specifications and schedule a site survey."}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <Link
-              href="/contact"
-              className="px-6 py-3 rounded-full bg-[#00DDCF] hover:bg-[#00c4b4] text-[#0B1C24] font-bold text-xs sm:text-sm transition-all duration-200 shadow-md active:scale-95"
-            >
-              {isArabic ? "تواصل معنا" : "Contact Us"}
-            </Link>
-            <Link
-              href="/get-a-quote"
-              className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs sm:text-sm transition-all duration-200 active:scale-95"
-            >
-              {isArabic ? "طلب تسعير" : "Get a Quote"}
-            </Link>
-          </div>
-        </div> */}
+        {/* Outro Text below Contact Us */}
+        <p className="mt-8 text-xs sm:text-[13px] text-stone-500 leading-relaxed text-left rtl:text-right">
+          {isArabic
+            ? "نحن نقدّر ثقتكم الغالية في خدماتنا ونلتزم دائماً بالحفاظ على ممارسات تجارية واضحة وشفافة مع كافة عملائنا الكرام."
+            : "We appreciate your trust in our services and remain committed to maintaining clear and transparent business practices."}
+        </p>
       </main>
     </div>
   );

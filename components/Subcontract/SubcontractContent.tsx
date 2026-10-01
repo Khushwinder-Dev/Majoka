@@ -348,7 +348,7 @@ export default function SubcontractContent() {
         {/* Background Image with Dark Tinted Gradient */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/subcontract/hero.png"
+            src="/subcontract/hero1.png"
             alt="Reliable Subcontracting For Your Projects"
             fill
             priority
@@ -387,7 +387,7 @@ export default function SubcontractContent() {
                 <>
                   Reliable Subcontracting
                   <br />
-                  For Your Projects
+                  <p className="text-[#01a9a0]">For Your Projects</p>
                 </>
               )}
             </h1>
@@ -555,7 +555,7 @@ export default function SubcontractContent() {
             <div className="lg:col-span-6">
               <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-[28px] overflow-hidden shadow-xl shadow-gray-200/70 border border-gray-100">
                 <Image
-                  src="/subcontract/intro-handshake.png"
+                  src="/subcontract/intro-handshake1.png"
                   alt="Subcontracting Services Collaboration"
                   fill
                   className="object-cover"
