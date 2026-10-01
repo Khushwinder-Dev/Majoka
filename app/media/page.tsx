@@ -13,6 +13,7 @@ import {
   Camera,
   Film,
   ArrowRight,
+  ArrowLeft,
   Phone,
   Eye,
   MapPin,
@@ -298,8 +299,8 @@ export default function MediaPage() {
     if (photoSliderRef.current) {
       const container = photoSliderRef.current;
       const card = container.querySelector<HTMLElement>(".photo-gallery-slide");
-      const cardWidth = card ? card.offsetWidth : 320;
-      const scrollStep = (cardWidth + 24) * (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : 2);
+      const cardWidth = card ? card.offsetWidth : 330;
+      const scrollStep = cardWidth + 24; // width + gap
       const factor = direction === "left" ? -1 : 1;
       const delta = isArabic ? -factor * scrollStep : factor * scrollStep;
 
@@ -484,25 +485,31 @@ export default function MediaPage() {
               })}
             </div>
 
-            {/* Slider Controls (Placed exactly where the search bar was) */}
-            <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+            {/* Carousel Controls (Placed at place of search bar, matching project standard carousel controls) */}
+            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-center">
               <button
                 type="button"
                 onClick={() => scrollPhotos("left")}
-                disabled={!canScrollLeft}
                 aria-label={isArabic ? "السابق" : "Previous Slide"}
-                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white text-[#0B1C24] hover:bg-[#00c4b4] hover:text-[#0B1C24] shadow-md flex items-center justify-center transition-all disabled:opacity-25 disabled:pointer-events-none cursor-pointer active:scale-95"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-[0_6px_22px_rgba(0,0,0,0.14)] flex items-center justify-center text-[#009e90] hover:bg-[#009e90] hover:text-white transition-all duration-300 cursor-pointer focus:outline-none hover:scale-110 active:scale-95"
               >
-                {isArabic ? <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" /> : <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />}
+                {isArabic ? (
+                  <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+                ) : (
+                  <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+                )}
               </button>
               <button
                 type="button"
                 onClick={() => scrollPhotos("right")}
-                disabled={!canScrollRight}
                 aria-label={isArabic ? "التالي" : "Next Slide"}
-                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white text-[#0B1C24] hover:bg-[#00c4b4] hover:text-[#0B1C24] shadow-md flex items-center justify-center transition-all disabled:opacity-25 disabled:pointer-events-none cursor-pointer active:scale-95"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-[0_6px_22px_rgba(0,0,0,0.14)] flex items-center justify-center text-[#009e90] hover:bg-[#009e90] hover:text-white transition-all duration-300 cursor-pointer focus:outline-none hover:scale-110 active:scale-95"
               >
-                {isArabic ? <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" /> : <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />}
+                {isArabic ? (
+                  <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+                ) : (
+                  <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+                )}
               </button>
             </div>
           </div>
@@ -535,7 +542,7 @@ export default function MediaPage() {
                     className="photo-gallery-slide flex-shrink-0 w-[270px] sm:w-[310px] md:w-[335px] lg:w-[350px] snap-start flex flex-col group cursor-pointer"
                   >
                     {/* Clean Image Container (No text inside image) */}
-                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-900 border border-white/10 shadow-lg group-hover:border-[#00c4b4]/40 transition-all duration-300">
+                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-900 shadow-lg group-hover:border-[#00c4b4]/40 transition-all duration-300">
                       <Image
                         src={photo.thumbnail}
                         alt={isArabic ? photo.titleAr : photo.titleEn}
@@ -551,7 +558,7 @@ export default function MediaPage() {
                       {/* Hover Center Action Buttons (Preview & View Details) */}
                       <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                         {/* Preview Option */}
-                        <button
+                        {/* <button
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -562,7 +569,7 @@ export default function MediaPage() {
                         >
                           <Eye className="w-3.5 h-3.5 stroke-[2.2] shrink-0" />
                           <span>{isArabic ? "معاينة" : "Preview"}</span>
-                        </button>
+                        </button> */}
 
                         {/* View Details Option (Takes to Services) */}
                         <button
