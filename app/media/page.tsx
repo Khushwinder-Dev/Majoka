@@ -431,9 +431,7 @@ export default function MediaPage() {
   const [photoSearch, setPhotoSearch] = useState<string>("");
 
   const [selectedVideoCategory, setSelectedVideoCategory] = useState<string>("all");
-  const [visibleVideoCount, setVisibleVideoCount] = useState<number>(6);
   const [videoSearch, setVideoSearch] = useState<string>("");
-  const [currentVideoPage, setCurrentVideoPage] = useState<number>(1);
 
   // Modals
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
@@ -526,9 +524,38 @@ export default function MediaPage() {
     return result;
   }, [videoItems, selectedVideoCategory, videoSearch]);
 
-  const displayedVideos = useMemo(() => {
-    return filteredVideos.slice(0, visibleVideoCount);
-  }, [filteredVideos, visibleVideoCount]);
+  const videoColumns = useMemo(() => {
+    const cols: VideoItem[][] = [];
+    for (let i = 0; i < filteredVideos.length; i += 2) {
+      cols.push(filteredVideos.slice(i, i + 2));
+    }
+    return cols;
+  }, [filteredVideos]);
+
+  // ── Video Gallery Slider Scroll & Controls ────────────────────
+  const videoSliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (videoSliderRef.current) {
+      videoSliderRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [selectedVideoCategory]);
+
+  const scrollVideos = (direction: "left" | "right") => {
+    if (videoSliderRef.current) {
+      const container = videoSliderRef.current;
+      const col = container.querySelector<HTMLElement>(".video-gallery-col");
+      const colWidth = col ? col.offsetWidth : 330;
+      const scrollStep = colWidth + 24; // column width + gap
+      const factor = direction === "left" ? -1 : 1;
+      const delta = isArabic ? -factor * scrollStep : factor * scrollStep;
+
+      container.scrollBy({
+        left: delta,
+        behavior: "smooth",
+      });
+    }
+  };
 
   // ── Lightbox Navigation ──────────────────────────────────────
   const handleOpenPhoto = (photo: PhotoItem) => {
@@ -957,7 +984,7 @@ export default function MediaPage() {
             </p>
           </div>
 
-          {/* Filter & Search Bar */}
+          {/* Filter Bar with Carousel Controls (Search removed, Carousel controls placed at right matching Image Gallery) */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 sm:mb-10">
             {/* Category Filter Pills */}
             <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
@@ -968,7 +995,6 @@ export default function MediaPage() {
                     key={cat.id}
                     onClick={() => {
                       setSelectedVideoCategory(cat.id);
-                      setVisibleVideoCount(6);
                     }}
                     className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
                       ? "bg-[#00a89a] text-white shadow-md shadow-[#00a89a]/30 scale-100"
@@ -981,91 +1007,85 @@ export default function MediaPage() {
               })}
             </div>
 
-            {/* Search Input */}
-            {/* <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
-              <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
-              <input
-                type="text"
-                value={videoSearch}
-                onChange={(e) => {
-                  setVideoSearch(e.target.value);
-                  setVisibleVideoCount(12);
-                }}
-                placeholder={isArabic ? "البحث في معرض الفيديو..." : "Search video gallery..."}
-                className="w-full pl-10 pr-9 rtl:pl-9 rtl:pr-10 py-2.5 rounded-full bg-[#EEF8F8]/60 border border-[#d6eeee] text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 shadow-xs focus:outline-none focus:border-[#00a89a] focus:ring-2 focus:ring-[#00a89a]/20 transition-all"
-              />
-              {videoSearch && (
-                <button
-                  type="button"
-                  onClick={() => setVideoSearch("")}
-                  className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
-                  title={isArabic ? "مسح البحث" : "Clear search"}
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              )}
-            </div> */}
+            {/* Carousel Controls (Placed at place of search bar, matching project standard carousel controls) */}
+            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-center">
+              <button
+                type="button"
+                onClick={() => scrollVideos("left")}
+                aria-label={isArabic ? "السابق" : "Previous Slide"}
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-[0_6px_22px_rgba(0,0,0,0.14)] flex items-center justify-center text-[#009e90] hover:bg-[#009e90] hover:text-white transition-all duration-300 cursor-pointer focus:outline-none hover:scale-110 active:scale-95"
+              >
+                {isArabic ? (
+                  <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+                ) : (
+                  <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+                )}
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollVideos("right")}
+                aria-label={isArabic ? "التالي" : "Next Slide"}
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white shadow-[0_6px_22px_rgba(0,0,0,0.14)] flex items-center justify-center text-[#009e90] hover:bg-[#009e90] hover:text-white transition-all duration-300 cursor-pointer focus:outline-none hover:scale-110 active:scale-95"
+              >
+                {isArabic ? (
+                  <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+                ) : (
+                  <ArrowRight className="w-5 h-5 stroke-[2.5]" />
+                )}
+              </button>
+            </div>
           </div>
 
-          {/* Loading Skeleton */}
+          {/* Loading Skeleton (4 columns of 2 rows each) */}
           {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => (
+            <div className="flex gap-5 sm:gap-6 overflow-hidden">
+              {Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-video bg-slate-100 animate-pulse border border-slate-200/60 rounded-2xl"
-                />
+                  className="flex-shrink-0 flex flex-col gap-5 sm:gap-6 w-[290px] sm:w-[340px] md:w-[380px] lg:w-[410px]"
+                >
+                  <div className="w-full aspect-video bg-white/40 animate-pulse border border-slate-200/60" />
+                  <div className="w-full aspect-video bg-white/40 animate-pulse border border-slate-200/60" />
+                </div>
               ))}
             </div>
           )}
 
-          {/* Video Grid (Matching Design: Heading & Subtitle on Top, Inline Playback & Fullscreen Option) */}
-          {!loading && displayedVideos.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayedVideos.map((video) => (
-                <VideoCard
-                  key={video.id}
-                  video={video}
-                  isArabic={isArabic}
-                  onOpenModal={(v) => setActiveVideo(v)}
-                />
-              ))}
+          {/* Video Slider Carousel (2 Rows Layout, with NO slider dots) */}
+          {!loading && videoColumns.length > 0 && (
+            <div className="relative group/carousel">
+              {/* Horizontal Scroll Track */}
+              <div
+                ref={videoSliderRef}
+                className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-5 sm:gap-6 pb-4 pt-1 px-0.5 no-scrollbar"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {videoColumns.map((col, colIdx) => (
+                  <div
+                    key={colIdx}
+                    className="video-gallery-col flex-shrink-0 flex flex-col gap-5 sm:gap-6 w-[290px] sm:w-[340px] md:w-[380px] lg:w-[410px] snap-start"
+                  >
+                    {col.map((video) => (
+                      <VideoCard
+                        key={video.id}
+                        video={video}
+                        isArabic={isArabic}
+                        onOpenModal={(v) => setActiveVideo(v)}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
           {/* Empty State */}
-          {!loading && displayedVideos.length === 0 && (
+          {!loading && filteredVideos.length === 0 && (
             <div className="text-center py-16 bg-slate-50 rounded-3xl border border-slate-200/60 max-w-md mx-auto">
               <Film className="w-12 h-12 text-slate-300 mx-auto mb-3" />
               <p className="text-base font-bold text-slate-700">
-                {videoSearch
-                  ? (isArabic ? `لا توجد نتائج بحث عن "${videoSearch}"` : `No videos found matching "${videoSearch}"`)
-                  : (isArabic ? "لا توجد فيديوهات في هذا القسم حالياً" : "No videos found in this category")}
+                {isArabic ? "لا توجد فيديوهات في هذا القسم حالياً" : "No videos found in this category"}
               </p>
-              {videoSearch && (
-                <button
-                  type="button"
-                  onClick={() => setVideoSearch("")}
-                  className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#00a89a] text-white text-xs font-bold hover:bg-[#008f83] transition-colors cursor-pointer"
-                >
-                  <X className="w-3 h-3" />
-                  <span>{isArabic ? "مسح البحث" : "Clear search"}</span>
-                </button>
-              )}
-            </div>
-          )}
-
-          {/* Load More Button (Loads another 2 rows = +6 videos) */}
-          {!loading && visibleVideoCount < filteredVideos.length && (
-            <div className="flex items-center justify-center mt-12 sm:mt-14">
-              <button
-                type="button"
-                onClick={() => setVisibleVideoCount((prev) => prev + 6)}
-                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2.5 px-6 rounded-full hover:bg-slate-100 shadow-xs border border-slate-200/60"
-              >
-                <span>{isArabic ? "تحميل المزيد" : "Load More"}</span>
-                <span className="text-base transition-transform group-hover:translate-y-0.5">↓</span>
-              </button>
             </div>
           )}
         </div>
