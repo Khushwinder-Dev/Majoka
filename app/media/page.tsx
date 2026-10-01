@@ -331,17 +331,17 @@ export default function MediaPage() {
       {/* ══════════════════════════════════════════════════════════════
           OUR PROJECTS SECTION (From Landing Page)
       ══════════════════════════════════════════════════════════════ */}
-      <OurProjectsSection />
+      {/* <OurProjectsSection /> */}
 
       {/* ══════════════════════════════════════════════════════════════
           SERVICES SECTION (Custom Media Order: GRP, Epoxy, Bitumen, Polyurea, Injection, Combo)
       ══════════════════════════════════════════════════════════════ */}
-      <ProtectionServicesSection servicesOrder={[1, 3, 4, 5, 6, 2]} />
+      {/* <ProtectionServicesSection servicesOrder={[1, 3, 4, 5, 6, 2]} /> */}
 
       {/* ══════════════════════════════════════════════════════════════
           SOLUTIONS LISTING SECTION (6 Specific Solutions from Solutions Page)
       ══════════════════════════════════════════════════════════════ */}
-      <SolutionsListingSection />
+      {/* <SolutionsListingSection /> */}
 
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: A CLOSER LOOK AT OUR WORK (PHOTO GALLERY)
@@ -813,7 +813,7 @@ export default function MediaPage() {
       {/* ══════════════════════════════════════════════════════════════
           LATEST NEWS SECTION (Layout Reference)
       ══════════════════════════════════════════════════════════════ */}
-      <MediaLatestNewsSection />
+      {/* <MediaLatestNewsSection /> */}
 
       {/* ══════════════════════════════════════════════════════════════
           4. SECTION: COMPANY PROFILE DOWNLOAD BANNER
