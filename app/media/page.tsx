@@ -245,9 +245,8 @@ function VideoCard({
   return (
     <div
       ref={cardRef}
-      className={`group relative overflow-hidden aspect-video bg-black rounded-2xl border border-slate-200/60 shadow-md hover:shadow-2xl transition-all duration-300 select-none ${
-        isFullscreen ? "w-full h-full rounded-none" : ""
-      }`}
+      className={`group relative overflow-hidden aspect-video bg-black shadow-md hover:shadow-2xl transition-all duration-300 select-none ${isFullscreen ? "w-full h-full rounded-none" : ""
+        }`}
     >
       {/* HTML5 video element */}
       <video
