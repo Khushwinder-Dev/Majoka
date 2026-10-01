@@ -808,7 +808,7 @@ export default function MediaPage() {
               {Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-[275px] sm:w-[310px] md:w-[335px] lg:w-[350px] aspect-[4/3] bg-white/10 animate-pulse border border-white/10 rounded-2xl"
+                  className="flex-shrink-0 w-[290px] sm:w-[340px] md:w-[380px] lg:w-[410px] aspect-[16/10] bg-white/40 animate-pulse border border-slate-200/60"
                 />
               ))}
             </div>
@@ -827,16 +827,16 @@ export default function MediaPage() {
                   <div
                     key={photo.id}
                     onClick={() => router.push("/services")}
-                    className="photo-gallery-slide flex-shrink-0 w-[270px] sm:w-[310px] md:w-[335px] lg:w-[350px] snap-start flex flex-col group cursor-pointer"
+                    className="photo-gallery-slide flex-shrink-0 w-[290px] sm:w-[340px] md:w-[380px] lg:w-[410px] snap-start flex flex-col group cursor-pointer"
                   >
-                    {/* Clean Image Container (No text inside image) */}
-                    <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-900 shadow-lg group-hover:border-[#00c4b4]/40 transition-all duration-300">
+                    {/* Clean Image Container (Landscape Rectangle Shape) */}
+                    <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-900 shadow-md group-hover:border-[#00c4b4]/40 transition-all duration-300">
                       <Image
                         src={photo.thumbnail}
                         alt={isArabic ? photo.titleAr : photo.titleEn}
                         fill
                         unoptimized
-                        sizes="(max-width: 640px) 270px, (max-width: 1024px) 335px, 350px"
+                        sizes="(max-width: 640px) 290px, (max-width: 1024px) 380px, 410px"
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                       />
 
