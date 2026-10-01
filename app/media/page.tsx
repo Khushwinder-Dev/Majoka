@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -32,6 +32,8 @@ interface PhotoItem {
   type: "photo";
   thumbnail: string;
   category: string;
+  serviceNameEn?: string;
+  serviceNameAr?: string;
   titleEn: string;
   titleAr: string;
   categoryLabelEn: string;
@@ -99,6 +101,32 @@ const LOCATIONS = [
   { en: "Sharjah Waterfront", ar: "واجهة الشارقة" },
 ];
 
+const DEMO_PROJECTS = [
+  { en: "UAE Pavilion EXPO 2020", ar: "جناح الإمارات إكسبو 2020" },
+  { en: "ADNOC New Head Quarters", ar: "المقر الرئيسي الجديد لأدنوك" },
+  { en: "Mirdif City Center", ar: "مردف سيتي سنتر" },
+  { en: "Mobility Pavilion EXPO", ar: "جناح التنقل إكسبو 2020" },
+  { en: "Miami 1 @ JVC by Samana", ar: "ميامي 1 في قرية جميرا الدائرية" },
+  { en: "Dubai Hills Estate", ar: "دبي هيلز استيت" },
+  { en: "City Premiere Marina Hotel", ar: "شقق سيتي بريمير مارينا" },
+  { en: "Miami Phase 2 @ JVT", ar: "ميامي المرحلة 2 في مثلث قرية جميرا" },
+  { en: "Arabian Ranches Villas", ar: "فلل المرابع العربية" },
+  { en: "Al Furjan South Villas", ar: "فلل الفرجان جنوب" },
+  { en: "Downtown Dubai Commercial Tower", ar: "برج داون تاون التجاري" },
+  { en: "Sharjah Waterfront Development", ar: "مشروع واجهة الشارقة المائية" },
+];
+
+const DEMO_SERVICES = [
+  { en: "GRP & Fiberglass Waterproofing", ar: "عزل GRP والألياف الزجاجية" },
+  { en: "Combo System Roof Waterproofing", ar: "نظام الكومبو لعزل الأسطح" },
+  { en: "Epoxy Floor Coating", ar: "طلاء أرضيات الإيبوكسي" },
+  { en: "Bitumen Membrane Waterproofing", ar: "عزل الغشاء البيتوميني" },
+  { en: "Polyurea Waterproofing", ar: "عزل البولي يوريا فائق المرونة" },
+  { en: "Injection Waterproofing", ar: "عزل الحقن المائي للخرسانة" },
+  { en: "LEED Platinum Waterproofing", ar: "عزل معتمد LEED بلاتيني" },
+  { en: "LEED Gold Thermal Insulation", ar: "عزل حراري معتمد LEED ذهبي" },
+];
+
 const PHOTOS_PER_PAGE = 12;
 const VIDEOS_PER_PAGE = 12;
 
@@ -133,6 +161,8 @@ export default function MediaPage() {
       .then(({ images, videos }: { images: string[]; videos: string[] }) => {
         const mappedPhotos: PhotoItem[] = images.map((src, i) => {
           const cat = PHOTO_CAT_MAP[i % PHOTO_CAT_MAP.length];
+          const proj = DEMO_PROJECTS[i % DEMO_PROJECTS.length];
+          const srv = DEMO_SERVICES[i % DEMO_SERVICES.length];
           return {
             id: 101 + i,
             type: "photo",
@@ -140,8 +170,10 @@ export default function MediaPage() {
             category: cat.key,
             categoryLabelEn: cat.labelEn,
             categoryLabelAr: cat.labelAr,
-            titleEn: "Project Name",
-            titleAr: "اسم المشروع",
+            serviceNameEn: srv.en,
+            serviceNameAr: srv.ar,
+            titleEn: proj.en,
+            titleAr: proj.ar,
             locationEn: "Dubai, UAE",
             locationAr: "دبي، الإمارات",
           };
@@ -171,26 +203,14 @@ export default function MediaPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  // ── Filtered & Paginated Photos ──────────────────────────────
+  // ── Filtered Photos ──────────────────────────────────────────
   const filteredPhotos = useMemo(() => {
     let result = photoItems;
     if (selectedPhotoCategory !== "all") {
       result = result.filter((p) => p.category === selectedPhotoCategory);
     }
-    if (photoSearch.trim()) {
-      const q = photoSearch.toLowerCase().trim();
-      result = result.filter(
-        (p) =>
-          p.titleEn.toLowerCase().includes(q) ||
-          p.titleAr.includes(q) ||
-          p.categoryLabelEn.toLowerCase().includes(q) ||
-          p.categoryLabelAr.includes(q) ||
-          p.locationEn.toLowerCase().includes(q) ||
-          p.locationAr.includes(q)
-      );
-    }
     return result;
-  }, [photoItems, selectedPhotoCategory, photoSearch]);
+  }, [photoItems, selectedPhotoCategory]);
 
   const displayedPhotos = useMemo(() => {
     return filteredPhotos.slice(0, visiblePhotoCount);
@@ -240,6 +260,54 @@ export default function MediaPage() {
     const prevIdx = (activePhotoIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
     setActivePhotoIndex(prevIdx);
     setActivePhoto(filteredPhotos[prevIdx]);
+  };
+
+  // ── Photo Gallery Slider Scroll & Controls ────────────────────
+  const photoSliderRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const updatePhotoScroll = () => {
+    if (photoSliderRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = photoSliderRef.current;
+      setCanScrollLeft(Math.abs(scrollLeft) > 10);
+      setCanScrollRight(Math.abs(scrollLeft) < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const el = photoSliderRef.current;
+    if (el) {
+      el.addEventListener("scroll", updatePhotoScroll);
+      window.addEventListener("resize", updatePhotoScroll);
+      updatePhotoScroll();
+      return () => {
+        el.removeEventListener("scroll", updatePhotoScroll);
+        window.removeEventListener("resize", updatePhotoScroll);
+      };
+    }
+  }, [filteredPhotos]);
+
+  useEffect(() => {
+    if (photoSliderRef.current) {
+      photoSliderRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    }
+  }, [selectedPhotoCategory, photoSearch]);
+
+  const scrollPhotos = (direction: "left" | "right") => {
+    if (photoSliderRef.current) {
+      const container = photoSliderRef.current;
+      const card = container.querySelector<HTMLElement>(".photo-gallery-slide");
+      const cardWidth = card ? card.offsetWidth : 320;
+      const scrollStep = (cardWidth + 24) * (typeof window !== "undefined" && window.innerWidth < 640 ? 1 : 2);
+      const factor = direction === "left" ? -1 : 1;
+      const delta = isArabic ? -factor * scrollStep : factor * scrollStep;
+
+      container.scrollBy({
+        left: delta,
+        behavior: "smooth",
+      });
+    }
   };
 
   useEffect(() => {
@@ -416,110 +484,116 @@ export default function MediaPage() {
               })}
             </div>
 
-            {/* Search Input */}
-            <div className="relative w-full sm:w-80 lg:w-72 shrink-0">
-              <Search className="absolute left-3.5 rtl:left-auto rtl:right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 pointer-events-none" />
-              <input
-                type="text"
-                value={photoSearch}
-                onChange={(e) => {
-                  setPhotoSearch(e.target.value);
-                  setVisiblePhotoCount(12);
-                }}
-                placeholder={isArabic ? "البحث في معرض الصور..." : "Search photo gallery..."}
-                className="w-full pl-10 pr-9 rtl:pl-9 rtl:pr-10 py-2.5 rounded-full bg-white border border-slate-200/90 text-xs sm:text-sm text-stone-800 placeholder:text-stone-400 shadow-xs focus:outline-none focus:border-[#00a89a] focus:ring-2 focus:ring-[#00a89a]/20 transition-all"
-              />
-              {photoSearch && (
-                <button
-                  type="button"
-                  onClick={() => setPhotoSearch("")}
-                  className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-200/70 hover:bg-stone-300 text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
-                  title={isArabic ? "مسح البحث" : "Clear search"}
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              )}
+            {/* Slider Controls (Placed exactly where the search bar was) */}
+            <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
+              <button
+                type="button"
+                onClick={() => scrollPhotos("left")}
+                disabled={!canScrollLeft}
+                aria-label={isArabic ? "السابق" : "Previous Slide"}
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white text-[#0B1C24] hover:bg-[#00c4b4] hover:text-[#0B1C24] shadow-md flex items-center justify-center transition-all disabled:opacity-25 disabled:pointer-events-none cursor-pointer active:scale-95"
+              >
+                {isArabic ? <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" /> : <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollPhotos("right")}
+                disabled={!canScrollRight}
+                aria-label={isArabic ? "التالي" : "Next Slide"}
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white text-[#0B1C24] hover:bg-[#00c4b4] hover:text-[#0B1C24] shadow-md flex items-center justify-center transition-all disabled:opacity-25 disabled:pointer-events-none cursor-pointer active:scale-95"
+              >
+                {isArabic ? <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" /> : <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />}
+              </button>
             </div>
           </div>
 
           {/* Loading Skeleton */}
           {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {Array.from({ length: 12 }).map((_, i) => (
+            <div className="flex gap-5 sm:gap-6 overflow-hidden">
+              {Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-[4/3] bg-white/70 animate-pulse border border-slate-200/60"
+                  className="flex-shrink-0 w-[275px] sm:w-[310px] md:w-[335px] lg:w-[350px] aspect-[4/3] bg-white/10 animate-pulse border border-white/10 rounded-2xl"
                 />
               ))}
             </div>
           )}
 
-          {/* 4-Column Photo Grid (Matching Reference Card Layout Exactly) */}
-          {!loading && displayedPhotos.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {displayedPhotos.map((photo) => (
-                <div
-                  key={photo.id}
-                  onClick={() => router.push("/services")}
-                  className="group relative overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/60 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-                >
-                  <Image
-                    src={photo.thumbnail}
-                    alt={isArabic ? photo.titleAr : photo.titleEn}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                  />
+          {/* Photo Slider Carousel (with NO slider dots) */}
+          {!loading && filteredPhotos.length > 0 && (
+            <div className="relative group/carousel">
+              {/* Horizontal Scroll Track */}
+              <div
+                ref={photoSliderRef}
+                className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-5 sm:gap-6 pb-4 pt-1 px-0.5 no-scrollbar"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+              >
+                {filteredPhotos.map((photo) => (
+                  <div
+                    key={photo.id}
+                    onClick={() => router.push("/services")}
+                    className="photo-gallery-slide flex-shrink-0 w-[270px] sm:w-[310px] md:w-[335px] lg:w-[350px] snap-start flex flex-col group cursor-pointer"
+                  >
+                    {/* Clean Image Container (No text inside image) */}
+                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-900 border border-white/10 shadow-lg group-hover:border-[#00c4b4]/40 transition-all duration-300">
+                      <Image
+                        src={photo.thumbnail}
+                        alt={isArabic ? photo.titleAr : photo.titleEn}
+                        fill
+                        unoptimized
+                        sizes="(max-width: 640px) 270px, (max-width: 1024px) 335px, 350px"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                      />
 
-                  {/* Gradient Overlay for bottom text visibility */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+                      {/* Subtle hover gradient */}
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/35 transition-colors duration-300" />
 
-                  {/* Hover Center Action Buttons (Preview & View Details) */}
-                  <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
-                    {/* Preview Option */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleOpenPhoto(photo);
-                      }}
-                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-black/65 hover:bg-[#00c4b4] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:border-[#00c4b4] hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
-                      title={isArabic ? "معاينة" : "Preview"}
-                    >
-                      <Eye className="w-3.5 h-3.5 stroke-[2.2] shrink-0" />
-                      <span>{isArabic ? "معاينة" : "Preview"}</span>
-                    </button>
+                      {/* Hover Center Action Buttons (Preview & View Details) */}
+                      <div className="absolute inset-0 flex items-center justify-center gap-2 sm:gap-2.5 z-20 px-2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                        {/* Preview Option */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenPhoto(photo);
+                          }}
+                          className="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/70 hover:bg-[#00c4b4] text-white hover:text-[#0B1C24] text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                          title={isArabic ? "معاينة" : "Preview"}
+                        >
+                          <Eye className="w-3.5 h-3.5 stroke-[2.2] shrink-0" />
+                          <span>{isArabic ? "معاينة" : "Preview"}</span>
+                        </button>
 
-                    {/* View Details Option (Takes to Services) */}
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push("/services");
-                      }}
-                      className="pointer-events-auto inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-full bg-[#00a89a] hover:bg-[#008f83] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
-                      title={isArabic ? "عرض التفاصيل" : "View Details"}
-                    >
-                      <span>{isArabic ? "عرض التفاصيل" : "View Details"}</span>
-                      <ArrowRight className="w-3.5 h-3.5 stroke-[2.2] rtl:rotate-180 shrink-0" />
-                    </button>
-                  </div>
-
-                  {/* Bottom-Left Meta Badge (Square Icon Box + Project Name + Dubai, UAE) */}
-                  <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 z-30 flex items-center gap-2.5 text-white">
-                    {/* Translucent Square Icon Box */}
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 text-white">
-                      <ImageIcon className="w-3.5 h-3.5" />
+                        {/* View Details Option (Takes to Services) */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            router.push("/services");
+                          }}
+                          className="pointer-events-auto inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#00a89a] hover:bg-[#008f83] text-white text-[11px] sm:text-xs font-bold tracking-wide backdrop-blur-md border border-white/30 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                          title={isArabic ? "عرض التفاصيل" : "View Details"}
+                        >
+                          <span>{isArabic ? "عرض التفاصيل" : "View Details"}</span>
+                          <ArrowRight className="w-3.5 h-3.5 stroke-[2.2] rtl:rotate-180 shrink-0" />
+                        </button>
+                      </div>
                     </div>
-                    {/* Project Title & Location */}
-                    <div className="leading-tight min-w-0">
-                      <h4
+
+                    {/* Heading and subtitle OUTSIDE the card (Matching Attached Design) */}
+                    <div className="mt-3.5 sm:mt-4 flex flex-col text-left rtl:text-right">
+                      {/* Smaller Gray Service Name */}
+                      <span className="text-xs sm:text-[13px] text-[#00a89a] font-medium tracking-wide truncate">
+                        {isArabic ? (photo.serviceNameAr || photo.categoryLabelAr) : (photo.serviceNameEn || photo.categoryLabelEn)}
+                      </span>
+
+                      {/* White Bold Project Name */}
+                      <h3
                         onClick={(e) => {
                           e.stopPropagation();
                           router.push("/project");
                         }}
-                        className="text-xs sm:text-[13px] font-bold text-white truncate transition-colors cursor-pointer group/title"
+                        className="mt-1 text-sm sm:text-base font-bold text-black group-hover:text-[#00DDCF] transition-colors leading-snug truncate"
                       >
                         <Link
                           href="/project"
@@ -527,53 +601,25 @@ export default function MediaPage() {
                             e.stopPropagation();
                             router.push("/project");
                           }}
-                          className="hover:text-[#00DDCF] group-hover/title:text-[#00DDCF] hover:underline transition-colors cursor-pointer inline-block max-w-full truncate"
+                          className="hover:underline"
                         >
                           {isArabic ? photo.titleAr : photo.titleEn}
                         </Link>
-                      </h4>
-                      <p className="text-[10px] sm:text-[11px] text-white/75 truncate mt-0.5">
-                        {isArabic ? photo.locationAr : photo.locationEn}
-                      </p>
+                      </h3>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           )}
 
           {/* Empty State */}
-          {!loading && displayedPhotos.length === 0 && (
-            <div className="text-center py-16 bg-white/70 backdrop-blur-sm rounded-3xl border border-slate-200/60 max-w-md mx-auto">
-              <Camera className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-              <p className="text-base font-bold text-slate-700">
-                {photoSearch
-                  ? (isArabic ? `لا توجد نتائج بحث عن "${photoSearch}"` : `No projects found matching "${photoSearch}"`)
-                  : (isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category")}
+          {!loading && filteredPhotos.length === 0 && (
+            <div className="text-center py-16 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 max-w-md mx-auto">
+              <Camera className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+              <p className="text-base font-bold text-white">
+                {isArabic ? "لا توجد مشاريع في هذا القسم حالياً" : "No projects found in this category"}
               </p>
-              {photoSearch && (
-                <button
-                  type="button"
-                  onClick={() => setPhotoSearch("")}
-                  className="mt-3.5 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#00a89a] text-white text-xs font-bold hover:bg-[#008f83] transition-colors cursor-pointer"
-                >
-                  <X className="w-3 h-3" />
-                  <span>{isArabic ? "مسح البحث" : "Clear search"}</span>
-                </button>
-              )}
-            </div>
-          )}
-
-          {/* Load More Button (Matching Reference Design: Load More ↓) */}
-          {!loading && visiblePhotoCount < filteredPhotos.length && (
-            <div className="flex items-center justify-center mt-12 sm:mt-14">
-              <button
-                onClick={() => setVisiblePhotoCount((prev) => prev + 8)}
-                className="text-xs sm:text-sm font-bold text-[#00a89a] hover:text-[#008f83] tracking-wide inline-flex items-center gap-1.5 transition-colors cursor-pointer group py-2 px-5 rounded-full hover:bg-white/80 shadow-xs"
-              >
-                <span>{isArabic ? "تحميل المزيد" : "Load More"}</span>
-                <span className="text-base transition-transform group-hover:translate-y-0.5">↓</span>
-              </button>
             </div>
           )}
         </div>
