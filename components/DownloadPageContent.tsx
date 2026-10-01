@@ -3,309 +3,745 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Download, FileText, Search, ArrowRight, ShieldCheck, CheckCircle2, PhoneCall } from "lucide-react";
-import CommonHeader from "@/components/Common/CommonHeader";
+import {
+  Download,
+  ArrowRight,
+  User,
+  Building2,
+  Phone,
+  Mail,
+  Check,
+  AlertCircle,
+  Sparkles,
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "react-hot-toast";
 
-interface DocumentItem {
-  id: number;
-  category: "all" | "corporate" | "waterproofing" | "technical";
-  titleEn: string;
-  titleAr: string;
-  descEn: string;
-  descAr: string;
-  size: string;
-  pages: string;
-  badgeEn: string;
-  badgeAr: string;
+// Checklist item definition
+interface ChecklistItem {
+  id: string;
+  en: string;
+  ar: string;
 }
 
-const DOCUMENTS: DocumentItem[] = [
+// Card definition
+type CardData =
+  | {
+      type: "single";
+      key: string;
+      titleEn: string;
+      titleAr: string;
+      descEn: string;
+      descAr: string;
+      graphicSvg: string;
+      size: string;
+    }
+  | {
+      type: "checklist";
+      key: string;
+      titleEn: string;
+      titleAr: string;
+      items: ChecklistItem[];
+    };
+
+const RESOURCE_CARDS: CardData[] = [
+  // 1. Company Profile
   {
-    id: 1,
-    category: "corporate",
-    titleEn: "Taj Al Rahmah Corporate Profile 2026",
-    titleAr: "الملف التعريفي الرسمي لشركة تاج الرحمة 2026",
-    descEn: "Comprehensive company background, trade licenses, engineering approvals, and landmark projects in the UAE.",
-    descAr: "نبذة شاملة عن الشركة، التراخيص التجارية، اعتمادات البلديات وقائمة بأبرز المشاريع المنجزة في الإمارات.",
-    size: "12.4 MB",
-    pages: "28 Pages",
-    badgeEn: "Corporate",
-    badgeAr: "ملف الشركة",
+    type: "single",
+    key: "company_profile",
+    titleEn: "Company Profile",
+    titleAr: "الملف التعريفي للشركة",
+    descEn:
+      "Learn more about Taj Al Rahmah, our expertise, services, project capabilities, and commitment to delivering.",
+    descAr:
+      "تعرف أكثر على شركة تاج الرحمة، خبراتنا الهندسية، خدماتنا، سجل مشاريعنا والتزامنا بأعلى معايير الجودة.",
+    graphicSvg: "/downloadPage/fi_16168696.svg",
+    size: "12MB",
   },
+  // 2. Certifications & Approvals
   {
-    id: 2,
-    category: "waterproofing",
-    titleEn: "Turnkey Waterproofing Systems Catalog",
-    titleAr: "كتالوج أنظمة العزل المائي الشاملة",
-    descEn: "Specifications for combo roof system, bitumen membranes, polyurethane, and basement waterproofing.",
-    descAr: "مواصفات نظام الكومبو المتكامل لأسطح المباني، لفائف البيتومين، البولي يوريثان، وعزل الأقبية والخزانات.",
-    size: "8.6 MB",
-    pages: "18 Pages",
-    badgeEn: "Waterproofing",
-    badgeAr: "عزل مائي",
+    type: "checklist",
+    key: "certifications_approvals",
+    titleEn: "Certifications & Approvals",
+    titleAr: "الشهادات والاعتمادات الرسمية",
+    items: [
+      { id: "ca_company_certs", en: "Company Certifications", ar: "شهادات الشركة" },
+      { id: "ca_trade_license", en: "Trade License", ar: "الرخصة التجارية" },
+      { id: "ca_quality_certs", en: "Quality Certifications", ar: "شهادات الجودة" },
+      { id: "ca_safety_certs", en: "Safety Certifications", ar: "شهادات السلامة المهنية" },
+      { id: "ca_other_approvals", en: "Other Approvals & Registrations", ar: "اعتمادات وتسجيلات أخرى" },
+    ],
   },
+  // 3. Technical Resources
   {
-    id: 3,
-    category: "technical",
-    titleEn: "GRP Lining & Fiberglass Fabrication Specs",
-    titleAr: "المواصفات الفنية لتبطين وتصنيع الفيبرجلاس (GRP)",
-    descEn: "Technical guidelines for chemical-resistant GRP tank lining, custom molds, and water retention systems.",
-    descAr: "دليل فني لتبطين خزانات المياه المقاومة للمواد الكيميائية وحلول صب وتصنيع منتجات GRP المتخصصة.",
-    size: "6.2 MB",
-    pages: "14 Pages",
-    badgeEn: "Technical",
-    badgeAr: "مواصفات فنية",
+    type: "checklist",
+    key: "technical_resources",
+    titleEn: "Technical Resources",
+    titleAr: "الموارد الفنية والهندسية",
+    items: [
+      { id: "tr_prod_specs", en: "Product Specifications", ar: "مواصفات المنتجات" },
+      { id: "tr_method_stmts", en: "Method Statements", ar: "بيانات أساليب التنفيذ (Method Statements)" },
+      { id: "tr_quality_certs", en: "Quality Certifications", ar: "شهادات جودة المواد" },
+      { id: "tr_mat_info", en: "Material Information", ar: "معلومات المواد الكيميائية والعزل" },
+      { id: "tr_tech_guidelines", en: "Technical Guidelines", ar: "الإرشادات الفنية" },
+    ],
   },
+  // 4. HSE Documents (Set 1)
   {
-    id: 4,
-    category: "technical",
-    titleEn: "Epoxy Flooring & Polyurea Coating Guide",
-    titleAr: "دليل طلاءات الأرضيات الإيبوكسية والبولي يوريا",
-    descEn: "Heavy-duty commercial epoxy systems, non-slip coatings, and rapid-curing polyurea waterproofing.",
-    descAr: "أنظمة الإيبوكسي الصناعي للأرضيات الثقيلة، الطلاءات المانعة للانزلاق، والبولي يوريا فائقة السرعة والجودة.",
-    size: "5.1 MB",
-    pages: "12 Pages",
-    badgeEn: "Technical",
-    badgeAr: "مواصفات فنية",
+    type: "checklist",
+    key: "hse_docs_1",
+    titleEn: "HSE Documents",
+    titleAr: "وثائق الصحة والسلامة والبيئة",
+    items: [
+      { id: "hse1_policy", en: "HSE Policy", ar: "سياسة الصحة والسلامة والبيئة" },
+      { id: "hse1_safety_guide", en: "Safety Guidelines", ar: "إرشادات السلامة المهنية" },
+      { id: "hse1_env_policy", en: "Environmental Policy", ar: "السياسة البيئية" },
+      { id: "hse1_safety_certs", en: "Safety Certifications", ar: "شهادات السلامة المهنية" },
+      { id: "hse1_qs_procedures", en: "Quality & Safety Procedures", ar: "إجراءات الجودة والسلامة" },
+    ],
   },
+  // 5. Policies & Documents (Set 1)
   {
-    id: 5,
-    category: "corporate",
-    titleEn: "Quality, HSE & Municipal Approvals Dossier",
-    titleAr: "ملف شهادات الجودة والسلامة والاعتمادات الحكومية",
-    descEn: "Dubai Municipality, Civil Defense, and ISO standard compliance certifications and approvals.",
-    descAr: "شهادات مطابقة بلدية دبي، الدفاع المدني، ومعايير الجودة والصحة والسلامة والبيئة ISO.",
-    size: "4.3 MB",
-    pages: "10 Pages",
-    badgeEn: "Corporate",
-    badgeAr: "ملف الشركة",
+    type: "checklist",
+    key: "policies_docs_1",
+    titleEn: "Policies & Documents",
+    titleAr: "السياسات والوثائق المؤسسية",
+    items: [
+      { id: "pol1_quality_policy", en: "Quality Policy", ar: "سياسة الجودة" },
+      { id: "pol1_env_policy", en: "Environmental Policy", ar: "السياسة البيئية" },
+      { id: "pol1_code_conduct", en: "Code of Conduct", ar: "ميثاق السلوك المهني" },
+      { id: "pol1_privacy_policy", en: "Privacy Policy", ar: "سياسة الخصوصية" },
+      { id: "pol1_health_safety", en: "Health & Safety Policy", ar: "سياسة السلامة والصحة" },
+    ],
   },
+  // 6. HSE Documents (Set 2)
   {
-    id: 6,
-    category: "waterproofing",
-    titleEn: "General Technical Contracting Brochure",
-    titleAr: "بروشور خدمات المقاولات الفنية المتكاملة",
-    descEn: "Turnkey overview of MEP, tiling, plastering, false ceiling, and structural renovation capabilities.",
-    descAr: "نظرة عامة على أعمال المقاولات المتكاملة، الأعمال الكهروميكانيكية، التبليط، البلاستر، وصيانة المنشآت.",
-    size: "7.8 MB",
-    pages: "16 Pages",
-    badgeEn: "Waterproofing",
-    badgeAr: "المقاولات",
+    type: "checklist",
+    key: "hse_docs_2",
+    titleEn: "HSE Documents",
+    titleAr: "وثائق السلامة والبيئة الإجرائية",
+    items: [
+      { id: "hse2_policy", en: "HSE Policy", ar: "سياسة الصحة والسلامة" },
+      { id: "hse2_safety_guide", en: "Safety Guidelines", ar: "دليل إرشادات الموقع" },
+      { id: "hse2_env_policy", en: "Environmental Policy", ar: "خطة الإدارة البيئية" },
+      { id: "hse2_qs_procedures", en: "Quality & Safety Procedures", ar: "إجراءات السلامة والجودة" },
+      { id: "hse2_env_measures", en: "Environmental Policy", ar: "التدابير البيئية للمشاريع" },
+    ],
+  },
+  // 7. Policies & Documents (Set 2)
+  {
+    type: "checklist",
+    key: "policies_docs_2",
+    titleEn: "Policies & Documents",
+    titleAr: "سياسات الحوكمة والامتثال",
+    items: [
+      { id: "pol2_quality_policy", en: "Quality Policy", ar: "سياسة ضبط الجودة" },
+      { id: "pol2_health_safety", en: "Health & Safety Policy", ar: "سياسة السلامة المهنية" },
+      { id: "pol2_env_policy", en: "Environmental Policy", ar: "سياسة الاستدامة البيئية" },
+      { id: "pol2_code_conduct", en: "Code of Conduct", ar: "ميثاق قواعد العمل" },
+      { id: "pol2_privacy_policy", en: "Privacy Policy", ar: "سياسة سرية المعلومات" },
+    ],
+  },
+  // 8. Technical Data Sheets
+  {
+    type: "single",
+    key: "technical_data_sheets",
+    titleEn: "Technical Data Sheets",
+    titleAr: "صحائف البيانات الفنية (TDS)",
+    descEn: "Technical information for selected products and solutions.",
+    descAr: "المواصفات والبيانات الفنية التفصيلية لكافة المنتجات وحلول العزل المائي.",
+    graphicSvg: "/downloadPage/fi_6618122.svg",
+    size: "52MB",
+  },
+  // 9. Certifications
+  {
+    type: "checklist",
+    key: "certifications_authorities",
+    titleEn: "Certifications",
+    titleAr: "شهادات واعتمادات الهيئات الحكومية",
+    items: [
+      { id: "cert_dm_approved", en: "Dubai Municipality DM Approved", ar: "معتمد من بلدية دبي (DM)" },
+      { id: "cert_dcl_approved", en: "DCL Approved Products", ar: "منتجات معتمدة من مختبر دبي المركزي (DCL)" },
+      { id: "cert_wras_certified", en: "WRAS Certified Products", ar: "منتجات معتمدة من WRAS لمياه الشرب" },
+      { id: "cert_dm_green", en: "DM Green Building Compliant", ar: "مطابق لمعايير المباني الخضراء (Sa'fat)" },
+    ],
   },
 ];
 
+// Gather all checklist item IDs
+const ALL_CHECKLIST_IDS: string[] = RESOURCE_CARDS.reduce<string[]>((acc, card) => {
+  if (card.type === "checklist") {
+    return acc.concat(card.items.map((i) => i.id));
+  }
+  return acc;
+}, []);
+
 export default function DownloadPageContent() {
   const { isArabic } = useLanguage();
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "corporate" | "waterproofing" | "technical">("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [downloadingId, setDownloadingId] = useState<number | null>(null);
 
-  const handleDownload = (doc: DocumentItem) => {
-    setDownloadingId(doc.id);
-    toast.success(
-      isArabic
-        ? `جاري تحميل ${doc.titleAr}...`
-        : `Preparing download for ${doc.titleEn}...`
-    );
-    setTimeout(() => {
-      setDownloadingId(null);
-      // Trigger document download
-      const link = document.createElement("a");
-      link.href = "/logo.png";
-      link.download = `${doc.titleEn.replace(/\s+/g, "_")}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }, 1200);
-  };
-
-  const filteredDocs = DOCUMENTS.filter((doc) => {
-    const matchesCategory = selectedCategory === "all" || doc.category === selectedCategory;
-    const q = searchQuery.toLowerCase().trim();
-    const matchesSearch =
-      !q ||
-      doc.titleEn.toLowerCase().includes(q) ||
-      doc.titleAr.toLowerCase().includes(q) ||
-      doc.descEn.toLowerCase().includes(q) ||
-      doc.descAr.toLowerCase().includes(q);
-    return matchesCategory && matchesSearch;
+  // Selection states (all checked by default as seen in the reference image design)
+  const [selectedItems, setSelectedItems] = useState<Record<string, boolean>>(() => {
+    const init: Record<string, boolean> = {};
+    ALL_CHECKLIST_IDS.forEach((id) => {
+      init[id] = true;
+    });
+    return init;
   });
 
-  const categories = [
-    { key: "all", labelEn: "All Documents", labelAr: "جميع المستندات" },
-    { key: "corporate", labelEn: "Company Profile", labelAr: "ملف الشركة" },
-    { key: "waterproofing", labelEn: "Waterproofing", labelAr: "العزل المائي" },
-    { key: "technical", labelEn: "Technical Specs", labelAr: "المواصفات الفنية" },
-  ];
+  const [selectedSingles, setSelectedSingles] = useState<Record<string, boolean>>({
+    company_profile: true,
+    technical_data_sheets: true,
+  });
+
+  // Form state
+  const [form, setForm] = useState({
+    name: "",
+    companyName: "",
+    phone: "",
+    email: "",
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Toggle single item
+  const toggleItem = (id: string) => {
+    setSelectedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  // Toggle single card (Card 1 or Card 8)
+  const toggleSingle = (key: string) => {
+    setSelectedSingles((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  // Toggle select all inside a specific checklist card
+  const toggleCardSelectAll = (items: ChecklistItem[]) => {
+    const allChecked = items.every((i) => selectedItems[i.id]);
+    setSelectedItems((prev) => {
+      const updated = { ...prev };
+      items.forEach((i) => {
+        updated[i.id] = !allChecked;
+      });
+      return updated;
+    });
+  };
+
+  // Total count of selected resources
+  const selectedChecklistCount = Object.values(selectedItems).filter(Boolean).length;
+  const selectedSinglesCount = Object.values(selectedSingles).filter(Boolean).length;
+  const totalSelectedCount = selectedChecklistCount + selectedSinglesCount;
+
+  // Handle form submission and download
+  const handleDownloadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: Record<string, string> = {};
+    if (!form.name.trim()) {
+      newErrors.name = isArabic ? "يرجى إدخال الاسم" : "Please enter your name";
+    }
+    if (!form.phone.trim()) {
+      newErrors.phone = isArabic ? "يرجى إدخال رقم الهاتف" : "Please enter your phone number";
+    }
+    if (!form.email.trim()) {
+      newErrors.email = isArabic ? "يرجى إدخال البريد الإلكتروني" : "Please enter your email";
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = isArabic ? "البريد الإلكتروني غير صحيح" : "Please enter a valid email address";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      toast.error(isArabic ? "يرجى استكمال الحقول المطلوبة" : "Please fill in the required fields");
+      return;
+    }
+
+    if (totalSelectedCount === 0) {
+      toast.error(
+        isArabic
+          ? "يرجى تحديد مستند واحد على الأقل للتحميل"
+          : "Please select at least one document to download"
+      );
+      return;
+    }
+
+    setErrors({});
+    setIsSubmitting(true);
+
+    try {
+      // Sync lead in background to /api/contact
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: form.name,
+          email: form.email,
+          phone: form.phone,
+          service: "Resource Download Center",
+          message: `User requested download of ${totalSelectedCount} resources. Company: ${form.companyName || "N/A"}`,
+        }),
+      }).catch(() => {});
+
+      toast.success(
+        isArabic
+          ? "تم تجهيز المستندات بنجاح، جاري بدء التحميل..."
+          : "Preparing documents... Your download will begin shortly!"
+      );
+
+      // Trigger download
+      setTimeout(() => {
+        const link = document.createElement("a");
+        link.href = "/logo.png";
+        link.download = "Taj_Al_Rahmah_Corporate_Resources_2026.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setIsSubmitting(false);
+      }, 1200);
+    } catch {
+      setIsSubmitting(false);
+      toast.error(isArabic ? "حدث خطأ، يرجى المحاولة مرة أخرى" : "An error occurred. Please try again.");
+    }
+  };
 
   return (
-    <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
-      {/* ── Page Header ── */}
-      <CommonHeader
-        title={isArabic ? "مركز التحميل والمستندات" : "Downloads & Resources"}
-        breadcrumb={isArabic ? "التحميلات" : "Download"}
-        imagePath="/banners/Contact_.png"
-      />
-
-      {/* ── Main Section ── */}
-      <section className="hidden py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-8xl mx-auto">
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center justify-center gap-3 mb-4">
-            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
-            <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#01a9a0]">
-              {isArabic ? "مركز التحميل والمستندات" : "DOCUMENT DOWNLOAD CENTER"}
-            </span>
-            <span className="inline-block h-[2px] w-6 sm:w-8 bg-[#01a9a0] rounded-full" />
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight leading-tight">
-            <span>{isArabic ? "تحميل البروشورات والملفات " : "Download Official Brochures & "}</span>
-            <span className="text-[#01a9a0]">{isArabic ? "التعريفية الرسمية" : "Technical Resources"}</span>
-          </h2>
-
-          <p className="mt-4 text-stone-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto font-normal">
-            {isArabic
-              ? "يمكنكم تحميل أحدث الملفات التعريفية والمواصفات الفنية وكتالوجات أنظمة العزل والمقاولات الخاصة بشركة تاج الرحمة."
-              : "Access and download up-to-date corporate profiles, technical brochures, data sheets, and system approvals for your construction projects."}
-          </p>
+    <div className="w-full bg-[#f8fbfb]" dir={isArabic ? "rtl" : "ltr"}>
+      {/* ══════════════════════════════════════════════════════════════
+          1. HERO BANNER SECTION (Downloads with Skyline Background)
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full h-[380px] sm:h-[440px] md:h-[500px] overflow-hidden">
+        {/* Background Image: Skyline over waterfront */}
+        <div className="absolute inset-0">
+          <Image
+            src="/downloadPage/Banner.png"
+            alt="Downloads Background Skyline"
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          {/* Subtle gradient overlay to match reference design */}
+          <div className="absolute inset-0 bg-gradient-to-b from-sky-950/20 via-black/20 to-sky-950/40" />
         </div>
 
-        {/* Filter & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-stone-200">
-          {/* Category Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none">
-            {categories.map((cat) => {
-              const active = selectedCategory === cat.key;
-              return (
-                <button
-                  key={cat.key}
-                  onClick={() => setSelectedCategory(cat.key as any)}
-                  className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer ${active
-                    ? "bg-[#01a9a0] text-white shadow-md shadow-[#01a9a0]/25"
-                    : "bg-stone-100 hover:bg-stone-200 text-stone-700"
-                    }`}
-                >
-                  {isArabic ? cat.labelAr : cat.labelEn}
-                </button>
-              );
-            })}
+        {/* Center Content: Download Icon + "Downloads" Heading */}
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
+          {/* Center Download Icon from Reference Design */}
+          <div className="mb-2 sm:mb-3 flex items-center justify-center">
+            <svg
+              className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
           </div>
 
-          {/* Search Input */}
-          <div className="relative w-full sm:w-72 shrink-0">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={isArabic ? "ابحث في المستندات..." : "Search documents..."}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full border border-stone-300 text-sm focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder:text-stone-400"
-            />
-            <Search className={`w-4 h-4 text-stone-400 absolute top-1/2 -translate-y-1/2 ${isArabic ? "right-3.5" : "left-3.5"}`} />
-          </div>
+          {/* Heading */}
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]">
+            {isArabic ? "التحميلات" : "Downloads"}
+          </h1>
         </div>
+      </section>
 
-        {/* Documents Grid */}
-        {filteredDocs.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredDocs.map((doc) => {
-              const isCurrentDownloading = downloadingId === doc.id;
-              return (
-                <div
-                  key={doc.id}
-                  className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-7 flex flex-col justify-between hover:shadow-xl hover:border-[#01a9a0]/40 transition-all duration-300 group"
-                >
-                  <div>
-                    {/* Top Row: Icon + Badge */}
-                    <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[#01a9a0]/10 flex items-center justify-center p-2 group-hover:scale-105 transition-transform shrink-0">
+      {/* ══════════════════════════════════════════════════════════════
+          2. RESOURCES & DOCUMENTS SECTION (3x3 Grid of 9 Cards)
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-[46px] font-black text-[#0B1C24] tracking-tight leading-tight">
+              {isArabic ? (
+                <>
+                  الموارد <span className="text-[#00DDCF]">&amp; المستندات</span>
+                </>
+              ) : (
+                <>
+                  Resources <span className="text-[#00DDCF]">&amp; Documents</span>
+                </>
+              )}
+            </h2>
+
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-[15px] text-stone-600 leading-relaxed max-w-2xl mx-auto">
+              {isArabic
+                ? "استكشف وحمّل ملفات ومستندات شركتنا، المواصفات الفنية، شهادات الاعتماد وغيرها من الموارد. تقدم هذه المستندات نظرة شاملة على إمكانياتنا وخبراتنا والتزامنا بأعلى معايير الجودة."
+                : "Explore and download our company documents, technical information, certifications, and other resources. These materials provide an overview of our capabilities, services, expertise, and commitment to quality."}
+            </p>
+          </div>
+
+          {/* 3x3 Grid (9 Cards) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+            {RESOURCE_CARDS.map((card) => {
+              // ── CARD VARIANT 1: Single file card (Company Profile & Technical Data Sheets) ──
+              if (card.type === "single") {
+                const isSelected = !!selectedSingles[card.key];
+                return (
+                  <div
+                    key={card.key}
+                    onClick={() => toggleSingle(card.key)}
+                    className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100 hover:border-[#00DDCF]/40 hover:shadow-[0_10px_35px_rgba(0,0,0,0.07)] transition-all duration-300 flex flex-col justify-between cursor-pointer group"
+                  >
+                    <div>
+                      {/* Top-Left Category Icon */}
+                      <div className="w-10 h-10 rounded-xl bg-[#00DDCF]/10 flex items-center justify-center p-2 mb-4">
                         <Image
-                          src="/certifications/logos/Custom Teal PDF File Badge.svg"
-                          alt="PDF Icon"
-                          width={36}
-                          height={36}
-                          className="w-full h-full object-contain"
+                          src="/downloadPage/fi_4673322.svg"
+                          alt="Category Icon"
+                          width={28}
+                          height={28}
+                          className="w-6 h-6 object-contain"
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-stone-100 text-stone-600">
-                          {isArabic ? doc.badgeAr : doc.badgeEn}
-                        </span>
-                        <span className="text-[11px] font-semibold text-stone-400">
-                          {doc.size}
-                        </span>
+
+                      {/* Card Title */}
+                      <h3 className="text-base sm:text-lg font-bold text-[#0B1C24] group-hover:text-[#00a89a] transition-colors">
+                        {isArabic ? card.titleAr : card.titleEn}
+                      </h3>
+
+                      {/* Card Description */}
+                      <p className="mt-2 text-xs text-stone-500 leading-relaxed">
+                        {isArabic ? card.descAr : card.descEn}
+                      </p>
+
+                      {/* Big Center Graphic */}
+                      <div className="my-6 flex items-center justify-center">
+                        <div className="relative w-28 h-28 sm:w-32 sm:h-32 transition-transform duration-300 group-hover:scale-105">
+                          <Image
+                            src={card.graphicSvg}
+                            alt={card.titleEn}
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-base sm:text-lg font-bold text-stone-900 group-hover:text-[#01a9a0] transition-colors leading-snug mb-2">
-                      {isArabic ? doc.titleAr : doc.titleEn}
+                    {/* Bottom Row: Checkbox Icon + Size Badge */}
+                    <div className="pt-2 flex items-center justify-between border-t border-slate-100/70">
+                      {/* Circular Turquoise Checkbox */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleSingle(card.key);
+                        }}
+                        aria-label={isSelected ? "Deselect" : "Select"}
+                        className={`w-5 h-5 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-[#00DDCF] border border-[#00DDCF] text-white shadow-xs"
+                            : "border-2 border-slate-300 hover:border-[#00DDCF] bg-white"
+                        }`}
+                      >
+                        {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                      </button>
+
+                      {/* Size Badge */}
+                      <span className="text-[11px] font-semibold text-stone-500 bg-slate-100/80 px-2.5 py-1 rounded-md border border-slate-200/60">
+                        {card.size}
+                      </span>
+                    </div>
+                  </div>
+                );
+              }
+
+              // ── CARD VARIANT 2: Multi-checkbox checklist cards ──
+              const allChecked = card.items.every((i) => selectedItems[i.id]);
+
+              return (
+                <div
+                  key={card.key}
+                  className="bg-white rounded-3xl p-6 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-slate-100 hover:border-[#00DDCF]/40 hover:shadow-[0_10px_35px_rgba(0,0,0,0.07)] transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Top-Left Category Icon */}
+                    <div className="w-10 h-10 rounded-xl bg-[#00DDCF]/10 flex items-center justify-center p-2 mb-4">
+                      <Image
+                        src="/downloadPage/fi_4673322.svg"
+                        alt="Category Icon"
+                        width={28}
+                        height={28}
+                        className="w-6 h-6 object-contain"
+                      />
+                    </div>
+
+                    {/* Card Title */}
+                    <h3 className="text-base sm:text-lg font-bold text-[#0B1C24]">
+                      {isArabic ? card.titleAr : card.titleEn}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-xs sm:text-sm text-stone-500 leading-relaxed font-normal mb-6">
-                      {isArabic ? doc.descAr : doc.descEn}
-                    </p>
+                    {/* Checklist Items */}
+                    <div className="mt-4 sm:mt-5 space-y-2.5">
+                      {/* Select All Option */}
+                      <div
+                        onClick={() => toggleCardSelectAll(card.items)}
+                        className="flex items-center gap-2.5 text-xs font-semibold text-slate-800 hover:text-[#00a89a] cursor-pointer transition-colors select-none pb-1"
+                      >
+                        <span
+                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
+                            allChecked
+                              ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
+                              : "border-2 border-slate-300 bg-white"
+                          }`}
+                        >
+                          {allChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                        </span>
+                        <span>{isArabic ? "تحديد الكل" : "Select All"}</span>
+                      </div>
+
+                      {/* Individual Items */}
+                      {card.items.map((item) => {
+                        const checked = !!selectedItems[item.id];
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={() => toggleItem(item.id)}
+                            className="flex items-center gap-2.5 text-xs text-stone-600 hover:text-stone-900 cursor-pointer transition-colors select-none"
+                          >
+                            <span
+                              className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
+                                checked
+                                  ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
+                                  : "border-2 border-slate-300 bg-white hover:border-[#00DDCF]"
+                              }`}
+                            >
+                              {checked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                            </span>
+                            <span className="leading-snug">
+                              {isArabic ? item.ar : item.en}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
 
-                  {/* Bottom Row: Metadata + Action */}
-                  <div className="pt-4 border-t border-stone-100 flex items-center justify-between gap-3">
-                    <span className="text-xs text-stone-400 font-medium">
-                      {doc.pages}
-                    </span>
-                    <button
-                      onClick={() => handleDownload(doc)}
-                      disabled={isCurrentDownloading}
-                      className="px-4 py-2 rounded-full bg-[#01a9a0] hover:bg-[#009386] active:scale-95 text-white font-bold text-xs inline-flex items-center gap-2 shadow-sm transition-all cursor-pointer whitespace-nowrap"
-                    >
-                      <Download className={`w-3.5 h-3.5 ${isCurrentDownloading ? "animate-bounce" : ""}`} />
-                      <span>
-                        {isCurrentDownloading
-                          ? (isArabic ? "جاري التحميل..." : "Downloading...")
-                          : (isArabic ? "تحميل PDF" : "Download PDF")}
-                      </span>
-                    </button>
-                  </div>
+                  {/* Subtle spacing bottom */}
+                  <div className="pt-4" />
                 </div>
               );
             })}
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-stone-500 text-sm">
-              {isArabic ? "لم يتم العثور على مستندات مطابقة لبحثك." : "No documents match your search criteria."}
-            </p>
-          </div>
-        )}
 
-        {/* Assistance / Contact Banner */}
-        <div className="mt-16 sm:mt-20 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#012227] to-[#01353c] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-2 mb-2 text-[#00c2b2] text-xs font-bold uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4" />
-              <span>{isArabic ? "دعم المستندات والمناقصات" : "Tender & Project Inquiries"}</span>
+          {/* ══════════════════════════════════════════════════════════════
+              3. DOWNLOAD FORM SECTION (Left Heading + Right Form Card)
+          ══════════════════════════════════════════════════════════════ */}
+          <div className="mt-20 sm:mt-24 md:mt-28 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-[1240px] mx-auto">
+            {/* Left Column: Heading & Tagline */}
+            <div className="text-left rtl:text-right">
+              {/* Tagline */}
+              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                <span className="w-6 h-[2px] bg-[#00DDCF] inline-block" />
+                <span className="text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase text-[#00DDCF]">
+                  {isArabic ? "التحميلات" : "DOWNLOAD"}
+                </span>
+              </div>
+
+              {/* Huge Bold Title */}
+              <h3 className="text-3xl sm:text-4xl md:text-[44px] font-black text-[#0B1C24] leading-[1.15] tracking-tight">
+                {isArabic ? (
+                  <>
+                    حمّل أحدث
+                    <br />
+                    مواردنا الهندسية
+                    <br />
+                    <span className="text-[#00DDCF]">أدلة ومستندات</span>
+                    <br />
+                    <span className="text-[#00DDCF]">شاملة للمشاريع</span>
+                  </>
+                ) : (
+                  <>
+                    Download Our
+                    <br />
+                    Latest Resources
+                    <br />
+                    <span className="text-[#00DDCF]">Guides &amp; Helpful</span>
+                    <br />
+                    <span className="text-[#00DDCF]">Materials</span>
+                  </>
+                )}
+              </h3>
+
+              {/* Dynamic counter of selected resources */}
+              <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200/80 shadow-xs text-xs font-medium text-stone-700">
+                <Sparkles className="w-4 h-4 text-[#00DDCF]" />
+                <span>
+                  {isArabic
+                    ? `تم تحديد ${totalSelectedCount} من المستندات والموارد الجاهزة للتحميل`
+                    : `${totalSelectedCount} resources selected ready for download`}
+                </span>
+              </div>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold leading-snug">
-              {isArabic ? "هل تحتاج إلى مستندات مخصصة أو جداول كميات (BOQ)؟" : "Need Custom Submittals, BOQ Estimates or Material Approvals?"}
-            </h3>
-            <p className="text-xs sm:text-sm text-white/80 mt-1 leading-relaxed">
-              {isArabic
-                ? "تواصل مع مهندسينا للحصول على اعتمادات المواد والمواصفات المعتمدة لمشروعكم."
-                : "Our engineering and estimation department can supply project-specific submittals and technical compliance documentation."}
-            </p>
+
+            {/* Right Column: Download Form Card */}
+            <div className="bg-white rounded-3xl p-7 sm:p-9 shadow-[0_12px_45px_rgba(0,0,0,0.06)] border border-slate-100 max-w-lg w-full mx-auto lg:ml-auto rtl:lg:mr-auto rtl:lg:ml-0">
+              <form onSubmit={handleDownloadSubmit} className="space-y-4" noValidate>
+                {/* 1. Name Field */}
+                <div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={(e) => {
+                        setForm((p) => ({ ...p, name: e.target.value }));
+                        if (errors.name) setErrors((p) => ({ ...p, name: "" }));
+                      }}
+                      placeholder={isArabic ? "الاسم" : "Name"}
+                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
+                        errors.name
+                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
+                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
+                      }`}
+                    />
+                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
+                      <User className="w-4 h-4" />
+                    </div>
+                  </div>
+                  {errors.name && (
+                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                      <span>{errors.name}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* 2. Company Name Field */}
+                <div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={form.companyName}
+                      onChange={(e) => setForm((p) => ({ ...p, companyName: e.target.value }))}
+                      placeholder={isArabic ? "اسم الشركة" : "Company Name"}
+                      className="w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border border-slate-200/90 text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
+                    />
+                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
+                      <Building2 className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Phone Number Field */}
+                <div>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={(e) => {
+                        setForm((p) => ({ ...p, phone: e.target.value }));
+                        if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
+                      }}
+                      placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
+                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
+                        errors.phone
+                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
+                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
+                      }`}
+                    />
+                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                  </div>
+                  {errors.phone && (
+                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                      <span>{errors.phone}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* 4. Email Address Field */}
+                <div>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) => {
+                        setForm((p) => ({ ...p, email: e.target.value }));
+                        if (errors.email) setErrors((p) => ({ ...p, email: "" }));
+                      }}
+                      placeholder={isArabic ? "البريد الإلكتروني" : "Email Address"}
+                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
+                        errors.email
+                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
+                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
+                      }`}
+                    />
+                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                  </div>
+                  {errors.email && (
+                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                      <span>{errors.email}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* 5. DOWNLOAD Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-2 py-3.5 px-6 rounded-full bg-[#00DDCF] hover:bg-[#00c5b8] active:scale-[0.99] text-white font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 shadow-[0_6px_22px_rgba(0,221,207,0.35)] transition-all cursor-pointer disabled:opacity-70"
+                >
+                  <Download className={`w-4 h-4 stroke-[2.4] ${isSubmitting ? "animate-bounce" : ""}`} />
+                  <span>
+                    {isSubmitting
+                      ? (isArabic ? "جاري التحميل..." : "DOWNLOADING...")
+                      : (isArabic ? "تحميل المستندات" : "DOWNLOAD")}
+                  </span>
+                </button>
+              </form>
+            </div>
           </div>
-
-          <Link
-            href="/contact"
-            className="px-6 py-3.5 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white font-bold text-sm inline-flex items-center gap-2.5 transition-all shadow-lg shrink-0 whitespace-nowrap"
-          >
-            <PhoneCall className="w-4 h-4" />
-            <span>{isArabic ? "تواصل مع الفريق الهندسي" : "Contact Engineering Team"}</span>
-          </Link>
         </div>
+      </section>
 
+      {/* ══════════════════════════════════════════════════════════════
+          4. CTA BANNER SECTION: "Let's Discuss Your Project"
+      ══════════════════════════════════════════════════════════════ */}
+      <section className="relative w-full py-16 sm:py-20 md:py-24 bg-gradient-to-r from-[#009e90] via-[#00a89a] to-[#00b4a6] text-white overflow-hidden">
+        {/* Subtle decorative circles */}
+        <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-white/5 blur-2xl pointer-events-none" />
+        <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-white/5 blur-2xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          {/* Heading */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black tracking-tight leading-tight">
+            {isArabic ? "دعنا نناقش مشروعك القادم" : "Let's Discuss Your Project"}
+          </h2>
+
+          {/* Subtitle */}
+          <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl mx-auto leading-relaxed">
+            {isArabic
+              ? "من العزل المائي والإصلاحات الهندسية إلى حلول البناء المتخصصة، فريقنا الهندسي جاهز لدعم كافة متطلبات مشروعك بأعلى كفاءة."
+              : "From waterproofing and repair to specialized construction solutions, our team is ready to support your project requirements."}
+          </p>
+
+          {/* GET A QUOTE Button (White Pill with Circular Arrow) */}
+          <div className="mt-7 sm:mt-9 flex items-center justify-center">
+            <Link
+              href="/get-a-quote"
+              className="inline-flex items-center gap-3 pl-6 pr-2 py-2 rtl:pl-2 rtl:pr-6 rounded-full bg-white text-[#009e90] font-bold text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:bg-slate-50 transition-all group"
+            >
+              <span>{isArabic ? "احصل على عرض سعر" : "GET A QUOTE"}</span>
+              <span className="w-8 h-8 rounded-full bg-[#009e90] text-white flex items-center justify-center transition-transform group-hover:scale-105">
+                <ArrowRight className="w-4 h-4 stroke-[2.5] rtl:rotate-180" />
+              </span>
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );
