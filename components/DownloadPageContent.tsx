@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "react-hot-toast";
+import { FloatInput } from "@/components/ui/FloatField";
 
 // Checklist item definition
 interface ChecklistItem {
@@ -27,22 +28,22 @@ interface ChecklistItem {
 // Card definition
 type CardData =
   | {
-      type: "single";
-      key: string;
-      titleEn: string;
-      titleAr: string;
-      descEn: string;
-      descAr: string;
-      graphicSvg: string;
-      size: string;
-    }
+    type: "single";
+    key: string;
+    titleEn: string;
+    titleAr: string;
+    descEn: string;
+    descAr: string;
+    graphicSvg: string;
+    size: string;
+  }
   | {
-      type: "checklist";
-      key: string;
-      titleEn: string;
-      titleAr: string;
-      items: ChecklistItem[];
-    };
+    type: "checklist";
+    key: string;
+    titleEn: string;
+    titleAr: string;
+    items: ChecklistItem[];
+  };
 
 const RESOURCE_CARDS: CardData[] = [
   // 1. Company Profile
@@ -284,7 +285,7 @@ export default function DownloadPageContent() {
           service: "Resource Download Center",
           message: `User requested download of ${totalSelectedCount} resources. Company: ${form.companyName || "N/A"}`,
         }),
-      }).catch(() => {});
+      }).catch(() => { });
 
       toast.success(
         isArabic
@@ -437,11 +438,10 @@ export default function DownloadPageContent() {
                           toggleSingle(card.key);
                         }}
                         aria-label={isSelected ? "Deselect" : "Select"}
-                        className={`w-5 h-5 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-[#00DDCF] border border-[#00DDCF] text-white shadow-xs"
-                            : "border-2 border-slate-300 hover:border-[#00DDCF] bg-white"
-                        }`}
+                        className={`w-5 h-5 rounded-full flex items-center justify-center transition-all cursor-pointer ${isSelected
+                          ? "bg-[#00DDCF] border border-[#00DDCF] text-white shadow-xs"
+                          : "border-2 border-slate-300 hover:border-[#00DDCF] bg-white"
+                          }`}
                       >
                         {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                       </button>
@@ -488,11 +488,10 @@ export default function DownloadPageContent() {
                         className="flex items-center gap-2.5 text-xs font-semibold text-slate-800 hover:text-[#00a89a] cursor-pointer transition-colors select-none pb-1"
                       >
                         <span
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
-                            allChecked
-                              ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
-                              : "border-2 border-slate-300 bg-white"
-                          }`}
+                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${allChecked
+                            ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
+                            : "border-2 border-slate-300 bg-white"
+                            }`}
                         >
                           {allChecked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                         </span>
@@ -509,11 +508,10 @@ export default function DownloadPageContent() {
                             className="flex items-center gap-2.5 text-xs text-stone-600 hover:text-stone-900 cursor-pointer transition-colors select-none"
                           >
                             <span
-                              className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
-                                checked
-                                  ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
-                                  : "border-2 border-slate-300 bg-white hover:border-[#00DDCF]"
-                              }`}
+                              className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${checked
+                                ? "bg-[#00DDCF] border border-[#00DDCF] text-white"
+                                : "border-2 border-slate-300 bg-white hover:border-[#00DDCF]"
+                                }`}
                             >
                               {checked && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                             </span>
@@ -573,121 +571,77 @@ export default function DownloadPageContent() {
               </h3>
 
               {/* Dynamic counter of selected resources */}
-              <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200/80 shadow-xs text-xs font-medium text-stone-700">
+              {/* <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200/80 shadow-xs text-xs font-medium text-stone-700">
                 <Sparkles className="w-4 h-4 text-[#00DDCF]" />
                 <span>
                   {isArabic
                     ? `تم تحديد ${totalSelectedCount} من المستندات والموارد الجاهزة للتحميل`
                     : `${totalSelectedCount} resources selected ready for download`}
                 </span>
-              </div>
+              </div> */}
             </div>
 
             {/* Right Column: Download Form Card */}
             <div className="bg-white rounded-3xl p-7 sm:p-9 shadow-[0_12px_45px_rgba(0,0,0,0.06)] border border-slate-100 max-w-lg w-full mx-auto lg:ml-auto rtl:lg:mr-auto rtl:lg:ml-0">
               <form onSubmit={handleDownloadSubmit} className="space-y-4" noValidate>
                 {/* 1. Name Field */}
-                <div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={form.name}
-                      onChange={(e) => {
-                        setForm((p) => ({ ...p, name: e.target.value }));
-                        if (errors.name) setErrors((p) => ({ ...p, name: "" }));
-                      }}
-                      placeholder={isArabic ? "الاسم" : "Name"}
-                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
-                        errors.name
-                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
-                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
-                      }`}
-                    />
-                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
-                      <User className="w-4 h-4" />
-                    </div>
-                  </div>
-                  {errors.name && (
-                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
-                      <span>{errors.name}</span>
-                    </p>
-                  )}
-                </div>
+                <FloatInput
+                  type="text"
+                  name="name"
+                  value={form.name}
+                  label={isArabic ? "الاسم الكامل *" : "Full Name *"}
+                  required
+                  isArabic={isArabic}
+                  error={errors.name}
+                  icon={<User className="w-4 h-4" />}
+                  onChange={(e) => {
+                    setForm((p) => ({ ...p, name: e.target.value }));
+                    if (errors.name) setErrors((p) => ({ ...p, name: "" }));
+                  }}
+                />
 
                 {/* 2. Company Name Field */}
-                <div>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      value={form.companyName}
-                      onChange={(e) => setForm((p) => ({ ...p, companyName: e.target.value }))}
-                      placeholder={isArabic ? "اسم الشركة" : "Company Name"}
-                      className="w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border border-slate-200/90 text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
-                    />
-                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
-                      <Building2 className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
+                <FloatInput
+                  type="text"
+                  name="companyName"
+                  value={form.companyName}
+                  label={isArabic ? "اسم الشركة" : "Company Name"}
+                  isArabic={isArabic}
+                  icon={<Building2 className="w-4 h-4" />}
+                  onChange={(e) => setForm((p) => ({ ...p, companyName: e.target.value }))}
+                />
 
                 {/* 3. Phone Number Field */}
-                <div>
-                  <div className="relative">
-                    <input
-                      type="tel"
-                      value={form.phone}
-                      onChange={(e) => {
-                        setForm((p) => ({ ...p, phone: e.target.value }));
-                        if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
-                      }}
-                      placeholder={isArabic ? "رقم الهاتف" : "Phone Number"}
-                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
-                        errors.phone
-                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
-                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
-                      }`}
-                    />
-                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                  </div>
-                  {errors.phone && (
-                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
-                      <span>{errors.phone}</span>
-                    </p>
-                  )}
-                </div>
+                <FloatInput
+                  type="tel"
+                  name="phone"
+                  value={form.phone}
+                  label={isArabic ? "رقم الهاتف *" : "Phone Number *"}
+                  required
+                  isArabic={isArabic}
+                  error={errors.phone}
+                  icon={<Phone className="w-4 h-4" />}
+                  onChange={(e) => {
+                    setForm((p) => ({ ...p, phone: e.target.value }));
+                    if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
+                  }}
+                />
 
                 {/* 4. Email Address Field */}
-                <div>
-                  <div className="relative">
-                    <input
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => {
-                        setForm((p) => ({ ...p, email: e.target.value }));
-                        if (errors.email) setErrors((p) => ({ ...p, email: "" }));
-                      }}
-                      placeholder={isArabic ? "البريد الإلكتروني" : "Email Address"}
-                      className={`w-full py-3.5 px-4 pr-11 rtl:pr-4 rtl:pl-11 rounded-full border text-xs sm:text-sm text-stone-800 placeholder-stone-400 bg-white transition-all focus:outline-hidden ${
-                        errors.email
-                          ? "border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-400/20"
-                          : "border-slate-200/90 focus:border-[#00DDCF] focus:ring-2 focus:ring-[#00DDCF]/20"
-                      }`}
-                    />
-                    <div className="absolute right-4 rtl:right-auto rtl:left-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#00DDCF]">
-                      <Mail className="w-4 h-4" />
-                    </div>
-                  </div>
-                  {errors.email && (
-                    <p className="text-red-500 text-[11px] mt-1 ml-3 rtl:mr-3 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3 flex-shrink-0" />
-                      <span>{errors.email}</span>
-                    </p>
-                  )}
-                </div>
+                <FloatInput
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  label={isArabic ? "البريد الإلكتروني *" : "Email Address *"}
+                  required
+                  isArabic={isArabic}
+                  error={errors.email}
+                  icon={<Mail className="w-4 h-4" />}
+                  onChange={(e) => {
+                    setForm((p) => ({ ...p, email: e.target.value }));
+                    if (errors.email) setErrors((p) => ({ ...p, email: "" }));
+                  }}
+                />
 
                 {/* 5. DOWNLOAD Button */}
                 <button

@@ -24,6 +24,7 @@ export interface FloatInputProps {
   isArabic?: boolean;
   error?: string;
   hasError?: boolean;
+  icon?: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -39,6 +40,7 @@ export function FloatInput({
   isArabic = false,
   error,
   hasError,
+  icon,
   onChange,
   onFocus,
   onBlur,
@@ -91,7 +93,17 @@ export function FloatInput({
         >
           {label}
         </label>
-        <InputValidationTick isValid={isValid && !isInvalid} isArabic={isArabic} />
+        {isValid && !isInvalid ? (
+          <InputValidationTick isValid={true} isArabic={isArabic} />
+        ) : icon ? (
+          <div
+            className={`absolute top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center text-[#00DDCF] transition-opacity duration-150 ${
+              isArabic ? "left-4 sm:left-4.5" : "right-4 sm:right-4.5"
+            }`}
+          >
+            {icon}
+          </div>
+        ) : null}
       </div>
 
       {error && (
