@@ -1017,11 +1017,11 @@ export default function FloatingChatWidget() {
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-label={isArabic ? "تواصل معنا" : "Contact options"}
-            className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-white border border-stone-200/90 shadow-xl hover:shadow-2xl hover:border-[#01a9a0] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#01a9a0] border border-stone-200/90 shadow-xl hover:shadow-2xl hover:border-[#01a9a0] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
           >
             {/* Chat bubble icon with animated ping badge */}
             <div className="relative flex items-center justify-center">
-              <MessageSquare className="w-6 h-6 text-[#01a9a0] stroke-[2.2] group-hover:scale-110 transition-transform duration-200" />
+              <MessageSquare className="w-6 h-6 text-white stroke-[2.2] group-hover:scale-110 transition-transform duration-200" />
               <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-[#01a9a0] rounded-full ring-2 ring-white" />
             </div>
 

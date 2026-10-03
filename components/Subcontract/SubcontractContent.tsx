@@ -344,7 +344,7 @@ export default function SubcontractContent() {
   return (
     <div className="w-full bg-white selection:bg-[#01a9a0] selection:text-white" dir={direction}>
       {/* ─── SECTION 1: HERO SECTION ───────────────────────────────────── */}
-      <section className="relative w-full min-h-[580px] lg:min-h-[660px] flex items-center pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
+      <section className="relative w-full min-h-[580px] lg:min-h-[600px] flex items-center pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
         {/* Background Image with Dark Tinted Gradient */}
         <div className="absolute inset-0 z-0">
           <Image
