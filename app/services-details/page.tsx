@@ -28,6 +28,7 @@ import {
   getTemplateKey,
 } from "@/components/service-templates";
 import { BannerSlider } from "@/components/ServiceBanners";
+import { ENABLE_SERVICES_BANNER_SLIDER } from "@/components/ServicesListing";
 
 /* ─── FALLBACKS ────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/media/servicesListing/Rectangle 14 (1).png";
@@ -42,6 +43,11 @@ const FALLBACK_IMAGES = [
   "/media/servicesListing/unsplash_CPs2X8JYmS8 (8).png",
   "/media/servicesListing/unsplash_CPs2X8JYmS8 (9).png",
 ];
+
+/* ─── STRIP HTML ──────────────────────────────────────────────── */
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, " ").replace(/\s{2,}/g, " ").trim();
+}
 
 /* ─── SMART IMAGE ──────────────────────────────────────────────── */
 function SmartImage({
@@ -418,7 +424,8 @@ function ServiceDetailsContent() {
     : null;
 
   /* Hero content */
-  const heroBanner  = activeSub?.serviceBanner || service.serviceBanner || DEFAULT_BANNER;
+  const rawHeroBanner = activeSub?.serviceBanner || service.serviceBanner || DEFAULT_BANNER;
+  const staticBannerSrc = Array.isArray(rawHeroBanner) ? (rawHeroBanner[0] || DEFAULT_BANNER) : (rawHeroBanner || DEFAULT_BANNER);
   const heroTitle   = activeSub ? activeSub.serviceTitle : service.serviceTitle;
   const heroEyebrow = activeSub
     ? `${service.serviceTitle} • ${service.category}`
@@ -426,6 +433,12 @@ function ServiceDetailsContent() {
   const heroTagline = activeSub
     ? activeSub.shortDescription || activeSub.serviceContent
     : service.tagline;
+
+  const sliderQueryParam = searchParams.get("slider");
+  const isSliderActive =
+    sliderQueryParam !== null
+      ? sliderQueryParam === "true" || sliderQueryParam === "1"
+      : ENABLE_SERVICES_BANNER_SLIDER;
 
   const router = useRouter();
 
@@ -469,11 +482,42 @@ function ServiceDetailsContent() {
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
-      {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
-      <BannerSlider
-        slides={bannerSlides}
-        initialIndex={0}
-      />
+      {/* ══ HERO BANNER (SLIDER OR STATIC BANNER) ══════════════════ */}
+      {isSliderActive ? (
+        <BannerSlider
+          slides={bannerSlides}
+          initialIndex={0}
+          className="h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px]"
+        />
+      ) : (
+        <div className="relative w-full h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#0b2447]">
+          <SmartImage
+            src={staticBannerSrc}
+            alt={heroTitle}
+            fallbackSrc={DEFAULT_BANNER}
+            priority
+            className="object-cover object-center scale-105 transition-transform duration-1000"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/70" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto z-10">
+            <div className="inline-flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
+                {heroEyebrow}
+              </span>
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-md">
+              {heroTitle}
+            </h1>
+            {heroTagline && (
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl leading-relaxed line-clamp-2 drop-shadow-sm font-medium">
+                {stripHtml(heroTagline)}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── BREADCRUMB ───────────────────────────────────────── */}
       {/* <div className="border-b border-stone-100 bg-stone-50/70">

@@ -20,6 +20,14 @@ import {
 } from "@/components/service-templates";
 import { BannerSlider } from "@/components/ServiceBanners";
 
+/* ─── CONFIGURATION FLAGS ─────────────────────────────────────── */
+/**
+ * Flag to control banner mode on the Service Listing page:
+ * - true  => Auto-playing banner slider with sub-services
+ * - false => Static hero banner with title and service image (no slider)
+ */
+export const ENABLE_SERVICES_BANNER_SLIDER = false;
+
 /* ─── ASSETS ──────────────────────────────────────────────────── */
 const DEFAULT_BANNER = "/banners/Services_.png";
 const FALLBACK_IMAGES = [
@@ -159,11 +167,20 @@ const SERVICES_FAQS = [
 
 
 /* ─── INNER CONTENT (needs useSearchParams) ───────────────────── */
-function ServicesContent() {
+function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isArabic } = useLanguage();
   const services = isArabic ? servicesDataAr : servicesDataEn;
+
+  // Resolve slider mode: URL parameter (?slider=true / ?slider=false) overrides prop / config flag
+  const sliderQueryParam = searchParams.get("slider");
+  const isSliderActive =
+    sliderQueryParam !== null
+      ? sliderQueryParam === "true" || sliderQueryParam === "1"
+      : typeof enableSlider === "boolean"
+        ? enableSlider
+        : ENABLE_SERVICES_BANNER_SLIDER;
 
   // Resolve active service from URL
   const serviceParam = searchParams.get("service") ?? null;
@@ -280,30 +297,79 @@ function ServicesContent() {
   // Banner slides: Sub-services of activeService on listing page, single sub-service banner on service details
   const bannerSlides = activeSub
     ? toBannerImages(
-        activeSub.serviceBanner || activeSub.serviceImage || activeService.serviceBanner,
-        DEFAULT_BANNER
-      ).map((image) => ({ image, title: activeSub.serviceTitle }))
+      activeSub.serviceBanner || activeSub.serviceImage || activeService.serviceBanner,
+      DEFAULT_BANNER
+    ).map((image) => ({ image, title: activeSub.serviceTitle }))
     : (activeService.subservices && activeService.subservices.length > 0)
-    ? activeService.subservices.flatMap((sub) =>
+      ? activeService.subservices.flatMap((sub) =>
         toBannerImages(
           sub.serviceBanner || sub.serviceImage || activeService.serviceBanner,
           DEFAULT_BANNER
         ).map((image) => ({ image, title: sub.serviceTitle }))
       )
-    : toBannerImages(
+      : toBannerImages(
         activeService.serviceBanner || activeService.serviceImage,
         DEFAULT_BANNER
       ).map((image) => ({ image, title: activeService.serviceTitle }));
 
+  // Static banner image: active subservice banner -> active service banner -> default banner
+  const staticBannerSrc =
+    (activeSub
+      ? (Array.isArray(activeSub.serviceBanner) ? activeSub.serviceBanner[0] : activeSub.serviceBanner) ||
+      activeSub.serviceImage
+      : null) ||
+    (Array.isArray(activeService.serviceBanner) ? activeService.serviceBanner[0] : activeService.serviceBanner) ||
+    activeService.serviceImage ||
+    DEFAULT_BANNER;
+
   return (
     <div className="w-full bg-white" dir={isArabic ? "rtl" : "ltr"}>
 
-      {/* ══ HERO BANNER SLIDER ══════════════════════════════════ */}
-      <BannerSlider
-        slides={bannerSlides}
-        initialIndex={0}
-        className="h-[600px]"
-      />
+      {/* ══ HERO BANNER: SLIDER OR STATIC BANNER ══════════════════ */}
+      {isSliderActive ? (
+        <BannerSlider
+          slides={bannerSlides}
+          initialIndex={0}
+          className="h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px]"
+        />
+      ) : (
+        <div className="relative w-full h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#0b2447]">
+          {/* Static Background Image */}
+          <SmartImage
+            src={staticBannerSrc}
+            alt={heroTitle}
+            fallbackSrc={DEFAULT_BANNER}
+            priority
+            className="object-cover object-center scale-105 transition-transform duration-1000"
+          />
+          {/* Gentle gradient overlay for high contrast and readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/70" />
+
+          {/* Centered Title & Description Content */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto z-10">
+            {/* Tagline Badge */}
+            {/* <div className="inline-flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
+                {isArabic ? "خدماتنا المتميزة" : "OUR SERVICES"}
+              </span>
+              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
+            </div> */}
+
+            {/* Main Service / Sub-Service Title */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-md">
+              {heroTitle}
+            </h1>
+
+            {/* Tagline */}
+            {/* {heroTagline && (
+              <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl leading-relaxed line-clamp-2 drop-shadow-sm font-medium">
+                {heroTagline}
+              </p>
+            )} */}
+          </div>
+        </div>
+      )}
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}
       <div id="services-content-area" className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 bg-[#f4f6f8]">
@@ -317,8 +383,8 @@ function ServicesContent() {
             <nav className="flex flex-col gap-1.5">
 
               {/* ── 1. Waterproofing — always on top ── */}
-               {services.filter((svc) => svc.serviceSlug === "waterproofing" || svc.serviceSlug === "swimming-pools").map((svc) => {
-             
+              {services.filter((svc) => svc.serviceSlug === "waterproofing" || svc.serviceSlug === "swimming-pools").map((svc) => {
+
                 const isActive = svc.serviceSlug === activeService.serviceSlug;
                 const hasSubs = Boolean(svc.subservices && svc.subservices.length > 0);
                 const isOpen = openServiceSlug === svc.serviceSlug;
@@ -364,8 +430,8 @@ function ServicesContent() {
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0 bg-[#009e90]/10">
                       <svg className="w-[15px] h-[15px] text-[#009e90]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
-                        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+                        <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
+                        <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
                       </svg>
                     </div>
                     <span className="text-[13px] font-semibold truncate">
@@ -495,7 +561,7 @@ function ServicesContent() {
                 </button>
 
                 {/* Sub-service title */}
-               
+
                 {["grp-fiberglass", "combo-system-roof-waterproofing"].includes(activeSub.id) ? (
                   <h2 className="text-[20px] sm:text-[24px] font-extrabold text-[#009e90] leading-tight mb-6">
                     {activeSub.subServiceContent.serviceTitle} : {activeSub.subServiceContent.tagline}
@@ -703,14 +769,14 @@ function ServicesContent() {
 }
 
 /* ─── EXPORT (wrapped in Suspense for useSearchParams) ────────── */
-export default function ServicesListing() {
+export default function ServicesListing({ enableSlider }: { enableSlider?: boolean } = {}) {
   return (
     <Suspense fallback={
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-[#009e90] border-t-transparent rounded-full animate-spin" />
       </div>
     }>
-      <ServicesContent />
+      <ServicesContent enableSlider={enableSlider} />
     </Suspense>
   );
 }
