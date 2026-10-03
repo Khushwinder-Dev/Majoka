@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { ChevronRight, ChevronDown, ChevronLeft, MessageCircle, Phone, ArrowLeft, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
-import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
 import { servicesDataEn, servicesDataAr, ServiceItem, SubServiceItem } from "@/data/servicesData";
 import { ServiceIcon } from "@/components/ServiceIcon";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
@@ -246,15 +246,32 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
 
   // Contact form state
   const [formData, setFormData] = useState({ fullName: "", email: "", phone: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: getFieldError(name, value, isArabic) }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const newErrors: Record<string, string> = {
+      fullName: getFieldError("fullName", formData.fullName, isArabic),
+      email: getFieldError("email", formData.email, isArabic),
+      phone: getFieldError("phone", formData.phone, isArabic),
+      subject: getFieldError("subject", formData.subject, isArabic),
+      message: getFieldError("message", formData.message, isArabic),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
@@ -276,6 +293,7 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
           { duration: 5000, style: { background: "#009e90", color: "#fff", padding: "16px", borderRadius: "8px" }, iconTheme: { primary: "#fff", secondary: "#009e90" } }
         );
         setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
+        setErrors({});
       } else {
         const data = await res.json().catch(() => ({}));
         toast.error(data.error || (isArabic ? "حدث خطأ. يرجى المحاولة مرة أخرى." : "Failed to send. Please try again."));
@@ -605,59 +623,144 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
             <h2 className="text-2xl sm:text-3xl md:text-[38px] font-extrabold text-stone-900 text-center leading-tight mb-8 sm:mb-12 max-w-2xl mx-auto tracking-tight">
               {isArabic ? "لا تتردد في مراسلة خبرائنا التقنيين" : "Feel Free to Write Our Technology Experts"}
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {/* Full Name */}
-                <div className="relative">
-                  <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
-                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.fullName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
-                    {isArabic ? "الاسم الكامل" : "Full Name"}
-                  </label>
-                  <InputValidationTick isValid={isValidText(formData.fullName)} isArabic={isArabic} />
+                <div>
+                  <div className="relative">
+                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange}
+                      placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                      className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                      } ${
+                        errors.fullName
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                      }`} />
+                    <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      isArabic ? "right-5" : "left-5"
+                    } ${
+                      errors.fullName
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                        : formData.fullName
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                    }`}>
+                      {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                    </label>
+                    <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} />
+                  </div>
+                  <FormFieldError error={errors.fullName} />
                 </div>
                 {/* Email */}
-                <div className="relative">
-                  <input type="email" name="email" required value={formData.email} onChange={handleInputChange}
-                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.email ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
-                    {isArabic ? "عنوان البريد الإلكتروني" : "Email Address"}
-                  </label>
-                  <InputValidationTick isValid={isValidEmail(formData.email)} isArabic={isArabic} />
+                <div>
+                  <div className="relative">
+                    <input type="email" name="email" value={formData.email} onChange={handleInputChange}
+                      placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                      className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                      } ${
+                        errors.email
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                      }`} />
+                    <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      isArabic ? "right-5" : "left-5"
+                    } ${
+                      errors.email
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                        : formData.email
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                    }`}>
+                      {isArabic ? "عنوان البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                    </label>
+                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} />
+                  </div>
+                  <FormFieldError error={errors.email} />
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {/* Phone */}
-                <div className="relative">
-                  <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
-                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.phone ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
-                    {isArabic ? "رقم الهاتف" : "Phone Number"}
-                  </label>
-                  <InputValidationTick isValid={isValidPhone(formData.phone)} isArabic={isArabic} />
+                <div>
+                  <div className="relative">
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
+                      placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                      className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                      } ${
+                        errors.phone
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                      }`} />
+                    <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      isArabic ? "right-5" : "left-5"
+                    } ${
+                      errors.phone
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                        : formData.phone
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                    }`}>
+                      {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                    </label>
+                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} />
+                  </div>
+                  <FormFieldError error={errors.phone} />
                 </div>
                 {/* Subject */}
-                <div className="relative">
-                  <input type="text" name="subject" required value={formData.subject} onChange={handleInputChange}
-                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                    className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}`} />
-                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.subject ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
-                    {isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"}
-                  </label>
-                  <InputValidationTick isValid={isValidText(formData.subject)} isArabic={isArabic} />
+                <div>
+                  <div className="relative">
+                    <input type="text" name="subject" value={formData.subject} onChange={handleInputChange}
+                      placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                      className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                      } ${
+                        errors.subject
+                          ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                          : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                      }`} />
+                    <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                      isArabic ? "right-5" : "left-5"
+                    } ${
+                      errors.subject
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                        : formData.subject
+                        ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                        : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                    }`}>
+                      {isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"} <span className="text-red-500">*</span>
+                    </label>
+                    <InputValidationTick isValid={isValidText(formData.subject) && !errors.subject} isArabic={isArabic} />
+                  </div>
+                  <FormFieldError error={errors.subject} />
                 </div>
               </div>
               {/* Message */}
-              <div className="relative">
-                <textarea name="message" required rows={6} value={formData.message} onChange={handleInputChange}
-                  placeholder=" " dir={isArabic ? "rtl" : "ltr"}
-                  className={`peer w-full bg-white border border-stone-300 rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all resize-y placeholder-transparent ${isArabic ? "text-right" : "text-left"}`} />
-                <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"} peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.message ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]" : ""}`}>
-                  {isArabic ? "الرسالة والتفاصيل" : "Message and details"}
-                </label>
+              <div>
+                <div className="relative">
+                  <textarea name="message" rows={6} value={formData.message} onChange={handleInputChange}
+                    placeholder=" " dir={isArabic ? "rtl" : "ltr"}
+                    className={`peer w-full bg-white border rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-y placeholder-transparent ${
+                      isArabic ? "text-right" : "text-left"
+                    } ${
+                      errors.message
+                        ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                        : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                    }`} />
+                  <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                    isArabic ? "right-5" : "left-5"
+                  } ${
+                    errors.message
+                      ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                      : formData.message
+                      ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                      : "top-4 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                  }`}>
+                    {isArabic ? "الرسالة والتفاصيل" : "Message and details"} <span className="text-red-500">*</span>
+                  </label>
+                </div>
+                <FormFieldError error={errors.message} />
               </div>
               <div className="flex justify-center pt-2 sm:pt-4">
                 <button type="submit" disabled={isSubmitting}

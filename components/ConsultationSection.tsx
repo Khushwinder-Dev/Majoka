@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Phone, Users, MapPin, ArrowRight, ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
 
 // ── Floating-label input ──────────────────────────────────────────────────────
 interface FloatFieldProps {
@@ -14,12 +14,13 @@ interface FloatFieldProps {
   label: string;
   required?: boolean;
   isArabic: boolean;
+  error?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function FloatField({ type = "text", name, value, label, required, isArabic, onChange }: FloatFieldProps) {
+function FloatField({ type = "text", name, value, label, required, isArabic, error, onChange }: FloatFieldProps) {
   const [focused, setFocused] = useState(false);
-  const lifted = focused || value.length > 0;
+  const lifted = focused || value.length > 0 || Boolean(error);
 
   const isValid =
     type === "email"
@@ -29,41 +30,52 @@ function FloatField({ type = "text", name, value, label, required, isArabic, onC
       : isValidText(value);
 
   return (
-    <div className="relative w-full">
-      <input
-        type={type}
-        name={name}
-        value={value}
-        required={required}
-        onChange={onChange}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        dir={isArabic ? "rtl" : "ltr"}
-        placeholder=" "
-        className={`
-          peer w-full rounded-full border bg-white
-          px-5 pt-5 pb-2
-          ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}
-          text-sm sm:text-[15px] text-stone-800
-          focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
-          transition-all duration-200
-          ${lifted ? "border-[#01a9a0]" : "border-stone-300"}
-        `}
-      />
-      <label
-        className={`
-          pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-5" : "left-5"}
-          transition-all duration-200
-          ${lifted
-            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-            : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
-          }
-        `}
-      >
-        {label}
-      </label>
-      <InputValidationTick isValid={isValid} isArabic={isArabic} />
+    <div>
+      <div className="relative w-full">
+        <input
+          type={type}
+          name={name}
+          value={value}
+          required={required}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          dir={isArabic ? "rtl" : "ltr"}
+          placeholder=" "
+          className={`
+            peer w-full rounded-full border bg-white
+            px-5 pt-5 pb-2
+            ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}
+            text-sm sm:text-[15px] text-stone-800
+            focus:outline-none transition-all duration-200
+            ${
+              error
+                ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                : lifted
+                ? "border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+            }
+          `}
+        />
+        <label
+          className={`
+            pointer-events-none absolute bg-white px-1
+            ${isArabic ? "right-5" : "left-5"}
+            transition-all duration-200
+            ${
+              error
+                ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                : lifted
+                ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                : "top-1/2 -translate-y-1/2 text-sm text-stone-400"
+            }
+          `}
+        >
+          {label}
+        </label>
+        <InputValidationTick isValid={isValid && !error} isArabic={isArabic} />
+      </div>
+      <FormFieldError error={error} />
     </div>
   );
 }
@@ -74,47 +86,59 @@ interface FloatTextareaProps {
   value: string;
   label: string;
   isArabic: boolean;
+  error?: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-function FloatTextarea({ name, value, label, isArabic, onChange }: FloatTextareaProps) {
+function FloatTextarea({ name, value, label, isArabic, error, onChange }: FloatTextareaProps) {
   const [focused, setFocused] = useState(false);
-  const lifted = focused || value.length > 0;
+  const lifted = focused || value.length > 0 || Boolean(error);
 
   return (
-    <div className="relative w-full">
-      <textarea
-        name={name}
-        value={value}
-        onChange={onChange}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        dir={isArabic ? "rtl" : "ltr"}
-        rows={4}
-        placeholder=" "
-        className={`
-          peer w-full rounded-2xl border bg-white
-          px-5 pt-6 pb-2
-          text-sm sm:text-[15px] text-stone-800
-          focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20
-          transition-all duration-200 resize-none h-32 sm:h-36
-          ${lifted ? "border-[#01a9a0]" : "border-stone-300"}
-          ${isArabic ? "text-right" : "text-left"}
-        `}
-      />
-      <label
-        className={`
-          pointer-events-none absolute bg-white px-1
-          ${isArabic ? "right-5" : "left-5"}
-          transition-all duration-200
-          ${lifted
-            ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
-            : "top-4 text-sm text-stone-400"
-          }
-        `}
-      >
-        {label}
-      </label>
+    <div>
+      <div className="relative w-full">
+        <textarea
+          name={name}
+          value={value}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          dir={isArabic ? "rtl" : "ltr"}
+          rows={4}
+          placeholder=" "
+          className={`
+            peer w-full rounded-2xl border bg-white
+            px-5 pt-6 pb-2
+            text-sm sm:text-[15px] text-stone-800
+            focus:outline-none transition-all duration-200 resize-none h-32 sm:h-36
+            ${isArabic ? "text-right" : "text-left"}
+            ${
+              error
+                ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                : lifted
+                ? "border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+            }
+          `}
+        />
+        <label
+          className={`
+            pointer-events-none absolute bg-white px-1
+            ${isArabic ? "right-5" : "left-5"}
+            transition-all duration-200
+            ${
+              error
+                ? "-top-2.5 text-[11px] font-semibold text-red-500"
+                : lifted
+                ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
+                : "top-4 text-sm text-stone-400"
+            }
+          `}
+        >
+          {label}
+        </label>
+      </div>
+      <FormFieldError error={error} />
     </div>
   );
 }
@@ -130,27 +154,35 @@ export default function ConsultationSection() {
     message: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone) {
-      setStatus("error");
-      setErrorMessage(
-        isArabic
-          ? "يرجى ملء جميع الحقول المطلوبة (الاسم، البريد الإلكتروني، ورقم الهاتف)."
-          : "Please fill in all required fields (Name, Email, and Phone Number)."
-      );
+
+    const newErrors: Record<string, string> = {
+      name: getFieldError("name", formData.name, isArabic),
+      email: getFieldError("email", formData.email, isArabic),
+      phone: getFieldError("phone", formData.phone, isArabic),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
+    setErrors({});
 
     setStatus("loading");
     setErrorMessage("");
@@ -318,7 +350,7 @@ export default function ConsultationSection() {
             </p>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-5">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4 sm:gap-5">
               {/* Row 1: Name & Company Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <FloatField
@@ -329,6 +361,7 @@ export default function ConsultationSection() {
                   label={isArabic ? "الاسم *" : "Name *"}
                   required
                   isArabic={isArabic}
+                  error={errors.name}
                 />
                 <FloatField
                   type="text"
@@ -350,6 +383,7 @@ export default function ConsultationSection() {
                   label={isArabic ? "البريد الإلكتروني *" : "Email Address *"}
                   required
                   isArabic={isArabic}
+                  error={errors.email}
                 />
                 <FloatField
                   type="tel"
@@ -359,6 +393,7 @@ export default function ConsultationSection() {
                   label={isArabic ? "رقم الهاتف *" : "Phone Number *"}
                   required
                   isArabic={isArabic}
+                  error={errors.phone}
                 />
               </div>
 

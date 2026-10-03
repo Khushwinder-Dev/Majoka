@@ -26,6 +26,12 @@ import { getProductById, ProductReview } from "@/data/productsData";
 import CommonHeader from "@/components/Common/CommonHeader";
 import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
 import { useLanguage } from "@/context/LanguageContext";
+import {
+  FormFieldError,
+  getFieldError,
+  InputValidationTick,
+  isValidText,
+} from "@/components/ui/InputValidationTick";
 
 const PRODUCT_FAQS: FaqItem[] = [
   {
@@ -105,6 +111,7 @@ export default function ProductDetailsPage() {
     rating: 5,
     comment: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Share via social
   const handleSocialShare = (platform: string) => {
@@ -150,11 +157,24 @@ export default function ProductDetailsPage() {
 
   const handleAddReviewSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newReview.name.trim() || !newReview.comment.trim()) {
-      toast.error("Please provide your name and review comments.");
+    const newErrors: Record<string, string> = {};
+
+    const nameErr = getFieldError("name", newReview.name, isArabic);
+    if (nameErr) newErrors.name = nameErr;
+
+    const commentErr = getFieldError("comment", newReview.comment, isArabic);
+    if (commentErr) newErrors.comment = commentErr;
+
+    if (!newReview.rating || newReview.rating < 1) {
+      newErrors.rating = isArabic ? "يرجى اختيار التقييم." : "Please select a rating.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
+    setErrors({});
     const createdReview: ProductReview = {
       id: `rev-${Date.now()}`,
       author: newReview.name,
@@ -652,17 +672,22 @@ export default function ProductDetailsPage() {
               Share your experience with {product.name}
             </p>
 
-            <form onSubmit={handleAddReviewSubmit} className="space-y-4">
+            <form onSubmit={handleAddReviewSubmit} noValidate className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Rating
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.rating ? "text-red-500" : "text-gray-700"
+                }`}>
+                  Rating *
                 </label>
                 <div className="flex items-center gap-1.5 text-amber-500 cursor-pointer">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       type="button"
                       key={star}
-                      onClick={() => setNewReview({ ...newReview, rating: star })}
+                      onClick={() => {
+                        setNewReview({ ...newReview, rating: star });
+                        if (errors.rating) setErrors((prev) => ({ ...prev, rating: "" }));
+                      }}
                       className="p-0.5 hover:scale-110 transition-transform"
                     >
                       <Star
@@ -677,38 +702,59 @@ export default function ProductDetailsPage() {
                     {newReview.rating} out of 5
                   </span>
                 </div>
+                <FormFieldError error={errors.rating} className="px-1" />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Your Name
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.name ? "text-red-500" : "text-gray-700"
+                }`}>
+                  Your Name *
                 </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Sarah Jenkins"
-                  value={newReview.name}
-                  onChange={(e) =>
-                    setNewReview({ ...newReview, name: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-full text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="e.g. Sarah Jenkins"
+                    value={newReview.name}
+                    onChange={(e) => {
+                      setNewReview({ ...newReview, name: e.target.value });
+                      if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+                    }}
+                    className={`w-full px-4 py-2.5 rounded-full text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all ${
+                      errors.name
+                        ? "bg-white border-2 border-red-500 ring-2 ring-red-500/15 focus:border-red-500"
+                        : "bg-gray-50 border border-gray-200 focus:border-[#01a9a0] focus:bg-white"
+                    }`}
+                  />
+                  <InputValidationTick
+                    isValid={isValidText(newReview.name, 2) && !errors.name}
+                    isArabic={isArabic}
+                  />
+                </div>
+                <FormFieldError error={errors.name} className="px-1" />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
-                  Your Review
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.comment ? "text-red-500" : "text-gray-700"
+                }`}>
+                  Your Review *
                 </label>
                 <textarea
                   rows={4}
-                  required
                   placeholder="Write details about the build quality, performance, and day-to-day use..."
                   value={newReview.comment}
-                  onChange={(e) =>
-                    setNewReview({ ...newReview, comment: e.target.value })
-                  }
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-2xl text-xs text-gray-800 placeholder:text-gray-400 outline-none focus:border-[#01a9a0] focus:bg-white transition-all resize-none"
+                  onChange={(e) => {
+                    setNewReview({ ...newReview, comment: e.target.value });
+                    if (errors.comment) setErrors((prev) => ({ ...prev, comment: "" }));
+                  }}
+                  className={`w-full px-4 py-3 rounded-2xl text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all resize-none ${
+                    errors.comment
+                      ? "bg-white border-2 border-red-500 ring-2 ring-red-500/15 focus:border-red-500"
+                      : "bg-gray-50 border border-gray-200 focus:border-[#01a9a0] focus:bg-white"
+                  }`}
                 />
+                <FormFieldError error={errors.comment} className="px-1" />
               </div>
 
               <button

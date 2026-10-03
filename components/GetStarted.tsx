@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
 
 interface FormData {
   fullName: string;
@@ -21,6 +21,7 @@ const GetStarted = () => {
     service: "",
     message: "",
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
@@ -34,39 +35,39 @@ const GetStarted = () => {
   ];
 
   const handleServiceSelect = (service: string) => {
-    setFormData({ ...formData, service });
+    setFormData((prev) => ({ ...prev, service }));
     setIsDropdownOpen(false);
+    if (errors.service) {
+      setErrors((prev) => ({ ...prev, service: "" }));
+    }
   };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Validation
-    if (!formData.service) {
-      toast.error("Please select a service", {
-        duration: 3000,
-        style: {
-          background: "#ef4444",
-          color: "#fff",
-          padding: "16px",
-          borderRadius: "8px",
-        },
-        iconTheme: {
-          primary: "#fff",
-          secondary: "#ef4444",
-        },
-      });
-      setIsSubmitting(false);
+    const newErrors: Record<string, string> = {
+      fullName: getFieldError("fullName", formData.fullName, false),
+      phone: getFieldError("phone", formData.phone, false),
+      email: getFieldError("email", formData.email, false),
+      service: formData.service ? "" : "Please select a service",
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
+    setErrors({});
+    setIsSubmitting(true);
 
     // Show loading toast
     const loadingToast = toast.loading("Sending your message...");
@@ -266,117 +267,152 @@ const GetStarted = () => {
 
           {/* Right Content - Contact Form */}
           <div className="w-full lg:w-5/12 bg-white/10 rounded-[20px] p-12 lg:p-15 border border-gray-400">
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-10">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col space-y-10">
               <div className="flex flex-col space-y-6">
                 {/* Name Input */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleInputChange}
-                    onFocus={() => setFocusedField("fullName")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.fullName || focusedField === "fullName"
-                      ? "-top-2.5 text-[11px] font-semibold text-white"
-                      : "top-3.5 text-sm text-white/70"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleInputChange}
+                      onFocus={() => setFocusedField("fullName")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.fullName
+                          ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
+                          : "border-[#e9f5fb] focus:border-white/70"
                       }`}
-                  >
-                    Name
-                  </label>
-                  <InputValidationTick isValid={isValidText(formData.fullName)} />
+                    />
+                    <label
+                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                        errors.fullName
+                          ? "-top-2.5 text-[11px] font-semibold text-red-300"
+                          : formData.fullName || focusedField === "fullName"
+                          ? "-top-2.5 text-[11px] font-semibold text-white"
+                          : "top-3.5 text-sm text-white/70"
+                      }`}
+                    >
+                      Name
+                    </label>
+                    <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} />
+                  </div>
+                  <FormFieldError error={errors.fullName} className="text-red-300" />
                 </div>
 
                 {/* Phone Input */}
-                <div className="relative">
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    onFocus={() => setFocusedField("phone")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.phone || focusedField === "phone"
-                      ? "-top-2.5 text-[11px] font-semibold text-white"
-                      : "top-3.5 text-sm text-white/70"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      onFocus={() => setFocusedField("phone")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.phone
+                          ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
+                          : "border-[#e9f5fb] focus:border-white/70"
                       }`}
-                  >
-                    Phone Number
-                  </label>
-                  <InputValidationTick isValid={isValidPhone(formData.phone)} />
+                    />
+                    <label
+                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                        errors.phone
+                          ? "-top-2.5 text-[11px] font-semibold text-red-300"
+                          : formData.phone || focusedField === "phone"
+                          ? "-top-2.5 text-[11px] font-semibold text-white"
+                          : "top-3.5 text-sm text-white/70"
+                      }`}
+                    >
+                      Phone Number
+                    </label>
+                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} />
+                  </div>
+                  <FormFieldError error={errors.phone} className="text-red-300" />
                 </div>
 
                 {/* Email Input */}
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    onFocus={() => setFocusedField("email")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 pr-12 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.email || focusedField === "email"
-                      ? "-top-2.5 text-[11px] font-semibold text-white"
-                      : "top-3.5 text-sm text-white/70"
+                <div>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      disabled={isSubmitting}
+                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                        errors.email
+                          ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
+                          : "border-[#e9f5fb] focus:border-white/70"
                       }`}
-                  >
-                    Email Address
-                  </label>
-                  <InputValidationTick isValid={isValidEmail(formData.email)} />
+                    />
+                    <label
+                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                        errors.email
+                          ? "-top-2.5 text-[11px] font-semibold text-red-300"
+                          : formData.email || focusedField === "email"
+                          ? "-top-2.5 text-[11px] font-semibold text-white"
+                          : "top-3.5 text-sm text-white/70"
+                      }`}
+                    >
+                      Email Address
+                    </label>
+                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} />
+                  </div>
+                  <FormFieldError error={errors.email} className="text-red-300" />
                 </div>
 
                 {/* Services Dropdown */}
-                <div className="relative">
-                  <div
-                    className={`w-full h-[50px] border border-[#e9f5fb] rounded-full px-6 py-4 flex items-center justify-between ${isSubmitting
-                      ? "opacity-50 cursor-not-allowed"
-                      : "cursor-pointer"
+                <div>
+                  <div className="relative">
+                    <div
+                      className={`w-full h-[50px] border rounded-full px-6 py-4 flex items-center justify-between transition-all ${
+                        errors.service
+                          ? "border-red-400 ring-2 ring-red-400/20"
+                          : "border-[#e9f5fb]"
+                      } ${
+                        isSubmitting
+                          ? "opacity-50 cursor-not-allowed"
+                          : "cursor-pointer"
                       }`}
-                    onClick={() =>
-                      !isSubmitting && setIsDropdownOpen(!isDropdownOpen)
-                    }
-                  >
-                    <span className="text-[#e9f5fb] text-lg">
-                      {formData.service || "Select Service"}
-                    </span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-[#e9f5fb] transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
-                        }`}
-                    />
-                  </div>
-
-                  {/* Dropdown Menu */}
-                  {isDropdownOpen && !isSubmitting && (
-                    <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg z-50 max-h-48 overflow-y-auto">
-                      {services.map((service, index) => (
-                        <div
-                          key={index}
-                          className="px-4 py-3 text-gray-800 hover:bg-gray-100/50 cursor-pointer transition-colors duration-150 first:rounded-t-2xl last:rounded-b-2xl"
-                          onClick={() => handleServiceSelect(service)}
-                        >
-                          {service}
-                        </div>
-                      ))}
+                      onClick={() =>
+                        !isSubmitting && setIsDropdownOpen(!isDropdownOpen)
+                      }
+                    >
+                      <span className="text-[#e9f5fb] text-lg">
+                        {formData.service || "Select Service"}
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[#e9f5fb] transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""
+                          }`}
+                      />
                     </div>
-                  )}
+
+                    {/* Dropdown Menu */}
+                    {isDropdownOpen && !isSubmitting && (
+                      <div className="absolute top-full left-0 right-0 mt-1 bg-white/90 backdrop-blur-md border border-gray-300 rounded-2xl shadow-lg z-50 max-h-48 overflow-y-auto">
+                        {services.map((service, index) => (
+                          <div
+                            key={index}
+                            className="px-4 py-3 text-gray-800 hover:bg-gray-100/50 cursor-pointer transition-colors duration-150 first:rounded-t-2xl last:rounded-b-2xl"
+                            onClick={() => handleServiceSelect(service)}
+                          >
+                            {service}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <FormFieldError error={errors.service} className="text-red-300" />
                 </div>
 
                 {/* Message Input */}

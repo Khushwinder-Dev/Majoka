@@ -5,7 +5,7 @@ import { X, Loader2, CheckCircle2, UserCheck, Mail, PhoneCall, Truck } from "luc
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
-import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
 
 export type ContactModalType = "expert" | "enquiry" | "callback" | "supplier" | null;
 
@@ -54,6 +54,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   const { isArabic } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Form states
   // 1. Talk to an Expert
@@ -100,6 +101,7 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   useEffect(() => {
     setIsSuccess(false);
     setIsSubmitting(false);
+    setErrors({});
   }, [activeModal]);
 
   // Handle escape key
@@ -130,16 +132,15 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   /* ── Submit handler for Talk to an Expert ── */
   const handleExpertSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!expertForm.fullName.trim()) {
-      toast.error(isArabic ? "يرجى إدخال الاسم الكامل" : "Please enter your full name");
-      return;
-    }
-    if (!expertForm.phone.trim()) {
-      toast.error(isArabic ? "يرجى إدخال رقم الهاتف" : "Please enter your phone number");
-      return;
-    }
-    if (!expertForm.serviceType) {
-      toast.error(isArabic ? "يرجى اختيار نوع الخدمة" : "Please select a service type");
+    const newErrors: Record<string, string> = {
+      fullName: getFieldError("fullName", expertForm.fullName, isArabic),
+      phone: getFieldError("phone", expertForm.phone, isArabic),
+      serviceType: expertForm.serviceType ? "" : (isArabic ? "يرجى اختيار نوع الخدمة" : "Please select a service type"),
+      email: expertForm.email.trim() ? (isValidEmail(expertForm.email) ? "" : (isArabic ? "يرجى إدخال بريد إلكتروني صالح" : "Please enter a valid email")) : "",
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
 
@@ -172,20 +173,16 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   /* ── Submit handler for Send an Enquiry ── */
   const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!enquiryForm.fullName.trim()) {
-      toast.error(isArabic ? "يرجى إدخال الاسم الكامل" : "Please enter your full name");
-      return;
-    }
-    if (!enquiryForm.phone.trim()) {
-      toast.error(isArabic ? "يرجى إدخال رقم الهاتف" : "Please enter your phone number");
-      return;
-    }
-    if (!enquiryForm.subject.trim()) {
-      toast.error(isArabic ? "يرجى إدخال الموضوع" : "Please enter a subject");
-      return;
-    }
-    if (!enquiryForm.enquiry.trim()) {
-      toast.error(isArabic ? "يرجى كتابة استفسارك" : "Please enter your enquiry");
+    const newErrors: Record<string, string> = {
+      fullName: getFieldError("fullName", enquiryForm.fullName, isArabic),
+      phone: getFieldError("phone", enquiryForm.phone, isArabic),
+      subject: enquiryForm.subject.trim() ? "" : (isArabic ? "يرجى إدخال الموضوع" : "Please enter a subject"),
+      enquiry: enquiryForm.enquiry.trim() ? "" : (isArabic ? "يرجى كتابة استفسارك" : "Please enter your enquiry"),
+      email: enquiryForm.email.trim() ? (isValidEmail(enquiryForm.email) ? "" : (isArabic ? "يرجى إدخال بريد إلكتروني صالح" : "Please enter a valid email")) : "",
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
 
@@ -218,12 +215,15 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   /* ── Submit handler for Request a Callback ── */
   const handleCallbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!callbackForm.fullName.trim()) {
-      toast.error(isArabic ? "يرجى إدخال الاسم الكامل" : "Please enter your full name");
-      return;
-    }
-    if (!callbackForm.phone.trim()) {
-      toast.error(isArabic ? "يرجى إدخال رقم الهاتف" : "Please enter your phone number");
+    const newErrors: Record<string, string> = {
+      fullName: getFieldError("fullName", callbackForm.fullName, isArabic),
+      phone: getFieldError("phone", callbackForm.phone, isArabic),
+      preferredTime: callbackForm.preferredTime ? "" : (isArabic ? "يرجى اختيار الوقت المفضل" : "Please select preferred time"),
+      reason: callbackForm.reason ? "" : (isArabic ? "يرجى اختيار سبب الاتصال" : "Please select reason"),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
 
@@ -256,24 +256,17 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
   /* ── Submit handler for Supplier Enquiries ── */
   const handleSupplierSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supplierForm.companyName.trim()) {
-      toast.error(isArabic ? "يرجى إدخال اسم الشركة" : "Please enter company name");
-      return;
-    }
-    if (!supplierForm.contactPerson.trim()) {
-      toast.error(isArabic ? "يرجى إدخال اسم الشخص المسؤول" : "Please enter contact person name");
-      return;
-    }
-    if (!supplierForm.phone.trim()) {
-      toast.error(isArabic ? "يرجى إدخال رقم الهاتف" : "Please enter phone number");
-      return;
-    }
-    if (!supplierForm.email.trim() || !supplierForm.email.includes("@")) {
-      toast.error(isArabic ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email address");
-      return;
-    }
-    if (!supplierForm.enquiry.trim()) {
-      toast.error(isArabic ? "يرجى كتابة تفاصيل الاستفسار" : "Please enter your enquiry details");
+    const newErrors: Record<string, string> = {
+      companyName: supplierForm.companyName.trim() ? "" : (isArabic ? "يرجى إدخال اسم الشركة" : "Please enter company name"),
+      contactPerson: supplierForm.contactPerson.trim() ? "" : (isArabic ? "يرجى إدخال اسم الشخص المسؤول" : "Please enter contact person name"),
+      phone: getFieldError("phone", supplierForm.phone, isArabic),
+      email: getFieldError("email", supplierForm.email, isArabic),
+      category: supplierForm.category ? "" : (isArabic ? "يرجى اختيار فئة التوريد" : "Please select category"),
+      enquiry: supplierForm.enquiry.trim() ? "" : (isArabic ? "يرجى كتابة تفاصيل الاستفسار" : "Please enter enquiry details"),
+    };
+
+    if (Object.values(newErrors).some(Boolean)) {
+      setErrors(newErrors);
       return;
     }
 
@@ -383,32 +376,45 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     : "Connect with our technical team to discuss your project or requirements."}
                 </p>
 
-                <form onSubmit={handleExpertSubmit} className="flex flex-col gap-3 sm:gap-3.5">
+                <form onSubmit={handleExpertSubmit} noValidate className="flex flex-col gap-3 sm:gap-3.5">
                   {/* Full Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={expertForm.fullName}
-                      onChange={(e) => setExpertForm({ ...expertForm, fullName: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        expertForm.fullName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(expertForm.fullName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={expertForm.fullName}
+                        onChange={(e) => {
+                          setExpertForm({ ...expertForm, fullName: e.target.value });
+                          if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.fullName
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : expertForm.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(expertForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
@@ -439,55 +445,82 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
 
                   {/* Phone & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={expertForm.phone}
-                        onChange={(e) => setExpertForm({ ...expertForm, phone: e.target.value })}
-                        required
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          expertForm.phone ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidPhone(expertForm.phone)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={expertForm.phone}
+                          onChange={(e) => {
+                            setExpertForm({ ...expertForm, phone: e.target.value });
+                            if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.phone
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : expertForm.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidPhone(expertForm.phone) && !errors.phone} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.phone} />
                     </div>
 
-                    <div className="relative">
-                      <input
-                        type="email"
-                        name="email"
-                        value={expertForm.email}
-                        onChange={(e) => setExpertForm({ ...expertForm, email: e.target.value })}
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          expertForm.email ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "البريد الإلكتروني" : "Email Address"}
-                      </label>
-                      <InputValidationTick isValid={isValidEmail(expertForm.email)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          value={expertForm.email}
+                          onChange={(e) => {
+                            setExpertForm({ ...expertForm, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.email
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : expertForm.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "البريد الإلكتروني" : "Email Address"}
+                        </label>
+                        <InputValidationTick isValid={isValidEmail(expertForm.email) && !errors.email} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.email} />
                     </div>
                   </div>
 
@@ -505,7 +538,12 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       isArabic={isArabic}
                       size="sm"
                       variant="rounded-full"
-                      onChange={(val) => setExpertForm((prev) => ({ ...prev, serviceType: val }))}
+                      error={errors.serviceType}
+                      hasError={Boolean(errors.serviceType)}
+                      onChange={(val) => {
+                        setExpertForm((prev) => ({ ...prev, serviceType: val }));
+                        if (errors.serviceType) setErrors((prev) => ({ ...prev, serviceType: "" }));
+                      }}
                     />
                   </div>
 
@@ -581,32 +619,45 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     : "Send us your enquiry and our team will get back to you shortly."}
                 </p>
 
-                <form onSubmit={handleEnquirySubmit} className="flex flex-col gap-3 sm:gap-3.5">
+                <form onSubmit={handleEnquirySubmit} noValidate className="flex flex-col gap-3 sm:gap-3.5">
                   {/* Full Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={enquiryForm.fullName}
-                      onChange={(e) => setEnquiryForm({ ...enquiryForm, fullName: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        enquiryForm.fullName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(enquiryForm.fullName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={enquiryForm.fullName}
+                        onChange={(e) => {
+                          setEnquiryForm({ ...enquiryForm, fullName: e.target.value });
+                          if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.fullName
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : enquiryForm.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(enquiryForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
@@ -637,110 +688,162 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
 
                   {/* Phone & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={enquiryForm.phone}
-                        onChange={(e) => setEnquiryForm({ ...enquiryForm, phone: e.target.value })}
-                        required
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          enquiryForm.phone ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidPhone(enquiryForm.phone)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={enquiryForm.phone}
+                          onChange={(e) => {
+                            setEnquiryForm({ ...enquiryForm, phone: e.target.value });
+                            if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.phone
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : enquiryForm.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidPhone(enquiryForm.phone) && !errors.phone} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.phone} />
                     </div>
 
-                    <div className="relative">
-                      <input
-                        type="email"
-                        name="email"
-                        value={enquiryForm.email}
-                        onChange={(e) => setEnquiryForm({ ...enquiryForm, email: e.target.value })}
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          enquiryForm.email ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "البريد الإلكتروني" : "Email Address"}
-                      </label>
-                      <InputValidationTick isValid={isValidEmail(enquiryForm.email)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          value={enquiryForm.email}
+                          onChange={(e) => {
+                            setEnquiryForm({ ...enquiryForm, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.email
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : enquiryForm.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "البريد الإلكتروني" : "Email Address"}
+                        </label>
+                        <InputValidationTick isValid={isValidEmail(enquiryForm.email) && !errors.email} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.email} />
                     </div>
                   </div>
 
                   {/* Subject */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="subject"
-                      value={enquiryForm.subject}
-                      onChange={(e) => setEnquiryForm({ ...enquiryForm, subject: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        enquiryForm.subject ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "الموضوع" : "Subject"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(enquiryForm.subject)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="subject"
+                        value={enquiryForm.subject}
+                        onChange={(e) => {
+                          setEnquiryForm({ ...enquiryForm, subject: e.target.value });
+                          if (errors.subject) setErrors((prev) => ({ ...prev, subject: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.subject
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.subject
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : enquiryForm.subject
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "الموضوع" : "Subject"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(enquiryForm.subject) && !errors.subject} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.subject} />
                   </div>
 
-
                   {/* Enquiry Textarea */}
-                  <div className="relative">
-                    <textarea
-                      rows={3}
-                      name="enquiry"
-                      value={enquiryForm.enquiry}
-                      onChange={(e) => setEnquiryForm({ ...enquiryForm, enquiry: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent resize-none ${
-                        isArabic ? "text-right" : "text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        enquiryForm.enquiry ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "استفسارك بالتفصيل" : "Your Enquiry"} <span className="text-red-500">*</span>
-                    </label>
+                  <div>
+                    <div className="relative">
+                      <textarea
+                        rows={3}
+                        name="enquiry"
+                        value={enquiryForm.enquiry}
+                        onChange={(e) => {
+                          setEnquiryForm({ ...enquiryForm, enquiry: e.target.value });
+                          if (errors.enquiry) setErrors((prev) => ({ ...prev, enquiry: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
+                          isArabic ? "text-right" : "text-left"
+                        } ${
+                          errors.enquiry
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.enquiry
+                            ? "-top-2 text-[10.5px] font-semibold text-red-500"
+                            : enquiryForm.enquiry
+                            ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-3.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "استفسارك بالتفصيل" : "Your Enquiry"} <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                    <FormFieldError error={errors.enquiry} />
                   </div>
 
                   {/* Submit Button */}
@@ -790,32 +893,45 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     : "Leave your details and our team will call you back shortly."}
                 </p>
 
-                <form onSubmit={handleCallbackSubmit} className="flex flex-col gap-3 sm:gap-3.5">
+                <form onSubmit={handleCallbackSubmit} noValidate className="flex flex-col gap-3 sm:gap-3.5">
                   {/* Full Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={callbackForm.fullName}
-                      onChange={(e) => setCallbackForm({ ...callbackForm, fullName: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        callbackForm.fullName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(callbackForm.fullName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={callbackForm.fullName}
+                        onChange={(e) => {
+                          setCallbackForm({ ...callbackForm, fullName: e.target.value });
+                          if (errors.fullName) setErrors((prev) => ({ ...prev, fullName: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.fullName
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : callbackForm.fullName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(callbackForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
@@ -845,30 +961,43 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                   </div>
 
                   {/* Phone */}
-                  <div className="relative">
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={callbackForm.phone}
-                      onChange={(e) => setCallbackForm({ ...callbackForm, phone: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        callbackForm.phone ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidPhone(callbackForm.phone)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={callbackForm.phone}
+                        onChange={(e) => {
+                          setCallbackForm({ ...callbackForm, phone: e.target.value });
+                          if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.phone
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.phone
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : callbackForm.phone
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidPhone(callbackForm.phone) && !errors.phone} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.phone} />
                   </div>
 
                   {/* Preferred Time */}
@@ -885,7 +1014,12 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       isArabic={isArabic}
                       size="sm"
                       variant="rounded-full"
-                      onChange={(val) => setCallbackForm((prev) => ({ ...prev, preferredTime: val }))}
+                      error={errors.preferredTime}
+                      hasError={Boolean(errors.preferredTime)}
+                      onChange={(val) => {
+                        setCallbackForm((prev) => ({ ...prev, preferredTime: val }));
+                        if (errors.preferredTime) setErrors((prev) => ({ ...prev, preferredTime: "" }));
+                      }}
                     />
                   </div>
 
@@ -903,7 +1037,12 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       isArabic={isArabic}
                       size="sm"
                       variant="rounded-full"
-                      onChange={(val) => setCallbackForm((prev) => ({ ...prev, reason: val }))}
+                      error={errors.reason}
+                      hasError={Boolean(errors.reason)}
+                      onChange={(val) => {
+                        setCallbackForm((prev) => ({ ...prev, reason: val }));
+                        if (errors.reason) setErrors((prev) => ({ ...prev, reason: "" }));
+                      }}
                     />
                   </div>
 
@@ -954,113 +1093,165 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                     : "Interested in supplying materials, products, equipment, or services? Send us your details."}
                 </p>
 
-                <form onSubmit={handleSupplierSubmit} className="flex flex-col gap-3 sm:gap-3.5">
+                <form onSubmit={handleSupplierSubmit} noValidate className="flex flex-col gap-3 sm:gap-3.5">
                   {/* Company Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={supplierForm.companyName}
-                      onChange={(e) => setSupplierForm({ ...supplierForm, companyName: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        supplierForm.companyName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "اسم الشركة" : "Company Name"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(supplierForm.companyName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={supplierForm.companyName}
+                        onChange={(e) => {
+                          setSupplierForm({ ...supplierForm, companyName: e.target.value });
+                          if (errors.companyName) setErrors((prev) => ({ ...prev, companyName: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.companyName
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.companyName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : supplierForm.companyName
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "اسم الشركة" : "Company Name"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(supplierForm.companyName) && !errors.companyName} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.companyName} />
                   </div>
 
                   {/* Contact Person */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="contactPerson"
-                      value={supplierForm.contactPerson}
-                      onChange={(e) => setSupplierForm({ ...supplierForm, contactPerson: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        supplierForm.contactPerson ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "اسم الشخص المسؤول" : "Contact Person"} <span className="text-red-500">*</span>
-                    </label>
-                    <InputValidationTick isValid={isValidText(supplierForm.contactPerson)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="contactPerson"
+                        value={supplierForm.contactPerson}
+                        onChange={(e) => {
+                          setSupplierForm({ ...supplierForm, contactPerson: e.target.value });
+                          if (errors.contactPerson) setErrors((prev) => ({ ...prev, contactPerson: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${
+                          errors.contactPerson
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.contactPerson
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                            : supplierForm.contactPerson
+                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "اسم الشخص المسؤول" : "Contact Person"} <span className="text-red-500">*</span>
+                      </label>
+                      <InputValidationTick isValid={isValidText(supplierForm.contactPerson) && !errors.contactPerson} isArabic={isArabic} />
+                    </div>
+                    <FormFieldError error={errors.contactPerson} />
                   </div>
 
                   {/* Phone & Email */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                    <div className="relative">
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={supplierForm.phone}
-                        onChange={(e) => setSupplierForm({ ...supplierForm, phone: e.target.value })}
-                        required
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          supplierForm.phone ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidPhone(supplierForm.phone)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={supplierForm.phone}
+                          onChange={(e) => {
+                            setSupplierForm({ ...supplierForm, phone: e.target.value });
+                            if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.phone
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : supplierForm.phone
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidPhone(supplierForm.phone) && !errors.phone} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.phone} />
                     </div>
 
-                    <div className="relative">
-                      <input
-                        type="email"
-                        name="email"
-                        value={supplierForm.email}
-                        onChange={(e) => setSupplierForm({ ...supplierForm, email: e.target.value })}
-                        required
-                        placeholder=" "
-                        disabled={isSubmitting}
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                          isArabic ? "right-4" : "left-4"
-                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                          supplierForm.email ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                        }`}
-                      >
-                        {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
-                      </label>
-                      <InputValidationTick isValid={isValidEmail(supplierForm.email)} isArabic={isArabic} />
+                    <div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          name="email"
+                          value={supplierForm.email}
+                          onChange={(e) => {
+                            setSupplierForm({ ...supplierForm, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                          }}
+                          placeholder=" "
+                          disabled={isSubmitting}
+                          dir={isArabic ? "rtl" : "ltr"}
+                          className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          } ${
+                            errors.email
+                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                          }`}
+                        />
+                        <label
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                            isArabic ? "right-4" : "left-4"
+                          } ${
+                            errors.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
+                              : supplierForm.email
+                              ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                              : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          }`}
+                        >
+                          {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                        </label>
+                        <InputValidationTick isValid={isValidEmail(supplierForm.email) && !errors.email} isArabic={isArabic} />
+                      </div>
+                      <FormFieldError error={errors.email} />
                     </div>
                   </div>
 
@@ -1078,7 +1269,12 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                       isArabic={isArabic}
                       size="sm"
                       variant="rounded-full"
-                      onChange={(val) => setSupplierForm((prev) => ({ ...prev, category: val }))}
+                      error={errors.category}
+                      hasError={Boolean(errors.category)}
+                      onChange={(val) => {
+                        setSupplierForm((prev) => ({ ...prev, category: val }));
+                        if (errors.category) setErrors((prev) => ({ ...prev, category: "" }));
+                      }}
                     />
                   </div>
 
@@ -1109,29 +1305,42 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                   </div>
 
                   {/* Enquiry Details Textarea */}
-                  <div className="relative">
-                    <textarea
-                      rows={3}
-                      name="enquiry"
-                      value={supplierForm.enquiry}
-                      onChange={(e) => setSupplierForm({ ...supplierForm, enquiry: e.target.value })}
-                      required
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent resize-none ${
-                        isArabic ? "text-right" : "text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        supplierForm.enquiry ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "تفاصيل استفسارك ومواد التوريد" : "Your Enquiry & Supply Details"} <span className="text-red-500">*</span>
-                    </label>
+                  <div>
+                    <div className="relative">
+                      <textarea
+                        rows={3}
+                        name="enquiry"
+                        value={supplierForm.enquiry}
+                        onChange={(e) => {
+                          setSupplierForm({ ...supplierForm, enquiry: e.target.value });
+                          if (errors.enquiry) setErrors((prev) => ({ ...prev, enquiry: "" }));
+                        }}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
+                          isArabic ? "text-right" : "text-left"
+                        } ${
+                          errors.enquiry
+                            ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                            : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          isArabic ? "right-4" : "left-4"
+                        } ${
+                          errors.enquiry
+                            ? "-top-2 text-[10.5px] font-semibold text-red-500"
+                            : supplierForm.enquiry
+                            ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
+                            : "top-3.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                        }`}
+                      >
+                        {isArabic ? "تفاصيل استفسارك ومواد التوريد" : "Your Enquiry & Supply Details"} <span className="text-red-500">*</span>
+                      </label>
+                    </div>
+                    <FormFieldError error={errors.enquiry} />
                   </div>
 
                   {/* Submit Button */}

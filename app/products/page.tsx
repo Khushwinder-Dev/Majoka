@@ -26,6 +26,14 @@ import { allProductsData, ProductDetailItem } from "@/data/productsData";
 import CommonHeader from "@/components/Common/CommonHeader";
 import FaqSection, { FaqItem } from "@/components/Common/FaqSection";
 import { useLanguage } from "@/context/LanguageContext";
+import {
+  FormFieldError,
+  getFieldError,
+  InputValidationTick,
+  isValidEmail,
+  isValidPhone,
+  isValidText,
+} from "@/components/ui/InputValidationTick";
 
 const PRODUCT_LISTING_FAQS: FaqItem[] = [
   {
@@ -122,6 +130,7 @@ export default function ProductsPage() {
 
   // Expert Modal State
   const [isExpertModalOpen, setIsExpertModalOpen] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [expertForm, setExpertForm] = useState({
     name: "",
     email: "",
@@ -210,10 +219,25 @@ export default function ProductsPage() {
   // Handle Expert Inquiry Submit
   const handleExpertSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!expertForm.name || !expertForm.email) {
-      toast.error("Please fill in your name and email.");
+    const newErrors: Record<string, string> = {};
+
+    const nameErr = getFieldError("name", expertForm.name, isArabic);
+    if (nameErr) newErrors.name = nameErr;
+
+    const emailErr = getFieldError("email", expertForm.email, isArabic);
+    if (emailErr) newErrors.email = emailErr;
+
+    if (expertForm.phone.trim()) {
+      const phoneErr = getFieldError("phone", expertForm.phone, isArabic);
+      if (phoneErr) newErrors.phone = phoneErr;
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+
+    setErrors({});
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -955,52 +979,92 @@ export default function ProductsPage() {
               </button>
             </div>
 
-            <form onSubmit={handleExpertSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleExpertSubmit} noValidate className="p-6 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.name ? "text-red-500" : "text-gray-700"
+                }`}>
                   Full Name *
                 </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. John Doe"
-                  value={expertForm.name}
-                  onChange={(e) =>
-                    setExpertForm({ ...expertForm, name: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
-                />
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="e.g. John Doe"
+                    value={expertForm.name}
+                    onChange={(e) => {
+                      setExpertForm({ ...expertForm, name: e.target.value });
+                      if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
+                    }}
+                    className={`w-full px-4 py-2.5 rounded-full border text-sm focus:outline-none transition-all ${
+                      errors.name
+                        ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                        : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                    }`}
+                  />
+                  <InputValidationTick
+                    isValid={isValidText(expertForm.name, 2) && !errors.name}
+                    isArabic={isArabic}
+                  />
+                </div>
+                <FormFieldError error={errors.name} />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.email ? "text-red-500" : "text-gray-700"
+                }`}>
                   Email Address *
                 </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="name@company.com"
-                  value={expertForm.email}
-                  onChange={(e) =>
-                    setExpertForm({ ...expertForm, email: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
-                />
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="name@company.com"
+                    value={expertForm.email}
+                    onChange={(e) => {
+                      setExpertForm({ ...expertForm, email: e.target.value });
+                      if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
+                    }}
+                    className={`w-full px-4 py-2.5 rounded-full border text-sm focus:outline-none transition-all ${
+                      errors.email
+                        ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                        : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                    }`}
+                  />
+                  <InputValidationTick
+                    isValid={isValidEmail(expertForm.email) && !errors.email}
+                    isArabic={isArabic}
+                  />
+                </div>
+                <FormFieldError error={errors.email} />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1">
+                <label className={`block text-xs font-semibold mb-1 transition-colors ${
+                  errors.phone ? "text-red-500" : "text-gray-700"
+                }`}>
                   Phone Number
                 </label>
-                <input
-                  type="tel"
-                  placeholder="+971 55 617 3300"
-                  value={expertForm.phone}
-                  onChange={(e) =>
-                    setExpertForm({ ...expertForm, phone: e.target.value })
-                  }
-                  className="w-full px-4 py-2.5 rounded-full border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all"
-                />
+                <div className="relative">
+                  <input
+                    type="tel"
+                    placeholder="+971 55 617 3300"
+                    value={expertForm.phone}
+                    onChange={(e) => {
+                      setExpertForm({ ...expertForm, phone: e.target.value });
+                      if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
+                    }}
+                    className={`w-full px-4 py-2.5 rounded-full border text-sm focus:outline-none transition-all ${
+                      errors.phone
+                        ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                        : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                    }`}
+                  />
+                  <InputValidationTick
+                    isValid={isValidPhone(expertForm.phone) && !errors.phone}
+                    isArabic={isArabic}
+                  />
+                </div>
+                <FormFieldError error={errors.phone} />
               </div>
 
               <div>

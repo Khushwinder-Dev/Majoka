@@ -348,7 +348,7 @@ export default function SubcontractContent() {
         {/* Background Image with Dark Tinted Gradient */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/subcontract/subconBanner.png"
+            src="/subcontract/subconBanner1.png"
             alt="Reliable Subcontracting For Your Projects"
             fill
             priority
@@ -850,7 +850,7 @@ export default function SubcontractContent() {
         {/* Background Image: Engineers at construction site sunset */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/subcontract/cta-bg.jpg"
+            src="/subcontract/cta-bg1.jpg"
             alt="Looking for a Reliable Subcontractor?"
             fill
             priority
