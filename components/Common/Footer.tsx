@@ -446,7 +446,7 @@ export default function Footer() {
               </div>
 
               {/* Column 3: Refund & Legal Policy Links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-sm lg:text-base text-stone-600">
+              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 lg:gap-x-2 gap-y-2 text-sm lg:text-base text-stone-600">
                 <Link
                   href="/sitemap"
                   className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
