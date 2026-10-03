@@ -332,7 +332,7 @@ export default function GetAQuoteContent() {
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0d2438] leading-[1.18] tracking-tight mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0B1C24] leading-[1.18] tracking-tight mb-4 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                 {isArabic ? (
                   <>
                     مشروعك يبدأ <br />
@@ -429,7 +429,7 @@ export default function GetAQuoteContent() {
                 </div>
 
                 {/* Card Title */}
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0d2438] tracking-tight mb-2">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0B1C24] tracking-tight mb-2">
                   {isArabic ? "أخبرنا عن مشروعك" : "Tell Us About Your Project"}
                 </h3>
 
@@ -748,12 +748,12 @@ export default function GetAQuoteContent() {
                     </label>
                   </div>
 
-                  {/* Submit Button in vibrant teal */}
+                  {/* Submit Button matching brand teal */}
                   <div className="pt-2">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#1cd2ad] hover:bg-[#16be9c] active:scale-[0.99] text-white font-bold text-sm sm:text-base py-3.5 sm:py-4 rounded-full shadow-lg shadow-[#1cd2ad]/25 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="w-full bg-[#01a9a0] hover:bg-[#00968e] active:scale-[0.99] text-white font-bold text-sm sm:text-base py-3.5 sm:py-4 rounded-full shadow-lg shadow-[#01a9a0]/25 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -812,21 +812,21 @@ export default function GetAQuoteContent() {
           {/* Section Header */}
           <div className="text-center mb-7 sm:mb-12">
             <div className="flex items-center justify-center gap-2 mb-2 sm:mb-2.5">
-              <span className="w-5 h-[1.5px] bg-[#1cd2ad]" />
-              <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#1cd2ad] uppercase">
+              <span className="w-5 h-[1.5px] bg-[#01a9a0]" />
+              <span className="text-[11px] sm:text-[12px] font-extrabold tracking-[0.2em] text-[#01a9a0] uppercase">
                 {isArabic ? "الأسئلة الشائعة" : "FAQ"}
               </span>
-              <span className="w-5 h-[1.5px] bg-[#1cd2ad]" />
+              <span className="w-5 h-[1.5px] bg-[#01a9a0]" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0d2438] tracking-tight mb-2.5 sm:mb-3">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0B1C24] tracking-tight mb-2.5 sm:mb-3">
               {isArabic ? (
                 <>
-                  الأسئلة <span className="text-[#1cd2ad]">الشائعة</span>
+                  الأسئلة <span className="text-[#01a9a0]">الشائعة</span>
                 </>
               ) : (
                 <>
-                  Frequently Asked <span className="text-[#1cd2ad]">Questions</span>
+                  Frequently Asked <span className="text-[#01a9a0]">Questions</span>
                 </>
               )}
             </h2>
@@ -882,8 +882,8 @@ export default function GetAQuoteContent() {
                   {/* Left Column: Heading + Subtitle + Contact Button */}
                   <div className="md:col-span-5 text-white">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="w-4 h-[2px] bg-[#3CD3C1]" />
-                      <span className="text-[11px] font-extrabold tracking-[0.2em] text-[#3CD3C1] uppercase">
+                      <span className="w-4 h-[2px] bg-[#01a9a0]" />
+                      <span className="text-[11px] font-extrabold tracking-[0.2em] text-[#01a9a0] uppercase">
                         {isArabic ? "هل تحتاج مساعدة؟" : "NEED HELP?"}
                       </span>
                     </div>
@@ -900,7 +900,7 @@ export default function GetAQuoteContent() {
 
                     <Link
                       href="/contact"
-                      className="inline-flex items-center gap-2 bg-white hover:bg-stone-100 active:scale-95 text-[#0d2438] font-bold text-xs sm:text-sm px-7 py-3.5 rounded-full shadow-md transition-all duration-200 group cursor-pointer"
+                      className="inline-flex items-center gap-2 bg-white hover:bg-stone-100 active:scale-95 text-[#01a9a0] font-bold text-xs sm:text-sm px-7 py-3.5 rounded-full shadow-md transition-all duration-200 group cursor-pointer"
                     >
                       <span>{isArabic ? "تواصل معنا" : "Contact Us"}</span>
                       {isArabic ? (
@@ -918,7 +918,7 @@ export default function GetAQuoteContent() {
                       href="tel:+971556173300"
                       className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-white/10 transition-colors group"
                     >
-                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#00b3a4]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#01a9a0]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                         <Image
                           src="/get-a-quote/icon-phone.svg"
                           alt="Phone"
@@ -928,7 +928,7 @@ export default function GetAQuoteContent() {
                         />
                       </div>
                       <div>
-                        <div className="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#5EEAD4] transition-colors">
+                        <div className="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#01a9a0] transition-colors">
                           +971 55 617 3300
                         </div>
                         <span className="text-[11px] text-stone-300">
@@ -942,7 +942,7 @@ export default function GetAQuoteContent() {
                       href="mailto:info@tajalrahmah.com"
                       className="flex items-center gap-3.5 p-2 rounded-xl hover:bg-white/10 transition-colors group"
                     >
-                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#00b3a4]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#01a9a0]/20 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                         <Image
                           src="/get-a-quote/icon-mail.svg"
                           alt="Email"
@@ -952,7 +952,7 @@ export default function GetAQuoteContent() {
                         />
                       </div>
                       <div>
-                        <div className="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#5EEAD4] transition-colors">
+                        <div className="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#01a9a0] transition-colors">
                           info@tajalrahmah.com
                         </div>
                         <span className="text-[11px] text-stone-300">
@@ -963,7 +963,7 @@ export default function GetAQuoteContent() {
 
                     {/* Location */}
                     <div className="flex items-center gap-3.5 p-2">
-                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#00b3a4]/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full border border-white/20 bg-[#01a9a0]/20 flex items-center justify-center flex-shrink-0">
                         <Image
                           src="/get-a-quote/icon-location.svg"
                           alt="Location"
