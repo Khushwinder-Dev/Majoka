@@ -86,3 +86,11 @@ th {
   background-color: #00c2b2;
   color: #ffffff;
 }
+
+/* Hide default 3-dots overflow button and menu on HTML5 video controls */
+video::-webkit-media-controls-overflow-button {
+  display: none !important;
+}
+video::-webkit-media-controls-overflow-menu-list {
+  display: none !important;
+}

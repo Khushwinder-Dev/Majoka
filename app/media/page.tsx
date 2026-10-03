@@ -152,11 +152,26 @@ function VideoCard({
   const router = useRouter();
   const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const seekerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const getEffectiveDuration = () => {
+    if (duration > 0) return duration;
+    if (video.duration) {
+      const parts = video.duration.split(":");
+      if (parts.length === 2) {
+        const m = parseInt(parts[0], 10);
+        const s = parseInt(parts[1], 10);
+        if (!isNaN(m) && !isNaN(s)) return m * 60 + s;
+      }
+    }
+    return 84; // 1:24 default fallback
+  };
 
   const togglePlay = (e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -212,26 +227,52 @@ function VideoCard({
   }, []);
 
   const handleTimeUpdate = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isDragging) {
       setCurrentTime(videoRef.current.currentTime);
     }
   };
 
   const handleLoadedMetadata = () => {
-    if (videoRef.current) {
+    if (videoRef.current && !isNaN(videoRef.current.duration)) {
       setDuration(videoRef.current.duration);
     }
   };
 
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    if (!videoRef.current || !duration) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
+  const updateSeekFromEvent = (clientX: number) => {
+    if (!seekerRef.current || !videoRef.current) return;
+    const rect = seekerRef.current.getBoundingClientRect();
+    const clickX = clientX - rect.left;
+    const totalDuration = getEffectiveDuration();
     const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-    videoRef.current.currentTime = percentage * duration;
-    setCurrentTime(percentage * duration);
+    const newTime = percentage * totalDuration;
+    videoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
   };
+
+  const handleSeekClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    updateSeekFromEvent(e.clientX);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return;
+      updateSeekFromEvent(e.clientX);
+    };
+    const handleMouseUp = () => {
+      if (isDragging) {
+        setIsDragging(false);
+      }
+    };
+    if (isDragging) {
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
+    }
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging, duration]);
 
   const formatTime = (secs: number) => {
     if (isNaN(secs) || secs < 0) return "0:00";
@@ -240,12 +281,13 @@ function VideoCard({
     return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
-  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
+  const effectiveDuration = getEffectiveDuration();
+  const progressPercentage = effectiveDuration > 0 ? (currentTime / effectiveDuration) * 100 : 0;
 
   return (
     <div
       ref={cardRef}
-      className={`group relative overflow-hidden aspect-video bg-black shadow-md hover:shadow-2xl transition-all duration-300 select-none ${isFullscreen ? "w-full h-full rounded-none" : ""
+      className={`group relative overflow-hidden aspect-video bg-black shadow-md hover:shadow-2xl transition-all duration-300 select-none ${isFullscreen ? "w-full h-full rounded-none" : "rounded-2xl"
         }`}
     >
       {/* HTML5 video element */}
@@ -258,7 +300,10 @@ function VideoCard({
         muted={isMuted}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        onEnded={() => setIsPlaying(false)}
+        onEnded={() => {
+          setIsPlaying(false);
+          setCurrentTime(0);
+        }}
         onClick={togglePlay}
         className="w-full h-full object-cover cursor-pointer"
       />
@@ -277,14 +322,16 @@ function VideoCard({
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          {/* Subtle dark gradient overlay so text and play button stand out */}
-          <div className="absolute inset-0 bg-black/35 group-hover:bg-black/25 transition-colors duration-300" />
+          {/* Subtle dark gradient overlay */}
+          <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-300" />
         </div>
       )}
 
       {/* Top Header Overlay: Logo Badge + Title + Subtitle */}
-      <div className="absolute top-0 inset-x-0 p-3 sm:p-4 z-20 flex items-center justify-between pointer-events-none bg-gradient-to-b from-black/85 via-black/45 to-transparent">
-        {/* Left: Avatar/Logo + Heading & Subtitle on top */}
+      <div
+        className={`absolute top-0 inset-x-0 p-3 sm:p-4 z-20 flex items-center justify-between pointer-events-none bg-gradient-to-b from-black/80 via-black/40 to-transparent transition-opacity duration-300 ${isPlaying ? "opacity-0 group-hover:opacity-100" : "opacity-100"
+          }`}
+      >
         <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2 rtl:pr-0 rtl:pl-2 pointer-events-auto">
           {/* Circular Company Logo Badge */}
           <div
@@ -306,7 +353,6 @@ function VideoCard({
 
           {/* Heading & Subtitle On Top */}
           <div className="leading-tight min-w-0">
-            {/* Project Title -> Navigates to /project on click */}
             <h4
               onClick={(e) => {
                 e.stopPropagation();
@@ -317,8 +363,6 @@ function VideoCard({
             >
               {isArabic ? video.titleAr : video.titleEn}
             </h4>
-
-            {/* Subtitle -> Navigates to /services on click */}
             <p
               onClick={(e) => {
                 e.stopPropagation();
@@ -331,88 +375,102 @@ function VideoCard({
             </p>
           </div>
         </div>
+      </div>
 
-        {/* Top-Right Control Icons: Only shown when playing */}
-        {isPlaying && (
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 pointer-events-auto text-white/90">
+      {/* Center Big Play Button: Prominent Translucent Frosted White Circle with Solid Black Play Triangle */}
+      {!isPlaying && (
+        <div
+          onClick={togglePlay}
+          className="absolute inset-0 z-20 flex items-center justify-center cursor-pointer transition-all duration-300"
+        >
+          <div
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/80 hover:bg-white backdrop-blur-md text-black flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-108 active:scale-95 group/playbtn"
+            title={isArabic ? "تشغيل الفيديو" : "Play Video"}
+          >
+            <Play className="w-8 h-8 sm:w-9 sm:h-9 fill-[#01a9a0] text-[#01a9a0] ml-1 rtl:ml-0 rtl:mr-1 transition-transform group-hover/playbtn:scale-105" />
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Controls Bar: Clean timeline with white thumb, time, volume & fullscreen (NO 3 dots) */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`absolute bottom-0 inset-x-0 z-30 px-3.5 sm:px-4 pb-2.5 sm:pb-3 pt-8 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 ${!isPlaying ? "opacity-100" : "opacity-100 sm:opacity-0 group-hover:opacity-100"
+          }`}
+      >
+        {/* Row 1: Time on left, Volume & Fullscreen on right (NO 3 dots menu) */}
+        <div className="flex items-center justify-between text-white mb-1.5 sm:mb-2">
+          {/* Left: Current Time / Total Duration */}
+          <div className="flex items-center">
+            <span className="font-sans font-medium tracking-wide text-white text-xs sm:text-sm drop-shadow-sm select-none">
+              {formatTime(currentTime)} / {duration > 0 ? formatTime(duration) : (video.duration || "1:24")}
+            </span>
+          </div>
+
+          {/* Right: Volume Mute Toggle + Fullscreen (NO 3 dots menu) */}
+          <div className="flex items-center gap-2.5 sm:gap-3.5">
+            {/* Volume Toggle */}
             <button
               type="button"
               onClick={toggleMute}
               aria-label={isMuted ? "Unmute" : "Mute"}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/45 hover:bg-black/75 backdrop-blur-sm flex items-center justify-center transition-all cursor-pointer hover:scale-110 active:scale-95 text-white shadow-xs"
+              className="p-1 sm:p-1.5 text-white/90 hover:text-white transition-all cursor-pointer hover:scale-110 active:scale-95"
               title={isMuted ? (isArabic ? "تشغيل الصوت" : "Unmute") : (isArabic ? "كتم الصوت" : "Mute")}
             >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+              {isMuted ? (
+                <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm" />
+              ) : (
+                <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm" />
+              )}
+            </button>
+
+            {/* Fullscreen Toggle */}
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+              className="p-1 sm:p-1.5 text-white/90 hover:text-white transition-all cursor-pointer hover:scale-110 active:scale-95"
+              title={isFullscreen ? (isArabic ? "إنهاء ملء الشاشة" : "Exit Fullscreen") : (isArabic ? "ملء الشاشة" : "Fullscreen")}
+            >
+              {isFullscreen ? (
+                <Minimize2 className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm stroke-[2.2]" />
+              ) : (
+                <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm stroke-[2.2]" />
+              )}
             </button>
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* Center Big Play Button (Translucent circle with white triangle, visible when idle/paused) */}
-      {!isPlaying && (
+        {/* Row 2: Full-width Scrubber Progress Bar with White Knob */}
         <div
-          onClick={togglePlay}
-          className="absolute inset-0 z-20 flex items-center justify-center cursor-pointer group-hover:scale-105 transition-transform duration-300"
+          ref={seekerRef}
+          onClick={handleSeekClick}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            setIsDragging(true);
+            updateSeekFromEvent(e.clientX);
+          }}
+          className="relative w-full py-1.5 cursor-pointer flex items-center group/seeker select-none"
         >
-          <div className="w-13 h-13 sm:w-15 sm:h-15 rounded-full bg-black/55 backdrop-blur-md border border-white/35 text-white flex items-center justify-center shadow-2xl hover:bg-[#009e90] hover:border-[#009e90] transition-all duration-300">
-            <Play className="w-6 h-6 sm:w-7 sm:h-7 fill-white ml-0.5 rtl:ml-0 rtl:mr-0.5 text-white" />
-          </div>
-        </div>
-      )}
-
-      {/* Bottom Controls Bar: Only shown when playing */}
-      {isPlaying && (
-        <div className="absolute bottom-0 inset-x-0 z-20 px-3.5 py-2.5 sm:px-4 sm:py-3 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300 opacity-100 sm:opacity-0 group-hover:opacity-100">
-          {/* Red Scrubber / Progress Bar (Seekable timeline) */}
-          <div
-            onClick={handleSeek}
-            className="relative w-full h-1 sm:h-1.5 hover:h-2 rounded-full bg-white/30 cursor-pointer transition-all mb-2 group/scrub"
-          >
+          {/* Track Bar Background */}
+          <div className="w-full h-1 sm:h-1.2 bg-white/35 rounded-full overflow-hidden relative">
+            {/* White Progress Fill */}
             <div
-              className="absolute top-0 bottom-0 left-0 bg-[#ff0000] rounded-full"
-              style={{ width: `${progressPercentage}%` }}
-            >
-              {/* Red Scrub Dot Handle */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-[#ff0000] shadow-[0_0_8px_rgba(255,0,0,0.8)] scale-100 group-hover/scrub:scale-125 transition-transform" />
-            </div>
+              className="h-full bg-white rounded-full"
+              style={{ width: `${Math.min(100, Math.max(0, progressPercentage))}%` }}
+            />
           </div>
 
-          {/* Controls Row: Play/Pause + Time + Fullscreen Option */}
-          <div className="flex items-center justify-between text-white text-[11px] sm:text-xs">
-            {/* Left: Play/Pause button + Current / Total Duration */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
-              <button
-                type="button"
-                onClick={togglePlay}
-                aria-label={isPlaying ? "Pause" : "Play"}
-                className="hover:text-[#00c4b4] transition-colors cursor-pointer"
-              >
-                {isPlaying ? <Pause className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" /> : <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-white" />}
-              </button>
-              <span className="font-mono font-medium tracking-tight text-white/95 text-[11px] sm:text-xs">
-                {formatTime(currentTime)} / {formatTime(duration || 105)}
-              </span>
-            </div>
-
-            {/* Right: Fullscreen Button */}
-            <div className="flex items-center gap-2 sm:gap-2.5">
-              <button
-                type="button"
-                onClick={toggleFullscreen}
-                aria-label={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/50 hover:bg-[#009e90] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-110 active:scale-95 shadow-md"
-                title={isArabic ? "ملء الشاشة" : "Fullscreen"}
-              >
-                {isFullscreen ? (
-                  <Minimize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
-                ) : (
-                  <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.2]" />
-                )}
-              </button>
-            </div>
-          </div>
+          {/* White Circular Thumb Knob */}
+          <div
+            className="absolute top-1/2 w-3.5 h-3.5 sm:w-4 sm:h-4 bg-white rounded-full shadow-[0_1px_5px_rgba(0,0,0,0.5)] pointer-events-none transition-transform group-hover/seeker:scale-125"
+            style={{
+              left: `${Math.min(100, Math.max(0, progressPercentage))}%`,
+              transform: "translate(-50%, -50%)",
+            }}
+          />
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -1284,6 +1342,7 @@ export default function MediaPage() {
               <video
                 src={activeVideo.videoSrc}
                 controls
+                controlsList="nodownload noplaybackrate"
                 autoPlay
                 playsInline
                 className="w-full h-full object-contain"

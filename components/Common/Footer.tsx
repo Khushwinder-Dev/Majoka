@@ -26,7 +26,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function FooterHeading({ title }: { title: string }) {
   return (
     <div className="flex flex-col gap-2 mb-1">
-      <h4 className="text-base sm:text-[17px] lg:text-lg font-bold text-stone-900 tracking-tight">{title}</h4>
+      <h4 className="text-base sm:text-[17px] lg:text-lg font-bold text-[#01a9a0] tracking-tight">{title}</h4>
       <div className="w-10 h-[2px] bg-[#01a9a0] rounded-full" />
     </div>
   );
