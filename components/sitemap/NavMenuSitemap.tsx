@@ -776,7 +776,7 @@ export default function NavMenuSitemap() {
                                 <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 group-hover:text-[#009e90] transition-colors leading-snug">
                                   {isArabic ? item.titleAr : item.titleEn}
                                 </h3>
-                                <p className="mt-1 text-xs text-stone-500 leading-relaxed line-clamp-2">
+                                <p className="mt-1.5 text-[13px] sm:text-[14px] text-stone-500 leading-relaxed line-clamp-2">
                                   {isArabic ? item.subAr : item.subEn}
                                 </p>
                               </div>
@@ -807,7 +807,7 @@ export default function NavMenuSitemap() {
                                 <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 group-hover:text-[#009e90] transition-colors leading-snug">
                                   {isArabic ? item.titleAr : item.titleEn}
                                 </h3>
-                                <p className="mt-1 text-xs text-stone-500 leading-relaxed line-clamp-2">
+                                <p className="mt-1.5 text-[13px] sm:text-[14px] text-stone-500 leading-relaxed line-clamp-2">
                                   {isArabic ? item.subAr : item.subEn}
                                 </p>
                               </div>
