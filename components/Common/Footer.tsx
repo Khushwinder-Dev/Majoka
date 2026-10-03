@@ -448,6 +448,13 @@ export default function Footer() {
               {/* Column 3: Refund & Legal Policy Links */}
               <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 gap-y-2 text-sm lg:text-base text-stone-600">
                 <Link
+                  href="/sitemap"
+                  className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
+                >
+                  {isArabic ? "خريطة الموقع" : "Site Map"}
+                </Link>
+                <span className="text-stone-300 select-none">•</span>
+                <Link
                   href="/refund-policy"
                   className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
                 >
