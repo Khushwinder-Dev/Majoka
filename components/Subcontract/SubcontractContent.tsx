@@ -555,7 +555,7 @@ export default function SubcontractContent() {
             <div className="lg:col-span-6">
               <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-[28px] overflow-hidden shadow-xl shadow-gray-200/70 border border-gray-100">
                 <Image
-                  src="/subcontract/intro-handshake1.png"
+                  src="/subcontract/intro-handshake12.png"
                   alt="Subcontracting Services Collaboration"
                   fill
                   className="object-cover"
