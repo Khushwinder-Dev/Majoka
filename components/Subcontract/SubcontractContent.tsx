@@ -348,15 +348,15 @@ export default function SubcontractContent() {
         {/* Background Image with Dark Tinted Gradient */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/subcontract/hero1.png"
+            src="/subcontract/subconBanner.png"
             alt="Reliable Subcontracting For Your Projects"
             fill
             priority
             className="object-cover object-[center_35%]"
           />
           {/* Multi-layered dark gradient overlay for optimal text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45" /> */}
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" /> */}
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
