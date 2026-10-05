@@ -164,14 +164,7 @@ export default function TrustedClientsSection() {
     setActiveTestimonial(index);
   };
 
-  // Auto-slide every 4 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDirection(1);
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [testimonials.length]);
+  // Auto-slide stopped - slides change only on manual dot navigation
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden">
