@@ -949,7 +949,7 @@ const Navbar = () => {
                               <p className="text-[15px] sm:text-[16px] font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate leading-snug">
                                 {sub.title}
                               </p>
-                              <p className="text-[12.5px] sm:text-[13px] text-slate-500 truncate mt-0.5">{sub.sub}</p>
+                              <p className="text-[14px] sm:text-[14.5px] text-slate-500 truncate mt-0.5">{sub.sub}</p>
                             </div>
                             <ChevronRight
                               className={`w-3.5 h-3.5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 flex-shrink-0 transition-all ${
