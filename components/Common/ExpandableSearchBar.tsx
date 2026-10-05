@@ -744,13 +744,13 @@ export default function ExpandableSearchBar({
                 handleExpand();
               }
             }}
-            className="w-full flex items-center justify-between bg-white/10 hover:bg-white/15 border border-white/20 rounded-full px-4 py-2.5 text-white/80 transition-all cursor-pointer text-xs"
+            className="w-full flex items-center justify-between bg-white hover:bg-slate-50 border border-slate-200 rounded-full px-4 py-2.5 text-slate-600 transition-all cursor-pointer text-xs shadow-xs group"
           >
             <div className="flex items-center gap-2">
-              <Search className="w-4 h-4 text-[#E6F7F6]" />
-              <span>{placeholder || defaultPlaceholder}</span>
+              <Search className="w-4 h-4 text-[#01a9a0] group-hover:scale-110 transition-transform" />
+              <span className="text-slate-600 group-hover:text-slate-900 transition-colors font-medium">{placeholder || defaultPlaceholder}</span>
             </div>
-            <span className="text-[10px] text-white/40 uppercase font-mono">Search</span>
+            <span className="text-[10px] text-[#01a9a0] font-bold uppercase tracking-wider bg-[#01a9a0]/10 px-2 py-0.5 rounded-full">Search</span>
           </button>
         </div>
       )}
@@ -766,8 +766,8 @@ export default function ExpandableSearchBar({
           dir={isAr ? "rtl" : "ltr"}
         >
           {/* 1. Integrated Search Input Box with Website Primary Theme */}
-          <div className="relative flex items-center bg-white border-2 border-[#E6F7F6] focus-within:ring-4 focus-within:ring-[#E6F7F6]/20 rounded-2xl px-4 py-3 transition-all shadow-xs gap-3">
-            <Search className="w-5 h-5 text-[#E6F7F6] shrink-0 stroke-[2.2]" />
+          <div className="relative flex items-center bg-white border-2 border-[#01a9a0]/30 focus-within:border-[#01a9a0] focus-within:ring-4 focus-within:ring-[#01a9a0]/15 rounded-2xl px-4 py-3 transition-all shadow-xs gap-3">
+            <Search className="w-5 h-5 text-[#01a9a0] shrink-0 stroke-[2.2]" />
             <input
               ref={inputRef}
               type="text"

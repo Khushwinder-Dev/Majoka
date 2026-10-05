@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight, Search, UserCheck, MapPin, Mail, PhoneCall, Truck, LifeBuoy } from "lucide-react";
+import { ArrowRight, ChevronDown, ChevronRight, ArrowUpRight, Search, UserCheck, MapPin, Mail, PhoneCall, Truck, LifeBuoy, X } from "lucide-react";
 import ExpandableSearchBar from "./Common/ExpandableSearchBar";
 import { useLanguage } from "@/context/LanguageContext";
 import ContactModals, { ContactModalType } from "./ContactModals";
@@ -807,7 +807,7 @@ const Navbar = () => {
       {/* ── MOBILE OVERLAY ──────────────────────────────────────────── */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs lg:hidden transition-opacity"
           onClick={() => setIsMobileMenuOpen(false)}
           style={{ zIndex: 2147483646 }}
         />
@@ -816,31 +816,34 @@ const Navbar = () => {
       {/* ── MOBILE PANEL ────────────────────────────────────────────── */}
       <div
         ref={menuRef}
-        className={`fixed top-0 right-0 h-full w-[320px] max-w-full bg-[#010f12] border-l border-white/10 transform transition-transform duration-300 ease-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`fixed top-0 right-0 h-full w-[330px] sm:w-[380px] max-w-[90vw] bg-white text-slate-800 shadow-2xl border-l border-slate-100 flex flex-col transform transition-transform duration-300 ease-out lg:hidden ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
         style={{ zIndex: 2147483647 }}
         dir={isArabic ? "rtl" : "ltr"}
       >
-        {/* Close */}
-        <div className={`absolute top-5 ${isArabic ? "left-5" : "right-5"}`}>
+        {/* Top Header: Logo + Close Button */}
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0 bg-white">
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+            <Image
+              src="/logo.png"
+              alt="Taj Al Rahmah"
+              width={90}
+              height={50}
+              className="w-auto h-auto max-h-10 object-contain"
+            />
+          </Link>
           <button
             onClick={() => setIsMobileMenuOpen(false)}
-            className="w-9 h-9 text-white/60 hover:text-white transition-colors flex items-center justify-center rounded-full hover:bg-white/10 cursor-pointer"
+            className="w-9 h-9 text-slate-400 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 transition-colors flex items-center justify-center rounded-full cursor-pointer"
             aria-label="Close menu"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-5 h-5 stroke-[2.2]" />
           </button>
         </div>
 
-        {/* Logo */}
-        <div className="px-6 pt-6 pb-4 border-b border-white/10">
-          <Image src="/logo.png" alt="Logo" width={80} height={64} className="w-auto h-auto max-h-11 object-contain" />
-        </div>
-
         {/* Mobile Search Input */}
-        <div className="px-5 py-3 border-b border-white/10 relative z-30">
+        <div className="px-5 py-3 border-b border-slate-100 bg-slate-50/70 relative z-30 shrink-0">
           <ExpandableSearchBar
             isDrawer={true}
             onSearch={handleSearch}
@@ -851,7 +854,7 @@ const Navbar = () => {
         </div>
 
         {/* Nav list */}
-        <div className="overflow-y-auto h-[calc(100%-170px)] pb-8">
+        <div className="overflow-y-auto flex-1 overscroll-contain py-2 divide-y divide-slate-100">
           <nav className="flex flex-col">
             {navItems.map((item) => {
               const active = isLinkActive(item.href);
@@ -869,31 +872,46 @@ const Navbar = () => {
                               item.megaKey === "company" ? companyMegaMenu[lang] : null;
 
               return (
-                <div key={item.name} className="border-b border-white/[0.06]">
-                  <div className="flex items-center">
+                <div key={item.name} className="group/navitem">
+                  <div
+                    className={`flex items-center transition-colors ${
+                      active ? "bg-[#01a9a0]/8" : "hover:bg-slate-50"
+                    }`}
+                  >
                     <Link
                       href={item.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex-1 px-6 py-4 text-[15px] sm:text-[16px] font-semibold uppercase tracking-wider font-anek transition-colors ${active ? "text-[#00c2b2]" : "text-white/80 hover:text-white"
-                        }`}
+                      className={`flex-1 px-6 py-3.5 text-[15px] sm:text-[16px] font-bold uppercase tracking-wider font-anek transition-colors ${
+                        active
+                          ? "text-[#01a9a0]"
+                          : "text-slate-800 hover:text-[#01a9a0]"
+                      }`}
                     >
                       {item.name}
                     </Link>
                     {hasMega && (
                       <button
                         onClick={() => setMobileExpanded(isExpanded ? null : item.megaKey!)}
-                        className="px-5 py-4 text-white/40 hover:text-[#00c2b2] transition-colors cursor-pointer"
+                        className={`px-5 py-3.5 transition-colors cursor-pointer ${
+                          isExpanded
+                            ? "text-[#01a9a0]"
+                            : "text-slate-400 hover:text-[#01a9a0]"
+                        }`}
                         aria-label={`Toggle ${item.name}`}
                       >
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} />
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 stroke-[2.2] ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
+                        />
                       </button>
                     )}
                   </div>
 
                   {/* Accordion */}
                   {hasMega && isExpanded && megaData && (
-                    <div className="bg-white/[0.04] px-4 pb-3 pt-1">
-                      <div className="flex flex-col gap-0.5">
+                    <div className="bg-[#f0faf9]/80 border-y border-[#01a9a0]/15 px-3 py-3 animate-in fade-in duration-200">
+                      <div className="flex flex-col gap-1.5">
                         {megaData.items.map((sub, i) => (
                           <Link
                             key={i}
@@ -921,19 +939,23 @@ const Navbar = () => {
                                 }
                               }
                             }}
-                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 transition-colors group"
+                            className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-white/80 hover:bg-white border border-[#01a9a0]/10 hover:border-[#01a9a0]/30 shadow-xs hover:shadow-sm transition-all group"
                           >
                             {/* Icon */}
-                            <div className="w-8 h-8 rounded-lg bg-[#009e90]/20 border border-[#009e90]/20 flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 rounded-lg bg-[#01a9a0]/10 border border-[#01a9a0]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#01a9a0]/20 transition-colors">
                               <NavIcon src={sub.icon} alt={sub.title} size={16} />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <p className="text-[12.5px] font-semibold text-white/90 group-hover:text-[#00c2b2] transition-colors truncate leading-snug">
+                              <p className="text-[13px] font-bold text-slate-800 group-hover:text-[#01a9a0] transition-colors truncate leading-snug">
                                 {sub.title}
                               </p>
-                              <p className="text-[10.5px] text-white/35 truncate mt-0.5">{sub.sub}</p>
+                              <p className="text-[11px] text-slate-500 truncate mt-0.5">{sub.sub}</p>
                             </div>
-                            <ChevronRight className={`w-3.5 h-3.5 text-white/25 group-hover:text-[#00c2b2] flex-shrink-0 transition-colors ${isArabic ? "rotate-180" : ""}`} />
+                            <ChevronRight
+                              className={`w-3.5 h-3.5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 flex-shrink-0 transition-all ${
+                                isArabic ? "rotate-180 group-hover:-translate-x-0.5" : ""
+                              }`}
+                            />
                           </Link>
                         ))}
                       </div>
@@ -941,9 +963,9 @@ const Navbar = () => {
                       <Link
                         href={megaData.ctaHref}
                         onClick={() => { setIsMobileMenuOpen(false); setMobileExpanded(null); }}
-                        className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#009e90] hover:bg-[#01887e] text-white text-[12px] font-bold px-4 py-2.5 rounded-full transition-colors"
+                        className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#01a9a0] hover:bg-[#008f88] text-white text-[12px] font-bold px-4 py-2.5 rounded-full shadow-xs hover:shadow-md transition-all"
                       >
-                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2]" />
                         {megaData.cta}
                       </Link>
                     </div>
@@ -952,20 +974,20 @@ const Navbar = () => {
               );
             })}
           </nav>
+        </div>
 
-          {/* Mobile bottom controls */}
-          <div className="px-6 mt-5 space-y-4">
-            <Link
-              href="/get-a-quote"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full pl-5 pr-1.5 py-2 sm:py-2.5 rounded-full bg-[#00b3a4] hover:bg-[#00c2b2] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center justify-center gap-2.5 shadow-lg group transition-colors"
-            >
-              <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
-              <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#00b3a4] flex items-center justify-center">
-                <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
-              </span>
-            </Link>
-          </div>
+        {/* Mobile bottom controls */}
+        <div className="p-5 border-t border-slate-100 bg-white shrink-0 space-y-3">
+          <Link
+            href="/get-a-quote"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="w-full pl-5 pr-1.5 py-2.5 rounded-full bg-[#01a9a0] hover:bg-[#008f88] text-white font-bold text-xs sm:text-sm tracking-wider uppercase inline-flex items-center justify-center gap-2.5 shadow-md shadow-[#01a9a0]/20 hover:shadow-lg transition-all group"
+          >
+            <span className="whitespace-nowrap font-anek">{t.nav.getQuote}</span>
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white text-[#01a9a0] flex items-center justify-center transition-transform group-hover:translate-x-0.5">
+              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+            </span>
+          </Link>
         </div>
       </div>
 
