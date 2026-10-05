@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Play, Pause, Volume2, VolumeX, Image as ImageIcon } from "lucide-react";
 import { AnimatePresence, motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import BookMeetingModal from "@/components/BookMeetingModal";
 
 // Animated counter for stats
 const AnimatedCounter = ({
@@ -65,6 +66,7 @@ const HeroSection = () => {
   const [isPlayingVideo, setIsPlayingVideo] = useState(false);
   const [isVideoPaused, setIsVideoPaused] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [isBookMeetingOpen, setIsBookMeetingOpen] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -340,16 +342,17 @@ const HeroSection = () => {
 
             {/* Dual CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-5">
-              {/* Button 1: EXPLORE SERVICES */}
-              <Link
-                href="/contact"
+              {/* Button 1: BOOK A MEETING */}
+              <button
+                type="button"
+                onClick={() => setIsBookMeetingOpen(true)}
                 className="group pl-4 sm:pl-7 pr-1.5 sm:pr-2.5 py-1.5 sm:py-2.5 rounded-full bg-white hover:bg-slate-50 text-[#009b8e] font-bold text-[11px] sm:text-sm tracking-wider uppercase inline-flex items-center gap-2.5 sm:gap-3.5 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
               >
                 <span>{t.hero.exploreProject}</span>
                 <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00c2b2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
+                  <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5] ${isArabic ? "rotate-180" : ""}`} />
                 </span>
-              </Link>
+              </button>
 
               {/* Button 2: EXPLORE PROJECT */}
               <Link
@@ -428,6 +431,12 @@ const HeroSection = () => {
           ))}
         </div>
       </div>
+
+      {/* 9. Book a Meeting Modal */}
+      <BookMeetingModal
+        isOpen={isBookMeetingOpen}
+        onClose={() => setIsBookMeetingOpen(false)}
+      />
     </section>
   );
 };

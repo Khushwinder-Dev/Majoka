@@ -510,7 +510,7 @@ const translations: Record<Language, Translations> = {
       description:
         "خبرة مثبتة وحرفية عالية لتقديم حلول متينة توفر الحماية المستدامة وتدوم طويلاً.",
       exploreServices: "استكشف الخدمات",
-      exploreProject: "استكشف المشاريع",
+      exploreProject: "احجز موعداً",
       stat1: "سنوات من الخبرة",
       stat2: "مشروع منجز",
       stat3: "عميل راضٍ",
