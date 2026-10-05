@@ -348,6 +348,9 @@ export default function PrivacyPage() {
         title={isAr ? "سياسة الخصوصية" : "Privacy Policy"}
         breadcrumb={isAr ? "سياسة الخصوصية" : "Privacy Policy"}
         imagePath="/banners/privacy.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
+        showOverlay={true}
       />
 
       {/* ── Main Policy Content ── */}

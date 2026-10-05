@@ -132,34 +132,26 @@ export default function WarrantyPageContent() {
     <div className="w-full bg-white overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (WARRANTY — with City Skyline & Cards)
+          1. HERO BANNER SECTION (WARRANTY)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[470px] flex items-center bg-[#071d34] overflow-hidden">
+      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#071d34]">
         {/* Background Image: Skyline with warranty coverage highlights */}
-        <Image
-          src="/banners/warranty.jpeg"
-          alt="Warranty Hero Banner"
-          fill
-          priority
-          unoptimized
-          className="object-center"
-        />
+        <div className="absolute inset-0">
+          <Image
+            src="/banners/warranty.jpeg"
+            alt="Warranty Hero Banner"
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+        </div>
 
         {/* Top gradient for transparent navbar readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none" />
 
-        {/* Left deep dark gradient overlay for text readability as in design */}
+        {/* Left deep dark gradient overlay as in design */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
-
-        {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
-          <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
-            <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
-              {isArabic ? "الضمان المعتمد" : "WARRANTY"}
-            </h1>
-            <span className="inline-block w-10 sm:w-14 md:w-16 h-[3px] sm:h-[4px] bg-white rounded-full drop-shadow" />
-          </div>
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════

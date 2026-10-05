@@ -307,9 +307,9 @@ export default function SolutionsPageContent() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full min-h-[440px] sm:min-h-[480px] lg:min-h-[575px] lg:h-[600px] flex items-center bg-[#011a24] overflow-hidden">
-        {/* Background Image: Worker with paint roller on blue waterproofed surface */}
-        <div className="absolute inset-0 z-0">
+      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#011a24]">
+        {/* Background Image: solutions.jpeg */}
+        <div className="absolute inset-0">
           <Image
             src="/banners/solutions.jpeg"
             alt={
@@ -321,11 +321,11 @@ export default function SolutionsPageContent() {
             priority
             unoptimized
             sizes="100vw"
-            className="object-cover object-[70%_center] sm:object-center"
+            className="object-cover object-center"
           />
         </div>
 
-        {/* Sophisticated Dark Gradient Overlays for optimal readability */}
+        {/* Sophisticated Dark Gradient Overlays */}
         <div
           className="absolute inset-0 pointer-events-none z-1"
           style={{
@@ -335,44 +335,6 @@ export default function SolutionsPageContent() {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#011a24]/60 via-transparent to-[#011a24]/40 pointer-events-none z-1" />
-
-        {/* Hero Content Container */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full py-20 sm:py-24">
-          <div className="max-w-2xl">
-            {/* Breadcrumb matching design */}
-            <div className="flex items-center gap-2 text-xs sm:text-[13px] font-extrabold tracking-[0.16em] uppercase text-white/90 mb-4 sm:mb-5">
-              <Link href="/" className="hover:text-[#00c4b4] transition-colors">
-                {isArabic ? "الرئيسية" : "HOME"}
-              </Link>
-              <span className="text-[#00c4b4]">/</span>
-              <span className="text-[#00c4b4]">
-                {isArabic ? "حلولنا" : "SOLUTIONS"}
-              </span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold text-white leading-[1.12] tracking-tight drop-shadow-sm">
-              {isArabic ? (
-                <>
-                  حلول العزل المائي{" "}
-                  <span className="text-[#00c4b4]">لكل مشروع</span>
-                </>
-              ) : (
-                <>
-                  Waterproofing Solutions For{" "}
-                  <span className="text-[#00c4b4]">Every Project</span>
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle Paragraph */}
-            <p className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-white/90 leading-relaxed font-normal max-w-xl">
-              {isArabic
-                ? "حلول عزل وحماية متطورة وموثوقة مصممة لتلبية المتطلبات الدقيقة للمشاريع السكنية والتجارية والصناعية ومشاريع البنية التحتية."
-                : "Reliable and durable waterproofing and protection solutions designed to meet the specific requirements of residential, commercial, industrial, and infrastructure projects."}
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════════

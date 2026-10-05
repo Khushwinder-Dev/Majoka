@@ -360,32 +360,8 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
             priority
             className="object-cover object-center scale-105 transition-transform duration-1000"
           />
-          {/* Gentle gradient overlay for high contrast and readability */}
+          {/* Gentle gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/70" />
-
-          {/* Centered Title & Description Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto z-10">
-            {/* Tagline Badge */}
-            {/* <div className="inline-flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
-              <span className="text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase text-[#00c4b4]">
-                {isArabic ? "خدماتنا المتميزة" : "OUR SERVICES"}
-              </span>
-              <span className="w-5 sm:w-6 h-[2px] bg-[#00c4b4] inline-block" />
-            </div> */}
-
-            {/* Main Service / Sub-Service Title */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-md">
-              {heroTitle}
-            </h1>
-
-            {/* Tagline */}
-            {/* {heroTagline && (
-              <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-white/90 max-w-2xl leading-relaxed line-clamp-2 drop-shadow-sm font-medium">
-                {heroTagline}
-              </p>
-            )} */}
-          </div>
         </div>
       )}
 

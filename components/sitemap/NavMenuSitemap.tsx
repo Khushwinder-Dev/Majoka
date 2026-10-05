@@ -645,7 +645,7 @@ export default function NavMenuSitemap() {
   return (
     <div className="w-full bg-white min-h-screen text-slate-900" dir={isArabic ? "rtl" : "ltr"}>
       {/* ─── 1. TOP BANNER ────────────────────────────────────────── */}
-      <section className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] overflow-hidden bg-slate-950">
+      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-slate-950">
         <div className="absolute inset-0">
           <Image
             src="/sitemapBanner.jpeg"
@@ -653,32 +653,16 @@ export default function NavMenuSitemap() {
             fill
             priority
             unoptimized
-            className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
-              }`}
+            className="object-cover object-center"
           />
-          {/* Dark gradient overlay for high contrast readability */}
+          {/* Dark gradient overlay */}
           <div
-            className={`absolute inset-0 ${isArabic
-              ? "bg-gradient-to-l from-black/90 via-black/65 to-black/30"
-              : "bg-gradient-to-r from-black/90 via-black/65 to-black/30"
-              }`}
+            className={`absolute inset-0 ${
+              isArabic
+                ? "bg-gradient-to-l from-black/90 via-black/65 to-black/30"
+                : "bg-gradient-to-r from-black/90 via-black/65 to-black/30"
+            }`}
           />
-        </div>
-
-        <div className="relative z-10 h-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
-          <div className="max-w-2xl text-left rtl:text-right">
-            <p className="text-sm sm:text-base font-bold uppercase tracking-wider text-[#00DDCF] mb-1.5 drop-shadow-sm">
-              {isArabic ? "تاج الرحمة للمقاولات" : "Taj Al Rahmah Contracting"}
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-sm">
-              {isArabic ? "خريطة الموقع" : "Site Map"}
-            </h1>
-            <p className="mt-2 text-xs sm:text-sm md:text-base text-white/80 max-w-xl font-normal leading-relaxed">
-              {isArabic
-                ? "دليل تنقل سريع لكافة صفحات وأقسام وخدمات موقع تاج الرحمة."
-                : "A complete navigational directory of all pages, services, projects, and resources."}
-            </p>
-          </div>
         </div>
       </section>
 

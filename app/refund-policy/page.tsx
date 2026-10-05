@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -88,8 +87,8 @@ export default function RefundPolicyPage() {
       {/* ══════════════════════════════════════════════════════════════
           1. HERO BANNER SECTION (Matching Reference Design)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] overflow-hidden">
-        {/* Background Image: refundBanner.png */}
+      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden">
+        {/* Background Image: refund.jpeg */}
         <div className="absolute inset-0">
           <Image
             src="/banners/refund.jpeg"
@@ -97,52 +96,16 @@ export default function RefundPolicyPage() {
             fill
             priority
             unoptimized
-            className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
-              }`}
+            className="object-cover object-center"
           />
-          {/* Dark gradient overlay on text side for crisp readability */}
+          {/* Dark gradient overlay */}
           <div
-            className={`absolute inset-0 ${isArabic
-              ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
-              : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-              }`}
+            className={`absolute inset-0 ${
+              isArabic
+                ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
+                : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
+            }`}
           />
-        </div>
-
-        {/* Content Container (Left-aligned as per design) */}
-        <div className="relative z-10 h-full max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
-          <div className="max-w-xl text-left rtl:text-right">
-            {/* Breadcrumb: HOME // REFUND & CANCELLATION POLICY */}
-            <div className="flex items-center gap-2 text-xs sm:text-[13px] font-bold tracking-wider uppercase mb-2.5 sm:mb-3">
-              <Link href="/" className="text-white/90 hover:text-[#00DDCF] transition-colors">
-                {isArabic ? "الرئيسية" : "HOME"}
-              </Link>
-              <span className="text-[#00DDCF] font-black">//</span>
-              <span className="text-[#00DDCF]">
-                {isArabic ? "سياسة الاسترداد والإلغاء" : "REFUND & CANCELLATION POLICY"}
-              </span>
-            </div>
-
-            {/* Main Title: Refund & Cancellation Policy */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-              {isArabic ? (
-                <>
-                  سياسة الاسترداد و<span className="text-[#00DDCF]">الإلغاء</span>
-                </>
-              ) : (
-                <>
-                  Refund &amp; <span className="text-[#00DDCF]">Cancellation Policy</span>
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle from Design */}
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-200/90 leading-relaxed font-normal">
-              {isArabic
-                ? "توضح هذه السياسة كيفية التعامل مع طلبات الإلغاء والمبالغ المستردة والدفعات المالية المرتبطة بخدماتنا واستشاراتنا الهندسية وأعمال الصيانة."
-                : "This policy explains how cancellations, refunds, and related payments are handled for our professional consultations, web profiling, and maintenance services."}
-            </p>
-          </div>
         </div>
       </section>
 
