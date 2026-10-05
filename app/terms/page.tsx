@@ -326,7 +326,7 @@ export default function TermsPage() {
       <CommonHeader
         title={isAr ? "شروط الاستخدام" : "Terms of Use"}
         breadcrumb={isAr ? "شروط الاستخدام" : "Terms of Use"}
-        imagePath="/banners/Home__.png"
+        imagePath="/banners/terms.jpeg"
       />
 
       {/* ── Main Policy Content ── */}

@@ -343,7 +343,7 @@ export default function CareerPageContent() {
         {/* Designer Banner Background */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/career/Careers_.png"
+            src="/banners/Career45t.jpeg"
             alt={
               isArabic
                 ? "خلفية وظائف تاج الرحمة"

@@ -160,7 +160,7 @@ export default function CookiesPage() {
       <CommonHeader
         title={isAr ? "سياسة ملفات تعريف الارتباط" : "Cookie Policy"}
         breadcrumb={isAr ? "سياسة ملفات تعريف الارتباط" : "Cookie Policy"}
-        imagePath="/banners/Home__.png"
+        imagePath="/banners/cook.jpeg"
       />
 
       {/* ── Main Policy Content ── */}

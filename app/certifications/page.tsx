@@ -61,7 +61,7 @@ export default function CertificationsPage() {
       <CommonHeader
         title={isArabic ? "شهاداتنا واعتماداتنا" : "Our Certifications"}
         breadcrumb={isArabic ? "الشهادات" : "Certifications"}
-        imagePath="/banners/certifications.png"
+        imagePath="/banners/cert.jpeg"
       />
 
       {/* ── SECTION 1: Cards (with sectionBg) ─────────────────── */}

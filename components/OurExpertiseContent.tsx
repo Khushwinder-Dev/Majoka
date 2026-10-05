@@ -219,7 +219,7 @@ export default function OurExpertiseContent() {
       <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[470px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image: Engineer with blueprints overlooking skyline */}
         <Image
-          src="/ourExpertise/Dubai modern skyline at twilight.png"
+          src="/banners/our-exp.jpeg"
           alt="Our Expertise Hero Banner"
           fill
           priority
