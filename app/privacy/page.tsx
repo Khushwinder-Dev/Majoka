@@ -347,7 +347,7 @@ export default function PrivacyPage() {
       <CommonHeader
         title={isAr ? "سياسة الخصوصية" : "Privacy Policy"}
         breadcrumb={isAr ? "سياسة الخصوصية" : "Privacy Policy"}
-        imagePath="/banners/Home__.png"
+        imagePath="/banners/privacy.jpeg"
       />
 
       {/* ── Main Policy Content ── */}

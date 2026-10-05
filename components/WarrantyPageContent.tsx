@@ -137,7 +137,7 @@ export default function WarrantyPageContent() {
       <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[470px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image: Skyline with warranty coverage highlights */}
         <Image
-          src="/warranty/Dubai modern skyline at twilight (1).png"
+          src="/banners/warranty.jpeg"
           alt="Warranty Hero Banner"
           fill
           priority

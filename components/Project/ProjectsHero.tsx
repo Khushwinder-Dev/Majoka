@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
-const BG_IMAGE = "/banners/Project1_.png";
+const BG_IMAGE = "/banners/projects.jpeg";
 
 export default function ProjectsHero() {
   const { isArabic } = useLanguage();

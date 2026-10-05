@@ -311,7 +311,7 @@ export default function SolutionsPageContent() {
         {/* Background Image: Worker with paint roller on blue waterproofed surface */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/solutions/Img.png"
+            src="/banners/solutions.jpeg"
             alt={
               isArabic
                 ? "حلول العزل المائي لجميع المشاريع"

@@ -92,22 +92,20 @@ export default function RefundPolicyPage() {
         {/* Background Image: refundBanner.png */}
         <div className="absolute inset-0">
           <Image
-            src="/refundBanner.png"
+            src="/banners/refund.jpeg"
             alt="Refund & Cancellation Policy"
             fill
             priority
             unoptimized
-            className={`object-cover ${
-              isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
-            }`}
+            className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
+              }`}
           />
           {/* Dark gradient overlay on text side for crisp readability */}
           <div
-            className={`absolute inset-0 ${
-              isArabic
-                ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
-                : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-            }`}
+            className={`absolute inset-0 ${isArabic
+              ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
+              : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
+              }`}
           />
         </div>
 
