@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import CareerPageContent from "@/components/CareerPageContent";
 
@@ -16,5 +16,9 @@ export const metadata: Metadata = {
 };
 
 export default function CareerPage() {
-  return <CareerPageContent />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <CareerPageContent />
+    </Suspense>
+  );
 }

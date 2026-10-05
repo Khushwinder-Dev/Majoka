@@ -478,7 +478,7 @@ const NAV_MENU_GROUPS: NavMenuGroup[] = [
         titleAr: "أرسل سيرتك الذاتية",
         subEn: "Share your CV for current openings or future roster opportunities.",
         subAr: "شارك سيرتك الذاتية للفرص الحالية والمستقبلية.",
-        href: "/career/1#apply",
+        href: "/career?job=1",
       },
       {
         icon: "arrow",

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -19,6 +20,7 @@ import {
 import { useLanguage } from "@/context/LanguageContext";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import LifeAtOurCompanySection from "@/components/LifeAtOurCompanySection";
+import JobDetailsModal from "@/components/Career/JobDetailsModal";
 
 /* ─── DATA FOR JOBS ─────────────────────────────────────────────────── */
 interface JobItem {
@@ -245,10 +247,45 @@ const CAREER_FAQS: CareerFaq[] = [
 
 export default function CareerPageContent() {
   const { isArabic } = useLanguage();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [openFaqId, setOpenFaqId] = useState<number | null>(CAREER_FAQS[0]?.id ?? 1);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
+
+  // Sync selectedJobId with URL query params (?job=1 or ?jobId=1)
+  useEffect(() => {
+    const jobParam = searchParams.get("job") || searchParams.get("jobId");
+    if (jobParam) {
+      const num = parseInt(jobParam, 10);
+      if (!isNaN(num)) {
+        setSelectedJobId(num);
+      }
+    }
+  }, [searchParams]);
+
+  const handleOpenJob = (id: number) => {
+    setSelectedJobId(id);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      params.set("job", String(id));
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+  };
+
+  const handleCloseJob = () => {
+    setSelectedJobId(null);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      params.delete("job");
+      params.delete("jobId");
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    }
+  };
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -593,7 +630,8 @@ export default function CareerPageContent() {
             {displayedJobs.map((job) => (
               <div
                 key={job.id}
-                className="bg-[#F8FAFB] hover:bg-white rounded-2xl sm:rounded-full px-6 sm:px-8 py-5 border border-slate-100 hover:border-[#00DDCF]/40 hover:shadow-[0_8px_24px_rgba(0,221,207,0.12)] transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+                onClick={() => handleOpenJob(job.id)}
+                className="bg-[#F8FAFB] hover:bg-white rounded-2xl sm:rounded-full px-6 sm:px-8 py-5 border border-slate-100 hover:border-[#00DDCF]/40 hover:shadow-[0_8px_24px_rgba(0,221,207,0.12)] transition-all duration-300 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer"
               >
                 {/* Job Info */}
                 <div className="flex-1">
@@ -615,14 +653,18 @@ export default function CareerPageContent() {
                   </div>
                 </div>
 
-                {/* View Details Link */}
-                <Link
-                  href={`/career/${job.id}`}
-                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#00c4b4] group-hover:text-[#00a89a] transition-all self-start sm:self-center shrink-0"
+                {/* View Details Button */}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenJob(job.id);
+                  }}
+                  className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#00c4b4] group-hover:text-[#00a89a] transition-all self-start sm:self-center shrink-0 cursor-pointer"
                 >
                   <span>{isArabic ? "عرض التفاصيل والتقديم" : "View Details"}</span>
                   <ArrowUpRight className="w-4 h-4 stroke-[2.5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
+                </button>
               </div>
             ))}
           </div>
@@ -839,6 +881,15 @@ export default function CareerPageContent() {
           </div>
         </div>
       )}
+
+      {/* ══════════════════════════════════════════════════════════════
+          JOB DETAILS & APPLICATION MODAL POPUP
+      ══════════════════════════════════════════════════════════════ */}
+      <JobDetailsModal
+        jobId={selectedJobId}
+        onClose={handleCloseJob}
+        isArabic={isArabic}
+      />
 
     </div>
   );
