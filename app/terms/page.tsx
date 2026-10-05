@@ -327,6 +327,8 @@ export default function TermsPage() {
         title={isAr ? "شروط الاستخدام" : "Terms of Use"}
         breadcrumb={isAr ? "شروط الاستخدام" : "Terms of Use"}
         imagePath="/banners/terms.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
       />
 
       {/* ── Main Policy Content ── */}

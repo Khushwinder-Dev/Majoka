@@ -161,6 +161,8 @@ export default function CookiesPage() {
         title={isAr ? "سياسة ملفات تعريف الارتباط" : "Cookie Policy"}
         breadcrumb={isAr ? "سياسة ملفات تعريف الارتباط" : "Cookie Policy"}
         imagePath="/banners/cook.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
       />
 
       {/* ── Main Policy Content ── */}

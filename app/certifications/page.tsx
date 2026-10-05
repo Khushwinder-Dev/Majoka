@@ -62,6 +62,8 @@ export default function CertificationsPage() {
         title={isArabic ? "شهاداتنا واعتماداتنا" : "Our Certifications"}
         breadcrumb={isArabic ? "الشهادات" : "Certifications"}
         imagePath="/banners/cert.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
       />
 
       {/* ── SECTION 1: Cards (with sectionBg) ─────────────────── */}
