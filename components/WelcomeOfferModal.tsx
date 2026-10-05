@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import { X, CheckCircle2, ArrowRight, ArrowLeft, Sparkles, Tag, ChevronDown, Loader2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
@@ -192,65 +191,36 @@ export default function WelcomeOfferModal({
     >
       {/* Modal Card */}
       <div
-        className="relative w-full max-w-4xl bg-white rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-12 max-h-[92vh] flex flex-col md:grid animate-in zoom-in-95 duration-300"
+        className="relative w-full max-w-4xl bg-[#E6F7F6] rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl border border-[#01a9a0]/25 grid grid-cols-1 md:grid-cols-12 max-h-[92vh] animate-in zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
         style={{ direction: isArabic ? "rtl" : "ltr" }}
       >
         {/* ========================================================= */}
         {/* CLOSE BUTTON (Top-Right corner with tooltip on hover)       */}
         {/* ========================================================= */}
-        <div className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-40 group">
+        <div className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 rtl:right-auto rtl:left-3.5 sm:rtl:left-5 z-40 group">
           <button
             type="button"
             onClick={handleClose}
             aria-label={isArabic ? "إغلاق" : "Close"}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0]/10 hover:bg-[#008f86]/10 text-black hover:text-black border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-stone-950 border border-stone-200/80 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#01a9a0]"
           >
             <X className="w-5 h-5 stroke-[2.5]" />
           </button>
           {/* Tooltip on Hover */}
           <div
             role="tooltip"
-            className="pointer-events-none absolute top-full right-0 mt-1.5 px-2.5 py-1 bg-stone-900 text-white text-[11px] font-medium rounded-md shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 whitespace-nowrap z-50"
+            className="pointer-events-none absolute top-full right-0 rtl:right-auto rtl:left-0 mt-1.5 px-2.5 py-1 bg-stone-900 text-white text-[11px] font-medium rounded-md shadow-lg opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-150 whitespace-nowrap z-50"
           >
             {isArabic ? "إغلاق" : "Close"}
-            <span className="absolute -top-1 right-3.5 border-4 border-transparent border-b-stone-900" />
+            <span className="absolute -top-1 right-3.5 rtl:right-auto rtl:left-3.5 border-4 border-transparent border-b-stone-900" />
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* LEFT COLUMN: HERO IMAGE & PROMO BRANDING                 */}
+        {/* LEFT COLUMN: WELCOME & PROMO OFFER                       */}
         {/* ========================================================= */}
-        <div className="relative md:col-span-5 h-44 sm:h-52 md:h-auto min-h-[190px] md:min-h-[480px] overflow-hidden bg-slate-900 flex flex-col justify-end p-5 sm:p-7">
-          <Image
-            src="/qwertyu.jpg"
-            alt={isArabic ? "تاج الرحمة للمقاولات والعزل" : "Taj Al Rahmah Contracting & Waterproofing"}
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Gradient Overlay */}
-          {/* <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/85 via-slate-900/50 to-transparent" /> */}
-
-          {/* Floating discount badge on image */}
-          {/* <div className="relative z-10 hidden sm:flex flex-col gap-2 text-white">
-            <div className="inline-flex items-center gap-2 bg-[#01a9a0] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg w-fit backdrop-blur-xs">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>{isArabic ? "خصم ترحيبي حصري 10%" : "Exclusive 10% Welcome Discount"}</span>
-            </div>
-            <p className="text-xs text-white/90 leading-relaxed max-w-xs drop-shadow-sm">
-              {isArabic
-                ? "حلول هندسية متكاملة تضمن أعلى معايير الجودة والاستدامة لمشروعك."
-                : "Engineered solutions delivering uncompromising quality and protection for your property."}
-            </p>
-          </div> */}
-        </div>
-
-        {/* ========================================================= */}
-        {/* RIGHT COLUMN: POPUP CONTENT & 4-FIELD FORM                */}
-        {/* ========================================================= */}
-        <div className="md:col-span-7 p-6 sm:p-8 md:p-9 lg:p-10 flex flex-col justify-center bg-white overflow-y-auto max-h-[calc(92vh-100px)] md:max-h-none">
+        <div className="md:col-span-6 p-6 sm:p-8 md:p-9 lg:p-10 flex flex-col justify-center bg-[#E6F7F6] border-b md:border-b-0 md:border-r rtl:md:border-r-0 rtl:md:border-l border-[#01a9a0]/15 overflow-y-auto">
           {/* Eyebrow */}
           <div className="flex items-center gap-2 mb-2">
             <span className="w-5 sm:w-6 h-[2.5px] bg-[#01a9a0] rounded-full" />
@@ -260,34 +230,74 @@ export default function WelcomeOfferModal({
           </div>
 
           {/* Main Headline */}
-          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-black text-stone-900 tracking-tight leading-tight mb-2">
+          <h2 className="text-xl sm:text-2xl lg:text-[26px] font-black text-stone-900 tracking-tight leading-tight mb-2.5">
             {isArabic
               ? "احمِ مشروعك بالحل المناسب"
               : "Protect Your Project With the Right Solution"}
           </h2>
 
           {/* Subtitle / Description */}
-          <p className="text-xs sm:text-[13px] text-stone-600 leading-relaxed mb-4">
+          <p className="text-xs sm:text-[13px] text-stone-700 leading-relaxed mb-4">
             {isArabic
               ? "هل تبحث عن حلول موثوقة لعزل المياه، أو الأسقف، أو الإصلاح، أو العزل الحراري، أو الأرضيات؟ فريقنا ذو الخبرة مستعد لمساعدتك في العثور على الحل المناسب لمشروعك."
               : "Looking for reliable waterproofing, roofing, repair, insulation, or flooring solutions? Our experienced team is ready to help you find the right solution for your project."}
           </p>
 
           {/* Offer Highlight Box */}
-          <div className="mb-5 p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#01a9a0]/10 via-[#01a9a0]/5 to-transparent border border-[#01a9a0]/20 flex items-start gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+          <div className="mb-4 p-3.5 sm:p-4 rounded-2xl bg-white border border-[#01a9a0]/25 shadow-xs flex items-start gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
               <Tag className="w-4 h-4" />
             </div>
             <div>
               <h3 className="text-xs sm:text-sm font-bold text-stone-900 leading-snug">
                 {isArabic ? "احصل على خصم 10% على مشروعك الأول" : "Get 10% Off Your First Project"}
               </h3>
-              <p className="text-[11px] sm:text-xs text-stone-600 leading-tight mt-0.5">
+              <p className="text-[11px] sm:text-xs text-stone-600 leading-relaxed mt-0.5">
                 {isArabic
                   ? "تحدث إلى فريقنا اليوم واحصل على خصم 10% على أول مشروع لك."
                   : "Talk to our team today and receive 10% off your first project."}
               </p>
             </div>
+          </div>
+
+          {/* Key Benefits Grid */}
+          <div className="hidden grid grid-cols-2 gap-2.5 pt-1 text-[11px] sm:text-xs text-stone-700 font-medium">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#01a9a0] shrink-0" />
+              <span>{isArabic ? "استشارة مجانية" : "Free Consultation"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#01a9a0] shrink-0" />
+              <span>{isArabic ? "ضمان حتى 25 سنة" : "Up to 25Y Warranty"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#01a9a0] shrink-0" />
+              <span>{isArabic ? "استجابة سريعة 24/7" : "24/7 Response"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#01a9a0] shrink-0" />
+              <span>{isArabic ? "فريق عمل معتمد" : "Certified Experts"}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================= */}
+        {/* RIGHT COLUMN: 4-FIELD FORM                               */}
+        {/* ========================================================= */}
+        <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-center bg-white overflow-y-auto max-h-[calc(92vh-100px)] md:max-h-none">
+          <div className="mb-3.5">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#01a9a0]/10 text-[#01a9a0] text-[11px] font-bold uppercase tracking-wider mb-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{isArabic ? "طلب استشارة سريعة" : "Quick Consultation"}</span>
+            </div>
+            <h3 className="text-base sm:text-lg font-black text-stone-900 tracking-tight">
+              {isArabic ? "أدخل تفاصيل مشروعك" : "Enter Your Project Details"}
+            </h3>
+            <p className="text-[11.5px] sm:text-xs text-stone-500 leading-snug">
+              {isArabic
+                ? "املأ البيانات أدناه لتفعيل الخصم 10% والتواصل معك."
+                : "Fill in the fields below to activate your 10% discount."}
+            </p>
           </div>
 
           {/* Form or Submitted State */}
@@ -329,20 +339,17 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      } ${
-                        errors.name
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${errors.name
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                      }`}
+                        }`}
                     />
                     <label
                       className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${
-                          errors.name
-                            ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.name
+                        } ${errors.name
+                          ? "-top-2 text-[10.5px] font-semibold text-red-500"
+                          : formData.name
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -365,20 +372,17 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      } ${
-                        errors.phone
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${errors.phone
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                      }`}
+                        }`}
                     />
                     <label
                       className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${
-                          errors.phone
-                            ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.phone
+                        } ${errors.phone
+                          ? "-top-2 text-[10.5px] font-semibold text-red-500"
+                          : formData.phone
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -401,20 +405,17 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      } ${
-                        errors.email
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                        } ${errors.email
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                      }`}
+                        }`}
                     />
                     <label
                       className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${
-                          errors.email
-                            ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.email
+                        } ${errors.email
+                          ? "-top-2 text-[10.5px] font-semibold text-red-500"
+                          : formData.email
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -475,15 +476,6 @@ export default function WelcomeOfferModal({
                     </>
                   )}
                 </button>
-
-                {/* Secondary Dismiss Action: Maybe Later */}
-                {/* <button
-                  type="button"
-                  onClick={handleClose}
-                  className="h-10 sm:h-10.5 px-5 rounded-full border border-stone-300 hover:border-stone-400 bg-stone-50 hover:bg-stone-100 text-stone-600 hover:text-stone-900 font-semibold text-xs sm:text-sm transition-all duration-200 flex items-center justify-center active:scale-[0.99] cursor-pointer shrink-0"
-                >
-                  {isArabic ? "ربما لاحقاً" : "Maybe Later"}
-                </button> */}
               </div>
             </form>
           )}
