@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
+import CommonHeader from "./Common/CommonHeader";
 
 interface WarrantyCard {
   id: number;
@@ -132,27 +133,13 @@ export default function WarrantyPageContent() {
     <div className="w-full bg-white overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (WARRANTY)
+          1. HERO BANNER SECTION (Same as Industries page banner)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#071d34]">
-        {/* Background Image: Skyline with warranty coverage highlights */}
-        <div className="absolute inset-0">
-          <Image
-            src="/banners/warranty.jpeg"
-            alt="Warranty Hero Banner"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-        </div>
-
-        {/* Top gradient for transparent navbar readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none" />
-
-        {/* Left deep dark gradient overlay as in design */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
-      </section>
+      <CommonHeader
+        imagePath="/banners/warranty.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           2. INTRO HEADING: "Our Warranty Coverage"

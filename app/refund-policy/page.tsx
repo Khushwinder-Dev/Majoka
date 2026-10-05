@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 interface PolicySection {
   number: string;
@@ -85,29 +85,13 @@ export default function RefundPolicyPage() {
   return (
     <div className="w-full bg-white text-stone-800" dir={isArabic ? "rtl" : "ltr"}>
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (Matching Reference Design)
+          1. HERO BANNER SECTION (Same as Industries page banner)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden">
-        {/* Background Image: refund.jpeg */}
-        <div className="absolute inset-0">
-          <Image
-            src="/banners/refund.jpeg"
-            alt="Refund & Cancellation Policy"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Dark gradient overlay */}
-          <div
-            className={`absolute inset-0 ${
-              isArabic
-                ? "bg-gradient-to-l from-black/90 via-black/60 to-transparent"
-                : "bg-gradient-to-r from-black/90 via-black/60 to-transparent"
-            }`}
-          />
-        </div>
-      </section>
+      <CommonHeader
+        imagePath="/banners/refund.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           2. MAIN CONTENT BODY (Matching Reference Design Layout)

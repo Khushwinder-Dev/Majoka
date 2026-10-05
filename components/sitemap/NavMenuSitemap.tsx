@@ -16,6 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ContactModals, { ContactModalType } from "../ContactModals";
+import CommonHeader from "../Common/CommonHeader";
 
 interface NavSubItem {
   icon?: string;
@@ -644,27 +645,12 @@ export default function NavMenuSitemap() {
 
   return (
     <div className="w-full bg-white min-h-screen text-slate-900" dir={isArabic ? "rtl" : "ltr"}>
-      {/* ─── 1. TOP BANNER ────────────────────────────────────────── */}
-      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-slate-950">
-        <div className="absolute inset-0">
-          <Image
-            src="/sitemapBanner.jpeg"
-            alt={isArabic ? "خريطة الموقع - تاج الرحمة" : "Site Map - Taj Al Rahmah"}
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Dark gradient overlay */}
-          <div
-            className={`absolute inset-0 ${
-              isArabic
-                ? "bg-gradient-to-l from-black/90 via-black/65 to-black/30"
-                : "bg-gradient-to-r from-black/90 via-black/65 to-black/30"
-            }`}
-          />
-        </div>
-      </section>
+      {/* ─── 1. TOP BANNER (Same as Industries page banner) ─────── */}
+      <CommonHeader
+        imagePath="/sitemapBanner.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
+      />
 
       {/* ─── 2. SEARCH & DIRECTORY MAIN CONTENT ────────────────────── */}
       <main className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-16">

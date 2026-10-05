@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
+import CommonHeader from "./Common/CommonHeader";
 
 /* ─── DATA FOR SECTION 2: COMPLETE PROTECTION TAILORED SOLUTIONS ─────── */
 interface TailoredSolution {
@@ -305,37 +306,13 @@ export default function SolutionsPageContent() {
     <div className="w-full bg-white text-[#0B1C24] overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION
+          1. HERO BANNER SECTION (Same as Industries page banner)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[360px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#011a24]">
-        {/* Background Image: solutions.jpeg */}
-        <div className="absolute inset-0">
-          <Image
-            src="/banners/solutions.jpeg"
-            alt={
-              isArabic
-                ? "حلول العزل المائي لجميع المشاريع"
-                : "Waterproofing Solutions For Every Project"
-            }
-            fill
-            priority
-            unoptimized
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-
-        {/* Sophisticated Dark Gradient Overlays */}
-        <div
-          className="absolute inset-0 pointer-events-none z-1"
-          style={{
-            background: isArabic
-              ? "linear-gradient(270deg, rgba(1, 26, 36, 0.92) 0%, rgba(1, 26, 36, 0.78) 45%, rgba(1, 26, 36, 0.45) 75%, rgba(1, 26, 36, 0.15) 100%)"
-              : "linear-gradient(90deg, rgba(1, 26, 36, 0.92) 0%, rgba(1, 26, 36, 0.78) 45%, rgba(1, 26, 36, 0.45) 75%, rgba(1, 26, 36, 0.15) 100%)",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#011a24]/60 via-transparent to-[#011a24]/40 pointer-events-none z-1" />
-      </section>
+      <CommonHeader
+        imagePath="/banners/solutions.jpeg"
+        showHeading={false}
+        showBreadcrumb={false}
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           2. SECTION: COMPLETE PROTECTION TAILORED SOLUTIONS (8 CARDS)

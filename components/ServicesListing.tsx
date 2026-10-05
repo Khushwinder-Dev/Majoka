@@ -19,6 +19,7 @@ import {
   getTemplateKey,
 } from "@/components/service-templates";
 import { BannerSlider } from "@/components/ServiceBanners";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 /* ─── CONFIGURATION FLAGS ─────────────────────────────────────── */
 /**
@@ -351,18 +352,15 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
           className="h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px]"
         />
       ) : (
-        <div className="relative w-full h-[380px] sm:h-[450px] md:h-[520px] lg:h-[600px] overflow-hidden bg-[#0b2447]">
-          {/* Static Background Image */}
-          <SmartImage
-            src={staticBannerSrc}
-            alt={heroTitle}
-            fallbackSrc={DEFAULT_BANNER}
-            priority
-            className="object-cover object-center scale-105 transition-transform duration-1000"
-          />
-          {/* Gentle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/70" />
-        </div>
+        <CommonHeader
+          imagePath={
+            staticBannerSrc === "/servicesSubServicesContent/services/waterproofing/banner/whatsapp-image-2025-12-21-at-10-54-34-pm-standard-p2j3we.webp"
+              ? "/banners/Services_.jpeg"
+              : staticBannerSrc
+          }
+          showHeading={false}
+          showBreadcrumb={false}
+        />
       )}
 
       {/* ══ BODY: SIDEBAR + CONTENT ══════════════════════════════ */}

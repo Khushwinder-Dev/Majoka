@@ -55,7 +55,7 @@ const Header = ({
             src={imagePath}
             alt={`${title || breadcrumb || "Header"} Background`}
             fill
-            className="object-cover scale-110 transition-transform duration-[3000ms] hover:scale-100"
+            className="scale-110 transition-transform duration-[3000ms] hover:scale-100"
             priority
           />
         </div>
