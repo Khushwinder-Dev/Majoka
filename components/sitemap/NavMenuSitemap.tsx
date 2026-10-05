@@ -4,7 +4,17 @@ import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { Search, X } from "lucide-react";
+import {
+  Search,
+  X,
+  UserCheck,
+  MapPin,
+  Mail,
+  PhoneCall,
+  Truck,
+  LifeBuoy,
+  ArrowRight,
+} from "lucide-react";
 import ContactModals, { ContactModalType } from "../ContactModals";
 
 interface NavSubItem {
