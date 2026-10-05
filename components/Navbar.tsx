@@ -910,8 +910,8 @@ const Navbar = () => {
 
                   {/* Accordion */}
                   {hasMega && isExpanded && megaData && (
-                    <div className="bg-[#f0faf9]/80 border-y border-[#01a9a0]/15 px-3 py-3 animate-in fade-in duration-200">
-                      <div className="flex flex-col gap-1.5">
+                    <div className="bg-[#f0faf9]/80 border-y border-[#01a9a0]/15 px-4 pb-3 pt-1 animate-in fade-in duration-200">
+                      <div className="flex flex-col gap-0.5">
                         {megaData.items.map((sub, i) => (
                           <Link
                             key={i}
@@ -946,10 +946,10 @@ const Navbar = () => {
                               <NavIcon src={sub.icon} alt={sub.title} size={16} />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <p className="text-[13px] font-bold text-slate-800 group-hover:text-[#01a9a0] transition-colors truncate leading-snug">
+                              <p className="text-[15px] sm:text-[16px] font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate leading-snug">
                                 {sub.title}
                               </p>
-                              <p className="text-[11px] text-slate-500 truncate mt-0.5">{sub.sub}</p>
+                              <p className="text-[12.5px] sm:text-[13px] text-slate-500 truncate mt-0.5">{sub.sub}</p>
                             </div>
                             <ChevronRight
                               className={`w-3.5 h-3.5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 flex-shrink-0 transition-all ${
@@ -963,7 +963,7 @@ const Navbar = () => {
                       <Link
                         href={megaData.ctaHref}
                         onClick={() => { setIsMobileMenuOpen(false); setMobileExpanded(null); }}
-                        className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#01a9a0] hover:bg-[#008f88] text-white text-[12px] font-bold px-4 py-2.5 rounded-full shadow-xs hover:shadow-md transition-all"
+                        className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-[#01a9a0] hover:bg-[#008f88] text-white text-[13px] sm:text-[13.5px] font-bold px-4 py-2.5 rounded-full shadow-xs hover:shadow-md transition-all"
                       >
                         <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.2]" />
                         {megaData.cta}
