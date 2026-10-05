@@ -1,21 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import {
-  ArrowRight,
-  ExternalLink,
-  UserCheck,
-  MapPin,
-  Mail,
-  PhoneCall,
-  Truck,
-  LifeBuoy,
-  Layers,
-  Sparkles,
-} from "lucide-react";
+import { Search, X } from "lucide-react";
 import ContactModals, { ContactModalType } from "../ContactModals";
 
 interface NavSubItem {
@@ -609,20 +598,44 @@ function NavSitemapIcon({ icon, alt }: { icon?: string; alt: string }) {
 export default function NavMenuSitemap() {
   const { isArabic } = useLanguage();
   const [activeContactModal, setActiveContactModal] = useState<ContactModalType>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", `#${id}`);
-    }
-  };
+  // Search only regarding this page's mentioned links
+  const filteredGroups = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return NAV_MENU_GROUPS;
+
+    return NAV_MENU_GROUPS.map((group) => {
+      const groupMatches =
+        group.titleEn.toLowerCase().includes(q) ||
+        group.titleAr.toLowerCase().includes(q);
+
+      if (groupMatches) {
+        return group;
+      }
+
+      const matchingItems = group.items.filter(
+        (item) =>
+          item.titleEn.toLowerCase().includes(q) ||
+          item.titleAr.toLowerCase().includes(q) ||
+          item.href.toLowerCase().includes(q)
+      );
+
+      return {
+        ...group,
+        items: matchingItems,
+      };
+    }).filter((group) => group.items.length > 0);
+  }, [searchQuery]);
+
+  const totalMatchingCount = useMemo(() => {
+    return filteredGroups.reduce((acc, g) => acc + g.items.length, 0);
+  }, [filteredGroups]);
 
   return (
-    <div className="w-full bg-[#fbfdfd] min-h-screen text-slate-900">
+    <div className="w-full bg-white min-h-screen text-slate-900" dir={isArabic ? "rtl" : "ltr"}>
       {/* ─── 1. TOP BANNER ────────────────────────────────────────── */}
-      <section className="relative w-full h-[320px] sm:h-[360px] md:h-[400px] overflow-hidden bg-slate-900">
+      <section className="relative w-full h-[280px] sm:h-[320px] md:h-[360px] overflow-hidden bg-slate-950">
         <div className="absolute inset-0">
           <Image
             src="/sitemapBanner.png"
@@ -630,206 +643,152 @@ export default function NavMenuSitemap() {
             fill
             priority
             unoptimized
-            className={`object-cover ${isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
-              }`}
+            className={`object-cover ${
+              isArabic ? "scale-x-[-1] object-left" : "object-right sm:object-center"
+            }`}
           />
           {/* Dark gradient overlay for high contrast readability */}
           <div
-            className={`absolute inset-0 ${isArabic
-              ? "bg-gradient-to-l from-black/85 via-black/60 to-transparent"
-              : "bg-gradient-to-r from-black/85 via-black/60 to-transparent"
-              }`}
+            className={`absolute inset-0 ${
+              isArabic
+                ? "bg-gradient-to-l from-black/90 via-black/65 to-black/30"
+                : "bg-gradient-to-r from-black/90 via-black/65 to-black/30"
+            }`}
           />
         </div>
 
         <div className="relative z-10 h-full max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
           <div className="max-w-2xl text-left rtl:text-right">
-            {/* Brand Title */}
-            <p className="text-xl sm:text-2xl md:text-[28px] font-bold text-white tracking-wide mb-1 drop-shadow-sm">
-              {isArabic ? "تاج الرحمة" : "Taj Al Rahmah"}
+            <p className="text-sm sm:text-base font-bold uppercase tracking-wider text-[#00DDCF] mb-1.5 drop-shadow-sm">
+              {isArabic ? "تاج الرحمة للمقاولات" : "Taj Al Rahmah Contracting"}
             </p>
-
-            {/* Page Title */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#00DDCF] tracking-tight leading-tight drop-shadow-sm">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-sm">
               {isArabic ? "خريطة الموقع" : "Site Map"}
             </h1>
-
-            {/* Description */}
-            <p className="mt-3 text-sm sm:text-base text-white/85 max-w-xl font-medium leading-relaxed">
+            <p className="mt-2 text-xs sm:text-sm md:text-base text-white/80 max-w-xl font-normal leading-relaxed">
               {isArabic
-                ? "دليلك الشامل لجميع أقسام القائمة الرئيسية الـ 8، وتشمل 48 رابطاً فرعياً لكافة خدماتنا وحلولنا ومشاريعنا وقطاعاتنا ومواردنا."
-                : "Comprehensive navigation directory featuring all 8 primary header groups and their 48 specialized services, solutions, projects, and resources."}
+                ? "دليل تنقل سريع لكافة صفحات وأقسام وخدمات موقع تاج الرحمة."
+                : "A complete navigational directory of all pages, services, projects, and resources."}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ─── 2. QUICK JUMP PILLS ───────────────────────────────────── */}
-      <section className="hidden border-b border-stone-200/80 bg-white sticky top-16 z-30 shadow-[0_2px_10px_rgba(0,0,0,0.03)] backdrop-blur-md">
-        <div className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-3.5 sm:py-4">
-          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1 sm:pb-0">
-            <span className="text-xs font-bold uppercase tracking-wider text-stone-600 shrink-0 hidden md:inline-flex items-center gap-1.5 ltr:mr-2 rtl:ml-2">
-              <Layers className="w-3.5 h-3.5 text-[#009e90]" />
-              {isArabic ? "الأقسام الثمانية:" : "8 Navigation Groups:"}
-            </span>
-            {NAV_MENU_GROUPS.map((group) => (
-              <a
-                key={group.id}
-                href={`#${group.id}`}
-                onClick={(e) => scrollToSection(e, group.id)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-100/80 hover:bg-[#009e90] text-stone-700 hover:text-white transition-all whitespace-nowrap shrink-0 group border border-stone-200/60"
+      {/* ─── 2. SEARCH & DIRECTORY MAIN CONTENT ────────────────────── */}
+      <main className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-16">
+        {/* Search Bar (searches only regarding this page's mentioned links) */}
+        <div className="max-w-2xl mx-auto mb-12 sm:mb-16">
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-4 rtl:pl-0 rtl:pr-4 flex items-center pointer-events-none text-slate-400">
+              <Search className="w-5 h-5" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={
+                isArabic
+                  ? "ابحث في روابط خريطة الموقع..."
+                  : "Search sitemap links..."
+              }
+              className="w-full pl-11 pr-11 rtl:pl-11 rtl:pr-11 py-3.5 sm:py-4 text-sm sm:text-base rounded-2xl border border-slate-300 hover:border-[#01a9a0]/60 bg-white text-slate-900 shadow-sm transition-all outline-none focus:border-[#01a9a0] focus:ring-4 focus:ring-[#01a9a0]/20 focus:shadow-[0_4px_24px_rgba(1,169,160,0.22)] placeholder:text-slate-400"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 pr-4 rtl:pr-0 rtl:pl-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
+                aria-label={isArabic ? "مسح البحث" : "Clear search"}
               >
-                <span className="text-[10px] opacity-60 font-mono group-hover:text-white">
-                  {group.num}
-                </span>
-                <span>{isArabic ? group.titleAr : group.titleEn}</span>
-                <span className="text-[10px] bg-white/70 group-hover:bg-white/20 text-stone-600 group-hover:text-white px-1.5 py-0.2 rounded-full font-bold">
-                  6
-                </span>
-              </a>
-            ))}
+                <X className="w-5 h-5" />
+              </button>
+            )}
           </div>
-        </div>
-      </section>
 
-      {/* ─── 3. 8 HEADER NAV GROUPS CONTAINER ──────────────────────── */}
-      <main className="max-w-[1280px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
-        <div className="space-y-16 sm:space-y-20">
-          {NAV_MENU_GROUPS.map((group) => {
-            return (
-              <section
-                key={group.id}
-                id={group.id}
-                className="scroll-mt-32 border-b border-stone-200/70 pb-12 sm:pb-16 last:border-b-0 last:pb-0"
+          {/* Search Result Feedback */}
+          {searchQuery.trim() && (
+            <div className="mt-3 flex items-center justify-between text-xs sm:text-sm text-slate-600 px-1">
+              <span>
+                {isArabic
+                  ? `تم العثور على ${totalMatchingCount} رابطاً يطابق "${searchQuery}"`
+                  : `Found ${totalMatchingCount} link${totalMatchingCount === 1 ? "" : "s"} matching "${searchQuery}"`}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="text-[#0067b8] hover:text-[#004b87] hover:underline font-semibold cursor-pointer"
               >
-                {/* ── Group Header (Heading + Subtitle + CTA) ── */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-4 border-b border-stone-100">
-                  <div>
-                    {/* Badge & Number */}
-                    <div className="hidden flex items-center gap-2 mb-2">
-                      <span className="inline-block w-4 sm:w-5 h-[3px] bg-[#00DDCF] rounded-full shrink-0" />
-                      <span className="text-xs font-mono font-bold text-[#009e90] tracking-wider uppercase">
-                        Group {group.num}
-                      </span>
-                      <span className="text-stone-300">•</span>
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-[#f0faf9] text-[#009e90] border border-[#009e90]/20">
-                        {isArabic ? group.badgeAr : group.badgeEn}
-                      </span>
-                    </div>
+                {isArabic ? "إعادة ضبط البحث" : "Reset search"}
+              </button>
+            </div>
+          )}
+        </div>
 
-                    {/* Main Group Heading */}
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
-                        <Link
-                          href={group.mainHref}
-                          className="hover:text-[#009e90] transition-colors inline-flex items-center gap-2 group/title"
-                        >
-                          <span>{isArabic ? group.titleAr : group.titleEn}</span>
-                          <ExternalLink className="w-5 h-5 text-stone-400 group-hover/title:text-[#009e90] opacity-0 group-hover/title:opacity-100 transition-opacity" />
-                        </Link>
-                      </h2>
-                    </div>
-
-                    {/* Group Tagline */}
-                    <p className="mt-1.5 text-sm sm:text-base text-stone-500 font-medium">
-                      {isArabic ? group.taglineAr : group.taglineEn}
-                    </p>
-                  </div>
-
-                  {/* Main section CTA button */}
+        {/* ─── 3. SITEMAP GROUPS & LINKS (AS PER REFERENCE DESIGN) ─── */}
+        {filteredGroups.length === 0 ? (
+          /* Empty Search Results State */
+          <div className="py-16 text-center max-w-md mx-auto animate-in fade-in">
+            <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400 mb-4">
+              <Search className="w-6 h-6" />
+            </div>
+            <h3 className="text-lg font-bold text-slate-900">
+              {isArabic ? "لم يتم العثور على روابط مطابقة" : "No matching links found"}
+            </h3>
+            <p className="mt-1.5 text-sm text-slate-500 leading-relaxed">
+              {isArabic
+                ? `لا توجد روابط في خريطة الموقع تطابق "${searchQuery}". يرجى تجربة كلمة بحث أخرى.`
+                : `No links in the sitemap matched "${searchQuery}". Please try searching with a different keyword.`}
+            </p>
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="mt-5 px-5 py-2.5 rounded-full bg-[#0067b8] hover:bg-[#004b87] text-white text-xs sm:text-sm font-semibold transition-all cursor-pointer shadow-sm"
+            >
+              {isArabic ? "عرض جميع الروابط" : "Show All Links"}
+            </button>
+          </div>
+        ) : (
+          /* Multi-column Directory Grid Matching Reference Image */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 lg:gap-x-12 gap-y-10 sm:gap-y-12">
+            {filteredGroups.map((group) => (
+              <div key={group.id} className="flex flex-col">
+                {/* Section Title (Bold, Dark text like reference) */}
+                <h2 className="text-lg sm:text-xl font-bold text-slate-950 mb-3.5 tracking-tight">
                   <Link
                     href={group.mainHref}
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#009e90] hover:text-[#01776d] px-4 py-2 rounded-xl bg-[#f0faf9] hover:bg-[#e3f6f4] transition-all self-start md:self-auto border border-[#009e90]/15 shrink-0"
+                    className="hover:text-[#0067b8] transition-colors"
                   >
-                    <span>{isArabic ? group.ctaAr : group.ctaEn}</span>
-                    <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                    {isArabic ? group.titleAr : group.titleEn}
                   </Link>
-                </div>
+                </h2>
 
-                {/* ── Group's 6 Submenu Links Grid ── */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                  {group.items.map((item, itemIdx) => {
-                    const isModalAction = Boolean(item.action);
-
-                    return (
-                      <div
-                        key={itemIdx}
-                        className="group relative flex flex-col justify-between p-4 sm:p-5 rounded-2xl bg-white border border-stone-200/80 hover:border-[#009e90]/40 hover:shadow-[0_10px_30px_rgba(0,158,144,0.08)] transition-all duration-200"
-                      >
-                        {isModalAction ? (
-                          <button
-                            type="button"
-                            onClick={() => setActiveContactModal(item.action!)}
-                            className="text-left rtl:text-right w-full flex flex-col h-full justify-between"
-                          >
-                            <div className="flex items-start gap-3.5">
-                              {/* Icon container */}
-                              <div className="w-10 h-10 rounded-xl bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all">
-                                <NavSitemapIcon
-                                  icon={item.icon}
-                                  alt={isArabic ? item.titleAr : item.titleEn}
-                                />
-                              </div>
-
-                              {/* Title & Sub */}
-                              <div className="min-w-0 flex-1">
-                                <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 group-hover:text-[#009e90] transition-colors leading-snug">
-                                  {isArabic ? item.titleAr : item.titleEn}
-                                </h3>
-                                <p className="mt-1.5 text-[13px] sm:text-[14px] text-stone-500 leading-relaxed line-clamp-2">
-                                  {isArabic ? item.subAr : item.subEn}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Bottom link prompt */}
-                            <div className="hidden pt-2 border-t border-stone-100 flex items-center justify-between text-xs font-semibold text-[#009e90]">
-                              <span>{isArabic ? "فتح نافذة التواصل" : "Open Contact Modal"}</span>
-                              <Sparkles className="w-3.5 h-3.5" />
-                            </div>
-                          </button>
-                        ) : (
-                          <Link
-                            href={item.href}
-                            className="flex flex-col h-full justify-between"
-                          >
-                            <div className="flex items-start gap-3.5">
-                              {/* Icon container */}
-                              <div className="w-10 h-10 rounded-xl bg-[#f0faf9] border border-[#009e90]/15 flex items-center justify-center shrink-0 group-hover:bg-[#009e90]/15 group-hover:border-[#009e90]/30 transition-all">
-                                <NavSitemapIcon
-                                  icon={item.icon}
-                                  alt={isArabic ? item.titleAr : item.titleEn}
-                                />
-                              </div>
-
-                              {/* Title & Sub */}
-                              <div className="min-w-0 flex-1">
-                                <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 group-hover:text-[#009e90] transition-colors leading-snug">
-                                  {isArabic ? item.titleAr : item.titleEn}
-                                </h3>
-                                <p className="mt-1.5 text-[13px] sm:text-[14px] text-stone-500 leading-relaxed line-clamp-2">
-                                  {isArabic ? item.subAr : item.subEn}
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Bottom link indicator */}
-                            <div className="hidden pt-2 border-t border-stone-100 flex items-center justify-between text-xs font-medium text-stone-400 group-hover:text-[#009e90] transition-colors">
-                              <span className="truncate max-w-[200px] text-[11px] font-mono">
-                                {item.href}
-                              </span>
-                              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
-                            </div>
-                          </Link>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          })}
-        </div>
+                {/* Vertical list of blue underlined text links as per reference image */}
+                <ul className="space-y-2 sm:space-y-2.5">
+                  {group.items.map((item, idx) => (
+                    <li key={idx}>
+                      {item.action ? (
+                        <button
+                          type="button"
+                          onClick={() => setActiveContactModal(item.action!)}
+                          className="text-[#0067b8] hover:text-[#004b87] underline underline-offset-2 decoration-[#0067b8]/80 hover:decoration-[#004b87] text-[15px] sm:text-[15.5px] leading-snug text-left rtl:text-right transition-colors cursor-pointer"
+                        >
+                          {isArabic ? item.titleAr : item.titleEn}
+                        </button>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          className="text-[#0067b8] hover:text-[#004b87] underline underline-offset-2 decoration-[#0067b8]/80 hover:decoration-[#004b87] text-[15px] sm:text-[15.5px] leading-snug inline-block transition-colors"
+                        >
+                          {isArabic ? item.titleAr : item.titleEn}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </main>
 
       {/* Contact Modals if user clicks any modal action from the Contact group */}
