@@ -387,30 +387,106 @@ function buildRowValues(sheetName, d, timestamp) {
 }
 
 /**
- * Optional email sender from Apps Script (Dual Guarantee)
+ * Sends rich HTML email notification directly via Google's MailApp (No SMTP credentials required)
  */
 function sendAppsScriptNotification(sheetName, data, timestamp) {
   if (!OWNER_EMAIL) return;
 
-  var subject = "[Taj Al Rahmah Web Lead] New " + sheetName + " Submission";
-  var lines = [
-    "A new lead has been submitted on Taj Al Rahmah Contracting UAE website.",
+  var clientName = data.fullName || data.name || data.firstName || "Website Visitor";
+  var clientEmail = data.email || data.emailAddress || "";
+  var clientPhone = data.phone || data.phoneNumber || "";
+  var subject = "[Taj Al Rahmah Lead] New " + sheetName + " Submission from " + clientName;
+
+  var rowsHtml = "";
+  var plainLines = [
+    "New submission received on Taj Al Rahmah Website",
     "Database Sheet Tab: " + sheetName,
     "Time: " + timestamp,
     "",
     "--- Submission Details ---"
   ];
 
+  var ignoredKeys = [
+    "formType", "sheetName", "type", "targetSheet", "timestamp", "isoTimestamp", "action"
+  ];
+
   for (var key in data) {
-    if (key !== "formType" && key !== "sheetName" && key !== "type" && key !== "targetSheet" && key !== "timestamp" && key !== "isoTimestamp") {
-      lines.push(key + ": " + data[key]);
+    if (ignoredKeys.indexOf(key) === -1 && data[key] !== undefined && data[key] !== null && String(data[key]).trim() !== "") {
+      var val = String(data[key]);
+      plainLines.push(key + ": " + val);
+
+      var displayLabel = key
+        .replace(/([A-Z])/g, ' $1')
+        .replace(/^./, function(str){ return str.toUpperCase(); });
+
+      var displayVal = val;
+      if (key.toLowerCase().indexOf("email") !== -1 && val.indexOf("@") !== -1) {
+        displayVal = '<a href="mailto:' + val + '" style="color:#009e90;font-weight:600;text-decoration:none;">' + val + '</a>';
+      } else if (key.toLowerCase().indexOf("phone") !== -1) {
+        displayVal = '<a href="tel:' + val.replace(/\s+/g, '') + '" style="color:#009e90;font-weight:600;text-decoration:none;">' + val + '</a>';
+      } else {
+        displayVal = val.replace(/\n/g, "<br/>");
+      }
+
+      rowsHtml += '<tr>' +
+        '<td style="padding:10px 14px;font-weight:600;color:#475569;background-color:#f8fafc;border-bottom:1px solid #e2e8f0;width:35%;font-size:13px;vertical-align:top;">' + displayLabel + '</td>' +
+        '<td style="padding:10px 14px;color:#0f172a;border-bottom:1px solid #e2e8f0;font-size:14px;line-height:1.5;vertical-align:top;">' + displayVal + '</td>' +
+      '</tr>';
     }
   }
+
+  var htmlContent = '<!DOCTYPE html><html><head><meta charset="utf-8"/></head>' +
+    '<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,Helvetica,Arial,sans-serif;color:#334155;">' +
+      '<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f1f5f9;padding:25px 12px;">' +
+        '<tr><td align="center">' +
+          '<table width="100%" style="max-width:620px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.06);border:1px solid #e2e8f0;">' +
+            
+            '<!-- Header -->' +
+            '<tr><td style="background:linear-gradient(135deg, #009e90 0%, #00756a 100%);padding:24px 28px;text-align:left;">' +
+              '<div style="display:inline-block;background:rgba(255,255,255,0.22);padding:3px 10px;border-radius:16px;font-size:11px;font-weight:700;color:#ffffff;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">' +
+                sheetName +
+              '</div>' +
+              '<h1 style="margin:0;color:#ffffff;font-size:20px;font-weight:700;line-height:1.3;">' +
+                'New Website Lead: ' + clientName +
+              '</h1>' +
+              '<p style="margin:4px 0 0 0;color:rgba(255,255,255,0.88);font-size:12px;">Taj Al Rahmah Contracting UAE — Automated Lead Alert</p>' +
+            '</td></tr>' +
+
+            '<!-- Body Content -->' +
+            '<tr><td style="padding:24px 28px;">' +
+              '<p style="margin:0 0 16px 0;font-size:14px;color:#64748b;line-height:1.5;">' +
+                'A new entry was submitted on the website and recorded to sheet tab <strong style="color:#009e90;">' + sheetName + '</strong>.' +
+              '</p>' +
+
+              '<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin-bottom:20px;">' +
+                rowsHtml +
+              '</table>' +
+
+              '<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0fdfa;border-left:4px solid #009e90;border-radius:4px;padding:12px 14px;">' +
+                '<tr><td style="font-size:12px;color:#134e4a;line-height:1.6;">' +
+                  '<strong>Submission Time:</strong> ' + timestamp + ' (UAE GST)<br/>' +
+                  '<strong>Database Tab:</strong> ' + sheetName + '<br/>' +
+                  '<strong>Recipient:</strong> ' + OWNER_EMAIL +
+                '</td></tr>' +
+              '</table>' +
+
+            '</td></tr>' +
+
+            '<!-- Footer -->' +
+            '<tr><td style="background-color:#f8fafc;padding:16px 28px;border-top:1px solid #e2e8f0;text-align:center;font-size:11px;color:#94a3b8;">' +
+              'Taj Al Rahmah Contracting UAE • Automated Notification System' +
+            '</td></tr>' +
+
+          '</table>' +
+        '</td></tr>' +
+      '</table>' +
+    '</body></html>';
 
   MailApp.sendEmail({
     to: OWNER_EMAIL,
     subject: subject,
-    body: lines.join("\n")
+    body: plainLines.join("\n"),
+    htmlBody: htmlContent
   });
 }
 
