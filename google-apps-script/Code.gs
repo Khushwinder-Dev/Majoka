@@ -83,6 +83,7 @@ const SHEETS_CONFIG = {
       "Email Address",
       "Phone Number",
       "Experience (Years)",
+      "CV / Resume Link",
       "CV / Resume File Name",
       "Cover Letter / Notes"
     ],
@@ -357,6 +358,12 @@ function buildRowValues(sheetName, d, timestamp) {
       ];
 
     case "5_Careers":
+      var driveLink = null;
+      if (d.cvBase64) {
+        driveLink = saveCvToGoogleDrive(d.cvBase64, d.cvFileName || "Resume.pdf", d.cvMimeType);
+      }
+      var resumeLink = driveLink || d.cvLink || d.cvFileUrl || d.resumeLink || d.fileUrl || "";
+
       return [
         timestamp,
         d.jobTitle || "",
@@ -365,6 +372,7 @@ function buildRowValues(sheetName, d, timestamp) {
         d.email || d.emailAddress || "",
         d.phone || d.phoneNumber || "",
         d.experience || "",
+        resumeLink,
         d.cvFileName || d.cvName || d.cv || "Uploaded via Website",
         d.coverLetter || d.notes || ""
       ];
@@ -404,6 +412,40 @@ function buildRowValues(sheetName, d, timestamp) {
 }
 
 /**
+ * Saves a base64 encoded CV / Resume directly to a dedicated Google Drive folder
+ * and sets public viewing permission so the link can be opened by recruiters/reviewers.
+ */
+function saveCvToGoogleDrive(base64Data, fileName, mimeType) {
+  if (!base64Data) return null;
+  try {
+    var folderName = "TajAlRahmah_Resumes";
+    var folders = DriveApp.getFoldersByName(folderName);
+    var folder;
+    if (folders.hasNext()) {
+      folder = folders.next();
+    } else {
+      folder = DriveApp.createFolder(folderName);
+    }
+
+    var cleanName = (fileName || "Applicant_Resume.pdf").replace(/[^\w\.\-\s]/gi, "_");
+    var decoded = Utilities.base64Decode(base64Data);
+    var blob = Utilities.newBlob(decoded, mimeType || "application/pdf", cleanName);
+    var file = folder.createFile(blob);
+
+    try {
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    } catch (shareErr) {
+      Logger.log("Sharing permission warning: " + shareErr);
+    }
+
+    return file.getUrl();
+  } catch (err) {
+    Logger.log("Google Drive upload error: " + err);
+    return null;
+  }
+}
+
+/**
  * Sends rich HTML email notification directly via Google's MailApp (No SMTP credentials required)
  */
 function sendAppsScriptNotification(sheetName, data, timestamp) {
@@ -424,7 +466,7 @@ function sendAppsScriptNotification(sheetName, data, timestamp) {
   ];
 
   var ignoredKeys = [
-    "formType", "sheetName", "type", "targetSheet", "timestamp", "isoTimestamp", "action"
+    "formType", "sheetName", "type", "targetSheet", "timestamp", "isoTimestamp", "action", "cvBase64"
   ];
 
   for (var key in data) {
@@ -441,6 +483,8 @@ function sendAppsScriptNotification(sheetName, data, timestamp) {
         displayVal = '<a href="mailto:' + val + '" style="color:#009e90;font-weight:600;text-decoration:none;">' + val + '</a>';
       } else if (key.toLowerCase().indexOf("phone") !== -1) {
         displayVal = '<a href="tel:' + val.replace(/\s+/g, '') + '" style="color:#009e90;font-weight:600;text-decoration:none;">' + val + '</a>';
+      } else if (val.indexOf("http://") === 0 || val.indexOf("https://") === 0) {
+        displayVal = '<a href="' + val + '" target="_blank" style="display:inline-block;background-color:#009e90;color:#ffffff;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:12px;">View / Download Resume &rarr;</a><br/><a href="' + val + '" target="_blank" style="color:#009e90;text-decoration:underline;font-size:11px;word-break:break-all;">' + val + '</a>';
       } else {
         displayVal = val.replace(/\n/g, "<br/>");
       }

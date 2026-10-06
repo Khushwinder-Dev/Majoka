@@ -330,6 +330,19 @@ function formatFieldValue(label: string, value: any): string {
   if (lowerLabel.includes("phone")) {
     return `<a href="tel:${escapeHtml(str.replace(/\s+/g, ""))}" style="color: #009e90; text-decoration: none; font-weight: 500;">${escapeHtml(str)}</a>`;
   }
+  if (str.startsWith("http://") || str.startsWith("https://")) {
+    return `
+      <div>
+        <a href="${escapeHtml(str)}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: #009e90; color: #ffffff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px; margin-bottom: 6px;">
+          View / Download Resume &rarr;
+        </a>
+        <br/>
+        <a href="${escapeHtml(str)}" target="_blank" rel="noopener noreferrer" style="color: #009e90; text-decoration: underline; font-size: 11px; word-break: break-all;">
+          ${escapeHtml(str)}
+        </a>
+      </div>
+    `;
+  }
 
   // Preserve newlines for messages, cover letters, details
   return escapeHtml(str).replace(/\n/g, "<br/>");

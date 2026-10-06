@@ -17,6 +17,7 @@ import {
   ArrowLeft,
   Trash2,
   Building2,
+  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
@@ -420,6 +421,8 @@ export default function JobDetailsModal({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [uploadedCvUrl, setUploadedCvUrl] = useState<string>("");
+  const [uploadedCvName, setUploadedCvName] = useState<string>("");
 
   const job = CAREER_JOBS.find((j) => j.id === jobId);
 
@@ -437,6 +440,8 @@ export default function JobDetailsModal({
       setErrors({});
       setIsSubmitted(false);
       setIsSubmitting(false);
+      setUploadedCvUrl("");
+      setUploadedCvName("");
     }
   }, [jobId]);
 
@@ -563,7 +568,15 @@ export default function JobDetailsModal({
         body: submitData,
       });
 
+      const resData = await response.json().catch(() => ({}));
+
       if (response.ok) {
+        if (resData.resumeUrl) {
+          setUploadedCvUrl(resData.resumeUrl);
+        }
+        if (resData.fileName || formData.cv?.name) {
+          setUploadedCvName(resData.fileName || formData.cv?.name || "");
+        }
         setIsSubmitted(true);
         toast.success(
           isArabic
@@ -572,9 +585,10 @@ export default function JobDetailsModal({
         );
       } else {
         toast.error(
-          isArabic
+          resData.error ||
+          (isArabic
             ? "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة لاحقاً."
-            : "Failed to submit application. Please try again later."
+            : "Failed to submit application. Please try again later.")
         );
       }
     } catch (error) {
@@ -786,6 +800,34 @@ export default function JobDetailsModal({
                       ? "شكراً لاهتمامك بالانضمام إلى فريق تاج الرحمة. سيقوم فريق الموارد البشرية بمراجعة ملفك والتواصل معك قريباً."
                       : "Thank you for your interest in Taj Al Rahmah. Our HR team has received your application and will contact you if your profile matches."}
                   </p>
+
+                  {uploadedCvUrl && (
+                    <div className="mt-2 p-3 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between text-start gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-[#01a9a0]/10 text-[#01a9a0] flex items-center justify-center shrink-0">
+                          <FileText className="w-4 h-4" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-[10px] font-semibold text-stone-500">
+                            {isArabic ? "رابط السيرة الذاتية المحفوظة" : "Saved Resume Link"}
+                          </p>
+                          <p className="text-xs font-bold text-stone-800 truncate">
+                            {uploadedCvName || "Resume Document"}
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href={uploadedCvUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 rounded-full bg-[#01a9a0]/10 hover:bg-[#01a9a0]/20 text-[#01a9a0] text-xs font-bold flex items-center gap-1 shrink-0 transition-colors"
+                      >
+                        <span>{isArabic ? "معاينة" : "View"}</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
+
                   <button
                     type="button"
                     onClick={onClose}

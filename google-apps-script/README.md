@@ -73,8 +73,9 @@ All forms on the website now map 1-to-1 into **`TajAlRahmah_Forms_Database`** wi
 | E | **Email Address** | `email` |
 | F | **Phone Number** | `phone` |
 | G | **Experience (Years)** | `experience` |
-| H | **CV / Resume File Name** | Uploaded file name and size |
-| I | **Cover Letter / Notes** | `coverLetter` |
+| H | **CV / Resume Link** | Clickable link to download/view the uploaded resume (Google Drive / Website link) |
+| I | **CV / Resume File Name** | Original uploaded file name and size |
+| J | **Cover Letter / Notes** | `coverLetter` |
 
 ---
 
