@@ -57,6 +57,7 @@ const Header = ({
             fill
             className="scale-110 transition-transform duration-[3000ms] hover:scale-100"
             priority
+            quality={90}
           />
         </div>
         {/* Dark overlay with gradient */}
