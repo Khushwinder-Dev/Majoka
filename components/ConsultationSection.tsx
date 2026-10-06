@@ -194,13 +194,13 @@ export default function ConsultationSection() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          formType: "2_Free_Consultation",
           fullName: formData.name.trim(),
+          companyName: formData.companyName.trim(),
           company: formData.companyName.trim(),
           email: formData.email,
           phone: formData.phone,
-          message: formData.companyName
-            ? `Company: ${formData.companyName.trim()}\n${formData.message || "Consultation Request"}`
-            : formData.message || "Consultation Request",
+          message: formData.message || "Free Consultation Request",
           service: "Free Consultation",
         }),
       });

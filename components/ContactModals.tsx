@@ -150,11 +150,13 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "6_Technology_Expert",
           fullName: expertForm.fullName.trim(),
+          companyName: expertForm.companyName.trim(),
           phone: expertForm.phone.trim(),
           email: expertForm.email.trim() || "expert-consultation@tajalrahmah.ae",
           service: expertForm.serviceType,
-          message: `[Talk to an Expert - Consultation Request]\nFull Name: ${expertForm.fullName.trim()}\nCompany Name: ${expertForm.companyName.trim() || "N/A"}\nPhone: ${expertForm.phone.trim()}\nEmail: ${expertForm.email.trim() || "N/A"}\nService Type: ${expertForm.serviceType}\nRequirement: ${expertForm.requirement.trim() || "N/A"}`,
+          message: expertForm.requirement.trim() || "Technology Expert Consultation",
         }),
       });
 
@@ -192,11 +194,13 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "4_Contact_Us",
           fullName: enquiryForm.fullName.trim(),
+          companyName: enquiryForm.companyName.trim(),
           phone: enquiryForm.phone.trim(),
           email: enquiryForm.email.trim() || "general-enquiry@tajalrahmah.ae",
           service: enquiryForm.subject,
-          message: `[Send an Enquiry - General Enquiry]\nFull Name: ${enquiryForm.fullName.trim()}\nCompany Name: ${enquiryForm.companyName.trim() || "N/A"}\nPhone: ${enquiryForm.phone.trim()}\nEmail: ${enquiryForm.email.trim() || "N/A"}\nSubject: ${enquiryForm.subject.trim()}\nEnquiry:\n${enquiryForm.enquiry.trim()}`,
+          message: `[Send an Enquiry]\nSubject: ${enquiryForm.subject.trim()}\nEnquiry: ${enquiryForm.enquiry.trim()}`,
         }),
       });
 
@@ -233,11 +237,13 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "4_Contact_Us",
           fullName: callbackForm.fullName.trim(),
+          companyName: callbackForm.companyName.trim(),
           phone: callbackForm.phone.trim(),
           email: "callback-request@tajalrahmah.ae",
-          service: callbackForm.reason,
-          message: `[Request a Callback]\nFull Name: ${callbackForm.fullName.trim()}\nCompany Name: ${callbackForm.companyName.trim() || "N/A"}\nPhone: ${callbackForm.phone.trim()}\nPreferred Call Time: ${callbackForm.preferredTime}\nReason for Callback: ${callbackForm.reason}`,
+          service: `Callback: ${callbackForm.reason}`,
+          message: `[Request a Callback]\nPreferred Call Time: ${callbackForm.preferredTime}\nReason: ${callbackForm.reason}`,
         }),
       });
 
@@ -276,11 +282,13 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName: `${supplierForm.contactPerson.trim()} (${supplierForm.companyName.trim()})`,
+          formType: "4_Contact_Us",
+          fullName: supplierForm.contactPerson.trim(),
+          companyName: supplierForm.companyName.trim(),
           phone: supplierForm.phone.trim(),
           email: supplierForm.email.trim(),
           service: `Supplier: ${supplierForm.category}`,
-          message: `[Supplier Enquiry]\nCompany Name: ${supplierForm.companyName.trim()}\nContact Person: ${supplierForm.contactPerson.trim()}\nPhone: ${supplierForm.phone.trim()}\nEmail: ${supplierForm.email.trim()}\nSupplier Category: ${supplierForm.category}\nCompany Website: ${supplierForm.website.trim() || "N/A"}\nEnquiry Details:\n${supplierForm.enquiry.trim()}`,
+          message: `[Supplier Proposal]\nCompany Website: ${supplierForm.website.trim() || "N/A"}\nDetails: ${supplierForm.enquiry.trim()}`,
         }),
       });
 

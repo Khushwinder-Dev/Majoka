@@ -308,13 +308,14 @@ export default function ContactPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          formType: "4_Contact_Us",
           fullName: formData.fullName,
+          companyName: formData.companyName,
           company: formData.companyName,
           phone: formData.phone,
           email: formData.email,
-          message: formData.companyName
-            ? `Company: ${formData.companyName}\n${formData.message}`
-            : formData.message,
+          service: "General Contact Inquiry",
+          message: formData.message,
         }),
       });
 

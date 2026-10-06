@@ -139,10 +139,13 @@ export default function WelcomeOfferModal({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            formType: "1_Welcome_Popup",
             fullName: formData.name.trim(),
             phone: formData.phone.trim(),
             email: formData.email.trim(),
+            projectType: formData.projectType,
             service: formData.projectType,
+            offerDetails: "10% Welcome Discount Offer",
             message: `[Welcome Offer - 10% Discount Request]\nProject Type: ${formData.projectType}\nClient Name: ${formData.name.trim()}\nPhone: ${formData.phone.trim()}`,
           }),
         });

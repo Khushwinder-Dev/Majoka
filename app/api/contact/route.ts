@@ -1,157 +1,161 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { processFormSubmission, FormType } from "@/lib/sheetsAndEmail";
 
 export async function POST(request: NextRequest) {
   try {
-    console.log("Received request:");
     const body = await request.json();
-    console.log("Received body:", body);
-    const { fullName, phone, email, description, message, service } = body;
-    console.log("Received body:", body);
+    const {
+      fullName,
+      phone,
+      phoneNumber,
+      email,
+      emailAddress,
+      company,
+      companyName,
+      description,
+      message,
+      service,
+      projectType,
+      projectLocation,
+      files,
+      offerDetails,
+      notes,
+    } = body;
 
-    // Validate required fields
-    if (!fullName || !phone || !email || !message) {
+    const resolvedName = (fullName || body.name || "").toString().trim();
+    const resolvedPhone = (phone || phoneNumber || "").toString().trim();
+    const resolvedEmail = (email || emailAddress || "").toString().trim();
+    const resolvedCompany = (companyName || company || "").toString().trim();
+    const resolvedMessage = (message || notes || description || "").toString().trim();
+    const resolvedService = (service || projectType || "").toString().trim();
+
+    // Validate essential fields
+    if (!resolvedName && !resolvedEmail && !resolvedPhone) {
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "Please provide your contact information (name, phone or email)." },
         { status: 400 }
       );
     }
 
-    // Create a transporter using SMTP
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST, // e.g., 'smtp.gmail.com'
-      port: parseInt(process.env.SMTP_PORT || "587"),
-      secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER, // Your email
-        pass: process.env.SMTP_PASSWORD, // Your email password or app password
-      },
-    });
+    // Determine target form type and sheet tab
+    let formType: FormType = "4_Contact_Us";
+    let title = "New Contact Us Inquiry";
 
-    // Email content
-    const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: "saad.samiul85@gmail.com",
-      subject: `New Contact Form Submission from ${fullName}`,
-      html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              color: #333;
-            }
-            .container {
-              max-width: 600px;
-              margin: 0 auto;
-              padding: 20px;
-              background-color: #f9f9f9;
-            }
-            .header {
-              background-color: #0ea5e9;
-              color: white;
-              padding: 20px;
-              text-align: center;
-              border-radius: 8px 8px 0 0;
-            }
-            .content {
-              background-color: white;
-              padding: 30px;
-              border-radius: 0 0 8px 8px;
-            }
-            .field {
-              margin-bottom: 20px;
-              padding-bottom: 15px;
-              border-bottom: 1px solid #eee;
-            }
-            .label {
-              font-weight: bold;
-              color: #0ea5e9;
-              display: block;
-              margin-bottom: 5px;
-            }
-            .value {
-              color: #333;
-              word-wrap: break-word;
-            }
-            .message-box {
-              background-color: #f0f9ff;
-              padding: 15px;
-              border-left: 4px solid #0ea5e9;
-              margin-top: 10px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <h1>New Contact Form Submission</h1>
-            </div>
-            <div class="content">
-              <div class="field">
-                <span class="label">Full Name:</span>
-                <span class="value">${fullName}</span>
-              </div>
-              
-              <div class="field">
-                <span class="label">Phone:</span>
-                <span class="value">${phone}</span>
-              </div>
-              
-              <div class="field">
-                <span class="label">Email:</span>
-                <span class="value"><a href="mailto:${email}">${email}</a></span>
-              </div>
-              
-            
-              
-              <div class="field">
-                <span class="label">Message:</span>
-                <div class="message-box">
-                  ${message.replace(/\n/g, "<br>")}
-                </div>
-              </div>
-              
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; color: #666; font-size: 12px;">
-                <p>This email was sent from the contact form on your website.</p>
-                <p>Date: ${new Date().toLocaleString()}</p>
-              </div>
-            </div>
-          </div>
-        </body>
-        </html>
-      `,
-      // Plain text version as fallback
-      text: `
-New Contact Form Submission
+    if (body.formType) {
+      const ft = body.formType.toString().trim();
+      if (
+        ft === "1_Welcome_Popup" ||
+        ft === "2_Free_Consultation" ||
+        ft === "3_Subscriptions" ||
+        ft === "4_Contact_Us" ||
+        ft === "5_Careers" ||
+        ft === "6_Technology_Expert" ||
+        ft === "7_Get_A_Quote"
+      ) {
+        formType = ft;
+      }
+    } else {
+      // Auto-detect based on context if not explicitly passed
+      const combined = `${resolvedService} ${resolvedMessage}`.toLowerCase();
+      if (combined.includes("welcome offer") || combined.includes("10% discount")) {
+        formType = "1_Welcome_Popup";
+      } else if (
+        resolvedService.toLowerCase() === "free consultation" ||
+        combined.includes("consultation request")
+      ) {
+        formType = "2_Free_Consultation";
+      } else if (
+        combined.includes("quote request") ||
+        combined.includes("[project type:") ||
+        projectLocation
+      ) {
+        formType = "7_Get_A_Quote";
+      } else if (
+        combined.includes("technology expert") ||
+        combined.includes("talk to an expert") ||
+        combined.includes("technical expert")
+      ) {
+        formType = "6_Technology_Expert";
+      }
+    }
 
-Full Name: ${fullName}
-Phone: ${phone}
-Email: ${email}
+    // Set human-readable title based on formType
+    switch (formType) {
+      case "1_Welcome_Popup":
+        title = `Welcome Offer Claim (10% Discount) from ${resolvedName}`;
+        break;
+      case "2_Free_Consultation":
+        title = `Free Consultation Request from ${resolvedName}`;
+        break;
+      case "6_Technology_Expert":
+        title = `Technology Expert Inquiry from ${resolvedName}`;
+        break;
+      case "7_Get_A_Quote":
+        title = `Project Quote Request from ${resolvedName}${resolvedService ? ` (${resolvedService})` : ""}`;
+        break;
+      default:
+        title = `New Contact Inquiry from ${resolvedName}`;
+        break;
+    }
 
-Message:
-${message}
+    // Prepare fields for structured email
+    const fields = [
+      { label: "Full Name", value: resolvedName },
+      { label: "Phone Number", value: resolvedPhone },
+      { label: "Email Address", value: resolvedEmail },
+      { label: "Company Name", value: resolvedCompany },
+      { label: "Service / Requirement", value: resolvedService },
+      { label: "Project Location", value: projectLocation },
+      { label: "Offer / Discount", value: offerDetails },
+      { label: "Attached Files", value: files ? (Array.isArray(files) ? files.join(", ") : files) : undefined },
+      { label: "Message / Notes", value: resolvedMessage },
+    ];
 
----
-Date: ${new Date().toLocaleString()}
-      `,
+    // Prepare clean data object for Google Sheets
+    const sheetData: Record<string, any> = {
+      fullName: resolvedName,
+      name: resolvedName,
+      phone: resolvedPhone,
+      phoneNumber: resolvedPhone,
+      email: resolvedEmail,
+      emailAddress: resolvedEmail,
+      companyName: resolvedCompany,
+      company: resolvedCompany,
+      service: resolvedService,
+      projectType: projectType || resolvedService,
+      projectLocation: projectLocation || "",
+      offerDetails: offerDetails || "10% Welcome Discount Offer",
+      message: resolvedMessage,
+      notes: resolvedMessage,
+      enquiry: resolvedMessage,
+      files: files ? (Array.isArray(files) ? files.join(", ") : files) : "None",
     };
 
-    console.log("Sending email:", mailOptions);
+    // Execute concurrently: sync to Google Sheets and send email notification to owner
+    const { sheetResult, emailResult } = await processFormSubmission({
+      formType,
+      title,
+      data: sheetData,
+      fields,
+    });
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    console.log(`[FormSubmission] Processed ${formType}:`, {
+      sheetSync: sheetResult.success,
+      emailNotification: emailResult.success,
+    });
 
     return NextResponse.json(
-      { message: "Email sent successfully" },
+      {
+        success: true,
+        message: "Your message has been sent successfully. We will contact you soon.",
+        formType,
+      },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error sending email:", error);
+  } catch (error: any) {
+    console.error("Error processing contact form submission:", error);
     return NextResponse.json(
-      { error: "Failed to send email. Please try again later." },
+      { error: "Failed to process form submission. Please try again later." },
       { status: 500 }
     );
   }

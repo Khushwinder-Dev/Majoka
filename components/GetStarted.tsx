@@ -75,10 +75,12 @@ const GetStarted = () => {
     try {
       // Map formData to match API expectations
       const apiData = {
+        formType: "4_Contact_Us",
         fullName: formData.fullName,
         phone: formData.phone,
         email: formData.email,
-        description: formData.service, // Service goes to description field
+        service: formData.service,
+        description: formData.service,
         message: formData.message,
       };
 

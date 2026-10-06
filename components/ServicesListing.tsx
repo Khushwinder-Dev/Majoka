@@ -279,11 +279,13 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "6_Technology_Expert",
           fullName: formData.fullName,
           email: formData.email,
           phone: formData.phone,
+          subject: formData.subject,
           service: formData.subject || activeService.serviceTitle,
-          message: formData.subject ? `[Subject: ${formData.subject}]\n\n${formData.message}` : formData.message,
+          message: formData.message,
         }),
       });
       if (res.ok) {

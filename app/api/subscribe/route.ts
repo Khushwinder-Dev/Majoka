@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { processFormSubmission } from "@/lib/sheetsAndEmail";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,55 +22,43 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("New newsletter subscription:", {
-      email,
-      firstName,
-      lastName,
-      country,
-      company,
-      department,
-      jobTitle,
-      date: new Date().toISOString(),
+    const trimmedFirstName = firstName.trim();
+    const trimmedLastName = lastName.trim();
+    const trimmedEmail = email.trim();
+    const trimmedCountry = country.trim();
+    const trimmedCompany = company.trim();
+    const trimmedDepartment = department.trim();
+    const trimmedJobTitle = jobTitle.trim();
+
+    // Data for Google Sheets
+    const sheetData = {
+      firstName: trimmedFirstName,
+      lastName: trimmedLastName,
+      fullName: `${trimmedFirstName} ${trimmedLastName}`,
+      email: trimmedEmail,
+      country: trimmedCountry,
+      company: trimmedCompany,
+      department: trimmedDepartment,
+      jobTitle: trimmedJobTitle,
+    };
+
+    // Fields for email notification
+    const fields = [
+      { label: "Subscriber Name", value: `${trimmedFirstName} ${trimmedLastName}` },
+      { label: "Email Address", value: trimmedEmail },
+      { label: "Company", value: trimmedCompany },
+      { label: "Job Title", value: trimmedJobTitle },
+      { label: "Department", value: trimmedDepartment },
+      { label: "Country", value: trimmedCountry },
+    ];
+
+    // Process both Google Sheet sync and email notification
+    await processFormSubmission({
+      formType: "3_Subscriptions",
+      title: `New Marketing Subscription: ${trimmedFirstName} ${trimmedLastName} (${trimmedCompany})`,
+      data: sheetData,
+      fields,
     });
-
-    // If SMTP is configured, attempt sending confirmation / notification email
-    if (process.env.SMTP_USER && process.env.SMTP_PASSWORD) {
-      try {
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST || "smtp.gmail.com",
-          port: parseInt(process.env.SMTP_PORT || "587"),
-          secure: process.env.SMTP_SECURE === "true",
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASSWORD,
-          },
-        });
-
-        // 1. Notification to admin
-        await transporter.sendMail({
-          from: process.env.SMTP_USER,
-          to: process.env.CONTACT_EMAIL || "info@tajalrahmah.com",
-          subject: `New Marketing Subscription: ${firstName} ${lastName} (${company})`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px;">
-              <h2 style="color: #01a9a0; margin-top: 0;">New Marketing Communications Subscription</h2>
-              <p>A new subscriber has signed up for marketing communications:</p>
-              <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Full Name:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${firstName} ${lastName}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Email:</td><td style="padding: 8px; border-bottom: 1px solid #eee;"><a href="mailto:${email}">${email}</a></td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Country:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${country}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Company:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${company}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Department:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${department}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Job Title:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${jobTitle}</td></tr>
-                <tr><td style="padding: 8px; font-weight: bold; border-bottom: 1px solid #eee;">Date:</td><td style="padding: 8px; border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
-              </table>
-            </div>
-          `,
-        });
-      } catch (mailError) {
-        console.warn("SMTP email sending skipped or failed:", mailError);
-      }
-    }
 
     return NextResponse.json(
       {

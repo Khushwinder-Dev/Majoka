@@ -279,9 +279,12 @@ export default function DownloadPageContent() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "4_Contact_Us",
           fullName: form.name,
           email: form.email,
           phone: form.phone,
+          companyName: form.companyName,
+          company: form.companyName,
           service: "Resource Download Center",
           message: `User requested download of ${totalSelectedCount} resources. Company: ${form.companyName || "N/A"}`,
         }),

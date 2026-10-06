@@ -220,11 +220,20 @@ export default function GetAQuoteContent() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "7_Get_A_Quote",
           fullName: formData.fullName,
+          emailAddress: formData.emailAddress,
           email: formData.emailAddress,
+          phoneNumber: formData.phoneNumber,
           phone: formData.phoneNumber,
+          companyName: formData.companyName,
+          company: formData.companyName,
+          projectType: formData.projectType,
+          projectLocation: formData.projectLocation,
           service: `Quote Request: ${formData.projectType || "General"} (${formData.projectLocation || "UAE"})`,
-          message: `[Company: ${formData.companyName || "N/A"}]\n[Location: ${formData.projectLocation}]\n[Project Type: ${formData.projectType}]\n\n${formData.projectDetails}`,
+          message: formData.projectDetails,
+          projectDetails: formData.projectDetails,
+          files: files.map((f) => f.name),
         }),
       });
 
