@@ -3,7 +3,7 @@
  * TAJ AL RAHMAH CONTRACTING UAE — MULTI-FORM GOOGLE SHEETS & EMAIL SYSTEM
  * ======================================================================================
  * Spreadsheet Name: TajAlRahmah_Forms_Database
- * Owner Notification Email: khushwinder.dev@gmail.com
+ * Owner Notification Email: alrahmahtaj@gmail.com
  *
  * Dedicated Sheets (Tabs) & Exact Form Field Columns:
  *  1. 1_Welcome_Popup
@@ -16,7 +16,7 @@
  * ======================================================================================
  */
 
-const OWNER_EMAIL = "khushwinder.dev@gmail.com";
+const OWNER_EMAIL = "alrahmahtaj@gmail.com";
 const BRAND_TEAL = "#009e90";
 
 // Comprehensive sheet configuration with exact columns for all form fields
@@ -189,7 +189,7 @@ function doPost(e) {
       }
     } catch (resizeErr) {}
 
-    // Send email notification to owner (khushwinder.dev@gmail.com)
+    // Send email notification to owner (alrahmahtaj@gmail.com)
     var emailSent = false;
     var emailError = null;
     try {
@@ -555,7 +555,7 @@ function sendAppsScriptNotification(sheetName, data, timestamp) {
  * ═══════════════════════════════════════════════════════════════════════
  * TEST & AUTHORIZE FUNCTION
  * Click "Run" on this function in Apps Script to grant MailApp permissions
- * and verify instant email delivery to khushwinder.dev@gmail.com!
+ * and verify instant email delivery to alrahmahtaj@gmail.com!
  * ═══════════════════════════════════════════════════════════════════════
  */
 function testSendEmailNotification() {

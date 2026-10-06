@@ -150,7 +150,7 @@ export async function sendEmailNotification({
   fields,
   attachments,
 }: FormSubmissionPayload): Promise<{ success: boolean; error?: any }> {
-  const recipient = process.env.NOTIFICATION_EMAIL || "khushwinder.dev@gmail.com";
+  const recipient = process.env.NOTIFICATION_EMAIL || "alrahmahtaj@gmail.com";
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
     console.warn("SMTP credentials not fully configured. Skipping email notification.");
