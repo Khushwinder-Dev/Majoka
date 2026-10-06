@@ -8,6 +8,10 @@ import {
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
+  FileText,
+  Trash2,
+  Paperclip,
+  Plus,
 } from "lucide-react";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
@@ -98,9 +102,17 @@ export default function GetAQuoteContent() {
   });
 
   const [files, setFiles] = useState<File[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const ALLOWED_EXTS = [
+    ".pdf", ".jpg", ".jpeg", ".png", ".webp",
+    ".doc", ".docx", ".xls", ".xlsx",
+    ".dwg", ".dxf", ".zip"
+  ];
+  const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15MB per file
 
   // FAQ Accordion State (first item uncollapsed by default)
   const [openFaqIds, setOpenFaqIds] = useState<number[]>([QUOTE_FAQS[0]?.id ?? 1]);
@@ -181,9 +193,66 @@ export default function GetAQuoteContent() {
     }
   };
 
+  const addFiles = (incomingFiles: File[]) => {
+    const valid: File[] = [];
+    for (const file of incomingFiles) {
+      const ext = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
+      if (!ALLOWED_EXTS.includes(ext)) {
+        toast.error(
+          isArabic
+            ? `الملف ${file.name} غير مدعوم. يرجى إرفاق ملفات PDF، Word، Excel، CAD أو صور.`
+            : `File "${file.name}" is not supported. Please upload PDF, Word, Excel, CAD drawings, or images.`
+        );
+        continue;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error(
+          isArabic
+            ? `حجم الملف ${file.name} كبير جداً (الحد الأقصى 15 ميجابايت).`
+            : `File "${file.name}" exceeds the 15MB size limit.`
+        );
+        continue;
+      }
+      // Prevent duplicates
+      if (!files.some((f) => f.name === file.name && f.size === file.size)) {
+        valid.push(file);
+      }
+    }
+
+    if (valid.length > 0) {
+      setFiles((prev) => [...prev, ...valid]);
+    }
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFiles(Array.from(e.target.files));
+      addFiles(Array.from(e.target.files));
+    }
+    if (e.target) e.target.value = "";
+  };
+
+  const removeFile = (indexToRemove: number) => {
+    setFiles((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    if (e.dataTransfer?.files) {
+      addFiles(Array.from(e.dataTransfer.files));
     }
   };
 
@@ -216,25 +285,29 @@ export default function GetAQuoteContent() {
     setIsSubmitting(true);
 
     try {
+      const submitData = new FormData();
+      submitData.append("formType", "7_Get_A_Quote");
+      submitData.append("fullName", formData.fullName);
+      submitData.append("emailAddress", formData.emailAddress);
+      submitData.append("email", formData.emailAddress);
+      submitData.append("phoneNumber", formData.phoneNumber);
+      submitData.append("phone", formData.phoneNumber);
+      submitData.append("companyName", formData.companyName || "");
+      submitData.append("company", formData.companyName || "");
+      submitData.append("projectType", formData.projectType);
+      submitData.append("projectLocation", formData.projectLocation);
+      submitData.append("service", `Quote Request: ${formData.projectType || "General"} (${formData.projectLocation || "UAE"})`);
+      submitData.append("message", formData.projectDetails);
+      submitData.append("projectDetails", formData.projectDetails);
+
+      // Attach all uploaded drawings and files
+      for (const file of files) {
+        submitData.append("files", file);
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formType: "7_Get_A_Quote",
-          fullName: formData.fullName,
-          emailAddress: formData.emailAddress,
-          email: formData.emailAddress,
-          phoneNumber: formData.phoneNumber,
-          phone: formData.phoneNumber,
-          companyName: formData.companyName,
-          company: formData.companyName,
-          projectType: formData.projectType,
-          projectLocation: formData.projectLocation,
-          service: `Quote Request: ${formData.projectType || "General"} (${formData.projectLocation || "UAE"})`,
-          message: formData.projectDetails,
-          projectDetails: formData.projectDetails,
-          files: files.map((f) => f.name),
-        }),
+        body: submitData,
       });
 
       if (res.ok) {
@@ -703,36 +776,104 @@ export default function GetAQuoteContent() {
 
                   {/* File Upload Zone */}
                   <div>
-                    <label className="block text-xs font-bold text-stone-800 mb-1.5">
-                      {isArabic ? "إرفاق ملفات أو مخططات" : "Upload Files"} <span className="text-stone-400 text-[11px]">({isArabic ? "اختياري" : "Optional"})</span>
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-xs font-bold text-stone-800 flex items-center gap-1.5">
+                        <Paperclip className="w-3.5 h-3.5 text-[#01a9a0]" />
+                        <span>{isArabic ? "إرفاق المخططات وجداول الكميات (BOQ)" : "Upload Drawings & BOQ"}</span>
+                        <span className="text-stone-400 text-[11px] font-normal">
+                          ({isArabic ? "اختياري" : "Optional"})
+                        </span>
+                      </label>
+                      {files.length > 0 && (
+                        <span className="text-[11px] font-semibold text-[#01a9a0]">
+                          {files.length} {isArabic ? "ملفات مرفقة" : "files attached"}
+                        </span>
+                      )}
+                    </div>
+
                     <div
                       onClick={() => fileInputRef.current?.click()}
-                      className="w-full border-2 border-dashed border-stone-200 hover:border-[#01a9a0] rounded-2xl p-6 sm:p-7 text-center bg-[#fafcfc] hover:bg-[#f2faf8] transition-all cursor-pointer group"
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      className={`w-full border-2 border-dashed rounded-2xl p-5 sm:p-6 text-center transition-all cursor-pointer group ${
+                        isDragging
+                          ? "border-[#01a9a0] bg-[#e6f7f5] ring-2 ring-[#01a9a0]/25"
+                          : "border-stone-200 hover:border-[#01a9a0] bg-[#fafcfc] hover:bg-[#f2faf8]"
+                      }`}
                     >
-                      <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-stone-100 group-hover:bg-[#e0fbf6] flex items-center justify-center text-stone-500 group-hover:text-[#01a9a0] transition-colors">
+                      <div className="w-10 h-10 mx-auto mb-2 rounded-full bg-stone-100 group-hover:bg-[#e0fbf6] flex items-center justify-center text-stone-500 group-hover:text-[#01a9a0] transition-colors shadow-2xs">
                         <Upload className="w-5 h-5" />
                       </div>
                       <p className="text-xs sm:text-sm font-semibold text-stone-700">
-                        {isArabic ? "اسحب الملفات وأفلتها هنا أو " : "Drag & drop files here or "}
-                        <span className="text-[#01a9a0] underline">{isArabic ? "تصفح" : "browse"}</span>
+                        {isArabic ? "اسحب وأفلت الملفات هنا أو " : "Drag & drop files here or "}
+                        <span className="text-[#01a9a0] underline font-bold">{isArabic ? "تصفح من جهازك" : "browse files"}</span>
                       </p>
                       <p className="text-[11px] text-stone-400 mt-1">
-                        {isArabic ? "الملفات المدعومة: PDF, JPG, PNG (بحد أقصى 10 ميجابايت)" : "Supports PDF, JPG, PNG (Max 10MB)"}
+                        {isArabic
+                          ? "يدعم PDF, CAD (DWG), Excel (BOQ), Word, صور حتى 15MB لكل ملف"
+                          : "Supports PDF, CAD (DWG), Excel (BOQ), Word, Images up to 15MB each"}
                       </p>
                       <input
                         ref={fileInputRef}
                         type="file"
                         multiple
-                        accept=".pdf,.jpg,.jpeg,.png"
+                        accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx,.xls,.xlsx,.dwg,.dxf,.zip"
                         onChange={handleFileChange}
                         className="hidden"
                       />
                     </div>
+
+                    {/* Uploaded Files List */}
                     {files.length > 0 && (
-                      <div className="mt-2 text-xs text-[#01a9a0] font-medium flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>{files.map((f) => f.name).join(", ")}</span>
+                      <div className="mt-3 space-y-2">
+                        {files.map((file, idx) => (
+                          <div
+                            key={`${file.name}-${idx}`}
+                            className="flex items-center justify-between p-2.5 sm:p-3 rounded-xl bg-white border border-stone-200 shadow-2xs hover:border-[#01a9a0]/40 transition-colors"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                              <div className="w-8 h-8 rounded-lg bg-[#01a9a0]/10 text-[#01a9a0] flex items-center justify-center shrink-0">
+                                <FileText className="w-4 h-4" />
+                              </div>
+                              <div className="min-w-0">
+                                <p className="text-xs font-bold text-stone-800 truncate max-w-[220px] sm:max-w-sm">
+                                  {file.name}
+                                </p>
+                                <p className="text-[10px] text-stone-400">
+                                  {(file.size / (1024 * 1024)).toFixed(2)} MB
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                removeFile(idx);
+                              }}
+                              className="w-7 h-7 rounded-full text-stone-400 hover:text-red-500 hover:bg-red-50 flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                              title={isArabic ? "حذف الملف" : "Remove file"}
+                              aria-label="Remove file"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+
+                        <div className="pt-1 flex items-center justify-between">
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="text-xs font-semibold text-[#01a9a0] hover:text-[#008f84] flex items-center gap-1 cursor-pointer transition-colors"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                            <span>{isArabic ? "إضافة المزيد من الملفات" : "Add more files"}</span>
+                          </button>
+                          <span className="text-[11px] text-stone-400">
+                            {isArabic ? "إجمالي الحجم:" : "Total size:"}{" "}
+                            {(files.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024)).toFixed(2)} MB
+                          </span>
+                        </div>
                       </div>
                     )}
                   </div>
