@@ -5,6 +5,7 @@ import { Phone, Users, MapPin, ArrowRight, ArrowLeft, CheckCircle2, Loader2 } fr
 import { useLanguage } from "@/context/LanguageContext";
 
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
+import { useVoiceInput, VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 // ── Floating-label input ──────────────────────────────────────────────────────
 interface FloatFieldProps {
@@ -15,12 +16,25 @@ interface FloatFieldProps {
   required?: boolean;
   isArabic: boolean;
   error?: string;
+  isListening?: boolean;
+  onVoiceToggle?: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function FloatField({ type = "text", name, value, label, required, isArabic, error, onChange }: FloatFieldProps) {
+function FloatField({
+  type = "text",
+  name,
+  value,
+  label,
+  required,
+  isArabic,
+  error,
+  isListening,
+  onVoiceToggle,
+  onChange,
+}: FloatFieldProps) {
   const [focused, setFocused] = useState(false);
-  const lifted = focused || value.length > 0 || Boolean(error);
+  const lifted = focused || value.length > 0 || Boolean(error) || Boolean(isListening);
 
   const isValid =
     type === "email"
@@ -45,12 +59,14 @@ function FloatField({ type = "text", name, value, label, required, isArabic, err
           className={`
             peer w-full rounded-full border bg-white
             px-5 pt-5 pb-2
-            ${isArabic ? "pl-11 text-right" : "pr-11 text-left"}
+            ${isArabic ? "pl-16 text-right" : "pr-16 text-left"}
             text-sm sm:text-[15px] text-stone-800
             focus:outline-none transition-all duration-200
             ${
               error
                 ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                : isListening
+                ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
                 : lifted
                 ? "border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                 : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
@@ -73,8 +89,21 @@ function FloatField({ type = "text", name, value, label, required, isArabic, err
         >
           {label}
         </label>
-        <InputValidationTick isValid={isValid && !error} isArabic={isArabic} />
+        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1 z-10`}>
+          <InputValidationTick isValid={isValid && !error} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+          {onVoiceToggle && (
+            <VoiceMicButton
+              isListening={Boolean(isListening)}
+              onClick={onVoiceToggle}
+              isArabic={isArabic}
+              size="sm"
+            />
+          )}
+        </div>
       </div>
+      {isListening && (
+        <VoiceListeningBadge isArabic={isArabic} />
+      )}
       <FormFieldError error={error} />
     </div>
   );
@@ -87,12 +116,23 @@ interface FloatTextareaProps {
   label: string;
   isArabic: boolean;
   error?: string;
+  isListening?: boolean;
+  onVoiceToggle?: () => void;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-function FloatTextarea({ name, value, label, isArabic, error, onChange }: FloatTextareaProps) {
+function FloatTextarea({
+  name,
+  value,
+  label,
+  isArabic,
+  error,
+  isListening,
+  onVoiceToggle,
+  onChange,
+}: FloatTextareaProps) {
   const [focused, setFocused] = useState(false);
-  const lifted = focused || value.length > 0 || Boolean(error);
+  const lifted = focused || value.length > 0 || Boolean(error) || Boolean(isListening);
 
   return (
     <div>
@@ -111,10 +151,12 @@ function FloatTextarea({ name, value, label, isArabic, error, onChange }: FloatT
             px-5 pt-6 pb-2
             text-sm sm:text-[15px] text-stone-800
             focus:outline-none transition-all duration-200 resize-none h-32 sm:h-36
-            ${isArabic ? "text-right" : "text-left"}
+            ${isArabic ? "pl-12 text-right" : "pr-12 text-left"}
             ${
               error
                 ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                : isListening
+                ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
                 : lifted
                 ? "border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                 : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
@@ -137,7 +179,20 @@ function FloatTextarea({ name, value, label, isArabic, error, onChange }: FloatT
         >
           {label}
         </label>
+        {onVoiceToggle && (
+          <div className={`absolute top-3.5 ${isArabic ? "left-3" : "right-3"} z-10`}>
+            <VoiceMicButton
+              isListening={Boolean(isListening)}
+              onClick={onVoiceToggle}
+              isArabic={isArabic}
+              size="sm"
+            />
+          </div>
+        )}
       </div>
+      {isListening && (
+        <VoiceListeningBadge isArabic={isArabic} />
+      )}
       <FormFieldError error={error} />
     </div>
   );
@@ -157,6 +212,22 @@ export default function ConsultationSection() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { listeningField, toggleListening } = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setFormData((prev) => {
+        let val = text;
+        if (fieldName === "message" && prev.message.trim()) {
+          val = `${prev.message.trim()} ${text}`;
+        }
+        return { ...prev, [fieldName]: val };
+      });
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -362,6 +433,8 @@ export default function ConsultationSection() {
                   required
                   isArabic={isArabic}
                   error={errors.name}
+                  isListening={listeningField === "name"}
+                  onVoiceToggle={() => toggleListening("name", "text")}
                 />
                 <FloatField
                   type="text"
@@ -370,6 +443,8 @@ export default function ConsultationSection() {
                   onChange={handleChange}
                   label={isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                   isArabic={isArabic}
+                  isListening={listeningField === "companyName"}
+                  onVoiceToggle={() => toggleListening("companyName", "text")}
                 />
               </div>
 
@@ -384,6 +459,8 @@ export default function ConsultationSection() {
                   required
                   isArabic={isArabic}
                   error={errors.email}
+                  isListening={listeningField === "email"}
+                  onVoiceToggle={() => toggleListening("email", "email")}
                 />
                 <FloatField
                   type="tel"
@@ -394,6 +471,8 @@ export default function ConsultationSection() {
                   required
                   isArabic={isArabic}
                   error={errors.phone}
+                  isListening={listeningField === "phone"}
+                  onVoiceToggle={() => toggleListening("phone", "phone")}
                 />
               </div>
 
@@ -404,6 +483,8 @@ export default function ConsultationSection() {
                 onChange={handleChange}
                 label={isArabic ? "تفاصيل المشروع أو الاستفسار..." : "Message"}
                 isArabic={isArabic}
+                isListening={listeningField === "message"}
+                onVoiceToggle={() => toggleListening("message", "textarea")}
               />
 
               {/* Error Message */}

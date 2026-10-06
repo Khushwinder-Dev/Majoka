@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
+import { VoiceMicButton, VoiceListeningBadge, useVoiceInput } from "@/components/ui/VoiceMicButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FormData {
   fullName: string;
@@ -13,6 +15,7 @@ interface FormData {
 }
 
 const GetStarted = () => {
+  const { isArabic } = useLanguage();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -24,6 +27,16 @@ const GetStarted = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setFormData((prev) => ({ ...prev, [fieldName]: text }));
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   const services = [
     "Contracting",
@@ -283,14 +296,14 @@ const GetStarted = () => {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`w-full h-[50px] ${isArabic ? "pl-20 pr-6 text-right" : "pr-20 pl-6 text-left"} py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
                         errors.fullName
                           ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
                           : "border-[#e9f5fb] focus:border-white/70"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} px-1 transition-all duration-200 pointer-events-none ${
                         errors.fullName
                           ? "-top-2.5 text-[11px] font-semibold text-red-300"
                           : formData.fullName || focusedField === "fullName"
@@ -300,8 +313,18 @@ const GetStarted = () => {
                     >
                       Name
                     </label>
-                    <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "fullName"}
+                        onClick={() => voice.toggleListening("fullName", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                        className="text-white hover:text-white hover:bg-white/10"
+                      />
+                      <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                    </div>
                   </div>
+                  {voice.listeningField === "fullName" && <VoiceListeningBadge isArabic={isArabic} />}
                   <FormFieldError error={errors.fullName} className="text-red-300" />
                 </div>
 
@@ -317,14 +340,14 @@ const GetStarted = () => {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`w-full h-[50px] ${isArabic ? "pl-20 pr-6 text-right" : "pr-20 pl-6 text-left"} py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
                         errors.phone
                           ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
                           : "border-[#e9f5fb] focus:border-white/70"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} px-1 transition-all duration-200 pointer-events-none ${
                         errors.phone
                           ? "-top-2.5 text-[11px] font-semibold text-red-300"
                           : formData.phone || focusedField === "phone"
@@ -334,8 +357,18 @@ const GetStarted = () => {
                     >
                       Phone Number
                     </label>
-                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "phone"}
+                        onClick={() => voice.toggleListening("phone", "phone")}
+                        isArabic={isArabic}
+                        size="sm"
+                        className="text-white hover:text-white hover:bg-white/10"
+                      />
+                      <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                    </div>
                   </div>
+                  {voice.listeningField === "phone" && <VoiceListeningBadge isArabic={isArabic} />}
                   <FormFieldError error={errors.phone} className="text-red-300" />
                 </div>
 
@@ -351,14 +384,14 @@ const GetStarted = () => {
                       onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
-                      className={`w-full h-[50px] px-6 pr-12 py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
+                      className={`w-full h-[50px] ${isArabic ? "pl-20 pr-6 text-right" : "pr-20 pl-6 text-left"} py-3 bg-transparent border rounded-full text-white text-sm sm:text-base focus:outline-none transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed ${
                         errors.email
                           ? "border-red-400 ring-2 ring-red-400/20 focus:border-red-400"
                           : "border-[#e9f5fb] focus:border-white/70"
                       }`}
                     />
                     <label
-                      className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} px-1 transition-all duration-200 pointer-events-none ${
                         errors.email
                           ? "-top-2.5 text-[11px] font-semibold text-red-300"
                           : formData.email || focusedField === "email"
@@ -368,8 +401,18 @@ const GetStarted = () => {
                     >
                       Email Address
                     </label>
-                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "email"}
+                        onClick={() => voice.toggleListening("email", "email")}
+                        isArabic={isArabic}
+                        size="sm"
+                        className="text-white hover:text-white hover:bg-white/10"
+                      />
+                      <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                    </div>
                   </div>
+                  {voice.listeningField === "email" && <VoiceListeningBadge isArabic={isArabic} />}
                   <FormFieldError error={errors.email} className="text-red-300" />
                 </div>
 
@@ -418,27 +461,39 @@ const GetStarted = () => {
                 </div>
 
                 {/* Message Input */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    onFocus={() => setFocusedField("message")}
-                    onBlur={() => setFocusedField(null)}
-                    placeholder=" "
-                    required
-                    disabled={isSubmitting}
-                    className="w-full h-[50px] px-6 py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
-                  <label
-                    className={`absolute left-5 px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
-                      ? "-top-2.5 text-[11px] font-semibold text-white"
-                      : "top-3.5 text-sm text-white/70"
-                      }`}
-                  >
-                    Message
-                  </label>
+                <div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      onFocus={() => setFocusedField("message")}
+                      onBlur={() => setFocusedField(null)}
+                      placeholder=" "
+                      required
+                      disabled={isSubmitting}
+                      className={`w-full h-[50px] ${isArabic ? "pl-14 pr-6 text-right" : "pr-14 pl-6 text-left"} py-3 bg-transparent border border-[#e9f5fb] rounded-full text-white text-sm sm:text-base focus:outline-none focus:border-white/70 transition-all peer placeholder-transparent disabled:opacity-50 disabled:cursor-not-allowed`}
+                    />
+                    <label
+                      className={`absolute ${isArabic ? "right-5" : "left-5"} px-1 transition-all duration-200 pointer-events-none ${formData.message || focusedField === "message"
+                        ? "-top-2.5 text-[11px] font-semibold text-white"
+                        : "top-3.5 text-sm text-white/70"
+                        }`}
+                    >
+                      Message
+                    </label>
+                    <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "message"}
+                        onClick={() => voice.toggleListening("message", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                        className="text-white hover:text-white hover:bg-white/10"
+                      />
+                    </div>
+                  </div>
+                  {voice.listeningField === "message" && <VoiceListeningBadge isArabic={isArabic} />}
                 </div>
               </div>
 

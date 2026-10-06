@@ -17,6 +17,7 @@ import {
 import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "react-hot-toast";
 import { FloatInput } from "@/components/ui/FloatField";
+import { useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 // Checklist item definition
 interface ChecklistItem {
@@ -204,6 +205,16 @@ export default function DownloadPageContent() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setForm((prev) => ({ ...prev, [fieldName]: text }));
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   // Toggle single item
   const toggleItem = (id: string) => {
@@ -597,6 +608,8 @@ export default function DownloadPageContent() {
                   isArabic={isArabic}
                   error={errors.name}
                   icon={<User className="w-4 h-4" />}
+                  isListening={voice.listeningField === "name"}
+                  onVoiceToggle={() => voice.toggleListening("name", "text")}
                   onChange={(e) => {
                     setForm((p) => ({ ...p, name: e.target.value }));
                     if (errors.name) setErrors((p) => ({ ...p, name: "" }));
@@ -611,6 +624,8 @@ export default function DownloadPageContent() {
                   label={isArabic ? "اسم الشركة" : "Company Name"}
                   isArabic={isArabic}
                   icon={<Building2 className="w-4 h-4" />}
+                  isListening={voice.listeningField === "companyName"}
+                  onVoiceToggle={() => voice.toggleListening("companyName", "text")}
                   onChange={(e) => setForm((p) => ({ ...p, companyName: e.target.value }))}
                 />
 
@@ -624,6 +639,8 @@ export default function DownloadPageContent() {
                   isArabic={isArabic}
                   error={errors.phone}
                   icon={<Phone className="w-4 h-4" />}
+                  isListening={voice.listeningField === "phone"}
+                  onVoiceToggle={() => voice.toggleListening("phone", "phone")}
                   onChange={(e) => {
                     setForm((p) => ({ ...p, phone: e.target.value }));
                     if (errors.phone) setErrors((p) => ({ ...p, phone: "" }));
@@ -640,6 +657,8 @@ export default function DownloadPageContent() {
                   isArabic={isArabic}
                   error={errors.email}
                   icon={<Mail className="w-4 h-4" />}
+                  isListening={voice.listeningField === "email"}
+                  onVoiceToggle={() => voice.toggleListening("email", "email")}
                   onChange={(e) => {
                     setForm((p) => ({ ...p, email: e.target.value }));
                     if (errors.email) setErrors((p) => ({ ...p, email: "" }));

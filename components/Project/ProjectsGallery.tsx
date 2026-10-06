@@ -23,6 +23,7 @@ import {
   Cog,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 type CategoryId =
   | "all"
@@ -423,6 +424,14 @@ export default function ProjectsGallery() {
   const [page, setPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setQuery(text);
+      setPage(1);
+    },
+  });
+
   const counts = useMemo(() => {
     const map: Record<string, number> = { all: PROJECTS.length };
     PROJECTS.forEach((project) => {
@@ -604,8 +613,8 @@ export default function ProjectsGallery() {
               </nav>
 
               <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 xl:ml-auto w-full xl:w-auto">
-                <label className="relative flex-1 xl:w-[240px]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 rtl:left-auto rtl:right-3" />
+                <label className="relative flex-1 xl:w-[260px] flex items-center">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 rtl:left-auto rtl:right-3 pointer-events-none" />
                   <input
                     type="search"
                     value={query}
@@ -614,8 +623,16 @@ export default function ProjectsGallery() {
                       setPage(1);
                     }}
                     placeholder={isArabic ? "ابحث في المشاريع..." : "Search projects..."}
-                    className="w-full rounded-full border border-stone-200 bg-white py-2.5 pl-9 pr-4 rtl:pl-4 rtl:pr-9 text-sm text-stone-700 placeholder:text-stone-400 outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15"
+                    className="w-full rounded-full border border-stone-200 bg-white py-2.5 pl-9 pr-10 rtl:pl-10 rtl:pr-9 text-sm text-stone-700 placeholder:text-stone-400 outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15"
                   />
+                  <div className="absolute right-2.5 rtl:right-auto rtl:left-2.5 top-1/2 -translate-y-1/2">
+                    <VoiceMicButton
+                      isListening={voice.listeningField === "projectsSearch"}
+                      onClick={() => voice.toggleListening("projectsSearch", "text")}
+                      isArabic={isArabic}
+                      size="sm"
+                    />
+                  </div>
                 </label>
 
                 <div className="flex items-center gap-2.5">

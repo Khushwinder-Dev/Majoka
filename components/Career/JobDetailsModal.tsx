@@ -28,6 +28,7 @@ import {
   isValidText,
   FormFieldError,
 } from "@/components/ui/InputValidationTick";
+import { useVoiceInput, VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 export interface JobDetail {
   id: number;
@@ -423,6 +424,22 @@ export default function JobDetailsModal({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [uploadedCvUrl, setUploadedCvUrl] = useState<string>("");
   const [uploadedCvName, setUploadedCvName] = useState<string>("");
+
+  const { listeningField, toggleListening } = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setFormData((prev) => {
+        let finalText = text;
+        if (fieldName === "coverLetter" && prev.coverLetter.trim()) {
+          finalText = `${prev.coverLetter.trim()} ${text}`;
+        }
+        return { ...prev, [fieldName]: finalText };
+      });
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   const job = CAREER_JOBS.find((j) => j.id === jobId);
 
@@ -849,8 +866,10 @@ export default function JobDetailsModal({
                         onChange={handleInputChange}
                         placeholder=" "
                         disabled={isSubmitting}
-                        className={`w-full px-4 pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
-                          errors.fullName
+                        className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
+                          listeningField === "fullName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.fullName
                             ? "border-red-500 ring-2 ring-red-500/15"
                             : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -861,18 +880,30 @@ export default function JobDetailsModal({
                         } ${
                           errors.fullName
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.fullName
+                            : formData.fullName || listeningField === "fullName"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick
-                        isValid={isValidText(formData.fullName) && !errors.fullName}
-                        isArabic={isArabic}
-                      />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick
+                          isValid={isValidText(formData.fullName) && !errors.fullName}
+                          isArabic={isArabic}
+                          className="!static !translate-y-0 !left-auto !right-auto"
+                        />
+                        <VoiceMicButton
+                          isListening={listeningField === "fullName"}
+                          onClick={() => toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "fullName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.fullName} />
                   </div>
 
@@ -886,8 +917,10 @@ export default function JobDetailsModal({
                         onChange={handleInputChange}
                         placeholder=" "
                         disabled={isSubmitting}
-                        className={`w-full px-4 pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
-                          errors.email
+                        className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
+                          listeningField === "email"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.email
                             ? "border-red-500 ring-2 ring-red-500/15"
                             : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -898,18 +931,30 @@ export default function JobDetailsModal({
                         } ${
                           errors.email
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.email
+                            : formData.email || listeningField === "email"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick
-                        isValid={isValidEmail(formData.email) && !errors.email}
-                        isArabic={isArabic}
-                      />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick
+                          isValid={isValidEmail(formData.email) && !errors.email}
+                          isArabic={isArabic}
+                          className="!static !translate-y-0 !left-auto !right-auto"
+                        />
+                        <VoiceMicButton
+                          isListening={listeningField === "email"}
+                          onClick={() => toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "email" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.email} />
                   </div>
 
@@ -923,8 +968,10 @@ export default function JobDetailsModal({
                         onChange={handleInputChange}
                         placeholder=" "
                         disabled={isSubmitting}
-                        className={`w-full px-4 pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
-                          errors.phone
+                        className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
+                          listeningField === "phone"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.phone
                             ? "border-red-500 ring-2 ring-red-500/15"
                             : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -935,18 +982,30 @@ export default function JobDetailsModal({
                         } ${
                           errors.phone
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.phone
+                            : formData.phone || listeningField === "phone"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick
-                        isValid={isValidPhone(formData.phone) && !errors.phone}
-                        isArabic={isArabic}
-                      />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick
+                          isValid={isValidPhone(formData.phone) && !errors.phone}
+                          isArabic={isArabic}
+                          className="!static !translate-y-0 !left-auto !right-auto"
+                        />
+                        <VoiceMicButton
+                          isListening={listeningField === "phone"}
+                          onClick={() => toggleListening("phone", "phone")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "phone" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.phone} />
                   </div>
 
@@ -960,8 +1019,10 @@ export default function JobDetailsModal({
                         onChange={handleInputChange}
                         placeholder=" "
                         disabled={isSubmitting}
-                        className={`w-full px-4 pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
-                          errors.experience
+                        className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
+                          listeningField === "experience"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.experience
                             ? "border-red-500 ring-2 ring-red-500/15"
                             : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -972,36 +1033,65 @@ export default function JobDetailsModal({
                         } ${
                           errors.experience
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.experience
+                            : formData.experience || listeningField === "experience"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "سنوات الخبرة (مثال: 5 سنوات)" : "Years of Experience (e.g. 5 Years)"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick
-                        isValid={isValidText(formData.experience, 1) && !errors.experience}
-                        isArabic={isArabic}
-                      />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick
+                          isValid={isValidText(formData.experience, 1) && !errors.experience}
+                          isArabic={isArabic}
+                          className="!static !translate-y-0 !left-auto !right-auto"
+                        />
+                        <VoiceMicButton
+                          isListening={listeningField === "experience"}
+                          onClick={() => toggleListening("experience", "number")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "experience" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.experience} />
                   </div>
 
                   {/* Cover Letter (Optional) */}
                   <div>
-                    <textarea
-                      name="coverLetter"
-                      value={formData.coverLetter}
-                      onChange={handleInputChange}
-                      rows={2}
-                      disabled={isSubmitting}
-                      placeholder={
-                        isArabic
-                          ? "نبذة موجزة أو خطاب تقديمي (اختياري)..."
-                          : "Brief note or cover letter (optional)..."
-                      }
-                      className="w-full px-4 py-2.5 bg-white rounded-2xl border border-slate-300 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 resize-none transition-all placeholder:text-stone-400"
-                    />
+                    <div className="relative">
+                      <textarea
+                        name="coverLetter"
+                        value={formData.coverLetter}
+                        onChange={handleInputChange}
+                        rows={2}
+                        disabled={isSubmitting}
+                        placeholder={
+                          isArabic
+                            ? "نبذة موجزة أو خطاب تقديمي (اختياري)..."
+                            : "Brief note or cover letter (optional)..."
+                        }
+                        className={`w-full px-4 ${isArabic ? "pl-12 text-right" : "pr-12 text-left"} py-2.5 bg-white rounded-2xl border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all resize-none placeholder:text-stone-400 ${
+                          listeningField === "coverLetter"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <div className={`absolute top-2.5 ${isArabic ? "left-2" : "right-2"} z-10`}>
+                        <VoiceMicButton
+                          isListening={listeningField === "coverLetter"}
+                          onClick={() => toggleListening("coverLetter", "textarea")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "coverLetter" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* CV / Resume Upload */}

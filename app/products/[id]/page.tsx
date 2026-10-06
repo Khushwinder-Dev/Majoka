@@ -32,6 +32,7 @@ import {
   InputValidationTick,
   isValidText,
 } from "@/components/ui/InputValidationTick";
+import { VoiceMicButton, VoiceListeningBadge, useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 const PRODUCT_FAQS: FaqItem[] = [
   {
@@ -112,6 +113,16 @@ export default function ProductDetailsPage() {
     comment: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setNewReview((prev) => ({ ...prev, [fieldName]: text }));
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   // Share via social
   const handleSocialShare = (platform: string) => {
@@ -720,17 +731,27 @@ export default function ProductDetailsPage() {
                       setNewReview({ ...newReview, name: e.target.value });
                       if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                     }}
-                    className={`w-full px-4 py-2.5 rounded-full text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all ${
+                    className={`w-full ${isArabic ? "pl-20 pr-4 text-right" : "pr-20 pl-4 text-left"} py-2.5 rounded-full text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all ${
                       errors.name
                         ? "bg-white border-2 border-red-500 ring-2 ring-red-500/15 focus:border-red-500"
                         : "bg-gray-50 border border-gray-200 focus:border-[#01a9a0] focus:bg-white"
                     }`}
                   />
-                  <InputValidationTick
-                    isValid={isValidText(newReview.name, 2) && !errors.name}
-                    isArabic={isArabic}
-                  />
+                  <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                    <VoiceMicButton
+                      isListening={voice.listeningField === "name"}
+                      onClick={() => voice.toggleListening("name", "text")}
+                      isArabic={isArabic}
+                      size="sm"
+                    />
+                    <InputValidationTick
+                      isValid={isValidText(newReview.name, 2) && !errors.name}
+                      isArabic={isArabic}
+                      className="!static !translate-y-0 !left-auto !right-auto"
+                    />
+                  </div>
                 </div>
+                {voice.listeningField === "name" && <VoiceListeningBadge isArabic={isArabic} />}
                 <FormFieldError error={errors.name} className="px-1" />
               </div>
 
@@ -740,20 +761,31 @@ export default function ProductDetailsPage() {
                 }`}>
                   Your Review *
                 </label>
-                <textarea
-                  rows={4}
-                  placeholder="Write details about the build quality, performance, and day-to-day use..."
-                  value={newReview.comment}
-                  onChange={(e) => {
-                    setNewReview({ ...newReview, comment: e.target.value });
-                    if (errors.comment) setErrors((prev) => ({ ...prev, comment: "" }));
-                  }}
-                  className={`w-full px-4 py-3 rounded-2xl text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all resize-none ${
-                    errors.comment
-                      ? "bg-white border-2 border-red-500 ring-2 ring-red-500/15 focus:border-red-500"
-                      : "bg-gray-50 border border-gray-200 focus:border-[#01a9a0] focus:bg-white"
-                  }`}
-                />
+                <div className="relative">
+                  <textarea
+                    rows={4}
+                    placeholder="Write details about the build quality, performance, and day-to-day use..."
+                    value={newReview.comment}
+                    onChange={(e) => {
+                      setNewReview({ ...newReview, comment: e.target.value });
+                      if (errors.comment) setErrors((prev) => ({ ...prev, comment: "" }));
+                    }}
+                    className={`w-full px-4 ${isArabic ? "pl-12 text-right" : "pr-12 text-left"} py-3 rounded-2xl text-xs text-gray-800 placeholder:text-gray-400 outline-none transition-all resize-none ${
+                      errors.comment
+                        ? "bg-white border-2 border-red-500 ring-2 ring-red-500/15 focus:border-red-500"
+                        : "bg-gray-50 border border-gray-200 focus:border-[#01a9a0] focus:bg-white"
+                    }`}
+                  />
+                  <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+                    <VoiceMicButton
+                      isListening={voice.listeningField === "comment"}
+                      onClick={() => voice.toggleListening("comment", "textarea")}
+                      isArabic={isArabic}
+                      size="sm"
+                    />
+                  </div>
+                </div>
+                {voice.listeningField === "comment" && <VoiceListeningBadge isArabic={isArabic} />}
                 <FormFieldError error={errors.comment} className="px-1" />
               </div>
 

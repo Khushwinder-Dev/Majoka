@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useId } from "react";
 import { Search, ChevronDown, Check } from "lucide-react";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 export interface SearchableSelectOption {
   value: string;
@@ -51,6 +52,13 @@ export default function SearchableSelect({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const id = useId();
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setSearchQuery(text);
+    },
+  });
 
   // Find currently selected option
   const selectedOption = options.find((opt) => opt.value === value);
@@ -225,7 +233,7 @@ export default function SearchableSelect({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={searchPlaceholder || defaultSearchPlaceholder}
                 className={`w-full bg-white border border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 rounded-xl py-2 text-xs sm:text-sm text-stone-800 outline-none transition-all placeholder:text-stone-400 ${
-                  isArabic ? "pr-3 pl-8 text-right" : "pl-3 pr-8 text-left"
+                  isArabic ? "pr-3 pl-16 text-right" : "pl-3 pr-16 text-left"
                 }`}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && filteredOptions.length > 0) {
@@ -234,11 +242,19 @@ export default function SearchableSelect({
                   }
                 }}
               />
-              <Search
-                className={`w-4 h-4 text-stone-400 pointer-events-none absolute ${
-                  isArabic ? "left-2.5" : "right-2.5"
+              <div
+                className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 ${
+                  isArabic ? "left-2" : "right-2"
                 }`}
-              />
+              >
+                <VoiceMicButton
+                  isListening={voice.listeningField === "selectSearch"}
+                  onClick={() => voice.toggleListening("selectSearch", "text")}
+                  isArabic={isArabic}
+                  size="sm"
+                />
+                <Search className="w-4 h-4 text-stone-400 pointer-events-none" />
+              </div>
             </div>
           </div>
 

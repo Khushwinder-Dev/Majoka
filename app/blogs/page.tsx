@@ -6,6 +6,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
 import Stats from "../../components/Stats";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NewsArticle {
   id: number;
@@ -17,9 +19,17 @@ interface NewsArticle {
 }
 
 const News = () => {
+  const { isArabic } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setSearchQuery(text);
+    },
+  });
 
   const handleCardClick = (id: number) => {
     router.push(`/news/${id}`);
@@ -154,16 +164,16 @@ const News = () => {
                 className="bg-[#01a9a0]/10 rounded-2xl p-5 sm:p-7"
                 data-aos="fade-right"
               >
-                <div className="relative">
+                <div className="relative flex items-center">
                   <input
                     type="text"
                     placeholder="Search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-12 py-3 bg-white rounded-[50px] outline outline-1 outline-offset-[-1px] outline-black/60 text-base focus:outline-2 focus:outline-pink-950 transition-all text-gray-800"
+                    className="w-full pl-10 pr-20 py-3 bg-white rounded-[50px] outline outline-1 outline-offset-[-1px] outline-black/60 text-base focus:outline-2 focus:outline-pink-950 transition-all text-gray-800"
                   />
                   <svg
-                    className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-black/60"
+                    className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-black/60 pointer-events-none"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -171,19 +181,14 @@ const News = () => {
                     <circle cx="11" cy="11" r="8" strokeWidth="2" />
                     <path d="m21 21-4.35-4.35" strokeWidth="2" />
                   </svg>
-                  <svg
-                    className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-black/60"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="11" cy="11" r="8" strokeWidth="2" />
-                    <path
-                      d="m21 21-4.35-4.35"
-                      strokeWidth="2"
-                      strokeLinecap="round"
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                    <VoiceMicButton
+                      isListening={voice.listeningField === "blogSearch"}
+                      onClick={() => voice.toggleListening("blogSearch", "text")}
+                      isArabic={isArabic}
+                      size="sm"
                     />
-                  </svg>
+                  </div>
                 </div>
               </div>
 

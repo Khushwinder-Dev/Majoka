@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 interface FaqItem {
   id: number;
@@ -230,6 +231,13 @@ export default function FaqPageContent() {
   const { isArabic } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<"all" | "services" | "solutions" | "projects" | "general">("all");
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setSearchQuery(text);
+    },
+  });
   // First FAQ uncollapsed by default
   const [openIds, setOpenIds] = useState<number[]>([FAQ_ITEMS[0]?.id ?? 1]);
 
@@ -381,6 +389,12 @@ export default function FaqPageContent() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={isArabic ? "ابحث هنا..." : "Search..."}
                 className="w-full bg-transparent text-stone-800 text-xs sm:text-sm font-medium focus:outline-none placeholder-stone-400 px-2 py-2"
+              />
+              <VoiceMicButton
+                isListening={voice.listeningField === "faqSearch"}
+                onClick={() => voice.toggleListening("faqSearch", "text")}
+                isArabic={isArabic}
+                size="sm"
               />
               {searchQuery && (
                 <button

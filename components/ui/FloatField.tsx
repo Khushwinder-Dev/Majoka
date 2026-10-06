@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 // ── Shared styles ─────────────────────────────────────────────────────────────
 const inputBase = `
@@ -25,6 +26,8 @@ export interface FloatInputProps {
   error?: string;
   hasError?: boolean;
   icon?: React.ReactNode;
+  isListening?: boolean;
+  onVoiceToggle?: () => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -41,6 +44,8 @@ export function FloatInput({
   error,
   hasError,
   icon,
+  isListening,
+  onVoiceToggle,
   onChange,
   onFocus,
   onBlur,
@@ -71,7 +76,9 @@ export function FloatInput({
           dir={isArabic ? "rtl" : "ltr"}
           placeholder=" "
           className={`${inputBase} ${
-            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+            onVoiceToggle
+              ? isArabic ? "pl-20 text-right" : "pr-20 text-left"
+              : isArabic ? "pl-11 text-right" : "pr-11 text-left"
           } ${
             isInvalid
               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
@@ -93,18 +100,34 @@ export function FloatInput({
         >
           {label}
         </label>
-        {isValid && !isInvalid ? (
-          <InputValidationTick isValid={true} isArabic={isArabic} />
-        ) : icon ? (
-          <div
-            className={`absolute top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center text-[#00DDCF] transition-opacity duration-150 ${
-              isArabic ? "left-4 sm:left-4.5" : "right-4 sm:right-4.5"
-            }`}
-          >
-            {icon}
-          </div>
-        ) : null}
+        
+        {/* Actions container: Mic button + Validation tick / icon */}
+        <div
+          className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${
+            isArabic ? "left-3" : "right-3"
+          }`}
+        >
+          {onVoiceToggle && (
+            <VoiceMicButton
+              isListening={!!isListening}
+              onClick={onVoiceToggle}
+              isArabic={isArabic}
+              size="sm"
+            />
+          )}
+          {isValid && !isInvalid ? (
+            <InputValidationTick isValid={true} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+          ) : icon ? (
+            <div
+              className="pointer-events-none flex items-center justify-center text-[#00DDCF] transition-opacity duration-150"
+            >
+              {icon}
+            </div>
+          ) : null}
+        </div>
       </div>
+
+      {isListening && <VoiceListeningBadge isArabic={isArabic} />}
 
       {error && (
         <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
@@ -126,6 +149,8 @@ export interface FloatTextareaProps {
   isArabic?: boolean;
   error?: string;
   hasError?: boolean;
+  isListening?: boolean;
+  onVoiceToggle?: () => void;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -139,6 +164,8 @@ export function FloatTextarea({
   isArabic = false,
   error,
   hasError,
+  isListening,
+  onVoiceToggle,
   onChange,
 }: FloatTextareaProps) {
   const [focused, setFocused] = useState(false);
@@ -173,7 +200,11 @@ export function FloatTextarea({
                 ? "border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                 : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
             }
-            ${isArabic ? "text-right" : "text-left"}
+            ${
+              onVoiceToggle
+                ? isArabic ? "pl-12 text-right" : "pr-12 text-left"
+                : isArabic ? "text-right" : "text-left"
+            }
           `}
         />
         <label
@@ -189,7 +220,19 @@ export function FloatTextarea({
         >
           {label}
         </label>
+        {onVoiceToggle && (
+          <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
+            <VoiceMicButton
+              isListening={!!isListening}
+              onClick={onVoiceToggle}
+              isArabic={isArabic}
+              size="sm"
+            />
+          </div>
+        )}
       </div>
+
+      {isListening && <VoiceListeningBadge isArabic={isArabic} />}
 
       {error && (
         <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">

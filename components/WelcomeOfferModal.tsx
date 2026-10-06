@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect from "@/components/ui/SearchableSelect";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
+import { useVoiceInput, VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 // Cooldown period: Once shown, do not auto-open again for 10 minutes
 const COOLDOWN_DURATION_MS = 10 * 60 * 1000; // 10 minutes in milliseconds
@@ -42,6 +43,16 @@ export default function WelcomeOfferModal({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { listeningField, toggleListening } = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setFormData((prev) => ({ ...prev, [fieldName]: text }));
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   useEffect(() => {
     if (!autoShow) return;
@@ -342,25 +353,42 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        } ${errors.name
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                      } ${
+                        listeningField === "name"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.name
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                        }`}
+                      }`}
                     />
                     <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${errors.name
+                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        isArabic ? "right-4" : "left-4"
+                      } ${
+                        errors.name
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.name
-                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
-                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
-                        }`}
+                          : formData.name || listeningField === "name"
+                          ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                          : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                      }`}
                     >
                       {isArabic ? "الاسم" : "Name"} <span className="text-red-500">*</span>
                     </label>
-                    <InputValidationTick isValid={isValidText(formData.name) && !errors.name} isArabic={isArabic} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                      <InputValidationTick isValid={isValidText(formData.name) && !errors.name} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      <VoiceMicButton
+                        isListening={listeningField === "name"}
+                        onClick={() => toggleListening("name", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    </div>
                   </div>
+                  {listeningField === "name" && (
+                    <VoiceListeningBadge isArabic={isArabic} />
+                  )}
                   <FormFieldError error={errors.name} />
                 </div>
 
@@ -375,25 +403,42 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        } ${errors.phone
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                      } ${
+                        listeningField === "phone"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.phone
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                        }`}
+                      }`}
                     />
                     <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${errors.phone
+                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        isArabic ? "right-4" : "left-4"
+                      } ${
+                        errors.phone
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.phone
-                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
-                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
-                        }`}
+                          : formData.phone || listeningField === "phone"
+                          ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                          : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                      }`}
                     >
                       {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                     </label>
-                    <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                      <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      <VoiceMicButton
+                        isListening={listeningField === "phone"}
+                        onClick={() => toggleListening("phone", "phone")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    </div>
                   </div>
+                  {listeningField === "phone" && (
+                    <VoiceListeningBadge isArabic={isArabic} />
+                  )}
                   <FormFieldError error={errors.phone} />
                 </div>
 
@@ -408,25 +453,42 @@ export default function WelcomeOfferModal({
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                        } ${errors.email
+                      className={`peer h-10 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                        isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                      } ${
+                        listeningField === "email"
+                          ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                          : errors.email
                           ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                           : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                        }`}
+                      }`}
                     />
                     <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-4" : "left-4"
-                        } ${errors.email
+                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                        isArabic ? "right-4" : "left-4"
+                      } ${
+                        errors.email
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.email
-                            ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
-                            : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
-                        }`}
+                          : formData.email || listeningField === "email"
+                          ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
+                          : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                      }`}
                     >
                       {isArabic ? "البريد الإلكتروني" : "Email"} <span className="text-red-500">*</span>
                     </label>
-                    <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} />
+                    <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                      <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                      <VoiceMicButton
+                        isListening={listeningField === "email"}
+                        onClick={() => toggleListening("email", "email")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    </div>
                   </div>
+                  {listeningField === "email" && (
+                    <VoiceListeningBadge isArabic={isArabic} />
+                  )}
                   <FormFieldError error={errors.email} />
                 </div>
 

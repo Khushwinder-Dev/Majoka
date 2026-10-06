@@ -18,6 +18,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText } from "@/components/ui/InputValidationTick";
+import { useVoiceInput, VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 interface QuoteFaqItem {
   id: number;
@@ -106,6 +107,22 @@ export default function GetAQuoteContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { listeningField, toggleListening } = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      setFormData((prev) => {
+        let finalText = text;
+        if (fieldName === "projectDetails" && prev.projectDetails.trim()) {
+          finalText = `${prev.projectDetails.trim()} ${text}`;
+        }
+        return { ...prev, [fieldName]: finalText };
+      });
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
+  });
 
   const ALLOWED_EXTS = [
     ".pdf", ".jpg", ".jpeg", ".png", ".webp",
@@ -527,151 +544,198 @@ export default function GetAQuoteContent() {
 
                   {/* Row 1: Full Name & Phone Number */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Full Name */}
-                    <div>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleInputChange}
-                          placeholder=" "
-                          dir={isArabic ? "rtl" : "ltr"}
-                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                          } ${
-                            errors.fullName
-                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
-                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                          }`}
-                        />
-                        <label
-                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
-                            isArabic ? "right-5" : "left-5"
-                          } ${
-                            errors.fullName
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                              : formData.fullName
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
-                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
-                          }`}
-                        >
-                          {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
-                        </label>
-                        <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} />
+                      {/* Full Name */}
+                      <div>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            name="fullName"
+                            value={formData.fullName}
+                            onChange={handleInputChange}
+                            placeholder=" "
+                            dir={isArabic ? "rtl" : "ltr"}
+                            className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                              isArabic ? "pl-20 text-right" : "pr-20 text-left"
+                            } ${
+                              listeningField === "fullName"
+                                ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                                : errors.fullName
+                                ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                                : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                            }`}
+                          />
+                          <label
+                            className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                              isArabic ? "right-5" : "left-5"
+                            } ${
+                              errors.fullName
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                                : formData.fullName || listeningField === "fullName"
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                                : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                            }`}
+                          >
+                            {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
+                          </label>
+                          <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                            <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                            <VoiceMicButton
+                              isListening={listeningField === "fullName"}
+                              onClick={() => toggleListening("fullName", "text")}
+                              isArabic={isArabic}
+                            />
+                          </div>
+                        </div>
+                        {listeningField === "fullName" && (
+                          <VoiceListeningBadge isArabic={isArabic} />
+                        )}
+                        {errors.fullName && !listeningField && (
+                          <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                            {errors.fullName}
+                          </p>
+                        )}
                       </div>
-                      {errors.fullName && (
-                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
-                          {errors.fullName}
-                        </p>
-                      )}
-                    </div>
 
-                    {/* Phone Number */}
-                    <div>
-                      <div className="relative">
-                        <input
-                          type="tel"
-                          name="phoneNumber"
-                          value={formData.phoneNumber}
-                          onChange={handleInputChange}
-                          placeholder=" "
-                          dir={isArabic ? "rtl" : "ltr"}
-                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                          } ${
-                            errors.phoneNumber
-                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
-                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
-                          }`}
-                        />
-                        <label
-                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
-                            isArabic ? "right-5" : "left-5"
-                          } ${
-                            errors.phoneNumber
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                              : formData.phoneNumber
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
-                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
-                          }`}
-                        >
-                          {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
-                        </label>
-                        <InputValidationTick isValid={isValidPhone(formData.phoneNumber) && !errors.phoneNumber} isArabic={isArabic} />
+                      {/* Phone Number */}
+                      <div>
+                        <div className="relative">
+                          <input
+                            type="tel"
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
+                            onChange={handleInputChange}
+                            placeholder=" "
+                            dir={isArabic ? "rtl" : "ltr"}
+                            className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                              isArabic ? "pl-20 text-right" : "pr-20 text-left"
+                            } ${
+                              listeningField === "phoneNumber"
+                                ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                                : errors.phoneNumber
+                                ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                                : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                            }`}
+                          />
+                          <label
+                            className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                              isArabic ? "right-5" : "left-5"
+                            } ${
+                              errors.phoneNumber
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                                : formData.phoneNumber || listeningField === "phoneNumber"
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                                : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                            }`}
+                          >
+                            {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
+                          </label>
+                          <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                            <InputValidationTick isValid={isValidPhone(formData.phoneNumber) && !errors.phoneNumber} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                            <VoiceMicButton
+                              isListening={listeningField === "phoneNumber"}
+                              onClick={() => toggleListening("phoneNumber", "phone")}
+                              isArabic={isArabic}
+                            />
+                          </div>
+                        </div>
+                        {listeningField === "phoneNumber" && (
+                          <VoiceListeningBadge isArabic={isArabic} />
+                        )}
+                        {errors.phoneNumber && !listeningField && (
+                          <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                            {errors.phoneNumber}
+                          </p>
+                        )}
                       </div>
-                      {errors.phoneNumber && (
-                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
-                          {errors.phoneNumber}
-                        </p>
-                      )}
-                    </div>
                   </div>
 
                   {/* Row 2: Email Address & Company Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Email Address */}
-                    <div>
+                      {/* Email Address */}
+                      <div>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            name="emailAddress"
+                            value={formData.emailAddress}
+                            onChange={handleInputChange}
+                            placeholder=" "
+                            dir={isArabic ? "rtl" : "ltr"}
+                            className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
+                              isArabic ? "pl-20 text-right" : "pr-20 text-left"
+                            } ${
+                              listeningField === "emailAddress"
+                                ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                                : errors.emailAddress
+                                ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
+                                : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                            }`}
+                          />
+                          <label
+                            className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                              isArabic ? "right-5" : "left-5"
+                            } ${
+                              errors.emailAddress
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
+                                : formData.emailAddress || listeningField === "emailAddress"
+                                ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
+                                : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                            }`}
+                          >
+                            {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                          </label>
+                          <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                            <InputValidationTick isValid={isValidEmail(formData.emailAddress) && !errors.emailAddress} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                            <VoiceMicButton
+                              isListening={listeningField === "emailAddress"}
+                              onClick={() => toggleListening("emailAddress", "email")}
+                              isArabic={isArabic}
+                            />
+                          </div>
+                        </div>
+                        {listeningField === "emailAddress" && (
+                          <VoiceListeningBadge isArabic={isArabic} />
+                        )}
+                        {errors.emailAddress && !listeningField && (
+                          <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
+                            {errors.emailAddress}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Company Name */}
                       <div className="relative">
                         <input
-                          type="email"
-                          name="emailAddress"
-                          value={formData.emailAddress}
+                          type="text"
+                          name="companyName"
+                          value={formData.companyName}
                           onChange={handleInputChange}
                           placeholder=" "
                           dir={isArabic ? "rtl" : "ltr"}
-                          className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                          className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
+                            isArabic ? "pl-20 text-right" : "pr-20 text-left"
                           } ${
-                            errors.emailAddress
-                              ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
-                              : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                            listeningField === "companyName" ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25" : ""
                           }`}
                         />
                         <label
-                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${
+                          className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
                             isArabic ? "right-5" : "left-5"
-                          } ${
-                            errors.emailAddress
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                              : formData.emailAddress
-                              ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
-                              : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
+                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                            formData.companyName || listeningField === "companyName" ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
                           }`}
                         >
-                          {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
+                          {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                         </label>
-                        <InputValidationTick isValid={isValidEmail(formData.emailAddress) && !errors.emailAddress} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                          <InputValidationTick isValid={isValidText(formData.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "companyName"}
+                            onClick={() => toggleListening("companyName", "text")}
+                            isArabic={isArabic}
+                          />
+                        </div>
                       </div>
-                      {errors.emailAddress && (
-                        <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
-                          {errors.emailAddress}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Company Name */}
-                    <div className="relative">
-                      <input
-                        type="text"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleInputChange}
-                        placeholder=" "
-                        dir={isArabic ? "rtl" : "ltr"}
-                        className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                          isArabic ? "pl-11 text-right" : "pr-11 text-left"
-                        }`}
-                      />
-                      <label
-                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${isArabic ? "right-5" : "left-5"
-                          } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${formData.companyName ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
-                          }`}
-                      >
-                        {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
-                      </label>
-                      <InputValidationTick isValid={isValidText(formData.companyName)} isArabic={isArabic} />
-                    </div>
                   </div>
 
                   {/* Row 3: Project Type & Project Location */}
@@ -705,9 +769,11 @@ export default function GetAQuoteContent() {
                           placeholder=" "
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-11 text-right" : "pr-11 text-left"
+                            isArabic ? "pl-20 text-right" : "pr-20 text-left"
                           } ${
-                            errors.projectLocation
+                            listeningField === "projectLocation"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.projectLocation
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -718,16 +784,26 @@ export default function GetAQuoteContent() {
                           } ${
                             errors.projectLocation
                               ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                              : formData.projectLocation
+                              : formData.projectLocation || listeningField === "projectLocation"
                               ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "موقع المشروع" : "Project Location"} <span className="text-red-500">*</span>
                         </label>
-                        <InputValidationTick isValid={isValidText(formData.projectLocation) && !errors.projectLocation} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
+                          <InputValidationTick isValid={isValidText(formData.projectLocation) && !errors.projectLocation} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "projectLocation"}
+                            onClick={() => toggleListening("projectLocation", "text")}
+                            isArabic={isArabic}
+                          />
+                        </div>
                       </div>
-                      {errors.projectLocation && (
+                      {listeningField === "projectLocation" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
+                      {errors.projectLocation && !listeningField && (
                         <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                           {errors.projectLocation}
                         </p>
@@ -746,9 +822,11 @@ export default function GetAQuoteContent() {
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none placeholder-transparent ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-14 text-right" : "pr-14 text-left"
                         } ${
-                          errors.projectDetails
+                          listeningField === "projectDetails"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.projectDetails
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -759,15 +837,25 @@ export default function GetAQuoteContent() {
                         } ${
                           errors.projectDetails
                             ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                            : formData.projectDetails
+                            : formData.projectDetails || listeningField === "projectDetails"
                             ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-4 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
                       </label>
+                      <div className={`absolute top-4 ${isArabic ? "left-3" : "right-3"} z-10`}>
+                        <VoiceMicButton
+                          isListening={listeningField === "projectDetails"}
+                          onClick={() => toggleListening("projectDetails", "textarea")}
+                          isArabic={isArabic}
+                        />
+                      </div>
                     </div>
-                    {errors.projectDetails && (
+                    {listeningField === "projectDetails" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
+                    {errors.projectDetails && !listeningField && (
                       <p className="text-xs text-red-500 mt-1.5 px-4 font-normal text-start animate-in fade-in duration-150">
                         {errors.projectDetails}
                       </p>

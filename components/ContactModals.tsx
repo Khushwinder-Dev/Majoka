@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import toast from "react-hot-toast";
 import SearchableSelect, { SearchableSelectOption } from "@/components/ui/SearchableSelect";
 import { InputValidationTick, isValidEmail, isValidPhone, isValidText, getFieldError, FormFieldError } from "@/components/ui/InputValidationTick";
+import { useVoiceInput, VoiceMicButton, VoiceListeningBadge } from "@/components/ui/VoiceMicButton";
 
 export type ContactModalType = "expert" | "enquiry" | "callback" | "supplier" | null;
 
@@ -95,6 +96,42 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
     category: "Building Materials",
     website: "",
     enquiry: "",
+  });
+
+  const { listeningField, toggleListening } = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      if (activeModal === "expert") {
+        setExpertForm((prev) => {
+          let val = text;
+          if (fieldName === "requirement" && prev.requirement.trim()) {
+            val = `${prev.requirement.trim()} ${text}`;
+          }
+          return { ...prev, [fieldName]: val };
+        });
+      } else if (activeModal === "enquiry") {
+        setEnquiryForm((prev) => {
+          let val = text;
+          if (fieldName === "enquiry" && prev.enquiry.trim()) {
+            val = `${prev.enquiry.trim()} ${text}`;
+          }
+          return { ...prev, [fieldName]: val };
+        });
+      } else if (activeModal === "callback") {
+        setCallbackForm((prev) => ({ ...prev, [fieldName]: text }));
+      } else if (activeModal === "supplier") {
+        setSupplierForm((prev) => {
+          let val = text;
+          if (fieldName === "enquiry" && prev.enquiry.trim()) {
+            val = `${prev.enquiry.trim()} ${text}`;
+          }
+          return { ...prev, [fieldName]: val };
+        });
+      }
+      if (errors[fieldName]) {
+        setErrors((prev) => ({ ...prev, [fieldName]: "" }));
+      }
+    },
   });
 
   // Reset success state whenever modal type changes or closes
@@ -400,9 +437,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.fullName
+                          listeningField === "fullName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.fullName
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -413,42 +452,70 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.fullName
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : expertForm.fullName
+                            : expertForm.fullName || listeningField === "fullName"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(expertForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(expertForm.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "fullName"}
+                          onClick={() => toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "fullName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={expertForm.companyName}
-                      onChange={(e) => setExpertForm({ ...expertForm, companyName: e.target.value })}
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        expertForm.companyName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
-                    </label>
-                    <InputValidationTick isValid={isValidText(expertForm.companyName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={expertForm.companyName}
+                        onChange={(e) => setExpertForm({ ...expertForm, companyName: e.target.value })}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                        } ${
+                          listeningField === "companyName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-4" : "left-4"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          expertForm.companyName || listeningField === "companyName" ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
+                      </label>
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(expertForm.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "companyName"}
+                          onClick={() => toggleListening("companyName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "companyName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* Phone & Email */}
@@ -467,9 +534,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.phone
+                            listeningField === "phone"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.phone
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -480,15 +549,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.phone
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : expertForm.phone
+                              : expertForm.phone || listeningField === "phone"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                         </label>
-                        <InputValidationTick isValid={isValidPhone(expertForm.phone) && !errors.phone} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidPhone(expertForm.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "phone"}
+                            onClick={() => toggleListening("phone", "phone")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "phone" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.phone} />
                     </div>
 
@@ -506,9 +586,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.email
+                            listeningField === "email"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.email
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -519,15 +601,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.email
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : expertForm.email
+                              : expertForm.email || listeningField === "email"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "البريد الإلكتروني" : "Email Address"}
                         </label>
-                        <InputValidationTick isValid={isValidEmail(expertForm.email) && !errors.email} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidEmail(expertForm.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "email"}
+                            onClick={() => toggleListening("email", "email")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "email" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.email} />
                     </div>
                   </div>
@@ -556,28 +649,45 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                   </div>
 
                   {/* Requirement Textarea */}
-                  <div className="relative">
-                    <textarea
-                      rows={3}
-                      name="requirement"
-                      value={expertForm.requirement}
-                      onChange={(e) => setExpertForm({ ...expertForm, requirement: e.target.value })}
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer w-full bg-white border border-stone-300 rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent resize-none ${
-                        isArabic ? "text-right" : "text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        expertForm.requirement ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "أخبرنا عن متطلباتك" : "Tell Us About Your Requirement"}
-                    </label>
+                  <div>
+                    <div className="relative">
+                      <textarea
+                        rows={3}
+                        name="requirement"
+                        value={expertForm.requirement}
+                        onChange={(e) => setExpertForm({ ...expertForm, requirement: e.target.value })}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer w-full bg-white border border-stone-300 rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
+                          isArabic ? "pl-12 text-right" : "pr-12 text-left"
+                        } ${
+                          listeningField === "requirement"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-4" : "left-4"
+                        } peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          expertForm.requirement || listeningField === "requirement" ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "أخبرنا عن متطلباتك" : "Tell Us About Your Requirement"}
+                      </label>
+                      <div className={`absolute top-3 ${isArabic ? "left-2.5" : "right-2.5"} z-10`}>
+                        <VoiceMicButton
+                          isListening={listeningField === "requirement"}
+                          onClick={() => toggleListening("requirement", "textarea")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "requirement" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* Submit Button */}
@@ -643,9 +753,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.fullName
+                          listeningField === "fullName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.fullName
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -656,42 +768,70 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.fullName
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : enquiryForm.fullName
+                            : enquiryForm.fullName || listeningField === "fullName"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(enquiryForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(enquiryForm.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "fullName"}
+                          onClick={() => toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "fullName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={enquiryForm.companyName}
-                      onChange={(e) => setEnquiryForm({ ...enquiryForm, companyName: e.target.value })}
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        enquiryForm.companyName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
-                    </label>
-                    <InputValidationTick isValid={isValidText(enquiryForm.companyName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={enquiryForm.companyName}
+                        onChange={(e) => setEnquiryForm({ ...enquiryForm, companyName: e.target.value })}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                        } ${
+                          listeningField === "companyName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-4" : "left-4"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          enquiryForm.companyName || listeningField === "companyName" ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
+                      </label>
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(enquiryForm.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "companyName"}
+                          onClick={() => toggleListening("companyName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "companyName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* Phone & Email */}
@@ -710,9 +850,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.phone
+                            listeningField === "phone"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.phone
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -723,15 +865,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.phone
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : enquiryForm.phone
+                              : enquiryForm.phone || listeningField === "phone"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "رقم الهاتف" : "Phone"} <span className="text-red-500">*</span>
                         </label>
-                        <InputValidationTick isValid={isValidPhone(enquiryForm.phone) && !errors.phone} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidPhone(enquiryForm.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "phone"}
+                            onClick={() => toggleListening("phone", "phone")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "phone" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.phone} />
                     </div>
 
@@ -749,9 +902,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.email
+                            listeningField === "email"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.email
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -762,15 +917,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.email
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : enquiryForm.email
+                              : enquiryForm.email || listeningField === "email"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "البريد الإلكتروني" : "Email Address"}
                         </label>
-                        <InputValidationTick isValid={isValidEmail(enquiryForm.email) && !errors.email} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidEmail(enquiryForm.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "email"}
+                            onClick={() => toggleListening("email", "email")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "email" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.email} />
                     </div>
                   </div>
@@ -790,9 +956,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.subject
+                          listeningField === "subject"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.subject
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -803,15 +971,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.subject
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : enquiryForm.subject
+                            : enquiryForm.subject || listeningField === "subject"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "الموضوع" : "Subject"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(enquiryForm.subject) && !errors.subject} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(enquiryForm.subject) && !errors.subject} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "subject"}
+                          onClick={() => toggleListening("subject", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "subject" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.subject} />
                   </div>
 
@@ -830,9 +1009,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-12 text-right" : "pr-12 text-left"
                         } ${
-                          errors.enquiry
+                          listeningField === "enquiry"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.enquiry
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -843,14 +1024,25 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.enquiry
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : enquiryForm.enquiry
+                            : enquiryForm.enquiry || listeningField === "enquiry"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-3.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "استفسارك بالتفصيل" : "Your Enquiry"} <span className="text-red-500">*</span>
                       </label>
+                      <div className={`absolute top-3 ${isArabic ? "left-2.5" : "right-2.5"} z-10`}>
+                        <VoiceMicButton
+                          isListening={listeningField === "enquiry"}
+                          onClick={() => toggleListening("enquiry", "textarea")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "enquiry" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.enquiry} />
                   </div>
 
@@ -917,9 +1109,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.fullName
+                          listeningField === "fullName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.fullName
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -930,42 +1124,70 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.fullName
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : callbackForm.fullName
+                            : callbackForm.fullName || listeningField === "fullName"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(callbackForm.fullName) && !errors.fullName} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(callbackForm.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "fullName"}
+                          onClick={() => toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "fullName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.fullName} />
                   </div>
 
                   {/* Company Name */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="companyName"
-                      value={callbackForm.companyName}
-                      onChange={(e) => setCallbackForm({ ...callbackForm, companyName: e.target.value })}
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        callbackForm.companyName ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
-                    </label>
-                    <InputValidationTick isValid={isValidText(callbackForm.companyName)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="companyName"
+                        value={callbackForm.companyName}
+                        onChange={(e) => setCallbackForm({ ...callbackForm, companyName: e.target.value })}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                        } ${
+                          listeningField === "companyName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-4" : "left-4"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          callbackForm.companyName || listeningField === "companyName" ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
+                      </label>
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(callbackForm.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "companyName"}
+                          onClick={() => toggleListening("companyName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "companyName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* Phone */}
@@ -983,9 +1205,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.phone
+                          listeningField === "phone"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.phone
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -996,15 +1220,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.phone
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : callbackForm.phone
+                            : callbackForm.phone || listeningField === "phone"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidPhone(callbackForm.phone) && !errors.phone} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidPhone(callbackForm.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "phone"}
+                          onClick={() => toggleListening("phone", "phone")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "phone" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.phone} />
                   </div>
 
@@ -1117,9 +1352,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.companyName
+                          listeningField === "companyName"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.companyName
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -1130,15 +1367,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.companyName
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : supplierForm.companyName
+                            : supplierForm.companyName || listeningField === "companyName"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "اسم الشركة" : "Company Name"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(supplierForm.companyName) && !errors.companyName} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(supplierForm.companyName) && !errors.companyName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "companyName"}
+                          onClick={() => toggleListening("companyName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "companyName" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.companyName} />
                   </div>
 
@@ -1157,9 +1405,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                          isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
                         } ${
-                          errors.contactPerson
+                          listeningField === "contactPerson"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.contactPerson
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -1170,15 +1420,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.contactPerson
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                            : supplierForm.contactPerson
+                            : supplierForm.contactPerson || listeningField === "contactPerson"
                             ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "اسم الشخص المسؤول" : "Contact Person"} <span className="text-red-500">*</span>
                       </label>
-                      <InputValidationTick isValid={isValidText(supplierForm.contactPerson) && !errors.contactPerson} isArabic={isArabic} />
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(supplierForm.contactPerson) && !errors.contactPerson} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "contactPerson"}
+                          onClick={() => toggleListening("contactPerson", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "contactPerson" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.contactPerson} />
                   </div>
 
@@ -1198,9 +1459,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.phone
+                            listeningField === "phone"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.phone
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -1211,15 +1474,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.phone
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : supplierForm.phone
+                              : supplierForm.phone || listeningField === "phone"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                         </label>
-                        <InputValidationTick isValid={isValidPhone(supplierForm.phone) && !errors.phone} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidPhone(supplierForm.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "phone"}
+                            onClick={() => toggleListening("phone", "phone")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "phone" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.phone} />
                     </div>
 
@@ -1237,9 +1511,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           disabled={isSubmitting}
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer h-10 sm:h-10.5 w-full bg-white border rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
-                            isArabic ? "pl-9 text-right" : "pr-9 text-left"
+                            isArabic ? "pl-16 text-right" : "pr-16 text-left"
                           } ${
-                            errors.email
+                            listeningField === "email"
+                              ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                              : errors.email
                               ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                               : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                           }`}
@@ -1250,15 +1526,26 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                           } ${
                             errors.email
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-red-500"
-                              : supplierForm.email
+                              : supplierForm.email || listeningField === "email"
                               ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
                         >
                           {isArabic ? "البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                         </label>
-                        <InputValidationTick isValid={isValidEmail(supplierForm.email) && !errors.email} isArabic={isArabic} />
+                        <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                          <InputValidationTick isValid={isValidEmail(supplierForm.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                          <VoiceMicButton
+                            isListening={listeningField === "email"}
+                            onClick={() => toggleListening("email", "email")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
                       </div>
+                      {listeningField === "email" && (
+                        <VoiceListeningBadge isArabic={isArabic} />
+                      )}
                       <FormFieldError error={errors.email} />
                     </div>
                   </div>
@@ -1287,29 +1574,46 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                   </div>
 
                   {/* Website */}
-                  <div className="relative">
-                    <input
-                      type="text"
-                      name="website"
-                      value={supplierForm.website}
-                      onChange={(e) => setSupplierForm({ ...supplierForm, website: e.target.value })}
-                      placeholder=" "
-                      disabled={isSubmitting}
-                      dir={isArabic ? "rtl" : "ltr"}
-                      className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
-                        isArabic ? "pl-9 text-right" : "pr-9 text-left"
-                      }`}
-                    />
-                    <label
-                      className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
-                        isArabic ? "right-4" : "left-4"
-                      } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                        supplierForm.website ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
-                      }`}
-                    >
-                      {isArabic ? "موقع الشركة الإلكتروني (اختياري)" : "Company Website (Optional)"}
-                    </label>
-                    <InputValidationTick isValid={isValidText(supplierForm.website, 3)} isArabic={isArabic} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="website"
+                        value={supplierForm.website}
+                        onChange={(e) => setSupplierForm({ ...supplierForm, website: e.target.value })}
+                        placeholder=" "
+                        disabled={isSubmitting}
+                        dir={isArabic ? "rtl" : "ltr"}
+                        className={`peer h-10 sm:h-10.5 w-full bg-white border border-stone-300 rounded-full px-4 pt-3 pb-0.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent ${
+                          isArabic ? "pl-16 text-right" : "pr-16 text-left"
+                        } ${
+                          listeningField === "website"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : "focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
+                        }`}
+                      />
+                      <label
+                        className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
+                          isArabic ? "right-4" : "left-4"
+                        } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
+                          supplierForm.website || listeningField === "website" ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                        }`}
+                      >
+                        {isArabic ? "موقع الشركة الإلكتروني (اختياري)" : "Company Website (Optional)"}
+                      </label>
+                      <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
+                        <InputValidationTick isValid={isValidText(supplierForm.website, 3)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
+                        <VoiceMicButton
+                          isListening={listeningField === "website"}
+                          onClick={() => toggleListening("website", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
+                    </div>
+                    {listeningField === "website" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                   </div>
 
                   {/* Enquiry Details Textarea */}
@@ -1327,9 +1631,11 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         disabled={isSubmitting}
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-2xl px-4 pt-4 pb-2.5 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
-                          isArabic ? "text-right" : "text-left"
+                          isArabic ? "pl-12 text-right" : "pr-12 text-left"
                         } ${
-                          errors.enquiry
+                          listeningField === "enquiry"
+                            ? "border-[#01a9a0] ring-2 ring-[#01a9a0]/25"
+                            : errors.enquiry
                             ? "border-red-500 ring-2 ring-red-500/15 focus:border-red-500 focus:ring-red-500/20"
                             : "border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
@@ -1340,14 +1646,25 @@ export default function ContactModals({ activeModal, onClose }: ContactModalsPro
                         } ${
                           errors.enquiry
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : supplierForm.enquiry
+                            : supplierForm.enquiry || listeningField === "enquiry"
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-3.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
                       >
                         {isArabic ? "تفاصيل استفسارك ومواد التوريد" : "Your Enquiry & Supply Details"} <span className="text-red-500">*</span>
                       </label>
+                      <div className={`absolute top-3 ${isArabic ? "left-2.5" : "right-2.5"} z-10`}>
+                        <VoiceMicButton
+                          isListening={listeningField === "enquiry"}
+                          onClick={() => toggleListening("enquiry", "textarea")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      </div>
                     </div>
+                    {listeningField === "enquiry" && (
+                      <VoiceListeningBadge isArabic={isArabic} />
+                    )}
                     <FormFieldError error={errors.enquiry} />
                   </div>
 

@@ -18,6 +18,8 @@ import {
   HelpCircle,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ResourceItem {
   id: number;
@@ -145,8 +147,16 @@ const resourceCategories = [
 ];
 
 export default function ResourcesPage() {
+  const { isArabic } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("All Resources");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setSearchQuery(text);
+    },
+  });
 
   const filteredResources = useMemo(() => {
     return resourcesData.filter((item) => {
@@ -244,15 +254,23 @@ export default function ResourcesPage() {
         <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200 mb-10">
           <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center">
             {/* Search Box */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <div className="relative flex-1 max-w-md flex items-center">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search resources, topics, standards..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-5 py-2.5 rounded-full border border-gray-200 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none text-sm transition-all"
+                className="w-full pl-11 pr-12 py-2.5 rounded-full border border-gray-200 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none text-sm transition-all"
               />
+              <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
+                <VoiceMicButton
+                  isListening={voice.listeningField === "resourcesSearch"}
+                  onClick={() => voice.toggleListening("resourcesSearch", "text")}
+                  isArabic={isArabic}
+                  size="sm"
+                />
+              </div>
             </div>
 
             {/* Results Count */}

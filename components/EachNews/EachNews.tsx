@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Related from "./Related";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NewsArticleData {
   id: number;
@@ -16,6 +20,15 @@ interface EachNewsProps {
 }
 
 const EachNews: React.FC<EachNewsProps> = ({ article }) => {
+  const { isArabic } = useLanguage();
+  const [email, setEmail] = useState("");
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (_fieldName, text) => {
+      setEmail(text);
+    },
+  });
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -80,12 +93,22 @@ const EachNews: React.FC<EachNewsProps> = ({ article }) => {
 
               {/* Email Subscription Form */}
               <div className="space-y-4">
-                <div className="relative">
+                <div className="relative flex items-center">
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-red-900 focus:border-transparent transition-all"
+                    className="w-full px-4 pr-12 py-3 bg-white border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-red-900 focus:border-transparent transition-all"
                   />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    <VoiceMicButton
+                      isListening={voice.listeningField === "newsletterEmail"}
+                      onClick={() => voice.toggleListening("newsletterEmail", "email")}
+                      isArabic={isArabic}
+                      size="sm"
+                    />
+                  </div>
                 </div>
 
                 <button className="w-full bg-red-900 hover:bg-red-800 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300 cursor-pointer">
