@@ -118,6 +118,14 @@ const SHEETS_CONFIG = {
 };
 
 /**
+ * Helper to return formatted JSON responses
+ */
+function respondJson(obj, statusCode) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
  * Handle POST request from Next.js website webhook
  */
 function doPost(e) {
@@ -164,24 +172,31 @@ function doPost(e) {
     sheet.appendRow(rowValues);
 
     // Format new row
-    var lastRow = sheet.getLastRow();
-    var numCols = SHEETS_CONFIG[targetSheetName].headers.length;
-    var rowRange = sheet.getRange(lastRow, 1, 1, numCols);
-    rowRange.setVerticalAlignment("middle");
-    rowRange.setFontSize(10);
+    try {
+      var lastRow = sheet.getLastRow();
+      var numCols = SHEETS_CONFIG[targetSheetName].headers.length;
+      var rowRange = sheet.getRange(lastRow, 1, 1, numCols);
+      rowRange.setVerticalAlignment("middle");
+      rowRange.setFontSize(10);
+    } catch (fmtErr) {}
 
     // Auto-adjust column widths
     try {
-      for (var col = 1; col <= numCols; col++) {
+      var colsToResize = SHEETS_CONFIG[targetSheetName].headers.length;
+      for (var col = 1; col <= colsToResize; col++) {
         sheet.autoResizeColumn(col);
       }
     } catch (resizeErr) {}
 
-    // Send email notification to owner
+    // Send email notification to owner (khushwinder.dev@gmail.com)
+    var emailSent = false;
+    var emailError = null;
     try {
       sendAppsScriptNotification(targetSheetName, data, timestamp);
+      emailSent = true;
     } catch (mailErr) {
-      console.warn("Apps Script notification skipped: " + mailErr.message);
+      emailError = mailErr.message || String(mailErr);
+      Logger.log("Email send warning: " + emailError);
     }
 
     return respondJson({
@@ -189,6 +204,8 @@ function doPost(e) {
       message: "Row added to " + targetSheetName,
       sheet: targetSheetName,
       timestamp: timestamp,
+      emailSent: emailSent,
+      emailError: emailError,
       row: rowValues
     }, 200);
 
@@ -488,6 +505,24 @@ function sendAppsScriptNotification(sheetName, data, timestamp) {
     body: plainLines.join("\n"),
     htmlBody: htmlContent
   });
+}
+
+/**
+ * ═══════════════════════════════════════════════════════════════════════
+ * TEST & AUTHORIZE FUNCTION
+ * Click "Run" on this function in Apps Script to grant MailApp permissions
+ * and verify instant email delivery to khushwinder.dev@gmail.com!
+ * ═══════════════════════════════════════════════════════════════════════
+ */
+function testSendEmailNotification() {
+  Logger.log("Testing email delivery to: " + OWNER_EMAIL);
+  MailApp.sendEmail({
+    to: OWNER_EMAIL,
+    subject: "✅ Verified: Taj Al Rahmah Lead Notification System",
+    htmlBody: "<div style='font-family: Arial, sans-serif; padding: 25px; background: #f0fdfa; border: 1px solid #ccfbf1; border-left: 6px solid #009e90; border-radius: 8px;'><h2 style='color:#0f766e; margin-top:0;'>Email Notification System Authorized!</h2><p style='color:#334155; font-size:14px;'>This email confirms that Google Apps Script is fully authorized and working. Any new lead submitted on the website will now be delivered to <strong>" + OWNER_EMAIL + "</strong> and saved in <strong>TajAlRahmah_Forms_Database</strong>.</p><p style='color:#64748b; font-size:12px;'>Timestamp: " + new Date().toLocaleString() + "</p></div>",
+    body: "Email notification system is active and verified for " + OWNER_EMAIL
+  });
+  Logger.log("Test email successfully sent to " + OWNER_EMAIL);
 }
 
 /**
