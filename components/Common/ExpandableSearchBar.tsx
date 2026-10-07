@@ -972,19 +972,13 @@ export default function ExpandableSearchBar({
                     <Camera className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 leading-tight">
-                        {isAr ? "البحث بالصورة بالذكاء الاصطناعي" : "AI Defect & Solution Photo Search"}
-                      </h3>
-                      <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-full bg-teal-50 text-[#01a9a0] border border-[#01a9a0]/20 flex items-center gap-1 uppercase tracking-wider">
-                        <Sparkles className="w-2.5 h-2.5 text-amber-500 fill-amber-500" />
-                        Gemini Vision
-                      </span>
-                    </div>
+                    <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 leading-tight">
+                      {isAr ? "البحث بالصورة" : "Image Search"}
+                    </h3>
                     <p className="text-[11px] text-slate-500 mt-0.5">
                       {isAr
-                        ? "ارفع صورة لمعالجة التسربات، التشققات، أو عزل الأسطح"
-                        : "Upload a defect photo to identify solutions & verified specs"}
+                        ? "ارفع صورة للبحث عن الخدمات والحلول المناسبة"
+                        : "Upload a photo to find matching services & solutions"}
                     </p>
                   </div>
                 </div>
@@ -1077,7 +1071,7 @@ export default function ExpandableSearchBar({
                     <div className="flex items-center gap-2 text-[#01a9a0] font-bold text-xs sm:text-sm">
                       <Loader2 className="w-4 h-4 animate-spin" />
                       <span>
-                        {isAr ? "جارٍ تحليل الصورة بالذكاء الاصطناعي ومطابقة المواصفات..." : "Analyzing photo with Gemini Vision AI..."}
+                        {isAr ? "جارٍ تحليل الصورة ومطابقة المواصفات..." : "Analyzing photo & matching specifications..."}
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-500 max-w-xs">
@@ -1132,8 +1126,8 @@ export default function ExpandableSearchBar({
                               <CheckCircle2 className="w-2.5 h-2.5" />
                               {isAr ? "مطابقة معتمدة" : "High Match"}
                             </span>
-                            <span className="text-[9.5px] text-slate-400 font-mono">
-                              {imageSearchData.aiSource === "gemini" ? "⚡ Gemini" : "✓ Verified Index"}
+                            <span className="text-[9.5px] text-slate-400 font-medium">
+                              {isAr ? "✓ فحص معتمد" : "✓ Verified Match"}
                             </span>
                           </div>
                           <h4 className="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug truncate">
