@@ -49,112 +49,36 @@ export interface ChatUserInfo {
 const STORAGE_KEY = "taj_chat_history_v1";
 const USER_INFO_KEY = "taj_chat_user_info_v1";
 
-// AI Knowledge Engine for Taj Al Rahmah
-function getAiResponse(userText: string, isArabic: boolean, userName?: string): { reply: string; quickActions: string[] } {
-  const lower = userText.toLowerCase();
-  const nameGreeting = userName ? (isArabic ? `عزيزي ${userName}، ` : `Dear ${userName}, `) : "";
+// Formats bolding, bullet points, and paragraphs cleanly
+function renderMessageContent(text: string) {
+  const lines = text.split("\n");
+  return lines.map((line, idx) => {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      return <span key={idx} className="block h-1.5" />;
+    }
 
-  if (
-    lower.includes("quote") ||
-    lower.includes("price") ||
-    lower.includes("cost") ||
-    lower.includes("inspection") ||
-    lower.includes("سعر") ||
-    lower.includes("عرض") ||
-    lower.includes("معاينة")
-  ) {
-    return {
-      reply: isArabic
-        ? `${nameGreeting}يسعدنا تقديم عرض سعر ومعاينة مجانية لمشروعك! فريقنا الهندسي متاح لزيارة موقعك في دبي والإمارات وإعداد تقرير فني شامل وضمان رسمي. يمكنك طلب عرض السعر مباشرة أو الاتصال بنا الآن.`
-        : `${nameGreeting}we would be glad to provide a free inspection and quotation for your project! Our engineering team conducts on-site surveys across Dubai and the UAE with detailed technical reports and official warranties. You can submit a request on our Quote page or call us directly.`,
-      quickActions: isArabic
-        ? ["احصل على عرض سعر فوري", "اتصل بمهندس الموقع", "ما هي أنظمة العزل المتوفرة؟"]
-        : ["Request Free Inspection", "Call an Engineer Directly", "What waterproofing systems do you offer?"],
-    };
-  }
+    const isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
 
-  if (
-    lower.includes("waterproof") ||
-    lower.includes("grp") ||
-    lower.includes("fiberglass") ||
-    lower.includes("roof") ||
-    lower.includes("leak") ||
-    lower.includes("عزل") ||
-    lower.includes("سطح") ||
-    lower.includes("تسريب")
-  ) {
-    return {
-      reply: isArabic
-        ? `${nameGreeting}تاج الرحمة متخصصة في حلول العزل المتطورة المعتمدة في الإمارات:\n• نظام الكومبو المتكامل للأسطح (Combo Roof System)\n• عزل GRP والألياف الزجاجية المقاومة للحرارة والكيماويات\n• عزل البولي يوريا فائق السرعة والمتانة\n• عزل الأغشية البيتومينية وحقن الشروخ المائية للسراديب\nجميع أعمالنا تأتي مع ضمان رسمي يصل حتى 25 عاماً.`
-        : `${nameGreeting}Taj Al Rahmah specializes in advanced waterproofing certified by UAE authorities:\n• Combo Roof System (Thermal insulation & complete waterproofing)\n• GRP & Fiberglass for water tanks, roofs, and wet areas\n• Fast-curing Polyurea coatings\n• Bitumen Membrane & High-pressure Injection for basements & cracks\nAll our waterproofing systems come with up to 25 years official warranty.`,
-      quickActions: isArabic
-        ? ["كم تبلغ مدة الضمان؟", "طلب معاينة للأسطح", "تواصل عبر واتساب"]
-        : ["What is your warranty period?", "Book a Roof Inspection", "Chat on WhatsApp"],
-    };
-  }
-
-  if (
-    lower.includes("warranty") ||
-    lower.includes("guarantee") ||
-    lower.includes("ضمان") ||
-    lower.includes("كفالة")
-  ) {
-    return {
-      reply: isArabic
-        ? `${nameGreeting}نوفر ضمانات رسمية معتمدة من بلدية دبي تتراوح بين 10 إلى 25 عاماً حسب نوع نظام العزل المستخدم (مثل نظام الكومبو وعزل GRP). الضمان يشمل صيانة دورية ومتابعة هندسية لضمان راحة بالك التامة.`
-        : `${nameGreeting}we provide official warranties certified by Dubai Municipality ranging from 10 to 25 years depending on the chosen system (such as Combo Roofing and GRP Fiberglass). Our warranty includes periodic inspections and complete engineering support.`,
-      quickActions: isArabic
-        ? ["كيف أحصل على شهادة الضمان؟", "احصل على عرض سعر", "اتصل بنا الآن"]
-        : ["How do I receive warranty certificate?", "Get a Quotation", "Call Us Now"],
-    };
-  }
-
-  if (
-    lower.includes("contact") ||
-    lower.includes("phone") ||
-    lower.includes("call") ||
-    lower.includes("location") ||
-    lower.includes("address") ||
-    lower.includes("اتصال") ||
-    lower.includes("هاتف") ||
-    lower.includes("موقع") ||
-    lower.includes("عنوان")
-  ) {
-    return {
-      reply: isArabic
-        ? `${nameGreeting}يمكنك التواصل معنا مباشرة:\n📞 هاتف: +971 52 749 2002 / +971 4 234 5678\n📧 بريد: info@tajalrahmah.com\n📍 الموقع: مكتب G-01-691، الخبيصي، دبي، الإمارات\n⏰ مواعيد العمل: من الإثنين إلى السبت (9:00 ص - 6:00 م).`
-        : `${nameGreeting}you can reach us directly:\n📞 Phone: +971 52 749 2002 / +971 4 234 5678\n📧 Email: info@tajalrahmah.com\n📍 Office: G-01-691, Al Khabaisi, Dubai, UAE\n⏰ Working Hours: Monday - Saturday (9:00 AM - 6:00 PM).`,
-      quickActions: isArabic
-        ? ["اتصل الآن", "تحدث عبر واتساب", "عرض خريطة الموقع"]
-        : ["Call Now", "Chat on WhatsApp", "View Location on Map"],
-    };
-  }
-
-  if (
-    lower.includes("epoxy") ||
-    lower.includes("floor") ||
-    lower.includes("إيبوكسي") ||
-    lower.includes("ارضيات")
-  ) {
-    return {
-      reply: isArabic
-        ? `${nameGreeting}نقدم حلول طلاء أرضيات الإيبوكسي عالية التحمل للمستودعات، مواقف السيارات، المستشفيات، والمصانع، بمقاومة فائقة للمواد الكيميائية وحركة الآليات الثقيلة، مع خيارات مقاومة للانزلاق وتشطيبات جمالية متعددة.`
-        : `${nameGreeting}we offer heavy-duty epoxy floor coating solutions for industrial warehouses, commercial car parks, healthcare facilities, and factories. Designed for superior chemical resistance, mechanical durability, and seamless aesthetic finishes.`,
-      quickActions: isArabic
-        ? ["احصل على استشارة للأرضيات", "اتصل بالدعم الفني", "طلب عرض سعر"]
-        : ["Consult Flooring Specialist", "Call Technical Support", "Get a Quote"],
-    };
-  }
-
-  // Default welcome response
-  return {
-    reply: isArabic
-      ? `أهلاً بك${userName ? ` يا ${userName}` : ""}! أنا المساعد الذكي لشركة تاج الرحمة للعزل وصيانة المباني. كيف يمكنني مساعدتك اليوم؟ يمكنني تزويدك بمعلومات عن خدمات العزل، الضمانات، أو تنسيق زيارة ومعاينة مجانية لمشروعك.`
-      : `Hello${userName ? ` ${userName}` : ""}! I am Taj Al Rahmah's AI assistant for waterproofing and building maintenance. How can I assist you today? I can help with waterproofing solutions, 10–25 year warranties, pricing, or scheduling a free site inspection.`,
-    quickActions: isArabic
-      ? ["احصل على عرض سعر ومعاينة", "ما هي خدمات العزل لديكم؟", "اتصل بنا مباشرة"]
-      : ["Get a Free Inspection & Quote", "What waterproofing services do you offer?", "Call Us Directly"],
-  };
+    return (
+      <span
+        key={idx}
+        className={`block ${isBullet ? "pl-2 rtl:pl-0 rtl:pr-2 my-0.5" : "my-0.5"}`}
+      >
+        {parts.map((part, pIdx) => {
+          if (part.startsWith("**") && part.endsWith("**")) {
+            return (
+              <strong key={pIdx} className="font-semibold text-stone-900">
+                {part.slice(2, -2)}
+              </strong>
+            );
+          }
+          return part;
+        })}
+      </span>
+    );
+  });
 }
 
 export default function FloatingChatWidget() {
@@ -347,8 +271,37 @@ export default function FloatingChatWidget() {
     }
   };
 
+  // Handle Quick Action clicks
+  const handleActionClick = (action: string) => {
+    const actionLower = action.toLowerCase();
+
+    // Direct WhatsApp
+    if (actionLower.includes("whatsapp") || action.includes("واتساب")) {
+      const waText = encodeURIComponent(
+        isArabic
+          ? `مرحباً تاج الرحمة، أود الاستفسار بخصوص: ${action}`
+          : `Hello Taj Al Rahmah, I would like to inquire about: ${action}`
+      );
+      window.open(`https://wa.me/971527492002?text=${waText}`, "_blank");
+      return;
+    }
+
+    // Direct Phone Call
+    if (
+      actionLower.includes("call") ||
+      action.includes("اتصل") ||
+      action.includes("+971")
+    ) {
+      window.location.href = "tel:+971527492002";
+      return;
+    }
+
+    // Normal chat message
+    handleSend(action);
+  };
+
   // Send message
-  const handleSend = (textToSend?: string) => {
+  const handleSend = async (textToSend?: string) => {
     // If user info is not provided, trigger info form first
     if (!userInfo) {
       setShowInfoForm(true);
@@ -365,13 +318,16 @@ export default function FloatingChatWidget() {
       timestamp: getCurrentTime(),
     };
 
-    setMessages((prev) => [...prev, userMsg]);
+    const nextMessages = [...messages, userMsg];
+    setMessages(nextMessages);
     setInputValue("");
     setIsTyping(true);
 
+    const queryLower = query.toLowerCase();
+
     // If query is an action to call
     if (
-      query.toLowerCase().includes("call now") ||
+      queryLower.includes("call now") ||
       query.includes("اتصل الآن") ||
       query.includes("اتصل بنا")
     ) {
@@ -380,19 +336,66 @@ export default function FloatingChatWidget() {
       }, 700);
     }
 
-    // Simulate smart AI response delay
-    setTimeout(() => {
-      const response = getAiResponse(query, isArabic, userInfo?.name);
+    // If query mentions WhatsApp
+    if (queryLower.includes("whatsapp") || query.includes("واتساب")) {
+      setTimeout(() => {
+        const waText = encodeURIComponent(
+          isArabic
+            ? `مرحباً شركة تاج الرحمة، أود الاستفسار عن خدماتكم`
+            : `Hello Taj Al Rahmah, I would like to inquire about your services`
+        );
+        window.open(`https://wa.me/971527492002?text=${waText}`, "_blank");
+      }, 700);
+    }
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: nextMessages.map((m) => ({
+            sender: m.sender,
+            text: m.text,
+          })),
+          userInfo,
+          isArabic,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Chat request failed");
+      }
+
+      const data = await res.json();
       const aiMsg: Message = {
         id: `${Date.now()}-ai`,
         sender: "ai",
-        text: response.reply,
+        text: data.reply || (isArabic ? "يسعدنا الرد على استفسارك، يرجى التواصل معنا هاتفياً أو عبر واتساب." : "We are glad to assist you. Please reach us by phone or WhatsApp."),
         timestamp: getCurrentTime(),
       };
+
       setMessages((prev) => [...prev, aiMsg]);
-      setQuickActions(response.quickActions);
+      if (Array.isArray(data.quickActions) && data.quickActions.length > 0) {
+        setQuickActions(data.quickActions);
+      }
+    } catch {
+      const fallbackAiMsg: Message = {
+        id: `${Date.now()}-ai-fallback`,
+        sender: "ai",
+        text: isArabic
+          ? `شكراً لتواصلك يا ${userInfo.name}. يمكنك دائماً الاتصال بمهندس الموقع مباشرة على الرقم 2002 749 52 971+ أو التواصل عبر واتساب.`
+          : `Thank you for reaching out, ${userInfo.name}. You can reach our engineering team directly at +971 52 749 2002 or on WhatsApp.`,
+        timestamp: getCurrentTime(),
+      };
+      setMessages((prev) => [...prev, fallbackAiMsg]);
+      setQuickActions(
+        isArabic
+          ? ["تواصل عبر واتساب", "اتصل الآن +971 52 749 2002"]
+          : ["Chat on WhatsApp", "Call +971 52 749 2002"]
+      );
+    } finally {
       setIsTyping(false);
-    }, 600);
+    }
   };
 
   // Start a new chat session
@@ -832,8 +835,8 @@ export default function FloatingChatWidget() {
                                     className="w-auto h-auto max-h-5 object-contain"
                                   />
                                 </div>
-                                <div className="bg-stone-50 border border-stone-200/70 text-stone-800 rounded-2xl rounded-tl-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed whitespace-pre-line">
-                                  {msg.text}
+                                <div className="bg-stone-50 border border-stone-200/70 text-stone-800 rounded-2xl rounded-tl-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed">
+                                  {renderMessageContent(msg.text)}
                                 </div>
                               </div>
                             )}
@@ -877,7 +880,7 @@ export default function FloatingChatWidget() {
                                 <button
                                   key={i}
                                   type="button"
-                                  onClick={() => handleSend(action)}
+                                  onClick={() => handleActionClick(action)}
                                   className="text-left rtl:text-right px-3.5 py-2 rounded-xl bg-[#e6fbf9] hover:bg-[#d0f5f2] text-stone-800 text-xs sm:text-sm font-normal transition-colors cursor-pointer border border-[#01a9a0]/20"
                                 >
                                   {action}
