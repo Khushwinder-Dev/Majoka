@@ -699,10 +699,14 @@ export default function ExpandableSearchBar({
       recognition.interimResults = false;
       recognition.lang = isAr ? "ar-AE" : "en-US";
 
-      recognition.onstart = () => setIsListening(true);
+      recognition.onstart = () => {
+        setIsListening(true);
+        setIsImageSearchOpen(false);
+      };
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
         setSearchQuery(transcript);
+        setIsImageSearchOpen(false);
         setIsListening(false);
       };
       recognition.onerror = () => setIsListening(false);
@@ -879,10 +883,19 @@ export default function ExpandableSearchBar({
               value={searchQuery}
               onFocus={() => setIsInputFocused(true)}
               onBlur={() => setIsInputFocused(false)}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                const val = e.target.value;
+                setSearchQuery(val);
+                if (isImageSearchOpen) {
+                  setIsImageSearchOpen(false);
+                }
+              }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
+                  if (isImageSearchOpen) {
+                    setIsImageSearchOpen(false);
+                  }
                   handleExecuteSearch(searchQuery);
                 } else if (e.key === "Escape") {
                   handleCollapse();
@@ -897,14 +910,21 @@ export default function ExpandableSearchBar({
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
-                setIsImageSearchOpen((prev) => !prev);
+                if (!isImageSearchOpen) {
+                  setIsImageSearchOpen(true);
+                  if (!imagePreview && !imageSearchData) {
+                    fileInputRef.current?.click();
+                  }
+                } else {
+                  fileInputRef.current?.click();
+                }
               }}
               className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${
                 isImageSearchOpen
                   ? "bg-[#01a9a0] text-white shadow-xs"
                   : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
               }`}
-              title={isAr ? "البحث بالصورة (ذكاء اصطناعي)" : "Search by Image (AI Vision)"}
+              title={isAr ? "البحث بالصورة" : "Search by Image"}
               aria-label="Image search"
             >
               <Camera className="w-4 h-4 transition-transform group-hover/cam:scale-110" />
@@ -1032,6 +1052,7 @@ export default function ExpandableSearchBar({
                             type="button"
                             onClick={() => {
                               setIsAnalyzingImage(true);
+                              setIsImageSearchOpen(true);
                               setImageSearchError(null);
                               setImageSearchData(null);
                               setImagePreview("https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?w=500&q=80");
