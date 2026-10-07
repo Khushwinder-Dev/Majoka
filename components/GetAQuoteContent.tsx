@@ -108,7 +108,7 @@ export default function GetAQuoteContent() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { listeningField, toggleListening } = useVoiceInput({
+  const { listeningField, toggleListening, setFocusedField, isFieldActive } = useVoiceInput({
     isArabic,
     onResult: (fieldName, text) => {
       setFormData((prev) => {
@@ -552,6 +552,8 @@ export default function GetAQuoteContent() {
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleInputChange}
+                            onFocus={() => setFocusedField("fullName")}
+                            onBlur={() => setFocusedField(null)}
                             placeholder=" "
                             dir={isArabic ? "rtl" : "ltr"}
                             className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
@@ -570,7 +572,7 @@ export default function GetAQuoteContent() {
                             } ${
                               errors.fullName
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                                : formData.fullName || listeningField === "fullName"
+                                : formData.fullName || isFieldActive("fullName")
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                                 : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                             }`}
@@ -579,11 +581,13 @@ export default function GetAQuoteContent() {
                           </label>
                           <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
                             <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                            <VoiceMicButton
-                              isListening={listeningField === "fullName"}
-                              onClick={() => toggleListening("fullName", "text")}
-                              isArabic={isArabic}
-                            />
+                            {isFieldActive("fullName") && (
+                              <VoiceMicButton
+                                isListening={listeningField === "fullName"}
+                                onClick={() => toggleListening("fullName", "text")}
+                                isArabic={isArabic}
+                              />
+                            )}
                           </div>
                         </div>
                         {listeningField === "fullName" && (
@@ -604,6 +608,8 @@ export default function GetAQuoteContent() {
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleInputChange}
+                            onFocus={() => setFocusedField("phoneNumber")}
+                            onBlur={() => setFocusedField(null)}
                             placeholder=" "
                             dir={isArabic ? "rtl" : "ltr"}
                             className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
@@ -622,7 +628,7 @@ export default function GetAQuoteContent() {
                             } ${
                               errors.phoneNumber
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                                : formData.phoneNumber || listeningField === "phoneNumber"
+                                : formData.phoneNumber || isFieldActive("phoneNumber")
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                                 : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                             }`}
@@ -631,11 +637,13 @@ export default function GetAQuoteContent() {
                           </label>
                           <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
                             <InputValidationTick isValid={isValidPhone(formData.phoneNumber) && !errors.phoneNumber} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                            <VoiceMicButton
-                              isListening={listeningField === "phoneNumber"}
-                              onClick={() => toggleListening("phoneNumber", "phone")}
-                              isArabic={isArabic}
-                            />
+                            {isFieldActive("phoneNumber") && (
+                              <VoiceMicButton
+                                isListening={listeningField === "phoneNumber"}
+                                onClick={() => toggleListening("phoneNumber", "phone")}
+                                isArabic={isArabic}
+                              />
+                            )}
                           </div>
                         </div>
                         {listeningField === "phoneNumber" && (
@@ -659,6 +667,8 @@ export default function GetAQuoteContent() {
                             name="emailAddress"
                             value={formData.emailAddress}
                             onChange={handleInputChange}
+                            onFocus={() => setFocusedField("emailAddress")}
+                            onBlur={() => setFocusedField(null)}
                             placeholder=" "
                             dir={isArabic ? "rtl" : "ltr"}
                             className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
@@ -677,7 +687,7 @@ export default function GetAQuoteContent() {
                             } ${
                               errors.emailAddress
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                                : formData.emailAddress || listeningField === "emailAddress"
+                                : formData.emailAddress || isFieldActive("emailAddress")
                                 ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                                 : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                             }`}
@@ -686,11 +696,13 @@ export default function GetAQuoteContent() {
                           </label>
                           <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
                             <InputValidationTick isValid={isValidEmail(formData.emailAddress) && !errors.emailAddress} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                            <VoiceMicButton
-                              isListening={listeningField === "emailAddress"}
-                              onClick={() => toggleListening("emailAddress", "email")}
-                              isArabic={isArabic}
-                            />
+                            {isFieldActive("emailAddress") && (
+                              <VoiceMicButton
+                                isListening={listeningField === "emailAddress"}
+                                onClick={() => toggleListening("emailAddress", "email")}
+                                isArabic={isArabic}
+                              />
+                            )}
                           </div>
                         </div>
                         {listeningField === "emailAddress" && (
@@ -710,6 +722,8 @@ export default function GetAQuoteContent() {
                           name="companyName"
                           value={formData.companyName}
                           onChange={handleInputChange}
+                          onFocus={() => setFocusedField("companyName")}
+                          onBlur={() => setFocusedField(null)}
                           placeholder=" "
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer w-full bg-white border border-stone-300 rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 transition-all placeholder-transparent ${
@@ -722,18 +736,20 @@ export default function GetAQuoteContent() {
                           className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none text-stone-400 ${
                             isArabic ? "right-5" : "left-5"
                           } peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                            formData.companyName || listeningField === "companyName" ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
+                            formData.companyName || isFieldActive("companyName") ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]" : ""
                           }`}
                         >
                           {isArabic ? "اسم الشركة (اختياري)" : "Company Name (Optional)"}
                         </label>
                         <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
                           <InputValidationTick isValid={isValidText(formData.companyName)} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                          <VoiceMicButton
-                            isListening={listeningField === "companyName"}
-                            onClick={() => toggleListening("companyName", "text")}
-                            isArabic={isArabic}
-                          />
+                          {isFieldActive("companyName") && (
+                            <VoiceMicButton
+                              isListening={listeningField === "companyName"}
+                              onClick={() => toggleListening("companyName", "text")}
+                              isArabic={isArabic}
+                            />
+                          )}
                         </div>
                       </div>
                   </div>
@@ -766,6 +782,8 @@ export default function GetAQuoteContent() {
                           name="projectLocation"
                           value={formData.projectLocation}
                           onChange={handleInputChange}
+                          onFocus={() => setFocusedField("projectLocation")}
+                          onBlur={() => setFocusedField(null)}
                           placeholder=" "
                           dir={isArabic ? "rtl" : "ltr"}
                           className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${
@@ -784,7 +802,7 @@ export default function GetAQuoteContent() {
                           } ${
                             errors.projectLocation
                               ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                              : formData.projectLocation || listeningField === "projectLocation"
+                              : formData.projectLocation || isFieldActive("projectLocation")
                               ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                               : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                           }`}
@@ -793,11 +811,13 @@ export default function GetAQuoteContent() {
                         </label>
                         <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1.5 z-10`}>
                           <InputValidationTick isValid={isValidText(formData.projectLocation) && !errors.projectLocation} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                          <VoiceMicButton
-                            isListening={listeningField === "projectLocation"}
-                            onClick={() => toggleListening("projectLocation", "text")}
-                            isArabic={isArabic}
-                          />
+                          {isFieldActive("projectLocation") && (
+                            <VoiceMicButton
+                              isListening={listeningField === "projectLocation"}
+                              onClick={() => toggleListening("projectLocation", "text")}
+                              isArabic={isArabic}
+                            />
+                          )}
                         </div>
                       </div>
                       {listeningField === "projectLocation" && (
@@ -819,6 +839,8 @@ export default function GetAQuoteContent() {
                         name="projectDetails"
                         value={formData.projectDetails}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("projectDetails")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-none placeholder-transparent ${
@@ -837,7 +859,7 @@ export default function GetAQuoteContent() {
                         } ${
                           errors.projectDetails
                             ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                            : formData.projectDetails || listeningField === "projectDetails"
+                            : formData.projectDetails || isFieldActive("projectDetails")
                             ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-4 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -845,11 +867,13 @@ export default function GetAQuoteContent() {
                         {isArabic ? "تفاصيل المشروع ونطاق العمل" : "Project Details"} <span className="text-red-500">*</span>
                       </label>
                       <div className={`absolute top-4 ${isArabic ? "left-3" : "right-3"} z-10`}>
-                        <VoiceMicButton
-                          isListening={listeningField === "projectDetails"}
-                          onClick={() => toggleListening("projectDetails", "textarea")}
-                          isArabic={isArabic}
-                        />
+                        {isFieldActive("projectDetails") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "projectDetails"}
+                            onClick={() => toggleListening("projectDetails", "textarea")}
+                            isArabic={isArabic}
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "projectDetails" && (

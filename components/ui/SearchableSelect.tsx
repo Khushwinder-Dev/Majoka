@@ -230,6 +230,8 @@ export default function SearchableSelect({
                 ref={searchInputRef}
                 type="text"
                 value={searchQuery}
+                onFocus={() => voice.setFocusedField("selectSearch")}
+                onBlur={() => voice.setFocusedField(null)}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={searchPlaceholder || defaultSearchPlaceholder}
                 className={`w-full bg-white border border-stone-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 rounded-xl py-2 text-xs sm:text-sm text-stone-800 outline-none transition-all placeholder:text-stone-400 ${
@@ -247,12 +249,14 @@ export default function SearchableSelect({
                   isArabic ? "left-2" : "right-2"
                 }`}
               >
-                <VoiceMicButton
-                  isListening={voice.listeningField === "selectSearch"}
-                  onClick={() => voice.toggleListening("selectSearch", "text")}
-                  isArabic={isArabic}
-                  size="sm"
-                />
+                {voice.isFieldActive("selectSearch") && (
+                  <VoiceMicButton
+                    isListening={voice.listeningField === "selectSearch"}
+                    onClick={() => voice.toggleListening("selectSearch", "text")}
+                    isArabic={isArabic}
+                    size="sm"
+                  />
+                )}
                 <Search className="w-4 h-4 text-stone-400 pointer-events-none" />
               </div>
             </div>

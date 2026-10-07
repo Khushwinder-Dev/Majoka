@@ -43,6 +43,7 @@ export default function WelcomeOfferModal({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const { listeningField, toggleListening } = useVoiceInput({
     isArabic,
@@ -350,6 +351,8 @@ export default function WelcomeOfferModal({
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField("name")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
@@ -369,7 +372,7 @@ export default function WelcomeOfferModal({
                       } ${
                         errors.name
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.name || listeningField === "name"
+                          : formData.name || focusedField === "name" || listeningField === "name"
                           ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -378,12 +381,14 @@ export default function WelcomeOfferModal({
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
                       <InputValidationTick isValid={isValidText(formData.name) && !errors.name} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                      <VoiceMicButton
-                        isListening={listeningField === "name"}
-                        onClick={() => toggleListening("name", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "name" || listeningField === "name") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "name"}
+                          onClick={() => toggleListening("name", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "name" && (
@@ -400,6 +405,8 @@ export default function WelcomeOfferModal({
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField("phone")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
@@ -419,7 +426,7 @@ export default function WelcomeOfferModal({
                       } ${
                         errors.phone
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.phone || listeningField === "phone"
+                          : formData.phone || focusedField === "phone" || listeningField === "phone"
                           ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -428,12 +435,14 @@ export default function WelcomeOfferModal({
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
                       <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                      <VoiceMicButton
-                        isListening={listeningField === "phone"}
-                        onClick={() => toggleListening("phone", "phone")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "phone" || listeningField === "phone") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "phone"}
+                          onClick={() => toggleListening("phone", "phone")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "phone" && (
@@ -450,6 +459,8 @@ export default function WelcomeOfferModal({
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
@@ -469,7 +480,7 @@ export default function WelcomeOfferModal({
                       } ${
                         errors.email
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.email || listeningField === "email"
+                          : formData.email || focusedField === "email" || listeningField === "email"
                           ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -478,12 +489,14 @@ export default function WelcomeOfferModal({
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-2.5" : "right-2.5"} flex items-center gap-1 z-10`}>
                       <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-                      <VoiceMicButton
-                        isListening={listeningField === "email"}
-                        onClick={() => toggleListening("email", "email")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "email" || listeningField === "email") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "email"}
+                          onClick={() => toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "email" && (

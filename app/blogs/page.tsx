@@ -169,6 +169,8 @@ const News = () => {
                     type="text"
                     placeholder="Search"
                     value={searchQuery}
+                    onFocus={() => voice.setFocusedField("blogSearch")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-20 py-3 bg-white rounded-[50px] outline outline-1 outline-offset-[-1px] outline-black/60 text-base focus:outline-2 focus:outline-pink-950 transition-all text-gray-800"
                   />
@@ -182,12 +184,14 @@ const News = () => {
                     <path d="m21 21-4.35-4.35" strokeWidth="2" />
                   </svg>
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "blogSearch"}
-                      onClick={() => voice.toggleListening("blogSearch", "text")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("blogSearch") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "blogSearch"}
+                        onClick={() => voice.toggleListening("blogSearch", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
               </div>

@@ -260,16 +260,20 @@ export default function ResourcesPage() {
                 type="text"
                 placeholder="Search resources, topics, standards..."
                 value={searchQuery}
+                onFocus={() => voice.setFocusedField("resourcesSearch")}
+                onBlur={() => voice.setFocusedField(null)}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-11 pr-12 py-2.5 rounded-full border border-gray-200 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 outline-none text-sm transition-all"
               />
               <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
-                <VoiceMicButton
-                  isListening={voice.listeningField === "resourcesSearch"}
-                  onClick={() => voice.toggleListening("resourcesSearch", "text")}
-                  isArabic={isArabic}
-                  size="sm"
-                />
+                {voice.isFieldActive("resourcesSearch") && (
+                  <VoiceMicButton
+                    isListening={voice.listeningField === "resourcesSearch"}
+                    onClick={() => voice.toggleListening("resourcesSearch", "text")}
+                    isArabic={isArabic}
+                    size="sm"
+                  />
+                )}
               </div>
             </div>
 

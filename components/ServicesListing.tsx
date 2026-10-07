@@ -615,7 +615,10 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                 {/* Full Name */}
                 <div>
                   <div className="relative">
-                    <input type="text" name="fullName" value={formData.fullName} onChange={handleInputChange}
+                    <input type="text" name="fullName" value={formData.fullName}
+                      onFocus={() => voice.setFocusedField("fullName")}
+                      onBlur={() => voice.setFocusedField(null)}
+                      onChange={handleInputChange}
                       placeholder=" " dir={isArabic ? "rtl" : "ltr"}
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-20 text-right" : "pr-20 text-left"
                         } ${errors.fullName
@@ -625,19 +628,21 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                     <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-5" : "left-5"
                       } ${errors.fullName
                         ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                        : formData.fullName
+                        : (formData.fullName || voice.isFieldActive("fullName"))
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}>
                       {isArabic ? "الاسم الكامل" : "Full Name"} <span className="text-red-500">*</span>
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "fullName"}
-                        onClick={() => voice.toggleListening("fullName", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {voice.isFieldActive("fullName") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "fullName"}
+                          onClick={() => voice.toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -647,7 +652,10 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                 {/* Email */}
                 <div>
                   <div className="relative">
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange}
+                    <input type="email" name="email" value={formData.email}
+                      onFocus={() => voice.setFocusedField("email")}
+                      onBlur={() => voice.setFocusedField(null)}
+                      onChange={handleInputChange}
                       placeholder=" " dir={isArabic ? "rtl" : "ltr"}
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-20 text-right" : "pr-20 text-left"
                         } ${errors.email
@@ -657,19 +665,21 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                     <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-5" : "left-5"
                       } ${errors.email
                         ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                        : formData.email
+                        : (formData.email || voice.isFieldActive("email"))
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}>
                       {isArabic ? "عنوان البريد الإلكتروني" : "Email Address"} <span className="text-red-500">*</span>
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "email"}
-                        onClick={() => voice.toggleListening("email", "email")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {voice.isFieldActive("email") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "email"}
+                          onClick={() => voice.toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -681,7 +691,10 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                 {/* Phone */}
                 <div>
                   <div className="relative">
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange}
+                    <input type="tel" name="phone" value={formData.phone}
+                      onFocus={() => voice.setFocusedField("phone")}
+                      onBlur={() => voice.setFocusedField(null)}
+                      onChange={handleInputChange}
                       placeholder=" " dir={isArabic ? "rtl" : "ltr"}
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-20 text-right" : "pr-20 text-left"
                         } ${errors.phone
@@ -691,19 +704,21 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                     <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-5" : "left-5"
                       } ${errors.phone
                         ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                        : formData.phone
+                        : (formData.phone || voice.isFieldActive("phone"))
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}>
                       {isArabic ? "رقم الهاتف" : "Phone Number"} <span className="text-red-500">*</span>
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "phone"}
-                        onClick={() => voice.toggleListening("phone", "phone")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {voice.isFieldActive("phone") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "phone"}
+                          onClick={() => voice.toggleListening("phone", "phone")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -713,7 +728,10 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                 {/* Subject */}
                 <div>
                   <div className="relative">
-                    <input type="text" name="subject" value={formData.subject} onChange={handleInputChange}
+                    <input type="text" name="subject" value={formData.subject}
+                      onFocus={() => voice.setFocusedField("subject")}
+                      onBlur={() => voice.setFocusedField(null)}
+                      onChange={handleInputChange}
                       placeholder=" " dir={isArabic ? "rtl" : "ltr"}
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all placeholder-transparent ${isArabic ? "pl-20 text-right" : "pr-20 text-left"
                         } ${errors.subject
@@ -723,19 +741,21 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                     <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-5" : "left-5"
                       } ${errors.subject
                         ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                        : formData.subject
+                        : (formData.subject || voice.isFieldActive("subject"))
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}>
                       {isArabic ? "الموضوع أو الخدمة المطلوبة" : "Subject or Service Needed"} <span className="text-red-500">*</span>
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "subject"}
-                        onClick={() => voice.toggleListening("subject", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {voice.isFieldActive("subject") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "subject"}
+                          onClick={() => voice.toggleListening("subject", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidText(formData.subject) && !errors.subject} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -746,7 +766,10 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
               {/* Message */}
               <div>
                 <div className="relative">
-                  <textarea name="message" rows={6} value={formData.message} onChange={handleInputChange}
+                  <textarea name="message" rows={6} value={formData.message}
+                    onFocus={() => voice.setFocusedField("message")}
+                    onBlur={() => voice.setFocusedField(null)}
+                    onChange={handleInputChange}
                     placeholder=" " dir={isArabic ? "rtl" : "ltr"}
                     className={`peer w-full bg-white border rounded-2xl px-5 pt-6 pb-2 text-stone-800 text-sm sm:text-[15px] focus:outline-none transition-all resize-y placeholder-transparent ${
                       isArabic ? "pl-12 text-right" : "pr-12 text-left"
@@ -757,19 +780,21 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
                   <label className={`absolute bg-white px-1 transition-all duration-200 pointer-events-none ${isArabic ? "right-5" : "left-5"
                     } ${errors.message
                       ? "-top-2.5 text-[11px] font-semibold text-red-500"
-                      : formData.message
+                      : (formData.message || voice.isFieldActive("message"))
                         ? "-top-2.5 text-[11px] font-semibold text-[#01a9a0]"
                         : "top-4 text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                     }`}>
                     {isArabic ? "الرسالة والتفاصيل" : "Message and details"} <span className="text-red-500">*</span>
                   </label>
                   <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "message"}
-                      onClick={() => voice.toggleListening("message", "textarea")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("message") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "message"}
+                        onClick={() => voice.toggleListening("message", "textarea")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
                 {voice.listeningField === "message" && <VoiceListeningBadge isArabic={isArabic} />}

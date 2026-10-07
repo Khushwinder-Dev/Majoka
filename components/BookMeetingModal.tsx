@@ -130,6 +130,7 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const { listeningField, toggleListening } = useVoiceInput({
     isArabic,
@@ -415,6 +416,8 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
+                      onFocus={() => setFocusedField("name")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
                       dir={isArabic ? "rtl" : "ltr"}
@@ -434,7 +437,7 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                       } ${
                         errors.name
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.name || listeningField === "name"
+                          : formData.name || focusedField === "name" || listeningField === "name"
                           ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -447,12 +450,14 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                         isArabic={isArabic}
                         className="!static !translate-y-0 !left-auto !right-auto"
                       />
-                      <VoiceMicButton
-                        isListening={listeningField === "name"}
-                        onClick={() => toggleListening("name", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "name" || listeningField === "name") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "name"}
+                          onClick={() => toggleListening("name", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "name" && (
@@ -469,6 +474,8 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       disabled={isSubmitting}
                       dir="ltr"
@@ -488,7 +495,7 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                       } ${
                         errors.email
                           ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                          : formData.email || listeningField === "email"
+                          : formData.email || focusedField === "email" || listeningField === "email"
                           ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -501,12 +508,14 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                         isArabic={isArabic}
                         className="!static !translate-y-0 !left-auto !right-auto"
                       />
-                      <VoiceMicButton
-                        isListening={listeningField === "email"}
-                        onClick={() => toggleListening("email", "email")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "email" || listeningField === "email") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "email"}
+                          onClick={() => toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "email" && (
@@ -524,6 +533,8 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
+                    onFocus={() => setFocusedField("phone")}
+                    onBlur={() => setFocusedField(null)}
                     placeholder=" "
                     disabled={isSubmitting}
                     dir="ltr"
@@ -543,7 +554,7 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                     } ${
                       errors.phone
                         ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                        : formData.phone || listeningField === "phone"
+                        : formData.phone || focusedField === "phone" || listeningField === "phone"
                         ? "-top-2 translate-y-0 text-[10.5px] font-semibold text-[#01a9a0]"
                         : "top-1/2 -translate-y-1/2 text-xs text-stone-400 peer-focus:-top-2 peer-focus:translate-y-0 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                     }`}
@@ -556,12 +567,14 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                       isArabic={isArabic}
                       className="!static !translate-y-0 !left-auto !right-auto"
                     />
-                    <VoiceMicButton
-                      isListening={listeningField === "phone"}
-                      onClick={() => toggleListening("phone", "phone")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {(focusedField === "phone" || listeningField === "phone") && (
+                      <VoiceMicButton
+                        isListening={listeningField === "phone"}
+                        onClick={() => toggleListening("phone", "phone")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
                 {listeningField === "phone" && (
@@ -643,6 +656,8 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                     rows={2}
                     value={formData.notes}
                     onChange={handleInputChange}
+                    onFocus={() => setFocusedField("notes")}
+                    onBlur={() => setFocusedField(null)}
                     placeholder=" "
                     disabled={isSubmitting}
                     className={`peer w-full bg-white border border-stone-300 rounded-2xl p-4 ${isArabic ? "pl-12 text-right" : "pr-12 text-left"} pt-4 text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all placeholder-transparent resize-none ${
@@ -655,18 +670,20 @@ export default function BookMeetingModal({ isOpen, onClose }: BookMeetingModalPr
                     className={`absolute bg-white px-1.5 transition-all duration-200 pointer-events-none text-stone-400 ${
                       isArabic ? "right-4" : "left-4"
                     } peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-xs peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0] ${
-                      formData.notes || listeningField === "notes" ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
+                      formData.notes || focusedField === "notes" || listeningField === "notes" ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]" : ""
                     }`}
                   >
                     {isArabic ? "تفاصيل إضافية / نبذة عن المشروع (اختياري)" : "Query Details / Project Notes (Optional)"}
                   </label>
                   <div className={`absolute top-3 ${isArabic ? "left-2" : "right-2"} z-10`}>
-                    <VoiceMicButton
-                      isListening={listeningField === "notes"}
-                      onClick={() => toggleListening("notes", "textarea")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {(focusedField === "notes" || listeningField === "notes") && (
+                      <VoiceMicButton
+                        isListening={listeningField === "notes"}
+                        onClick={() => toggleListening("notes", "textarea")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
                 {listeningField === "notes" && (

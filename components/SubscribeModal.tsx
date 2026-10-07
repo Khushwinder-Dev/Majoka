@@ -70,6 +70,7 @@ function SubscribeModalContent({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const { listeningField, toggleListening } = useVoiceInput({
     isArabic,
@@ -385,6 +386,8 @@ function SubscribeModalContent({
                       id="sub-modal-email"
                       value={formData.email}
                       onChange={handleInputChange}
+                      onFocus={() => setFocusedField("email")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       dir="ltr"
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -404,7 +407,7 @@ function SubscribeModalContent({
                       } ${
                         errors.email
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                          : formData.email || listeningField === "email"
+                          : formData.email || focusedField === "email" || listeningField === "email"
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -418,12 +421,14 @@ function SubscribeModalContent({
                         isArabic={isArabic}
                         className="!static !translate-y-0 !left-auto !right-auto"
                       />
-                      <VoiceMicButton
-                        isListening={listeningField === "email"}
-                        onClick={() => toggleListening("email", "email")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "email" || listeningField === "email") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "email"}
+                          onClick={() => toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "email" && (
@@ -447,6 +452,8 @@ function SubscribeModalContent({
                         id="sub-modal-firstName"
                         value={formData.firstName}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("firstName")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -466,7 +473,7 @@ function SubscribeModalContent({
                         } ${
                           errors.firstName
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                            : formData.firstName || listeningField === "firstName"
+                            : formData.firstName || focusedField === "firstName" || listeningField === "firstName"
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -480,12 +487,14 @@ function SubscribeModalContent({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "firstName"}
-                          onClick={() => toggleListening("firstName", "text")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {(focusedField === "firstName" || listeningField === "firstName") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "firstName"}
+                            onClick={() => toggleListening("firstName", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "firstName" && (
@@ -507,6 +516,8 @@ function SubscribeModalContent({
                         id="sub-modal-lastName"
                         value={formData.lastName}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("lastName")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -526,7 +537,7 @@ function SubscribeModalContent({
                         } ${
                           errors.lastName
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                            : formData.lastName || listeningField === "lastName"
+                            : formData.lastName || focusedField === "lastName" || listeningField === "lastName"
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -540,12 +551,14 @@ function SubscribeModalContent({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "lastName"}
-                          onClick={() => toggleListening("lastName", "text")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {(focusedField === "lastName" || listeningField === "lastName") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "lastName"}
+                            onClick={() => toggleListening("lastName", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "lastName" && (
@@ -583,6 +596,8 @@ function SubscribeModalContent({
                       id="sub-modal-company"
                       value={formData.company}
                       onChange={handleInputChange}
+                      onFocus={() => setFocusedField("company")}
+                      onBlur={() => setFocusedField(null)}
                       placeholder=" "
                       dir={isArabic ? "rtl" : "ltr"}
                       className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -602,7 +617,7 @@ function SubscribeModalContent({
                       } ${
                         errors.company
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                          : formData.company || listeningField === "company"
+                          : formData.company || focusedField === "company" || listeningField === "company"
                           ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                           : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                       }`}
@@ -616,12 +631,14 @@ function SubscribeModalContent({
                         isArabic={isArabic}
                         className="!static !translate-y-0 !left-auto !right-auto"
                       />
-                      <VoiceMicButton
-                        isListening={listeningField === "company"}
-                        onClick={() => toggleListening("company", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {(focusedField === "company" || listeningField === "company") && (
+                        <VoiceMicButton
+                          isListening={listeningField === "company"}
+                          onClick={() => toggleListening("company", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                     </div>
                   </div>
                   {listeningField === "company" && (
@@ -645,6 +662,8 @@ function SubscribeModalContent({
                         id="sub-modal-department"
                         value={formData.department}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("department")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -664,7 +683,7 @@ function SubscribeModalContent({
                         } ${
                           errors.department
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                            : formData.department || listeningField === "department"
+                            : formData.department || focusedField === "department" || listeningField === "department"
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -678,12 +697,14 @@ function SubscribeModalContent({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "department"}
-                          onClick={() => toggleListening("department", "text")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {(focusedField === "department" || listeningField === "department") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "department"}
+                            onClick={() => toggleListening("department", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "department" && (
@@ -705,6 +726,8 @@ function SubscribeModalContent({
                         id="sub-modal-jobTitle"
                         value={formData.jobTitle}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("jobTitle")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         dir={isArabic ? "rtl" : "ltr"}
                         className={`peer w-full bg-white border rounded-full px-5 pt-5 pb-2 text-stone-800 text-sm focus:outline-none transition-all placeholder-transparent ${
@@ -724,7 +747,7 @@ function SubscribeModalContent({
                         } ${
                           errors.jobTitle
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-red-500"
-                            : formData.jobTitle || listeningField === "jobTitle"
+                            : formData.jobTitle || focusedField === "jobTitle" || listeningField === "jobTitle"
                             ? "-top-2.5 translate-y-0 text-[11px] font-semibold text-[#01a9a0]"
                             : "top-1/2 -translate-y-1/2 text-xs sm:text-sm text-stone-400 peer-focus:-top-2.5 peer-focus:translate-y-0 peer-focus:text-[11px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -738,12 +761,14 @@ function SubscribeModalContent({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "jobTitle"}
-                          onClick={() => toggleListening("jobTitle", "text")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {(focusedField === "jobTitle" || listeningField === "jobTitle") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "jobTitle"}
+                            onClick={() => toggleListening("jobTitle", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "jobTitle" && (

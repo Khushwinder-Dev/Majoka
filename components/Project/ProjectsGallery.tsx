@@ -618,6 +618,8 @@ export default function ProjectsGallery() {
                   <input
                     type="search"
                     value={query}
+                    onFocus={() => voice.setFocusedField("projectsSearch")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setQuery(e.target.value);
                       setPage(1);
@@ -626,12 +628,14 @@ export default function ProjectsGallery() {
                     className="w-full rounded-full border border-stone-200 bg-white py-2.5 pl-9 pr-10 rtl:pl-10 rtl:pr-9 text-sm text-stone-700 placeholder:text-stone-400 outline-none focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15"
                   />
                   <div className="absolute right-2.5 rtl:right-auto rtl:left-2.5 top-1/2 -translate-y-1/2">
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "projectsSearch"}
-                      onClick={() => voice.toggleListening("projectsSearch", "text")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("projectsSearch") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "projectsSearch"}
+                        onClick={() => voice.toggleListening("projectsSearch", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </label>
 

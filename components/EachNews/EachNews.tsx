@@ -97,17 +97,21 @@ const EachNews: React.FC<EachNewsProps> = ({ article }) => {
                   <input
                     type="email"
                     value={email}
+                    onFocus={() => voice.setFocusedField("newsletterEmail")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="w-full px-4 pr-12 py-3 bg-white border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-red-900 focus:border-transparent transition-all"
                   />
                   <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "newsletterEmail"}
-                      onClick={() => voice.toggleListening("newsletterEmail", "email")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("newsletterEmail") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "newsletterEmail"}
+                        onClick={() => voice.toggleListening("newsletterEmail", "email")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
 

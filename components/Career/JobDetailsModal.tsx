@@ -425,7 +425,7 @@ export default function JobDetailsModal({
   const [uploadedCvUrl, setUploadedCvUrl] = useState<string>("");
   const [uploadedCvName, setUploadedCvName] = useState<string>("");
 
-  const { listeningField, toggleListening } = useVoiceInput({
+  const { listeningField, toggleListening, setFocusedField, isFieldActive } = useVoiceInput({
     isArabic,
     onResult: (fieldName, text) => {
       setFormData((prev) => {
@@ -864,6 +864,8 @@ export default function JobDetailsModal({
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("fullName")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         disabled={isSubmitting}
                         className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
@@ -880,7 +882,7 @@ export default function JobDetailsModal({
                         } ${
                           errors.fullName
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.fullName || listeningField === "fullName"
+                            : formData.fullName || isFieldActive("fullName")
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -893,12 +895,14 @@ export default function JobDetailsModal({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "fullName"}
-                          onClick={() => toggleListening("fullName", "text")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {isFieldActive("fullName") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "fullName"}
+                            onClick={() => toggleListening("fullName", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "fullName" && (
@@ -915,6 +919,8 @@ export default function JobDetailsModal({
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("email")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         disabled={isSubmitting}
                         className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
@@ -931,7 +937,7 @@ export default function JobDetailsModal({
                         } ${
                           errors.email
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.email || listeningField === "email"
+                            : formData.email || isFieldActive("email")
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -944,12 +950,14 @@ export default function JobDetailsModal({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "email"}
-                          onClick={() => toggleListening("email", "email")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {isFieldActive("email") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "email"}
+                            onClick={() => toggleListening("email", "email")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "email" && (
@@ -966,6 +974,8 @@ export default function JobDetailsModal({
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("phone")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         disabled={isSubmitting}
                         className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
@@ -982,7 +992,7 @@ export default function JobDetailsModal({
                         } ${
                           errors.phone
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.phone || listeningField === "phone"
+                            : formData.phone || isFieldActive("phone")
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -995,12 +1005,14 @@ export default function JobDetailsModal({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "phone"}
-                          onClick={() => toggleListening("phone", "phone")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {isFieldActive("phone") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "phone"}
+                            onClick={() => toggleListening("phone", "phone")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "phone" && (
@@ -1017,6 +1029,8 @@ export default function JobDetailsModal({
                         name="experience"
                         value={formData.experience}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("experience")}
+                        onBlur={() => setFocusedField(null)}
                         placeholder=" "
                         disabled={isSubmitting}
                         className={`w-full px-4 ${isArabic ? "pl-18 pr-4" : "pr-18 pl-4"} pt-3.5 pb-1 bg-white rounded-full border text-stone-800 text-xs sm:text-[13px] focus:outline-none transition-all peer placeholder-transparent ${
@@ -1033,7 +1047,7 @@ export default function JobDetailsModal({
                         } ${
                           errors.experience
                             ? "-top-2 text-[10.5px] font-semibold text-red-500"
-                            : formData.experience || listeningField === "experience"
+                            : formData.experience || isFieldActive("experience")
                             ? "-top-2 text-[10.5px] font-semibold text-[#01a9a0]"
                             : "top-2.5 text-xs text-stone-400 peer-focus:-top-2 peer-focus:text-[10.5px] peer-focus:font-semibold peer-focus:text-[#01a9a0]"
                         }`}
@@ -1046,12 +1060,14 @@ export default function JobDetailsModal({
                           isArabic={isArabic}
                           className="!static !translate-y-0 !left-auto !right-auto"
                         />
-                        <VoiceMicButton
-                          isListening={listeningField === "experience"}
-                          onClick={() => toggleListening("experience", "number")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
+                        {isFieldActive("experience") && (
+                          <VoiceMicButton
+                            isListening={listeningField === "experience"}
+                            onClick={() => toggleListening("experience", "number")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                       </div>
                     </div>
                     {listeningField === "experience" && (
@@ -1067,6 +1083,8 @@ export default function JobDetailsModal({
                         name="coverLetter"
                         value={formData.coverLetter}
                         onChange={handleInputChange}
+                        onFocus={() => setFocusedField("coverLetter")}
+                        onBlur={() => setFocusedField(null)}
                         rows={2}
                         disabled={isSubmitting}
                         placeholder={
@@ -1080,14 +1098,16 @@ export default function JobDetailsModal({
                             : "border-slate-300 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20"
                         }`}
                       />
-                      <div className={`absolute top-2.5 ${isArabic ? "left-2" : "right-2"} z-10`}>
-                        <VoiceMicButton
-                          isListening={listeningField === "coverLetter"}
-                          onClick={() => toggleListening("coverLetter", "textarea")}
-                          isArabic={isArabic}
-                          size="sm"
-                        />
-                      </div>
+                      {isFieldActive("coverLetter") && (
+                        <div className={`absolute top-2.5 ${isArabic ? "left-2" : "right-2"} z-10`}>
+                          <VoiceMicButton
+                            isListening={listeningField === "coverLetter"}
+                            onClick={() => toggleListening("coverLetter", "textarea")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        </div>
+                      )}
                     </div>
                     {listeningField === "coverLetter" && (
                       <VoiceListeningBadge isArabic={isArabic} />

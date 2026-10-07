@@ -22,6 +22,7 @@ import {
   Edit3,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
 
 interface Message {
   id: string;
@@ -177,6 +178,20 @@ export default function FloatingChatWidget() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const voice = useVoiceInput({
+    isArabic,
+    onResult: (fieldName, text) => {
+      if (fieldName === "chatMessage") {
+        setInputValue((prev) => (prev ? prev + " " + text : text));
+      } else {
+        setInfoForm((prev) => ({ ...prev, [fieldName]: text }));
+        if (infoErrors[fieldName as keyof ChatUserInfo]) {
+          setInfoErrors((prev) => ({ ...prev, [fieldName]: undefined }));
+        }
+      }
+    },
+  });
 
   // Load user info and history from localStorage
   useEffect(() => {
@@ -567,16 +582,28 @@ export default function FloatingChatWidget() {
                           <input
                             type="text"
                             value={infoForm.name}
+                            onFocus={() => voice.setFocusedField("name")}
+                            onBlur={() => voice.setFocusedField(null)}
                             onChange={(e) => {
                               setInfoForm((p) => ({ ...p, name: e.target.value }));
                               if (infoErrors.name) setInfoErrors((p) => ({ ...p, name: undefined }));
                             }}
                             placeholder={isArabic ? "مثال: محمد أحمد" : "e.g. John Smith"}
-                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.name
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-10 rtl:pr-3 rtl:pl-10 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.name
                               ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
                               : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
                               }`}
                           />
+                          <div className="absolute inset-y-0 right-2 rtl:right-auto rtl:left-2 flex items-center">
+                            {voice.isFieldActive("name") && (
+                              <VoiceMicButton
+                                isListening={voice.listeningField === "name"}
+                                onClick={() => voice.toggleListening("name", "text")}
+                                isArabic={isArabic}
+                                size="sm"
+                              />
+                            )}
+                          </div>
                         </div>
                         {infoErrors.name && (
                           <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
@@ -598,16 +625,28 @@ export default function FloatingChatWidget() {
                           <input
                             type="email"
                             value={infoForm.email}
+                            onFocus={() => voice.setFocusedField("email")}
+                            onBlur={() => voice.setFocusedField(null)}
                             onChange={(e) => {
                               setInfoForm((p) => ({ ...p, email: e.target.value }));
                               if (infoErrors.email) setInfoErrors((p) => ({ ...p, email: undefined }));
                             }}
                             placeholder={isArabic ? "name@example.com" : "name@example.com"}
-                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.email
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-10 rtl:pr-3 rtl:pl-10 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.email
                               ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
                               : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
                               }`}
                           />
+                          <div className="absolute inset-y-0 right-2 rtl:right-auto rtl:left-2 flex items-center">
+                            {voice.isFieldActive("email") && (
+                              <VoiceMicButton
+                                isListening={voice.listeningField === "email"}
+                                onClick={() => voice.toggleListening("email", "email")}
+                                isArabic={isArabic}
+                                size="sm"
+                              />
+                            )}
+                          </div>
                         </div>
                         {infoErrors.email && (
                           <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
@@ -629,16 +668,28 @@ export default function FloatingChatWidget() {
                           <input
                             type="tel"
                             value={infoForm.phone}
+                            onFocus={() => voice.setFocusedField("phone")}
+                            onBlur={() => voice.setFocusedField(null)}
                             onChange={(e) => {
                               setInfoForm((p) => ({ ...p, phone: e.target.value }));
                               if (infoErrors.phone) setInfoErrors((p) => ({ ...p, phone: undefined }));
                             }}
                             placeholder={isArabic ? "+971 5X XXX XXXX" : "+971 5X XXX XXXX"}
-                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-3 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.phone
+                            className={`w-full pl-9 rtl:pl-3 rtl:pr-9 pr-10 rtl:pr-3 rtl:pl-10 py-2.5 text-xs sm:text-sm rounded-xl border bg-stone-50/60 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:bg-white transition-all ${infoErrors.phone
                               ? "border-red-500 focus:border-red-500 focus:ring-1 focus:ring-red-500 bg-red-50/20"
                               : "border-stone-200 focus:border-[#01a9a0] focus:ring-1 focus:ring-[#01a9a0]/30"
                               }`}
                           />
+                          <div className="absolute inset-y-0 right-2 rtl:right-auto rtl:left-2 flex items-center">
+                            {voice.isFieldActive("phone") && (
+                              <VoiceMicButton
+                                isListening={voice.listeningField === "phone"}
+                                onClick={() => voice.toggleListening("phone", "phone")}
+                                isArabic={isArabic}
+                                size="sm"
+                              />
+                            )}
+                          </div>
                         </div>
                         {infoErrors.phone && (
                           <p className="text-red-500 text-[11px] mt-1 flex items-center gap-1">
@@ -848,6 +899,8 @@ export default function FloatingChatWidget() {
                         ref={inputRef}
                         type="text"
                         value={inputValue}
+                        onFocus={() => voice.setFocusedField("chatMessage")}
+                        onBlur={() => voice.setFocusedField(null)}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") {
@@ -856,11 +909,19 @@ export default function FloatingChatWidget() {
                           }
                         }}
                         placeholder={isArabic ? "اسأل الذكاء الاصطناعي أي شيء..." : "Ask AI anything..."}
-                        className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-11 rtl:pr-0 rtl:pl-11"
+                        className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-20 rtl:pr-0 rtl:pl-20"
                       />
 
-                      {/* Right Input Action: Send Button */}
-                      <div className="absolute right-2 rtl:right-auto rtl:left-2 bottom-1.5 flex items-center">
+                      {/* Right Input Action: Mic + Send Button */}
+                      <div className="absolute right-2 rtl:right-auto rtl:left-2 bottom-1.5 flex items-center gap-1">
+                        {voice.isFieldActive("chatMessage") && (
+                          <VoiceMicButton
+                            isListening={voice.listeningField === "chatMessage"}
+                            onClick={() => voice.toggleListening("chatMessage", "text")}
+                            isArabic={isArabic}
+                            size="sm"
+                          />
+                        )}
                         <button
                           type="button"
                           onClick={() => handleSend()}

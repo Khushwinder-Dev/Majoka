@@ -671,6 +671,8 @@ export default function NavMenuSitemap() {
             <input
               type="text"
               value={searchQuery}
+              onFocus={() => voice.setFocusedField("sitemapSearch")}
+              onBlur={() => voice.setFocusedField(null)}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={
                 isArabic
@@ -680,12 +682,14 @@ export default function NavMenuSitemap() {
               className="w-full pl-11 pr-20 rtl:pl-20 rtl:pr-11 py-3.5 sm:py-4 text-sm sm:text-base rounded-2xl border border-slate-300 hover:border-[#01a9a0]/60 bg-white text-slate-900 shadow-sm transition-all outline-none focus:border-[#01a9a0] focus:ring-4 focus:ring-[#01a9a0]/20 focus:shadow-[0_4px_24px_rgba(1,169,160,0.22)] placeholder:text-slate-400"
             />
             <div className="absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 pr-3 rtl:pr-0 rtl:pl-3 flex items-center gap-1.5">
-              <VoiceMicButton
-                isListening={voice.listeningField === "sitemapSearch"}
-                onClick={() => voice.toggleListening("sitemapSearch", "text")}
-                isArabic={isArabic}
-                size="sm"
-              />
+              {voice.isFieldActive("sitemapSearch") && (
+                <VoiceMicButton
+                  isListening={voice.listeningField === "sitemapSearch"}
+                  onClick={() => voice.toggleListening("sitemapSearch", "text")}
+                  isArabic={isArabic}
+                  size="sm"
+                />
+              )}
               {searchQuery && (
                 <button
                   type="button"

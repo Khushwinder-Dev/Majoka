@@ -727,6 +727,8 @@ export default function ProductDetailsPage() {
                     type="text"
                     placeholder="e.g. Sarah Jenkins"
                     value={newReview.name}
+                    onFocus={() => voice.setFocusedField("name")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setNewReview({ ...newReview, name: e.target.value });
                       if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
@@ -738,12 +740,14 @@ export default function ProductDetailsPage() {
                     }`}
                   />
                   <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "name"}
-                      onClick={() => voice.toggleListening("name", "text")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("name") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "name"}
+                        onClick={() => voice.toggleListening("name", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                     <InputValidationTick
                       isValid={isValidText(newReview.name, 2) && !errors.name}
                       isArabic={isArabic}
@@ -766,6 +770,8 @@ export default function ProductDetailsPage() {
                     rows={4}
                     placeholder="Write details about the build quality, performance, and day-to-day use..."
                     value={newReview.comment}
+                    onFocus={() => voice.setFocusedField("comment")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setNewReview({ ...newReview, comment: e.target.value });
                       if (errors.comment) setErrors((prev) => ({ ...prev, comment: "" }));
@@ -777,12 +783,14 @@ export default function ProductDetailsPage() {
                     }`}
                   />
                   <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "comment"}
-                      onClick={() => voice.toggleListening("comment", "textarea")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("comment") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "comment"}
+                        onClick={() => voice.toggleListening("comment", "textarea")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
                 {voice.listeningField === "comment" && <VoiceListeningBadge isArabic={isArabic} />}

@@ -13,6 +13,7 @@ export interface UseVoiceInputOptions {
 
 export function useVoiceInput({ isArabic = false, onResult }: UseVoiceInputOptions) {
   const [listeningField, setListeningField] = useState<string | null>(null);
+  const [focusedField, setFocusedField] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
 
   // Clean up on unmount
@@ -142,7 +143,19 @@ export function useVoiceInput({ isArabic = false, onResult }: UseVoiceInputOptio
     [isArabic, listeningField, onResult]
   );
 
-  return { listeningField, toggleListening, setListeningField };
+  const isFieldActive = useCallback(
+    (fieldName: string) => focusedField === fieldName || listeningField === fieldName,
+    [focusedField, listeningField]
+  );
+
+  return {
+    listeningField,
+    toggleListening,
+    setListeningField,
+    focusedField,
+    setFocusedField,
+    isFieldActive,
+  };
 }
 
 export interface VoiceMicButtonProps {
@@ -152,6 +165,8 @@ export interface VoiceMicButtonProps {
   disabled?: boolean;
   className?: string;
   size?: "sm" | "md";
+  title?: string;
+  visible?: boolean;
 }
 
 export function VoiceMicButton({
@@ -161,9 +176,24 @@ export function VoiceMicButton({
   disabled = false,
   className = "",
   size = "md",
+  title,
+  visible,
 }: VoiceMicButtonProps) {
+  // If visible is explicitly passed and false (and not currently listening), do not render
+  if (visible !== undefined && !visible && !isListening) {
+    return null;
+  }
+
   const sizeClasses = size === "sm" ? "w-7 h-7" : "w-8 h-8";
   const iconSize = size === "sm" ? "w-3.5 h-3.5" : "w-4 h-4";
+
+  const defaultTitle = isListening
+    ? isArabic
+      ? "جارٍ الاستماع... انقر للإيقاف"
+      : "Listening... Click to stop"
+    : isArabic
+    ? "انقر للتحدث بالصوت"
+    : "Click to speak";
 
   return (
     <button
@@ -171,15 +201,7 @@ export function VoiceMicButton({
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
       disabled={disabled}
-      title={
-        isListening
-          ? isArabic
-            ? "جارٍ الاستماع... انقر للإيقاف"
-            : "Listening... Click to stop"
-          : isArabic
-          ? "انقر للتحدث بالصوت"
-          : "Click to speak"
-      }
+      title={title || defaultTitle}
       className={`relative ${sizeClasses} rounded-full flex items-center justify-center transition-all cursor-pointer animate-in fade-in zoom-in-75 duration-150 ${
         isListening
           ? "bg-red-500 text-white shadow-md shadow-red-500/30 scale-105"

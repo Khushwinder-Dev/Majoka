@@ -398,6 +398,7 @@ export default function ExpandableSearchBar({
   const isAr = isArabic;
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<FilterCategory>("all");
   const [isListening, setIsListening] = useState(false);
@@ -772,6 +773,8 @@ export default function ExpandableSearchBar({
               ref={inputRef}
               type="text"
               value={searchQuery}
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -786,9 +789,10 @@ export default function ExpandableSearchBar({
             />
 
             {/* Voice Search */}
-            {speechSupported && !searchQuery && (
+            {speechSupported && !searchQuery && (isInputFocused || isListening) && (
               <button
                 type="button"
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={handleVoiceSearch}
                 className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${isListening
                   ? "bg-red-500 text-white animate-pulse"

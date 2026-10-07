@@ -386,16 +386,20 @@ export default function FaqPageContent() {
               <input
                 type="text"
                 value={searchQuery}
+                onFocus={() => voice.setFocusedField("faqSearch")}
+                onBlur={() => voice.setFocusedField(null)}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={isArabic ? "ابحث هنا..." : "Search..."}
                 className="w-full bg-transparent text-stone-800 text-xs sm:text-sm font-medium focus:outline-none placeholder-stone-400 px-2 py-2"
               />
-              <VoiceMicButton
-                isListening={voice.listeningField === "faqSearch"}
-                onClick={() => voice.toggleListening("faqSearch", "text")}
-                isArabic={isArabic}
-                size="sm"
-              />
+              {voice.isFieldActive("faqSearch") && (
+                <VoiceMicButton
+                  isListening={voice.listeningField === "faqSearch"}
+                  onClick={() => voice.toggleListening("faqSearch", "text")}
+                  isArabic={isArabic}
+                  size="sm"
+                />
+              )}
               {searchQuery && (
                 <button
                   type="button"

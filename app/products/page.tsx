@@ -298,17 +298,21 @@ export default function ProductsPage() {
             <input
               type="text"
               value={searchQuery}
+              onFocus={() => voice.setFocusedField("productsSearch")}
+              onBlur={() => voice.setFocusedField(null)}
               onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
               placeholder="Search products…"
               className="w-full h-11 pl-9 pr-16 rounded-full bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
             />
             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              <VoiceMicButton
-                isListening={voice.listeningField === "productsSearch"}
-                onClick={() => voice.toggleListening("productsSearch", "text")}
-                isArabic={isArabic}
-                size="sm"
-              />
+              {voice.isFieldActive("productsSearch") && (
+                <VoiceMicButton
+                  isListening={voice.listeningField === "productsSearch"}
+                  onClick={() => voice.toggleListening("productsSearch", "text")}
+                  isArabic={isArabic}
+                  size="sm"
+                />
+              )}
               {searchQuery && (
                 <button
                   onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
@@ -617,17 +621,21 @@ export default function ProductsPage() {
                     <input
                       type="text"
                       value={searchQuery}
+                      onFocus={() => voice.setFocusedField("productsSearch")}
+                      onBlur={() => voice.setFocusedField(null)}
                       onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
                       placeholder="Search products…"
                       className="w-full h-10 pl-9 pr-16 rounded-full bg-white border border-gray-200 text-sm text-gray-800 placeholder:text-gray-400 focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/15 outline-none transition-all duration-200 shadow-sm"
                     />
                     <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "productsSearch"}
-                        onClick={() => voice.toggleListening("productsSearch", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                      />
+                      {voice.isFieldActive("productsSearch") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "productsSearch"}
+                          onClick={() => voice.toggleListening("productsSearch", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                        />
+                      )}
                       {searchQuery && (
                         <button
                           onClick={() => { setSearchQuery(""); setCurrentPage(1); }}
@@ -1023,6 +1031,8 @@ export default function ProductsPage() {
                     type="text"
                     placeholder="e.g. John Doe"
                     value={expertForm.name}
+                    onFocus={() => voice.setFocusedField("name")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setExpertForm({ ...expertForm, name: e.target.value });
                       if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
@@ -1034,12 +1044,14 @@ export default function ProductsPage() {
                     }`}
                   />
                   <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "name"}
-                      onClick={() => voice.toggleListening("name", "text")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("name") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "name"}
+                        onClick={() => voice.toggleListening("name", "text")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                     <InputValidationTick
                       isValid={isValidText(expertForm.name, 2) && !errors.name}
                       isArabic={isArabic}
@@ -1062,6 +1074,8 @@ export default function ProductsPage() {
                     type="email"
                     placeholder="name@company.com"
                     value={expertForm.email}
+                    onFocus={() => voice.setFocusedField("email")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setExpertForm({ ...expertForm, email: e.target.value });
                       if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
@@ -1073,12 +1087,14 @@ export default function ProductsPage() {
                     }`}
                   />
                   <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "email"}
-                      onClick={() => voice.toggleListening("email", "email")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("email") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "email"}
+                        onClick={() => voice.toggleListening("email", "email")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                     <InputValidationTick
                       isValid={isValidEmail(expertForm.email) && !errors.email}
                       isArabic={isArabic}
@@ -1101,6 +1117,8 @@ export default function ProductsPage() {
                     type="tel"
                     placeholder="+971 55 617 3300"
                     value={expertForm.phone}
+                    onFocus={() => voice.setFocusedField("phone")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) => {
                       setExpertForm({ ...expertForm, phone: e.target.value });
                       if (errors.phone) setErrors((prev) => ({ ...prev, phone: "" }));
@@ -1112,12 +1130,14 @@ export default function ProductsPage() {
                     }`}
                   />
                   <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "phone"}
-                      onClick={() => voice.toggleListening("phone", "phone")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("phone") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "phone"}
+                        onClick={() => voice.toggleListening("phone", "phone")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                     <InputValidationTick
                       isValid={isValidPhone(expertForm.phone) && !errors.phone}
                       isArabic={isArabic}
@@ -1138,18 +1158,22 @@ export default function ProductsPage() {
                     rows={3}
                     placeholder="Tell us about your requirements or preferences..."
                     value={expertForm.message}
+                    onFocus={() => voice.setFocusedField("message")}
+                    onBlur={() => voice.setFocusedField(null)}
                     onChange={(e) =>
                       setExpertForm({ ...expertForm, message: e.target.value })
                     }
                     className={`w-full px-4 ${isArabic ? "pl-12 text-right" : "pr-12 text-left"} py-3 rounded-2xl border border-stone-300 text-sm focus:border-[#01a9a0] focus:ring-2 focus:ring-[#01a9a0]/20 focus:outline-none transition-all resize-none`}
                   />
                   <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                    <VoiceMicButton
-                      isListening={voice.listeningField === "message"}
-                      onClick={() => voice.toggleListening("message", "textarea")}
-                      isArabic={isArabic}
-                      size="sm"
-                    />
+                    {voice.isFieldActive("message") && (
+                      <VoiceMicButton
+                        isListening={voice.listeningField === "message"}
+                        onClick={() => voice.toggleListening("message", "textarea")}
+                        isArabic={isArabic}
+                        size="sm"
+                      />
+                    )}
                   </div>
                 </div>
                 {voice.listeningField === "message" && <VoiceListeningBadge isArabic={isArabic} />}

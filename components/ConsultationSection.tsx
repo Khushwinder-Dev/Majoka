@@ -91,7 +91,7 @@ function FloatField({
         </label>
         <div className={`absolute top-1/2 -translate-y-1/2 ${isArabic ? "left-3" : "right-3"} flex items-center gap-1 z-10`}>
           <InputValidationTick isValid={isValid && !error} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
-          {onVoiceToggle && (
+          {onVoiceToggle && (focused || isListening) && (
             <VoiceMicButton
               isListening={Boolean(isListening)}
               onClick={onVoiceToggle}
@@ -179,7 +179,7 @@ function FloatTextarea({
         >
           {label}
         </label>
-        {onVoiceToggle && (
+        {onVoiceToggle && (focused || isListening) && (
           <div className={`absolute top-3.5 ${isArabic ? "left-3" : "right-3"} z-10`}>
             <VoiceMicButton
               isListening={Boolean(isListening)}

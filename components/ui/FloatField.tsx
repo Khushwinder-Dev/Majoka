@@ -107,7 +107,7 @@ export function FloatInput({
             isArabic ? "left-3" : "right-3"
           }`}
         >
-          {onVoiceToggle && (
+          {onVoiceToggle && (focused || isListening) && (
             <VoiceMicButton
               isListening={!!isListening}
               onClick={onVoiceToggle}
@@ -220,7 +220,7 @@ export function FloatTextarea({
         >
           {label}
         </label>
-        {onVoiceToggle && (
+        {onVoiceToggle && (focused || isListening) && (
           <div className={`absolute top-3 z-10 ${isArabic ? "left-3" : "right-3"}`}>
             <VoiceMicButton
               isListening={!!isListening}

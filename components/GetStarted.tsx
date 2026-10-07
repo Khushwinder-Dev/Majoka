@@ -314,13 +314,15 @@ const GetStarted = () => {
                       Name
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "fullName"}
-                        onClick={() => voice.toggleListening("fullName", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                        className="text-white hover:text-white hover:bg-white/10"
-                      />
+                      {(focusedField === "fullName" || voice.listeningField === "fullName") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "fullName"}
+                          onClick={() => voice.toggleListening("fullName", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                          className="text-white hover:text-white hover:bg-white/10"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidText(formData.fullName) && !errors.fullName} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -358,13 +360,15 @@ const GetStarted = () => {
                       Phone Number
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "phone"}
-                        onClick={() => voice.toggleListening("phone", "phone")}
-                        isArabic={isArabic}
-                        size="sm"
-                        className="text-white hover:text-white hover:bg-white/10"
-                      />
+                      {(focusedField === "phone" || voice.listeningField === "phone") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "phone"}
+                          onClick={() => voice.toggleListening("phone", "phone")}
+                          isArabic={isArabic}
+                          size="sm"
+                          className="text-white hover:text-white hover:bg-white/10"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidPhone(formData.phone) && !errors.phone} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -402,13 +406,15 @@ const GetStarted = () => {
                       Email Address
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "email"}
-                        onClick={() => voice.toggleListening("email", "email")}
-                        isArabic={isArabic}
-                        size="sm"
-                        className="text-white hover:text-white hover:bg-white/10"
-                      />
+                      {(focusedField === "email" || voice.listeningField === "email") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "email"}
+                          onClick={() => voice.toggleListening("email", "email")}
+                          isArabic={isArabic}
+                          size="sm"
+                          className="text-white hover:text-white hover:bg-white/10"
+                        />
+                      )}
                       <InputValidationTick isValid={isValidEmail(formData.email) && !errors.email} isArabic={isArabic} className="!static !translate-y-0 !left-auto !right-auto" />
                     </div>
                   </div>
@@ -484,13 +490,15 @@ const GetStarted = () => {
                       Message
                     </label>
                     <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-1 z-10 ${isArabic ? "left-3" : "right-3"}`}>
-                      <VoiceMicButton
-                        isListening={voice.listeningField === "message"}
-                        onClick={() => voice.toggleListening("message", "text")}
-                        isArabic={isArabic}
-                        size="sm"
-                        className="text-white hover:text-white hover:bg-white/10"
-                      />
+                      {(focusedField === "message" || voice.listeningField === "message") && (
+                        <VoiceMicButton
+                          isListening={voice.listeningField === "message"}
+                          onClick={() => voice.toggleListening("message", "text")}
+                          isArabic={isArabic}
+                          size="sm"
+                          className="text-white hover:text-white hover:bg-white/10"
+                        />
+                      )}
                     </div>
                   </div>
                   {voice.listeningField === "message" && <VoiceListeningBadge isArabic={isArabic} />}
