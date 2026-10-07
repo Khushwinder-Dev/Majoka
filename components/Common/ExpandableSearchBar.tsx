@@ -418,7 +418,7 @@ export default function ExpandableSearchBar({
   const [aiResponse, setAiResponse] = useState<string | null>(null);
 
   // Image Search State
-  const [showImageModal, setShowImageModal] = useState(false);
+  const [isImageSearchOpen, setIsImageSearchOpen] = useState(false);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isAnalyzingImage, setIsAnalyzingImage] = useState(false);
@@ -435,7 +435,6 @@ export default function ExpandableSearchBar({
   } | null>(null);
   const [imageSearchError, setImageSearchError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const modalFileInputRef = useRef<HTMLInputElement>(null);
 
   const processImageFile = async (file: File) => {
     if (!file) return;
@@ -446,6 +445,7 @@ export default function ExpandableSearchBar({
           ? "يرجى اختيار ملف صورة صالح (PNG, JPG, WEBP)"
           : "Please select a valid image file (PNG, JPG, WEBP)"
       );
+      setIsImageSearchOpen(true);
       return;
     }
 
@@ -455,6 +455,7 @@ export default function ExpandableSearchBar({
           ? "حجم الصورة كبير جداً (الحد الأقصى 10 ميغابايت)"
           : "Image is too large (maximum 10MB)"
       );
+      setIsImageSearchOpen(true);
       return;
     }
 
@@ -462,7 +463,8 @@ export default function ExpandableSearchBar({
     setImageSearchError(null);
     setImageSearchData(null);
     setIsAnalyzingImage(true);
-    setShowImageModal(true);
+    setIsImageSearchOpen(true);
+    setIsExpanded(true);
 
     const previewUrl = URL.createObjectURL(file);
     setImagePreview(previewUrl);
@@ -573,6 +575,7 @@ export default function ExpandableSearchBar({
 
   const handleCollapse = () => {
     setIsExpanded(false);
+    setIsImageSearchOpen(false);
     if (!isDrawer) {
       setSearchQuery("");
     }
@@ -892,8 +895,15 @@ export default function ExpandableSearchBar({
             {/* Image Search Camera Button */}
             <button
               type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="p-1.5 rounded-full transition-all shrink-0 cursor-pointer text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9] group/cam relative"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsImageSearchOpen((prev) => !prev);
+              }}
+              className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${
+                isImageSearchOpen
+                  ? "bg-[#01a9a0] text-white shadow-xs"
+                  : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
+              }`}
               title={isAr ? "البحث بالصورة (ذكاء اصطناعي)" : "Search by Image (AI Vision)"}
               aria-label="Image search"
             >
@@ -951,203 +961,484 @@ export default function ExpandableSearchBar({
             </button>
           </div>
 
-          {/* 2. Filter Category Pills with Website Primary Theme */}
-          <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-            <button
-              type="button"
-              onClick={() => setShowImageModal(true)}
-              className="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5 bg-gradient-to-r from-[#01a9a0] to-[#00bfa5] text-white hover:opacity-95 shadow-sm shadow-[#01a9a0]/30"
-              title={isAr ? "البحث بالصورة الذكي" : "AI Image Search"}
-            >
-              <Camera className="w-3.5 h-3.5" />
-              <span>{isAr ? "بحث بالصورة" : "Image Search"}</span>
-              <Sparkles className="w-3 h-3 text-amber-300" />
-            </button>
-            {FILTER_TABS.map((tab) => {
-              const isSelected = activeTab === tab.key;
-              return (
+          {/* ─── CONDITIONAL: EMBEDDED AI IMAGE SEARCH VIEW OR REGULAR SEARCH ─── */}
+          {isImageSearchOpen ? (
+            /* EMBEDDED AI IMAGE SEARCH PANEL INSIDE SEARCH BAR */
+            <div className="mt-4 flex flex-col animate-in fade-in zoom-in-95 duration-200">
+              {/* Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#01a9a0] to-[#00bfa5] flex items-center justify-center text-white shadow-sm shadow-[#01a9a0]/30 shrink-0">
+                    <Camera className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-extrabold text-xs sm:text-sm text-slate-900 leading-tight">
+                        {isAr ? "البحث بالصورة بالذكاء الاصطناعي" : "AI Defect & Solution Photo Search"}
+                      </h3>
+                      <span className="text-[9.5px] font-extrabold px-2 py-0.5 rounded-full bg-teal-50 text-[#01a9a0] border border-[#01a9a0]/20 flex items-center gap-1 uppercase tracking-wider">
+                        <Sparkles className="w-2.5 h-2.5 text-amber-500 fill-amber-500" />
+                        Gemini Vision
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 mt-0.5">
+                      {isAr
+                        ? "ارفع صورة لمعالجة التسربات، التشققات، أو عزل الأسطح"
+                        : "Upload a defect photo to identify solutions & verified specs"}
+                    </p>
+                  </div>
+                </div>
                 <button
-                  key={tab.key}
                   type="button"
-                  onClick={() => setActiveTab(tab.key)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${isSelected
-                    ? "bg-[#E6F7F6] text-[#01a9a0] shadow-sm shadow-[#E6F7F6]/35"
-                    : "bg-slate-100 hover:bg-[#f0faf9] text-slate-700 hover:text-[#01a9a0] border border-transparent hover:border-[#E6F7F6]/25"
-                    }`}
+                  onClick={() => setIsImageSearchOpen(false)}
+                  className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                  title={isAr ? "العودة للبحث العادي" : "Back to normal search"}
                 >
-                  {isAr ? tab.labelAr : tab.labelEn}
+                  <X className="w-4 h-4" />
                 </button>
-              );
-            })}
-          </div>
+              </div>
 
-          {/* 3. Section Header */}
-          <div className="mt-5 mb-2.5 flex items-center justify-between">
-            <p className="text-xs font-extrabold tracking-wider uppercase text-slate-800">
-              {searchQuery.trim() === ""
-                ? isAr
-                  ? "الأكثر استخداماً"
-                  : "Most used"
-                : isAr
-                  ? "نتائج البحث"
-                  : "Search results"}
-            </p>
-            {searchQuery.trim() !== "" && (
-              <span className="text-xs text-[#E6F7F6] font-bold">
-                {filteredResults.length} {isAr ? "نتيجة" : "results"}
-              </span>
-            )}
-          </div>
+              {/* Scrollable Body */}
+              <div className="mt-3 max-h-[340px] sm:max-h-[380px] overflow-y-auto pr-1 space-y-3">
+                {/* 1. Dropzone (when no image preview yet) */}
+                {!imagePreview && (
+                  <div
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleDrop}
+                    onClick={() => fileInputRef.current?.click()}
+                    className="border-2 border-dashed border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 rounded-2xl p-5 text-center cursor-pointer transition-all group flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-slate-50/50 to-white"
+                  >
+                    <div className="w-12 h-12 rounded-2xl bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] flex items-center justify-center transition-colors shadow-inner">
+                      <UploadCloud className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-slate-800 text-xs sm:text-sm">
+                        {isAr ? "انقر لاختيار صورة أو اسحب وأفلت هنا" : "Click to upload or drag & drop photo"}
+                      </p>
+                      <p className="text-[11px] text-slate-400 mt-0.5">
+                        {isAr ? "يدعم PNG, JPG, WEBP حتى 10 ميغابايت" : "Supports PNG, JPG, WEBP up to 10MB"}
+                      </p>
+                    </div>
 
-          {/* 4. Results List / Most Used */}
-          <div className="flex-1 overflow-y-auto min-h-0 max-h-[300px] sm:max-h-[340px] pr-1">
-            {searchQuery.trim() === "" ? (
-              /* Most used items */
-              <div className="space-y-1">
-                {mostUsedItems.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => {
-                        if (onSearch) {
-                          onSearch(isAr ? item.titleAr : item.titleEn, item.href);
-                        }
-                        router.push(item.href);
-                        handleCollapse();
-                        onCloseMenu?.();
-                      }}
-                      className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#f0faf9] transition-all cursor-pointer group"
-                    >
-                      <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                        <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
-                          <Icon className="w-5 h-5 stroke-[2]" />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h5 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
-                            {isAr ? item.titleAr : item.titleEn}
-                          </h5>
-                          <p className="text-xs text-slate-500 font-medium truncate mt-0.5">
-                            {isAr ? item.categoryAr : item.categoryEn}
+                    {/* Quick Sample Test Scenarios */}
+                    <div className="mt-2 pt-2.5 border-t border-slate-100 w-full" onClick={(e) => e.stopPropagation()}>
+                      <p className="text-[10.5px] font-semibold text-slate-500 mb-1.5">
+                        {isAr ? "أو جرّب أحد الأمثلة السريعة:" : "Or test with quick sample scenarios:"}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 justify-center">
+                        {[
+                          { labelEn: "💧 Roof Water Leak", labelAr: "💧 تسرب مياه السطح", hint: "roof water leak membrane" },
+                          { labelEn: "🧱 Concrete Structural Crack", labelAr: "🧱 شروخ خرسانية إنشائية", hint: "concrete crack structural repair injection" },
+                          { labelEn: "🏢 Epoxy Warehouse Floor", labelAr: "🏢 أرضيات إيبوكسي مستودعات", hint: "epoxy flooring coating" },
+                          { labelEn: "🚰 GRP Water Tank", labelAr: "🚰 خزان مياه فايبرجلاس", hint: "grp fiberglass water tank lining" },
+                          { labelEn: "🏊 Pool Waterproofing", labelAr: "🏊 عزل مسبح", hint: "swimming pool waterproofing" },
+                        ].map((sample, sIdx) => (
+                          <button
+                            key={sIdx}
+                            type="button"
+                            onClick={() => {
+                              setIsAnalyzingImage(true);
+                              setImageSearchError(null);
+                              setImageSearchData(null);
+                              setImagePreview("https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?w=500&q=80");
+                              fetch("/api/image-search", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify({ hint: sample.hint }),
+                              })
+                                .then((r) => r.json())
+                                .then((data) => {
+                                  if (!data.success) throw new Error(data.error);
+                                  setImageSearchData(data);
+                                })
+                                .catch((err) => setImageSearchError(err.message))
+                                .finally(() => setIsAnalyzingImage(false));
+                            }}
+                            className="px-2.5 py-1 text-[10.5px] font-medium rounded-lg bg-white border border-slate-200 hover:border-[#01a9a0] hover:text-[#01a9a0] text-slate-700 transition-colors shadow-2xs cursor-pointer"
+                          >
+                            {isAr ? sample.labelAr : sample.labelEn}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. Analyzing / Scanning State */}
+                {isAnalyzingImage && (
+                  <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-[#f0faf9]/60 to-white rounded-2xl border border-[#01a9a0]/20 text-center gap-3">
+                    {imagePreview && (
+                      <div className="relative w-36 h-28 rounded-xl overflow-hidden shadow-md border-2 border-[#01a9a0]/50 bg-slate-900">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={imagePreview} alt="Uploaded preview" className="w-full h-full object-cover opacity-80" />
+                        <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#00ffc8] to-transparent shadow-[0_0_15px_#00ffc8] animate-[bounce_1.5s_infinite]" />
+                      </div>
+                    )}
+                    <div className="flex items-center gap-2 text-[#01a9a0] font-bold text-xs sm:text-sm">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>
+                        {isAr ? "جارٍ تحليل الصورة بالذكاء الاصطناعي ومطابقة المواصفات..." : "Analyzing photo with Gemini Vision AI..."}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 max-w-xs">
+                      {isAr
+                        ? "يتم فحص تشققات الخرسانة وعوازل الأسطح والمواد المناسبة لمعايير الإمارات"
+                        : "Matching defects against waterproofing systems, concrete repair, & epoxy coatings"}
+                    </p>
+                  </div>
+                )}
+
+                {/* 3. Error Message */}
+                {imageSearchError && !isAnalyzingImage && (
+                  <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-2.5">
+                    <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                    <div className="flex-1 text-xs">
+                      <p className="font-bold">{isAr ? "تنبيه التحليل" : "Analysis Notice"}</p>
+                      <p className="mt-0.5 text-rose-700">{imageSearchError}</p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setImagePreview(null);
+                          setImageSearchError(null);
+                          fileInputRef.current?.click();
+                        }}
+                        className="mt-2 inline-flex items-center gap-1 font-bold text-rose-700 hover:underline cursor-pointer"
+                      >
+                        <RefreshCw className="w-3 h-3" />
+                        <span>{isAr ? "محاولة بصورة أخرى" : "Try with another image"}</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. Search Results Display */}
+                {imageSearchData && !isAnalyzingImage && (
+                  <div className="space-y-3">
+                    {/* Summary Card */}
+                    <div className="bg-gradient-to-br from-[#f0faf9] via-white to-slate-50 border border-[#01a9a0]/30 rounded-2xl p-3.5 shadow-2xs">
+                      <div className="flex items-start gap-3">
+                        {imagePreview && (
+                          <div className="w-16 h-16 rounded-xl overflow-hidden border border-[#01a9a0]/30 shadow-xs shrink-0 bg-slate-100">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={imagePreview} alt="Scanned item" className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-extrabold uppercase tracking-wider bg-[#01a9a0] text-white">
+                              {imageSearchData.category}
+                            </span>
+                            <span className="px-2 py-0.5 rounded-full text-[9.5px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
+                              <CheckCircle2 className="w-2.5 h-2.5" />
+                              {isAr ? "مطابقة معتمدة" : "High Match"}
+                            </span>
+                            <span className="text-[9.5px] text-slate-400 font-mono">
+                              {imageSearchData.aiSource === "gemini" ? "⚡ Gemini" : "✓ Verified Index"}
+                            </span>
+                          </div>
+                          <h4 className="font-extrabold text-xs sm:text-sm text-slate-900 leading-snug truncate">
+                            {isAr ? imageSearchData.detectedAr : imageSearchData.detectedEn}
+                          </h4>
+                          <p className="text-[11px] text-slate-600 mt-0.5 line-clamp-2 leading-relaxed">
+                            {isAr ? imageSearchData.descriptionAr : imageSearchData.descriptionEn}
                           </p>
                         </div>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
                     </div>
-                  );
-                })}
-              </div>
-            ) : (
-              /* Filtered Search Results */
-              <div className="space-y-1 divide-y divide-slate-100">
-                {filteredResults.length > 0 ? (
-                  filteredResults.map((item) => {
-                    const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
-                    const displayName = isAr && item.nameAr ? item.nameAr : item.name;
-                    const displayDesc = isAr && item.descAr ? item.descAr : item.desc;
-                    const displayCategory = isAr && item.categoryAr ? item.categoryAr : item.category;
 
-                    return (
-                      <div
-                        key={item.id}
-                        onClick={() => handleSelectResult(item)}
-                        className="p-3 rounded-2xl hover:bg-[#f0faf9] cursor-pointer transition-colors flex items-center justify-between gap-3 group"
-                      >
-                        <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                          <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
-                            {item.category === "Product" && <Package className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Service" && <Wrench className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Solution" && <ShieldCheck className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Project" && <Building2 className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Industry" && <HardHat className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Resource" && <FileText className="w-5 h-5 stroke-[2]" />}
-                            {item.category === "Page" && <ExternalLink className="w-5 h-5 stroke-[2]" />}
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2 mb-0.5">
-                              <span
-                                className={`text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}
-                              >
-                                {displayCategory}
-                              </span>
-                              <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
-                                {highlightMatch(displayName, searchQuery)}
-                              </h4>
-                            </div>
-                            <p className="text-xs text-slate-500 line-clamp-1 leading-relaxed">
-                              {displayDesc}
-                            </p>
-                          </div>
-                        </div>
-
-                        <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
+                    {/* Matched Items */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <p className="font-extrabold text-[11px] uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+                          <Sparkles className="w-3 h-3 text-[#01a9a0]" />
+                          <span>{isAr ? "الخدمات والحلول المطابقة بالموقع:" : "Matching Services & Solutions:"}</span>
+                        </p>
+                        <span className="text-[10px] font-bold text-slate-400">
+                          {imageSearchData.matchedItems.length} {isAr ? "نتائج" : "results"}
+                        </span>
                       </div>
-                    );
-                  })
-                ) : (
-                  <div className="py-8 px-4 text-center">
-                    <p className="text-sm font-bold text-slate-800">
-                      {isAr ? "لم نجد نتائج لـ" : "No results for"} "{searchQuery}"
-                    </p>
-                    <p className="text-xs text-slate-400 mt-1">
-                      {isAr
-                        ? "جرّب البحث باسم خدمة (عزل، إيبوكسي، كومبو) أو حل أو مشروع"
-                        : "Try searching for service names (epoxy, combo, waterproofing) or solutions"}
-                    </p>
-                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+
+                      <div className="space-y-1.5 max-h-44 overflow-y-auto pr-1">
+                        {imageSearchData.matchedItems.map((item, idx) => {
+                          const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
+                          return (
+                            <div
+                              key={idx}
+                              onClick={() => handleSelectResult(item)}
+                              className="flex items-center justify-between p-2.5 rounded-xl bg-white hover:bg-[#f0faf9] border border-slate-200 hover:border-[#01a9a0] transition-all cursor-pointer group shadow-2xs"
+                            >
+                              <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                                <div className="w-8 h-8 rounded-lg bg-[#f0faf9] group-hover:bg-[#01a9a0] text-[#01a9a0] group-hover:text-white flex items-center justify-center shrink-0 transition-colors">
+                                  {item.category === "Product" && <Package className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Service" && <Wrench className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Solution" && <ShieldCheck className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Project" && <Building2 className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Industry" && <HardHat className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Resource" && <FileText className="w-3.5 h-3.5 stroke-[2]" />}
+                                  {item.category === "Page" && <ExternalLink className="w-3.5 h-3.5 stroke-[2]" />}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-1.5 mb-0.5">
+                                    <span className={`text-[8.5px] font-extrabold uppercase px-1.5 py-0.2 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}>
+                                      {isAr && item.categoryAr ? item.categoryAr : item.category}
+                                    </span>
+                                    <h5 className="font-bold text-xs text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
+                                      {isAr && item.nameAr ? item.nameAr : item.name}
+                                    </h5>
+                                  </div>
+                                  <p className="text-[10.5px] text-slate-500 truncate">
+                                    {isAr && item.descAr ? item.descAr : item.desc}
+                                  </p>
+                                </div>
+                              </div>
+                              <div className="flex items-center gap-1 text-[#01a9a0] shrink-0 text-[11px] font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform ml-1 rtl:ml-0 rtl:mr-1">
+                                <span>{isAr ? "عرض" : "View"}</span>
+                                <ArrowRight className="w-3 h-3 rtl:rotate-180" />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex items-center justify-between pt-2 border-t border-slate-100 gap-2 flex-wrap">
                       <button
                         type="button"
                         onClick={() => {
-                          router.push(`/services?search=${encodeURIComponent(searchQuery)}`);
-                          handleCollapse();
-                          onCloseMenu?.();
+                          setImagePreview(null);
+                          setImageSearchData(null);
+                          setImageSearchError(null);
+                          fileInputRef.current?.click();
                         }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
+                        className="px-2.5 py-1.5 rounded-xl border border-slate-200 hover:border-[#01a9a0] text-slate-700 hover:text-[#01a9a0] text-[11px] font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
                       >
-                        <Wrench className="w-3.5 h-3.5" />
-                        <span>{isAr ? "تصفح الخدمات" : "Browse Services"}</span>
+                        <Camera className="w-3 h-3" />
+                        <span>{isAr ? "فحص صورة أخرى" : "Scan Another Photo"}</span>
                       </button>
+
                       <button
                         type="button"
                         onClick={() => {
-                          router.push(`/solutions`);
                           handleCollapse();
+                          router.push("/get-a-quote");
                           onCloseMenu?.();
                         }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
+                        className="px-3 py-1.5 rounded-xl bg-[#01a9a0] hover:bg-[#00928a] text-white text-[11px] font-bold flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
                       >
-                        <ShieldCheck className="w-3.5 h-3.5" />
-                        <span>{isAr ? "تصفح الحلول" : "Browse Solutions"}</span>
+                        <span>{isAr ? "طلب معاينة وعرض سعر" : "Request Quote"}</span>
+                        <ArrowRight className="w-3 h-3 rtl:rotate-180" />
                       </button>
                     </div>
                   </div>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            /* REGULAR SEARCH VIEW: Filter Category Pills, Most Used / Results, Bottom Footer Bar */
+            <>
+              {/* 2. Filter Category Pills with Website Primary Theme */}
+              <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <button
+                  type="button"
+                  onClick={() => setIsImageSearchOpen(true)}
+                  className="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5 bg-gradient-to-r from-[#01a9a0] to-[#00bfa5] text-white hover:opacity-95 shadow-sm shadow-[#01a9a0]/30"
+                  title={isAr ? "البحث بالصورة الذكي" : "AI Image Search"}
+                >
+                  <Camera className="w-3.5 h-3.5" />
+                  <span>{isAr ? "بحث بالصورة" : "Image Search"}</span>
+                  <Sparkles className="w-3 h-3 text-amber-300" />
+                </button>
+                {FILTER_TABS.map((tab) => {
+                  const isSelected = activeTab === tab.key;
+                  return (
+                    <button
+                      key={tab.key}
+                      type="button"
+                      onClick={() => {
+                        setActiveTab(tab.key);
+                        setIsImageSearchOpen(false);
+                      }}
+                      className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${isSelected
+                        ? "bg-[#E6F7F6] text-[#01a9a0] shadow-sm shadow-[#E6F7F6]/35"
+                        : "bg-slate-100 hover:bg-[#f0faf9] text-slate-700 hover:text-[#01a9a0] border border-transparent hover:border-[#E6F7F6]/25"
+                        }`}
+                    >
+                      {isAr ? tab.labelAr : tab.labelEn}
+                    </button>
+                  );
+                })}
+              </div>
 
-          {/* 5. Bottom Footer Bar with Website Primary Button */}
-          <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3 shrink-0">
-            <span className="text-xs sm:text-sm text-slate-600 font-medium">
-              {isAr ? "هل تحتاج مساعدة في البحث؟" : "Need help finding something?"}
-            </span>
+              {/* 3. Section Header */}
+              <div className="mt-5 mb-2.5 flex items-center justify-between">
+                <p className="text-xs font-extrabold tracking-wider uppercase text-slate-800">
+                  {searchQuery.trim() === ""
+                    ? isAr
+                      ? "الأكثر استخداماً"
+                      : "Most used"
+                    : isAr
+                      ? "نتائج البحث"
+                      : "Search results"}
+                </p>
+                {searchQuery.trim() !== "" && (
+                  <span className="text-xs text-[#01a9a0] font-bold">
+                    {filteredResults.length} {isAr ? "نتيجة" : "results"}
+                  </span>
+                )}
+              </div>
 
-            {/* ASK AI Agent Button */}
-            <button
-              type="button"
-              onClick={() => {
-                if (searchQuery.trim()) {
-                  setAiQuestion(searchQuery.trim());
-                  handleAskAiSubmit(searchQuery.trim());
-                }
-                setShowAiModal(true);
-              }}
-              className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#E6F7F6] hover:bg-[#E6F7F6]/90 text-[#01a9a0] font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-[#E6F7F6]/30 hover:shadow-lg hover:shadow-[#E6F7F6]/50 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shrink-0"
-            >
-              <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300/30" />
-              <span>{isAr ? "اسأل المساعد الذكي" : "Ask AI Agent"}</span>
-            </button>
-          </div>
+              {/* 4. Results List / Most Used */}
+              <div className="flex-1 overflow-y-auto min-h-0 max-h-[300px] sm:max-h-[340px] pr-1">
+                {searchQuery.trim() === "" ? (
+                  /* Most used items */
+                  <div className="space-y-1">
+                    {mostUsedItems.map((item, idx) => {
+                      const Icon = item.icon;
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => {
+                            if (onSearch) {
+                              onSearch(isAr ? item.titleAr : item.titleEn, item.href);
+                            }
+                            router.push(item.href);
+                            handleCollapse();
+                            onCloseMenu?.();
+                          }}
+                          className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#f0faf9] transition-all cursor-pointer group"
+                        >
+                          <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                            <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
+                              <Icon className="w-5 h-5 stroke-[2]" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <h5 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
+                                {isAr ? item.titleAr : item.titleEn}
+                              </h5>
+                              <p className="text-xs text-slate-500 font-medium truncate mt-0.5">
+                                {isAr ? item.categoryAr : item.categoryEn}
+                              </p>
+                            </div>
+                          </div>
+                          <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  /* Filtered Search Results */
+                  <div className="space-y-1 divide-y divide-slate-100">
+                    {filteredResults.length > 0 ? (
+                      filteredResults.map((item) => {
+                        const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
+                        const displayName = isAr && item.nameAr ? item.nameAr : item.name;
+                        const displayDesc = isAr && item.descAr ? item.descAr : item.desc;
+                        const displayCategory = isAr && item.categoryAr ? item.categoryAr : item.category;
+
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={() => handleSelectResult(item)}
+                            className="p-3 rounded-2xl hover:bg-[#f0faf9] cursor-pointer transition-colors flex items-center justify-between gap-3 group"
+                          >
+                            <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                              <div className="w-11 h-11 rounded-2xl bg-[#f0faf9] text-[#01a9a0] border border-[#01a9a0]/20 group-hover:bg-[#01a9a0] group-hover:text-white group-hover:border-[#01a9a0] flex items-center justify-center shrink-0 transition-all duration-200 shadow-2xs">
+                                {item.category === "Product" && <Package className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Service" && <Wrench className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Solution" && <ShieldCheck className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Project" && <Building2 className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Industry" && <HardHat className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Resource" && <FileText className="w-5 h-5 stroke-[2]" />}
+                                {item.category === "Page" && <ExternalLink className="w-5 h-5 stroke-[2]" />}
+                              </div>
+                              <div className="min-w-0 flex-1">
+                                <div className="flex items-center gap-2 mb-0.5">
+                                  <span
+                                    className={`text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}
+                                  >
+                                    {displayCategory}
+                                  </span>
+                                  <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
+                                    {highlightMatch(displayName, searchQuery)}
+                                  </h4>
+                                </div>
+                                <p className="text-xs text-slate-500 line-clamp-1 leading-relaxed">
+                                  {displayDesc}
+                                </p>
+                              </div>
+                            </div>
+
+                            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-[#01a9a0] group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all shrink-0 ml-2 rtl:ml-0 rtl:mr-2 stroke-[2.2]" />
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="py-8 px-4 text-center">
+                        <p className="text-sm font-bold text-slate-800">
+                          {isAr ? "لم نجد نتائج لـ" : "No results for"} "{searchQuery}"
+                        </p>
+                        <p className="text-xs text-slate-400 mt-1">
+                          {isAr
+                            ? "جرّب البحث باسم خدمة (عزل، إيبوكسي، كومبو) أو حل أو مشروع"
+                            : "Try searching for service names (epoxy, combo, waterproofing) or solutions"}
+                        </p>
+                        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              router.push(`/services?search=${encodeURIComponent(searchQuery)}`);
+                              handleCollapse();
+                              onCloseMenu?.();
+                            }}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
+                          >
+                            <Wrench className="w-3.5 h-3.5" />
+                            <span>{isAr ? "تصفح الخدمات" : "Browse Services"}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              router.push(`/solutions`);
+                              handleCollapse();
+                              onCloseMenu?.();
+                            }}
+                            className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#f0faf9] hover:bg-[#e1f5f3] text-[#01a9a0] text-xs font-bold rounded-full transition-colors border border-[#01a9a0]/30 cursor-pointer"
+                          >
+                            <ShieldCheck className="w-3.5 h-3.5" />
+                            <span>{isAr ? "تصفح الحلول" : "Browse Solutions"}</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* 5. Bottom Footer Bar with Website Primary Button */}
+              <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between gap-3 shrink-0">
+                <span className="text-xs sm:text-sm text-slate-600 font-medium">
+                  {isAr ? "هل تحتاج مساعدة في البحث؟" : "Need help finding something?"}
+                </span>
+
+                {/* ASK AI Agent Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (searchQuery.trim()) {
+                      setAiQuestion(searchQuery.trim());
+                      handleAskAiSubmit(searchQuery.trim());
+                    }
+                    setShowAiModal(true);
+                  }}
+                  className="px-4 sm:px-5 py-2.5 rounded-xl bg-[#E6F7F6] hover:bg-[#E6F7F6]/90 text-[#01a9a0] font-bold text-xs sm:text-sm flex items-center gap-2 shadow-md shadow-[#E6F7F6]/30 hover:shadow-lg hover:shadow-[#E6F7F6]/50 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer shrink-0"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-300 fill-amber-300/30" />
+                  <span>{isAr ? "اسأل المساعد الذكي" : "Ask AI Agent"}</span>
+                </button>
+              </div>
+            </>
+          )}
         </div>
       )}
 
@@ -1272,306 +1563,6 @@ export default function ExpandableSearchBar({
                 <MessageCircle className="w-3.5 h-3.5" />
                 <span>{isAr ? "محادثة مهندس عبر واتساب" : "WhatsApp Engineer"}</span>
               </a>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-
-      {/* ─── AI IMAGE SEARCH MODAL ─── */}
-      {showImageModal && typeof document !== "undefined" && createPortal(
-        <div
-          className="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-in fade-in duration-200"
-          onClick={() => {
-            if (!isAnalyzingImage) setShowImageModal(false);
-          }}
-          dir={isAr ? "rtl" : "ltr"}
-        >
-          <div
-            className="relative bg-white rounded-3xl shadow-2xl max-w-xl w-full border border-teal-100 overflow-hidden flex flex-col max-h-[92vh] animate-in zoom-in-95 duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-teal-50/70 via-white to-teal-50/30 flex-shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#01a9a0] to-[#00bfa5] flex items-center justify-center text-white shadow-md shadow-[#01a9a0]/25 shrink-0">
-                  <Camera className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-extrabold text-sm sm:text-base text-slate-900 leading-tight">
-                      {isAr ? "البحث بالصورة بالذكاء الاصطناعي" : "AI Visual Defect & Solution Search"}
-                    </h3>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 uppercase tracking-wider flex items-center gap-1">
-                      <Sparkles className="w-2.5 h-2.5" />
-                      Gemini Vision
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-500 mt-0.5">
-                    {isAr
-                      ? "ارفع صورة لمعالجة التسربات، التشققات، الأرضيات أو مشاريع العزل"
-                      : "Upload a defect or project photo to match verified solutions & products"}
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowImageModal(false)}
-                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                title={isAr ? "إغلاق" : "Close"}
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Scrollable Body */}
-            <div className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm">
-              {/* Dropzone / Upload Area (when no results yet, or to change) */}
-              {!imagePreview && (
-                <div
-                  onDragOver={(e) => e.preventDefault()}
-                  onDrop={handleDrop}
-                  onClick={() => modalFileInputRef.current?.click()}
-                  className="border-2 border-dashed border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-teal-50/40 rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-all group flex flex-col items-center justify-center gap-3 bg-gradient-to-b from-slate-50 to-white"
-                >
-                  <div className="w-14 h-14 rounded-2xl bg-teal-50 group-hover:bg-teal-100/80 text-[#01a9a0] flex items-center justify-center transition-colors shadow-inner">
-                    <UploadCloud className="w-7 h-7 group-hover:scale-110 transition-transform" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-slate-800 text-sm sm:text-base">
-                      {isAr ? "انقر لاختيار صورة أو اسحب وأفلت هنا" : "Click to upload or drag & drop photo here"}
-                    </p>
-                    <p className="text-xs text-slate-500 mt-1">
-                      {isAr
-                        ? "يدعم صيغ PNG, JPG, WEBP حتى 10 ميغابايت"
-                        : "Supports PNG, JPG, WEBP up to 10MB"}
-                    </p>
-                  </div>
-                  <input
-                    ref={modalFileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleFileChange}
-                  />
-
-                  {/* Sample Test Scenarios */}
-                  <div className="mt-3 pt-3 border-t border-slate-200/60 w-full" onClick={(e) => e.stopPropagation()}>
-                    <p className="text-[11px] font-semibold text-slate-500 mb-2">
-                      {isAr ? "أو جرّب أحد الأمثلة السريعة:" : "Or test with quick sample scenarios:"}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 justify-center">
-                      {[
-                        { labelEn: "💧 Roof Water Leak", labelAr: "💧 تسرب مياه السطح", hint: "roof water leak membrane" },
-                        { labelEn: "🧱 Concrete Structural Crack", labelAr: "🧱 شروخ خرسانية إنشائية", hint: "concrete crack structural repair injection" },
-                        { labelEn: "🏢 Epoxy Warehouse Floor", labelAr: "🏢 أرضيات إيبوكسي مستودعات", hint: "epoxy flooring coating" },
-                        { labelEn: "🚰 GRP Water Tank", labelAr: "🚰 خزان مياه فايبرجلاس", hint: "grp fiberglass water tank lining" },
-                        { labelEn: "🏊 Pool Waterproofing", labelAr: "🏊 عزل مسبح", hint: "swimming pool waterproofing" },
-                      ].map((sample, sIdx) => (
-                        <button
-                          key={sIdx}
-                          type="button"
-                          onClick={() => {
-                            setIsAnalyzingImage(true);
-                            setImageSearchError(null);
-                            setImageSearchData(null);
-                            setImagePreview("https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?w=500&q=80");
-                            fetch("/api/image-search", {
-                              method: "POST",
-                              headers: { "Content-Type": "application/json" },
-                              body: JSON.stringify({ hint: sample.hint }),
-                            })
-                              .then((r) => r.json())
-                              .then((data) => {
-                                if (!data.success) throw new Error(data.error);
-                                setImageSearchData(data);
-                              })
-                              .catch((err) => setImageSearchError(err.message))
-                              .finally(() => setIsAnalyzingImage(false));
-                          }}
-                          className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-white border border-slate-200 hover:border-[#01a9a0] hover:text-[#01a9a0] text-slate-700 transition-colors shadow-2xs cursor-pointer"
-                        >
-                          {isAr ? sample.labelAr : sample.labelEn}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Analyzing / Scanning State */}
-              {isAnalyzingImage && (
-                <div className="flex flex-col items-center justify-center p-8 bg-gradient-to-b from-teal-50/50 to-white rounded-2xl border border-teal-100 text-center gap-4">
-                  {imagePreview && (
-                    <div className="relative w-44 h-36 rounded-xl overflow-hidden shadow-md border-2 border-teal-400/50 bg-slate-900">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={imagePreview} alt="Uploaded preview" className="w-full h-full object-cover opacity-80" />
-                      {/* Scanning Line */}
-                      <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-[#00ffc8] to-transparent shadow-[0_0_15px_#00ffc8] animate-[bounce_1.5s_infinite]" />
-                    </div>
-                  )}
-                  <div className="flex items-center gap-2 text-[#01a9a0] font-bold text-sm">
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    <span>
-                      {isAr ? "جارٍ تحليل الصورة بالذكاء الاصطناعي ومطابقة المواصفات..." : "Analyzing photo with Gemini Vision AI & matching services..."}
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-500 max-w-sm">
-                    {isAr
-                      ? "يتم فحص تشققات الخرسانة، تسربات المياه، طبقات العزل والأرضيات التخصصية وفق معايير بلدية دبي"
-                      : "Scanning visual patterns against concrete repair, waterproofing membranes, epoxy, and certified subcontracting index"}
-                  </p>
-                </div>
-              )}
-
-              {/* Error Message */}
-              {imageSearchError && !isAnalyzingImage && (
-                <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
-                  <div className="flex-1 text-xs">
-                    <p className="font-bold">{isAr ? "حدث خطأ أثناء التحليل" : "Analysis Notice"}</p>
-                    <p className="mt-0.5 text-rose-700">{imageSearchError}</p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setImagePreview(null);
-                        setImageSearchError(null);
-                        modalFileInputRef.current?.click();
-                      }}
-                      className="mt-2 inline-flex items-center gap-1 font-bold text-rose-700 hover:underline cursor-pointer"
-                    >
-                      <RefreshCw className="w-3.5 h-3.5" />
-                      <span>{isAr ? "محاولة بصورة أخرى" : "Try with another image"}</span>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Search Results Display */}
-              {imageSearchData && !isAnalyzingImage && (
-                <div className="space-y-4">
-                  {/* Analysis Summary Card */}
-                  <div className="bg-gradient-to-br from-teal-50/80 via-white to-slate-50 border border-teal-200/80 rounded-2xl p-4 shadow-xs">
-                    <div className="flex items-start gap-3.5">
-                      {imagePreview && (
-                        <div className="w-20 h-20 rounded-xl overflow-hidden border border-teal-200 shadow-sm shrink-0 bg-slate-100">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={imagePreview} alt="Scanned item" className="w-full h-full object-cover" />
-                        </div>
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-[#01a9a0] text-white">
-                            {imageSearchData.category}
-                          </span>
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1">
-                            <CheckCircle2 className="w-3 h-3" />
-                            {isAr ? "مطابقة معتمدة" : "High Match"}
-                          </span>
-                          <span className="text-[10px] text-slate-400 font-mono">
-                            {imageSearchData.aiSource === "gemini" ? "⚡ Gemini Multimodal" : "✓ Verified Catalog Index"}
-                          </span>
-                        </div>
-                        <h4 className="font-extrabold text-sm sm:text-base text-slate-900 leading-snug">
-                          {isAr ? imageSearchData.detectedAr : imageSearchData.detectedEn}
-                        </h4>
-                        <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                          {isAr ? imageSearchData.descriptionAr : imageSearchData.descriptionEn}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Matched Services / Products / Projects List */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <p className="font-extrabold text-xs uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-[#01a9a0]" />
-                        <span>{isAr ? "الحلول والمنتجات والخدمات المطابقة بالموقع:" : "Matching Services, Products & Solutions on Site:"}</span>
-                      </p>
-                      <span className="text-[11px] font-bold text-slate-400">
-                        {imageSearchData.matchedItems.length} {isAr ? "نتائج" : "results"}
-                      </span>
-                    </div>
-
-                    <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                      {imageSearchData.matchedItems.map((item, idx) => {
-                        const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
-                        return (
-                          <div
-                            key={idx}
-                            onClick={() => {
-                              setShowImageModal(false);
-                              handleSelectResult(item);
-                            }}
-                            className="flex items-center justify-between p-3 rounded-xl bg-white hover:bg-teal-50/60 border border-slate-200/80 hover:border-[#01a9a0] transition-all cursor-pointer group shadow-2xs"
-                          >
-                            <div className="flex items-center gap-3 min-w-0 flex-1">
-                              <div className="w-9 h-9 rounded-xl bg-[#f0faf9] group-hover:bg-[#01a9a0] text-[#01a9a0] group-hover:text-white flex items-center justify-center shrink-0 transition-colors shadow-2xs">
-                                {item.category === "Product" && <Package className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Service" && <Wrench className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Solution" && <ShieldCheck className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Project" && <Building2 className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Industry" && <HardHat className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Resource" && <FileText className="w-4 h-4 stroke-[2]" />}
-                                {item.category === "Page" && <ExternalLink className="w-4 h-4 stroke-[2]" />}
-                              </div>
-                              <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-2 mb-0.5">
-                                  <span className={`text-[9.5px] font-extrabold uppercase px-2 py-0.5 rounded-full border ${badge.bg} ${badge.text} ${badge.border}`}>
-                                    {isAr && item.categoryAr ? item.categoryAr : item.category}
-                                  </span>
-                                  <h5 className="font-bold text-xs sm:text-sm text-slate-900 group-hover:text-[#01a9a0] transition-colors truncate">
-                                    {isAr && item.nameAr ? item.nameAr : item.name}
-                                  </h5>
-                                </div>
-                                <p className="text-[11px] text-slate-500 truncate">
-                                  {isAr && item.descAr ? item.descAr : item.desc}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-1 text-[#01a9a0] shrink-0 text-xs font-bold group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform ml-2 rtl:ml-0 rtl:mr-2">
-                              <span>{isAr ? "عرض" : "View"}</span>
-                              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Re-upload or Quote CTA */}
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-100 gap-2 flex-wrap">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setImagePreview(null);
-                        setImageSearchData(null);
-                        setImageSearchError(null);
-                        modalFileInputRef.current?.click();
-                      }}
-                      className="px-3 py-1.5 rounded-xl border border-slate-200 hover:border-[#01a9a0] text-slate-700 hover:text-[#01a9a0] text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors"
-                    >
-                      <Camera className="w-3.5 h-3.5" />
-                      <span>{isAr ? "فحص صورة أخرى" : "Scan Another Photo"}</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowImageModal(false);
-                        handleCollapse();
-                        router.push("/get-a-quote");
-                        onCloseMenu?.();
-                      }}
-                      className="px-3.5 py-1.5 rounded-xl bg-[#01a9a0] hover:bg-[#00928a] text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm shadow-[#01a9a0]/30"
-                    >
-                      <span>{isAr ? "طلب معاينة وعرض سعر مجاني" : "Request Free Site Inspection & Quote"}</span>
-                      <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>,
