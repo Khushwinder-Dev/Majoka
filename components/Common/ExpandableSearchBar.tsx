@@ -1033,49 +1033,6 @@ export default function ExpandableSearchBar({
                         {isAr ? "يدعم PNG, JPG, WEBP حتى 10 ميغابايت" : "Supports PNG, JPG, WEBP up to 10MB"}
                       </p>
                     </div>
-
-                    {/* Quick Sample Test Scenarios */}
-                    <div className="mt-2 pt-2.5 border-t border-slate-100 w-full" onClick={(e) => e.stopPropagation()}>
-                      <p className="text-[10.5px] font-semibold text-slate-500 mb-1.5">
-                        {isAr ? "أو جرّب أحد الأمثلة السريعة:" : "Or test with quick sample scenarios:"}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 justify-center">
-                        {[
-                          { labelEn: "💧 Roof Water Leak", labelAr: "💧 تسرب مياه السطح", hint: "roof water leak membrane" },
-                          { labelEn: "🧱 Concrete Structural Crack", labelAr: "🧱 شروخ خرسانية إنشائية", hint: "concrete crack structural repair injection" },
-                          { labelEn: "🏢 Epoxy Warehouse Floor", labelAr: "🏢 أرضيات إيبوكسي مستودعات", hint: "epoxy flooring coating" },
-                          { labelEn: "🚰 GRP Water Tank", labelAr: "🚰 خزان مياه فايبرجلاس", hint: "grp fiberglass water tank lining" },
-                          { labelEn: "🏊 Pool Waterproofing", labelAr: "🏊 عزل مسبح", hint: "swimming pool waterproofing" },
-                        ].map((sample, sIdx) => (
-                          <button
-                            key={sIdx}
-                            type="button"
-                            onClick={() => {
-                              setIsAnalyzingImage(true);
-                              setIsImageSearchOpen(true);
-                              setImageSearchError(null);
-                              setImageSearchData(null);
-                              setImagePreview("https://images.unsplash.com/photo-1541888946425-d0fbb18615f3?w=500&q=80");
-                              fetch("/api/image-search", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ hint: sample.hint }),
-                              })
-                                .then((r) => r.json())
-                                .then((data) => {
-                                  if (!data.success) throw new Error(data.error);
-                                  setImageSearchData(data);
-                                })
-                                .catch((err) => setImageSearchError(err.message))
-                                .finally(() => setIsAnalyzingImage(false));
-                            }}
-                            className="px-2.5 py-1 text-[10.5px] font-medium rounded-lg bg-white border border-slate-200 hover:border-[#01a9a0] hover:text-[#01a9a0] text-slate-700 transition-colors shadow-2xs cursor-pointer"
-                          >
-                            {isAr ? sample.labelAr : sample.labelEn}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                 )}
 
