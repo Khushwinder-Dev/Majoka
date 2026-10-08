@@ -385,10 +385,10 @@ const HeroSection = () => {
                       : t.hero.pauseVideoHint
                     : t.hero.playVideoHint
                 }
-                className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-white/12 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110 shadow-[0_0_35px_rgba(0,194,178,0.35)] hover:shadow-[0_0_55px_rgba(0,194,178,0.65)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00c2b2]"
+                className="relative w-20 h-20 rounded-full bg-white/12 flex items-center justify-center cursor-pointer transition-all duration-500 hover:scale-110"
               >
                 {/* Inner Vibrant Teal Circle */}
-                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full bg-[#00c2b2] group-hover:bg-[#00d6c4] flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full bg-[#00c2b2] group-hover:bg-[#00d6c4] flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
                   {isPlayingVideo && !isVideoPaused ? (
                     <Pause className="w-6 h-6 sm:w-7 sm:h-7 text-white fill-white" />
                   ) : (
@@ -398,7 +398,7 @@ const HeroSection = () => {
               </button>
 
               {/* Play / Pause Hint on Hover */}
-              <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              {/* <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                 <span className="text-[11px] font-semibold text-white/90 bg-black/50 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/20">
                   {isPlayingVideo
                     ? isVideoPaused
@@ -406,7 +406,7 @@ const HeroSection = () => {
                       : t.hero.pauseVideoHint
                     : t.hero.playVideoHint}
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
