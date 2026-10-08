@@ -139,9 +139,9 @@ const News = () => {
   return (
     <div className="min-h-screen bg-white">
       <CommonHeader
-        title="Blogs"
-        breadcrumb="Blogs"
         imagePath="/banners/new/blogs.png"
+        showHeading={false}
+        showBreadcrumb={false}
         unoptimized
       />
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Handshake } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 /* ─── DATA DEFINITIONS ─────────────────────────────────────────────────── */
 
@@ -344,81 +345,12 @@ export default function SubcontractContent() {
   return (
     <div className="w-full bg-white selection:bg-[#01a9a0] selection:text-white" dir={direction}>
       {/* ─── SECTION 1: HERO SECTION ───────────────────────────────────── */}
-      <section className="relative w-full min-h-[580px] lg:min-h-[600px] flex items-center pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden">
-        {/* Background Image with Dark Tinted Gradient */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/banners/new/subcontracting.png"
-            alt="Reliable Subcontracting For Your Projects"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Multi-layered dark gradient overlay for optimal text contrast */}
-          {/* <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/45" /> */}
-          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" /> */}
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-2xl">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-5 sm:mb-6">
-              <Link
-                href="/"
-                className="text-white/85 hover:text-white transition-colors"
-              >
-                {isAr ? "الرئيسية" : "HOME"}
-              </Link>
-              <span className="text-[#01a9a0] font-bold">//</span>
-              <span className="text-[#01a9a0]">
-                {isAr ? "خدمات مقاولات الباطن" : "SUBCONTRACTING"}
-              </span>
-            </nav>
-
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold text-white tracking-tight leading-[1.15]">
-              {isAr ? (
-                <>
-                  مقاولات باطن موثوقة
-                  <br />
-                  لمشاريعكم الإنشائية
-                </>
-              ) : (
-                <>
-                  Reliable Subcontracting
-                  <br />
-                  <p className="text-[#01a9a0]">For Your Projects</p>
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-gray-200 text-sm sm:text-base lg:text-[17px] leading-relaxed mt-5 max-w-xl font-normal">
-              {isAr
-                ? "خدمات متخصصة في العزل المائي والمقاولات الدقيقة تسلّم بجودة عالية، وأمان تام، وتنسيق هندسي موثوق للمشاريع."
-                : "Professional waterproofing and specialized contracting services delivered with quality, safety, and reliable project coordination."}
-            </p>
-
-            {/* CTA Button */}
-            <div className="mt-8 sm:mt-10">
-              <Link
-                href="/get-a-quote"
-                className="inline-flex items-center gap-3.5 bg-[#01a9a0] hover:bg-[#008f87] text-white font-bold text-xs sm:text-[13px] tracking-wider uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded-full transition-all duration-300 shadow-lg shadow-[#01a9a0]/30 hover:shadow-[#01a9a0]/50 hover:scale-[1.02] group"
-              >
-                <span>
-                  {isAr
-                    ? "طلب تسعير مقاولة باطن"
-                    : "REQUEST A SUBCONTRACTING QUOTE"}
-                </span>
-                <span className="w-8 h-8 rounded-full bg-white text-[#01a9a0] flex items-center justify-center flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
-                  <ArrowRight className="w-4 h-4 text-[#01a9a0] rtl:rotate-180" />
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CommonHeader
+        imagePath="/banners/new/subcontracting.png"
+        showHeading={false}
+        showBreadcrumb={false}
+        unoptimized
+      />
 
       {/* ─── SECTION 2: CERTIFICATION — OUR COMMITMENT TO QUALITY (SINGLE ROW AT TOP) ─── */}
       <section className="w-full relative py-14 sm:py-16 lg:py-18 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-gray-100">

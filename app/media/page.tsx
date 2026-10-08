@@ -30,6 +30,7 @@ import {
   Check,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import CommonHeader from "@/components/Common/CommonHeader";
 import OurProjectsSection from "@/components/OurProjectsSection";
 import ProtectionServicesSection from "@/components/ProtectionServicesSection";
 import SolutionsListingSection from "@/components/SolutionsListingSection";
@@ -714,61 +715,14 @@ export default function MediaPage() {
     >
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO HEADER SECTION (Exact Match to Design Screenshot)
+          1. HERO HEADER SECTION (Media)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[380px] sm:h-[440px] md:h-[500px] lg:h-[600px] xl:h-[600px] flex items-center bg-[#041620] overflow-hidden">
-        {/* Background Image: Workstation, Camera, Laptop, Film Strips & Floating Cards */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/banners/new/media.png"
-            alt="Our Media Banner"
-            fill
-            priority
-            unoptimized
-            className={`object-cover object-center ${isArabic ? "scale-x-[-1]" : ""}`}
-          />
-          {/* Gentle Directional Dark Gradient Overlay for Crisp Text Legibility */}
-          <div
-            className={`absolute inset-0 pointer-events-none ${isArabic
-              ? "bg-gradient-to-l from-black/80 via-black/45 sm:via-black/30 to-transparent"
-              : "bg-gradient-to-r from-black/80 via-black/45 sm:via-black/30 to-transparent"
-              }`}
-          />
-        </div>
-
-        {/* Hero Content Container */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full pt-20 sm:pt-24 md:pt-28 pb-8">
-          <div className="max-w-lg lg:max-w-xl">
-            {/* Tagline: — FEATURED PROJECTS */}
-            <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="w-5 sm:w-6 h-[2px] bg-slate-300 inline-block" />
-              <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-gray-200">
-                {isArabic ? "مشاريع متميزة" : "FEATURED PROJECTS"}
-              </span>
-            </div>
-
-            {/* Main Headline: Our Media */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black text-white leading-[1.12] tracking-tight drop-shadow-md">
-              {isArabic ? (
-                <>
-                  معرض <span className="text-[#00DDCF]">الوسائط</span>
-                </>
-              ) : (
-                <>
-                  Our <span className="text-[#00DDCF]">Media</span>
-                </>
-              )}
-            </h1>
-
-            {/* Subtitle from Design */}
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-[15px] text-gray-200/90 leading-relaxed font-normal max-w-md drop-shadow-sm">
-              {isArabic
-                ? "تثبت شهاداتنا واعتماداتنا التزامنا الراسخ بتقديم حلول عزل مائي موثوقة وآمنة وعالية الجودة في الإمارات."
-                : "Our certifications demonstrate our commitment to delivering reliable, safe, and high-quality waterproofing solutions."}
-            </p>
-          </div>
-        </div>
-      </section>
+      <CommonHeader
+        imagePath="/banners/new/media.png"
+        showHeading={false}
+        showBreadcrumb={false}
+        unoptimized
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           OUR PROJECTS SECTION (From Landing Page)
