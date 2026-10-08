@@ -223,9 +223,9 @@ export default function Footer() {
         <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
           {/* ── 6-Column Navigation Grid ─────────────────────────────────── */}
           <div className="pt-14 sm:pt-16 lg:pt-18 pb-10 sm:pb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-y-8 sm:gap-8 lg:gap-5 xl:gap-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 footer-nav-grid gap-y-8 sm:gap-8 lg:gap-5 xl:gap-7">
               {/* COL 1 — Brand & About (from Reference Design) */}
-              <div className="flex flex-col col-span-1 sm:col-span-2 md:col-span-1 xl:col-span-1">
+              <div className="flex flex-col col-span-1 sm:col-span-2 md:col-span-3 xl:col-span-1">
                 {/* Title & Tagline */}
                 <div className="flex flex-col gap-0.5">
                   <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a2540] tracking-tight uppercase">
@@ -253,8 +253,8 @@ export default function Footer() {
                   </Link> */}
                 </p>
 
-                {/* Social Icons (Moved from bottom bar as in reference design) */}
-                <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap mt-5">
+                {/* Social Icons (5 circular icons strictly on 1 line) */}
+                <div className="flex items-center gap-2.5 sm:gap-3 flex-nowrap mt-5">
                   {socialLinks.map(({ href, Icon, label }) => (
                     <Link
                       key={label}
@@ -262,7 +262,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#008f88] text-white flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#008f88] text-white flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer shrink-0"
                     >
                       <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
                     </Link>
