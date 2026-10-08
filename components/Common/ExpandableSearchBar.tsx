@@ -1034,7 +1034,7 @@ export default function ExpandableSearchBar({
               </div>
 
               {/* Scrollable Body */}
-              <div className="mt-3 max-h-[340px] sm:max-h-[380px] overflow-y-auto pr-1 space-y-3">
+              <div className="mt-3 max-h-[340px] sm:max-h-[380px] overflow-y-auto slim-scrollbar pr-1.5 space-y-3">
                 {/* 1. Dropzone with Drag & Drop ("drap") and Explicit "Upload Image" Button */}
                 {!imagePreview && (
                   <div
@@ -1193,7 +1193,7 @@ export default function ExpandableSearchBar({
                         </span>
                       </div>
 
-                      <div className="space-y-1.5 max-h-44 overflow-y-auto pr-1">
+                      <div className="space-y-1.5 max-h-44 overflow-y-auto slim-scrollbar pr-1.5">
                         {imageSearchData.matchedItems.map((item, idx) => {
                           const badge = CATEGORY_COLORS[item.category] || CATEGORY_COLORS.Page;
                           return (
@@ -1273,7 +1273,7 @@ export default function ExpandableSearchBar({
             /* REGULAR SEARCH VIEW: Filter Category Pills, Most Used / Results, Bottom Footer Bar */
             <>
               {/* 2. Filter Category Pills with Website Primary Theme */}
-              <div className="mt-4 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+              <div className="mt-4 flex items-center gap-2 overflow-x-auto slim-scrollbar pb-2">
                 <button
                   type="button"
                   onClick={() => setIsImageSearchOpen(true)}
@@ -1324,7 +1324,7 @@ export default function ExpandableSearchBar({
               </div>
 
               {/* 4. Results List / Most Used */}
-              <div className="flex-1 overflow-y-auto min-h-0 max-h-[300px] sm:max-h-[340px] pr-1">
+              <div className="flex-1 overflow-y-auto slim-scrollbar min-h-0 max-h-[300px] sm:max-h-[340px] pr-1.5">
                 {searchQuery.trim() === "" ? (
                   /* Most used items */
                   <div className="space-y-1">

@@ -100,4 +100,59 @@ video::-webkit-media-controls-overflow-menu-list {
   .footer-nav-grid {
     grid-template-columns: minmax(320px, 1.85fr) 1fr 1.08fr 1fr 1fr minmax(215px, 1.25fr) !important;
   }
-}
+}
+
+/* ─── Modern Slim, Clean Scrollbars ─────────────────────────────────────── */
+.slim-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.slim-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.slim-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slim-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.slim-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #01a9a0;
+}
+
+/* Global slim scrollbars to replace chunky 17px OS defaults */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #01a9a0;
+}
+
+/* Hide scrollbar utility when needed */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
