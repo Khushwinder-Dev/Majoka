@@ -16,6 +16,7 @@ interface HeaderProps {
   showBreadcrumb?: boolean;
   showBreadcrumbs?: boolean;
   className?: string;
+  unoptimized?: boolean;
 }
 
 const Header = ({
@@ -28,6 +29,7 @@ const Header = ({
   showBreadcrumb = true,
   showBreadcrumbs = true,
   className = "",
+  unoptimized = true,
 }: HeaderProps) => {
   useEffect(() => {
     AOS.init({
@@ -57,7 +59,7 @@ const Header = ({
             fill
             className="scale-110 transition-transform duration-[3000ms] hover:scale-100"
             priority
-            quality={90}
+            unoptimized={unoptimized}
           />
         </div>
         {/* Dark overlay with gradient */}

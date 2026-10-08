@@ -720,7 +720,7 @@ export default function MediaPage() {
         {/* Background Image: Workstation, Camera, Laptop, Film Strips & Floating Cards */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/mediaPageNew/HeroSection.png"
+            src="/banners/new/media.png"
             alt="Our Media Banner"
             fill
             priority

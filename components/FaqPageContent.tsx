@@ -291,12 +291,12 @@ export default function FaqPageContent() {
       <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[460px] xl:h-[490px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image */}
         <Image
-          src="/faqPage/Dubai modern skyline at twilight.png"
+          src="/banners/new/faqs.png"
           alt="Frequently Asked Questions Hero"
           fill
           priority
           unoptimized
-          className="object-left sm:object-center"
+          className="object-cover object-center"
         />
 
         {/* Top gradient for navbar clarity */}

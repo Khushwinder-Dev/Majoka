@@ -332,7 +332,7 @@ export default function DownloadPageContent() {
         {/* Background Image: Skyline over waterfront */}
         <div className="absolute inset-0">
           <Image
-            src="/downloadPage/Banner.png"
+            src="/banners/new/download.png"
             alt="Downloads Background Skyline"
             fill
             priority

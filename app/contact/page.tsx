@@ -72,9 +72,10 @@ export default function ContactPage() {
       <CommonHeader
         title="Contact Us to Start Your Project"
         breadcrumb="Contact"
-        imagePath="/banners/contactqw.png"
+        imagePath="/banners/new/contact-us.png"
         showHeading={false}
         showBreadcrumb={false}
+        unoptimized
       />
       <Contact />
       <Map />

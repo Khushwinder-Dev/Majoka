@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Reliable Subcontracting for Your Projects | Taj Al Rahmah",
     description:
       "Professional waterproofing and specialized contracting services delivered with quality, safety, and reliable project coordination.",
-    images: ["/subcontract/hero1.png"],
+    images: ["/banners/new/subcontracting.png"],
   },
 };
 

@@ -373,12 +373,12 @@ export default function GetAQuoteContent() {
       <section className="relative w-full h-[320px] sm:h-[380px] md:h-[430px] lg:h-[470px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Hero Banner from new assets */}
         <Image
-          src="/get-a-quote/hero-banner.png"
+          src="/banners/new/getAqoute.png"
           alt="Get a Quote Hero Banner"
           fill
           priority
           unoptimized
-          className="object-left sm:object-center"
+          className="object-cover object-center"
         />
 
         {/* Top gradient for transparent navbar readability */}

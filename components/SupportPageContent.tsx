@@ -137,12 +137,12 @@ export default function SupportPageContent() {
       <section className="relative w-full h-[340px] sm:h-[420px] md:h-[500px] lg:h-[600px] flex items-center bg-[#071d34] overflow-hidden">
         {/* Background Image: Support Specialists in headsets */}
         <Image
-          src="/support/Dubai modern skyline at twilight.png"
+          src="/banners/new/Support.png"
           alt="Support Hero Banner"
           fill
           priority
           unoptimized
-          className="object-center"
+          className="object-cover object-center"
         />
 
         {/* Top gradient for transparent navbar readability */}
