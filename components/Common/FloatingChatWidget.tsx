@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   MessageSquare,
   Phone,
@@ -20,15 +21,21 @@ import {
   AlertCircle,
   CheckCircle2,
   Edit3,
+  Camera,
+  UploadCloud,
+  ImageIcon,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { VoiceMicButton, useVoiceInput } from "@/components/ui/VoiceMicButton";
+import type { SearchResultItem } from "@/data/searchIndex";
 
 interface Message {
   id: string;
   sender: "user" | "ai";
   text: string;
   timestamp: string;
+  imageUrl?: string;
+  matchedItems?: SearchResultItem[];
 }
 
 interface ChatSession {
@@ -100,8 +107,76 @@ export default function FloatingChatWidget() {
   const [infoForm, setInfoForm] = useState({ name: "", email: "", phone: "" });
   const [infoErrors, setInfoErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
+  // Image Search / Photo Inspection State
+  const [selectedImage, setSelectedImage] = useState<{ file: File; previewUrl: string } | null>(null);
+  const [isAnalyzingImage, setIsAnalyzingImage] = useState(false);
+  const [isDraggingFile, setIsDraggingFile] = useState(false);
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleProcessFile = (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      alert(isArabic ? "يرجى اختيار ملف صورة صالح (JPG, PNG, WEBP)" : "Please select a valid image file (JPG, PNG, WEBP)");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert(isArabic ? "حجم الصورة كبير جداً (الحد الأقصى 10 ميغابايت)" : "Image size exceeds 10MB limit");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSelectedImage({
+        file,
+        previewUrl: reader.result as string,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleProcessFile(file);
+    }
+    e.target.value = "";
+  };
+
+  const handleImageSelectClick = () => {
+    if (!userInfo) {
+      setShowInfoForm(true);
+      return;
+    }
+    imageInputRef.current?.click();
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isDraggingFile) setIsDraggingFile(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.currentTarget.contains(e.relatedTarget as Node)) return;
+    setIsDraggingFile(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingFile(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith("image/")) {
+      if (!userInfo) {
+        setShowInfoForm(true);
+        return;
+      }
+      handleProcessFile(file);
+    }
+  };
 
   const voice = useVoiceInput({
     isArabic,
@@ -258,15 +333,15 @@ export default function FloatingChatWidget() {
         id: `${Date.now()}-ai-welcome`,
         sender: "ai",
         text: isArabic
-          ? `أهلاً بك يا ${newUserData.name}! 👋 يسعدنا تواصلك مع شركة تاج الرحمة للعزل وصيانة المباني. كيف يمكننا مساعدتك اليوم في مشروعك؟`
-          : `Hello ${newUserData.name}! 👋 Welcome to Taj Al Rahmah Waterproofing & Building Maintenance. How can I assist you with your project today?`,
+          ? `أهلاً بك يا ${newUserData.name}! 👋 يسعدنا تواصلك مع شركة تاج الرحمة للعزل وصيانة المباني. كيف يمكننا مساعدتك اليوم؟ يمكنك كتابة استفسارك أو إرفاق صورة للفحص الفوري.`
+          : `Hello ${newUserData.name}! 👋 Welcome to Taj Al Rahmah Waterproofing & Building Maintenance. How can I assist you with your project today? You can type your inquiry or upload a photo for instant inspection.`,
         timestamp: getCurrentTime(),
       };
       setMessages([welcomeMsg]);
       setQuickActions(
         isArabic
-          ? ["طلب معاينة وعرض سعر فوري", "ما هي أنظمة العزل المتوفرة؟", "اتصل بمهندس الموقع"]
-          : ["Request Free Inspection & Quote", "What waterproofing systems do you offer?", "Call an Engineer Directly"]
+          ? ["📷 فحص تسريب أو مشكلة بصورة", "طلب معاينة وعرض سعر فوري", "ما هي أنظمة العزل المتوفرة؟", "اتصل بمهندس الموقع"]
+          : ["📷 Inspect issue with photo", "Request Free Inspection & Quote", "What waterproofing systems do you offer?", "Call an Engineer Directly"]
       );
     }
   };
@@ -274,6 +349,12 @@ export default function FloatingChatWidget() {
   // Handle Quick Action clicks
   const handleActionClick = (action: string) => {
     const actionLower = action.toLowerCase();
+
+    // Photo inspection trigger
+    if (action.includes("📷") || action.includes("صورة") || actionLower.includes("photo")) {
+      handleImageSelectClick();
+      return;
+    }
 
     // Direct WhatsApp
     if (actionLower.includes("whatsapp") || action.includes("واتساب")) {
@@ -305,6 +386,96 @@ export default function FloatingChatWidget() {
     // If user info is not provided, trigger info form first
     if (!userInfo) {
       setShowInfoForm(true);
+      return;
+    }
+
+    // ── IF IMAGE IS ATTACHED: CALL /api/image-search ──
+    if (selectedImage) {
+      const currentImage = selectedImage;
+      setSelectedImage(null);
+
+      const query = (textToSend || inputValue).trim();
+      const userText = query || (isArabic ? "طلب فحص وتحليل الصورة" : "Photo inspection request");
+
+      const userMsg: Message = {
+        id: `${Date.now()}-user`,
+        sender: "user",
+        text: userText,
+        imageUrl: currentImage.previewUrl,
+        timestamp: getCurrentTime(),
+      };
+
+      const nextMessages = [...messages, userMsg];
+      setMessages(nextMessages);
+      setInputValue("");
+      setIsTyping(true);
+      setIsAnalyzingImage(true);
+
+      try {
+        const formData = new FormData();
+        formData.append("image", currentImage.file);
+        if (query) {
+          formData.append("hint", query);
+        }
+
+        const res = await fetch("/api/image-search", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || "Image inspection failed");
+        }
+
+        const detectedTitle = isArabic ? data.detectedAr : data.detectedEn;
+        const detectedDesc = isArabic ? data.descriptionAr : data.descriptionEn;
+
+        const replyText = isArabic
+          ? `🔍 **نتائج الفحص الذكي للصورة:**\n\n**${detectedTitle}**\n\n${detectedDesc}\n\nنوصي بالأنظمة والخدمات المعتمدة التالية لحل المشكلة نهائياً وضمان سلامة المبنى:`
+          : `🔍 **Smart Photo Inspection Results:**\n\n**${detectedTitle}**\n\n${detectedDesc}\n\nWe recommend our certified systems and services below to permanently resolve this issue:`;
+
+        const aiMsg: Message = {
+          id: `${Date.now()}-ai`,
+          sender: "ai",
+          text: replyText,
+          timestamp: getCurrentTime(),
+          matchedItems: Array.isArray(data.matchedItems) ? data.matchedItems.slice(0, 3) : [],
+        };
+
+        setMessages((prev) => [...prev, aiMsg]);
+        setQuickActions(
+          isArabic
+            ? [
+                "طلب معاينة مجانية لهذا العطل",
+                "استفسار عبر واتساب بخصوص هذه الصورة",
+                "اتصل بمهندس الموقع +971 52 749 2002",
+              ]
+            : [
+                "Book Free Site Inspection for this Issue",
+                "Chat on WhatsApp regarding this photo",
+                "Call Site Engineer +971 52 749 2002",
+              ]
+        );
+      } catch {
+        const fallbackAiMsg: Message = {
+          id: `${Date.now()}-ai-fallback`,
+          sender: "ai",
+          text: isArabic
+            ? `عذراً، لم نتمكن من تحليل الصورة تلقائياً الآن. يمكنك إرسال الصورة لمهندسنا عبر واتساب للمعاينة الفورية وتحديد الحل المناسب.`
+            : `We couldn't automatically analyze the photo at this moment. You can send the image directly to our site engineer via WhatsApp for immediate assessment.`,
+          timestamp: getCurrentTime(),
+        };
+        setMessages((prev) => [...prev, fallbackAiMsg]);
+        setQuickActions(
+          isArabic
+            ? ["إرسال الصورة عبر واتساب", "اتصل الآن +971 52 749 2002"]
+            : ["Send photo on WhatsApp", "Call +971 52 749 2002"]
+        );
+      } finally {
+        setIsTyping(false);
+        setIsAnalyzingImage(false);
+      }
       return;
     }
 
@@ -446,12 +617,14 @@ export default function FloatingChatWidget() {
   // Default Prompts (Image 3 reference style)
   const defaultPrompts = isArabic
     ? [
+      "📷 فحص تسريب أو مشكلة بواسطة صورة",
       "طلب معاينة وعرض سعر مجاني",
       "استكشف أنظمة العزل المائي والأسطح",
       "الاستفسار عن طلاء أرضيات الإيبوكسي",
       "طلب صيانة وإصلاح تسريبات المياه الطارئة",
     ]
     : [
+      "📷 Inspect a leak or issue with photo",
       "Get a Free Inspection & Quote",
       "Explore Waterproofing & Roof Systems",
       "Epoxy Floor Coating Services",
@@ -543,10 +716,30 @@ export default function FloatingChatWidget() {
 
           {/* ── TAB: CHAT ─────────────────────────────────────────────── */}
           {activeTab === "chat" && (
-            <div className="flex-1 flex flex-col min-h-0 bg-white">
+            <div
+              className="flex-1 flex flex-col min-h-0 bg-white relative"
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              {/* Drag & Drop Overlay */}
+              {isDraggingFile && (
+                <div className="absolute inset-0 bg-[#01a9a0]/92 backdrop-blur-xs z-30 flex flex-col items-center justify-center p-6 text-white text-center rounded-b-3xl animate-in fade-in duration-150 pointer-events-none">
+                  <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-3">
+                    <UploadCloud className="w-8 h-8 text-white animate-bounce" />
+                  </div>
+                  <p className="font-bold text-base">
+                    {isArabic ? "أفلت الصورة هنا للفحص الفوري" : "Drop photo here for instant AI analysis"}
+                  </p>
+                  <p className="text-xs text-white/80 mt-1">
+                    {isArabic ? "فحص تسريبات الأسطح، التشققات الخرسانية، أو أرضيات الإيبوكسي" : "Detect leaks, concrete cracks, or epoxy floor defects"}
+                  </p>
+                </div>
+              )}
+
               {/* ── FIRST-TIME USER INTAKE FORM (When no user info or user clicked edit) ── */}
               {(!userInfo || showInfoForm) ? (
-                <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col justify-center">
+                <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col justify-center slim-scrollbar">
                   <div className="max-w-md mx-auto w-full">
                     {/* Centered Logo */}
                     <div className="flex justify-center mb-3">
@@ -736,7 +929,7 @@ export default function FloatingChatWidget() {
                 /* ── STANDARD CHAT & WELCOME STREAM (When user info is saved) ── */
                 <>
                   {/* Messages & Welcome Container */}
-                  <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+                  <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 slim-scrollbar">
                     {messages.length === 0 ? (
                       /* ── Welcome Screen (Image 3) ── */
                       <div className="flex flex-col items-center pt-3 pb-2 text-center">
@@ -760,19 +953,41 @@ export default function FloatingChatWidget() {
 
                         {/* Quick suggestion prompt rows with ↗ icon */}
                         <div className="w-full space-y-2 mb-4">
-                          {defaultPrompts.map((prompt, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              onClick={() => handleSend(prompt)}
-                              className="w-full flex items-center justify-between text-left rtl:text-right px-3.5 py-2.5 rounded-xl border border-stone-200/80 hover:border-[#01a9a0] hover:bg-stone-50/70 text-xs sm:text-sm text-stone-700 hover:text-stone-900 transition-all duration-200 group cursor-pointer"
-                            >
-                              <span className="flex items-center gap-2">
-                                <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                <span>{prompt}</span>
-                              </span>
-                            </button>
-                          ))}
+                          {defaultPrompts.map((prompt, idx) => {
+                            const isPhotoPrompt = prompt.includes("📷");
+                            return (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => {
+                                  if (isPhotoPrompt) {
+                                    handleImageSelectClick();
+                                  } else {
+                                    handleSend(prompt);
+                                  }
+                                }}
+                                className={`w-full flex items-center justify-between text-left rtl:text-right px-3.5 py-2.5 rounded-xl border transition-all duration-200 group cursor-pointer text-xs sm:text-sm ${
+                                  isPhotoPrompt
+                                    ? "border-[#01a9a0]/40 bg-[#01a9a0]/5 hover:bg-[#01a9a0]/10 text-[#01a9a0] font-medium"
+                                    : "border-stone-200/80 hover:border-[#01a9a0] hover:bg-stone-50/70 text-stone-700 hover:text-stone-900"
+                                }`}
+                              >
+                                <span className="flex items-center gap-2">
+                                  {isPhotoPrompt ? (
+                                    <Camera className="w-4 h-4 text-[#01a9a0] group-hover:scale-110 transition-transform" />
+                                  ) : (
+                                    <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover:text-[#01a9a0] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                  )}
+                                  <span>{prompt}</span>
+                                </span>
+                                {isPhotoPrompt && (
+                                  <span className="text-[10px] bg-[#01a9a0] text-white px-2 py-0.5 rounded-full font-semibold">
+                                    {isArabic ? "فحص ذكي" : "AI Vision"}
+                                  </span>
+                                )}
+                              </button>
+                            );
+                          })}
                         </div>
 
                         {/* Category Filter Chips */}
@@ -822,7 +1037,17 @@ export default function FloatingChatWidget() {
                           >
                             {msg.sender === "user" ? (
                               <div className="max-w-[85%] bg-[#e0f7f5] text-stone-900 rounded-2xl rounded-tr-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed">
-                                {msg.text}
+                                {msg.imageUrl && (
+                                  <div className="mb-2 overflow-hidden rounded-xl border border-teal-200/80 bg-white max-w-[220px]">
+                                    <img
+                                      src={msg.imageUrl}
+                                      alt="Uploaded photo"
+                                      className="w-full h-auto max-h-48 object-cover cursor-pointer hover:opacity-95 transition-opacity"
+                                      onClick={() => window.open(msg.imageUrl, "_blank")}
+                                    />
+                                  </div>
+                                )}
+                                {msg.text && <div>{msg.text}</div>}
                               </div>
                             ) : (
                               <div className="flex items-start gap-2 max-w-[92%]">
@@ -837,6 +1062,32 @@ export default function FloatingChatWidget() {
                                 </div>
                                 <div className="bg-stone-50 border border-stone-200/70 text-stone-800 rounded-2xl rounded-tl-xs px-4 py-2.5 shadow-xs text-xs sm:text-sm leading-relaxed">
                                   {renderMessageContent(msg.text)}
+
+                                  {/* Recommended Solutions / Services Cards from Image Search */}
+                                  {Array.isArray(msg.matchedItems) && msg.matchedItems.length > 0 && (
+                                    <div className="mt-3 pt-2.5 border-t border-stone-200/80 space-y-1.5">
+                                      <span className="text-[11px] font-semibold text-stone-700 block">
+                                        {isArabic ? "الحلول والأنظمة المقترحة:" : "Recommended Solutions:"}
+                                      </span>
+                                      {msg.matchedItems.slice(0, 3).map((item, idx) => (
+                                        <Link
+                                          key={idx}
+                                          href={item.href}
+                                          className="flex items-center justify-between p-2 rounded-xl bg-white border border-stone-200 hover:border-[#01a9a0] hover:shadow-xs transition-all text-stone-800 hover:text-[#01a9a0] group/card"
+                                        >
+                                          <div className="min-w-0 pr-2 rtl:pr-0 rtl:pl-2">
+                                            <span className="text-[10px] font-medium text-[#01a9a0] block leading-tight">
+                                              {isArabic ? (item.categoryAr || item.category) : item.category}
+                                            </span>
+                                            <span className="text-xs font-semibold block truncate text-stone-900 group-hover/card:text-[#01a9a0]">
+                                              {isArabic ? (item.nameAr || item.name) : item.name}
+                                            </span>
+                                          </div>
+                                          <ArrowUpRight className="w-4 h-4 text-stone-400 group-hover/card:text-[#01a9a0] group-hover/card:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform flex-shrink-0" />
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             )}
@@ -846,9 +1097,9 @@ export default function FloatingChatWidget() {
                           </div>
                         ))}
 
-                        {/* Typing Indicator */}
+                        {/* Typing / Analysis Indicator */}
                         {isTyping && (
-                          <div className="flex items-center gap-2 max-w-[80%]">
+                          <div className="flex items-center gap-2 max-w-[85%]">
                             <div className="w-7 h-7 rounded-full bg-[#01a9a0]/10 flex items-center justify-center flex-shrink-0 p-1">
                               <Image
                                 src="/logo.png"
@@ -858,11 +1109,18 @@ export default function FloatingChatWidget() {
                                 className="w-auto h-auto max-h-5 object-contain"
                               />
                             </div>
-                            <div className="bg-stone-100 rounded-2xl px-3.5 py-2 flex items-center gap-1.5">
-                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce" />
-                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.2s]" />
-                              <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.4s]" />
-                            </div>
+                            {isAnalyzingImage ? (
+                              <div className="bg-[#e6fbf9] border border-[#01a9a0]/30 rounded-2xl px-3.5 py-2 flex items-center gap-2 text-xs text-[#01a9a0] font-medium animate-pulse">
+                                <Sparkles className="w-3.5 h-3.5 animate-spin" />
+                                <span>{isArabic ? "جاري فحص الصورة بالذكاء الاصطناعي..." : "AI Vision analyzing photo..."}</span>
+                              </div>
+                            ) : (
+                              <div className="bg-stone-100 rounded-2xl px-3.5 py-2 flex items-center gap-1.5">
+                                <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce" />
+                                <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.2s]" />
+                                <span className="w-2 h-2 rounded-full bg-[#01a9a0] animate-bounce [animation-delay:0.4s]" />
+                              </div>
+                            )}
                           </div>
                         )}
 
@@ -897,6 +1155,46 @@ export default function FloatingChatWidget() {
 
                   {/* ── BOTTOM INPUT CARD (Image 3 & 4) ────────────────────────── */}
                   <div className="p-3 border-t border-stone-100 bg-white">
+                    {/* Selected Image Staged Preview Chip */}
+                    {selectedImage && (
+                      <div className="mb-2 p-2 bg-[#e6fbf9] border border-[#01a9a0]/30 rounded-xl flex items-center justify-between gap-2.5 animate-in fade-in slide-in-from-bottom-2 duration-150">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="relative w-11 h-11 rounded-lg overflow-hidden border border-[#01a9a0]/30 flex-shrink-0 bg-stone-100">
+                            <img
+                              src={selectedImage.previewUrl}
+                              alt="Preview"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <span className="text-xs font-semibold text-stone-900 truncate block">
+                              {selectedImage.file.name}
+                            </span>
+                            <span className="text-[10px] text-[#01a9a0] font-medium flex items-center gap-1">
+                              <Sparkles className="w-3 h-3" />
+                              {isArabic ? "جاهز للفحص بالذكاء الاصطناعي" : "Ready for AI Vision Analysis"}
+                            </span>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedImage(null)}
+                          title={isArabic ? "إزالة الصورة" : "Remove image"}
+                          className="p-1 rounded-full text-stone-400 hover:text-red-500 hover:bg-white/80 transition-colors flex-shrink-0 cursor-pointer"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+
+                    <input
+                      ref={imageInputRef}
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleImageFileChange}
+                    />
+
                     <div className="relative rounded-2xl border border-stone-200 bg-stone-50/70 p-2.5 focus-within:border-[#01a9a0] focus-within:bg-white focus-within:shadow-md transition-all">
                       <input
                         ref={inputRef}
@@ -911,12 +1209,27 @@ export default function FloatingChatWidget() {
                             handleSend();
                           }
                         }}
-                        placeholder={isArabic ? "اسأل الذكاء الاصطناعي أي شيء..." : "Ask AI anything..."}
-                        className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-20 rtl:pr-0 rtl:pl-20"
+                        placeholder={
+                          selectedImage
+                            ? (isArabic ? "أضف ملاحظة أو اضغط إرسال للفحص..." : "Add a note or press send to analyze...")
+                            : (isArabic ? "اسأل الذكاء الاصطناعي أو ارفع صورة..." : "Ask AI anything or upload photo...")
+                        }
+                        className="w-full bg-transparent text-xs sm:text-sm text-stone-800 placeholder-stone-400 focus:outline-hidden pr-24 rtl:pr-0 rtl:pl-24"
                       />
 
-                      {/* Right Input Action: Mic + Send Button */}
+                      {/* Right Input Action: Camera + Mic + Send Button */}
                       <div className="absolute right-2 rtl:right-auto rtl:left-2 bottom-1.5 flex items-center gap-1">
+                        {/* Camera / Image search button */}
+                        <button
+                          type="button"
+                          onClick={handleImageSelectClick}
+                          title={isArabic ? "فحص تسريب أو مشكلة بالصورة" : "Inspect issue with photo"}
+                          aria-label={isArabic ? "فحص بالصورة" : "Image inspection"}
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-stone-500 hover:text-[#01a9a0] hover:bg-[#01a9a0]/10 transition-colors cursor-pointer"
+                        >
+                          <Camera className="w-4 h-4" />
+                        </button>
+
                         {voice.isFieldActive("chatMessage") && (
                           <VoiceMicButton
                             isListening={voice.listeningField === "chatMessage"}
@@ -928,9 +1241,9 @@ export default function FloatingChatWidget() {
                         <button
                           type="button"
                           onClick={() => handleSend()}
-                          disabled={!inputValue.trim()}
+                          disabled={!inputValue.trim() && !selectedImage}
                           aria-label={isArabic ? "إرسال" : "Send message"}
-                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-xs ${inputValue.trim()
+                          className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-xs ${(inputValue.trim() || selectedImage)
                             ? "bg-[#01a9a0] text-white hover:bg-[#00c2b2] cursor-pointer active:scale-95"
                             : "bg-stone-200 text-stone-400 cursor-not-allowed opacity-60"
                             }`}
@@ -971,7 +1284,7 @@ export default function FloatingChatWidget() {
                 )}
               </div>
 
-              <div className="flex-1 overflow-y-auto space-y-2">
+              <div className="flex-1 overflow-y-auto space-y-2 slim-scrollbar">
                 {chatHistory.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center p-6 text-stone-400">
                     <Clock className="w-8 h-8 mb-2 opacity-50" />
