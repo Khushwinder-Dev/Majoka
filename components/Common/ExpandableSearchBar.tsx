@@ -35,6 +35,7 @@ import {
 } from "lucide-react";
 import { SITE_SEARCH_INDEX, SearchResultItem } from "@/data/searchIndex";
 import { useLanguage } from "@/context/LanguageContext";
+import toast from "react-hot-toast";
 
 import { createPortal } from "react-dom";
 
@@ -419,6 +420,7 @@ export default function ExpandableSearchBar({
 
   // Image Search State
   const [isImageSearchOpen, setIsImageSearchOpen] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isAnalyzingImage, setIsAnalyzingImage] = useState(false);
@@ -435,6 +437,7 @@ export default function ExpandableSearchBar({
   } | null>(null);
   const [imageSearchError, setImageSearchError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
 
   const processImageFile = async (file: File) => {
     if (!file) return;
@@ -507,6 +510,8 @@ export default function ExpandableSearchBar({
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
     const file = e.dataTransfer.files?.[0];
     if (file) {
       processImageFile(file);
@@ -687,13 +692,30 @@ export default function ExpandableSearchBar({
   };
 
   const handleVoiceSearch = () => {
-    if (!speechSupported || typeof window === "undefined") return;
+    if (typeof window === "undefined") return;
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      toast.error(
+        isAr
+          ? "خاصية الإدخال الصوتي غير مدعومة في هذا المتصفح. يرجى استخدام متصفح Chrome أو Edge أو Safari."
+          : "Voice search is not supported in this browser. Please use Chrome, Edge, or Safari.",
+        { duration: 4000 }
+      );
+      return;
+    }
+
+    if (isListening) {
+      try {
+        recognitionRef.current?.stop();
+      } catch {}
+      setIsListening(false);
+      return;
+    }
 
     try {
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) return;
-
       const recognition: SpeechRecognitionInstance = new SpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
@@ -701,22 +723,21 @@ export default function ExpandableSearchBar({
 
       recognition.onstart = () => {
         setIsListening(true);
-        setIsImageSearchOpen(false);
       };
       recognition.onresult = (event: SpeechRecognitionEvent) => {
         const transcript = event.results[0][0].transcript;
-        setSearchQuery(transcript);
-        setIsImageSearchOpen(false);
-        setIsListening(false);
+        if (transcript) {
+          setSearchQuery(transcript);
+          setIsImageSearchOpen(false);
+          setIsListening(false);
+          handleExecuteSearch(transcript);
+        }
       };
       recognition.onerror = () => setIsListening(false);
       recognition.onend = () => setIsListening(false);
 
-      if (isListening) {
-        recognition.stop();
-      } else {
-        recognition.start();
-      }
+      recognitionRef.current = recognition;
+      recognition.start();
     } catch {
       setIsListening(false);
     }
@@ -905,23 +926,56 @@ export default function ExpandableSearchBar({
               className="flex-1 bg-transparent text-sm sm:text-base text-slate-900 placeholder-slate-400 outline-none min-w-0 font-medium"
             />
 
-            {/* Image Search Camera Button */}
+            {/* Clear Query X */}
+            {searchQuery.length > 0 && (
+              <button
+                type="button"
+                onClick={handleClearQuery}
+                className="p-1.5 text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9] rounded-full transition-colors shrink-0 cursor-pointer"
+                title={isAr ? "مسح النص" : "Clear text"}
+                aria-label="Clear text"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+
+            {/* Voice Search (Always persistent, never vanishes on blur or camera click) */}
+            {mounted && (
+              <button
+                type="button"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={handleVoiceSearch}
+                className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${
+                  isListening
+                    ? "bg-red-500 text-white animate-pulse shadow-xs"
+                    : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
+                }`}
+                title={
+                  isListening
+                    ? (isAr ? "جارٍ الاستماع..." : "Listening...")
+                    : (isAr ? "البحث الصوتي" : "Voice search")
+                }
+                aria-label="Voice search"
+              >
+                {isListening ? (
+                  <MicOff className="w-4 h-4" />
+                ) : (
+                  <Mic className="w-4 h-4" />
+                )}
+              </button>
+            )}
+
+            {/* Image Search Camera Button (Toggles panel; does NOT immediately force open file chooser) */}
             <button
               type="button"
+              onMouseDown={(e) => e.preventDefault()}
               onClick={(e) => {
                 e.stopPropagation();
-                if (!isImageSearchOpen) {
-                  setIsImageSearchOpen(true);
-                  if (!imagePreview && !imageSearchData) {
-                    fileInputRef.current?.click();
-                  }
-                } else {
-                  fileInputRef.current?.click();
-                }
+                setIsImageSearchOpen((prev) => !prev);
               }}
               className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${
                 isImageSearchOpen
-                  ? "bg-[#01a9a0] text-white shadow-xs"
+                  ? "bg-[#01a9a0] text-white shadow-xs ring-2 ring-[#01a9a0]/30"
                   : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
               }`}
               title={isAr ? "البحث بالصورة" : "Search by Image"}
@@ -937,37 +991,6 @@ export default function ExpandableSearchBar({
               onChange={handleFileChange}
             />
 
-            {/* Voice Search */}
-            {speechSupported && !searchQuery && (isInputFocused || isListening) && (
-              <button
-                type="button"
-                onMouseDown={(e) => e.preventDefault()}
-                onClick={handleVoiceSearch}
-                className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${isListening
-                  ? "bg-red-500 text-white animate-pulse"
-                  : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
-                  }`}
-                title={isListening ? "Listening..." : "Voice search"}
-              >
-                {isListening ? (
-                  <MicOff className="w-4 h-4" />
-                ) : (
-                  <Mic className="w-4 h-4" />
-                )}
-              </button>
-            )}
-
-            {/* Clear Query X */}
-            {searchQuery.length > 0 && (
-              <button
-                type="button"
-                onClick={handleClearQuery}
-                className="p-1 text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9] rounded-full transition-colors shrink-0 cursor-pointer"
-                title={isAr ? "مسح النص" : "Clear text"}
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
 
             {/* Close button */}
             <button
@@ -1014,25 +1037,69 @@ export default function ExpandableSearchBar({
 
               {/* Scrollable Body */}
               <div className="mt-3 max-h-[340px] sm:max-h-[380px] overflow-y-auto pr-1 space-y-3">
-                {/* 1. Dropzone (when no image preview yet) */}
+                {/* 1. Dropzone with Drag & Drop ("drap") and Explicit "Upload Image" Button */}
                 {!imagePreview && (
                   <div
-                    onDragOver={(e) => e.preventDefault()}
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsDragging(true);
+                    }}
+                    onDragEnter={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsDragging(true);
+                    }}
+                    onDragLeave={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsDragging(false);
+                    }}
                     onDrop={handleDrop}
                     onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 rounded-2xl p-5 text-center cursor-pointer transition-all group flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-slate-50/50 to-white"
+                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 group flex flex-col items-center justify-center gap-3 ${
+                      isDragging
+                        ? "border-[#01a9a0] bg-[#f0faf9] scale-[1.01] shadow-md shadow-[#01a9a0]/15"
+                        : "border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 bg-gradient-to-b from-slate-50/60 to-white"
+                    }`}
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] flex items-center justify-center transition-colors shadow-inner">
-                      <UploadCloud className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                    <div
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-inner ${
+                        isDragging
+                          ? "bg-[#01a9a0] text-white scale-110 shadow-md shadow-[#01a9a0]/30"
+                          : "bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] group-hover:scale-105"
+                      }`}
+                    >
+                      <UploadCloud className="w-7 h-7" />
                     </div>
-                    <div>
+
+                    <div className="space-y-1">
                       <p className="font-bold text-slate-800 text-xs sm:text-sm">
-                        {isAr ? "انقر لاختيار صورة أو اسحب وأفلت هنا" : "Click to upload or drag & drop photo"}
+                        {isDragging
+                          ? (isAr ? "أفلت الصورة هنا للبدء بالتحليل" : "Drop your image here to analyze")
+                          : (isAr ? "اسحب وأفلت الصورة هنا" : "Drag and drop your image here")}
                       </p>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
-                        {isAr ? "يدعم PNG, JPG, WEBP حتى 10 ميغابايت" : "Supports PNG, JPG, WEBP up to 10MB"}
+                      <p className="text-[11px] text-slate-500 font-medium">
+                        {isAr ? "أو اضغط بالأسفل لاختيار ملف من جهازك" : "or click below to choose a file from your device"}
                       </p>
                     </div>
+
+                    {/* Dedicated Upload Image Button / Text Badge */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        fileInputRef.current?.click();
+                      }}
+                      className="mt-0.5 px-4 py-2 rounded-xl bg-[#01a9a0] hover:bg-[#00928a] text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 shadow-sm shadow-[#01a9a0]/25 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                    >
+                      <ImageIcon className="w-4 h-4" />
+                      <span>{isAr ? "رفع صورة" : "Upload Image"}</span>
+                    </button>
+
+                    <p className="text-[11px] text-slate-400">
+                      {isAr ? "يدعم PNG, JPG, WEBP (حتى 10 ميغابايت)" : "Supports PNG, JPG, WEBP (up to 10MB)"}
+                    </p>
                   </div>
                 )}
 
