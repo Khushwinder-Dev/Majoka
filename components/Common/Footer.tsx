@@ -23,6 +23,14 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
 function FooterHeading({ title }: { title: string }) {
   return (
     <div className="flex flex-col gap-2 mb-1">
@@ -190,12 +198,11 @@ export default function Footer() {
     { labelEn: "Subcontract", labelAr: "المقاولون من الباطن", href: "/subcontract" },
   ];
 
-  // Social Links
+  // Social Links (matching reference design: Facebook, Instagram, X, LinkedIn, YouTube)
   const socialLinks = [
-    { href: "https://wa.me/971527492002", Icon: WhatsAppIcon, label: "WhatsApp" },
     { href: "https://www.facebook.com/tajalrahmahuae", Icon: Facebook, label: "Facebook" },
     { href: "https://www.instagram.com/tajalrahmahuae", Icon: Instagram, label: "Instagram" },
-    { href: "https://x.com/tajalrahmahuae", Icon: Twitter, label: "X" },
+    { href: "https://x.com/tajalrahmahuae", Icon: XIcon, label: "X" },
     { href: "https://www.linkedin.com/company/tajalrahmah", Icon: Linkedin, label: "LinkedIn" },
     { href: "https://youtube.com/@tajalrahmahuae", Icon: Youtube, label: "YouTube" },
   ];
@@ -216,8 +223,54 @@ export default function Footer() {
         <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
           {/* ── 6-Column Navigation Grid ─────────────────────────────────── */}
           <div className="pt-14 sm:pt-16 lg:pt-18 pb-10 sm:pb-12">
-            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-y-6 sm:gap-8 lg:gap-5 xl:gap-7">
-              {/* COL 1 — Services */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-y-8 sm:gap-8 lg:gap-5 xl:gap-7">
+              {/* COL 1 — Brand & About (from Reference Design) */}
+              <div className="flex flex-col col-span-1 sm:col-span-2 md:col-span-1 xl:col-span-1">
+                {/* Title & Tagline */}
+                <div className="flex flex-col gap-0.5">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-[#0a2540] tracking-tight uppercase">
+                    {isArabic ? "تاج الرحمة" : "Taj Al Rahmah"}
+                  </h3>
+                  <p className="text-base sm:text-[17px] font-bold text-[#01a9a0] tracking-tight">
+                    {isArabic ? t.footer.tagline2 : "Delivering Lasting Solutions"}
+                  </p>
+                </div>
+
+                {/* Description with Read More link */}
+                <p className="mt-3.5 text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                  {isArabic
+                    ? t.footer.companyDescription
+                    : "We provide reliable waterproofing and protective coating solutions for residential, commercial, and industrial projects, delivering durable protection through GRP & Fiberglass, Roof Systems, Epoxy, Bitumen Membrane, and Polyurea solutions."}{" "}
+                  {/* <Link
+                    href="/about-us"
+                    className="inline-flex items-center gap-1 font-bold text-[#01a9a0] hover:text-[#008f88] hover:underline transition-colors whitespace-nowrap"
+                  >
+                    <span>{isArabic ? "اقرأ المزيد" : "Read More"}</span>
+                    <ArrowRight
+                      className={`w-3.5 h-3.5 ${isArabic ? "rotate-180" : ""}`}
+                      strokeWidth={2.5}
+                    />
+                  </Link> */}
+                </p>
+
+                {/* Social Icons (Moved from bottom bar as in reference design) */}
+                <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap mt-5">
+                  {socialLinks.map(({ href, Icon, label }) => (
+                    <Link
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#01a9a0] hover:bg-[#008f88] text-white flex items-center justify-center shadow-sm hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+                    >
+                      <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {/* COL 2 — Services */}
               <div className="flex flex-col gap-4">
                 <FooterHeading title={t.footer.servicesTitle} />
                 <ul className="flex flex-col gap-2.5">
@@ -235,7 +288,7 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* COL 2 — Solutions */}
+              {/* COL 3 — Solutions */}
               <div className="flex flex-col gap-4">
                 <FooterHeading title={isArabic ? "حلولنا" : "Solutions"} />
                 <ul className="flex flex-col gap-2.5">
@@ -253,23 +306,7 @@ export default function Footer() {
                 </ul>
               </div>
 
-              {/* COL 3 — Projects */}
-              <div className="flex flex-col gap-4">
-                <FooterHeading title={isArabic ? "مشاريعنا" : "Projects"} />
-                <ul className="flex flex-col gap-2.5">
-                  {projectsItems.map((item, i) => (
-                    <li key={i}>
-                      <FooterLink href={item.href} label={isArabic ? item.labelAr : item.labelEn} />
-                    </li>
-                  ))}
-                  <li>
-                    <FooterLink
-                      href="/project"
-                      label={isArabic ? "عرض جميع المشاريع" : "View All Projects"}
-                    />
-                  </li>
-                </ul>
-              </div>
+              {/* (Projects column hidden as requested) */}
 
               {/* COL 4 — Resources */}
               <div className="flex flex-col gap-4">
@@ -417,36 +454,18 @@ export default function Footer() {
             </div>
 
             <div
-              className={`flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-6 ${isArabic ? "pl-0" : "pr-0"
+              className={`flex flex-col sm:flex-row items-center justify-between gap-4 lg:gap-6 ${isArabic ? "pl-0" : "pr-0"
                 }`}
             >
-
-
-              {/* Column 2: Copyright Text */}
-              <div className="text-center px-2 shrink-0">
+              {/* Copyright Text */}
+              <div className="text-center sm:text-start px-2 shrink-0">
                 <p className="text-sm lg:text-base text-stone-600 leading-normal">
                   {t.footer.copyright}
                 </p>
               </div>
 
-              {/* Column 1: Social Icons */}
-              <div className="flex items-center justify-center lg:justify-start gap-2 shrink-0">
-                {socialLinks.map(({ href, Icon, label }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="w-8 h-8 rounded-full bg-[#01a9a0] hover:bg-[#00c2b2] text-white flex items-center justify-center shadow-xs hover:-translate-y-0.5 transition-all duration-300"
-                  >
-                    <Icon className="w-3.5 h-3.5" />
-                  </Link>
-                ))}
-              </div>
-
-              {/* Column 3: Refund & Legal Policy Links */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-end gap-x-3 sm:gap-x-4 lg:gap-x-2 gap-y-2 text-sm lg:text-base text-stone-600">
+              {/* Refund & Legal Policy Links */}
+              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 sm:gap-x-4 lg:gap-x-3 gap-y-2 text-sm lg:text-base text-stone-600">
                 <Link
                   href="/sitemap"
                   className="hover:text-[#01a9a0] transition-colors whitespace-nowrap"
