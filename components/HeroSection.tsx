@@ -171,14 +171,13 @@ const HeroSection = () => {
     >
       {/* 1. Background Image Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
-          isPlayingVideo && !isVideoPaused
-            ? "opacity-0 pointer-events-none"
-            : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo && !isVideoPaused
+          ? "opacity-0 pointer-events-none"
+          : "opacity-100"
+          }`}
       >
         <Image
-          src="/banners/Home__.png"
+          src="/banners/Home__1.png"
           alt="Taj Al Rahmah City Skyline Hero"
           fill
           priority
@@ -190,11 +189,10 @@ const HeroSection = () => {
 
       {/* 2. Background Video Banner */}
       <div
-        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${
-          isPlayingVideo && !isVideoPaused
-            ? "opacity-100"
-            : "opacity-0 pointer-events-none"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out z-0 ${isPlayingVideo && !isVideoPaused
+          ? "opacity-100"
+          : "opacity-0 pointer-events-none"
+          }`}
       >
         <video
           ref={videoRef}
