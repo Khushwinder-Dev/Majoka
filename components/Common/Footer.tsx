@@ -237,7 +237,7 @@ export default function Footer() {
                 </div>
 
                 {/* Description with Read More link */}
-                <p className="mt-3.5 text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                <p className="mt-3.5 text-xs sm:text-sm lg:text-base text-stone-600 leading-relaxed font-normal">
                   {isArabic
                     ? t.footer.companyDescription
                     : "We provide reliable waterproofing and protective coating solutions for residential, commercial, and industrial projects, delivering durable protection through GRP & Fiberglass, Roof Systems, Epoxy, Bitumen Membrane, and Polyurea solutions."}{" "}
