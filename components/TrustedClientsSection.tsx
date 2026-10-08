@@ -27,9 +27,9 @@ const IMAGE_VARIANTS = {
 // ── Infinite auto-scroll logo strip ──────────────────────────────────────────
 function LogoStrip({ logos }: { logos: { name: string; src: string }[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const animRef  = useRef<number | null>(null);
+  const animRef = useRef<number | null>(null);
   const pauseRef = useRef(false);
-  const posRef   = useRef(0);
+  const posRef = useRef(0);
 
   // Triple the logos for a seamless loop
   const allLogos = [...logos, ...logos, ...logos];
@@ -107,9 +107,9 @@ function LogoStrip({ logos }: { logos: { name: string; src: string }[] }) {
 // ── Main component ────────────────────────────────────────────────────────────
 export default function TrustedClientsSection() {
   const { isArabic } = useLanguage();
-  const [isVideoOpen, setIsVideoOpen]     = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [direction, setDirection]         = useState(1);
+  const [direction, setDirection] = useState(1);
 
   const testimonials = [
     {
@@ -118,8 +118,8 @@ export default function TrustedClientsSection() {
         ? "من التخطيط الأولي للموقع وحتى التسليم النهائي، أثبت فريقهم الهندسي كفاءة استثنائية ونزاهة هيكلية وجودة تنفيذ دقيقة، مع الالتزام التام بالجدول الزمني والميزانية المحددة."
         : "From Initial Site Planning To Final Handover, Their Construction Team Delivered Structural Integrity, Precise Craftsmanship, And A Project Completed Right On Schedule And Within Budget.",
       author: isArabic ? "ريهان ميتشل" : "Rehan Mitchel",
-      role:   isArabic ? "المؤسس، الرئيس التنفيذي" : "Founder, CEO",
-      image:  "/media/testimonials/testimonial-bd-11.png",
+      role: isArabic ? "المؤسس، الرئيس التنفيذي" : "Founder, CEO",
+      image: "/media/testimonials/testimonial-bd-111.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
     {
@@ -128,8 +128,8 @@ export default function TrustedClientsSection() {
         ? "تعاملنا مع تاج الرحمة في مشاريع عزل وحماية معقدة، وكانت النتيجة تفوق التوقعات في كل مرحلة، سواء من حيث جودة المواد أو الالتزام العالي بالمواعيد."
         : "Working with Taj Al Rahmah on specialized waterproofing and protection exceeded our expectations at every stage, from material quality to flawless site execution.",
       author: isArabic ? "أحمد المنصوري" : "Ahmed Al Mansoori",
-      role:   isArabic ? "مدير العمليات الهندسية" : "VP of Operations",
-      image:  "/media/testimonials/testimonial-bd-2.png",
+      role: isArabic ? "مدير العمليات الهندسية" : "VP of Operations",
+      image: "/media/testimonials/testimonial-bd-2.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
     {
@@ -138,8 +138,8 @@ export default function TrustedClientsSection() {
         ? "فريق محترف يقدم استشارات هندسية دقيقة وحلولاً تدوم طويلاً، مما وفر علينا تكاليف صيانة مستقبلية كبيرة. نوصي بهم بثقة تامة."
         : "A truly professional team that provides precise technical consultations and long-lasting solutions, saving us significant future maintenance costs.",
       author: isArabic ? "كريم حسن" : "Karim Hassan",
-      role:   isArabic ? "مدير المشاريع الإنشائية" : "Director of Construction",
-      image:  "/media/testimonials/testimonial-bd-3.png",
+      role: isArabic ? "مدير المشاريع الإنشائية" : "Director of Construction",
+      image: "/media/testimonials/testimonial-bd-3.png",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     },
   ];
@@ -256,11 +256,10 @@ export default function TrustedClientsSection() {
               onClick={() => goToSlide(idx)}
               aria-label={`${isArabic ? "الشهادة" : "Go to testimonial"} ${idx + 1}`}
               aria-current={activeTestimonial === idx}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                activeTestimonial === idx
-                  ? "w-8 h-2.5 bg-[#01a9a0] shadow-[0_2px_8px_rgba(1,169,160,0.4)]"
-                  : "w-2.5 h-2.5 bg-stone-300 hover:bg-[#01a9a0]/50"
-              }`}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${activeTestimonial === idx
+                ? "w-8 h-2.5 bg-[#01a9a0] shadow-[0_2px_8px_rgba(1,169,160,0.4)]"
+                : "w-2.5 h-2.5 bg-stone-300 hover:bg-[#01a9a0]/50"
+                }`}
             />
           ))}
         </div>
