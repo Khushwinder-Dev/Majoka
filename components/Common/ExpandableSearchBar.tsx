@@ -972,7 +972,7 @@ export default function ExpandableSearchBar({
                 e.stopPropagation();
                 setIsImageSearchOpen((prev) => !prev);
               }}
-              className={`hidden p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${isImageSearchOpen
+              className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${isImageSearchOpen
                 ? "bg-[#01a9a0] text-white shadow-xs ring-2 ring-[#01a9a0]/30"
                 : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
                 }`}
@@ -1277,7 +1277,7 @@ export default function ExpandableSearchBar({
                 <button
                   type="button"
                   onClick={() => setIsImageSearchOpen(true)}
-                  className="px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5 bg-gradient-to-r from-[#01a9a0] to-[#00bfa5] text-white hover:opacity-95 shadow-sm shadow-[#01a9a0]/30"
+                  className="hidden px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5 bg-gradient-to-r from-[#01a9a0] to-[#00bfa5] text-white hover:opacity-95 shadow-sm shadow-[#01a9a0]/30"
                   title={isAr ? "البحث بالصورة الذكي" : "AI Image Search"}
                 >
                   <Camera className="w-3.5 h-3.5" />
