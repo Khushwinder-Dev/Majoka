@@ -108,6 +108,9 @@ export default function FloatingChatWidget() {
   const [infoErrors, setInfoErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
   // Image Search / Photo Inspection State
+  const [showImageUploadModal, setShowImageUploadModal] = useState(false);
+  const [modalImage, setModalImage] = useState<{ file: File; previewUrl: string } | null>(null);
+  const [modalNote, setModalNote] = useState("");
   const [selectedImage, setSelectedImage] = useState<{ file: File; previewUrl: string } | null>(null);
   const [isAnalyzingImage, setIsAnalyzingImage] = useState(false);
   const [isDraggingFile, setIsDraggingFile] = useState(false);
@@ -116,7 +119,7 @@ export default function FloatingChatWidget() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleProcessFile = (file: File) => {
+  const handleProcessModalFile = (file: File) => {
     if (!file.type.startsWith("image/")) {
       alert(isArabic ? "يرجى اختيار ملف صورة صالح (JPG, PNG, WEBP)" : "Please select a valid image file (JPG, PNG, WEBP)");
       return;
@@ -127,10 +130,11 @@ export default function FloatingChatWidget() {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      setSelectedImage({
+      setModalImage({
         file,
         previewUrl: reader.result as string,
       });
+      setShowImageUploadModal(true);
     };
     reader.readAsDataURL(file);
   };
@@ -138,7 +142,7 @@ export default function FloatingChatWidget() {
   const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      handleProcessFile(file);
+      handleProcessModalFile(file);
     }
     e.target.value = "";
   };
@@ -148,7 +152,17 @@ export default function FloatingChatWidget() {
       setShowInfoForm(true);
       return;
     }
-    imageInputRef.current?.click();
+    setShowImageUploadModal(true);
+  };
+
+  const handleSendFromModal = () => {
+    if (!modalImage) return;
+    const imgToSend = modalImage;
+    const noteToSend = modalNote;
+    setShowImageUploadModal(false);
+    setModalImage(null);
+    setModalNote("");
+    handleSend(noteToSend, imgToSend);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -174,7 +188,7 @@ export default function FloatingChatWidget() {
         setShowInfoForm(true);
         return;
       }
-      handleProcessFile(file);
+      handleProcessModalFile(file);
     }
   };
 
@@ -382,17 +396,21 @@ export default function FloatingChatWidget() {
   };
 
   // Send message
-  const handleSend = async (textToSend?: string) => {
+  const handleSend = async (textToSend?: string, imageOverride?: { file: File; previewUrl: string }) => {
     // If user info is not provided, trigger info form first
     if (!userInfo) {
       setShowInfoForm(true);
       return;
     }
 
+    const currentImage = imageOverride || selectedImage;
+
     // ── IF IMAGE IS ATTACHED: CALL /api/image-search ──
-    if (selectedImage) {
-      const currentImage = selectedImage;
+    if (currentImage) {
       setSelectedImage(null);
+      setShowImageUploadModal(false);
+      setModalImage(null);
+      setModalNote("");
 
       const query = (textToSend || inputValue).trim();
       const userText = query || (isArabic ? "طلب فحص وتحليل الصورة" : "Photo inspection request");
@@ -734,6 +752,177 @@ export default function FloatingChatWidget() {
                   <p className="text-xs text-white/80 mt-1">
                     {isArabic ? "فحص تسريبات الأسطح، التشققات الخرسانية، أو أرضيات الإيبوكسي" : "Detect leaks, concrete cracks, or epoxy floor defects"}
                   </p>
+                </div>
+              )}
+
+              {/* ── IMAGE SEARCH & UPLOAD MODAL (Matching Search Bar design) ── */}
+              {showImageUploadModal && (
+                <div className="absolute inset-0 bg-white/98 backdrop-blur-md z-40 flex flex-col p-4 animate-in fade-in zoom-in-95 duration-200">
+                  {/* Header */}
+                  <div className="flex items-center justify-between pb-3 border-b border-stone-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#01a9a0] to-[#00bfa5] flex items-center justify-center text-white shadow-xs shrink-0">
+                        <Camera className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="font-extrabold text-xs sm:text-sm text-stone-900 leading-tight">
+                          {isArabic ? "البحث بالصورة" : "Image Search"}
+                        </h3>
+                        <p className="text-[11px] text-stone-500 mt-0.5">
+                          {isArabic
+                            ? "ارفع صورة للبحث عن الخدمات والحلول المناسبة"
+                            : "Upload a photo to find matching services & solutions"}
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowImageUploadModal(false);
+                        setModalImage(null);
+                        setModalNote("");
+                      }}
+                      className="p-1.5 rounded-full text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer"
+                      title={isArabic ? "إغلاق" : "Close"}
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Body */}
+                  <div className="flex-1 overflow-y-auto slim-scrollbar py-3 flex flex-col justify-center">
+                    {!modalImage ? (
+                      /* Dropzone area with Drag & Drop and Upload Image Button */
+                      <div
+                        onDragOver={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsDraggingFile(true);
+                        }}
+                        onDragEnter={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsDraggingFile(true);
+                        }}
+                        onDragLeave={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsDraggingFile(false);
+                        }}
+                        onDrop={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setIsDraggingFile(false);
+                          const file = e.dataTransfer.files?.[0];
+                          if (file) handleProcessModalFile(file);
+                        }}
+                        onClick={() => imageInputRef.current?.click()}
+                        className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 group flex flex-col items-center justify-center gap-3 ${
+                          isDraggingFile
+                            ? "border-[#01a9a0] bg-[#f0faf9] scale-[1.01] shadow-md shadow-[#01a9a0]/15"
+                            : "border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 bg-gradient-to-b from-stone-50/60 to-white"
+                        }`}
+                      >
+                        <div
+                          className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-inner ${
+                            isDraggingFile
+                              ? "bg-[#01a9a0] text-white scale-110 shadow-md shadow-[#01a9a0]/30"
+                              : "bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] group-hover:scale-105"
+                          }`}
+                        >
+                          <UploadCloud className="w-7 h-7" />
+                        </div>
+
+                        <div className="space-y-1">
+                          <p className="font-bold text-stone-800 text-xs sm:text-sm">
+                            {isDraggingFile
+                              ? (isArabic ? "أفلت الصورة هنا للبدء بالتحليل" : "Drop your image here to analyze")
+                              : (isArabic ? "اسحب وأفلت الصورة هنا" : "Drag and drop your image here")}
+                          </p>
+                          <p className="text-[11px] text-stone-500 font-medium">
+                            {isArabic ? "أو اضغط بالأسفل لاختيار ملف من جهازك" : "or click below to choose a file from your device"}
+                          </p>
+                        </div>
+
+                        {/* Dedicated Upload Image Button */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            imageInputRef.current?.click();
+                          }}
+                          className="mt-0.5 px-4 py-2 rounded-xl bg-[#01a9a0] hover:bg-[#00928a] text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2 shadow-sm shadow-[#01a9a0]/25 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                        >
+                          <ImageIcon className="w-4 h-4" />
+                          <span>{isArabic ? "رفع صورة" : "Upload Image"}</span>
+                        </button>
+
+                        <p className="text-[11px] text-stone-400">
+                          {isArabic ? "يدعم PNG, JPG, WEBP (حتى 10 ميغابايت)" : "Supports PNG, JPG, WEBP (up to 10MB)"}
+                        </p>
+                      </div>
+                    ) : (
+                      /* Image Preview & Note Input before sending */
+                      <div className="space-y-3.5">
+                        <div className="relative rounded-2xl overflow-hidden border border-[#01a9a0]/30 bg-stone-900 max-h-52 flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={modalImage.previewUrl}
+                            alt="Selected preview"
+                            className="max-h-48 w-auto object-contain"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setModalImage(null)}
+                            title={isArabic ? "إزالة الصورة" : "Remove image"}
+                            className="absolute top-2 right-2 rtl:right-auto rtl:left-2 p-1.5 rounded-full bg-black/60 hover:bg-black text-white transition-colors cursor-pointer"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-semibold text-stone-700 mb-1">
+                            {isArabic ? "ملاحظة أو وصف المشكلة (اختياري)" : "Note or issue description (optional)"}
+                          </label>
+                          <input
+                            type="text"
+                            value={modalNote}
+                            onChange={(e) => setModalNote(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                e.preventDefault();
+                                handleSendFromModal();
+                              }
+                            }}
+                            placeholder={isArabic ? "مثال: تسريب مياه في السقف أو تشقق خرساني..." : "e.g. Water leak on ceiling or concrete crack..."}
+                            className="w-full px-3.5 py-2.5 text-xs sm:text-sm rounded-xl border border-stone-200 bg-stone-50 text-stone-900 placeholder-stone-400 focus:outline-hidden focus:border-[#01a9a0] focus:bg-white"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-1">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setModalImage(null);
+                              imageInputRef.current?.click();
+                            }}
+                            className="flex-1 py-2.5 px-3 rounded-xl border border-stone-200 hover:bg-stone-50 text-stone-700 font-semibold text-xs transition-colors cursor-pointer text-center"
+                          >
+                            {isArabic ? "تغيير الصورة" : "Change Image"}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={handleSendFromModal}
+                            className="flex-1 py-2.5 px-3 rounded-xl bg-[#01a9a0] hover:bg-[#00928a] text-white font-semibold text-xs transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#01a9a0]/25 cursor-pointer"
+                          >
+                            <Sparkles className="w-3.5 h-3.5" />
+                            <span>{isArabic ? "إرسال وتحليل الصورة" : "Send & Analyze Photo"}</span>
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
