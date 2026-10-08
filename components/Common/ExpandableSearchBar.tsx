@@ -710,7 +710,7 @@ export default function ExpandableSearchBar({
     if (isListening) {
       try {
         recognitionRef.current?.stop();
-      } catch {}
+      } catch { }
       setIsListening(false);
       return;
     }
@@ -945,11 +945,10 @@ export default function ExpandableSearchBar({
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={handleVoiceSearch}
-                className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${
-                  isListening
-                    ? "bg-red-500 text-white animate-pulse shadow-xs"
-                    : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
-                }`}
+                className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer ${isListening
+                  ? "bg-red-500 text-white animate-pulse shadow-xs"
+                  : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
+                  }`}
                 title={
                   isListening
                     ? (isAr ? "جارٍ الاستماع..." : "Listening...")
@@ -973,11 +972,10 @@ export default function ExpandableSearchBar({
                 e.stopPropagation();
                 setIsImageSearchOpen((prev) => !prev);
               }}
-              className={`p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${
-                isImageSearchOpen
-                  ? "bg-[#01a9a0] text-white shadow-xs ring-2 ring-[#01a9a0]/30"
-                  : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
-              }`}
+              className={`hidden p-1.5 rounded-full transition-all shrink-0 cursor-pointer group/cam relative ${isImageSearchOpen
+                ? "bg-[#01a9a0] text-white shadow-xs ring-2 ring-[#01a9a0]/30"
+                : "text-slate-400 hover:text-[#01a9a0] hover:bg-[#f0faf9]"
+                }`}
               title={isAr ? "البحث بالصورة" : "Search by Image"}
               aria-label="Image search"
             >
@@ -1057,18 +1055,16 @@ export default function ExpandableSearchBar({
                     }}
                     onDrop={handleDrop}
                     onClick={() => fileInputRef.current?.click()}
-                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 group flex flex-col items-center justify-center gap-3 ${
-                      isDragging
-                        ? "border-[#01a9a0] bg-[#f0faf9] scale-[1.01] shadow-md shadow-[#01a9a0]/15"
-                        : "border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 bg-gradient-to-b from-slate-50/60 to-white"
-                    }`}
+                    className={`border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 group flex flex-col items-center justify-center gap-3 ${isDragging
+                      ? "border-[#01a9a0] bg-[#f0faf9] scale-[1.01] shadow-md shadow-[#01a9a0]/15"
+                      : "border-[#01a9a0]/40 hover:border-[#01a9a0] hover:bg-[#f0faf9]/60 bg-gradient-to-b from-slate-50/60 to-white"
+                      }`}
                   >
                     <div
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-inner ${
-                        isDragging
-                          ? "bg-[#01a9a0] text-white scale-110 shadow-md shadow-[#01a9a0]/30"
-                          : "bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] group-hover:scale-105"
-                      }`}
+                      className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-200 shadow-inner ${isDragging
+                        ? "bg-[#01a9a0] text-white scale-110 shadow-md shadow-[#01a9a0]/30"
+                        : "bg-[#f0faf9] group-hover:bg-[#01a9a0]/15 text-[#01a9a0] group-hover:scale-105"
+                        }`}
                     >
                       <UploadCloud className="w-7 h-7" />
                     </div>
