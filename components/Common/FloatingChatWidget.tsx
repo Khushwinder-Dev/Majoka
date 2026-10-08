@@ -56,7 +56,7 @@ export interface ChatUserInfo {
 const STORAGE_KEY = "taj_chat_history_v1";
 const USER_INFO_KEY = "taj_chat_user_info_v1";
 
-// Formats bolding, bullet points, and paragraphs cleanly
+// Formats bolding, bullet points, markdown links, emails, and phone numbers cleanly
 function renderMessageContent(text: string) {
   const lines = text.split("\n");
   return lines.map((line, idx) => {
@@ -66,22 +66,92 @@ function renderMessageContent(text: string) {
     }
 
     const isBullet = trimmed.startsWith("•") || trimmed.startsWith("-");
-    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    const cleanLine = isBullet ? trimmed.replace(/^[•\-]\s*/, "") : line;
+
+    // Helper to render plain text with emails and phone numbers made clickable
+    const renderContactLinks = (raw: string, keyPrefix: string) => {
+      const contactRegex = /(info@tajalrahmah\.com|\+971\s*(?:52|4|50|54|55|56)\s*\d{3}\s*\d{4}|\+971\s*52\s*749\s*2002|\+971\s*4\s*234\s*5678)/gi;
+      const parts = raw.split(contactRegex);
+      return parts.map((part, cIdx) => {
+        if (/info@tajalrahmah\.com/i.test(part)) {
+          return (
+            <a
+              key={`${keyPrefix}-email-${cIdx}`}
+              href="mailto:info@tajalrahmah.com"
+              className="text-[#01a9a0] underline font-medium hover:text-[#008f87] transition-colors"
+            >
+              {part}
+            </a>
+          );
+        }
+        if (/^\+971/i.test(part.trim())) {
+          const cleanPhone = part.replace(/\s+/g, "");
+          return (
+            <a
+              key={`${keyPrefix}-phone-${cIdx}`}
+              href={`tel:${cleanPhone}`}
+              className="text-[#01a9a0] underline font-semibold hover:text-[#008f87] transition-colors inline-flex items-center gap-0.5 mx-0.5"
+            >
+              {part}
+            </a>
+          );
+        }
+        return part;
+      });
+    };
+
+    // Helper to render bold and contact links
+    const renderBoldAndContacts = (segment: string, segIdx: number) => {
+      const boldParts = segment.split(/(\*\*[^*]+\*\*)/g);
+      return boldParts.map((bPart, bIdx) => {
+        if (bPart.startsWith("**") && bPart.endsWith("**")) {
+          return (
+            <strong key={`b-${segIdx}-${bIdx}`} className="font-semibold text-stone-900">
+              {renderContactLinks(bPart.slice(2, -2), `b-${segIdx}-${bIdx}`)}
+            </strong>
+          );
+        }
+        return (
+          <React.Fragment key={`t-${segIdx}-${bIdx}`}>
+            {renderContactLinks(bPart, `t-${segIdx}-${bIdx}`)}
+          </React.Fragment>
+        );
+      });
+    };
+
+    // Parse markdown links [label](url)
+    const linkRegex = /(\[[^\]]+\]\([^)]+\))/g;
+    const segments = cleanLine.split(linkRegex);
 
     return (
       <span
         key={idx}
-        className={`block ${isBullet ? "pl-2 rtl:pl-0 rtl:pr-2 my-0.5" : "my-0.5"}`}
+        className={`block ${
+          isBullet
+            ? "pl-3 rtl:pl-0 rtl:pr-3 my-0.5 relative before:content-['•'] before:absolute before:left-0 rtl:before:left-auto rtl:before:right-0 before:text-[#01a9a0] before:font-bold"
+            : "my-0.5"
+        }`}
       >
-        {parts.map((part, pIdx) => {
-          if (part.startsWith("**") && part.endsWith("**")) {
+        {segments.map((seg, sIdx) => {
+          const linkMatch = seg.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+          if (linkMatch) {
+            const label = linkMatch[1];
+            const href = linkMatch[2];
+            const isInternal = href.startsWith("/");
             return (
-              <strong key={pIdx} className="font-semibold text-stone-900">
-                {part.slice(2, -2)}
-              </strong>
+              <a
+                key={`link-${sIdx}`}
+                href={href}
+                target={isInternal ? "_self" : "_blank"}
+                rel={isInternal ? undefined : "noopener noreferrer"}
+                className="text-[#01a9a0] font-semibold underline hover:text-[#008f87] transition-colors inline-flex items-center gap-0.5 mx-0.5"
+              >
+                <span>{label}</span>
+                <ArrowUpRight className="w-3 h-3 inline-block" />
+              </a>
             );
           }
-          return part;
+          return renderBoldAndContacts(seg, sIdx);
         })}
       </span>
     );
@@ -391,6 +461,27 @@ export default function FloatingChatWidget() {
       return;
     }
 
+    // Direct Contact Page Navigation
+    if (
+      actionLower.includes("contact page") ||
+      actionLower.includes("go to contact") ||
+      action.includes("صفحة اتصل بنا") ||
+      action.includes("صفحة التواصل")
+    ) {
+      window.location.href = "/contact";
+      return;
+    }
+
+    // Direct Email
+    if (
+      actionLower.includes("email") ||
+      action.includes("بريد") ||
+      actionLower.includes("info@tajalrahmah.com")
+    ) {
+      window.location.href = "mailto:info@tajalrahmah.com?subject=" + encodeURIComponent("Taj Al Rahmah Inquiry");
+      return;
+    }
+
     // Normal chat message
     handleSend(action);
   };
@@ -619,6 +710,7 @@ export default function FloatingChatWidget() {
   const categories = isArabic
     ? [
       { label: "الكل", value: "All" },
+      { label: "الأسئلة الشائعة", value: "FAQs" },
       { label: "العزل المائي", value: "Waterproofing" },
       { label: "الأسطح", value: "Roofing" },
       { label: "الأرضيات", value: "Flooring" },
@@ -626,6 +718,7 @@ export default function FloatingChatWidget() {
     ]
     : [
       { label: "All", value: "All" },
+      { label: "FAQs", value: "FAQs" },
       { label: "Waterproofing", value: "Waterproofing" },
       { label: "Roofing", value: "Roofing" },
       { label: "Flooring", value: "Flooring" },
@@ -636,6 +729,7 @@ export default function FloatingChatWidget() {
   const defaultPrompts = isArabic
     ? [
       "📷 فحص تسريب أو مشكلة بواسطة صورة",
+      "❓ الأسئلة الشائعة وتفاصيل الضمان المعتمد",
       "طلب معاينة وعرض سعر مجاني",
       "استكشف أنظمة العزل المائي والأسطح",
       "الاستفسار عن طلاء أرضيات الإيبوكسي",
@@ -643,6 +737,7 @@ export default function FloatingChatWidget() {
     ]
     : [
       "📷 Inspect a leak or issue with photo",
+      "❓ Frequently Asked Questions & Warranties",
       "Get a Free Inspection & Quote",
       "Explore Waterproofing & Roof Systems",
       "Epoxy Floor Coating Services",
@@ -1187,7 +1282,13 @@ export default function FloatingChatWidget() {
                               type="button"
                               onClick={() => {
                                 setActiveCategory(cat.value);
-                                if (cat.value === "Contact") {
+                                if (cat.value === "FAQs") {
+                                  handleSend(
+                                    isArabic
+                                      ? "ما هي الأسئلة الشائعة بخصوص فترات الضمان ومدة العمل واعتمادات بلدية دبي؟"
+                                      : "What are your FAQs regarding warranty, project duration, and municipality approvals?"
+                                  );
+                                } else if (cat.value === "Contact") {
                                   handleSend(
                                     isArabic ? "ما هي طرق التواصل وأرقام الهواتف؟" : "What are your contact details?"
                                   );
