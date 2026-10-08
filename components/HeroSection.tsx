@@ -184,6 +184,7 @@ const HeroSection = () => {
           quality={100}
           className="object-cover object-center"
           sizes="100vw"
+          unoptimized
         />
       </div>
 
