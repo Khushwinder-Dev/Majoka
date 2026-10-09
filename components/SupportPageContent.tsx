@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import FaqAccordionItem from "@/components/Common/FaqAccordionItem";
 import { useLanguage } from "@/context/LanguageContext";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 interface SupportCard {
   id: number;
@@ -132,35 +133,14 @@ export default function SupportPageContent() {
     <div className="w-full bg-white overflow-hidden" dir={isArabic ? "rtl" : "ltr"}>
 
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (SUPPORT — with Call Center Team)
+          1. HERO BANNER SECTION (SUPPORT)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[340px] sm:h-[420px] md:h-[500px] lg:h-[600px] flex items-center bg-[#071d34] overflow-hidden">
-        {/* Background Image: Support Specialists in headsets */}
-        <Image
-          src="/support/Dubai modern skyline at twilight.png"
-          alt="Support Hero Banner"
-          fill
-          priority
-          unoptimized
-          className="object-center"
-        />
-
-        {/* Top gradient for transparent navbar readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none" />
-
-        {/* Left deep dark gradient overlay for text readability as in design */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#021822]/90 via-[#021822]/65 via-35% md:via-30% to-transparent pointer-events-none" />
-
-        {/* Hero Heading Content */}
-        <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 w-full">
-          <div className="flex items-center gap-3 sm:gap-4.5 mt-8 sm:mt-12 md:mt-16">
-            <h1 className="text-3xl sm:text-4xl md:text-[46px] font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
-              {isArabic ? "الدعم الفني" : "SUPPORT"}
-            </h1>
-            <span className="inline-block w-10 sm:w-14 md:w-16 h-[3px] sm:h-[4px] bg-white rounded-full drop-shadow" />
-          </div>
-        </div>
-      </section>
+      <CommonHeader
+        imagePath="/banners/new/Support.png"
+        showHeading={false}
+        showBreadcrumb={false}
+        unoptimized
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           MIDDLE SECTION WRAPPER WITH ORGANIC VECTOR CURVES (Left & Right)

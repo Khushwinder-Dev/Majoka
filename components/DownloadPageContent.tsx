@@ -18,6 +18,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { toast } from "react-hot-toast";
 import { FloatInput } from "@/components/ui/FloatField";
 import { useVoiceInput } from "@/components/ui/VoiceMicButton";
+import CommonHeader from "@/components/Common/CommonHeader";
 
 // Checklist item definition
 interface ChecklistItem {
@@ -326,48 +327,14 @@ export default function DownloadPageContent() {
   return (
     <div className="w-full bg-[#f8fbfb]" dir={isArabic ? "rtl" : "ltr"}>
       {/* ══════════════════════════════════════════════════════════════
-          1. HERO BANNER SECTION (Downloads with Skyline Background)
+          1. HERO BANNER SECTION (Downloads)
       ══════════════════════════════════════════════════════════════ */}
-      <section className="relative w-full h-[380px] sm:h-[440px] md:h-[500px] overflow-hidden">
-        {/* Background Image: Skyline over waterfront */}
-        <div className="absolute inset-0">
-          <Image
-            src="/downloadPage/Banner.png"
-            alt="Downloads Background Skyline"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-center"
-          />
-          {/* Subtle gradient overlay to match reference design */}
-          <div className="absolute inset-0 bg-gradient-to-b from-sky-950/20 via-black/20 to-sky-950/40" />
-        </div>
-
-        {/* Center Content: Download Icon + "Downloads" Heading */}
-        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-          {/* Center Download Icon from Reference Design */}
-          <div className="mb-2 sm:mb-3 flex items-center justify-center">
-            <svg
-              className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]">
-            {isArabic ? "التحميلات" : "Downloads"}
-          </h1>
-        </div>
-      </section>
+      <CommonHeader
+        imagePath="/banners/new/download.png"
+        showHeading={false}
+        showBreadcrumb={false}
+        unoptimized
+      />
 
       {/* ══════════════════════════════════════════════════════════════
           2. RESOURCES & DOCUMENTS SECTION (3x3 Grid of 9 Cards)

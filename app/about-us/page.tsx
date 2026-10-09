@@ -73,9 +73,10 @@ const AboutUs = () => {
   return (
     <div>
       <CommonHeader
-        title="About Our Company"
-        breadcrumb="About Us"
-        imagePath="/banners/abu.jpeg"
+        imagePath="/banners/new/about-us.png"
+        showHeading={false}
+        showBreadcrumb={false}
+        unoptimized
       />
       <AboutUsSection />
       <OurMission />

@@ -136,9 +136,10 @@ export default function WarrantyPageContent() {
           1. HERO BANNER SECTION (Same as Industries page banner)
       ══════════════════════════════════════════════════════════════ */}
       <CommonHeader
-        imagePath="/banners/warranty.jpeg"
+        imagePath="/banners/new/waranty.png"
         showHeading={false}
         showBreadcrumb={false}
+        unoptimized
       />
 
       {/* ══════════════════════════════════════════════════════════════
