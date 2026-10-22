@@ -177,7 +177,7 @@ const HeroSection = () => {
           }`}
       >
         <Image
-          src="/banners/Home__2.png"
+          src="/banners/banner_3.jpg"
           alt="Taj Al Rahmah City Skyline Hero"
           fill
           priority
