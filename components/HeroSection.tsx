@@ -182,7 +182,7 @@ const HeroSection = () => {
           fill
           priority
           quality={100}
-          className="object-cover object-center"
+          className="hero-banner-image"
           sizes="100vw"
           unoptimized
         />
@@ -201,7 +201,7 @@ const HeroSection = () => {
           loop
           playsInline
           muted={isMuted}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[70%_center] lg:object-center"
         />
       </div>
 
