@@ -29,15 +29,20 @@ body {
   color: var(--foreground);
   font-family: var(--font-anek-malayalam), "Anek Malayalam", sans-serif;
 }
+
 .theme-bg-main {
   background: var(--primary);
 }
+
 .theme-text-main {
   color: var(--primary);
 }
+
 .theme-text-main-hover-white {
   color: var(--primary);
-}.theme-text-main-hover-white:hover {
+}
+
+.theme-text-main-hover-white:hover {
   color: var(--white);
 }
 
@@ -69,6 +74,7 @@ h6,
 
 /* Global typography on large screens (min-width: 1024px) */
 @media (min-width: 1024px) {
+
   /* 1. All paragraph / short descriptions / description & form inputs = 16px */
   p,
   li,
@@ -118,12 +124,12 @@ h6,
   span[class*="sub-title" i],
   div[class*="subtitle" i],
   div[class*="sub-title" i],
-  h1 + p,
-  h2 + p,
-  h3 + p,
-  div:has(> h1) + p,
-  div:has(> h2) + p,
-  div:has(> h3) + p {
+  h1+p,
+  h2+p,
+  h3+p,
+  div:has(> h1)+p,
+  div:has(> h2)+p,
+  div:has(> h3)+p {
     font-size: 17px !important;
     line-height: 1.55 !important;
   }
@@ -197,6 +203,7 @@ th {
 video::-webkit-media-controls-overflow-button {
   display: none !important;
 }
+
 video::-webkit-media-controls-overflow-menu-list {
   display: none !important;
 }
@@ -267,9 +274,11 @@ video::-webkit-media-controls-overflow-menu-list {
   padding-top: 40px;
   padding-bottom: 40px;
 }
+
 .section-pt {
   padding-top: 40px;
 }
+
 .section-pb {
   padding-bottom: 40px;
 }
@@ -279,9 +288,11 @@ video::-webkit-media-controls-overflow-menu-list {
     padding-top: 56px;
     padding-bottom: 56px;
   }
+
   .section-pt {
     padding-top: 56px;
   }
+
   .section-pb {
     padding-bottom: 56px;
   }
@@ -292,9 +303,11 @@ video::-webkit-media-controls-overflow-menu-list {
     padding-top: 72px;
     padding-bottom: 72px;
   }
+
   .section-pt {
     padding-top: 72px;
   }
+
   .section-pb {
     padding-bottom: 72px;
   }
@@ -303,7 +316,7 @@ video::-webkit-media-controls-overflow-menu-list {
 /* Hero banner responsive framing so working guy is fully visible on mobile & tablet */
 .hero-banner-image {
   object-fit: cover !important;
-  object-position: 20% center !important;
+  object-position: 30% center !important;
 }
 
 @media (min-width: 640px) {
@@ -317,5 +330,3 @@ video::-webkit-media-controls-overflow-menu-list {
     object-position: center center !important;
   }
 }
-
-
