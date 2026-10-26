@@ -194,7 +194,7 @@ const HeroSection = () => {
           fill
           priority
           quality={100}
-          className="block md:hidden object-cover object-center"
+          className="block md:hidden object-cover object-bottom"
           sizes="(max-width: 767px) 100vw, 1px"
           unoptimized
         />
