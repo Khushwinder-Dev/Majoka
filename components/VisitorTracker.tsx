@@ -45,17 +45,7 @@ export default function VisitorTracker() {
 
         const payloadStr = JSON.stringify(clientData);
 
-        // Try sendBeacon first (best for background/non-blocking)
-        if (
-          typeof navigator !== "undefined" &&
-          typeof navigator.sendBeacon === "function"
-        ) {
-          const blob = new Blob([payloadStr], { type: "application/json" });
-          const sent = navigator.sendBeacon("/api/track", blob);
-          if (sent) return;
-        }
-
-        // Fallback to fetch with keepalive
+        // Send via fetch with keepalive (universal support on mobile & desktop, no CORS preflight issues)
         fetch("/api/track", {
           method: "POST",
           headers: {
@@ -63,9 +53,16 @@ export default function VisitorTracker() {
           },
           body: payloadStr,
           keepalive: true,
-        }).catch(() => {
-          // Silent catch to prevent any user impact
-        });
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (process.env.NODE_ENV === "development") {
+              console.log("[VisitorTracker] Response:", data);
+            }
+          })
+          .catch(() => {
+            // Silent catch to prevent any user impact
+          });
       } catch {
         // Silently ignore tracking errors
       }

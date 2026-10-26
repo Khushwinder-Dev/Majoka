@@ -115,9 +115,35 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Visitor tracking error:", error);
-    // Return 200 even on error so tracking never disrupts the visitor's UX
-    return NextResponse.json({ success: false }, { status: 200 });
+    return NextResponse.json(
+      { success: false, error: error?.message || "Tracking error" },
+      { status: 200 }
+    );
   }
 }
+
+// Diagnostic GET endpoint to test database connectivity directly in the browser
+export async function GET() {
+  try {
+    const count = await prisma.visitorLog.count();
+    return NextResponse.json({
+      status: "ok",
+      connected: true,
+      total_visitors: count,
+      database: "Aiven Cloud MySQL",
+    });
+  } catch (err: any) {
+    console.error("Database connection test error:", err);
+    return NextResponse.json(
+      {
+        status: "error",
+        connected: false,
+        error: err.message || String(err),
+      },
+      { status: 500 }
+    );
+  }
+}
+
