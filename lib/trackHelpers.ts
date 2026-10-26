@@ -67,7 +67,7 @@ export function parseUserAgent(uaString: string | null | undefined): ParsedUA {
 
 export function isLocalOrPrivateIp(ip: string): boolean {
   if (!ip) return true;
-  const clean = ip.trim();
+  const clean = ip.replace(/^::ffff:/, "").trim();
   return (
     clean === "127.0.0.1" ||
     clean === "::1" ||

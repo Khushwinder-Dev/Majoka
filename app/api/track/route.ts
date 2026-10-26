@@ -57,6 +57,10 @@ export async function POST(req: NextRequest) {
       ip = xRealIp.trim();
     }
 
+    // Strip IPv6-mapped IPv4 prefix if present
+    ip = ip.replace(/^::ffff:/, "").trim();
+    if (ip === "::1") ip = "127.0.0.1";
+
     // 3. Extract User-Agent & device details
     const userAgent = req.headers.get("user-agent") || "";
     const parsedUa = parseUserAgent(userAgent);
