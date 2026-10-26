@@ -3,21 +3,21 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model VisitorLog {
   id               String   @id @default(cuid())
-  ip_address       String   @unique
-  country          String?  @default("Unknown")
-  city             String?  @default("Unknown")
-  timezone         String?  @default("Unknown")
-  user_agent       String?
-  device_type      String?  @default("Desktop")
-  browser          String?  @default("Unknown")
-  os               String?  @default("Unknown")
-  path_visited     String   @default("/")
+  ip_address       String   @unique @db.VarChar(191)
+  country          String?  @default("Unknown") @db.VarChar(191)
+  city             String?  @default("Unknown") @db.VarChar(191)
+  timezone         String?  @default("Unknown") @db.VarChar(191)
+  user_agent       String?  @db.Text
+  device_type      String?  @default("Desktop") @db.VarChar(50)
+  browser          String?  @default("Unknown") @db.VarChar(100)
+  os               String?  @default("Unknown") @db.VarChar(100)
+  path_visited     String   @default("/") @db.VarChar(255)
   visit_count      Int      @default(1)
   first_visited_at DateTime @default(now())
   last_visited_at  DateTime @default(now())
