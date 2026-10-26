@@ -176,26 +176,14 @@ const HeroSection = () => {
           : "opacity-100"
           }`}
       >
-        {/* Desktop / Tablet Banner */}
         <Image
           src="/banners/banner_3.jpg"
           alt="Taj Al Rahmah City Skyline Hero"
           fill
           priority
           quality={100}
-          className="hidden md:block object-cover object-center"
-          sizes="(min-width: 768px) 100vw, 1px"
-          unoptimized
-        />
-        {/* Mobile Banner */}
-        <Image
-          src="/banners/mobile_1080x1920.png"
-          alt="Taj Al Rahmah City Skyline Hero Mobile"
-          fill
-          priority
-          quality={100}
-          className="block md:hidden object-cover object-center"
-          sizes="(max-width: 767px) 100vw, 1px"
+          className="hero-banner-image"
+          sizes="100vw"
           unoptimized
         />
       </div>
@@ -213,7 +201,7 @@ const HeroSection = () => {
           loop
           playsInline
           muted={isMuted}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[70%_center] lg:object-center"
         />
       </div>
 

@@ -311,4 +311,22 @@ video::-webkit-media-controls-overflow-menu-list {
   .section-pb {
     padding-bottom: 72px;
   }
-}
+}
+
+/* Hero banner responsive framing so working guy is fully visible on mobile & tablet */
+.hero-banner-image {
+  object-fit: cover !important;
+  object-position: 30% center !important;
+}
+
+@media (min-width: 640px) {
+  .hero-banner-image {
+    object-position: 25% center !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-banner-image {
+    object-position: center center !important;
+  }
+}
