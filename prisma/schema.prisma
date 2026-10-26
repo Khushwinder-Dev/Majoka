@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model VisitorLog {
+  id               String   @id @default(cuid())
+  ip_address       String   @unique
+  country          String?  @default("Unknown")
+  city             String?  @default("Unknown")
+  timezone         String?  @default("Unknown")
+  user_agent       String?
+  device_type      String?  @default("Desktop")
+  browser          String?  @default("Unknown")
+  os               String?  @default("Unknown")
+  path_visited     String   @default("/")
+  visit_count      Int      @default(1)
+  first_visited_at DateTime @default(now())
+  last_visited_at  DateTime @default(now())
+
+  @@map("visitor_logs")
+  @@index([ip_address])
+}

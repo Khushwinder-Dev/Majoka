@@ -24,6 +24,8 @@ const anekMalayalam = Anek_Malayalam({
   variable: "--font-anek-malayalam",
 });
 
+import SiteLayoutWrapper from "@/components/SiteLayoutWrapper";
+
 export const metadata: Metadata = {
   title: "Taj Al Rahmah",
   description: "Professional contracting and technical services in Dubai, UAE",
@@ -90,22 +92,12 @@ export default function RootLayout({
                 style: {
                   background: "#3b82f6",
                   color: "#fff",
-                  padding: "16px",
-                  borderRadius: "8px",
                 },
               },
             }}
           />
 
-          <Navbar />
-          {children}
-          <Footer />
-
-          {/* Global Floating Chat & Call Widget */}
-          <FloatingChatWidget />
-
-          {/* Global Subscribe Newsletter Modal */}
-          <SubscribeModal />
+          <SiteLayoutWrapper>{children}</SiteLayoutWrapper>
         </LanguageProvider>
       </body>
     </html>
