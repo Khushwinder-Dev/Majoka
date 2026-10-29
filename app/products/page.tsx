@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -122,6 +122,26 @@ export default function ProductsPage() {
   const [isPageDropdownOpen, setIsPageDropdownOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedCardId, setSelectedCardId] = useState<number>(1);
+  const pageDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close itemsPerPage dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        pageDropdownRef.current &&
+        !pageDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsPageDropdownOpen(false);
+      }
+    }
+
+    if (isPageDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isPageDropdownOpen]);
 
   // Share Modal State
   const [shareModalProduct, setShareModalProduct] = useState<ProductDetailItem | null>(null);
@@ -162,6 +182,7 @@ export default function ProductsPage() {
         ? prev.filter((c) => c !== catName)
         : [...prev, catName]
     );
+    setCurrentPage(1);
   };
 
   // Reset All Filters
@@ -169,6 +190,7 @@ export default function ProductsPage() {
     setSelectedCategories([]);
     setSelectedRating("any");
     setSearchQuery("");
+    setCurrentPage(1);
     toast.success("Filters reset to default");
   };
 
@@ -191,6 +213,13 @@ export default function ProductsPage() {
   }, [searchQuery, selectedCategories, selectedRating]);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
+
+  // Automatically keep currentPage within valid bounds
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    }
+  }, [currentPage, totalPages]);
   const paginatedProducts = useMemo(() => {
     const start = (currentPage - 1) * itemsPerPage;
     return filteredProducts.slice(start, start + itemsPerPage);
@@ -445,7 +474,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === "any"}
-                          onChange={() => setSelectedRating("any")}
+                          onChange={() => { setSelectedRating("any"); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <span className="text-gray-700">Any rating</span>
@@ -457,7 +486,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === 5}
-                          onChange={() => setSelectedRating(5)}
+                          onChange={() => { setSelectedRating(5); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <div className="flex items-center gap-1 text-amber-500">
@@ -476,7 +505,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === 4}
-                          onChange={() => setSelectedRating(4)}
+                          onChange={() => { setSelectedRating(4); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <div className="flex items-center gap-1">
@@ -496,7 +525,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === 3}
-                          onChange={() => setSelectedRating(3)}
+                          onChange={() => { setSelectedRating(3); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <div className="flex items-center gap-1">
@@ -521,7 +550,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === 2}
-                          onChange={() => setSelectedRating(2)}
+                          onChange={() => { setSelectedRating(2); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <div className="flex items-center gap-1">
@@ -546,7 +575,7 @@ export default function ProductsPage() {
                           type="radio"
                           name="rating"
                           checked={selectedRating === 1}
-                          onChange={() => setSelectedRating(1)}
+                          onChange={() => { setSelectedRating(1); setCurrentPage(1); }}
                           className="accent-[#01a9a0] w-3.5 h-3.5 cursor-pointer"
                         />
                         <div className="flex items-center gap-1">
@@ -561,6 +590,32 @@ export default function ProductsPage() {
                       </label>
                     </div>
                   )}
+                </div>
+
+                {/* Section 3: ITEMS PER PAGE (Mobile) */}
+                <div className="pt-4 border-t border-gray-100 lg:hidden">
+                  <span className="text-[11px] font-bold text-gray-600 tracking-wider uppercase block mb-2.5">
+                    {isArabic ? "لكل صفحة" : "ITEMS PER PAGE"}
+                  </span>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[20, 40, 60, 80].map((num) => (
+                      <button
+                        key={num}
+                        type="button"
+                        onClick={() => {
+                          setItemsPerPage(num);
+                          setCurrentPage(1);
+                        }}
+                        className={`py-1.5 rounded-lg text-xs font-semibold text-center border transition-all cursor-pointer ${
+                          itemsPerPage === num
+                            ? "bg-[#01a9a0] text-white border-[#01a9a0] shadow-xs"
+                            : "bg-gray-50 text-gray-700 border-gray-200 hover:border-[#01a9a0]"
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -638,34 +693,56 @@ export default function ProductsPage() {
                   </button>
                 </div>
 
-                {/* Show Page Dropdown */}
-                <div className="relative flex items-center gap-2 text-xs text-gray-500 font-medium">
-                  <span>Show Page</span>
+                {/* Items Per Page Dropdown */}
+                <div
+                  ref={pageDropdownRef}
+                  className="relative flex items-center gap-2 text-xs text-gray-500 font-medium"
+                >
+                  <span>{isArabic ? "لكل صفحة" : "Per Page"}</span>
                   <div className="relative">
                     <button
-                      onClick={() => setIsPageDropdownOpen(!isPageDropdownOpen)}
-                      className="bg-white border border-gray-200 rounded-full px-3.5 py-1.5 pr-7 text-xs font-semibold text-gray-700 flex items-center gap-1 shadow-xs hover:border-[#01a9a0] cursor-pointer transition-colors"
+                      type="button"
+                      onClick={() => setIsPageDropdownOpen((prev) => !prev)}
+                      aria-expanded={isPageDropdownOpen}
+                      aria-haspopup="listbox"
+                      title={isArabic ? "عدد المنتجات لكل صفحة" : "Products per page"}
+                      className="relative bg-white border border-gray-200 rounded-full px-3.5 py-1.5 pr-7 text-xs font-semibold text-gray-700 flex items-center gap-1 shadow-xs hover:border-[#01a9a0] cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#01a9a0]/20"
                     >
                       <span>{itemsPerPage}</span>
-                      <ChevronDown className="w-3.5 h-3.5 text-gray-400 absolute right-2 top-1/2 -translate-y-1/2" />
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 text-gray-400 absolute right-2.5 top-1/2 -translate-y-1/2 transition-transform duration-200 pointer-events-none ${
+                          isPageDropdownOpen ? "rotate-180 text-[#01a9a0]" : ""
+                        }`}
+                      />
                     </button>
 
                     {/* Open Dropdown Menu (showing 20, 40, 60, 80 as in design) */}
                     {isPageDropdownOpen && (
-                      <div className="absolute right-0 top-full mt-1.5 w-20 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-30 animate-in fade-in zoom-in-95 duration-150">
+                      <div
+                        role="listbox"
+                        className="absolute right-0 top-full mt-1.5 min-w-[5.5rem] bg-white rounded-xl shadow-xl border border-gray-100 py-1 z-40 overflow-hidden"
+                      >
                         {[20, 40, 60, 80].map((num) => (
                           <button
                             key={num}
+                            type="button"
+                            role="option"
+                            aria-selected={itemsPerPage === num}
                             onClick={() => {
                               setItemsPerPage(num);
+                              setCurrentPage(1);
                               setIsPageDropdownOpen(false);
                             }}
-                            className={`w-full px-3 py-1.5 text-xs text-left cursor-pointer transition-colors ${itemsPerPage === num
-                              ? "bg-[#01a9a0]/10 text-[#01a9a0] font-bold"
-                              : "text-gray-700 hover:bg-gray-50"
-                              }`}
+                            className={`w-full px-3 py-1.5 text-xs text-left cursor-pointer transition-colors flex items-center justify-between gap-2 ${
+                              itemsPerPage === num
+                                ? "bg-[#01a9a0]/10 text-[#01a9a0] font-bold"
+                                : "text-gray-700 hover:bg-gray-50"
+                            }`}
                           >
-                            {num}
+                            <span>{num}</span>
+                            {itemsPerPage === num && (
+                              <Check className="w-3 h-3 text-[#01a9a0]" />
+                            )}
                           </button>
                         ))}
                       </div>
@@ -910,49 +987,71 @@ export default function ProductsPage() {
             )}
 
             {/* ===================== PAGINATION BAR ===================== */}
-            <div className="mt-10 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <span className="text-xs sm:text-sm text-gray-500 font-medium">
-                Showing {filteredProducts.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1} to{" "}
-                {Math.min(currentPage * itemsPerPage, filteredProducts.length)} of {filteredProducts.length}
-              </span>
+            {filteredProducts.length > 0 && (
+              <div className="mt-10 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <span className="text-xs sm:text-sm text-gray-500 font-medium">
+                  {isArabic
+                    ? `عرض ${(currentPage - 1) * itemsPerPage + 1} إلى ${Math.min(
+                        currentPage * itemsPerPage,
+                        filteredProducts.length
+                      )} من أصل ${filteredProducts.length}`
+                    : `Showing ${(currentPage - 1) * itemsPerPage + 1} to ${Math.min(
+                        currentPage * itemsPerPage,
+                        filteredProducts.length
+                      )} of ${filteredProducts.length}`}
+                </span>
 
-              {totalPages > 1 && (
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  {/* Previous (<<) */}
-                  <button
-                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                    disabled={currentPage === 1}
-                    className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
-                    title="Previous Page"
-                  >
-                    <ChevronsLeft className="w-4 h-4" />
-                  </button>
-
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                {totalPages > 1 && (
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {/* Previous (<<) */}
                     <button
-                      key={pageNum}
-                      onClick={() => setCurrentPage(pageNum)}
-                      className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${currentPage === pageNum
-                        ? "bg-[#01a9a0] text-white font-bold shadow-xs"
-                        : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
-                        }`}
+                      type="button"
+                      onClick={() => {
+                        setCurrentPage(Math.max(1, currentPage - 1));
+                        window.scrollTo({ top: 350, behavior: "smooth" });
+                      }}
+                      disabled={currentPage === 1}
+                      className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
+                      title="Previous Page"
                     >
-                      {pageNum}
+                      <ChevronsLeft className="w-4 h-4" />
                     </button>
-                  ))}
 
-                  {/* Next (>>) */}
-                  <button
-                    onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                    disabled={currentPage === totalPages}
-                    className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
-                    title="Next Page"
-                  >
-                    <ChevronsRight className="w-4 h-4" />
-                  </button>
-                </div>
-              )}
-            </div>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+                      <button
+                        key={pageNum}
+                        type="button"
+                        onClick={() => {
+                          setCurrentPage(pageNum);
+                          window.scrollTo({ top: 350, behavior: "smooth" });
+                        }}
+                        className={`w-8 h-8 rounded-lg font-medium text-xs sm:text-sm flex items-center justify-center transition-all cursor-pointer ${
+                          currentPage === pageNum
+                            ? "bg-[#01a9a0] text-white font-bold shadow-xs"
+                            : "bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef]"
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    ))}
+
+                    {/* Next (>>) */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCurrentPage(Math.min(totalPages, currentPage + 1));
+                        window.scrollTo({ top: 350, behavior: "smooth" });
+                      }}
+                      disabled={currentPage === totalPages}
+                      className="w-8 h-8 rounded-lg bg-[#e6f7f5] text-[#01a9a0] border border-[#b2e5e1] hover:bg-[#d4f2ef] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer"
+                      title="Next Page"
+                    >
+                      <ChevronsRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </main>
         </div>
       </div>

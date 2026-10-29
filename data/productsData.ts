@@ -105,19 +105,41 @@ const rawProducts = [
       "Heavy-duty safety cage ladder designed for secure vertical access to industrial platforms, tanks, buildings and elevated structures.",
   },
   {
-    id: 4,
-    name: "Access Cover",
-    longName: "Reinforced FRP Square Access Cover",
-    description:
-      "Reinforced access cover designed to protect utility openings, inspection points, drainage systems and underground access areas.",
-  },
-  {
     id: 5,
     name: "Grp/fiberglass catch basin bucket",
     longName: "Molded Drainage Pipe Fitting",
     description:
       "Durable GRP/fiberglass catch basin bucket designed for drainage systems and effective collection and management of surface water and wastewater.",
   },
+  {
+    id: 17,
+    name: "Grp/fiberglass sealing plate for manhole cover",
+    longName: "Reinforced Molded FRP Access Cover",
+    description:
+      "Strong GRP/fiberglass sealing plate designed to provide secure protection and sealing for manhole covers, inspection openings and utility access points.",
+  },
+  {
+    id: 18,
+    name: "Pipe Bend",
+    longName: "Fiberglass Reinforced Pipe Bend",
+    description:
+      "Corrosion-resistant pipe bend designed to change pipeline direction while maintaining reliable fluid flow and structural strength.",
+  },
+  {
+    id: 15,
+    name: "Boat",
+    longName: "Fiberglass Reinforced Plastic Boat",
+    description:
+      "Lightweight and strong boat suitable for recreational boating, fishing, transportation and general marine applications.",
+  },
+  {
+    id: 4,
+    name: "Access Cover",
+    longName: "Reinforced FRP Square Access Cover",
+    description:
+      "Reinforced access cover designed to protect utility openings, inspection points, drainage systems and underground access areas.",
+  },
+
   {
     id: 6,
     name: "Rectangular Tank",
@@ -139,13 +161,13 @@ const rawProducts = [
     description:
       "High-quality molded bathtub offering a smooth, durable and easy-to-maintain surface for residential, hotel and commercial bathroom applications.",
   },
-  {
-    id: 9,
-    name: "Bathroom Tub",
-    longName: "Freestanding FRP Bathroom Tub",
-    description:
-      "Durable bathroom tub designed for residential and commercial bathroom installations with a smooth molded finish.",
-  },
+  // {
+  //   id: 9,
+  //   name: "Bathroom Tub",
+  //   longName: "Freestanding FRP Bathroom Tub",
+  //   description:
+  //     "Durable bathroom tub designed for residential and commercial bathroom installations with a smooth molded finish.",
+  // },
   {
     id: 10,
     name: "Wall Access Ladder",
@@ -168,33 +190,14 @@ const rawProducts = [
       "FRP drainage fitting designed for reliable connection of drainage pipes and water management systems.",
   },
   {
-    id: 15,
-    name: "Boat",
-    longName: "Fiberglass Reinforced Plastic Boat",
-    description:
-      "Lightweight and strong boat suitable for recreational boating, fishing, transportation and general marine applications.",
-  },
-  {
     id: 16,
     name: "Playground Equipment",
     longName: "Outdoor Children's Playground Equipment",
     description:
       "Durable playground equipment designed for children in parks, schools, residential communities and recreational areas.",
   },
-  {
-    id: 17,
-    name: "Grp/fiberglass sealing plate for manhole cover",
-    longName: "Reinforced Molded FRP Access Cover",
-    description:
-      "Strong GRP/fiberglass sealing plate designed to provide secure protection and sealing for manhole covers, inspection openings and utility access points.",
-  },
-  {
-    id: 18,
-    name: "Pipe Bend",
-    longName: "Fiberglass Reinforced Pipe Bend",
-    description:
-      "Corrosion-resistant pipe bend designed to change pipeline direction while maintaining reliable fluid flow and structural strength.",
-  },
+
+
   {
     id: 19,
     name: "Car Parking Canopy",
@@ -236,6 +239,27 @@ const rawProducts = [
     longName: "Heavy Duty FRP Step Ladder",
     description:
       "Heavy-duty FRP step ladder designed for maintenance, construction and industrial working-at-height applications.",
+  },
+  {
+    id: 35,
+    name: "Grp/fiberglass Planter",
+    longName: "Outdoor Decorative Planter Set",
+    description:
+      "Stylish and durable GRP/fiberglass planter suitable for indoor and outdoor plants, flowers, gardens and landscaping applications.",
+  },
+  {
+    id: 36,
+    name: "Grp/fiberglass Shower Trey 600x600 800x800",
+    longName: "Molded FRP Shower Base",
+    description:
+      "Molded GRP/fiberglass shower tray available in 600 × 600mm and 800 × 800mm sizes, designed for residential, hotel and commercial bathroom installations.",
+  },
+  {
+    id: 48,
+    name: "Outdoor Canopy",
+    longName: "Modern FRP Outdoor Patio Shade Structure",
+    description:
+      "Stylish outdoor canopy designed to create a comfortable shaded area for residential, commercial, hospitality and recreational applications.",
   },
   {
     id: 27,
@@ -293,20 +317,7 @@ const rawProducts = [
     description:
       "Durable profile sheet designed for roofing, cladding, construction and industrial applications.",
   },
-  {
-    id: 35,
-    name: "Grp/fiberglass Planter",
-    longName: "Outdoor Decorative Planter Set",
-    description:
-      "Stylish and durable GRP/fiberglass planter suitable for indoor and outdoor plants, flowers, gardens and landscaping applications.",
-  },
-  {
-    id: 36,
-    name: "Grp/fiberglass Shower Trey 600x600 800x800",
-    longName: "Molded FRP Shower Base",
-    description:
-      "Molded GRP/fiberglass shower tray available in 600 × 600mm and 800 × 800mm sizes, designed for residential, hotel and commercial bathroom installations.",
-  },
+
   {
     id: 37,
     name: "Translucent Sheet",
@@ -356,13 +367,7 @@ const rawProducts = [
     description:
       "Modern outdoor pergola structure designed to provide shade and enhance gardens, patios, terraces and outdoor living spaces.",
   },
-  {
-    id: 48,
-    name: "Outdoor Canopy",
-    longName: "Modern FRP Outdoor Patio Shade Structure",
-    description:
-      "Stylish outdoor canopy designed to create a comfortable shaded area for residential, commercial, hospitality and recreational applications.",
-  },
+
   {
     id: 51,
     name: "Grp/fiberglass Shower Trey 1mx800",
