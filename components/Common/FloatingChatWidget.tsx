@@ -457,7 +457,7 @@ export default function FloatingChatWidget() {
       action.includes("اتصل") ||
       action.includes("+971")
     ) {
-      window.location.href = "tel:+971527492002";
+      window.location.href = "tel:+971556173300";
       return;
     }
 
@@ -558,12 +558,12 @@ export default function FloatingChatWidget() {
             ? [
                 "طلب معاينة مجانية لهذا العطل",
                 "استفسار عبر واتساب بخصوص هذه الصورة",
-                "اتصل بمهندس الموقع +971 52 749 2002",
+                "اتصل بمهندس الموقع +971 55 617 3300",
               ]
             : [
                 "Book Free Site Inspection for this Issue",
                 "Chat on WhatsApp regarding this photo",
-                "Call Site Engineer +971 52 749 2002",
+                "Call Site Engineer +971 55 617 3300",
               ]
         );
       } catch {
@@ -578,8 +578,8 @@ export default function FloatingChatWidget() {
         setMessages((prev) => [...prev, fallbackAiMsg]);
         setQuickActions(
           isArabic
-            ? ["إرسال الصورة عبر واتساب", "اتصل الآن +971 52 749 2002"]
-            : ["Send photo on WhatsApp", "Call +971 52 749 2002"]
+            ? ["إرسال الصورة عبر واتساب", "اتصل الآن +971 55 617 3300"]
+            : ["Send photo on WhatsApp", "Call +971 55 617 3300"]
         );
       } finally {
         setIsTyping(false);
@@ -612,7 +612,7 @@ export default function FloatingChatWidget() {
       query.includes("اتصل بنا")
     ) {
       setTimeout(() => {
-        window.location.href = "tel:+971527492002";
+        window.location.href = "tel:+971556173300";
       }, 700);
     }
 
@@ -663,15 +663,15 @@ export default function FloatingChatWidget() {
         id: `${Date.now()}-ai-fallback`,
         sender: "ai",
         text: isArabic
-          ? `شكراً لتواصلك يا ${userInfo.name}. يمكنك دائماً الاتصال بمهندس الموقع مباشرة على الرقم 2002 749 52 971+ أو التواصل عبر واتساب.`
-          : `Thank you for reaching out, ${userInfo.name}. You can reach our engineering team directly at +971 52 749 2002 or on WhatsApp.`,
+          ? `شكراً لتواصلك يا ${userInfo.name}. يمكنك دائماً الاتصال بمهندس الموقع مباشرة على الرقم 3300 617 55 971+ أو التواصل عبر واتساب.`
+          : `Thank you for reaching out, ${userInfo.name}. You can reach our engineering team directly at +971 55 617 3300 or on WhatsApp.`,
         timestamp: getCurrentTime(),
       };
       setMessages((prev) => [...prev, fallbackAiMsg]);
       setQuickActions(
         isArabic
-          ? ["تواصل عبر واتساب", "اتصل الآن +971 52 749 2002"]
-          : ["Chat on WhatsApp", "Call +971 52 749 2002"]
+          ? ["تواصل عبر واتساب", "اتصل الآن +971 55 617 3300"]
+          : ["Chat on WhatsApp", "Call +971 55 617 3300"]
       );
     } finally {
       setIsTyping(false);
@@ -1661,7 +1661,7 @@ export default function FloatingChatWidget() {
 
             {/* 2. Call Now */}
             <a
-              href="tel:+971527492002"
+              href="tel:+971556173300"
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 text-stone-800 hover:text-emerald-600 font-medium text-xs sm:text-sm transition-all duration-200 text-left rtl:text-right cursor-pointer group"
             >
@@ -1672,7 +1672,7 @@ export default function FloatingChatWidget() {
                 <span className="font-semibold text-stone-900 leading-tight">
                   {isArabic ? "اتصل الآن" : "Call Now"}
                 </span>
-                <span className="text-[10px] text-stone-500">+971 52 749 2002</span>
+                <span className="text-[10px] text-stone-500">+971 55 617 3300</span>
               </div>
             </a>
           </div>

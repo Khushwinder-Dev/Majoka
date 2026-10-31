@@ -65,9 +65,9 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
       className="w-full text-left"
       dir={isArabic ? "rtl" : "ltr"}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-        {/* ── LEFT COLUMN: Diagram & 2x2 Image Grid ── */}
-        <div className="lg:col-span-5 xl:col-span-5 flex flex-col w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-start">
+        {/* ── LEFT COLUMN: Compact Diagram & 2x2 Image Grid ── */}
+        <div className="lg:col-span-4 xl:col-span-4 w-full max-w-[250px] sm:max-w-[270px] mx-auto lg:mx-0 flex flex-col">
           {/* Top 3D Diagram */}
           <div
             onClick={() =>
@@ -78,7 +78,7 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
                   : "Combo Roofing System Layered Cross Section Diagram",
               })
             }
-            className="group relative w-full aspect-[605/313] bg-white rounded-xl overflow-hidden border border-stone-200/90 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex items-center justify-center p-2 mb-3.5"
+            className="group relative w-full aspect-[605/313] bg-white rounded-lg overflow-hidden border border-stone-200/90 shadow-2xs hover:border-[#009e90]/40 hover:shadow-[0_4px_16px_rgba(0,158,144,0.12)] transition-all duration-300 cursor-pointer flex items-center justify-center p-1.5 mb-2.5"
             title={isArabic ? "اضغط للتكبير" : "Click to enlarge diagram"}
           >
             <Image
@@ -90,21 +90,21 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
               }
               fill
               unoptimized
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-contain p-1 transition-transform duration-300 group-hover:scale-[1.02]"
+              sizes="270px"
+              className="object-contain p-0.5 transition-transform duration-300 group-hover:scale-[1.02]"
             />
-            <div className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-xs text-stone-600 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-xs">
-              <ZoomIn className="w-3.5 h-3.5" />
+            <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-white/95 backdrop-blur-xs text-[#009e90] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-xs border border-stone-100">
+              <ZoomIn className="w-3 h-3" />
             </div>
           </div>
 
-          {/* Bottom 2x2 Image Grid */}
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full">
+          {/* Bottom 2x2 Compact Image Grid */}
+          <div className="grid grid-cols-2 gap-2 w-full">
             {PROCESS_IMAGES.map((img, i) => (
               <div
                 key={i}
                 onClick={() => setActiveModalImg({ src: img.src, alt: img.alt })}
-                className="group relative aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200/80 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+                className="group relative aspect-square rounded-lg overflow-hidden bg-stone-100 border border-stone-200/80 shadow-2xs hover:border-[#009e90]/40 hover:shadow-[0_4px_16px_rgba(0,158,144,0.12)] transition-all duration-300 cursor-pointer"
                 title={isArabic ? img.labelAr : img.labelEn}
               >
                 <Image
@@ -112,12 +112,12 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
                   alt={isArabic ? img.labelAr : img.alt}
                   fill
                   unoptimized
-                  sizes="(max-width: 1024px) 50vw, 20vw"
+                  sizes="135px"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-200" />
-                <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white/90 text-stone-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-xs">
-                  <ZoomIn className="w-3 h-3" />
+                <div className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-white/95 text-[#009e90] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-xs border border-stone-100">
+                  <ZoomIn className="w-2.5 h-2.5" />
                 </div>
               </div>
             ))}
@@ -125,39 +125,39 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
         </div>
 
         {/* ── RIGHT COLUMN: Content & Application Method ── */}
-        <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center">
-          {/* Main Title */}
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111c3a] tracking-tight leading-tight">
+        <div className="lg:col-span-8 xl:col-span-8 flex flex-col justify-center">
+          {/* Main Title - Site Theme Color */}
+          <h2 className="text-2xl sm:text-[26px] font-extrabold text-[#009e90] tracking-tight leading-tight">
             {isArabic ? "نظام عزل الأسطح بالكومبو" : "Combo Roofing System"}
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-[11px] sm:text-[12px] font-bold text-stone-500 uppercase tracking-wider mt-1.5 mb-3">
+          {/* Subtitle - Theme Tone */}
+          <p className="text-[11px] sm:text-[11.5px] font-bold text-[#009e90]/80 uppercase tracking-wider mt-1 mb-2.5">
             {isArabic
               ? "عزل مائي متكامل بدون فواصل مع تشطيب نهائي للسطح:"
               : "SEAMLESS WATERPROOFING WITH FINISHED ROOF TOP:"}
           </p>
 
           {/* Description Paragraph */}
-          <p className="text-[13px] sm:text-[13.5px] text-stone-600 leading-relaxed font-normal mb-6">
+          <p className="text-[13px] sm:text-[13.5px] text-stone-600 leading-relaxed font-normal mb-5">
             {isArabic
               ? "نظام أكوا شيلد (Aqua Shield) هو عبارة عن تقنية رش رغوة البولي يوريثان لتوفير حماية حرارية ومائية متكاملة لجميع أنواع الأسطح والأسطح المعدنية المموجة ومستودعات التبريد والمباني السكنية والصناعية، كما يمنح مظهراً انسيابياً جميلاً لا يتطلب أي خطوات عمل إضافية للتشطيب."
               : "Aqua shield system is basically a polyurethane foam spray to provide you thermal protection for the both heat and waterproofing which covers all types of roof and corrugated sheet based shields as well as cold storages and other thermal based livings and industries, while it gives a nice and smooth look which does not require any further working step to make it better or finished."}
           </p>
 
-          {/* Method of Application Heading */}
-          <h3 className="text-xl sm:text-2xl font-extrabold text-[#111c3a] tracking-tight leading-snug mb-4">
+          {/* Method of Application Heading - Site Theme Color */}
+          <h3 className="text-lg sm:text-[20px] font-extrabold text-[#009e90] tracking-tight leading-snug mb-3.5">
             {isArabic ? "طريقة التطبيق والتنفيذ" : "Method of Application"}
           </h3>
 
-          {/* 2-Column Application Checklist */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5">
+          {/* 2-Column Application Checklist - Site Theme Color Badges */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
             {APPLICATION_STEPS.map((step, idx) => (
-              <div key={idx} className="flex items-center gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-[#e2574c] flex items-center justify-center text-white flex-shrink-0 shadow-xs">
-                  <Check className="w-3 h-3 stroke-[3]" />
+              <div key={idx} className="group/item flex items-center gap-2.5">
+                <div className="w-4.5 h-4.5 rounded-full bg-[#009e90] flex items-center justify-center text-white flex-shrink-0 shadow-xs group-hover/item:scale-110 transition-transform duration-200">
+                  <Check className="w-2.5 h-2.5 stroke-[3]" />
                 </div>
-                <span className="text-[11.5px] sm:text-[12.5px] font-bold text-stone-700 tracking-wide uppercase">
+                <span className="text-[11px] sm:text-[11.5px] font-bold text-stone-700 tracking-wide uppercase group-hover/item:text-[#009e90] transition-colors duration-200">
                   {isArabic ? step.ar : step.en}
                 </span>
               </div>
@@ -174,11 +174,11 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl p-4 flex flex-col items-center"
+            className="relative max-w-4xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl p-4 flex flex-col items-center border border-[#009e90]/20"
           >
             <button
               onClick={() => setActiveModalImg(null)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-stone-100 hover:bg-[#009e90]/10 hover:text-[#009e90] text-stone-600 flex items-center justify-center transition-colors cursor-pointer"
               title="Close"
             >
               <X className="w-4 h-4" />
@@ -199,4 +199,3 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
     </div>
   );
 }
-

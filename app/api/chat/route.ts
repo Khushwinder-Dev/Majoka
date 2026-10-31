@@ -51,8 +51,8 @@ const FALLBACK_KNOWLEDGE: {
       `${name ? `Dear ${name}, ` : ""}All our waterproofing and Combo Roofing projects come with **Official Dubai Municipality Approved Warranties**:\n\n• **Duration**: 10 to 25 Years written official warranty certificate depending on system specification.\n• **Scope**: Covers materials, leakage prevention, and full waterproofing integrity.\n• **Maintenance**: Includes scheduled follow-up inspections and rapid engineering support throughout the warranty period.\n\nWould you like a sample warranty certificate or to schedule an on-site survey?`,
     replyAr: (name) =>
       `${name ? `عزيزي ${name}، ` : ""}كافة مشاريع العزل ونظام الكومبو لدينا مشمولة بـ **شهادات ضمان رسمية معتمدة من بلدية دبي**:\n\n• **مدة الضمان**: من 10 إلى 25 عاماً بشهادة رسمية موثقة وفق المواصفات المعتمدة.\n• **نطاق التغطية**: يشمل جودة المواد، منع تسرب المياه، وتماسك الطبقات العازلة تماماً.\n• **خدمة ما بعد التنفيذ**: زيارات دورية مجانية وتجاوب هندسي سريع طوال فترة الضمان.\n\nهل ترغب بنموذج لشهادة الضمان أو حجز معاينة للموقع؟`,
-    quickActionsEn: ["Book Free Site Survey", "Request Warranty Sample", "Call +971 52 749 2002", "Go to Contact Page"],
-    quickActionsAr: ["حجز معاينة موقع مجانية", "طلب نموذج شهادة الضمان", "اتصل الآن +971 52 749 2002", "زيارة صفحة اتصل بنا"],
+    quickActionsEn: ["Book Free Site Survey", "Request Warranty Sample", "Call +971 55 617 3300", "Go to Contact Page"],
+    quickActionsAr: ["حجز معاينة موقع مجانية", "طلب نموذج شهادة الضمان", "اتصل الآن +971 55 617 3300", "زيارة صفحة اتصل بنا"],
   },
 
   // 3. Approvals, Municipality & Certifications
@@ -81,11 +81,11 @@ const FALLBACK_KNOWLEDGE: {
   {
     triggers: ["emergency", "burst", "active leak", "flooding", "urgent", "now", "immediately", "طوارئ", "عاجل", "تسريب مفاجئ", "فوري", "تسريب مستمر", "سريع"],
     replyEn: (name) =>
-      `🚨 ${name ? `Dear ${name}, ` : ""}**Emergency Water Leakage Response Available!**\n\nFor active water ingress or severe leaks in roofs, basements, or retaining walls:\n• Our rapid-response teams use **High-Pressure Polyurethane Chemical Injection** that reacts with water to stop active flowing leaks within minutes.\n• Immediate site dispatch across Dubai, Sharjah, Ajman, and all UAE emirates.\n\n📞 **Emergency Hotline**: +971 52 749 2002\n💬 **Instant WhatsApp**: [Chat with Emergency Engineer](https://wa.me/971527492002)`,
+      `🚨 ${name ? `Dear ${name}, ` : ""}**Emergency Water Leakage Response Available!**\n\nFor active water ingress or severe leaks in roofs, basements, or retaining walls:\n• Our rapid-response teams use **High-Pressure Polyurethane Chemical Injection** that reacts with water to stop active flowing leaks within minutes.\n• Immediate site dispatch across Dubai, Sharjah, Ajman, and all UAE emirates.\n\n📞 **Emergency Hotline**: +971 55 617 3300\n💬 **Instant WhatsApp**: [Chat with Emergency Engineer](https://wa.me/971556173300)`,
     replyAr: (name) =>
-      `🚨 ${name ? `عزيزي ${name}، ` : ""}**خدمة الطوارئ لمعالجة تسريبات المياه الفورية متوفرة!**\n\nفي حالات تدفق المياه النشطة أو التسريبات الشديدة في الأسطح أو السراديب أو الجدران الاستنادية:\n• تستخدم فرق الطوارئ لدينا تقنية **حقن البولي يوريثان التفاعلي تحت ضغط عالٍ** لوقف تدفق المياه خلال دقائق معدودة.\n• تحرك سريع لفرق الطوارئ في دبي، الشارقة، عجمان، وكافة إمارات الدولة.\n\n📞 **خط الطوارئ المباشر**: 2002 749 52 971+\n💬 **واتساب الطوارئ المباشر**: [محادثة مهندس الطوارئ](https://wa.me/971527492002)`,
-    quickActionsEn: ["Call Hotline +971 52 749 2002", "Emergency WhatsApp Help", "Go to Contact Page"],
-    quickActionsAr: ["اتصل بالخط الساخن +971 52 749 2002", "واتساب الطوارئ الفوري", "زيارة صفحة اتصل بنا"],
+      `🚨 ${name ? `عزيزي ${name}، ` : ""}**خدمة الطوارئ لمعالجة تسريبات المياه الفورية متوفرة!**\n\nفي حالات تدفق المياه النشطة أو التسريبات الشديدة في الأسطح أو السراديب أو الجدران الاستنادية:\n• تستخدم فرق الطوارئ لدينا تقنية **حقن البولي يوريثان التفاعلي تحت ضغط عالٍ** لوقف تدفق المياه خلال دقائق معدودة.\n• تحرك سريع لفرق الطوارئ في دبي، الشارقة، عجمان، وكافة إمارات الدولة.\n\n📞 **خط الطوارئ المباشر**: 3300 617 55 971+\n💬 **واتساب الطوارئ المباشر**: [محادثة مهندس الطوارئ](https://wa.me/971556173300)`,
+    quickActionsEn: ["Call Hotline +971 55 617 3300", "Emergency WhatsApp Help", "Go to Contact Page"],
+    quickActionsAr: ["اتصل بالخط الساخن +971 55 617 3300", "واتساب الطوارئ الفوري", "زيارة صفحة اتصل بنا"],
   },
 
   // 6. Combo Roof System vs Traditional Waterproofing
@@ -106,8 +106,8 @@ const FALLBACK_KNOWLEDGE: {
       `${name ? `Dear ${name}, ` : ""}We offer **100% Free On-Site Inspections & Engineering Quotations** across Dubai, Abu Dhabi, Sharjah, Ajman, and all UAE emirates!\n\n• A certified senior site engineer visits your property at your convenience.\n• We perform structural moisture testing, assess substrate conditions, and measure exact areas.\n• You receive a detailed technical report with itemized pricing, approved material data sheets, and official warranty terms.\n\nWould you like to book a site visit today?`,
     replyAr: (name) =>
       `${name ? `عزيزي ${name}، ` : ""}يسعدنا تقديم **معاينة موقع هندسية مجانية 100% وعرض سعر تفصيلي** في دبي، أبوظبي، الشارقة، عجمان، وكافة إمارات الدولة!\n\n• يقوم مهندس معتمد بزيارة موقعك في الوقت الذي يناسبك.\n• نفحص مصادر الرطوبة ونقيس المساحات ونحدد النظام الهندسي الأنسب.\n• تستلم تقريراً فنياً شاملاً مع عرض سعر مفصل ومواصفات المواد وضمان رسمي معتمد.\n\nهل تود حجز موعد للمعاينة المجانية الآن؟`,
-    quickActionsEn: ["Book Free Site Survey", "Chat on WhatsApp", "Call +971 52 749 2002", "Go to Contact Page"],
-    quickActionsAr: ["حجز معاينة موقع مجانية", "تواصل عبر واتساب", "اتصل الآن +971 52 749 2002", "زيارة صفحة اتصل بنا"],
+    quickActionsEn: ["Book Free Site Survey", "Chat on WhatsApp", "Call +971 55 617 3300", "Go to Contact Page"],
+    quickActionsAr: ["حجز معاينة موقع مجانية", "تواصل عبر واتساب", "اتصل الآن +971 55 617 3300", "زيارة صفحة اتصل بنا"],
   },
 
   // 8. Waterproofing & Roof Systems
@@ -161,19 +161,19 @@ const FALLBACK_KNOWLEDGE: {
       `${name ? `Dear ${name}, ` : ""}Taj Al Rahmah provides **Complete UAE Coverage** with dedicated mobile engineering units:\n\n• **Dubai**: Central headquarters, rapid response throughout all communities.\n• **Sharjah & Ajman**: Daily operations for commercial and residential sectors.\n• **Abu Dhabi & Al Ain**: Full contracting projects for villas, industrial, and government facilities.\n• **Ras Al Khaimah, Umm Al Quwain & Fujairah**: Certified crews available for all project scales.\n\nFree site inspections are available across all emirates!`,
     replyAr: (name) =>
       `${name ? `عزيزي ${name}، ` : ""}تغطي شركة تاج الرحمة **كافة إمارات دولة الإمارات العربية المتحدة** بفرق عمل متخصصة:\n\n• **دبي**: المقر الرئيسي وفرق طوارئ واستجابة سريعة لكافة المناطق.\n• **الشارقة وعجمان**: تنفيذ يومي لمشاريع الفلل والمباني التجارية والمستودعات.\n• **أبوظبي والعين**: مشاريع الفلل والمرافق الصناعية والتجارية.\n• **رأس الخيمة، أم القيوين، والفجيرة**: فرق هندسية متكاملة لجميع المشاريع.\n\nالمعاينة الفنية مجانية 100% في جميع الإمارات!`,
-    quickActionsEn: ["Book Survey in My Area", "Call +971 52 749 2002", "Go to Contact Page", "Chat on WhatsApp"],
-    quickActionsAr: ["حجز معاينة في منطقتي", "اتصل الآن +971 52 749 2002", "زيارة صفحة اتصل بنا", "تواصل عبر واتساب"],
+    quickActionsEn: ["Book Survey in My Area", "Call +971 55 617 3300", "Go to Contact Page", "Chat on WhatsApp"],
+    quickActionsAr: ["حجز معاينة في منطقتي", "اتصل الآن +971 55 617 3300", "زيارة صفحة اتصل بنا", "تواصل عبر واتساب"],
   },
 
   // 13. Direct Contact, Phone, Email & Address
   {
     triggers: ["contact", "phone", "call", "email", "address", "location", "office", "timing", "hours", "اتصال", "تواصل", "هاتف", "ايميل", "عنوان", "مكتب", "دوام"],
     replyEn: (name) =>
-      `${name ? `Dear ${name}, ` : ""}You can connect directly with our engineering and customer desk:\n\n📞 **Phone / Hotline**: +971 52 749 2002 / +971 4 234 5678\n📧 **Official Email**: info@tajalrahmah.com\n🌐 **Official Contact Page**: [Visit Our Contact Page](/contact)\n📍 **Main Office**: Office G-01-691, Al Khabaisi, Deira, Dubai, UAE\n⏰ **Working Hours**: Monday – Saturday: 9:00 AM – 6:00 PM (Closed Sunday)\n💬 **WhatsApp**: [Chat Directly on WhatsApp](https://wa.me/971527492002)\n\nWe provide 100% Free Site Inspections across all UAE emirates.`,
+      `${name ? `Dear ${name}, ` : ""}You can connect directly with our engineering and customer desk:\n\n📞 **Phone / Hotline**: +971 55 617 3300 / +971 4 234 5678\n📧 **Official Email**: info@tajalrahmah.com\n🌐 **Official Contact Page**: [Visit Our Contact Page](/contact)\n📍 **Main Office**: Office G-01-691, Al Khabaisi, Deira, Dubai, UAE\n⏰ **Working Hours**: Monday – Saturday: 9:00 AM – 6:00 PM (Closed Sunday)\n💬 **WhatsApp**: [Chat Directly on WhatsApp](https://wa.me/971556173300)\n\nWe provide 100% Free Site Inspections across all UAE emirates.`,
     replyAr: (name) =>
-      `${name ? `عزيزي ${name}، ` : ""}يمكنك التواصل معنا مباشرة عبر القنوات الرسمية التالية:\n\n📞 **الهاتف المباشر**: 2002 749 52 971+ / 5678 234 4 971+\n📧 **البريد الإلكتروني**: info@tajalrahmah.com\n🌐 **صفحة التواصل الرسمية**: [زيارة صفحة اتصل بنا](/contact)\n📍 **المكتب الرئيسي**: مكتب G-01-691، الخبيصي، ديرة، دبي، الإمارات\n⏰ **أوقات العمل**: من الإثنين إلى السبت: 9:00 صباحاً – 6:00 مساءً (الأحد مغلق)\n💬 **واتساب المباشر**: [محادثة عبر واتساب](https://wa.me/971527492002)\n\nنوفر معاينة موقع مجانية 100% في كافة إمارات الدولة.`,
-    quickActionsEn: ["Go to Contact Page", "Call +971 52 749 2002", "Email info@tajalrahmah.com", "Chat on WhatsApp"],
-    quickActionsAr: ["زيارة صفحة اتصل بنا", "اتصل الآن +971 52 749 2002", "إرسال بريد إلكتروني", "تواصل عبر واتساب"],
+      `${name ? `عزيزي ${name}، ` : ""}يمكنك التواصل معنا مباشرة عبر القنوات الرسمية التالية:\n\n📞 **الهاتف المباشر**: 3300 617 55 971+ / 5678 234 4 971+\n📧 **البريد الإلكتروني**: info@tajalrahmah.com\n🌐 **صفحة التواصل الرسمية**: [زيارة صفحة اتصل بنا](/contact)\n📍 **المكتب الرئيسي**: مكتب G-01-691، الخبيصي، ديرة، دبي، الإمارات\n⏰ **أوقات العمل**: من الإثنين إلى السبت: 9:00 صباحاً – 6:00 مساءً (الأحد مغلق)\n💬 **واتساب المباشر**: [محادثة عبر واتساب](https://wa.me/971556173300)\n\nنوفر معاينة موقع مجانية 100% في كافة إمارات الدولة.`,
+    quickActionsEn: ["Go to Contact Page", "Call +971 55 617 3300", "Email info@tajalrahmah.com", "Chat on WhatsApp"],
+    quickActionsAr: ["زيارة صفحة اتصل بنا", "اتصل الآن +971 55 617 3300", "إرسال بريد إلكتروني", "تواصل عبر واتساب"],
   },
 ];
 
@@ -196,11 +196,11 @@ function getFallbackReply(
   // Generic & Out-of-Box Fallback: Points to Contact Page, Phone, and Email
   return {
     reply: isArabic
-      ? `${userName ? `أهلاً بك يا ${userName}، ` : "أهلاً بك! "}شكراً لتواصلك مع **شركة تاج الرحمة للعزل وصيانة المباني**.\n\nبخصوص استفسارك الخاص أو أي طلبات متخصصة، يسعدنا تواصلك مع فريقنا الهندسي والإداري مباشرة لخدمتك بالشكل الأمثل:\n\n• **صفحة التواصل الرسمية**: [صفحة اتصل بنا](/contact)\n• **الهاتف المباشر**: 2002 749 52 971+ / 5678 234 4 971+\n• **البريد الإلكتروني**: info@tajalrahmah.com\n• **واتساب مهندس الموقع**: [محادثة واتساب](https://wa.me/971527492002)\n\nيسعدنا تقديم **معاينة مجانية للموقع** واستشارة فنية متخصصة في أي مكان بالإمارات!`
-      : `${userName ? `Hello ${userName}, ` : "Hello! "}Thank you for reaching out to **Taj Al Rahmah Waterproofing & Building Maintenance**.\n\nFor custom inquiries, technical specifications, or questions outside standard automated scopes, our engineering and management team is readily available to assist you directly:\n\n• **Official Contact Page**: [Contact Us Page](/contact)\n• **Direct Hotline**: +971 52 749 2002 / +971 4 234 5678\n• **Official Email**: info@tajalrahmah.com\n• **Direct WhatsApp**: [Chat on WhatsApp](https://wa.me/971527492002)\n\nWe provide **100% Free Site Inspections & Official Quotations** across Dubai and all UAE emirates!`,
+      ? `${userName ? `أهلاً بك يا ${userName}، ` : "أهلاً بك! "}شكراً لتواصلك مع **شركة تاج الرحمة للعزل وصيانة المباني**.\n\nبخصوص استفسارك الخاص أو أي طلبات متخصصة، يسعدنا تواصلك مع فريقنا الهندسي والإداري مباشرة لخدمتك بالشكل الأمثل:\n\n• **صفحة التواصل الرسمية**: [صفحة اتصل بنا](/contact)\n• **الهاتف المباشر**: 3300 617 55 971+ / 5678 234 4 971+\n• **البريد الإلكتروني**: info@tajalrahmah.com\n• **واتساب مهندس الموقع**: [محادثة واتساب](https://wa.me/971556173300)\n\nيسعدنا تقديم **معاينة مجانية للموقع** واستشارة فنية متخصصة في أي مكان بالإمارات!`
+      : `${userName ? `Hello ${userName}, ` : "Hello! "}Thank you for reaching out to **Taj Al Rahmah Waterproofing & Building Maintenance**.\n\nFor custom inquiries, technical specifications, or questions outside standard automated scopes, our engineering and management team is readily available to assist you directly:\n\n• **Official Contact Page**: [Contact Us Page](/contact)\n• **Direct Hotline**: +971 55 617 3300 / +971 4 234 5678\n• **Official Email**: info@tajalrahmah.com\n• **Direct WhatsApp**: [Chat on WhatsApp](https://wa.me/971556173300)\n\nWe provide **100% Free Site Inspections & Official Quotations** across Dubai and all UAE emirates!`,
     quickActions: isArabic
-      ? ["زيارة صفحة اتصل بنا", "اتصل الآن +971 52 749 2002", "إرسال بريد إلكتروني", "تواصل عبر واتساب"]
-      : ["Go to Contact Page", "Call +971 52 749 2002", "Email info@tajalrahmah.com", "Chat on WhatsApp"],
+      ? ["زيارة صفحة اتصل بنا", "اتصل الآن +971 55 617 3300", "إرسال بريد إلكتروني", "تواصل عبر واتساب"]
+      : ["Go to Contact Page", "Call +971 55 617 3300", "Email info@tajalrahmah.com", "Chat on WhatsApp"],
   };
 }
 
@@ -234,10 +234,10 @@ export async function POST(request: NextRequest) {
 Company Profile & Official Contacts:
 - Full Legal Name: Taj Al Rahmah Building Maintenance & Waterproofing LLC
 - Main Office: Office G-01-691, Al Khabaisi, Deira, Dubai, UAE.
-- Direct Hotlines: +971 52 749 2002 / +971 4 234 5678
+- Direct Hotlines: +971 55 617 3300 / +971 4 234 5678
 - Official Email: info@tajalrahmah.com
 - Contact Us Page: /contact
-- WhatsApp: +971 52 749 2002 (https://wa.me/971527492002)
+- WhatsApp: +971 55 617 3300 (https://wa.me/971556173300)
 - Working Hours: Monday – Saturday: 9:00 AM – 6:00 PM (Closed Sunday)
 - Geographic Coverage: Dubai, Abu Dhabi, Sharjah, Ajman, Ras Al Khaimah, Umm Al Quwain, Fujairah, and Al Ain.
 - Core Policy: 100% Free Site Inspection & Detailed Engineering Quotations across all UAE emirates.
@@ -267,11 +267,11 @@ CRITICAL INSTRUCTIONS:
    - State politely that this specific matter is specialized or outside standard automated scope.
    - ALWAYS direct the customer to our official contact channels with clickable markdown:
      • Contact Page: [Contact Us Page](/contact) (or [صفحة اتصل بنا](/contact) in Arabic)
-     • Direct Phone: +971 52 749 2002
+     • Direct Phone: +971 55 617 3300
      • Official Email: info@tajalrahmah.com
    - Set "quickActions" to include:
-     In English: ["Go to Contact Page", "Call +971 52 749 2002", "Email info@tajalrahmah.com", "Chat on WhatsApp"]
-     In Arabic: ["زيارة صفحة اتصل بنا", "اتصل الآن +971 52 749 2002", "إرسال بريد إلكتروني", "تواصل عبر واتساب"]
+     In English: ["Go to Contact Page", "Call +971 55 617 3300", "Email info@tajalrahmah.com", "Chat on WhatsApp"]
+     In Arabic: ["زيارة صفحة اتصل بنا", "اتصل الآن +971 55 617 3300", "إرسال بريد إلكتروني", "تواصل عبر واتساب"]
 4. Language: If the user writes in Arabic, respond in fluent, professional Arabic. If English, in clear, professional English.
 5. Format: Output MUST be ONLY valid JSON matching:
 {
