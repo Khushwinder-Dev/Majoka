@@ -362,7 +362,7 @@ CRITICAL INSTRUCTIONS:
     return NextResponse.json<ChatApiResponse>(
       {
         success: false,
-        reply: "We are currently experiencing a brief technical delay. Please call us directly at +971 52 749 2002 or contact us on WhatsApp.",
+        reply: "We are currently experiencing a brief technical delay. Please call us directly at +971 55 617 3300 or contact us on WhatsApp.",
         quickActions: ["Call Now", "Chat on WhatsApp"],
         source: "fallback-knowledge-base",
         error: error?.message || "Internal error",
