@@ -70,7 +70,7 @@ function renderMessageContent(text: string) {
 
     // Helper to render plain text with emails and phone numbers made clickable
     const renderContactLinks = (raw: string, keyPrefix: string) => {
-      const contactRegex = /(info@tajalrahmah\.com|\+971\s*(?:52|4|50|54|55|56)\s*\d{3}\s*\d{4}|\+971\s*52\s*749\s*2002|\+971\s*4\s*234\s*5678)/gi;
+      const contactRegex = /(info@tajalrahmah\.com|\+971\s*(?:52|4|50|54|55|56)\s*\d{3}\s*\d{4}|\+971\s*55\s*617\s*3300|\+971\s*52\s*749\s*2002|\+971\s*4\s*234\s*5678)/gi;
       const parts = raw.split(contactRegex);
       return parts.map((part, cIdx) => {
         if (/info@tajalrahmah\.com/i.test(part)) {
