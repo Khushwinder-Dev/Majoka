@@ -6,6 +6,7 @@ import Link from "next/link";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
 import GallerySlider from "@/components/ui/GallerySlider";
+import ComboRoofingSystemSection from "./ComboRoofingSystemSection";
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
@@ -142,6 +143,12 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
 
   const siblings = service.subservices.filter((s) => s.serviceSlug !== sub.serviceSlug);
 
+  const isComboSubservice =
+    sub.serviceSlug === "combo-system-roof-waterproofing" ||
+    sub.serviceSlug === "combo-system" ||
+    sub.id === "combo-system-roof-waterproofing" ||
+    sub.id === "combo-system";
+
   return (
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
@@ -157,23 +164,45 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
       )}
       {/* ── 2. SUB-SERVICE DETAIL BLOCK ───────────────────────── */}
       <section className="mb-10">
-        {(sub.subServiceContent?.content ?? []).map((subservice: any, idx: number) => (
-          <div key={subservice.id || idx} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
-            <div
-              className="
-      text-[14px] text-stone-600 leading-relaxed
-      [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#009e90] [&_h3]:mb-3 [&_h3]:mt-6
-      [&_p]:mb-1
-      [&_ul]:list-disc
-      [&_ul]:pl-6
-      [&_ul]:mb-5
-      [&_li]:mb-1
-      [&_strong]:font-bold [&_strong]:text-black
-    "
-              dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
-            />
+        {(sub.subServiceContent?.content ?? []).length > 0 ? (
+          (sub.subServiceContent?.content ?? []).map((subservice: any, idx: number) => (
+            <div key={subservice.id || idx} className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+              <div
+                className="
+        text-[14px] text-stone-600 leading-relaxed
+        [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#009e90] [&_h3]:mb-3 [&_h3]:mt-6
+        [&_p]:mb-1
+        [&_ul]:list-disc
+        [&_ul]:pl-6
+        [&_ul]:mb-5
+        [&_li]:mb-1
+        [&_strong]:font-bold [&_strong]:text-black
+      "
+                dangerouslySetInnerHTML={{ __html: subservice.serviceContent }}
+              />
+              {/* Inserted ONLY for Combo System Roof Waterproofing subservice at marked position below first block */}
+              {isComboSubservice && idx === 0 && (
+                <div className="mt-8 pt-7 border-t border-stone-200/80">
+                  <ComboRoofingSystemSection isArabic={isArabic} />
+                </div>
+              )}
+            </div>
+          ))
+        ) : isComboSubservice ? (
+          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+            <h3 className="text-lg font-bold text-[#009e90] mb-3">
+              {isArabic ? "ما هو نظام الكومبو سيستم؟" : "What is the Combo System?"}
+            </h3>
+            <p className="text-[14px] text-stone-600 leading-relaxed mb-6">
+              {isArabic
+                ? "هو نظام عزل متطور يتكون من طبقات متعددة ومترابطة، تبدأ برغوة البولي يوريثان كحاجز حراري ومائي عالي الجودة، ويُستكمل بطبقات حماية إسمنتية وأكريليكية لإنشاء طبقة واحدة صلبة وخالية من الفواصل، توفر حماية مطلقة ضد الحرارة وتسربات المياه."
+                : "It is an advanced insulation system consisting of multiple bonded layers, starting with Polyurethane Foam, which acts as a high-quality thermal and water barrier. The system is finalized with cementitious and acrylic protective layers. The hallmark of this system is that it creates a single, solid, seamless joint-free layer, providing absolute protection against both heat and water leakage."}
+            </p>
+            <div className="pt-7 border-t border-stone-200/80">
+              <ComboRoofingSystemSection isArabic={isArabic} />
+            </div>
           </div>
-        ))}
+        ) : null}
       </section>
 
       {/* ── 3. WHY CHOOSE ─────────────────────────────────────── */}
