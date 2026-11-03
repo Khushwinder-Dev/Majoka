@@ -211,7 +211,7 @@ video::-webkit-media-controls-overflow-menu-list {
 /* Custom responsive layout for footer columns: gives first brand column optimal width and balances other columns */
 @media (min-width: 1280px) {
   .footer-nav-grid {
-    grid-template-columns: minmax(320px, 1.85fr) 1fr 1.08fr 1fr 1fr minmax(215px, 1.25fr) !important;
+    grid-template-columns: minmax(310px, 1.8fr) 1fr 1.05fr 1fr 1fr minmax(225px, 1.3fr) !important;
   }
 }
 

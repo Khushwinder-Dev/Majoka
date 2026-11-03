@@ -59,11 +59,11 @@ function FooterLink({ href, label }: { href: string; label: string }) {
 
 function ContactItem({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-2.5 sm:gap-3">
-      <div className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#01a9a0] flex items-center justify-center shadow-md">
+    <div className="flex items-start gap-2.5 sm:gap-3 xl:gap-2.5">
+      <div className="flex-shrink-0 w-8 h-8 sm:w-8 sm:h-8 xl:w-[32px] xl:h-[32px] rounded-full bg-[#01a9a0] flex items-center justify-center shadow-xs">
         {icon}
       </div>
-      <div className="flex flex-col gap-0.5 pt-0.5 sm:pt-1 text-xs sm:text-sm lg:text-base text-stone-700 font-normal min-w-0 flex-1 leading-snug">
+      <div className="flex flex-col gap-0.5 pt-0.5 text-xs sm:text-[13px] xl:text-[13.5px] 2xl:text-sm text-stone-700 font-normal min-w-0 flex-1 leading-snug">
         {children}
       </div>
     </div>
@@ -223,7 +223,7 @@ export default function Footer() {
         <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-6 xl:px-10 2xl:px-14">
           {/* ── 6-Column Navigation Grid ─────────────────────────────────── */}
           <div className="pt-[40px] md:pt-[56px] lg:pt-[72px] pb-[40px] md:pb-[56px] lg:pb-[72px]">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 footer-nav-grid gap-y-8 sm:gap-8 lg:gap-5 xl:gap-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 footer-nav-grid gap-y-8 sm:gap-8 lg:gap-5 xl:gap-7 items-start">
               {/* COL 1 — Brand & About (from Reference Design) */}
               <div className="flex flex-col col-span-1 sm:col-span-2 md:col-span-3 xl:col-span-1">
                 {/* Title & Tagline */}
@@ -323,9 +323,9 @@ export default function Footer() {
               </div>
 
               {/* COL 6 — Contact */}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3.5 xl:gap-3">
                 <FooterHeading title={t.footer.contactTitle} />
-                <div className="flex flex-col gap-3 sm:gap-3.5">
+                <div className="flex flex-col gap-2 sm:gap-2.5 xl:gap-2">
                   <ContactItem
                     icon={
                       <Image
@@ -334,7 +334,7 @@ export default function Footer() {
                         width={20}
                         height={20}
                         unoptimized
-                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert"
                       />
                     }
                   >
@@ -360,7 +360,7 @@ export default function Footer() {
                         width={20}
                         height={20}
                         unoptimized
-                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert"
                       />
                     }
                   >
@@ -386,11 +386,11 @@ export default function Footer() {
                         width={20}
                         height={20}
                         unoptimized
-                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert"
                       />
                     }
                   >
-                    <span className="whitespace-pre-line leading-relaxed">{t.footer.location}</span>
+                    <span className="whitespace-pre-line leading-snug">{t.footer.location}</span>
                   </ContactItem>
 
                   <ContactItem
@@ -401,12 +401,12 @@ export default function Footer() {
                         width={20}
                         height={20}
                         unoptimized
-                        className="w-4 h-4 sm:w-5 sm:h-5 object-contain brightness-0 invert"
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain brightness-0 invert"
                       />
                     }
                   >
                     <span className="leading-snug">{t.footer.workingHours}</span>
-                    <span className="text-stone-700 text-xs">{t.footer.closedDay}</span>
+                    <span className="text-stone-500 text-xs leading-snug">{t.footer.closedDay}</span>
                   </ContactItem>
                 </div>
               </div>
