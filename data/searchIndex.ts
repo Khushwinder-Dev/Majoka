@@ -78,6 +78,10 @@ if (Array.isArray(servicesJsonEn)) {
         "service",
         "contracting",
         "division",
+        "Dubai",
+        "UAE",
+        "Abu Dhabi",
+        "Sharjah",
         ...(s.seoKeywords || []),
       ].filter(Boolean),
     });
@@ -106,6 +110,9 @@ if (Array.isArray(servicesJsonEn)) {
             "subservice",
             "application",
             "waterproofing",
+            "Dubai",
+            "UAE",
+            ...(sub.seoKeywords || []),
           ].filter(Boolean),
         });
       });
