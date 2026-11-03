@@ -260,6 +260,17 @@ const coreSearchItems: SearchResultItem[] = [
     keywords: ["industrial warehouses", "logistics", "factories", "epoxy floor", "مستودعات", "مصانع"],
   },
   {
+    id: "project-dubai-metro-station",
+    name: "Dubai Metro Station Project",
+    nameAr: "مشروع محطة مترو دبي",
+    category: "Project",
+    categoryAr: "مشاريع",
+    href: "/projects",
+    desc: "Specialized painting and surface coating works executed at Dubai Metro Station, Dubai, UAE.",
+    descAr: "أعمال الدهانات والطلاءات التخصصية المنفذة في محطة مترو دبي، الإمارات العربية المتحدة.",
+    keywords: ["Dubai Metro Station", "Dubai Metro", "painting project", "Dubai,UAE", "commercial painting", "transportation", "مترو دبي", "دهانات"],
+  },
+  {
     id: "project-infrastructure",
     name: "Infrastructure & Public Utilities Projects",
     nameAr: "مشاريع البنية التحتية والمرافق العامة",
