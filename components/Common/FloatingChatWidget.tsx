@@ -173,7 +173,7 @@ export default function FloatingChatWidget() {
 
   // User Lead Capture State
   const [userInfo, setUserInfo] = useState<ChatUserInfo | null>(null);
-  const [showInfoForm, setShowInfoForm] = useState(false);
+  const [showInfoForm, setShowInfoForm] = useState(true);
   const [infoForm, setInfoForm] = useState({ name: "", email: "", phone: "" });
   const [infoErrors, setInfoErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
@@ -276,17 +276,10 @@ export default function FloatingChatWidget() {
     },
   });
 
-  // Load user info and history from localStorage
+  // Load chat history from localStorage (intentionally do not restore userInfo so user is prompted each time)
   useEffect(() => {
     try {
-      const savedUser = localStorage.getItem(USER_INFO_KEY);
-      if (savedUser) {
-        const parsed = JSON.parse(savedUser);
-        if (parsed && parsed.name && parsed.email && parsed.phone) {
-          setUserInfo(parsed);
-          setInfoForm(parsed);
-        }
-      }
+      localStorage.removeItem(USER_INFO_KEY);
     } catch {
       // Ignore
     }
@@ -387,12 +380,6 @@ export default function FloatingChatWidget() {
 
     setUserInfo(newUserData);
     setShowInfoForm(false);
-
-    try {
-      localStorage.setItem(USER_INFO_KEY, JSON.stringify(newUserData));
-    } catch {
-      // ignore
-    }
 
     // Send lead to backend API in background
     try {
@@ -663,8 +650,8 @@ export default function FloatingChatWidget() {
         id: `${Date.now()}-ai-fallback`,
         sender: "ai",
         text: isArabic
-          ? `شكراً لتواصلك يا ${userInfo.name}. يمكنك دائماً الاتصال بمهندس الموقع مباشرة على الرقم 3300 617 55 971+ أو التواصل عبر واتساب.`
-          : `Thank you for reaching out, ${userInfo.name}. You can reach our engineering team directly at +971 55 617 3300 or on WhatsApp.`,
+          ? `شكراً لتواصلك يا ${userInfo?.name || ""}. يمكنك دائماً الاتصال بمهندس الموقع مباشرة على الرقم 3300 617 55 971+ أو التواصل عبر واتساب.`
+          : `Thank you for reaching out, ${userInfo?.name || ""}. You can reach our engineering team directly at +971 55 617 3300 or on WhatsApp.`,
         timestamp: getCurrentTime(),
       };
       setMessages((prev) => [...prev, fallbackAiMsg]);
@@ -678,8 +665,12 @@ export default function FloatingChatWidget() {
     }
   };
 
-  // Start a new chat session
+  // Start a new chat session — prompts user for info every time
   const handleNewChat = () => {
+    setUserInfo(null);
+    setShowInfoForm(true);
+    setInfoErrors({});
+    setInfoForm({ name: "", email: "", phone: "" });
     setMessages([]);
     setQuickActions([]);
     setActiveTab("chat");
@@ -687,6 +678,32 @@ export default function FloatingChatWidget() {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+  };
+
+  // Close chat window and reset state so opening it again prompts user
+  const handleCloseChat = () => {
+    setIsOpen(false);
+    setUserInfo(null);
+    setShowInfoForm(true);
+    setInfoErrors({});
+    setInfoForm({ name: "", email: "", phone: "" });
+    setMessages([]);
+    setQuickActions([]);
+    setInputValue("");
+  };
+
+  // Open Chat from Popover — prompts user for info every time
+  const handleOpenChatNow = () => {
+    setUserInfo(null);
+    setShowInfoForm(true);
+    setInfoErrors({});
+    setInfoForm({ name: "", email: "", phone: "" });
+    setMessages([]);
+    setQuickActions([]);
+    setInputValue("");
+    setActiveTab("chat");
+    setIsOpen(true);
+    setIsMenuOpen(false);
   };
 
   // Load a chat session from history
@@ -762,7 +779,9 @@ export default function FloatingChatWidget() {
                 type="button"
                 onClick={() => {
                   setActiveTab("chat");
-                  setShowInfoForm(false);
+                  if (userInfo) {
+                    setShowInfoForm(false);
+                  }
                 }}
                 className={`px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-200 cursor-pointer ${activeTab === "chat"
                   ? "bg-[#01a9a0] text-white shadow-xs"
@@ -818,7 +837,7 @@ export default function FloatingChatWidget() {
               </button>
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={handleCloseChat}
                 title={isArabic ? "إغلاق" : "Close"}
                 className="p-1.5 rounded-lg hover:bg-stone-100 hover:text-stone-900 transition-colors cursor-pointer"
               >
@@ -1021,8 +1040,8 @@ export default function FloatingChatWidget() {
                 </div>
               )}
 
-              {/* ── FIRST-TIME USER INTAKE FORM (When no user info or user clicked edit) ── */}
-              {(!userInfo || showInfoForm) ? (
+              {/* ── USER INTAKE FORM (Prompts on every chat or when user clicks edit) ── */}
+              {(showInfoForm || !userInfo) ? (
                 <div className="flex-1 overflow-y-auto px-5 py-6 flex flex-col justify-center slim-scrollbar">
                   <div className="max-w-md mx-auto w-full">
                     {/* Centered Logo */}
@@ -1229,7 +1248,9 @@ export default function FloatingChatWidget() {
                         </div>
 
                         <h3 className="text-lg sm:text-xl font-bold text-stone-900 tracking-tight">
-                          {isArabic ? `مرحباً بك يا ${userInfo.name} 👋` : `Hello ${userInfo.name} 👋`}
+                          {isArabic
+                            ? `مرحباً بك يا ${userInfo?.name || "زائرنا الكريم"} 👋`
+                            : `Hello ${userInfo?.name || "there"} 👋`}
                         </h3>
                         <p className="text-xs sm:text-sm text-stone-500 mt-1 mb-5">
                           {isArabic ? "كيف يمكنني مساعدتك اليوم؟" : "How can I help you today?"}
@@ -1637,13 +1658,10 @@ export default function FloatingChatWidget() {
         {/* Menu Popover (Chat Now & Call Now) */}
         {isMenuOpen && !isOpen && (
           <div className="flex flex-col gap-2 p-2 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-stone-200/80 animate-in fade-in slide-in-from-bottom-2 duration-200 min-w-[170px]">
-            {/* 1. Chat Now */}
+            {/* 1. Chat Now — always prompts for name, email, etc. */}
             <button
               type="button"
-              onClick={() => {
-                setIsOpen(true);
-                setIsMenuOpen(false);
-              }}
+              onClick={handleOpenChatNow}
               className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-[#01a9a0]/10 text-stone-800 hover:text-[#01a9a0] font-medium text-xs sm:text-sm transition-all duration-200 text-left rtl:text-right cursor-pointer group"
             >
               <div className="w-8 h-8 rounded-full bg-[#01a9a0] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
