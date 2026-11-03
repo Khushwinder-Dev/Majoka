@@ -7,6 +7,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import type { ServiceItem, SubServiceItem } from "@/data/servicesData";
 import GallerySlider from "@/components/ui/GallerySlider";
 import ComboRoofingSystemSection from "./ComboRoofingSystemSection";
+import GrpLiningDiagramSection from "./GrpLiningDiagramSection";
 
 /* ─── helpers ─────────────────────────────────────────────────── */
 const FALLBACK = "/media/servicesListing/unsplash_CPs2X8JYmS8 (1).png";
@@ -149,6 +150,12 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
     sub.id === "combo-system-roof-waterproofing" ||
     sub.id === "combo-system";
 
+  const isGrpSubservice =
+    sub.serviceSlug === "grp-fiberglass-waterproofing" ||
+    sub.serviceSlug === "grp-fiberglass" ||
+    sub.id === "grp-fiberglass-waterproofing" ||
+    sub.id === "grp-fiberglass";
+
   return (
     <article className="w-full" dir={isArabic ? "rtl" : "ltr"}>
 
@@ -186,6 +193,13 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
                   <ComboRoofingSystemSection isArabic={isArabic} />
                 </div>
               )}
+
+              {/* Inserted ONLY for GRP & Fiberglass Waterproofing subservice at marked position below first block */}
+              {isGrpSubservice && idx === 0 && (
+                <div className="mt-8 pt-7 border-t border-stone-200/80">
+                  <GrpLiningDiagramSection isArabic={isArabic} />
+                </div>
+              )}
             </div>
           ))
         ) : isComboSubservice ? (
@@ -200,6 +214,20 @@ export default function TemplateB({ service, sub, isArabic }: Props) {
             </p>
             <div className="pt-7 border-t border-stone-200/80">
               <ComboRoofingSystemSection isArabic={isArabic} />
+            </div>
+          </div>
+        ) : isGrpSubservice ? (
+          <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md mb-4">
+            <h3 className="text-lg font-bold text-[#009e90] mb-3">
+              {isArabic ? "ما هو تبطين وعزل GRP؟" : "What is GRP Lining?"}
+            </h3>
+            <p className="text-[14px] text-stone-600 leading-relaxed mb-6">
+              {isArabic
+                ? "تبطين GRP هو عملية دمج ألياف زجاجية مع راتنجات كيميائية متخصصة، تُطبق يدوياً على أسطح الخزانات أو الأرضيات لتشكيل طبقة بلاستيكية مقواة عالية القوة ترتبط بالسطح بشكل دائم وتمنع أي تفاعل كيميائي أو تسرب للمياه."
+                : "GRP lining is a process of fusing glass fibers with specialized chemical resins, applied manually to tank surfaces or floors to form a high-strength \"reinforced plastic\" layer. This layer bonds permanently to the original surface, preventing any chemical reaction or water leakage."}
+            </p>
+            <div className="pt-7 border-t border-stone-200/80">
+              <GrpLiningDiagramSection isArabic={isArabic} />
             </div>
           </div>
         ) : null}
