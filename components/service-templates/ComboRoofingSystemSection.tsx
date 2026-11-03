@@ -68,29 +68,29 @@ export default function ComboRoofingSystemSection({ isArabic = false }: Props) {
           {/* ── TOP ROW: Large 3D Diagram & Combo Roofing System Overview ── */}
           <div className="flex flex-col md:flex-row gap-6 lg:gap-8 items-center md:items-start">
             {/* Left: Prominent 3D Layered Cross Section Diagram */}
-            <div className="w-full md:w-[45%] lg:w-[46%] shrink-0 max-w-[440px] mx-auto md:mx-0">
+            <div className="w-full md:w-[48%] lg:w-[48%] shrink-0 max-w-[480px] mx-auto md:mx-0">
               <div
                 onClick={() =>
                   setActiveModalImg({
                     src: DIAGRAM_IMAGE,
                     alt: isArabic
-                      ? "مخطط طبقات نظام الكومبو سيستم للأسطح"
-                      : "Combo Roofing System Layered Cross Section Diagram",
+                      ? "مخطط طبقات نظام الكومبو سيستم للأسطح وعزل البولي يوريثان - شركة تاج الرحمة للخدمات الفنية دبي"
+                      : "Taj Al Rahmah Technical Services LLC - Combo Roofing System Layered Cross Section Diagram",
                   })
                 }
-                className="group relative w-full aspect-[605/313] bg-white rounded-xl overflow-hidden border border-stone-200/90 shadow-2xs hover:border-[#009e90]/60 hover:shadow-[0_6px_20px_rgba(0,158,144,0.15)] transition-all duration-300 cursor-pointer flex items-center justify-center p-2"
+                className="group relative w-full aspect-[1024/422] bg-white rounded-xl overflow-hidden border border-stone-200/90 shadow-2xs hover:border-[#009e90]/60 hover:shadow-[0_6px_20px_rgba(0,158,144,0.15)] transition-all duration-300 cursor-pointer flex items-center justify-center p-2"
                 title={isArabic ? "اضغط للتكبير" : "Click to enlarge diagram"}
               >
                 <Image
                   src={DIAGRAM_IMAGE}
                   alt={
                     isArabic
-                      ? "مخطط طبقات نظام الكومبو سيستم للأسطح"
-                      : "Combo Roofing System Layered Cross Section Diagram"
+                      ? "مخطط طبقات نظام الكومبو سيستم للأسطح وعزل البولي يوريثان - شركة تاج الرحمة للخدمات الفنية دبي"
+                      : "Taj Al Rahmah Technical Services LLC - Combo Roofing System Layered Cross Section Diagram"
                   }
                   fill
                   unoptimized
-                  sizes="(max-width: 768px) 100vw, 440px"
+                  sizes="(max-width: 768px) 100vw, 480px"
                   className="object-contain p-1 transition-transform duration-300 group-hover:scale-[1.02]"
                   priority
                 />
