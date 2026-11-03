@@ -199,7 +199,16 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
 
   const activeSub: SubServiceItem | null = subParam
     ? activeService.subservices.find(
-      (s) => s.serviceSlug.toLowerCase() === subParam.toLowerCase()
+      (s) =>
+        s.serviceSlug.toLowerCase() === subParam.toLowerCase() ||
+        (subParam.toLowerCase() === "grp-fiberglass-waterproofing" && s.serviceSlug.toLowerCase() === "grp-fiberglass") ||
+        (subParam.toLowerCase() === "grp-fiberglass" && s.serviceSlug.toLowerCase() === "grp-fiberglass-waterproofing") ||
+        (subParam.toLowerCase() === "combo-system-roof-waterproofing" && s.serviceSlug.toLowerCase() === "combo-system") ||
+        (subParam.toLowerCase() === "combo-system" && s.serviceSlug.toLowerCase() === "combo-system-roof-waterproofing") ||
+        (subParam.toLowerCase() === "bitumen-membrane-waterproofing" && s.serviceSlug.toLowerCase() === "bitumen-membrane") ||
+        (subParam.toLowerCase() === "bitumen-membrane" && s.serviceSlug.toLowerCase() === "bitumen-membrane-waterproofing") ||
+        (subParam.toLowerCase() === "polyurea-coating-waterproofing" && s.serviceSlug.toLowerCase() === "polyurea-coating") ||
+        (subParam.toLowerCase() === "polyurea-coating" && s.serviceSlug.toLowerCase() === "polyurea-coating-waterproofing")
     ) ?? null
     : null;
 
@@ -373,6 +382,7 @@ function ServicesContent({ enableSlider }: { enableSlider?: boolean }) {
           }
           showHeading={false}
           showBreadcrumb={false}
+          showOverlay={false}
         />
       )}
 
